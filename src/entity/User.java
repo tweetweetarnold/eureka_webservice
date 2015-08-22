@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
@@ -16,15 +17,14 @@ import javax.persistence.Id;
  */
 @Entity
 public class User {
-	@Id 
+	@Id  @GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
 	private String username, password, name;
 	private Date createDate;
 
-	public User(int userId, String username, String password, String name,
+	public User(String username, String password, String name,
 			Date createDate) {
 		super();
-		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.name = name;
