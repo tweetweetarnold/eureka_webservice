@@ -19,7 +19,7 @@ import javax.persistence.Id;
 public class User {
 	@Id  @GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
-	private String username, password, name;
+	private String username, password, name, bankAcc;
 	private Date createDate;
 
 	public User(String username, String password, String name,

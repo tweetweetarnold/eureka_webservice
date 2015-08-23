@@ -10,6 +10,47 @@ public class Hawker {
 	@Id
 	private int hawkerId;
 	private String username, password, name;
+	private Canteen canteen;
 	private Date createDate;
+	
+	
+	public int getHawkerId() {
+		return hawkerId;
+	}
+	public void setHawkerId(int hawkerId) {
+		this.hawkerId = hawkerId;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Canteen getCanteen() {
+		return canteen;
+	}
+	public void setCanteen(Canteen canteen) {
+		this.canteen = canteen;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	
+	
 
 }
