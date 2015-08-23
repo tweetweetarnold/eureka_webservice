@@ -10,5 +10,6 @@ public class Driver {
 	@Id
 	private int driverId;
 	private String username, password, name;
+	private long contactNo;
 	private Date createDate;
 }

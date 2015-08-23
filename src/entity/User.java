@@ -20,15 +20,37 @@ public class User {
 	@Id  @GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
 	private String username, password, name, bankAcc;
+	private long contactNo;
 	private Date createDate;
 
-	public User(String username, String password, String name,
-			Date createDate) {
+
+	
+	public User(int userId, String username, String password, String name,
+			String bankAcc, long contactNo, Date createDate) {
 		super();
+		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.name = name;
+		this.bankAcc = bankAcc;
+		this.contactNo = contactNo;
 		this.createDate = createDate;
+	}
+
+	public String getBankAcc() {
+		return bankAcc;
+	}
+
+	public void setBankAcc(String bankAcc) {
+		this.bankAcc = bankAcc;
+	}
+
+	public long getContactNo() {
+		return contactNo;
+	}
+
+	public void setContactNo(long contactNo) {
+		this.contactNo = contactNo;
 	}
 
 	public int getUserId() {

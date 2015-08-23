@@ -10,10 +10,28 @@ public class Hawker {
 	@Id
 	private int hawkerId;
 	private String username, password, name;
+	private long contactNo;
 	private Canteen canteen;
 	private Date createDate;
 	
 	
+	public Hawker(int hawkerId, String username, String password, String name,
+			long contactNo, Canteen canteen, Date createDate) {
+		super();
+		this.hawkerId = hawkerId;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.contactNo = contactNo;
+		this.canteen = canteen;
+		this.createDate = createDate;
+	}
+	public long getContactNo() {
+		return contactNo;
+	}
+	public void setContactNo(long contactNo) {
+		this.contactNo = contactNo;
+	}
 	public int getHawkerId() {
 		return hawkerId;
 	}
