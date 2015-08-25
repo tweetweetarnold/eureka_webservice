@@ -4,37 +4,64 @@
 package entity;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * @author Arnold. User class
- *
+ * 
  */
 @Entity
 public class User {
-	@Id  @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 	private String username, password, name, bankAcc;
 	private long contactNo;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "companyId")
+	private Company company;
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<Food> favouriteList;
 	private Date createDate;
 
-
-	
-	public User(int userId, String username, String password, String name,
-			String bankAcc, long contactNo, Date createDate) {
+	public User(String username, String password, String name, String bankAcc,
+			long contactNo, Company company, Set<Food> favouriteList,
+			Date createDate) {
 		super();
-		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.bankAcc = bankAcc;
 		this.contactNo = contactNo;
+		this.company = company;
+		this.favouriteList = favouriteList;
 		this.createDate = createDate;
+	}
+
+	public Set<Food> getFavouriteList() {
+		return favouriteList;
+	}
+
+	public void setFavouriteList(Set<Food> favouriteList) {
+		this.favouriteList = favouriteList;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	public String getBankAcc() {
@@ -92,9 +119,5 @@ public class User {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	
-	
-	
-	
 
 }
