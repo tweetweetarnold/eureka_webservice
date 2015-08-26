@@ -20,10 +20,10 @@ import javax.persistence.OneToMany;
  * 
  */
 @Entity
-public class User {
+public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userId;
+	private int employeeId;
 	private String username, password, name, bankAcc;
 	private long contactNo;
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -33,7 +33,7 @@ public class User {
 	private Set<Food> favouriteList;
 	private Date createDate;
 
-	public User(String username, String password, String name, String bankAcc,
+	public Employee(String username, String password, String name, String bankAcc,
 			long contactNo, Company company, Set<Food> favouriteList,
 			Date createDate) {
 		super();
@@ -79,12 +79,12 @@ public class User {
 		this.contactNo = contactNo;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getEmployeeId() {
+		return employeeId;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
 	}
 
 	public String getUsername() {

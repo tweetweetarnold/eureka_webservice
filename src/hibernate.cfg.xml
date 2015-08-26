@@ -39,12 +39,13 @@
 		<mapping class="entity.Canteen" />
 		<mapping class="entity.Company" />
 		<mapping class="entity.Driver" />
+		<mapping class="entity.Employee" />
 		<mapping class="entity.Food" />
 		<mapping class="entity.FoodOrder" />
 		<mapping class="entity.FoodOrderItem" />
 		<mapping class="entity.Hawker" />
 		<mapping class="entity.OperationDayHours" />
-		<mapping class="entity.User" />
+		
 
 		<!-- end of hibernate configuration settings -->
 

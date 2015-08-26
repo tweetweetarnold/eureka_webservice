@@ -17,7 +17,7 @@ import entity.Food;
 import entity.FoodOrder;
 import entity.FoodOrderItem;
 import entity.Hawker;
-import entity.User;
+import entity.Employee;
 
 public class Test {
 
@@ -39,8 +39,8 @@ public class Test {
 		Set<Food> fav = new HashSet<Food>();
 		fav.add(food);
 		fav.add(food2);
-		User user = new User("abc", "123", "Boon Hui", "POSB", 456456, company,
-				fav, new Date());
+		Employee employee = new Employee("abc", "123", "Boon Hui", "POSB",
+				456456, company, fav, new Date());
 
 		SessionFactory sessionFactory = new Configuration().configure()
 				.buildSessionFactory();
@@ -54,7 +54,7 @@ public class Test {
 		session.save(food);
 		session.save(order);
 		session.save(item);
-		session.save(user);
+		session.save(employee);
 
 		session.getTransaction().commit();
 		session.close();

@@ -11,26 +11,41 @@ public class MyConnection {
 
 	public MyConnection() {
 		try {
-		if (session == null) {
-			sessionFactory = new Configuration().configure()
-					.buildSessionFactory();
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-		}
-		}catch(HibernateException e) {
+			if (session == null) {
+				sessionFactory = new Configuration().configure()
+						.buildSessionFactory();
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+			}
+		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public static void delete(Object o) {
+		session.delete(o);
+		session.getTransaction().commit();
+	}
+
+	public static void update(Object o) {
+		session.update(o);
+		session.getTransaction().commit();
+	}
+
+	public static Object get(Class objClass, int id) {
+		Object o = session.get(objClass, id);
+		return o;
+	}
+
 	public static void save(Object o) {
 		session.save(o);
 		session.getTransaction().commit();
 	}
-	
+
 	public static void saveOnly(Object o) {
 		session.save(o);
 	}
-	
+
 	public static void commit() {
 		session.getTransaction().commit();
 	}

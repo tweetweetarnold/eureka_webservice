@@ -20,8 +20,8 @@ public class FoodOrder {
 	private int foodOrderId;
 	private String status;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "userId")
-	private User user;
+	@JoinColumn(name = "employeeId")
+	private Employee employee;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "driverId")
 	private Driver driver;
@@ -29,11 +29,11 @@ public class FoodOrder {
 	private Set<FoodOrderItem> foodOrderList;
 	private Date createDate;
 
-	public FoodOrder(String status, User user, Driver driver,
+	public FoodOrder(String status, Employee employee, Driver driver,
 			Set<FoodOrderItem> foodOrderList, Date createDate) {
 		super();
 		this.status = status;
-		this.user = user;
+		this.employee = employee;
 		this.driver = driver;
 		this.foodOrderList = foodOrderList;
 		this.createDate = createDate;
@@ -63,12 +63,12 @@ public class FoodOrder {
 		this.status = status;
 	}
 
-	public User getUser() {
-		return user;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	public Driver getDriver() {

@@ -12,18 +12,18 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Company {
-	@Id	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int companyId;
 	private String name;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
-	private Set<User> userList;
+	private Set<Employee> employeeList;
 	private Date createDate;
-	
 
-	public Company(String name, Set<User> userList, Date createDate) {
+	public Company(String name, Set<Employee> employeeList, Date createDate) {
 		super();
 		this.name = name;
-		this.userList = userList;
+		this.employeeList = employeeList;
 		this.createDate = createDate;
 	}
 
@@ -43,12 +43,12 @@ public class Company {
 		this.name = name;
 	}
 
-	public Set<User> getUserList() {
-		return userList;
+	public Set<Employee> getEmployeeList() {
+		return employeeList;
 	}
 
-	public void setUserList(Set<User> userList) {
-		this.userList = userList;
+	public void setEmployeeList(Set<Employee> employeeList) {
+		this.employeeList = employeeList;
 	}
 
 	public Date getCreateDate() {
