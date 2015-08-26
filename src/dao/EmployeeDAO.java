@@ -11,5 +11,7 @@ public class EmployeeDAO {
 	public static Employee getUser(int id) {
 		return (Employee) MyConnection.get(Employee.class, id);
 	}
+	
+	
 
 }
