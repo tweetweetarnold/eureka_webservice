@@ -15,5 +15,12 @@ public class EmployeeDAO {
 	public static void saveEmployee(Employee e) {
 		MyConnection.save(e);
 	}
-
+	
+	public static void updateEmployee(Employee e) {
+		MyConnection.update(e);
+	}
+	
+	public static void deleteEmployee(Employee e) {
+		MyConnection.delete(e);
+	}
 }
