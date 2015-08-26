@@ -7,6 +7,7 @@ import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.json.simple.JSONObject;
 
 import com.javadocmd.simplelatlng.LatLng;
 
@@ -55,6 +56,8 @@ public class Test {
 		session.save(order);
 		session.save(item);
 		session.save(employee);
+
+		// JSONObject obj = new JSONObject();
 
 		session.getTransaction().commit();
 		session.close();
