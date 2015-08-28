@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.LoginController;
+
 /**
  * Servlet implementation class Hello
  */
@@ -49,11 +51,20 @@ public class Hello extends HttpServlet {
 		// request.setCharacterEncoding("UTF-8");
 		// response.setCharacterEncoding("UTF-8");
 		try {
-			System.out.println("Here");
+			
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-
-			out.println("hello arnold");
+			out.println();
+			if(request.getParameter("function").equals("newLogin")){
+				LoginController loginController = new LoginController();
+				String username = request.getParameter("username");
+				if(loginController.authenticateUser(username,request.getParameter("password"))){
+					out.println("hello " + username);
+				}else{
+					response.sendRedirect("TestApp.jsp");
+				}
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
