@@ -7,10 +7,13 @@
 <title>TestApp</title>
 </head>
 <body>
-<form action="Hello">
+<form action="loginServlet">
 	<input type="hidden" name="function" value="newLogin">
-	<input type="text" name="username">
+	Username:</br>
+	<input type="text" name="username"></br>
+	Password:</br>
 	<input type="text" name="password">
+	</br>
 	<input type="submit">
 </form>
 </body>
