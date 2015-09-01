@@ -11,6 +11,11 @@ public class EmployeeDAO {
 	public static Employee getEmployee(int id) {
 		return (Employee) MyConnection.get(Employee.class, id);
 	}
+	
+	//BH added a new getEmployeeUsername method that parses in String username
+	public static Employee getEmployeeUsername(String username) {
+		return (Employee) MyConnection.get(Employee.class, username);
+	}
 
 	public static void saveEmployee(Employee e) {
 		MyConnection.save(e);
