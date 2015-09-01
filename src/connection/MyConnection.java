@@ -36,6 +36,12 @@ public class MyConnection {
 		Object o = session.get(objClass, id);
 		return o;
 	}
+	
+	//BH added a new get method that parses in objClass and username
+	public static Object get(Class objClass, String username) {
+		Object o = session.get(objClass, username);
+		return o;
+	}
 
 	public static void save(Object o) {
 		session.save(o);
