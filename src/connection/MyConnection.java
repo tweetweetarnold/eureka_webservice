@@ -1,9 +1,15 @@
 package connection;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.DetachedCriteria;
+
+import entity.Canteen;
 
 public class MyConnection {
 	private static SessionFactory sessionFactory;
@@ -20,6 +26,24 @@ public class MyConnection {
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
+	}
+	
+//	for retrieve all
+	public static List<Object> retrieveAllRecords(DetachedCriteria dc){
+		session.beginTransaction();
+		Criteria criteria = dc.getExecutableCriteria(session);
+		List<Object> list = criteria.list();
+		session.getTransaction().commit();
+		return list;
+	}
+	
+//	same as retrieveAll but with limit
+	public static List<Object> retrieveAllRecordsWithLimit(DetachedCriteria dc, int max){
+		session.beginTransaction();
+		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max);
+		List<Object> list = criteria.list();
+		session.getTransaction().commit();
+		return list;
 	}
 
 	public static void delete(Object o) {
