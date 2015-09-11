@@ -29,6 +29,9 @@ public class Test {
 				3.4), new Date(), null);
 		Hawker hawker = new Hawker("abc", "123", "Chris Cheng", 456456,
 				canteen, new Date(), null, null);
+		Set<Hawker> set = new HashSet<>();
+		set.add(hawker);
+		canteen.setHawkerList(set);
 		Company company = new Company("Apple", null, new Date());
 		Driver driver = new Driver("abc", "123", "Arnold", 456546, new Date());
 		Food food = new Food("Chicken Wings", "Delicious", 2.5, null,
