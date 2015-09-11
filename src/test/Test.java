@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 
 import com.javadocmd.simplelatlng.LatLng;
 
+import connection.MyConnection;
 import entity.Canteen;
 import entity.Company;
 import entity.Driver;
@@ -42,26 +43,28 @@ public class Test {
 		fav.add(food2);
 		Employee employee = new Employee("abc", "123", "Boon Hui", "POSB",
 				456456, company, fav, new Date());
+		
+		MyConnection.save(canteen);
 
-		SessionFactory sessionFactory = new Configuration().configure()
-				.buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		session.save(canteen);
-		session.save(hawker);
-		session.save(company);
-		session.save(driver);
-		session.save(food);
-		session.save(order);
-		session.save(item);
-		session.save(employee);
-
-		// JSONObject obj = new JSONObject();
-
-		session.getTransaction().commit();
-		session.close();
-		sessionFactory.close();
+//		SessionFactory sessionFactory = new Configuration().configure()
+//				.buildSessionFactory();
+//		Session session = sessionFactory.openSession();
+//		session.beginTransaction();
+//
+//		session.save(canteen);
+//		session.save(hawker);
+//		session.save(company);
+//		session.save(driver);
+//		session.save(food);
+//		session.save(order);
+//		session.save(item);
+//		session.save(employee);
+//
+//		// JSONObject obj = new JSONObject();
+//
+//		session.getTransaction().commit();
+//		session.close();
+//		sessionFactory.close();
 	}
 
 }
