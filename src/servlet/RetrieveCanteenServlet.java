@@ -1,6 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -44,12 +47,25 @@ public class RetrieveCanteenServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		CanteenController canteenController = new CanteenController();
 		List<Canteen> canteenList = canteenController.retrieveAll();
-		JSONArray JsonArray = new JSONArray();
-		JsonArray.add(canteenList);
+		JSONArray jsonArray = new JSONArray();
+		Iterator iter = canteenList.iterator();
 		
-		RequestDispatcher rd = request.getRequestDispatcher("testRetrieveUser.jsp");
-		request.setAttribute("canteenArray", JsonArray);
+		while(iter.hasNext()){
+			Canteen tempCanteen = (Canteen) iter.next();
+			jsonArray.add(tempCanteen);
+		}
+		//for test app
+		RequestDispatcher rd = request.getRequestDispatcher("TestApp.jsp");
+		request.setAttribute("canteenArray", jsonArray);
 		rd.forward(request,response);
+		
+		PrintWriter out = response.getWriter();
+		// Assuming your json object is **jsonObject**, perform the following, it will return your json object  
+		out.print(jsonArray);
+		out.flush();
+		
+		
+		 
 	}
 
 }

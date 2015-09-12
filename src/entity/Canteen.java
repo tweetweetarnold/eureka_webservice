@@ -24,6 +24,17 @@ public class Canteen {
 	private Date createDate;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "canteen")
 	private Set<Hawker> hawkerList;
+	
+	
+	
+	public Canteen() {
+		this.canteenId = 0;
+		this.name = "";
+		this.address = "";
+		this.location = null;
+		this.createDate = null;
+		this.hawkerList = null;
+	}
 
 	public Canteen(String name, String address, LatLng location,
 			Date createDate, Set<Hawker> hawkerList) {

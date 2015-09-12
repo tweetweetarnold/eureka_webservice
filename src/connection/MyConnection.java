@@ -20,8 +20,7 @@ public class MyConnection {
 	public static Session startSession() {
 		try {
 			if (session == null) {
-				sessionFactory = new Configuration().configure()
-						.buildSessionFactory();
+				sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 				session = sessionFactory.openSession();
 				session.beginTransaction();
 			}
@@ -60,6 +59,7 @@ public class MyConnection {
 
 	public static void update(Object o) {
 		startSession();
+		
 		session.update(o);
 		session.getTransaction().commit();
 		closeAll();
