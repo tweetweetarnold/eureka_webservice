@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 
 import com.javadocmd.simplelatlng.LatLng;
 
+import connection.MyConnection;
 import entity.Canteen;
 import entity.Company;
 import entity.Driver;
@@ -28,6 +29,9 @@ public class Test {
 				3.4), new Date(), null);
 		Hawker hawker = new Hawker("abc", "123", "Chris Cheng", 456456,
 				canteen, new Date(), null, null);
+		Set<Hawker> set = new HashSet<>();
+		set.add(hawker);
+		canteen.setHawkerList(set);
 		Company company = new Company("Apple", null, new Date());
 		Driver driver = new Driver("abc", "123", "Arnold", 456546, new Date());
 		Food food = new Food("Chicken Wings", "Delicious", 2.5, null,
@@ -42,26 +46,28 @@ public class Test {
 		fav.add(food2);
 		Employee employee = new Employee("abc", "123", "Boon Hui", "POSB",
 				456456, company, fav, new Date());
+		
+		MyConnection.save(canteen);
 
-		SessionFactory sessionFactory = new Configuration().configure()
-				.buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		session.save(canteen);
-		session.save(hawker);
-		session.save(company);
-		session.save(driver);
-		session.save(food);
-		session.save(order);
-		session.save(item);
-		session.save(employee);
-
-		// JSONObject obj = new JSONObject();
-
-		session.getTransaction().commit();
-		session.close();
-		sessionFactory.close();
+//		SessionFactory sessionFactory = new Configuration().configure()
+//				.buildSessionFactory();
+//		Session session = sessionFactory.openSession();
+//		session.beginTransaction();
+//
+//		session.save(canteen);
+//		session.save(hawker);
+//		session.save(company);
+//		session.save(driver);
+//		session.save(food);
+//		session.save(order);
+//		session.save(item);
+//		session.save(employee);
+//
+//		// JSONObject obj = new JSONObject();
+//
+//		session.getTransaction().commit();
+//		session.close();
+//		sessionFactory.close();
 	}
 
 }
