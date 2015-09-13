@@ -10,6 +10,28 @@ public class UserController {
 		
 	}
 	
+	public boolean addNewEmployee(Employee newEmployee) {
+		String username = newEmployee.getUsername();
+		//checking for duplicates
+		Employee empInDatabase = EmployeeDAO.getEmployeeUsername(username);
+		if (empInDatabase == null) {
+			EmployeeDAO.saveEmployee(newEmployee);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void updateEmployee(Employee e) {
+		EmployeeDAO.updateEmployee(e);
+		//EmployeeDAO.saveEmployee(e);
+		
+	}
+	
+	public void removeEmployee(Employee e) {
+		EmployeeDAO.deleteEmployee(e);
+	}
+	
 	public Employee retrieveEmployee(int id){
 		Employee tempE = employeeDAO.getEmployee(id);
 		return tempE;
@@ -21,4 +43,6 @@ public class UserController {
 		return tempE;
 
 	}
+	
+	
 }
