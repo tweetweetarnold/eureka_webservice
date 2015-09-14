@@ -2,6 +2,8 @@ package controller;
 
 import dao.*;
 import entity.*;
+import is203.JWTUtility;
+import is203.JWTException;
 
 public class LoginController {
 	
@@ -27,9 +29,44 @@ public class LoginController {
 		} else {
 			return false;
 		}
-		
-		
 		//return (testUsername.equals(username) && testPassword.equals(password));
+	}
+	
+	/*
+	 * This method parses in username and password inputs and perform authenticating. 
+	 * If username and password are valid,It will generate and returns a String object.
+	 */
+	public String tokenGenerator (String username, String password) {
+		
+		Employee e = EmployeeDAO.getEmployeeUsername(username); 
+		if (e != null) {
+			String employeeUsername = e.getUsername();
+			String employeePassword = e.getPassword();
+			if (employeeUsername != null && employeePassword != null) {
+				if (employeeUsername.equals(username) && employeePassword.equals(password)) {
+					//String token generating process
+					String jwt = JWTUtility.sign("asdfghjklmnbvcxz", username);
+	                String strVerify = null;
+	                try {
+	                	strVerify = JWTUtility.verify(jwt,"asdfghjklmnbvcxz" );
+		                if (strVerify.equals(username)) {
+		                	return jwt;
+		                }
+	                } catch (JWTException ex) {
+	                	String s = ex.getMessage();
+	                    return null;
+	                }
+				} else {
+					return null;
+				}
+					//return (employeeUsername.equals(username) && employeePassword.equals(password));
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+		return null;
 	}
 
 }
