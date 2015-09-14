@@ -17,23 +17,22 @@ import controller.CanteenController;
 import dao.CanteenDAO;
 import entity.Canteen;
 import entity.Food;
-import entity.Hawker;
-import entity.OperationDayHours;
+import entity.Stall;
 public class DataInput {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		CanteenController canteenController = new CanteenController();
-		ArrayList<Hawker> hawkerList = new ArrayList<Hawker>();
+		ArrayList<Stall> hawkerList = new ArrayList<Stall>();
 		
-		Hawker hawker1 = new Hawker("admin", "123", "ArnoFood" ,92742509, null, new Date(),null, null);
+		Stall hawker1 = new Stall("admin", "123", "ArnoFood" ,92742509, null, new Date(),null);
 		Food apples = new Food("Apple", "Healthy!", 2.00, hawker1, new Date());
 		ArrayList<Food> foodList = new ArrayList<Food>(); 
 		foodList.add(apples);
 		Set<Food> foodSet = new HashSet();
 		foodSet.add(apples);
 		hawker1.setFoodList(foodSet);
-		Set<Hawker> hawkerSet = new HashSet();
+		Set<Stall> hawkerSet = new HashSet();
 		hawkerSet.add(hawker1);
 		Canteen newCanteen = new Canteen("Chomp Chomp", "20 Kensington Park Rd, Singapore 557269" , new LatLng(1.352083,103.819836), new Date(), hawkerSet);
 		hawker1.setCanteen(newCanteen);

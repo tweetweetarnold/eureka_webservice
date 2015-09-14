@@ -23,7 +23,7 @@ public class Canteen {
 	private LatLng location;
 	private Date createDate;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "canteen")
-	private Set<Hawker> hawkerList;
+	private Set<Stall> hawkerList;
 	
 	
 	
@@ -37,7 +37,7 @@ public class Canteen {
 	}
 
 	public Canteen(String name, String address, LatLng location,
-			Date createDate, Set<Hawker> hawkerList) {
+			Date createDate, Set<Stall> hawkerList) {
 		super();
 		this.name = name;
 		this.address = address;
@@ -78,11 +78,11 @@ public class Canteen {
 		this.createDate = createDate;
 	}
 
-	public Set<Hawker> getHawkerList() {
+	public Set<Stall> getHawkerList() {
 		return hawkerList;
 	}
 
-	public void setHawkerList(Set<Hawker> hawkerList) {
+	public void setHawkerList(Set<Stall> hawkerList) {
 		this.hawkerList = hawkerList;
 	}
 

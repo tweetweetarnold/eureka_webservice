@@ -13,10 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Hawker {
+public class Stall {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int hawkerId;
+	private int stallId;
 	private String username;
 	private String password;
 	private String name;
@@ -25,14 +25,12 @@ public class Hawker {
 	@JoinColumn(name = "canteenId")
 	private Canteen canteen;
 	private Date createDate;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "hawker")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "stall")
 	private Set<Food> foodList;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "hawker")
-	private Set<OperationDayHours> operatingHours;
 
-	public Hawker(String username, String password, String name,
+	public Stall(String username, String password, String name,
 			long contactNo, Canteen canteen, Date createDate,
-			Set<Food> foodList, Set<OperationDayHours> operatingHours) {
+			Set<Food> foodList) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -41,23 +39,15 @@ public class Hawker {
 		this.canteen = canteen;
 		this.createDate = createDate;
 		this.foodList = foodList;
-		this.operatingHours = operatingHours;
 	}
 
-	public Set<OperationDayHours> getOperatingHours() {
-		return operatingHours;
+
+	public int getStallId() {
+		return stallId;
 	}
 
-	public void setOperatingHours(Set<OperationDayHours> operatingHours) {
-		this.operatingHours = operatingHours;
-	}
-
-	public int getHawkerId() {
-		return hawkerId;
-	}
-
-	public void setHawkerId(int hawkerId) {
-		this.hawkerId = hawkerId;
+	public void setStallId(int stallId) {
+		this.stallId = stallId;
 	}
 
 	public String getUsername() {

@@ -33,7 +33,7 @@
 		<!-- ******** This segment should be removed in production to prevent changes 
 			to database tables ******** -->
 		<!-- Drop and re-create the database schema on startup -->
-		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
 
 		<!-- Mention here all the model classes along with their package name -->
 		<mapping class="entity.Canteen" />
@@ -43,8 +43,7 @@
 		<mapping class="entity.Food" />
 		<mapping class="entity.FoodOrder" />
 		<mapping class="entity.FoodOrderItem" />
-		<mapping class="entity.Hawker" />
-		<mapping class="entity.OperationDayHours" />
+		<mapping class="entity.Stall" />
 		
 
 		<!-- end of hibernate configuration settings -->

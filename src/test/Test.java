@@ -7,19 +7,17 @@ import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.json.simple.JSONObject;
 
 import com.javadocmd.simplelatlng.LatLng;
 
-import connection.MyConnection;
 import entity.Canteen;
 import entity.Company;
 import entity.Driver;
+import entity.Employee;
 import entity.Food;
 import entity.FoodOrder;
 import entity.FoodOrderItem;
-import entity.Hawker;
-import entity.Employee;
+import entity.Stall;
 
 public class Test {
 
@@ -27,10 +25,10 @@ public class Test {
 
 		Canteen canteen = new Canteen("Kopitiam", "123 Street", new LatLng(1.2,
 				3.4), new Date(), null);
-		Hawker hawker = new Hawker("abc", "123", "Chris Cheng", 456456,
-				canteen, new Date(), null, null);
-		Set<Hawker> set = new HashSet<>();
-		set.add(hawker);
+		Stall stall = new Stall("abc", "123", "Chris Cheng", 456456,
+				canteen, new Date(), null);
+		Set<Stall> set = new HashSet<>();
+		set.add(stall);
 		canteen.setHawkerList(set);
 		Company company = new Company("Apple", null, new Date());
 		Driver driver = new Driver("abc", "123", "Arnold", 456546, new Date());
@@ -47,27 +45,27 @@ public class Test {
 		Employee employee = new Employee("abc", "123", "Boon Hui", "POSB",
 				456456, company, fav, new Date());
 		
-		MyConnection.save(canteen);
+//		MyConnection.save(canteen);
 
-//		SessionFactory sessionFactory = new Configuration().configure()
-//				.buildSessionFactory();
-//		Session session = sessionFactory.openSession();
-//		session.beginTransaction();
-//
-//		session.save(canteen);
-//		session.save(hawker);
-//		session.save(company);
-//		session.save(driver);
-//		session.save(food);
-//		session.save(order);
-//		session.save(item);
-//		session.save(employee);
-//
-//		// JSONObject obj = new JSONObject();
-//
-//		session.getTransaction().commit();
-//		session.close();
-//		sessionFactory.close();
+		SessionFactory sessionFactory = new Configuration().configure()
+				.buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		session.save(canteen);
+		session.save(stall);
+		session.save(company);
+		session.save(driver);
+		session.save(food);
+		session.save(order);
+		session.save(item);
+		session.save(employee);
+
+		// JSONObject obj = new JSONObject();
+
+		session.getTransaction().commit();
+		session.close();
+		sessionFactory.close();
 	}
 
 }

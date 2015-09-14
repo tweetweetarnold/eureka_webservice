@@ -19,18 +19,18 @@ public class Food {
 	private String description;
 	private double price;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "hawkerId")
-	private Hawker hawker;
+	@JoinColumn(name = "stallId")
+	private Stall stall;
 	// private byte[] image;
 	private Date createDate;
 
-	public Food(String name, String description, double price, Hawker hawker,
+	public Food(String name, String description, double price, Stall stall,
 			Date createDate) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.price = price;
-		this.hawker = hawker;
+		this.stall = stall;
 		this.createDate = createDate;
 	}
 
@@ -66,12 +66,12 @@ public class Food {
 		this.price = price;
 	}
 
-	public Hawker getHawker() {
-		return hawker;
+	public Stall getStall() {
+		return stall;
 	}
 
-	public void setHawker(Hawker hawker) {
-		this.hawker = hawker;
+	public void setStall(Stall stall) {
+		this.stall = stall;
 	}
 
 	public Date getCreateDate() {
