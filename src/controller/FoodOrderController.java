@@ -14,4 +14,8 @@ public class FoodOrderController {
 		foodOrderDAO.saveFoodOrder(f);
 	}
 	
+	public FoodOrder getFoodOrder(int foodOrderId){
+		return foodOrderDAO.getFoodOrder(foodOrderId);
+	}
+	
 }
