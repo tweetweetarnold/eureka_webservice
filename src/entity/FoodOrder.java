@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+
 
 @Entity
 public class FoodOrder {
@@ -85,6 +88,17 @@ public class FoodOrder {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	//retrieve the total price for the particular food order
+	public double getFoodOrderTotalPrice(){
+		double result = 0.0;
+		Set<FoodOrderItem> foodOrderList = getFoodOrderList();
+		Iterator iter = foodOrderList.iterator();
+		while(iter.hasNext()){
+			FoodOrderItem tempItem = (FoodOrderItem) iter.next();
+			result += (tempItem.getQuantity()* tempItem.getPrice());
+		}
+		return result;
 	}
 
 }

@@ -13,6 +13,11 @@ public class FoodOrderDAO {
 		return (FoodOrder) MyConnection.get(FoodOrder.class, foodOrderId);
 	}
 	
+	public static FoodOrder getFoodOrderByDate(Date ) {
+		return (FoodOrder) MyConnection.get(FoodOrder.class, foodOrderId);
+	}
+	
+	
 	public static void saveFoodOrder(FoodOrder f) {
 		MyConnection.save(f);
 	}
