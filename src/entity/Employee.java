@@ -32,7 +32,10 @@ public class Employee {
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Food> favouriteList;
 	private Date createDate;
-
+	
+	public Employee (){
+		
+	}
 	public Employee(String username, String password, String name, String bankAcc,
 			long contactNo, Company company, Set<Food> favouriteList,
 			Date createDate) {

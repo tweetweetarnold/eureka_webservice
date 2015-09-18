@@ -19,7 +19,11 @@ public class Company {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
 	private Set<Employee> employeeList;
 	private Date createDate;
-
+	
+	public Company() {
+		
+	}
+	
 	public Company(String name, Set<Employee> employeeList, Date createDate) {
 		super();
 		this.name = name;

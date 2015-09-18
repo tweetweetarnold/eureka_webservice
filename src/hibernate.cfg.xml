@@ -33,7 +33,7 @@
 		<!-- ******** This segment should be removed in production to prevent changes 
 			to database tables ******** -->
 		<!-- Drop and re-create the database schema on startup -->
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		 <property name="hibernate.hbm2ddl.auto">update</property>
 
 		<!-- Mention here all the model classes along with their package name -->
 		<mapping class="entity.Canteen" />
