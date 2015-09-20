@@ -32,6 +32,10 @@ if(request.getAttribute("canteenArray")!= null){
 		   	
 		   	//Test the Canteen Object
 		   	Canteen c = (Canteen)canteenArray.get(i);
+		   	out.println(i+1 +" "+ c.getAddress());
+		   	%>
+		   	<br/>
+		   	<%
 		   	System.out.println(c.getAddress());
 	   } 
 	} 

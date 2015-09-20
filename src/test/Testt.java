@@ -19,7 +19,7 @@ import entity.FoodOrder;
 import entity.FoodOrderItem;
 import entity.Stall;
 
-public class Test {
+public class Testt  {
 
 	public static void main(String[] args) {
 

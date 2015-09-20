@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -19,8 +20,11 @@ public class MyConnection {
 	
 	public static Session startSession() {
 		try {
-			if (session == null) {
+			if (sessionFactory == null) {
 				sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+			}else{
 				session = sessionFactory.openSession();
 				session.beginTransaction();
 			}
@@ -36,7 +40,7 @@ public class MyConnection {
 		Criteria criteria = dc.getExecutableCriteria(session);
 		List<Object> list = criteria.list();
 		session.getTransaction().commit();
-		closeAll();
+//		closeAll();
 		return list;
 	}
 	
@@ -46,7 +50,7 @@ public class MyConnection {
 		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max);
 		List<Object> list = criteria.list();
 		session.getTransaction().commit();
-		closeAll();
+//		closeAll();
 		return list;
 	}
 
@@ -54,7 +58,7 @@ public class MyConnection {
 		startSession();
 		session.delete(o);
 		session.getTransaction().commit();
-		closeAll();
+//		closeAll();
 	}
 
 	public static void update(Object o) {
@@ -62,13 +66,13 @@ public class MyConnection {
 		
 		session.update(o);
 		session.getTransaction().commit();
-		closeAll();
+//		closeAll();
 	}
 
 	public static Object get(Class objClass, int id) {
 		startSession();
 		Object o = session.get(objClass, id);
-		closeAll();
+//		closeAll();
 		return o;
 	}
 	
@@ -76,15 +80,26 @@ public class MyConnection {
 	public static Object get(Class objClass, String username) {
 		startSession();
 		Object o = session.get(objClass, username);
-		closeAll();
+//		closeAll();
 		return o;
 	}
 
+	public static List<Object> get(String sql) {
+		startSession();
+		
+//		Criteria criteria = dc.getExecutableCriteria(session);
+		Query query = session.createQuery(sql);
+
+		List<Object> list = (List<Object>) query.list();
+		session.getTransaction().commit();
+//		closeAll();
+		return list;
+	}
 	public static void save(Object o) {
 		startSession();
 		session.save(o);
 		session.getTransaction().commit();
-		closeAll();
+//		closeAll();
 	}
 
 //	public static void saveOnly(Object o) {

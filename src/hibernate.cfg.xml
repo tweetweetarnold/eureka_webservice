@@ -12,9 +12,9 @@
 
 		<!-- Database connection settings -->
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://127.9.56.130:3306/eureka</property>
-		<property name="connection.username">adminp9Iq9AA</property>
-		<property name="connection.password">iFpcI3iNaity</property>
+		<property name="connection.url">jdbc:mysql://localhost/eureka_db</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property>
 
 		<!-- start of hibernate configuration settings -->
 
