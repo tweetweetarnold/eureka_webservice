@@ -11,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.DetachedCriteria;
 
 import entity.Canteen;
+import entity.FoodOrder;
 
 public class MyConnection {
 	private static SessionFactory sessionFactory;
@@ -88,8 +89,7 @@ public class MyConnection {
 		startSession();
 		
 //		Criteria criteria = dc.getExecutableCriteria(session);
-		Query query = session.createQuery(sql);
-
+		Query query = session.createSQLQuery(sql).addEntity(FoodOrder.class);
 		List<Object> list = (List<Object>) query.list();
 		session.getTransaction().commit();
 //		closeAll();

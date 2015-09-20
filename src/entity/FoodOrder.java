@@ -32,6 +32,9 @@ public class FoodOrder {
 	private Set<FoodOrderItem> foodOrderList;
 	private Date createDate;
 
+	public FoodOrder(){
+	
+	}
 	public FoodOrder(String status, Employee employee, Driver driver,
 			Set<FoodOrderItem> foodOrderList, Date createDate) {
 		super();

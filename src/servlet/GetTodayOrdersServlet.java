@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
+import controller.FoodOrderController;
+
 /**
  * Servlet implementation class GetTodayOrdersServlet
  */
@@ -35,7 +39,13 @@ public class GetTodayOrdersServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		String date = new Data().toString();
+		int index = date.indexOf(" ");
+		date = date.substring(0, index);
+		date+=" 00:00:00";
+		FoodOrderController foodOrderController = new FoodOrderController();
+		foodOrderController.getFoodOrderToday()
 	}
 
 }
