@@ -3,17 +3,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Arnold Test</title>
+<title>DaBao</title>
 </head>
 <body>
 
-	<h1>Arnold test body</h1>
-	<br>
-	my name is arnold and i am a boy
-	
 	<div id="content"></div>
-	
+
 	<script type="text/javascript" src="resources/js/jquery.js"></script>
-	<script type="text/javascript" src="resources/js/arnold2.js"></script>
+	<script type="text/javascript" src="resources/js/pagedirect.js"></script>
+
 </body>
 </html>
