@@ -8,6 +8,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import model.Canteen;
+import model.Driver;
+import model.Employee;
+import model.Food;
+import model.FoodOrder;
+import model.FoodOrderItem;
+import model.Stall;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -18,13 +26,6 @@ import controller.CanteenController;
 import controller.FoodOrderController;
 import dao.CanteenDAO;
 import dao.FoodOrderDAO;
-import entity.Canteen;
-import entity.Driver;
-import entity.Employee;
-import entity.Food;
-import entity.FoodOrder;
-import entity.FoodOrderItem;
-import entity.Stall;
 public class DataInputter {
 
 	public static void main(String[] args) {

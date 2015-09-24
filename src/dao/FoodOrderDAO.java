@@ -3,9 +3,9 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Canteen;
+import model.FoodOrder;
 import connection.MyConnection;
-import entity.Canteen;
-import entity.FoodOrder;
 
 public class FoodOrderDAO {
 	

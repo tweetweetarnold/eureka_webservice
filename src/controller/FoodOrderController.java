@@ -6,10 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import model.FoodOrder;
+
 import org.joda.time.JodaTimePermission;
 
 import dao.FoodOrderDAO;
-import entity.FoodOrder;
 
 public class FoodOrderController {
 	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();

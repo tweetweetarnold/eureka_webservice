@@ -3,10 +3,11 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Canteen;
+
 import org.hibernate.criterion.DetachedCriteria;
 
 import connection.MyConnection;
-import entity.Canteen;
 
 public class CanteenDAO {
 	

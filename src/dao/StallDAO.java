@@ -1,7 +1,7 @@
 package dao;
 
+import model.Stall;
 import connection.MyConnection;
-import entity.Stall;
 
 public class StallDAO {
 	

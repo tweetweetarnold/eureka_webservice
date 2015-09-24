@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Employee;
+
 import com.google.gson.Gson;
 
 import controller.UserController;
-import entity.Employee;
 
 /**
  * Servlet implementation class retrieveUserServlet

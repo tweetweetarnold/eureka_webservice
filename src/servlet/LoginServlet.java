@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.*;
 import controller.LoginController;
 
 import java.security.*;
 
 import dao.*;
-import entity.*;
 import services.*;
 /**
  * Servlet implementation class Hello

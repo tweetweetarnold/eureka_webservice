@@ -1,7 +1,7 @@
 package dao;
 
+import model.Food;
 import connection.MyConnection;
-import entity.Food;
 
 public class FoodDAO {
 	

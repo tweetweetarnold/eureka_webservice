@@ -1,7 +1,7 @@
 <%@page import="org.json.simple.JSONArray" %>
 <%@page import="java.util.*" %>
 <%@page import="org.json.simple.JSONObject" %>
-<%@page import="entity.Canteen" %>
+<%@page import="model.Canteen" %>
 <%@ page import="com.google.gson.Gson" %>
 
 

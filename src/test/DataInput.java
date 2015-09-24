@@ -7,6 +7,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import model.Canteen;
+import model.Food;
+import model.Stall;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -15,9 +19,6 @@ import com.javadocmd.simplelatlng.LatLng;
 
 import controller.CanteenController;
 import dao.CanteenDAO;
-import entity.Canteen;
-import entity.Food;
-import entity.Stall;
 public class DataInput {
 
 	public static void main(String[] args) {

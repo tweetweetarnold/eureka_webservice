@@ -1,7 +1,7 @@
 package controller;
 
+import model.*;
 import dao.*;
-import entity.*;
 
 public class CompanyController {
 	

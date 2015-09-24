@@ -2,6 +2,9 @@ package connection;
 
 import java.util.List;
 
+import model.Canteen;
+import model.FoodOrder;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -9,9 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.DetachedCriteria;
-
-import entity.Canteen;
-import entity.FoodOrder;
 
 public class MyConnection {
 	private static SessionFactory sessionFactory;

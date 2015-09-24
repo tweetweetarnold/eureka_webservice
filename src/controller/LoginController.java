@@ -1,8 +1,7 @@
 package controller;
 
+import model.*;
 import dao.*;
-import entity.*;
-
 import services.PasswordService;
 
 

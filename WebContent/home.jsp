@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>Welcome</h2> 
-<%@page import="dao.*,entity.*,services.*" %>
+<%@page import="dao.*,model.*,services.*" %>
 <%
 	Employee st = (Employee) request.getAttribute("user");
 	out.println("Hi " + st.getName());

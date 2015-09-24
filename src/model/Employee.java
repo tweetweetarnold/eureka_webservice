@@ -1,7 +1,7 @@
 /**
  * 
  */
-package entity;
+package model;
 
 import java.util.Date;
 import java.util.Set;

@@ -1,7 +1,7 @@
 package controller;
 
+import model.Employee;
 import dao.EmployeeDAO;
-import entity.Employee;
 public class UserController {
 	EmployeeDAO employeeDAO = new EmployeeDAO();
 	public static void main(String[] args) {

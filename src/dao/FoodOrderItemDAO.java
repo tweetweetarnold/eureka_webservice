@@ -1,7 +1,7 @@
 package dao;
 
+import model.FoodOrderItem;
 import connection.MyConnection;
-import entity.FoodOrderItem;
 
 public class FoodOrderItemDAO {
 	

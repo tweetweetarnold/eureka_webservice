@@ -10,6 +10,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+<%@ page import="com.model.Food" %>
+
 <title>DaBao - Homepage</title>
 
 <!-- Bootstrap Core CSS -->
@@ -22,7 +24,7 @@
 
 <body>
 
-	<!-- headerbar jsp include -->
+	<!-- Headerbar JSP Include -->
 	<jsp:include page="headerbar.jsp" />
 
 	<!-- Page Content -->
@@ -44,8 +46,8 @@
 
 			<div class="col-md-9">
 
+				<!-- Carousel Holder -->
 				<div class="row carousel-holder">
-
 					<div class="col-md-12">
 						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 							<ol class="carousel-indicators">
@@ -54,7 +56,7 @@
 								<li data-target="#carousel-example-generic" data-slide-to="2"></li>
 							</ol>
 							<div class="carousel-inner">
-								<div class="item active" >
+								<div class="item active">
 									<img class="slide-image" src="assets/images/img-friedrice.jpg" alt="">
 								</div>
 								<div class="item">
@@ -72,11 +74,14 @@
 							</a>
 						</div>
 					</div>
-
 				</div>
 
-				<div class="row">
+				<%
+					ArrayList<Food> foodList = new ArrayList<Food>();
+				%>
 
+
+				<div class="row">
 					<div class="col-sm-4 col-lg-4 col-md-4">
 						<div class="thumbnail">
 							<img src="http://placehold.it/320x150" alt="">

@@ -1,7 +1,7 @@
 package dao;
 
+import model.Employee;
 import connection.MyConnection;
-import entity.Employee;
 
 public class EmployeeDAO {
 

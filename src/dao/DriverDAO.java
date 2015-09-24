@@ -1,7 +1,7 @@
 package dao;
 
+import model.Driver;
 import connection.MyConnection;
-import entity.Driver;
 
 public class DriverDAO {
 	
