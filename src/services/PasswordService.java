@@ -10,8 +10,12 @@ import javax.crypto.spec.SecretKeySpec;
 //import sun.misc.BASE64Encoder;
 //import sun.misc.CharacterEncoder;
 
+
 public class PasswordService {
-	
+	/*
+	 * This methods parses in a String object as an input for AES encrpytion
+	 * returns a ciphertext in the form of a String object
+	 */
 	public static String encryptPassword(String inputPassword) {
 		
 		try {
@@ -38,7 +42,11 @@ public class PasswordService {
 			 }
 		return null;
 	}
-	
+
+	/*
+	 * This methods parses in a ciphertext String object as an input for AES decrpytion
+	 * returns a plaintext in the form of String object
+	 */
 public static String decryptPassword(String encryptedPassword) {
 		
 		try {
@@ -49,12 +57,7 @@ public static String decryptPassword(String encryptedPassword) {
 			 Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
 			 Cipher cipher = Cipher.getInstance("AES");
 	
-//			 // encrypt the text
-//			 cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-//			 byte[] encrypted = cipher.doFinal(inputPassword.getBytes());
-////			 System.err.println(new String(encrypted));
-//			 return new String(encrypted);
-			 
+
 //			  decrypt the text
 			 cipher.init(Cipher.DECRYPT_MODE, aesKey);
 			 byte[] encrypted = encryptedPassword.getBytes();
