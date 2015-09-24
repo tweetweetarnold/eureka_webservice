@@ -1,5 +1,11 @@
 
 <!DOCTYPE html>
+<!-- Java imports -->
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="model.Food"%>
+<%@page import="java.util.ArrayList"%>
 <html lang="en">
 
 <head>
@@ -9,8 +15,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-
-<%@ page import="com.model.Food" %>
 
 <title>DaBao - Homepage</title>
 
@@ -76,12 +80,55 @@
 					</div>
 				</div>
 
+
 				<%
 					ArrayList<Food> foodList = new ArrayList<Food>();
+											for(int i = 1; i <= 5; i++){
+												Food food = new Food("food" + i, "nice food", i, null, new Date());
+												foodList.add(food);
+											};
 				%>
 
 
+				<!-- Individual Food Item -->
 				<div class="row">
+
+					<%
+						for(Food f : foodList){
+					%>
+					<div class="col-sm-4 col-lg-4 col-md-4">
+						<div class="thumbnail">
+							<img src="http://placehold.it/320x150" alt="">
+							<div class="caption">
+								<h4 class="pull-right">
+									$<%=f.getPrice()%></h4>
+								<h4>
+									<a href="#"><%=f.getName()%></a>
+								</h4>
+								<p>
+									See more snippets like this online store item at
+									<a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>
+									.
+								</p>
+							</div>
+							<div class="ratings">
+								<p class="pull-right">15 reviews</p>
+								<p>
+									<span class="glyphicon glyphicon-star"></span>
+									<span class="glyphicon glyphicon-star"></span>
+									<span class="glyphicon glyphicon-star"></span>
+									<span class="glyphicon glyphicon-star"></span>
+									<span class="glyphicon glyphicon-star"></span>
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<%
+						}
+					%>
+
+
 					<div class="col-sm-4 col-lg-4 col-md-4">
 						<div class="thumbnail">
 							<img src="http://placehold.it/320x150" alt="">
@@ -109,110 +156,19 @@
 						</div>
 					</div>
 
-					<div class="col-sm-4 col-lg-4 col-md-4">
-						<div class="thumbnail">
-							<img src="http://placehold.it/320x150" alt="">
-							<div class="caption">
-								<h4 class="pull-right">$64.99</h4>
-								<h4>
-									<a href="#">Second Product</a>
-								</h4>
-								<p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-							<div class="ratings">
-								<p class="pull-right">12 reviews</p>
-								<p>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star-empty"></span>
-								</p>
-							</div>
-						</div>
-					</div>
 
-					<div class="col-sm-4 col-lg-4 col-md-4">
-						<div class="thumbnail">
-							<img src="http://placehold.it/320x150" alt="">
-							<div class="caption">
-								<h4 class="pull-right">$74.99</h4>
-								<h4>
-									<a href="#">Third Product</a>
-								</h4>
-								<p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-							<div class="ratings">
-								<p class="pull-right">31 reviews</p>
-								<p>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star-empty"></span>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-4 col-lg-4 col-md-4">
-						<div class="thumbnail">
-							<img src="http://placehold.it/320x150" alt="">
-							<div class="caption">
-								<h4 class="pull-right">$84.99</h4>
-								<h4>
-									<a href="#">Fourth Product</a>
-								</h4>
-								<p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-							<div class="ratings">
-								<p class="pull-right">6 reviews</p>
-								<p>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star-empty"></span>
-									<span class="glyphicon glyphicon-star-empty"></span>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-4 col-lg-4 col-md-4">
-						<div class="thumbnail">
-							<img src="http://placehold.it/320x150" alt="">
-							<div class="caption">
-								<h4 class="pull-right">$94.99</h4>
-								<h4>
-									<a href="#">Fifth Product</a>
-								</h4>
-								<p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-							<div class="ratings">
-								<p class="pull-right">18 reviews</p>
-								<p>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star-empty"></span>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-4 col-lg-4 col-md-4">
-						<h4>
-							<a href="#">Like this template?</a>
-						</h4>
-						<p>
-							If you like this template, then check out
-							<a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a>
-							on how to build a working review system for your online store!
-						</p>
-						<a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View
-							Tutorial</a>
-					</div>
+					<!-- 					<div class="col-sm-4 col-lg-4 col-md-4"> -->
+					<!-- 						<h4> -->
+					<!-- 							<a href="#">Like this template?</a> -->
+					<!-- 						</h4> -->
+					<!-- 						<p> -->
+					<!-- 							If you like this template, then check out -->
+					<!-- 							<a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a> -->
+					<!-- 							on how to build a working review system for your online store! -->
+					<!-- 						</p> -->
+					<!-- 						<a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View -->
+					<!-- 							Tutorial</a> -->
+					<!-- 					</div> -->
 
 				</div>
 
@@ -227,14 +183,8 @@
 
 		<hr>
 
-		<!-- Footer -->
-		<footer>
-			<div class="row">
-				<div class="col-lg-12">
-					<p>Copyright &copy; Eureka 2015</p>
-				</div>
-			</div>
-		</footer>
+		<!-- Footer JSP Include -->
+		<jsp:include page="footer.jsp" />
 
 	</div>
 	<!-- /.container -->
