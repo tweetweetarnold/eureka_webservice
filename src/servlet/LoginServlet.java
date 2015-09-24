@@ -63,25 +63,16 @@ public class LoginServlet extends HttpServlet {
 			out.println();
 //			if(request.getParameter("function").equals("newLogin")){
 				LoginController loginController = new LoginController();
-				Integer id = Integer.parseInt(request.getParameter("username"));
-				out.println(id);
+				String username = (String) request.getParameter("username");
 				String inputPwd = (String) request.getParameter("password");
-				//System.out.println(pwd);
-				Employee emp = loginController.authenticateUser(id,PasswordService.encryptPassword(inputPwd));
+				if (username != null && inputPwd != null && !username.equals("") && !inputPwd.equals("")) {
+					Integer id = Integer.parseInt(username);
+					out.println(id);
+					//String inputPwd = (String) request.getParameter("password");
+					//System.out.println(pwd);
+					Employee emp = loginController.authenticateUser(id,PasswordService.encryptPassword(inputPwd));
 					if (emp != null) {
-//					String jwt = JWTUtility.sign("asdfghjklmnbvcxz", username);
-//	                String strVerify = null;
-//	                try {
-//	                	strVerify = JWTUtility.verify(jwt,"asdfghjklmnbvcxz" );
-//		                if (strVerify.equals(username)) {
-//		                	out.println(jwt);
-//		                }
-//	                } catch (JWTException ex) {
-//		                String s = ex.getMessage();
-////	                    return null;
-//	                }
-//					
-	                out.println("hello " + id);
+						out.println("hello " + id);
 						out.println("Encrypted: " + PasswordService.encryptPassword(inputPwd));
 						out.println("Decrypted: " + PasswordService.decryptPassword(PasswordService.encryptPassword(inputPwd)));
 						out.println("You got it!");
@@ -89,10 +80,13 @@ public class LoginServlet extends HttpServlet {
 						RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 						request.setAttribute("user", emp);
 						rd.forward(request,response);
+					} else {
+						out.println("SALA");
+						//services.PasswordService.getInstance().encrypt(pwd);
+						out.println(inputPwd);
+					}
 				} else {
-					out.println("SALA");
-					//services.PasswordService.getInstance().encrypt(pwd);
-					out.println(inputPwd);
+					response.sendRedirect("login.jsp");
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
