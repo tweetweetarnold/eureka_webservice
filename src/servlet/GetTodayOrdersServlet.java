@@ -45,7 +45,7 @@ public class GetTodayOrdersServlet extends HttpServlet {
 		date = date.substring(0, index);
 		date+=" 00:00:00";
 		FoodOrderController foodOrderController = new FoodOrderController();
-		foodOrderController.getFoodOrderToday()
+		foodOrderController.getFoodOrderToday();
 	}
 
 }

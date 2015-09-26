@@ -17,6 +17,7 @@ import java.security.*;
 
 import dao.*;
 import services.*;
+
 /**
  * Servlet implementation class Hello
  */
@@ -36,8 +37,8 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	public void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
@@ -46,51 +47,56 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	public void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
 
-	public void process(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	public void process(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// request.setCharacterEncoding("UTF-8");
 		// response.setCharacterEncoding("UTF-8");
 		try {
-			
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
 			out.println();
-//			if(request.getParameter("function").equals("newLogin")){
+			// if(request.getParameter("function").equals("newLogin")){
+
+			String username = (String) request.getParameter("username");
+			String inputPwd = (String) request.getParameter("password");
+			if (username != null && inputPwd != null && !username.equals("")
+					&& !inputPwd.equals("")) {
+				Integer id = Integer.parseInt(username);
+				out.println(id);
 				LoginController loginController = new LoginController();
-				String username = (String) request.getParameter("username");
-				String inputPwd = (String) request.getParameter("password");
-				if (username != null && inputPwd != null && !username.equals("") && !inputPwd.equals("")) {
-					Integer id = Integer.parseInt(username);
-					out.println(id);
-					//String inputPwd = (String) request.getParameter("password");
-					//System.out.println(pwd);
-					Employee emp = loginController.authenticateUser(id,PasswordService.encryptPassword(inputPwd));
-					if (emp != null) {
-						out.println("hello " + id);
-						out.println("Encrypted: " + PasswordService.encryptPassword(inputPwd));
-						out.println("Decrypted: " + PasswordService.decryptPassword(PasswordService.encryptPassword(inputPwd)));
-						out.println("You got it!");
-						
-						RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
-						request.setAttribute("user", emp);
-						rd.forward(request,response);
-					} else {
-						out.println("SALA");
-						//services.PasswordService.getInstance().encrypt(pwd);
-						out.println(inputPwd);
-					}
+				// String inputPwd = (String) request.getParameter("password");
+				// System.out.println(pwd);
+				Employee emp = loginController.authenticateUser(id,
+						PasswordService.encryptPassword(inputPwd));
+				if (emp != null) {
+					out.println("hello " + id);
+					out.println("Encrypted: "
+							+ PasswordService.encryptPassword(inputPwd));
+					out.println("Decrypted: "
+							+ PasswordService.decryptPassword(PasswordService
+									.encryptPassword(inputPwd)));
+					out.println("You got it!");
+
+					RequestDispatcher rd = request
+							.getRequestDispatcher("home.jsp");
+					request.setAttribute("user", emp);
+					rd.forward(request, response);
 				} else {
-					response.sendRedirect("login.jsp");
+					out.println("SALA");
+					// services.PasswordService.getInstance().encrypt(pwd);
+					out.println(inputPwd);
 				}
+			} else {
+				response.sendRedirect("login.jsp");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	//}
-		}
+	}
 }
