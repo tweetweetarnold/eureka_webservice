@@ -31,8 +31,7 @@
 
 	<div class="container">
 
-		<form class="form-signin" method="post" action="homepage.jsp">
-			<!-- 			action="/eureka_webservice/LoginServlet"> -->
+		<form class="form-signin" method="post" action="/eureka_webservice/LoginServlet">
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
 			<input type="password" name="password" class="form-control" placeholder="Password" required>
@@ -43,6 +42,9 @@
 				</label>
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		</form>
+		<form class="form-signin" method="post" action="homepage.jsp">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Lazy Button</button>
 		</form>
 
 	</div>

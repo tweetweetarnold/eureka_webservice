@@ -66,6 +66,7 @@ public class RegistrationServlet extends HttpServlet {
 				long contactNumber = Long.parseLong(contactNum);
 				int generatedEmployeeId = registrationController.registerUser(username, password, employeeName, bankAcc, contactNumber, companyName);
 				out.println("You have successfully registered to our application. Your login id is : " + generatedEmployeeId);
+				response.sendRedirect("/eureka_webservice/login.jsp");
 			} else {
 				response.sendRedirect("/eureka_webservice/registration.jsp");
 			}
