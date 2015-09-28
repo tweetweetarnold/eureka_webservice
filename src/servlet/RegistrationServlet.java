@@ -53,7 +53,7 @@ public class RegistrationServlet extends HttpServlet {
 			
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-			out.println();
+			out.println("RegistrationServlet");
 			RegistrationController registrationController = new RegistrationController();
 			String employeeName = (String) request.getParameter("employeeName");
 			String username = (String) request.getParameter("username");
