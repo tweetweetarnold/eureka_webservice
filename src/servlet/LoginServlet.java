@@ -57,23 +57,32 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// request.setCharacterEncoding("UTF-8");
 		// response.setCharacterEncoding("UTF-8");
+
 		try {
 			response.setContentType("text/html");
+			// response.setContentType("application/json"); // for JSON response
+			// response.setCharacterEncoding("utf-8"); // for JSON response
 			PrintWriter out = response.getWriter();
+
 			out.println();
 			// if(request.getParameter("function").equals("newLogin")){
 
+			// Getting User Input Parameters
 			String username = (String) request.getParameter("username");
 			String inputPwd = (String) request.getParameter("password");
+
+			// User Input Validation
 			if (username != null && inputPwd != null && !username.equals("")
 					&& !inputPwd.equals("")) {
-				Integer id = Integer.parseInt(username);
+				
+				Integer id = Integer.parseInt(username); // **@Boonhui, why need to parse to int?
 				out.println(id);
+				
 				LoginController loginController = new LoginController();
-				// String inputPwd = (String) request.getParameter("password");
-				// System.out.println(pwd);
 				Employee emp = loginController.authenticateUser(id,
 						PasswordService.encryptPassword(inputPwd));
+				
+//				*** For Development only *** 
 				if (emp != null) {
 					out.println("hello " + id);
 					out.println("Encrypted: "
@@ -93,6 +102,7 @@ public class LoginServlet extends HttpServlet {
 					out.println(inputPwd);
 				}
 			} else {
+//				Error Response
 				response.sendRedirect("login.jsp");
 			}
 		} catch (Exception e) {
