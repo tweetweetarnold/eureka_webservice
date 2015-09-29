@@ -62,7 +62,7 @@ public class RegistrationServlet extends HttpServlet {
 			String contactNum = (String) request.getParameter("contactNumber");
 			String bankAcc = (String) request.getParameter("bankAcc");
 			String companyName = (String) request.getParameter("company");
-			if (!employeeName.equals("") && !username.equals("") && !password.equals("") && !confirmPwd.equals("") && !contactNum.equals("") && !bankAcc.equals("") && !companyName.equals("") && password.equals(confirmPwd)) {
+			if (!employeeName.equals("") && !username.equals("") && !password.equals("") && !confirmPwd.equals("") && (password.length()>= 7) && (confirmPwd.length() >= 7) && (contactNum.length() >= 8) && !contactNum.equals("") && !bankAcc.equals("") && !companyName.equals("") && password.equals(confirmPwd)) {
 				long contactNumber = Long.parseLong(contactNum);
 				int generatedEmployeeId = registrationController.registerUser(username, password, employeeName, bankAcc, contactNumber, companyName);
 				out.println("You have successfully registered to our application. Your login id is : " + generatedEmployeeId);
