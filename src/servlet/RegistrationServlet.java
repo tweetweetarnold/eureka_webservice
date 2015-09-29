@@ -49,10 +49,11 @@ public class RegistrationServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// request.setCharacterEncoding("UTF-8");
 		// response.setCharacterEncoding("UTF-8");
+		
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
 		try {
-			
-			response.setContentType("text/html");
-			PrintWriter out = response.getWriter();
 			out.println("RegistrationServlet");
 			RegistrationController registrationController = new RegistrationController();
 			String employeeName = (String) request.getParameter("name");
@@ -71,11 +72,14 @@ public class RegistrationServlet extends HttpServlet {
 				response.setHeader("Refresh", "10; URL=/eureka_webservice/login.jsp");
 				//response.sendRedirect("/eureka_webservice/login.jsp");
 			} else {
+				out.println("here2");
 				response.sendRedirect("/eureka_webservice/registration.jsp");
 			}
 			
 				
 		} catch (Exception e) {
+			out.println("here1");
+			out.println(e.getMessage());
 			e.printStackTrace();
 		}
 	//}

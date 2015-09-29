@@ -20,7 +20,7 @@ public class Canteen {
 	private int canteenId;
 	private String name;
 	private String address;
-	private LatLng location;
+//	private LatLng location;
 	private Date createDate;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "canteen")
 	private Set<Stall> hawkerList;
@@ -31,7 +31,7 @@ public class Canteen {
 		this.canteenId = 0;
 		this.name = "";
 		this.address = "";
-		this.location = null;
+//		this.location = null;
 		this.createDate = null;
 		this.hawkerList = null;
 	}
@@ -41,7 +41,7 @@ public class Canteen {
 		super();
 		this.name = name;
 		this.address = address;
-		this.location = location;
+//		this.location = location;
 		this.createDate = createDate;
 		this.hawkerList = hawkerList;
 	}
@@ -62,13 +62,13 @@ public class Canteen {
 		this.address = address;
 	}
 
-	public LatLng getLocation() {
-		return location;
-	}
-
-	public void setLocation(LatLng location) {
-		this.location = location;
-	}
+//	public LatLng getLocation() {
+//		return location;
+//	}
+//
+//	public void setLocation(LatLng location) {
+//		this.location = location;
+//	}
 
 	public Date getCreateDate() {
 		return createDate;
