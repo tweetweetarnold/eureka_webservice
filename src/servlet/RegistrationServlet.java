@@ -55,7 +55,7 @@ public class RegistrationServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("RegistrationServlet");
 			RegistrationController registrationController = new RegistrationController();
-			String employeeName = (String) request.getParameter("employeeName");
+			String employeeName = (String) request.getParameter("name");
 			String username = (String) request.getParameter("username");
 			String password = (String) request.getParameter("password");
 			String confirmPwd = (String) request.getParameter("confirmPwd");
@@ -66,7 +66,10 @@ public class RegistrationServlet extends HttpServlet {
 				long contactNumber = Long.parseLong(contactNum);
 				int generatedEmployeeId = registrationController.registerUser(username, password, employeeName, bankAcc, contactNumber, companyName);
 				out.println("You have successfully registered to our application. Your login id is : " + generatedEmployeeId);
-				response.sendRedirect("/eureka_webservice/login.jsp");
+				//For testing purposes,upon successful registration, it will stay on the servlet page for 10 seconds 
+				//to tell user to login using the generated employee id and then direct to login page
+				response.setHeader("Refresh", "10; URL=/eureka_webservice/login.jsp");
+				//response.sendRedirect("/eureka_webservice/login.jsp");
 			} else {
 				response.sendRedirect("/eureka_webservice/registration.jsp");
 			}
