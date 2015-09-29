@@ -21,10 +21,16 @@ public class LoginController {
 		int employeeid = e.getEmployeeId();
 		if (employeeid != 0) {
 			String employeePasswordinDB = e.getPassword();
+			//checking that the input password is correct as the password stored in DB
+			if (inputPassword.equals(employeePasswordinDB)) {
+				return e;
+			} else {
+				return null;
+			}
 		} else {
 			return null;
 		}
-		return e;
+		
 	}
 
 }
