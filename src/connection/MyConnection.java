@@ -2,7 +2,6 @@ package connection;
 
 import java.util.List;
 
-import model.Canteen;
 import model.FoodOrder;
 
 import org.hibernate.Criteria;
