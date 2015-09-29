@@ -27,9 +27,9 @@
     <![endif]-->
 </head>
 
-<body>
+<body style="background-color: #e73f4d">
 
-	<div class="container">
+	<div class="container" style="background-color: #e4e4e4">
 
 		<form class="form-signin" method="post" action="/eureka_webservice/LoginServlet">
 			<h2 class="form-signin-heading">Please sign in</h2>
@@ -41,12 +41,12 @@
 <!-- 					Remember me -->
 <!-- 				</label> -->
 <!-- 			</div> -->
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #e73f4d; border-color: #e73f4d; ">Sign in</button>
 		</form>
 		
 <!-- 		**************** For testing purposes ****************   -->
 		<form class="form-signin" method="post" action="homepage.jsp">
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Lazy Button</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #e73f4d; border-color: #e73f4d; ">Lazy Button</button>
 		</form>
 <!-- 		**************** For testing purposes ****************   -->
 

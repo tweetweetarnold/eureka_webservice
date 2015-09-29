@@ -29,7 +29,7 @@
 <body>
 
 	<!-- Headerbar JSP Include -->
-	<jsp:include page="headerbar.jsp" />
+	<jsp:include page="headerfooter/header.jsp" />
 
 	<!-- Page Content -->
 	<div class="container">
@@ -184,7 +184,7 @@
 		<hr>
 
 		<!-- Footer JSP Include -->
-		<jsp:include page="footer.jsp" />
+		<jsp:include page="headerfooter/footer.jsp" />
 
 	</div>
 	<!-- /.container -->
