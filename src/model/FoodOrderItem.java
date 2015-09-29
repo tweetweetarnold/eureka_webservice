@@ -25,6 +25,9 @@ public class FoodOrderItem {
 	private double price;
 	private String remarks;
 	private Date createDate;
+	
+	public FoodOrderItem() {
+	}
 
 	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity,
 			double price, String remarks, Date createDate) {

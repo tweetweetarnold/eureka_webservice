@@ -21,13 +21,13 @@
 
 		<form class="form-signin" method="post" action="/eureka_webservice/RegistrationServlet">
 			<h2 class="form-signin-heading">Please insert fields</h2>
-			<input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
-			<input type="text" name="name" class="form-control" placeholder="Name" required>
+			<input type="text" name="username" class="form-control" placeholder="Username" required>
+			<input type="text" name="name" class="form-control" placeholder="Name" >
 			<input type="password" name="password" class="form-control" placeholder="Password" required>
 			<input type="password" name="confirmPwd" class="form-control" placeholder="Confirm Password" required>
-			<input type="text" name="contactNumber" class="form-control" placeholder="Contact Number" required>
-			<input type="text" name="bankAcc" class="form-control" placeholder="Bank Account Number" required>
-			<input type="text" name="company" class="form-control" placeholder="Company" required>
+			<input type="text" name="contactNumber" class="form-control" placeholder="Contact Number" >
+			<input type="text" name="bankAcc" class="form-control" placeholder="Bank Account Number" >
+			<input type="text" name="company" class="form-control" placeholder="Company" >
 
 			<br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>

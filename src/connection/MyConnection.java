@@ -2,7 +2,6 @@ package connection;
 
 import java.util.List;
 
-import model.Canteen;
 import model.FoodOrder;
 
 import org.hibernate.Criteria;
@@ -20,15 +19,20 @@ public class MyConnection {
 //	public MyConnection() {}
 	
 	public static Session startSession() {
+		System.out.println("running start session");
 		try {
 			if (sessionFactory == null) {
+				System.out.println("sessionfactory is null");
 				sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+				System.out.println("sessionfactory is set");
 				session = sessionFactory.openSession();
+				System.out.println("session is set. Session: " + session);
 				session.beginTransaction();
 			}else{
 				session = sessionFactory.openSession();
 				session.beginTransaction();
 			}
+			System.out.println("sessionfactory: " + sessionFactory);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
@@ -64,7 +68,6 @@ public class MyConnection {
 
 	public static void update(Object o) {
 		startSession();
-		
 		session.update(o);
 		session.getTransaction().commit();
 //		closeAll();
@@ -96,6 +99,7 @@ public class MyConnection {
 		return list;
 	}
 	public static void save(Object o) {
+		System.out.println("running save...");
 		startSession();
 		session.save(o);
 		session.getTransaction().commit();

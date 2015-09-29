@@ -27,6 +27,9 @@ public class Stall {
 	private Date createDate;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "stall")
 	private Set<Food> foodList;
+	
+	public Stall() {
+	}
 
 	public Stall(String username, String password, String name,
 			long contactNo, Canteen canteen, Date createDate,

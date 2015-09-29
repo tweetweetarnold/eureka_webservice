@@ -27,28 +27,49 @@
     <![endif]-->
 </head>
 
-<body style="background-color: #e73f4d">
-
-	<div class="container" style="background-color: #e4e4e4">
+<body>
+	<div class="container">
 
 		<form class="form-signin" method="post" action="/eureka_webservice/LoginServlet">
 			<h2 class="form-signin-heading">Please sign in</h2>
-			<input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+
+			<!-- Error message handling -->
+			<%
+				String errorMsg = (String) session.getAttribute("error");
+				if (errorMsg != null && !errorMsg.isEmpty()) {
+			%>
+			<div class="alert alert-danger" role="alert">
+				<b>Error!</b>
+				<br>
+				<%=errorMsg%>
+			</div>
+			<%
+				}
+			%>
+
+			<!-- User input -->
+			<input type="text" name="username" class="form-control" placeholder="Username" required>
 			<input type="password" name="password" class="form-control" placeholder="Password" required>
-<!-- 			<div class="checkbox"> -->
-<!-- 				<label> -->
-<!-- 					<input type="checkbox" value="remember-me"> -->
-<!-- 					Remember me -->
-<!-- 				</label> -->
-<!-- 			</div> -->
-			<button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #e73f4d; border-color: #e73f4d; ">Sign in</button>
+			<!-- 			<div class="checkbox"> -->
+			<!-- 				<label> -->
+			<!-- 					<input type="checkbox" value="remember-me"> -->
+			<!-- 					Remember me -->
+			<!-- 				</label> -->
+			<!-- 			</div> -->
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+			<br>
+			<div align="center">
+				<a href="registration.jsp">Register new user</a>
+			</div>
+
 		</form>
-		
-<!-- 		**************** For testing purposes ****************   -->
+
+		<!-- 		**************** For testing purposes ****************   -->
 		<form class="form-signin" method="post" action="homepage.jsp">
-			<button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #e73f4d; border-color: #e73f4d; ">Lazy Button</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Lazy Button</button>
 		</form>
-<!-- 		**************** For testing purposes ****************   -->
+		<!-- 		**************** For testing purposes ****************   -->
 
 	</div>
 	<!-- /container -->

@@ -15,6 +15,9 @@ public class Driver {
 	private String username, password, name;
 	private long contactNo;
 	private Date createDate;
+	
+	public Driver() {
+	}
 
 	public Driver(String username, String password, String name,
 			long contactNo, Date createDate) {
