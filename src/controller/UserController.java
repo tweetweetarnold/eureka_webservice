@@ -28,10 +28,10 @@ public class UserController {
 	}
 
 	// Employee ID not set yet so search by username
-	public Employee retrieveEmployeeTEMPORARY(String username) {
-		Employee tempE = employeeDAO.getEmployeeTEMPORARY(username);
-		return tempE;
-
-	}
+//	public Employee retrieveEmployeeTEMPORARY(String username) {
+//		Employee tempE = employeeDAO.getEmployeeTEMPORARY(username);
+//		return tempE;
+//
+//	}
 
 }

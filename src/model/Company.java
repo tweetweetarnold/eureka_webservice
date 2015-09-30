@@ -21,7 +21,7 @@ public class Company {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
 	private Set<Employee> employeeList;
 	private Date createDate;
-	private DateTime cutoffTime;
+	private Date cutoffTime;
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Canteen> canteenList;
 
@@ -30,7 +30,7 @@ public class Company {
 	}
 
 	public Company(String name, Set<Employee> employeeList, Date createDate,
-			DateTime cutoffTime, Set<Canteen> canteenList) {
+			Date cutoffTime, Set<Canteen> canteenList) {
 		super();
 		this.name = name;
 		this.employeeList = employeeList;
@@ -63,11 +63,11 @@ public class Company {
 		this.createDate = createDate;
 	}
 
-	public DateTime getCutoffTime() {
+	public Date getCutoffTime() {
 		return cutoffTime;
 	}
 
-	public void setCutoffTime(DateTime cutoffTime) {
+	public void setCutoffTime(Date cutoffTime) {
 		this.cutoffTime = cutoffTime;
 	}
 

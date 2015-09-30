@@ -51,8 +51,6 @@ public class RegistrationServlet extends HttpServlet {
 
 	public void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// request.setCharacterEncoding("UTF-8");
-		// response.setCharacterEncoding("UTF-8");
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -64,7 +62,7 @@ public class RegistrationServlet extends HttpServlet {
 			String username = (String) request.getParameter("username");
 			String password = (String) request.getParameter("password");
 			String confirmPwd = (String) request.getParameter("confirmPwd");
-			String contactNum = (String) request.getParameter("contactNumber");
+			String contactNo = (String) request.getParameter("contactNumber");
 			String bankAcc = (String) request.getParameter("bankAcc");
 			String companyName = (String) request.getParameter("company");
 
@@ -72,17 +70,17 @@ public class RegistrationServlet extends HttpServlet {
 			boolean validation = !employeeName.equals("")
 					&& !username.equals("") && !password.equals("")
 					&& !confirmPwd.equals("") && (password.length() >= 7)
-					&& (confirmPwd.length() >= 7) && (contactNum.length() >= 8)
-					&& !contactNum.equals("") && !bankAcc.equals("")
+					&& (confirmPwd.length() >= 7) && (contactNo.length() >= 8)
+					&& !contactNo.equals("") && !bankAcc.equals("")
 					&& !companyName.equals("") && password.equals(confirmPwd);
 
-			validation = true; // for testing
+			validation = true; // for testing ***
 			if (validation) {
 				// long contactNumber = Long.parseLong(contactNum);
 				long contactNumber = 123; // for testing
-				int generatedEmployeeId = registrationController.registerUser(
-						username, password, employeeName, bankAcc,
-						contactNumber, companyName);
+				int generatedEmployeeId = registrationController.registerUser(username, password, employeeName, 123, 123, companyName);
+				
+				
 				out.println("You have successfully registered to our application. Your login id is : "
 						+ generatedEmployeeId);
 
@@ -95,12 +93,10 @@ public class RegistrationServlet extends HttpServlet {
 				// response.sendRedirect("/eureka_webservice/login.jsp");
 
 			} else {
-				out.println("here2");
 				// response.sendRedirect("/eureka_webservice/registration.jsp");
 			}
 
 		} catch (Exception e) {
-			out.println("here1");
 			out.println(e.getMessage());
 			e.printStackTrace();
 		}
