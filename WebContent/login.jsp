@@ -27,7 +27,7 @@
     <![endif]-->
 </head>
 
-<body>
+<body style="background-color: #e73f4d">
 	<div class="container">
 
 		<form class="form-signin" method="post" action="/eureka_webservice/LoginServlet">

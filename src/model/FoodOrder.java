@@ -14,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-
-
 @Entity
 public class FoodOrder {
 	@Id
@@ -26,21 +24,21 @@ public class FoodOrder {
 	@JoinColumn(name = "employeeId")
 	private Employee employee;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "driverId")
-	private Driver driver;
+	@JoinColumn(name = "admin")
+	private Admin admin;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "foodOrder")
 	private Set<FoodOrderItem> foodOrderList;
 	private Date createDate;
 
-	public FoodOrder(){
-	
+	public FoodOrder() {
 	}
-	public FoodOrder(String status, Employee employee, Driver driver,
+
+	public FoodOrder(String status, Employee employee, Admin admin,
 			Set<FoodOrderItem> foodOrderList, Date createDate) {
 		super();
 		this.status = status;
 		this.employee = employee;
-		this.driver = driver;
+		this.admin = admin;
 		this.foodOrderList = foodOrderList;
 		this.createDate = createDate;
 	}
@@ -77,12 +75,12 @@ public class FoodOrder {
 		this.employee = employee;
 	}
 
-	public Driver getDriver() {
-		return driver;
+	public Admin getAdmin() {
+		return admin;
 	}
 
-	public void setDriver(Driver driver) {
-		this.driver = driver;
+	public void setDriver(Admin admin) {
+		this.admin = admin;
 	}
 
 	public Date getCreateDate() {
@@ -92,14 +90,15 @@ public class FoodOrder {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	//retrieve the total price for the particular food order
-	public double getFoodOrderTotalPrice(){
+
+	// retrieve the total price for the particular food order
+	public double getFoodOrderTotalPrice() {
 		double result = 0.0;
 		Set<FoodOrderItem> foodOrderList = getFoodOrderList();
 		Iterator iter = foodOrderList.iterator();
-		while(iter.hasNext()){
+		while (iter.hasNext()) {
 			FoodOrderItem tempItem = (FoodOrderItem) iter.next();
-			result += (tempItem.getQuantity()* tempItem.getPrice());
+			result += (tempItem.getQuantity() * tempItem.getPrice());
 		}
 		return result;
 	}

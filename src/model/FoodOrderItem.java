@@ -25,7 +25,7 @@ public class FoodOrderItem {
 	private double price;
 	private String remarks;
 	private Date createDate;
-	
+
 	public FoodOrderItem() {
 	}
 

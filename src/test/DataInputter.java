@@ -1,31 +1,10 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
-import model.Canteen;
-import model.Driver;
-import model.Employee;
-import model.Food;
 import model.FoodOrder;
-import model.FoodOrderItem;
-import model.Stall;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-import com.javadocmd.simplelatlng.LatLng;
-
-import controller.CanteenController;
 import controller.FoodOrderController;
-import dao.CanteenDAO;
-import dao.FoodOrderDAO;
 public class DataInputter {
 
 	public static void main(String[] args) {

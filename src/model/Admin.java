@@ -8,18 +8,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Driver {
+public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int driverId;
+	private int adminId;
 	private String username, password, name;
 	private long contactNo;
 	private Date createDate;
 	
-	public Driver() {
+	public Admin() {
 	}
 
-	public Driver(String username, String password, String name,
+	public Admin(String username, String password, String name,
 			long contactNo, Date createDate) {
 		super();
 		this.username = username;
@@ -29,12 +29,12 @@ public class Driver {
 		this.createDate = createDate;
 	}
 
-	public int getDriverId() {
-		return driverId;
+	public int getAdminId() {
+		return adminId;
 	}
 
-	public void setDriverId(int driverId) {
-		this.driverId = driverId;
+	public void setAdminId(int adminId) {
+		this.adminId = adminId;
 	}
 
 	public String getUsername() {

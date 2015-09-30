@@ -20,41 +20,45 @@ import services.PasswordService;
 @WebServlet("/RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegistrationServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		process(request, response);
+	public RegistrationServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		process(request, response);
-	}
-	
-	public void process(HttpServletRequest request,
+	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		process(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		process(request, response);
+	}
+
+	public void process(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// request.setCharacterEncoding("UTF-8");
 		// response.setCharacterEncoding("UTF-8");
-		
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		
+		out.println("RegistrationServlet");
+
 		try {
-			out.println("RegistrationServlet");
 			RegistrationController registrationController = new RegistrationController();
 			String employeeName = (String) request.getParameter("name");
 			String username = (String) request.getParameter("username");
@@ -63,26 +67,43 @@ public class RegistrationServlet extends HttpServlet {
 			String contactNum = (String) request.getParameter("contactNumber");
 			String bankAcc = (String) request.getParameter("bankAcc");
 			String companyName = (String) request.getParameter("company");
-			if (!employeeName.equals("") && !username.equals("") && !password.equals("") && !confirmPwd.equals("") && (password.length()>= 7) && (confirmPwd.length() >= 7) && (contactNum.length() >= 8) && !contactNum.equals("") && !bankAcc.equals("") && !companyName.equals("") && password.equals(confirmPwd)) {
-				long contactNumber = Long.parseLong(contactNum);
-				int generatedEmployeeId = registrationController.registerUser(username, password, employeeName, bankAcc, contactNumber, companyName);
-				out.println("You have successfully registered to our application. Your login id is : " + generatedEmployeeId);
-				//For testing purposes,upon successful registration, it will stay on the servlet page for 10 seconds 
-				//to tell user to login using the generated employee id and then direct to login page
-				response.setHeader("Refresh", "10; URL=/eureka_webservice/login.jsp");
-				//response.sendRedirect("/eureka_webservice/login.jsp");
+
+			// Check user parameters
+			boolean validation = !employeeName.equals("")
+					&& !username.equals("") && !password.equals("")
+					&& !confirmPwd.equals("") && (password.length() >= 7)
+					&& (confirmPwd.length() >= 7) && (contactNum.length() >= 8)
+					&& !contactNum.equals("") && !bankAcc.equals("")
+					&& !companyName.equals("") && password.equals(confirmPwd);
+
+			validation = true; // for testing
+			if (validation) {
+				// long contactNumber = Long.parseLong(contactNum);
+				long contactNumber = 123; // for testing
+				int generatedEmployeeId = registrationController.registerUser(
+						username, password, employeeName, bankAcc,
+						contactNumber, companyName);
+				out.println("You have successfully registered to our application. Your login id is : "
+						+ generatedEmployeeId);
+
+				// For testing purposes,upon successful registration, it will
+				// stay on the servlet page for 10 seconds
+				// to tell user to login using the generated employee id and
+				// then direct to login page
+				// response.setHeader("Refresh",
+				// "10; URL=/eureka_webservice/login.jsp");
+				// response.sendRedirect("/eureka_webservice/login.jsp");
+
 			} else {
 				out.println("here2");
-				response.sendRedirect("/eureka_webservice/registration.jsp");
+				// response.sendRedirect("/eureka_webservice/registration.jsp");
 			}
-			
-				
+
 		} catch (Exception e) {
 			out.println("here1");
 			out.println(e.getMessage());
 			e.printStackTrace();
 		}
-	//}
-		}
-
+		// }
+	}
 }

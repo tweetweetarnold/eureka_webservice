@@ -27,13 +27,12 @@ public class Stall {
 	private Date createDate;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "stall")
 	private Set<Food> foodList;
-	
+
 	public Stall() {
 	}
 
-	public Stall(String username, String password, String name,
-			long contactNo, Canteen canteen, Date createDate,
-			Set<Food> foodList) {
+	public Stall(String username, String password, String name, long contactNo,
+			Canteen canteen, Date createDate, Set<Food> foodList) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -43,7 +42,6 @@ public class Stall {
 		this.createDate = createDate;
 		this.foodList = foodList;
 	}
-
 
 	public int getStallId() {
 		return stallId;
