@@ -1,18 +1,20 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import controller.RegistrationController;
-import model.Employee;
-import services.PasswordService;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -33,8 +35,8 @@ public class RegistrationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
@@ -43,63 +45,78 @@ public class RegistrationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("RegistrationServlet");
+		response.setContentType("application/json");
+		JSONObject returnObj = new JSONObject();
+		// PrintWriter out = response.getWriter();
+		System.out.println("RegistrationServlet");
 
 		try {
 			RegistrationController registrationController = new RegistrationController();
+			JSONObject jsonMessage = new JSONObject();
+
 			String employeeName = (String) request.getParameter("name");
 			String username = (String) request.getParameter("username");
 			String password = (String) request.getParameter("password");
 			String confirmPwd = (String) request.getParameter("confirmPwd");
-			String contactNo = (String) request.getParameter("contactNumber");
+			String contactNo = (String) request.getParameter("contactNo");
 			String bankAcc = (String) request.getParameter("bankAcc");
 			String companyName = (String) request.getParameter("company");
 
-			// Check user parameters
-			boolean validation = !employeeName.equals("")
-					&& !username.equals("") && !password.equals("")
-					&& !confirmPwd.equals("") && (password.length() >= 7)
-					&& (confirmPwd.length() >= 7) && (contactNo.length() >= 8)
-					&& !contactNo.equals("") && !bankAcc.equals("")
-					&& !companyName.equals("") && password.equals(confirmPwd);
+			jsonMessage.put("name", employeeName);
+			jsonMessage.put("username", username);
+			jsonMessage.put("contactNo", contactNo);
+			jsonMessage.put("bankAcc", bankAcc);
+			jsonMessage.put("company", companyName);
 
-			validation = true; // for testing ***
+			returnObj.put("message", jsonMessage);
+
+			// Check user parameters
+			boolean validation = !employeeName.equals("") && !username.equals("")
+					&& !password.equals("") && !confirmPwd.equals("") && (password.length() >= 7)
+					&& (confirmPwd.length() >= 7) && (contactNo.length() >= 8)
+					&& !contactNo.equals("") && !bankAcc.equals("") && !companyName.equals("")
+					&& password.equals(confirmPwd);
+
+			// validation = true; // for testing ***
 			if (validation) {
 				// long contactNumber = Long.parseLong(contactNum);
 				long contactNumber = 123; // for testing
-				int generatedEmployeeId = registrationController.registerUser(username, password, employeeName, 123, 123, companyName);
-				
-				
-				out.println("You have successfully registered to our application. Your login id is : "
-						+ generatedEmployeeId);
+				int generatedEmployeeId = registrationController.registerUser(username, password,
+						employeeName, 123, 123, companyName);
 
-				// For testing purposes,upon successful registration, it will
-				// stay on the servlet page for 10 seconds
-				// to tell user to login using the generated employee id and
-				// then direct to login page
-				// response.setHeader("Refresh",
-				// "10; URL=/eureka_webservice/login.jsp");
-				// response.sendRedirect("/eureka_webservice/login.jsp");
+				System.out.println("User created successfully. UserID: " + generatedEmployeeId);
+				returnObj.put("status", "ok");
+				System.out.println(returnObj.toString());
 
 			} else {
 				// response.sendRedirect("/eureka_webservice/registration.jsp");
+				System.out.println("RegistrationServlet: Validation failed.");
+				throw new Exception(
+						"Please ensure that you have inserted valid characters into the fields.");
 			}
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+			System.out.println("Exception@RegistrationServlet: " + e.getMessage());
 			e.printStackTrace();
+			returnObj.put("error", e.getMessage());
+			returnObj.put("status", "fail");
+			HttpSession session = request.getSession();
+			session.setAttribute("error", returnObj);
+
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			System.out.println(gson.toJson(returnObj));
+
+			response.sendRedirect("/eureka_webservice/registration.jsp");
 		}
-		// }
 	}
 }

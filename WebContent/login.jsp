@@ -27,47 +27,39 @@
     <![endif]-->
 </head>
 
-<body style="background-color: #e73f4d">
+<body>
 	<div class="container">
 
 		<form class="form-signin" method="post" action="/eureka_webservice/LoginServlet">
 			<h2 class="form-signin-heading">Please sign in</h2>
 
-			<!-- Error message handling -->
-			<%
-				String errorMsg = (String) session.getAttribute("error");
-				if (errorMsg != null && !errorMsg.isEmpty()) {
-			%>
-			<div class="alert alert-danger" role="alert">
-				<b>Error!</b>
-				<br>
-				<%=errorMsg%>
-			</div>
-			<%
-				}
-			%>
-
 			<!-- User input -->
 			<input type="text" name="username" class="form-control" placeholder="Username" required>
 			<input type="password" name="password" class="form-control" placeholder="Password" required>
-			<!-- 			<div class="checkbox"> -->
-			<!-- 				<label> -->
-			<!-- 					<input type="checkbox" value="remember-me"> -->
-			<!-- 					Remember me -->
-			<!-- 				</label> -->
-			<!-- 			</div> -->
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
 			<br>
 			<div align="center">
 				<a href="registration.jsp">Register new user</a>
 			</div>
-
+			
+			<!-- Error message handling -->
+			<%
+				String error = (String) session.getAttribute("error");
+				if (error != null && !error.isEmpty()) {
+			%>
+			<div class="alert alert-danger" role="alert">
+				<b>Error!</b>
+				<br>
+				<%=error%>
+			</div>
+			<%
+				}
+			%>
 		</form>
 
 		<!-- 		**************** For testing purposes ****************   -->
 		<form class="form-signin" method="post" action="homepage.jsp">
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Lazy Button</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Cheater Login</button>
 		</form>
 		<!-- 		**************** For testing purposes ****************   -->
 
