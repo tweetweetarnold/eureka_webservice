@@ -4,67 +4,64 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import model.Admin;
 import model.Canteen;
 import model.Company;
-import model.Driver;
 import model.Employee;
 import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
 import model.Stall;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-import com.javadocmd.simplelatlng.LatLng;
+import connection.MyConnection;
 
 public class Test {
 
 	public static void main(String[] args) {
 
-		Canteen canteen = new Canteen("Kopitiam", "123 Street", null, new Date(), null);
-		Stall stall = new Stall("abc", "123", "Chris Cheng", 456456,
-				canteen, new Date(), null);
-		Set<Stall> set = new HashSet<>();
-		set.add(stall);
-		canteen.setHawkerList(set);
-		Company company = new Company("Apple", null, new Date());
-		Driver driver = new Driver("abc", "123", "Arnold", 456546, new Date());
-		Food food = new Food("Chicken Wings", "Delicious", 2.5, null,
+		Canteen canteen = new Canteen("xiaodingdang", "123", new Date(), null);
+		Stall stall = new Stall("stall", "123", "foodrepublic", 123, canteen,
+				new Date(), null);
+		Food food = new Food("chickenrice", "damn nice", 2.50, stall,
 				new Date());
-		Food food2 = new Food("French Fries", "Delicious", 2.5, null,
+		Admin admin = new Admin("admin", "123", "admin123", 123, new Date());
+		Company company = new Company("xiaodingdang co.", null, new Date(),
+				null, null);
+		Employee employee = new Employee("arnold123", "123", "arnold", 123, 10,
+				123, company, null, null, new Date());
+		FoodOrder order = new FoodOrder("done", employee, admin, null,
 				new Date());
-		FoodOrder order = new FoodOrder("Done", null, null, null, new Date());
-		FoodOrderItem item = new FoodOrderItem(order, food, 2, 2.5, "Remarks",
-				new Date());
-		Set<Food> fav = new HashSet<Food>();
-		fav.add(food);
-		fav.add(food2);
-		Employee employee = new Employee("abc", "123", "Boon Hui", "POSB",
-				456456, company, fav, new Date());
-		
-//		MyConnection.save(canteen);
+		FoodOrderItem foodItem = new FoodOrderItem(order, food, 2, 2.5,
+				"remarks", new Date());
 
-		SessionFactory sessionFactory = new Configuration().configure()
-				.buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Set<Canteen> canteenList = new HashSet<>();
+		canteenList.add(canteen);
+		company.setCanteenList(canteenList);
+		Set<FoodOrder> orderList = new HashSet<>();
+		orderList.add(order);
+		employee.setOrderHistory(orderList);
+		Set<FoodOrderItem> foodOrderList = new HashSet<>();
+		foodOrderList.add(foodItem);
+		order.setFoodOrderList(foodOrderList);
+		Set<Employee> employeeList = new HashSet<>();
+		employeeList.add(employee);
+		company.setEmployeeList(employeeList);
+		Set<Food> foodList = new HashSet<>();
+		employee.setFavouriteList(foodList);
+		foodList.add(food);
+		Set<Stall> stallList = new HashSet<>();
+		stallList.add(stall);
+		stall.setFoodList(foodList);
+		canteen.setStallList(stallList);
 
-		session.save(canteen);
-		session.save(stall);
-		session.save(company);
-		session.save(driver);
-		session.save(food);
-		session.save(order);
-		session.save(item);
-		session.save(employee);
+		MyConnection.save(canteen);
+		MyConnection.save(stall);
+		MyConnection.save(food);
+		MyConnection.save(admin);
+		MyConnection.save(company);
+		MyConnection.save(employee);
+		MyConnection.save(order);
+		MyConnection.save(foodItem);
 
-		// JSONObject obj = new JSONObject();
-
-		session.getTransaction().commit();
-		session.close();
-		sessionFactory.close();
 	}
 
 }

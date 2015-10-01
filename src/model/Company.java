@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.joda.time.DateTime;
+
 @Entity
 public class Company {
 	@Id
@@ -19,24 +21,22 @@ public class Company {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
 	private Set<Employee> employeeList;
 	private Date createDate;
+	private Date cutoffTime;
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<Canteen> canteenList;
 
 	public Company() {
 
 	}
 
-	public Company(String name, Set<Employee> employeeList, Date createDate) {
+	public Company(String name, Set<Employee> employeeList, Date createDate,
+			Date cutoffTime, Set<Canteen> canteenList) {
 		super();
 		this.name = name;
 		this.employeeList = employeeList;
 		this.createDate = createDate;
-	}
-
-	public int getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
+		this.cutoffTime = cutoffTime;
+		this.canteenList = canteenList;
 	}
 
 	public String getName() {
@@ -61,6 +61,22 @@ public class Company {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public Date getCutoffTime() {
+		return cutoffTime;
+	}
+
+	public void setCutoffTime(Date cutoffTime) {
+		this.cutoffTime = cutoffTime;
+	}
+
+	public Set<Canteen> getCanteenList() {
+		return canteenList;
+	}
+
+	public void setCanteenList(Set<Canteen> canteenList) {
+		this.canteenList = canteenList;
 	}
 
 }

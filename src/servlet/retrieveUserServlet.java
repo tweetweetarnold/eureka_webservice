@@ -44,18 +44,18 @@ public class retrieveUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//int tempID = Integer.parseInt(request.getParameter("userID"));
-		String tempID = request.getParameter("userID");
-		UserController userController = new UserController();
-		Employee tempE = userController.retrieveEmployeeTEMPORARY(tempID);
-		Gson gson = new Gson();
-		//convert the employee object(tempE) to a json object
-		String jsonString = gson.toJson(tempE);
-		//send json output back
-		
-		response.getWriter().write(jsonString);
-		RequestDispatcher rd = request.getRequestDispatcher("testRetrieveUser.jsp");
-		request.setAttribute("UserJson", jsonString);
-		rd.forward(request,response);
+//		String tempID = request.getParameter("userID");
+//		UserController userController = new UserController();
+//		Employee tempE = userController.retrieveEmployeeTEMPORARY(tempID);
+//		Gson gson = new Gson();
+//		//convert the employee object(tempE) to a json object
+//		String jsonString = gson.toJson(tempE);
+//		//send json output back
+//		
+//		response.getWriter().write(jsonString);
+//		RequestDispatcher rd = request.getRequestDispatcher("testRetrieveUser.jsp");
+//		request.setAttribute("UserJson", jsonString);
+//		rd.forward(request,response);
 		
 	}
 

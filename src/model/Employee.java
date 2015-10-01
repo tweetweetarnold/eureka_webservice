@@ -24,62 +24,38 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int employeeId;
-	private String username, password, name, bankAcc;
+	private String username, password, name;
+	private long creditCardNo;
+	private long eDollars;
 	private long contactNo;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "companyId")
 	private Company company;
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Food> favouriteList;
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<FoodOrder> orderHistory;
 	private Date createDate;
-	
-	public Employee (){
-		
+
+	public Employee() {
+
 	}
-	public Employee(String username, String password, String name, String bankAcc,
-			long contactNo, Company company, Set<Food> favouriteList,
+
+	public Employee(String username, String password, String name,
+			long creditCardNo, long eDollars, long contactNo, Company company,
+			Set<Food> favouriteList, Set<FoodOrder> orderHistory,
 			Date createDate) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.name = name;
-		this.bankAcc = bankAcc;
+		this.creditCardNo = creditCardNo;
+		this.eDollars = eDollars;
 		this.contactNo = contactNo;
 		this.company = company;
 		this.favouriteList = favouriteList;
+		this.orderHistory = orderHistory;
 		this.createDate = createDate;
-	}
-
-	public Set<Food> getFavouriteList() {
-		return favouriteList;
-	}
-
-	public void setFavouriteList(Set<Food> favouriteList) {
-		this.favouriteList = favouriteList;
-	}
-
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
-	}
-
-	public String getBankAcc() {
-		return bankAcc;
-	}
-
-	public void setBankAcc(String bankAcc) {
-		this.bankAcc = bankAcc;
-	}
-
-	public long getContactNo() {
-		return contactNo;
-	}
-
-	public void setContactNo(long contactNo) {
-		this.contactNo = contactNo;
 	}
 
 	public int getEmployeeId() {
@@ -112,6 +88,54 @@ public class Employee {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public long getCreditCardNo() {
+		return creditCardNo;
+	}
+
+	public void setCreditCardNo(long creditCardNo) {
+		this.creditCardNo = creditCardNo;
+	}
+
+	public long geteDollars() {
+		return eDollars;
+	}
+
+	public void seteDollars(long eDollars) {
+		this.eDollars = eDollars;
+	}
+
+	public long getContactNo() {
+		return contactNo;
+	}
+
+	public void setContactNo(long contactNo) {
+		this.contactNo = contactNo;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public Set<Food> getFavouriteList() {
+		return favouriteList;
+	}
+
+	public void setFavouriteList(Set<Food> favouriteList) {
+		this.favouriteList = favouriteList;
+	}
+
+	public Set<FoodOrder> getOrderHistory() {
+		return orderHistory;
+	}
+
+	public void setOrderHistory(Set<FoodOrder> orderHistory) {
+		this.orderHistory = orderHistory;
 	}
 
 	public Date getCreateDate() {

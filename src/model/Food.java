@@ -21,8 +21,11 @@ public class Food {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "stallId")
 	private Stall stall;
-	// private byte[] image;
+	// private image byte[];
 	private Date createDate;
+
+	public Food() {
+	}
 
 	public Food(String name, String description, double price, Stall stall,
 			Date createDate) {

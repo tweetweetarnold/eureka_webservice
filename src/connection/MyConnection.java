@@ -2,7 +2,6 @@ package connection;
 
 import java.util.List;
 
-import model.Canteen;
 import model.FoodOrder;
 
 import org.hibernate.Criteria;
@@ -17,113 +16,93 @@ public class MyConnection {
 	private static SessionFactory sessionFactory;
 	private static Session session;
 
-//	public MyConnection() {}
-	
+	public MyConnection() {
+	}
+
 	public static Session startSession() {
+		System.out.println("MyConnection: startSession");
 		try {
 			if (sessionFactory == null) {
-				sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-				session = sessionFactory.openSession();
-				session.beginTransaction();
-			}else{
-				session = sessionFactory.openSession();
-				session.beginTransaction();
+				sessionFactory = new Configuration().configure(
+						"hibernate.cfg.xml").buildSessionFactory();
+				System.out.println("SessionFactory is set.");
 			}
+
+			session = sessionFactory.openSession();
+			System.out.println("Session is set.");
+			session.beginTransaction();
+
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
 		return session;
 	}
-	
-//	for retrieve all
-	public static List<Object> retrieveAllRecords(DetachedCriteria dc){
-		startSession();
-		Criteria criteria = dc.getExecutableCriteria(session);
-		List<Object> list = criteria.list();
-		session.getTransaction().commit();
-//		closeAll();
-		return list;
-	}
-	
-//	same as retrieveAll but with limit
-	public static List<Object> retrieveAllRecordsWithLimit(DetachedCriteria dc, int max){
-		startSession();
-		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max);
-		List<Object> list = criteria.list();
-		session.getTransaction().commit();
-//		closeAll();
-		return list;
-	}
 
 	public static void delete(Object o) {
-		startSession();
+		System.out.println("MyConnection: delete");
+		Session session = startSession();
 		session.delete(o);
 		session.getTransaction().commit();
-//		closeAll();
+		session.close();
 	}
 
 	public static void update(Object o) {
-		startSession();
-		
+		System.out.println("MyConnection: update");
+		Session session = startSession();
 		session.update(o);
 		session.getTransaction().commit();
-//		closeAll();
+		session.close();
 	}
 
 	public static Object get(Class objClass, int id) {
-		startSession();
+		System.out.println("MyConnection: get");
+		Session session = startSession();
 		Object o = session.get(objClass, id);
-//		closeAll();
+		session.close();
 		return o;
 	}
-	
-	//BH added a new get method that parses in objClass and username
-	public static Object get(Class objClass, String username) {
-		startSession();
-		Object o = session.get(objClass, username);
-//		closeAll();
-		return o;
+
+	public static void save(Object o) {
+		System.out.println("MyConnection: save");
+		Session session = startSession();
+		session.save(o);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	// for retrieve all
+	public static List<Object> retrieveAllRecords(DetachedCriteria dc) {
+		System.out.println("MyConnection: retrieveAllRecords");
+		Session session = startSession();
+		Criteria criteria = dc.getExecutableCriteria(session);
+		List<Object> list = criteria.list();
+		session.getTransaction().commit();
+		closeAll();
+		return list;
+	}
+
+	// same as retrieveAll but with limit
+	public static List<Object> retrieveAllRecordsWithLimit(DetachedCriteria dc,
+			int max) {
+		System.out.println("MyConnection: retrieveAllRecordsWithLimit");
+		Session session = startSession();
+		Criteria criteria = dc.getExecutableCriteria(session)
+				.setMaxResults(max);
+		List<Object> list = criteria.list();
+		session.getTransaction().commit();
+		closeAll();
+		return list;
 	}
 
 	public static List<Object> get(String sql) {
-		startSession();
-		
-//		Criteria criteria = dc.getExecutableCriteria(session);
+		Session session = startSession();
+
+		// Criteria criteria = dc.getExecutableCriteria(session);
 		Query query = session.createSQLQuery(sql).addEntity(FoodOrder.class);
 		List<Object> list = (List<Object>) query.list();
 		session.getTransaction().commit();
-//		closeAll();
+		closeAll();
 		return list;
-	}
-	public static void save(Object o) {
-		startSession();
-		session.save(o);
-		session.getTransaction().commit();
-//		closeAll();
-	}
-
-//	public static void saveOnly(Object o) {
-//		session.save(o);
-//	}
-
-//	public static void commit() {
-//		session.getTransaction().commit();
-//	}
-
-	public static void closeSession() {
-		try {
-			session.close();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void closeSessionFactory() {
-		try {
-			sessionFactory.close();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public static void closeAll() {
