@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<%@page import="org.json.simple.JSONObject"%>
 
 <title>DaBao - Register</title>
 
@@ -21,25 +22,59 @@
 
 		<form class="form-signin" method="post" action="/eureka_webservice/RegistrationServlet">
 			<h2 class="form-signin-heading">Please insert fields</h2>
-			<input type="text" name="username" class="form-control" placeholder="Username" required>
-			<input type="text" name="name" class="form-control" placeholder="Name" >
+
+			<%
+				String username = "";
+				String name = "";
+				String contactNo = "";
+				String bankAcc = "";
+				String company = "";
+
+				JSONObject obj = null;
+				obj = (JSONObject) session.getAttribute("error");
+				if (obj != null) {
+					JSONObject msg = (JSONObject) obj.get("message");
+
+					username = (String) msg.get("username");
+					name = (String) msg.get("name");
+					contactNo = (String) msg.get("contactNo");
+					bankAcc = (String) msg.get("bankAcc");
+					company = (String) msg.get("company");
+				}
+			%>
+
+			<!-- User input -->
+			<input type="text" name="username" class="form-control" placeholder="Username" value="<%=username%>" required>
+			<input type="text" name="name" class="form-control" placeholder="Name" value="<%=name%>" required>
 			<input type="password" name="password" class="form-control" placeholder="Password" required>
 			<input type="password" name="confirmPwd" class="form-control" placeholder="Confirm Password" required>
-			<input type="text" name="contactNumber" class="form-control" placeholder="Contact Number" >
-			<input type="text" name="bankAcc" class="form-control" placeholder="Bank Account Number" >
-			<input type="text" name="company" class="form-control" placeholder="Company" >
+			<input type="text" name="contactNo" class="form-control" placeholder="Contact Number" value="<%=contactNo%>" required>
+			<input type="text" name="bankAcc" class="form-control" placeholder="Bank Account Number" value="<%=bankAcc%>" required>
+			<input type="text" name="company" class="form-control" placeholder="Company" value="<%=company%>" required>
 
 			<br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-		</form>
+			<br>
+			<div align="center">
+				<a href="login.jsp">Return to Login</a>
+			</div>
+			<br>
 
-		<%
-			String error = (String) request.getAttribute("error");
-			// 	if (error != null) {
-			// 		out.println(error);
-			// 	}
-			// 	 request.removeAttribute("error");
-		%>
+
+			<!-- Error message handling -->
+			<%
+				if (obj != null) {
+			%>
+			<div class="alert alert-danger" role="alert">
+				<b>Error!</b>
+				<br>
+				<%=obj.get("error")%>
+			</div>
+			<%
+				session.removeAttribute("error");
+				}
+			%>
+		</form>
 
 	</div>
 

@@ -55,8 +55,6 @@ public class LoginServlet extends HttpServlet {
 
 	public void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// request.setCharacterEncoding("UTF-8");
-		// response.setCharacterEncoding("UTF-8");
 
 		try {
 			response.setContentType("text/html");
@@ -64,36 +62,36 @@ public class LoginServlet extends HttpServlet {
 			// response.setCharacterEncoding("utf-8"); // for JSON response
 			PrintWriter out = response.getWriter();
 
-			out.println();
-			// if(request.getParameter("function").equals("newLogin")){
+			out.println("LoginServlet");
 
 			// Getting User Input Parameters
 			String username = (String) request.getParameter("username");
 			String inputPwd = (String) request.getParameter("password");
 
 			// User Input Validation
-			if (username != null && inputPwd != null && !username.equals("")
-					&& !inputPwd.equals("")) {
-				
-				Integer id = Integer.parseInt(username); // **@Boonhui, why need to parse to int?
+			boolean validation = (username != null && inputPwd != null && !username.equals("") && !inputPwd
+					.equals(""));
+
+			if (validation) {
+
+				Integer id = Integer.parseInt(username); // **@Boonhui, why need
+															// to parse to int?
 				out.println(id);
-				
+
 				LoginController loginController = new LoginController();
 				Employee emp = loginController.authenticateUser(id,
 						PasswordService.encryptPassword(inputPwd));
-				
-//				*** For Development only *** 
+
+				// *** For Development only ***
 				if (emp != null) {
 					out.println("hello " + id);
-					out.println("Encrypted: "
-							+ PasswordService.encryptPassword(inputPwd));
+					out.println("Encrypted: " + PasswordService.encryptPassword(inputPwd));
 					out.println("Decrypted: "
 							+ PasswordService.decryptPassword(PasswordService
 									.encryptPassword(inputPwd)));
 					out.println("You got it!");
 
-					RequestDispatcher rd = request
-							.getRequestDispatcher("home.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 					request.setAttribute("user", emp);
 					rd.forward(request, response);
 				} else {
@@ -102,7 +100,7 @@ public class LoginServlet extends HttpServlet {
 					out.println(inputPwd);
 				}
 			} else {
-//				Error Response
+				// Error Response
 				response.sendRedirect("login.jsp");
 			}
 		} catch (Exception e) {
