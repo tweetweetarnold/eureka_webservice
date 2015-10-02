@@ -81,13 +81,11 @@ public class RegistrationServlet extends HttpServlet {
 			returnObj.put("message", jsonMessage);
 
 			// Check user parameters
-			boolean validation = !employeeName.equals("") && !username.equals("")
-					&& !password.equals("") && !confirmPwd.equals("") && (password.length() >= 7)
-					&& (confirmPwd.length() >= 7) && (contactNo.length() >= 8)
-					&& !contactNo.equals("") && !bankAcc.equals("") && !companyName.equals("")
-					&& password.equals(confirmPwd);
+			boolean validation = !(employeeName.isEmpty() && username.isEmpty()
+					&& password.isEmpty() && confirmPwd.isEmpty() && contactNo.isEmpty()
+					&& bankAcc.isEmpty() && companyName.isEmpty() && password.equals(confirmPwd) && password
+					.length() < 7);
 
-			// validation = true; // for testing ***
 			if (validation) {
 				// long contactNumber = Long.parseLong(contactNum);
 				long contactNumber = 123; // for testing

@@ -19,19 +19,14 @@ public class Test {
 	public static void main(String[] args) {
 
 		Canteen canteen = new Canteen("xiaodingdang", "123", new Date(), null);
-		Stall stall = new Stall("stall", "123", "foodrepublic", 123, canteen,
-				new Date(), null);
-		Food food = new Food("chickenrice", "damn nice", 2.50, stall,
-				new Date());
+		Stall stall = new Stall("stall", "123", "foodrepublic", 123, canteen, new Date(), null);
+		Food food = new Food("chickenrice", "damn nice", 2.50, stall, new Date());
 		Admin admin = new Admin("admin", "123", "admin123", 123, new Date());
-		Company company = new Company("xiaodingdang co.", null, new Date(),
-				null, null);
-		Employee employee = new Employee("arnold123", "123", "arnold", 123, 10,
-				123, company, null, null, new Date());
-		FoodOrder order = new FoodOrder("done", employee, admin, null,
-				new Date());
-		FoodOrderItem foodItem = new FoodOrderItem(order, food, 2, 2.5,
-				"remarks", new Date());
+		Company company = new Company("xiaodingdang co.", null, new Date(), null, null);
+		Employee employee = new Employee("arnold123", "123", "arnold", 123, 10, 123, company, null,
+				null, new Date());
+		FoodOrder order = new FoodOrder("done", employee, admin, null, new Date());
+		FoodOrderItem foodItem = new FoodOrderItem(order, food, 2, 2.5, "remarks", new Date());
 
 		Set<Canteen> canteenList = new HashSet<>();
 		canteenList.add(canteen);

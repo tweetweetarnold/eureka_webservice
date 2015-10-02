@@ -2,9 +2,11 @@ package test;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
-import model.FoodOrder;
-import controller.FoodOrderController;
+import model.Canteen;
+import model.Stall;
+import controller.CanteenController;
 public class DataInputter {
 
 	public static void main(String[] args) {
@@ -43,15 +45,27 @@ public class DataInputter {
 //		foodOrderDao.saveFoodOrder(foodOrder2);
 //		foodOrderDao.saveFoodOrder(foodOrder3);
 		
-		FoodOrderController foodOrderController = new FoodOrderController();
-		List<FoodOrder> list = foodOrderController.getFoodOrderToday();
-		System.out.println("ListSize =" + list.size());
-		
-		Iterator iter = list.iterator();
-		while(iter.hasNext()){
-			FoodOrder tempFoodOrder = (FoodOrder)iter.next();
-			System.out.println(tempFoodOrder.getStatus());
+		CanteenController controller = new CanteenController();
+		List<Canteen> list = controller.retrieveAll();
+		for(int i = 0; i < list.size(); i++) {
+			Canteen c = list.get(i);
+			System.out.println(c.getAddress());
+			System.out.println(c.getName());
+			Set<Stall> list2 = c.getStallList();
+			Iterator iterator = list2.iterator();
+			Stall s = (Stall) iterator.next();
+			System.out.println("Stall: " + s.getName());
 		}
+		
+//		FoodOrderController foodOrderController = new FoodOrderController();
+//		List<FoodOrder> list = foodOrderController.getFoodOrderToday();
+//		System.out.println("ListSize =" + list.size());
+//		
+//		Iterator iter = list.iterator();
+//		while(iter.hasNext()){
+//			FoodOrder tempFoodOrder = (FoodOrder)iter.next();
+//			System.out.println(tempFoodOrder.getStatus());
+//		}
 	}
 
 }

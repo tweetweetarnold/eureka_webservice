@@ -23,8 +23,8 @@ public class MyConnection {
 		System.out.println("MyConnection: startSession");
 		try {
 			if (sessionFactory == null) {
-				sessionFactory = new Configuration().configure(
-						"hibernate.cfg.xml").buildSessionFactory();
+				sessionFactory = new Configuration().configure("hibernate.cfg.xml")
+						.buildSessionFactory();
 				System.out.println("SessionFactory is set.");
 			}
 
@@ -82,12 +82,10 @@ public class MyConnection {
 	}
 
 	// same as retrieveAll but with limit
-	public static List<Object> retrieveAllRecordsWithLimit(DetachedCriteria dc,
-			int max) {
+	public static List<Object> retrieveAllRecordsWithLimit(DetachedCriteria dc, int max) {
 		System.out.println("MyConnection: retrieveAllRecordsWithLimit");
 		Session session = startSession();
-		Criteria criteria = dc.getExecutableCriteria(session)
-				.setMaxResults(max);
+		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max);
 		List<Object> list = criteria.list();
 		session.getTransaction().commit();
 		closeAll();
