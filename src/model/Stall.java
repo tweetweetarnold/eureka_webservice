@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class Stall {
 	@JoinColumn(name = "canteenId")
 	private Canteen canteen;
 	private Date createDate;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "stall")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "stall")
 	private Set<Food> foodList;
 
 	public Stall() {

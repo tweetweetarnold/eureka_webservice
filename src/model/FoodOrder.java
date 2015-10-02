@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class FoodOrder {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "admin")
 	private Admin admin;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "foodOrder")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")
 	private Set<FoodOrderItem> foodOrderList;
 	private Date createDate;
 
