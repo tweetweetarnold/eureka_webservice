@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Date"%>
 <%@page import="model.Food"%>
@@ -62,6 +63,9 @@
 				<%
 						}
 					}
+					Gson gson = new Gson();
+					String json = gson.toJson(order);
+
 				%>
 
 				<tr>
@@ -80,6 +84,7 @@
 		</table>
 
 		<form action="#" method="post">
+			<input type="hidden" value="<%=json%>" name="foodOrder">
 			<button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 50%;">Check Out</button>
 		</form>
 
