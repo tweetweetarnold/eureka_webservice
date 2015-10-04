@@ -74,6 +74,23 @@
 				session.removeAttribute("error");
 				}
 			%>
+			
+			
+			<!-- Success message handling -->
+			<%
+			JSONObject objSuccess = null;
+			objSuccess = (JSONObject) session.getAttribute("success");
+				if (objSuccess != null) {
+			%>
+			<div class="alert alert-danger" role="alert">
+				<b>Success!</b>
+				<br>
+				<%=objSuccess.get("success")%>
+			</div>
+			<%
+				session.removeAttribute("sucess");
+				}
+			%>
 		</form>
 
 	</div>
