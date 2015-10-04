@@ -1,3 +1,4 @@
+<%@page import="java.util.HashSet"%>
 <%@page import="java.util.Date"%>
 <%@page import="model.Food"%>
 <%@page import="java.util.ArrayList"%>
@@ -41,8 +42,9 @@
 					Food food = new Food("abc", "123", 2.30, null, new Date());
 					FoodOrder order = (FoodOrder) session.getAttribute("foodOrder");
 					FoodOrderItem item2 = new FoodOrderItem(order, food, 2, 6.00, "food sucks", new Date());
-					Set<FoodOrderItem> list = order.getFoodOrderList();
+					Set<FoodOrderItem> list = new HashSet<>();
 					list.add(item2);
+					order.setFoodOrderList(list);
 					int i = 0;
 					if(true){
 // 					if (order != null) {
