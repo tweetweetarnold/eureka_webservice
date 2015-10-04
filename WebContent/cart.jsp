@@ -1,3 +1,5 @@
+<%@page import="com.google.gson.Gson"%>
+<%@page import="java.util.HashSet"%>
 <%@page import="java.util.Date"%>
 <%@page import="model.Food"%>
 <%@page import="java.util.ArrayList"%>
@@ -39,10 +41,13 @@
 			<tbody>
 				<%
 					Food food = new Food("abc", "123", 2.30, null, new Date());
-					FoodOrder order = (FoodOrder) session.getAttribute("foodOrder");
+// 					FoodOrder order = (FoodOrder) session.getAttribute("foodOrder");
+					FoodOrder order = new FoodOrder("nothing", null, null, null, new Date());
 					FoodOrderItem item2 = new FoodOrderItem(order, food, 2, 6.00, "food sucks", new Date());
-					Set<FoodOrderItem> list = order.getFoodOrderList();
+					Set<FoodOrderItem> list = new HashSet<FoodOrderItem>();
 					list.add(item2);
+					System.out.println(list);
+					order.setFoodOrderList(list);
 					int i = 0;
 					if(true){
 // 					if (order != null) {
@@ -58,6 +63,9 @@
 				<%
 						}
 					}
+					Gson gson = new Gson();
+					String json = gson.toJson(order);
+
 				%>
 
 				<tr>
@@ -76,6 +84,7 @@
 		</table>
 
 		<form action="#" method="post">
+			<input type="hidden" value="<%=json%>" name="foodOrder">
 			<button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 50%;">Check Out</button>
 		</form>
 
