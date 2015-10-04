@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.FoodOrder;
 
@@ -41,12 +42,25 @@ public class AddNewFoodOrder extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String tempFoodOrder = (String) request.getAttribute("foodOrder");
-		FoodOrderController foodOrderController = new FoodOrderController();
-		Gson gson = new Gson();
-		FoodOrder foodOrder = gson.fromJson(tempFoodOrder, FoodOrder.class ); 
-		foodOrderController.addFoodOrder(foodOrder);
+//		FoodOrder tempFoodOrder = (FoodOrder) request.getAttribute("foodOrder");
+//		String arnold = (String) request.getParameter("arnold");
+//		
+//		System.out.println("arnold: " + arnold);
+//		System.out.println("Temp: " + tempFoodOrder);
+//		FoodOrderController foodOrderController = new FoodOrderController();
+//		Gson gson = new Gson();
+////		FoodOrder foodOrder = gson.fromJson(tempFoodOrder, FoodOrder.class );
+//		FoodOrder foodOrder = tempFoodOrder;
+//		foodOrderController.addFoodOrder(foodOrder);
 		
+		HttpSession session = request.getSession();
+		FoodOrder order = (FoodOrder) session.getAttribute("foodOrder");
+		System.out.println("order: " + order);
+		FoodOrderController controller = new FoodOrderController();
+		controller.addFoodOrder(order);
+		System.out.println("foodOrder added to database");
+		
+		response.sendRedirect("cart.jsp");
 		
 	}
 
