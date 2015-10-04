@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-
+<%@page import="org.json.simple.JSONObject"%>
 <title>DaBao - Sign In</title>
 
 <!-- Bootstrap core CSS -->
@@ -31,28 +31,45 @@
 	<div class="container">
 
 		<form class="form-signin" method="post" action="/eureka_webservice/LoginServlet">
+		<% 
+		String username = "";
+		String password = "";
+		JSONObject obj = null;
+				obj = (JSONObject) session.getAttribute("error");
+				if (obj != null) {
+					JSONObject msg = (JSONObject) obj.get("message");
+
+					username = (String) msg.get("username");
+				    password = (String) msg.get("inputPwd");
+					
+				}
+			%>
 			<h2 class="form-signin-heading">Please sign in</h2>
 
 			<!-- User input -->
-			<input type="text" name="username" class="form-control" placeholder="Username" required>
-			<input type="password" name="password" class="form-control" placeholder="Password" required>
+			<input type="text" name="username" class="form-control" placeholder="Username" value="<%=username%>" required>
+			<input type="password" name="password" class="form-control" placeholder="Password" value="<%=password%>" required>
+			
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 			<br>
 			<div align="center">
 				<a href="registration.jsp">Register new user</a>
 			</div>
 			
+			
+			
+			
 			<!-- Error message handling -->
 			<%
-				String error = (String) session.getAttribute("error");
-				if (error != null && !error.isEmpty()) {
+				if (obj != null) {
 			%>
 			<div class="alert alert-danger" role="alert">
 				<b>Error!</b>
 				<br>
-				<%=error%>
+				<%=obj.get("error")%>
 			</div>
 			<%
+				session.removeAttribute("error");
 				}
 			%>
 		</form>
