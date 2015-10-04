@@ -34,6 +34,45 @@ public class FoodOrderController {
 		return foodOrderDAO.getFoodOrder(foodOrderId);
 	}
 	
+public HashMap getFoodOrderforCutOff(){
+		
+		Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = sdf.format(cal.getTime());
+        System.out.println("Current date in String Format: " + strDate);
+		SimpleDateFormat sdf1 = new SimpleDateFormat();
+        sdf1.applyPattern("yyyy-MM-dd");
+        Date date= null;
+		try {
+			date = sdf1.parse(strDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        String string=sdf1.format(date);
+        System.out.println("Current date in Date Format: " + string);
+        cal.add(Calendar.DATE, -1);
+        String dateAfter = sdf1.format(cal.getTime());
+		
+		
+		System.out.println(string);
+		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDateAndTime(dateAfter+ " 10:00:00",string +" 10:00:00");
+		
+		//foodOrderItems With Employee name as key
+		HashMap foodOrders = new HashMap();
+		Iterator iter = tempFoodOrderList.iterator();
+		double totalPrice = 0.0;
+		while(iter.hasNext()){
+			FoodOrder tempFoodOrder =(FoodOrder) iter.next();	
+			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
+			foodOrders.put(tempFoodOrder.getEmployee().getUsername(),foodOrderList);
+			double price = tempFoodOrder.getFoodOrderTotalPrice();
+			totalPrice += price;
+		}
+		foodOrders.put("totalPrice", totalPrice);
+		return foodOrders;
+	}
+	
 	public HashMap getFoodOrderToday(){
 		
 		Calendar cal = Calendar.getInstance();

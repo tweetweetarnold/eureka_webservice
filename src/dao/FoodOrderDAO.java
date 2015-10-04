@@ -15,6 +15,19 @@ public class FoodOrderDAO {
 	public static FoodOrder getFoodOrder(int foodOrderId) {
 		return (FoodOrder) MyConnection.get(FoodOrder.class, foodOrderId);
 	}
+	
+	public static List<FoodOrder> getFoodOrderByDateAndTime(String past, String present){
+		String sqlQuery = "SELECT * FROM  foodorder where createDate>=\""
+				+ past + "\" and createDate<=\""
+				+ present + "\"";
+		List<FoodOrder> returnList = new ArrayList<>();
+		List<Object> lister = MyConnection.get(sqlQuery);
+
+		for (Object o : lister) {
+			returnList.add((FoodOrder) o);
+		}
+		return returnList;
+	}
 
 	public static List<FoodOrder> getFoodOrderByDate(String date) {
 		String sqlQuery = "SELECT * FROM  foodorder where createDate>=\""
