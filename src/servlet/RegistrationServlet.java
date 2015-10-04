@@ -87,14 +87,20 @@ public class RegistrationServlet extends HttpServlet {
 					.length() < 7);
 
 			if (validation) {
-				// long contactNumber = Long.parseLong(contactNum);
-				long contactNumber = 123; // for testing
+				 long contactNumber = Long.parseLong(contactNo);
+				//long contactNumber = 123; // for testing
+				 long creditCardNumber = Long.parseLong(bankAcc);
 				int generatedEmployeeId = registrationController.registerUser(username, password,
-						employeeName, 123, 123, companyName);
+						employeeName, creditCardNumber, contactNumber, companyName);
 
-				System.out.println("User created successfully. UserID: " + generatedEmployeeId);
+				//System.out.println("User created successfully. UserID: " + generatedEmployeeId);
+				returnObj.put("success", "User created successfully. UserID: " + generatedEmployeeId );
 				returnObj.put("status", "ok");
-				System.out.println(returnObj.toString());
+				HttpSession session = request.getSession();
+				session.setAttribute("success", returnObj);
+				
+				response.sendRedirect("/eureka_webservice/registration.jsp");
+				//System.out.println(returnObj.toString());
 
 			} else {
 				// response.sendRedirect("/eureka_webservice/registration.jsp");
