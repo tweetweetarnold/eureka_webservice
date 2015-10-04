@@ -12,7 +12,7 @@ public class RegistrationController {
 	public int registerUser(String username, String password, String name, long creditCardNo,
 			long contactNo, String companyName) {
 
-		Company company = new Company("abc", null, new Date(), null, null);
+		Company company = new Company(companyName, null, new Date(), null, null);
 		String encryptPassword = PasswordService.encryptPassword(password);
 
 		Employee newEmployee = new Employee(username, encryptPassword, name, creditCardNo, 10,
