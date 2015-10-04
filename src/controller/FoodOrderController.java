@@ -62,12 +62,7 @@ public class FoodOrderController {
 		Iterator iter = tempFoodOrderList.iterator();
 		double totalPrice = 0.0;
 		while(iter.hasNext()){
-			FoodOrder tempFoodOrder =(FoodOrder) iter.next();
-			
-			Gson Gson = new Gson();
-			String tempString = Gson.toJson(tempFoodOrder);
-			System.out.println(tempString);
-			
+			FoodOrder tempFoodOrder =(FoodOrder) iter.next();	
 			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
 			foodOrders.put(tempFoodOrder.getEmployee().getUsername(),foodOrderList);
 			double price = tempFoodOrder.getFoodOrderTotalPrice();
