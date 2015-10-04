@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="model.Food"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Set"%>
 <%@page import="model.FoodOrderItem"%>
@@ -36,11 +38,15 @@
 			</thead>
 			<tbody>
 				<%
+					Food food = new Food("abc", "123", 2.30, null, new Date());
 					FoodOrder order = (FoodOrder) session.getAttribute("foodOrder");
-					out.println(order);
+					FoodOrderItem item2 = new FoodOrderItem(order, food, 2, 6.00, "food sucks", new Date());
+					Set<FoodOrderItem> list = order.getFoodOrderList();
+					list.add(item2);
 					int i = 0;
-					if (order != null) {
-						Set<FoodOrderItem> list = order.getFoodOrderList();
+					if(true){
+// 					if (order != null) {
+// 						Set<FoodOrderItem> list = order.getFoodOrderList();
 						for(FoodOrderItem item : list){
 				%>
 				<tr>
