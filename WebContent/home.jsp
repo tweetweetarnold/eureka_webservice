@@ -9,9 +9,11 @@
 	<h2>Welcome</h2>
 	<%@page import="dao.*,model.*,services.*"%>
 	<%
-		Employee st = (Employee) request.getAttribute("user");
+		Employee st = (Employee) session.getAttribute("user");
 		out.println("Hi " + st.getName());
+		String token = (String) session.getAttribute("tokenID");
 		out.println("<br>Your encrypted password is: " + st.getPassword());
+		out.println("generated ID: " + token);
 	%>
 </body>
 </html>

@@ -83,10 +83,10 @@
 
 				<%
 					ArrayList<Food> foodList = new ArrayList<Food>();
-											for(int i = 1; i <= 5; i++){
-												Food food = new Food("food" + i, "nice food", i, null, new Date());
-												foodList.add(food);
-											};
+							for(int i = 1; i <= 5; i++){
+								Food food = new Food("food" + i, "nice food", i, null, new Date());
+								foodList.add(food);
+							};
 				%>
 
 
@@ -101,7 +101,8 @@
 							<img src="http://placehold.it/320x150" alt="">
 							<div class="caption">
 								<h4 class="pull-right">
-									$<%=f.getPrice()%></h4>
+									$<%=f.getPrice()%>
+								</h4>
 								<h4>
 									<a href="#"><%=f.getName()%></a>
 								</h4>
@@ -110,17 +111,18 @@
 									<a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>
 									.
 								</p>
+
 							</div>
-							<div class="ratings">
-								<p class="pull-right">15 reviews</p>
-								<p>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-								</p>
+							<div class="pull-right" style="margin-right: 5px;">
+								<form action="/eureka_webservice/AddFoodItemToSessionServlet">
+									<input type="hidden" id="foodId" value="<%=f.getName()%>">
+									<button type="submit" class="btn btn-danger">Add to Cart</button>
+								</form>
 							</div>
+							<br>
+							<br>
+
+
 						</div>
 					</div>
 
@@ -197,7 +199,6 @@
 
 	<!-- Arnold Test JavaScript -->
 	<!-- 	<script src="resources/js/pagedirect.js"></script> -->
-
 </body>
 
 </html>

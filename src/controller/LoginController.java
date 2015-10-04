@@ -1,6 +1,9 @@
 package controller;
 
 import model.*;
+
+import java.util.UUID;
+
 import dao.*;
 import services.PasswordService;
 
@@ -23,6 +26,7 @@ public class LoginController {
 			String employeePasswordinDB = e.getPassword();
 			//checking that the input password is correct as the password stored in DB
 			if (inputPassword.equals(employeePasswordinDB)) {
+				
 				return e;
 			} else {
 				return null;
