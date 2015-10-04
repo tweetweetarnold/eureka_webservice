@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.GsonBuilder"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Date"%>
@@ -28,6 +29,10 @@
 	<div class="container">
 
 		<h1>Your Orders</h1>
+		<%
+			FoodOrder order = (FoodOrder) session.getAttribute("foodOrder");
+				
+		%>
 
 		<table class="table table-striped">
 			<thead>
@@ -40,32 +45,22 @@
 			</thead>
 			<tbody>
 				<%
-					Food food = new Food("abc", "123", 2.30, null, new Date());
-// 					FoodOrder order = (FoodOrder) session.getAttribute("foodOrder");
-					FoodOrder order = new FoodOrder("nothing", null, null, null, new Date());
-					FoodOrderItem item2 = new FoodOrderItem(order, food, 2, 6.00, "food sucks", new Date());
-					Set<FoodOrderItem> list = new HashSet<FoodOrderItem>();
-					list.add(item2);
-					System.out.println(list);
-					order.setFoodOrderList(list);
-					int i = 0;
-					if(true){
-// 					if (order != null) {
-// 						Set<FoodOrderItem> list = order.getFoodOrderList();
-						for(FoodOrderItem item : list){
+				if(order != null){
+					Set<FoodOrderItem> list = order.getFoodOrderList();	
+				if(list != null){
+								for(FoodOrderItem item : list){
 				%>
 				<tr>
-					<td><%=i++%></td>
+					<td>1</td>
 					<td><%=item.getFood().getName()%></td>
 					<td><%=item.getQuantity()%></td>
 					<td><%=item.getPrice()%></td>
 				</tr>
-				<%
-						}
-					}
-					Gson gson = new Gson();
-					String json = gson.toJson(order);
 
+				<%
+					}
+								}
+								}
 				%>
 
 				<tr>
@@ -83,8 +78,8 @@
 			</tbody>
 		</table>
 
-		<form action="#" method="post">
-			<input type="hidden" value="<%=json%>" name="foodOrder">
+		<form action="/eureka_webservice/AddNewFoodOrder" method="post">
+			<%-- 			<input type="hidden" value="<%=request.setAttribute("foodOrder", order)%>" name="foodOrder"> --%>
 			<button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 50%;">Check Out</button>
 		</form>
 

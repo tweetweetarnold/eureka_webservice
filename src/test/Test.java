@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import model.Admin;
 import model.Canteen;
 import model.Company;
@@ -47,7 +50,9 @@ public class Test {
 		stallList.add(stall);
 		stall.setFoodList(foodList);
 		canteen.setStallList(stallList);
-
+		
+//		Gson gson = new GsonBuilder().registerTypeAdapter(arg0, arg1);
+		
 		MyConnection.save(canteen);
 		MyConnection.save(stall);
 		MyConnection.save(food);
