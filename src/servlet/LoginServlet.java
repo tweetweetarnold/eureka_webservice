@@ -9,11 +9,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 
 import model.*;
 import controller.LoginController;
 
 import java.security.*;
+import java.util.UUID;
 
 import dao.*;
 import services.*;
@@ -55,11 +59,11 @@ public class LoginServlet extends HttpServlet {
 
 	public void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		JSONObject returnObj = new JSONObject();
 		try {
-			response.setContentType("text/html");
-			// response.setContentType("application/json"); // for JSON response
-			// response.setCharacterEncoding("utf-8"); // for JSON response
+			response.setContentType("application/json");
+			
 			PrintWriter out = response.getWriter();
 
 			out.println("LoginServlet");
@@ -67,7 +71,13 @@ public class LoginServlet extends HttpServlet {
 			// Getting User Input Parameters
 			String username = (String) request.getParameter("username");
 			String inputPwd = (String) request.getParameter("password");
-
+			
+			JSONObject jsonMessage = new JSONObject();
+			
+			jsonMessage.put("username", username);
+			jsonMessage.put("inputPwd", inputPwd);
+			returnObj.put("message", jsonMessage);
+			
 			// User Input Validation
 			boolean validation = (username != null && inputPwd != null && !username.equals("") && !inputPwd
 					.equals(""));
@@ -76,35 +86,36 @@ public class LoginServlet extends HttpServlet {
 
 				Integer id = Integer.parseInt(username); // **@Boonhui, why need
 															// to parse to int?
-				out.println(id);
-
+				
 				LoginController loginController = new LoginController();
 				Employee emp = loginController.authenticateUser(id,
 						PasswordService.encryptPassword(inputPwd));
 
+				
 				// *** For Development only ***
-				if (emp != null) {
-					out.println("hello " + id);
-					out.println("Encrypted: " + PasswordService.encryptPassword(inputPwd));
-					out.println("Decrypted: "
-							+ PasswordService.decryptPassword(PasswordService
-									.encryptPassword(inputPwd)));
-					out.println("You got it!");
-
-					RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
-					request.setAttribute("user", emp);
-					rd.forward(request, response);
-				} else {
-					out.println("SALA");
-					// services.PasswordService.getInstance().encrypt(pwd);
-					out.println(inputPwd);
-				}
+					//creates a tokenID using UUID (Universalised Unique Identifier Object)
+					//the user's username is tagged at the end of the token
+					String tokenID = UUID.randomUUID().toString().toUpperCase() 
+		            + "|" + emp.getUsername() + "|";
+					
+					HttpSession session = request.getSession();
+					session.setAttribute("user", emp);
+					session.setAttribute("tokenID", tokenID);
+					
+					response.sendRedirect("home.jsp");
+				
 			} else {
 				// Error Response
-				response.sendRedirect("login.jsp");
+				throw new Exception("Please ensure that you have inserted valid ID and password into the fields.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			returnObj.put("error", "Please ensure that you have inserted valid ID and password into the fields.");
+			returnObj.put("status", "fail");
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("error", returnObj);
+			response.sendRedirect("login.jsp");
 		}
 	}
 }
