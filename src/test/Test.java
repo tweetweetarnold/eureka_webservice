@@ -368,19 +368,7 @@ public class Test {
 		stallList.add(stall);
 		stall.setFoodList(foodList);
 		canteen.setStallList(stallList);
-<<<<<<< HEAD
-
-	//	MyConnection.save(canteen);
-	//	MyConnection.save(stall);
-	//	MyConnection.save(food);
-=======
 		
-//		Gson gson = new GsonBuilder().registerTypeAdapter(arg0, arg1);
-		
-		MyConnection.save(canteen);
-		MyConnection.save(stall);
-		MyConnection.save(food);
->>>>>>> d9b94204b888105bf1e7e90aff062c1e6f44c3b3
 		MyConnection.save(admin);
 		MyConnection.save(company);
 		MyConnection.save(employee);
