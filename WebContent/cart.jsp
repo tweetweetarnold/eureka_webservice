@@ -40,10 +40,12 @@
 			<tbody>
 				<%
 					Food food = new Food("abc", "123", 2.30, null, new Date());
-					FoodOrder order = (FoodOrder) session.getAttribute("foodOrder");
+// 					FoodOrder order = (FoodOrder) session.getAttribute("foodOrder");
+					FoodOrder order = new FoodOrder("nothing", null, null, null, new Date());
 					FoodOrderItem item2 = new FoodOrderItem(order, food, 2, 6.00, "food sucks", new Date());
-					Set<FoodOrderItem> list = new HashSet<>();
+					Set<FoodOrderItem> list = new HashSet<FoodOrderItem>();
 					list.add(item2);
+					System.out.println(list);
 					order.setFoodOrderList(list);
 					int i = 0;
 					if(true){
