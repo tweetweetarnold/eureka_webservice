@@ -24,6 +24,9 @@
 						<a href="#">Contact</a>
 					</li>
 					<li>
+						<a href="cart.jsp">Cart</a>
+					</li>
+					<li>
 						<a href="login.jsp">Logout</a>
 					</li>
 				</ul>
