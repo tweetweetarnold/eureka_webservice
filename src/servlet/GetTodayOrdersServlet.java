@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
+import com.google.gson.Gson;
 import com.mysql.fabric.xmlrpc.base.Data;
 
 import controller.FoodOrderController;
@@ -54,16 +57,15 @@ public class GetTodayOrdersServlet extends HttpServlet {
 		FoodOrderController foodOrderController = new FoodOrderController();
 		
 		JSONArray jsonArray = new JSONArray();
-		Iterator iter = foodOrderController.getFoodOrderToday().iterator();
+		HashMap tempFoodOrderHash = foodOrderController.getFoodOrderToday();
+//		Iterator iter = tempFoodOrderHash.keySet().iterator();
 		
-		while(iter.hasNext()){
-			FoodOrder tempFoodOrder = (FoodOrder) iter.next();
-			jsonArray.add(tempFoodOrder);
-		}
+		Gson gson = new Gson(); 
+		JSONObject json = new JSONObject(tempFoodOrderHash); 
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("testRetrieveFoodOrders.jsp");
-		request.setAttribute("foodOrders", jsonArray);
+		request.setAttribute("foodOrders", json);
 		rd.forward(request,response);
 		System.out.println("HELLO");
 	}

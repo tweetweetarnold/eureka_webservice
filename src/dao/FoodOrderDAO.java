@@ -19,10 +19,8 @@ public class FoodOrderDAO {
 	public static List<FoodOrder> getFoodOrderByDate(String date) {
 		String sqlQuery = "SELECT * FROM  foodorder where createDate>=\""
 				+ date + "\"";
-		System.out.println(sqlQuery);
 		List<FoodOrder> returnList = new ArrayList<>();
 		List<Object> lister = MyConnection.get(sqlQuery);
-		System.out.println(lister.size());
 
 		for (Object o : lister) {
 			returnList.add((FoodOrder) o);

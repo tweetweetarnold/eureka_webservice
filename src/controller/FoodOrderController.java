@@ -2,13 +2,20 @@ package controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import model.FoodOrder;
+import model.FoodOrderItem;
 
 import org.joda.time.JodaTimePermission;
+
+import com.google.gson.Gson;
 
 import dao.FoodOrderDAO;
 
@@ -27,7 +34,7 @@ public class FoodOrderController {
 		return foodOrderDAO.getFoodOrder(foodOrderId);
 	}
 	
-	public List getFoodOrderToday(){
+	public HashMap getFoodOrderToday(){
 		
 		Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -48,10 +55,26 @@ public class FoodOrderController {
 		
 		
 		System.out.println(string);
+		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(string);
 		
-		
-		
-		return foodOrderDAO.getFoodOrderByDate(string);
+		//foodOrderItems With Employee name as key
+		HashMap foodOrders = new HashMap();
+		Iterator iter = tempFoodOrderList.iterator();
+		double totalPrice = 0.0;
+		while(iter.hasNext()){
+			FoodOrder tempFoodOrder =(FoodOrder) iter.next();
+			
+			Gson Gson = new Gson();
+			String tempString = Gson.toJson(tempFoodOrder);
+			System.out.println(tempString);
+			
+			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
+			foodOrders.put(tempFoodOrder.getEmployee().getUsername(),foodOrderList);
+			double price = tempFoodOrder.getFoodOrderTotalPrice();
+			totalPrice += price;
+		}
+		foodOrders.put("totalPrice", totalPrice);
+		return foodOrders;
 	}
 	
 }

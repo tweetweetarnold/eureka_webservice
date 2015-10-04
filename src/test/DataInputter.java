@@ -1,12 +1,17 @@
 package test;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import model.Canteen;
+import model.FoodOrder;
+import model.FoodOrderItem;
 import model.Stall;
 import controller.CanteenController;
+import dao.FoodOrderDAO;
 public class DataInputter {
 
 	public static void main(String[] args) {
@@ -33,30 +38,30 @@ public class DataInputter {
 		
 		
 //		FoodOrder(String status, Employee employee, Driver driver, Set<FoodOrderItem> foodOrderList, Date createDate) 
-//		Set<FoodOrderItem> foodOrderSet = new HashSet();
-//		FoodOrder foodOrder1 = new FoodOrder("In Progress", null, null, foodOrderSet, new Date());
-//		Object o = foodOrder1;
-//		FoodOrder fo2 = (FoodOrder) o;
+		Set<FoodOrderItem> foodOrderSet = new HashSet();
+		FoodOrder foodOrder1 = new FoodOrder("In Progress", null, null, foodOrderSet, new Date());
+		Object o = foodOrder1;
+		FoodOrder fo2 = (FoodOrder) o;
 		
-//		FoodOrder foodOrder2 = new FoodOrder("Failed", null, null, foodOrderSet, new Date());
-//		FoodOrder foodOrder3 = new FoodOrder("Complete", null, null, foodOrderSet, new Date());
-//		FoodOrderDAO foodOrderDao = new FoodOrderDAO();
-//		foodOrderDao.saveFoodOrder(foodOrder1);
-//		foodOrderDao.saveFoodOrder(foodOrder2);
-//		foodOrderDao.saveFoodOrder(foodOrder3);
-		
-		CanteenController controller = new CanteenController();
-		List<Canteen> list = controller.retrieveAll();
-		for(int i = 0; i < list.size(); i++) {
-			Canteen c = list.get(i);
-			System.out.println(c.getAddress());
-			System.out.println(c.getName());
-			Set<Stall> list2 = c.getStallList();
-			Iterator iterator = list2.iterator();
-			Stall s = (Stall) iterator.next();
-			System.out.println("Stall: " + s.getName());
-		}
-		
+		FoodOrder foodOrder2 = new FoodOrder("Failed", null, null, foodOrderSet, new Date());
+		FoodOrder foodOrder3 = new FoodOrder("Complete", null, null, foodOrderSet, new Date());
+		FoodOrderDAO foodOrderDao = new FoodOrderDAO();
+		foodOrderDao.saveFoodOrder(foodOrder1);
+		foodOrderDao.saveFoodOrder(foodOrder2);
+		foodOrderDao.saveFoodOrder(foodOrder3);
+	
+//		CanteenController controller = new CanteenController();
+//		List<Canteen> list = controller.retrieveAll();
+//		for(int i = 0; i < list.size(); i++) {
+//			Canteen c = list.get(i);
+//			System.out.println(c.getAddress());
+//			System.out.println(c.getName());
+//			Set<Stall> list2 = c.getStallList();
+//			Iterator iterator = list2.iterator();
+//			Stall s = (Stall) iterator.next();
+//			System.out.println("Stall: " + s.getName());
+//		}
+//		
 //		FoodOrderController foodOrderController = new FoodOrderController();
 //		List<FoodOrder> list = foodOrderController.getFoodOrderToday();
 //		System.out.println("ListSize =" + list.size());

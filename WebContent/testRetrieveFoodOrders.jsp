@@ -23,18 +23,14 @@ Hi there! are you ready to retrieve today's orders?
 
 <%
 if(request.getAttribute("foodOrders")!=null){
-	JSONArray foodOrderList = (JSONArray) request.getAttribute("foodOrders");
-	ArrayList<FoodOrder> listData = new ArrayList<FoodOrder>();     
+	JSONObject foodOrders = (JSONObject) request.getAttribute("foodOrders");    
+	Iterator iter = foodOrders.keySet().iterator();
 	
-	if (foodOrderList != null) { 
-	   for (int i=0;i<foodOrderList.size();i++){ 
-		   	//Add Canteen to the ArrayList!
-	    	listData.add((FoodOrder)foodOrderList.get(i));
-		}
+	out.println("Number of people" + (foodOrders.size()-1));
+	
+	while(iter.hasNext()){
+		out.println(iter.next());
 	}
-	out.println("Number of people" + listData.size());
-	
-	out.println("status = " + listData.get(0).getStatus());
 %>
 <br/>
 
@@ -43,50 +39,15 @@ if(request.getAttribute("foodOrders")!=null){
 		<th>Number</th> <th>Name</th> <th>Items</th> <th>Quantity</th> <th>Price</th>
 	</tr>
 <%
-	if(listData!=null){
-		for(int i = 0; i<=listData.size(); i++){
-			FoodOrder tempFoodOrder = listData.get(i);
-			Employee employee = tempFoodOrder.getEmployee();
-			String name = null;
-			if(employee!=null){
-				name = tempFoodOrder.getEmployee().getName();
-			}
-			Set<FoodOrderItem> food = tempFoodOrder.getFoodOrderList();
-			if(food!=null){
-				Iterator<FoodOrderItem> iterator = food.iterator();
-				FoodOrderItem foodOrderItem = (FoodOrderItem)iterator.next();
+	
 %>
 
-		<tr>
-		<td rowspan=<%=food.size()%>><%=i+1%></td><td rowspan=<%=food.size()%>><%=name%></td>
-<% 			
-			
-%>			
-				<td><%=foodOrderItem.getFood().getName()%></td> <td><%=foodOrderItem.getFood().getPrice() %></td>
-	</tr>
-<%				
-				
-			while(iterator.hasNext()){
-				foodOrderItem=(FoodOrderItem)iterator.next();
-%>
-				<tr>
-					<td><%=foodOrderItem.getFood().getName()%></td><td><%=foodOrderItem.getFood().getPrice() %></td>
-				</tr>
-			
-<%
-			}			
-%>
-	
-<%
-			}
-			}
-%>
-	
+		
 
 <%		
 	}
 %>
 </table>
-<%} %>
+<% %>
 </body>
 </html>

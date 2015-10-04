@@ -12,6 +12,8 @@ import model.FoodOrder;
 
 import com.google.gson.Gson;
 
+import controller.FoodOrderController;
+
 /**
  * Servlet implementation class AddNewFoodOrder
  */
@@ -39,9 +41,12 @@ public class AddNewFoodOrder extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String jsonInput = request.getParameter("foodOrder");
+		String tempFoodOrder = (String) request.getAttribute("foodOrder");
+		FoodOrderController foodOrderController = new FoodOrderController();
 		Gson gson = new Gson();
-		FoodOrder tempOrder = gson.fromJson(jsonInput, FoodOrder.class);
+		FoodOrder foodOrder = gson.fromJson(tempFoodOrder, FoodOrder.class ); 
+		foodOrderController.addFoodOrder(foodOrder);
+		
 		
 	}
 
