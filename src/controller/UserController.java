@@ -25,13 +25,9 @@ public class UserController {
 	}
 
 	public Employee retrieveEmployeeViaUsername(String username) {
-		List<Employee> employeeList = EmployeeDAO.getEmployeeByUsername(username);
-		for (Employee e : employeeList) {
-			if (e.getUsername().equals(username)) {
-				return e;
-			}
-		}
-		return null;
+		Employee employee = EmployeeDAO.getEmployeeByUsername(username);
+		
+		return employee;
 
 	}
 
