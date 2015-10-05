@@ -31,10 +31,7 @@
 
 		<h1>Your Orders</h1>
 		<%
-			JSONObject foodOrder = (JSONObject) session.getAttribute("foodOrder");
-		System.out.println("foodOrder: " + foodOrder);
-		FoodOrder order = (FoodOrder) foodOrder.get("foodOrder");
-		System.out.println("order: " + order.toString());
+			FoodOrder foodOrder = (FoodOrder) session.getAttribute("foodOrder");
 		%>
 
 		<table class="table table-striped">
@@ -48,11 +45,11 @@
 			</thead>
 			<tbody>
 				<%
-					if(order != null){
-					Set<FoodOrderItem> list = order.getFoodOrderList();	
-					System.out.println("foodList: " + list.size());
-				if(list != null){
-								for(FoodOrderItem item : list){
+					if(foodOrder != null){
+						Set<FoodOrderItem> list = foodOrder.getFoodOrderList();	
+						System.out.println("foodList: " + list.size());
+						if(list != null){
+							for(FoodOrderItem item : list){
 				%>
 				<tr>
 					<td>1</td>
@@ -63,22 +60,9 @@
 
 				<%
 					}
-					}
-					}
+							}
+							}
 				%>
-
-				<tr>
-					<td>1</td>
-					<td>Chicken Rice</td>
-					<td>2</td>
-					<td>$5.00</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>Wanton Mee</td>
-					<td>1</td>
-					<td>$3.00</td>
-				</tr>
 			</tbody>
 		</table>
 

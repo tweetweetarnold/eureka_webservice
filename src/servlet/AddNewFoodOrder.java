@@ -44,23 +44,12 @@ public class AddNewFoodOrder extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		FoodOrder tempFoodOrder = (FoodOrder) request.getAttribute("foodOrder");
-//		String arnold = (String) request.getParameter("arnold");
-//		
-//		System.out.println("arnold: " + arnold);
-//		System.out.println("Temp: " + tempFoodOrder);
-//		FoodOrderController foodOrderController = new FoodOrderController();
-//		Gson gson = new Gson();
-////		FoodOrder foodOrder = gson.fromJson(tempFoodOrder, FoodOrder.class );
-//		FoodOrder foodOrder = tempFoodOrder;
-//		foodOrderController.addFoodOrder(foodOrder);
 		
 		HttpSession session = request.getSession();
-		JSONObject foodOrder = (JSONObject) session.getAttribute("foodOrder");
-		FoodOrder order = (FoodOrder) foodOrder.get("foodOrder");
-		System.out.println("order: " + order);
+		FoodOrder foodOrder = (FoodOrder) session.getAttribute("foodOrder");
+		System.out.println("order: " + foodOrder);
 		FoodOrderController controller = new FoodOrderController();
-		controller.addFoodOrder(order);
+		controller.addFoodOrder(foodOrder);
 		System.out.println("foodOrder added to database");
 		
 		response.sendRedirect("cart.jsp");

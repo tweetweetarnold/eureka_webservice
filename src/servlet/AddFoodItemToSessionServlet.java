@@ -2,8 +2,10 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -67,52 +69,49 @@ public class AddFoodItemToSessionServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("AddFoodItemToSessionServlet");
 
-		JSONObject obj = new JSONObject();
+		JSONObject returnJson = new JSONObject();
 
 		try {
-			// Get Sesssion
+			// Get Session
 			HttpSession session = request.getSession();
 
-			JSONObject foodOrder = (JSONObject) session.getAttribute("foodOrder");
-			if (foodOrder == null) {
-				foodOrder = new JSONObject(); // For testing
+			// Get FoodOrder
+			FoodOrder foodOrder = null;
+			if (session.getAttribute("foodOrder") == null) {
+				Employee emp = (Employee) session.getAttribute("user");
+				foodOrder = new FoodOrder("good", emp, null, new HashSet<FoodOrderItem>(),
+						new Date());
+				System.out.println("New FoodOrder created.");
+			}else {
+				foodOrder = (FoodOrder) session.getAttribute("foodOrder");
 			}
-			FoodOrder order = (FoodOrder) foodOrder.get("foodOrder");
-			if(order == null) {
-				Employee emp = (Employee) session.getAttribute("employee");
-				order = new FoodOrder("good", emp, null, null, new Date());
-				
-			}
+			System.out.println("AddFoodItemToSessionServlet foodOrder is set: " + foodOrder);
 
-			// String foodId = (String) request.getParameter("foodId");
-			Food food = (Food) session.getAttribute("newFoodOrderItem");
-			FoodOrderItem item = new FoodOrderItem(order, food, 2, 2.5, null, new Date());
-			Set<FoodOrderItem> set = new HashSet<FoodOrderItem>();
-			set.add(item);
-			order.setFoodOrderList(set);
-			foodOrder.put("foodOrder", order);
-			
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			System.out.println(gson.toJson("THEORDER: " + foodOrder));
+			// Get selected food item
+			List<Food> allFood = (ArrayList<Food>) session.getAttribute("allFood");
+			String foodId = (String) request.getParameter("foodId");
+			System.out.println("foodId: " + foodId);
+			Food food = allFood.get(Integer.parseInt(request.getParameter("foodId")));
+			System.out.println("AddFoodToItemSessionServlet Food: " + food);
 
-			// JSONArray foodItems = new JSONArray(); // For testing
-			// foodItems.add(foodId);
-			// foodOrder.put("foodItems", foodItems);
+			Set<FoodOrderItem> list = foodOrder.getFoodOrderList();
+			list.add(new FoodOrderItem(foodOrder, food, 1, food.getPrice(), null, new Date()));
+
+			foodOrder.setFoodOrderList(list);
 			session.setAttribute("foodOrder", foodOrder);
-			System.out.println("im here");
 
-			obj.put("status", "ok");
-			obj.put("message", "Activity complete");
-			
+			returnJson.put("status", "ok");
+			returnJson.put("message", "New FoodOrderItem has been added to Cart");
+
 			response.sendRedirect("homepage.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			obj.put("status", "fail");
-			obj.put("error", e.getMessage());
+			returnJson.put("status", "fail");
+			returnJson.put("error", e.getMessage());
 		} finally {
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			System.out.println(gson.toJson(obj));
+			System.out.println(gson.toJson(returnJson));
 		}
 	}
 

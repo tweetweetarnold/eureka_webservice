@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <!-- Java imports -->
+<%@page import="java.util.List"%>
 <%@page import="org.json.simple.JSONArray"%>
 <%@page import="model.Canteen"%>
 <%@page import="org.json.simple.JSONObject"%>
@@ -82,18 +83,18 @@
 						</div>
 					</div>
 				</div>
-
-
 				<%
-				JSONObject allFood = (JSONObject) session.getAttribute("allFood");
-				ArrayList<Food> list = (ArrayList<Food>) allFood.get("allFood");
+// 				JSONObject allFood = (JSONObject) session.getAttribute("allFood");
+// 				ArrayList<Food> list = (ArrayList<Food>) allFood.get("allFood");
+				List<Food> list = (ArrayList<Food>) session.getAttribute("allFood");
 				%>
 
 				<!-- Individual Food Item -->
 				<div class="row">
 
 					<%
-						for(int i = 0; i < list.size(); i++){
+// 						for(int i = 0; i < list.size(); i++){
+						for(int i = 0; i < 10; i++){
 							Food f = (Food) list.get(i);
 					%>
 					<div class="col-sm-4 col-lg-4 col-md-4">
@@ -115,7 +116,7 @@
 							</div>
 							<div class="pull-right" style="margin-right: 5px;">
 								<form action="/eureka_webservice/AddFoodItemToSessionServlet">
-									<%session.setAttribute("newFoodOrderItem", f); %>
+									<input type="hidden" value="<%=i %>" id="foodId" name="foodId">
 									<button type="submit" class="btn btn-danger">Add to Cart</button>
 								</form>
 							</div>

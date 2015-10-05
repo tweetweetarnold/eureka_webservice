@@ -56,9 +56,6 @@
 				<a href="registration.jsp">Register new user</a>
 			</div>
 
-
-
-
 			<!-- Error message handling -->
 			<%
 				if (obj != null) {
@@ -73,12 +70,6 @@
 				}
 			%>
 		</form>
-
-		<!-- 		**************** For testing purposes ****************   -->
-		<form class="form-signin" method="post" action="homepage.jsp">
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Cheater Login</button>
-		</form>
-		<!-- 		**************** For testing purposes ****************   -->
 
 	</div>
 	<!-- /container -->

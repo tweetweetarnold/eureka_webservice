@@ -57,72 +57,80 @@ public class LoginServlet extends HttpServlet {
 		process(request, response);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		JSONObject returnObj = new JSONObject();
+
+		JSONObject returnJson = new JSONObject();
+		JSONObject jsonMessage = new JSONObject();
+
 		try {
 			response.setContentType("application/json");
-			
 			PrintWriter out = response.getWriter();
 
 			// Getting User Input Parameters
 			String username = (String) request.getParameter("username");
 			String inputPwd = (String) request.getParameter("password");
-			
-			JSONObject jsonMessage = new JSONObject();
-			
+
 			jsonMessage.put("username", username);
-			jsonMessage.put("inputPwd", inputPwd);
-			returnObj.put("message", jsonMessage);
-			
+
 			// User Input Validation
-			boolean validation = (username != null && inputPwd != null && !username.equals("") && !inputPwd
+			boolean isValid = (username != null && inputPwd != null && !username.equals("") && !inputPwd
 					.equals(""));
 
-			if (validation) {
-
+			if (isValid) {
 				Integer id = Integer.parseInt(username); // **@Boonhui, why need
 															// to parse to int?
-				
+
 				LoginController loginController = new LoginController();
+				// if employee is not valid, returns null
 				Employee emp = loginController.authenticateUser(id,
 						PasswordService.encryptPassword(inputPwd));
-				HttpSession session = request.getSession();
-				session.setAttribute("employee", emp);
 
-				
-				// *** For Development only ***
-				//creates a tokenID using UUID (Universalised Unique Identifier Object)
-				//the user's username is tagged at the end of the token
-				String tokenID = UUID.randomUUID().toString().toUpperCase() 
-		            + "|" + emp.getUsername() + "|";
-					
+				if (emp != null) {
+					// *** For Development only ***
+					// creates a tokenID using UUID (Universalised Unique
+					// Identifier
+					// Object)
+					// the user's username is tagged at the end of the token
+					String tokenID = UUID.randomUUID().toString().toUpperCase() + "|"
+							+ emp.getUsername() + "|";
+
+					HttpSession session = request.getSession();
 					session.setAttribute("user", emp);
 					session.setAttribute("tokenID", tokenID);
+
+					// Get all food data from database and save into session for
+					// display
+					CanteenController canteenController = new CanteenController();
+					List<Food> allFoodList = canteenController.getAllFood();
+					System.out.println("LoginServlet foodListSize: " + allFoodList.size());
 					
-					CanteenController ctl = new CanteenController();
-					List<Food> list = ctl.getAllFood();
-					System.out.println("Food List: " + list);
-					JSONObject obj = new JSONObject();
-					obj.put("allFood", list);
-					System.out.println("OBJ: " + obj);
-					session.setAttribute("allFood", obj);
-					
-					
+					session.setAttribute("allFood", allFoodList);
+
+//					JSONObject obj = new JSONObject();
+//					obj.put("allFood", allFoodList);
+//					System.out.println("OBJ: " + obj);
+//					session.setAttribute("allFood", obj);
+
 					response.sendRedirect("homepage.jsp");
-				
+				}
+
 			} else {
 				// Error Response
-				throw new Exception("Please ensure that you have inserted valid ID and password into the fields.");
+
+				throw new Exception(
+						"Please ensure that you have inserted valid ID and password into the fields.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			returnObj.put("error", "Please ensure that you have inserted valid ID and password into the fields.");
-			returnObj.put("status", "fail");
-			
+			returnJson.put("message", jsonMessage);
+			returnJson.put("error",
+					"Please ensure that you have inserted valid ID and password into the fields.");
+			returnJson.put("status", "fail");
+
 			HttpSession session = request.getSession();
-			session.setAttribute("error", returnObj);
+			session.setAttribute("error", returnJson);
 			response.sendRedirect("login.jsp");
 		}
 	}
