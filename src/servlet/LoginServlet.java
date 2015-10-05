@@ -66,8 +66,6 @@ public class LoginServlet extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 
-			out.println("LoginServlet");
-
 			// Getting User Input Parameters
 			String username = (String) request.getParameter("username");
 			String inputPwd = (String) request.getParameter("password");
@@ -93,16 +91,16 @@ public class LoginServlet extends HttpServlet {
 
 				
 				// *** For Development only ***
-					//creates a tokenID using UUID (Universalised Unique Identifier Object)
-					//the user's username is tagged at the end of the token
-					String tokenID = UUID.randomUUID().toString().toUpperCase() 
+				//creates a tokenID using UUID (Universalised Unique Identifier Object)
+				//the user's username is tagged at the end of the token
+				String tokenID = UUID.randomUUID().toString().toUpperCase() 
 		            + "|" + emp.getUsername() + "|";
 					
-					HttpSession session = request.getSession();
-					session.setAttribute("user", emp);
-					session.setAttribute("tokenID", tokenID);
+				HttpSession session = request.getSession();
+				session.setAttribute("user", emp);
+				session.setAttribute("tokenID", tokenID);
 					
-					response.sendRedirect("home.jsp");
+				response.sendRedirect("home.jsp");
 				
 			} else {
 				// Error Response
