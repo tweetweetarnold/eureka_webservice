@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import model.Employee;
 import model.FoodOrder;
 import model.FoodOrderItem;
 
@@ -34,7 +35,9 @@ public class FoodOrderController {
 	public FoodOrder getFoodOrder(int foodOrderId) {
 		return foodOrderDAO.getFoodOrder(foodOrderId);
 	}
-	//Retrieve all FoodOrders from yesterday 10:00:00 to today 10:00:00 with total price as object in HashMap with key "totalPrice"
+
+	// Retrieve all FoodOrders from yesterday 10:00:00 to today 10:00:00 with
+	// total price as object in HashMap with key "totalPrice"
 	public HashMap getFoodOrderforCutOff() {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -73,8 +76,8 @@ public class FoodOrderController {
 		return foodOrders;
 	}
 
-
-	//Retrieve FoodOrders from today 00:00:00 to today 23:59:59 with total price as object in HashMap with key "totalPrice"
+	// Retrieve FoodOrders from today 00:00:00 to today 23:59:59 with total
+	// price as object in HashMap with key "totalPrice"
 	public HashMap getFoodOrderToday() {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -101,14 +104,23 @@ public class FoodOrderController {
 		double totalPrice = 0.0;
 		while (iter.hasNext()) {
 			FoodOrder tempFoodOrder = (FoodOrder) iter.next();
-			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(
-					tempFoodOrder.getFoodOrderList());
-			foodOrders.put(tempFoodOrder.getEmployee().getUsername(), foodOrderList);
+			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
+			Employee tempEmployee = tempFoodOrder.getEmployee();
+			if (tempEmployee != null) {
+				foodOrders.put(tempFoodOrder.getEmployee().getUsername(), foodOrderList);
+			}else{
+				foodOrders.put("Unknown", foodOrderList);
+			}
 			double price = tempFoodOrder.getFoodOrderTotalPrice();
 			totalPrice += price;
 		}
-		foodOrders.put("totalPrice", totalPrice);
-		return foodOrders;
+
+		if (foodOrders.size() > 0) {
+			foodOrders.put("totalPrice", totalPrice);
+			return foodOrders;
+		} else {
+			return null;
+		}
 	}
 
 }
