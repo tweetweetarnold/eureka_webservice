@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Admin;
 import model.Employee;
 import model.Food;
 
@@ -77,40 +78,52 @@ public class LoginServlet extends HttpServlet {
 			// User Input Validation
 			boolean isValid = (username != null && inputPwd != null && !username.equals("") && !inputPwd
 					.equals(""));
-
+			LoginController loginController = new LoginController();
 			if (isValid) {
-		
-				LoginController loginController = new LoginController();
-				Employee emp = loginController.authenticateUser(username,
+				
+				if (!username.equals("admin")) {
+					Employee emp = loginController.authenticateUser(username,
 						PasswordService.encryptPassword(inputPwd));
 
-				if (emp != null) {
-					// *** For Development only ***
-					// creates a tokenID using UUID (Universalised Unique
-					// Identifier
-					// Object)
-					// the user's username is tagged at the end of the token
-					String tokenID = UUID.randomUUID().toString().toUpperCase() + "|"
-							+ emp.getUsername() + "|";
-
+						// *** For Development only ***
+						// creates a tokenID using UUID (Universalised Unique
+						// Identifier
+						// Object)
+						// the user's username is tagged at the end of the token
+						String tokenID = UUID.randomUUID().toString().toUpperCase() + "|"
+								+ emp.getUsername() + "|";
+	
+						HttpSession session = request.getSession();
+						session.setAttribute("user", emp);
+						session.setAttribute("tokenID", tokenID);
+	
+						// Get all food data from database and save into session for
+						// display
+						CanteenController canteenController = new CanteenController();
+						List<Food> allFoodList = canteenController.getAllFood();
+						System.out.println("LoginServlet foodListSize: " + allFoodList.size());
+						
+						session.setAttribute("allFood", allFoodList);
+	
+	//					JSONObject obj = new JSONObject();
+	//					obj.put("allFood", allFoodList);
+	//					System.out.println("OBJ: " + obj);
+	//					session.setAttribute("allFood", obj);
+	
+						response.sendRedirect("homepage.jsp");
+				} else {
+					Admin admin = loginController.authenticateAdmin(username,inputPwd);
 					HttpSession session = request.getSession();
-					session.setAttribute("user", emp);
-					session.setAttribute("tokenID", tokenID);
-
-					// Get all food data from database and save into session for
-					// display
-					CanteenController canteenController = new CanteenController();
-					List<Food> allFoodList = canteenController.getAllFood();
-					System.out.println("LoginServlet foodListSize: " + allFoodList.size());
+					session.setAttribute("admin", admin);
 					
-					session.setAttribute("allFood", allFoodList);
-
-//					JSONObject obj = new JSONObject();
-//					obj.put("allFood", allFoodList);
-//					System.out.println("OBJ: " + obj);
-//					session.setAttribute("allFood", obj);
-
-					response.sendRedirect("homepage.jsp");
+					//creates a tokenID using UUID (Universalised Unique Identifier Object)
+					//the admin's username is tagged at the end of the token
+					String tokenID = UUID.randomUUID().toString().toUpperCase() 
+			            + "|" + admin.getUsername() + "|";
+					
+					session.setAttribute("tokenID", tokenID);
+					response.sendRedirect("adminHomepage.jsp");
+					
 				}
 
 			} else {
@@ -119,11 +132,20 @@ public class LoginServlet extends HttpServlet {
 				throw new Exception(
 						"Please ensure that you have inserted valid ID and password into the fields.");
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (NullPointerException e) {
 			returnJson.put("message", jsonMessage);
 			returnJson.put("error",
 					"Please ensure that you have inserted valid ID and password into the fields.");
+			returnJson.put("status", "fail");
+
+			HttpSession session = request.getSession();
+			session.setAttribute("error", returnJson);
+			response.sendRedirect("login.jsp");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put("message", jsonMessage);
+			returnJson.put("error", e.getMessage());
 			returnJson.put("status", "fail");
 
 			HttpSession session = request.getSession();
