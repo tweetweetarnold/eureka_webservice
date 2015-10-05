@@ -1,6 +1,9 @@
 package controller;
 
 import model.Employee;
+
+import java.util.List;
+
 import dao.EmployeeDAO;
 
 public class UserController {
@@ -21,9 +24,14 @@ public class UserController {
 		EmployeeDAO.deleteEmployee(e);
 	}
 
-	public Employee retrieveEmployee(int id) {
-		Employee tempE = employeeDAO.getEmployee(id);
-		return tempE;
+	public Employee retrieveEmployeeViaUsername(String username) {
+		List<Employee> employeeList = EmployeeDAO.getEmployeeByUsername(username);
+		for (Employee e : employeeList) {
+			if (e.getUsername().equals(username)) {
+				return e;
+			}
+		}
+		return null;
 
 	}
 
