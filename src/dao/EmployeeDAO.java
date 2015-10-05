@@ -13,16 +13,20 @@ public class EmployeeDAO {
 		return (Employee) MyConnection.get(Employee.class, employeeId);
 	}
 	
-	public static List<Employee> getEmployeeByUsername(String username){
+	//Retrieve Employee from DB using Employee username
+	public static Employee getEmployeeByUsername(String username){
 		String sqlQuery = "SELECT * FROM  employee where username=\""
 				+ username + "\"";
-		List<Employee> returnList = new ArrayList<>();
 		List<Object> lister = MyConnection.getEmployee(sqlQuery);
 
 		for (Object o : lister) {
-			returnList.add((Employee) o);
+			Employee employee = (Employee) o;
+			if (employee.getUsername().equals(username)) {
+				return employee;
+			}
+			
 		}
-		return returnList;
+		return null;
 	}
 	
 	//Save new Employee into the DB
