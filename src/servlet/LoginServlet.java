@@ -2,8 +2,9 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.UUID;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,16 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Employee;
+import model.Food;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import model.*;
+import services.PasswordService;
+import controller.CanteenController;
 import controller.LoginController;
-
-import java.security.*;
-import java.util.UUID;
-
-import dao.*;
-import services.*;
 
 /**
  * Servlet implementation class Hello
@@ -90,6 +90,8 @@ public class LoginServlet extends HttpServlet {
 				LoginController loginController = new LoginController();
 				Employee emp = loginController.authenticateUser(id,
 						PasswordService.encryptPassword(inputPwd));
+				HttpSession session = request.getSession();
+				session.setAttribute("employee", emp);
 
 				
 				// *** For Development only ***
@@ -98,11 +100,19 @@ public class LoginServlet extends HttpServlet {
 					String tokenID = UUID.randomUUID().toString().toUpperCase() 
 		            + "|" + emp.getUsername() + "|";
 					
-					HttpSession session = request.getSession();
 					session.setAttribute("user", emp);
 					session.setAttribute("tokenID", tokenID);
 					
-					response.sendRedirect("home.jsp");
+					CanteenController ctl = new CanteenController();
+					List<Food> list = ctl.getAllFood();
+					System.out.println("Food List: " + list);
+					JSONObject obj = new JSONObject();
+					obj.put("allFood", list);
+					System.out.println("OBJ: " + obj);
+					session.setAttribute("allFood", obj);
+					
+					
+					response.sendRedirect("homepage.jsp");
 				
 			} else {
 				// Error Response

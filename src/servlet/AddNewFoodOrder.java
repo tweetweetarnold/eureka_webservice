@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 import model.FoodOrder;
 
 import com.google.gson.Gson;
@@ -54,7 +56,8 @@ public class AddNewFoodOrder extends HttpServlet {
 //		foodOrderController.addFoodOrder(foodOrder);
 		
 		HttpSession session = request.getSession();
-		FoodOrder order = (FoodOrder) session.getAttribute("foodOrder");
+		JSONObject foodOrder = (JSONObject) session.getAttribute("foodOrder");
+		FoodOrder order = (FoodOrder) foodOrder.get("foodOrder");
 		System.out.println("order: " + order);
 		FoodOrderController controller = new FoodOrderController();
 		controller.addFoodOrder(order);

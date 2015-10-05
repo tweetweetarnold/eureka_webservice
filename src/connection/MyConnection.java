@@ -27,7 +27,6 @@ public class MyConnection {
 						.buildSessionFactory();
 				System.out.println("SessionFactory is set.");
 			}
-
 			session = sessionFactory.openSession();
 			System.out.println("Session is set.");
 			session.beginTransaction();
@@ -43,7 +42,7 @@ public class MyConnection {
 		Session session = startSession();
 		session.delete(o);
 		session.getTransaction().commit();
-		session.close();
+		 session.close();
 	}
 
 	public static void update(Object o) {
@@ -51,14 +50,14 @@ public class MyConnection {
 		Session session = startSession();
 		session.update(o);
 		session.getTransaction().commit();
-		session.close();
+		 session.close();
 	}
 
 	public static Object get(Class objClass, int id) {
 		System.out.println("MyConnection: get");
 		Session session = startSession();
 		Object o = session.get(objClass, id);
-		session.close();
+		 session.close();
 		return o;
 	}
 
@@ -67,7 +66,7 @@ public class MyConnection {
 		Session session = startSession();
 		session.save(o);
 		session.getTransaction().commit();
-		session.close();
+		 session.close();
 	}
 
 	// for retrieve all
@@ -77,7 +76,7 @@ public class MyConnection {
 		Criteria criteria = dc.getExecutableCriteria(session);
 		List<Object> list = criteria.list();
 		session.getTransaction().commit();
-		closeAll();
+		 closeAll();
 		return list;
 	}
 
@@ -88,7 +87,7 @@ public class MyConnection {
 		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max);
 		List<Object> list = criteria.list();
 		session.getTransaction().commit();
-		closeAll();
+		 closeAll();
 		return list;
 	}
 
@@ -99,14 +98,14 @@ public class MyConnection {
 		Query query = session.createSQLQuery(sql).addEntity(FoodOrder.class);
 		List<Object> list = (List<Object>) query.list();
 		session.getTransaction().commit();
-		closeAll();
+		 closeAll();
 		return list;
 	}
 
 	public static void closeAll() {
 		try {
 			session.close();
-			sessionFactory.close();
+//			sessionFactory.close();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}

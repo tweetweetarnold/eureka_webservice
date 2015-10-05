@@ -1,3 +1,4 @@
+<%@page import="org.json.simple.JSONObject"%>
 <%@page import="com.google.gson.GsonBuilder"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.HashSet"%>
@@ -30,8 +31,10 @@
 
 		<h1>Your Orders</h1>
 		<%
-			FoodOrder order = (FoodOrder) session.getAttribute("foodOrder");
-				
+			JSONObject foodOrder = (JSONObject) session.getAttribute("foodOrder");
+		System.out.println("foodOrder: " + foodOrder);
+		FoodOrder order = (FoodOrder) foodOrder.get("foodOrder");
+		System.out.println("order: " + order.toString());
 		%>
 
 		<table class="table table-striped">
@@ -45,8 +48,9 @@
 			</thead>
 			<tbody>
 				<%
-				if(order != null){
+					if(order != null){
 					Set<FoodOrderItem> list = order.getFoodOrderList();	
+					System.out.println("foodList: " + list.size());
 				if(list != null){
 								for(FoodOrderItem item : list){
 				%>
@@ -59,8 +63,8 @@
 
 				<%
 					}
-								}
-								}
+					}
+					}
 				%>
 
 				<tr>

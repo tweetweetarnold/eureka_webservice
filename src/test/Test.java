@@ -493,6 +493,8 @@ public class Test {
 		MyConnection.save(food45);
 		MyConnection.save(food46);
 		
+		System.out.println("Test.java completed");
+		
 		
 
 	}

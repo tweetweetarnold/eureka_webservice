@@ -79,7 +79,8 @@
 		<%
 			}
 					} else {
-						totalPrice =(double)foodOrders.get(username);
+// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
+						totalPrice = (Double) foodOrders.get(username);
 					}
 				}
 		%>
