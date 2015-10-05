@@ -106,6 +106,7 @@ public class FoodOrderController {
 			FoodOrder tempFoodOrder = (FoodOrder) iter.next();
 			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
 			Employee tempEmployee = tempFoodOrder.getEmployee();
+			System.out.println(tempEmployee);
 			if (tempEmployee != null) {
 				foodOrders.put(tempFoodOrder.getEmployee().getUsername(), foodOrderList);
 			}else{
