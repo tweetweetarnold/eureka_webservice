@@ -2,6 +2,7 @@ package connection;
 
 import java.util.List;
 
+import model.Employee;
 import model.FoodOrder;
 
 import org.hibernate.Criteria;
@@ -99,6 +100,17 @@ public class MyConnection {
 		List<Object> list = (List<Object>) query.list();
 		session.getTransaction().commit();
 		 closeAll();
+		return list;
+	}
+	
+	public static List<Object> getEmployee(String sql) {
+		Session session = startSession();
+
+		// Criteria criteria = dc.getExecutableCriteria(session);
+		Query query = session.createSQLQuery(sql).addEntity(Employee.class);
+		List<Object> list = (List<Object>) query.list();
+		session.getTransaction().commit();
+		closeAll();
 		return list;
 	}
 
