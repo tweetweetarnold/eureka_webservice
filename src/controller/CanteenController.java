@@ -11,14 +11,9 @@ import dao.CanteenDAO;
 
 public class CanteenController {
 	CanteenDAO canteenDao = new CanteenDAO();
-<<<<<<< HEAD
 	
 	public List<Canteen> retrieveAll(){
 		System.out.println(canteenDao.getAllCanteens());
-=======
-	//Retrieve all Canteens From the DB
-	public List retrieveAll(){
->>>>>>> origin/master
 		return canteenDao.getAllCanteens();
 	}
 	

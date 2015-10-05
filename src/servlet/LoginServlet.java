@@ -98,7 +98,6 @@ public class LoginServlet extends HttpServlet {
 				String tokenID = UUID.randomUUID().toString().toUpperCase() 
 		            + "|" + emp.getUsername() + "|";
 					
-<<<<<<< HEAD
 					session.setAttribute("user", emp);
 					session.setAttribute("tokenID", tokenID);
 					
@@ -112,13 +111,6 @@ public class LoginServlet extends HttpServlet {
 					
 					
 					response.sendRedirect("homepage.jsp");
-=======
-				HttpSession session = request.getSession();
-				session.setAttribute("user", emp);
-				session.setAttribute("tokenID", tokenID);
-					
-				response.sendRedirect("home.jsp");
->>>>>>> origin/master
 				
 			} else {
 				// Error Response
