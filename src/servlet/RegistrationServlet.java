@@ -82,28 +82,28 @@ public class RegistrationServlet extends HttpServlet {
 
 			// Check user parameters
 			boolean validation = !(employeeName.isEmpty() && username.isEmpty()
-					&& password.isEmpty() && confirmPwd.isEmpty() && contactNo.isEmpty()
+					&& password.isEmpty() && confirmPwd.isEmpty() && contactNo.isEmpty() && contactNo.length() < 8
 					&& bankAcc.isEmpty() && companyName.isEmpty() && password.equals(confirmPwd) && password
 					.length() < 7);
 
 			if (validation) {
-				 long contactNumber = Long.parseLong(contactNo);
-				//long contactNumber = 123; // for testing
-				 long creditCardNumber = Long.parseLong(bankAcc);
+				long contactNumber = Long.parseLong(contactNo);
+				
+				long creditCardNumber = Long.parseLong(bankAcc);
 				int generatedEmployeeId = registrationController.registerUser(username, password,
 						employeeName, creditCardNumber, contactNumber, companyName);
 
-				//System.out.println("User created successfully. UserID: " + generatedEmployeeId);
+				
 				returnObj.put("success", "User created successfully. UserID: " + generatedEmployeeId );
 				returnObj.put("status", "ok");
 				HttpSession session = request.getSession();
 				session.setAttribute("success", returnObj);
 				
 				response.sendRedirect("/eureka_webservice/registration.jsp");
-				//System.out.println(returnObj.toString());
+				
 
 			} else {
-				// response.sendRedirect("/eureka_webservice/registration.jsp");
+				
 				System.out.println("RegistrationServlet: Validation failed.");
 				throw new Exception(
 						"Please ensure that you have inserted valid characters into the fields.");

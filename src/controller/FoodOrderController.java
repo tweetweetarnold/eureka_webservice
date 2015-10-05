@@ -26,16 +26,29 @@ public class FoodOrderController {
 
 	}
 
+<<<<<<< HEAD
+=======
+	// Add a new FoodOrder into the DB
+>>>>>>> origin/master
 	public void addFoodOrder(FoodOrder f) {
 		foodOrderDAO.saveFoodOrder(f);
 	}
 
+<<<<<<< HEAD
 	public FoodOrder getFoodOrder(int foodOrderId) {
 		return foodOrderDAO.getFoodOrder(foodOrderId);
 	}
 
 	public HashMap getFoodOrderforCutOff() {
 
+=======
+	// Retrieve a FoodOrder by id
+	public FoodOrder getFoodOrder(int foodOrderId) {
+		return foodOrderDAO.getFoodOrder(foodOrderId);
+	}
+	//Retrieve all FoodOrders from yesterday 10:00:00 to today 10:00:00 with total price as object in HashMap with key "totalPrice"
+	public HashMap getFoodOrderforCutOff() {
+>>>>>>> origin/master
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = sdf.format(cal.getTime());
@@ -55,8 +68,13 @@ public class FoodOrderController {
 		String dateAfter = sdf1.format(cal.getTime());
 
 		System.out.println(string);
+<<<<<<< HEAD
 		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDateAndTime(dateAfter
 				+ " 10:00:00", string + " 10:00:00");
+=======
+		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDateAndTime(dateAfter + " 10:00:00",
+				string + " 10:00:00");
+>>>>>>> origin/master
 
 		// foodOrderItems With Employee name as key
 		HashMap foodOrders = new HashMap();
@@ -64,8 +82,12 @@ public class FoodOrderController {
 		double totalPrice = 0.0;
 		while (iter.hasNext()) {
 			FoodOrder tempFoodOrder = (FoodOrder) iter.next();
+<<<<<<< HEAD
 			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(
 					tempFoodOrder.getFoodOrderList());
+=======
+			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
+>>>>>>> origin/master
 			foodOrders.put(tempFoodOrder.getEmployee().getUsername(), foodOrderList);
 			double price = tempFoodOrder.getFoodOrderTotalPrice();
 			totalPrice += price;
@@ -74,8 +96,13 @@ public class FoodOrderController {
 		return foodOrders;
 	}
 
+<<<<<<< HEAD
 	public HashMap getFoodOrderToday() {
 
+=======
+	//Retrieve FoodOrders from today 00:00:00 to today 23:59:59 with total price as object in HashMap with key "totalPrice"
+	public HashMap getFoodOrderToday() {
+>>>>>>> origin/master
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = sdf.format(cal.getTime());
@@ -90,9 +117,15 @@ public class FoodOrderController {
 			e.printStackTrace();
 		}
 		String string = sdf1.format(date);
+<<<<<<< HEAD
 		System.out.println("Current date in Date Format: " + string);
 
 		System.out.println(string);
+=======
+//		System.out.println("Current date in Date Format: " + string);
+
+//		System.out.println(string);
+>>>>>>> origin/master
 		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(string);
 
 		// foodOrderItems With Employee name as key
@@ -101,8 +134,12 @@ public class FoodOrderController {
 		double totalPrice = 0.0;
 		while (iter.hasNext()) {
 			FoodOrder tempFoodOrder = (FoodOrder) iter.next();
+<<<<<<< HEAD
 			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(
 					tempFoodOrder.getFoodOrderList());
+=======
+			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
+>>>>>>> origin/master
 			foodOrders.put(tempFoodOrder.getEmployee().getUsername(), foodOrderList);
 			double price = tempFoodOrder.getFoodOrderTotalPrice();
 			totalPrice += price;
