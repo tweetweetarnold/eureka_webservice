@@ -7,32 +7,20 @@ public class EmployeeDAO {
 
 	public EmployeeDAO() {
 	}
-
-	public static Employee getEmployee(int id) {
-		return (Employee) MyConnection.get(Employee.class, id);
+	//Retrieve Employee from DB with EmployeeID
+	public static Employee getEmployee(int employeeId) {
+		return (Employee) MyConnection.get(Employee.class, employeeId);
 	}
-
+	//Save new Employee into the DB
 	public static void saveEmployee(Employee e) {
 		MyConnection.save(e);
 	}
-
+	//Update existing Employee in the DB
 	public static void updateEmployee(Employee e) {
 		MyConnection.update(e);
 	}
-
+	//Delete Employee from the DB
 	public static void deleteEmployee(Employee e) {
 		MyConnection.delete(e);
 	}
-
-//	public Employee getEmployeeTEMPORARY(String username) {
-//
-//		// temporary EmployeeObject REMOVE WHEN DATABASE IS UP!
-//		Employee tempEmployee = new Employee("chris.cheng.2013", "1234",
-//				"Chris", "1441", 92742509, null, null, null);
-//		if (username.equals(tempEmployee.getUsername())) {
-//			return tempEmployee;
-//		}
-//		return null;
-//
-//	}
 }
