@@ -31,5 +31,20 @@ public class LoginController {
 		}
 		
 	}
+	
+	
+	public Admin authenticateAdmin(String inputUsername, String inputPassword) {
+		Admin admin = AdminDAO.getadminByUsername(inputUsername);
+		if (admin != null) {
+			String adminPasswordinDB = admin.getPassword();
+			if (inputPassword.equals(adminPasswordinDB)) {
+				return admin;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 
 }
