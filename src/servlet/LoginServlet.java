@@ -81,12 +81,9 @@ public class LoginServlet extends HttpServlet {
 					.equals(""));
 
 			if (validation) {
-
-				Integer id = Integer.parseInt(username); // **@Boonhui, why need
-															// to parse to int?
-				
+		
 				LoginController loginController = new LoginController();
-				Employee emp = loginController.authenticateUser(id,
+				Employee emp = loginController.authenticateUser(username,
 						PasswordService.encryptPassword(inputPwd));
 				HttpSession session = request.getSession();
 				session.setAttribute("employee", emp);
