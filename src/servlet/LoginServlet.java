@@ -79,12 +79,9 @@ public class LoginServlet extends HttpServlet {
 					.equals(""));
 
 			if (isValid) {
-				Integer id = Integer.parseInt(username); // **@Boonhui, why need
-															// to parse to int?
-
+		
 				LoginController loginController = new LoginController();
-				// if employee is not valid, returns null
-				Employee emp = loginController.authenticateUser(id,
+				Employee emp = loginController.authenticateUser(username,
 						PasswordService.encryptPassword(inputPwd));
 
 				if (emp != null) {

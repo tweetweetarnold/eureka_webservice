@@ -90,7 +90,7 @@ public class RegistrationServlet extends HttpServlet {
 				long contactNumber = Long.parseLong(contactNo);
 				
 				long creditCardNumber = Long.parseLong(bankAcc);
-				int generatedEmployeeId = registrationController.registerUser(username, password,
+				String generatedEmployeeId = registrationController.registerUser(username, password,
 						employeeName, creditCardNumber, contactNumber, companyName);
 
 				

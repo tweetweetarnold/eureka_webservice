@@ -58,7 +58,7 @@
 		%>
 		<tr>
 			<td rowspan=<%=listSize%>><%=++number%></td>
-			<td rowspan=<%=listSize%>><%=username%></td>
+			<td rowspan=<%=listSize%>><a href="RetrieveUserByUsernameServlet?username=<%=username%>"><%=username%></a></td>
 			<td><%=foodName%></td>
 			<td><%=foodOrderItemList.get(0).getQuantity()%></td>
 			<td><%=foodOrderItemList.get(0).getPrice()%></td>
@@ -79,18 +79,18 @@
 		<%
 			}
 					} else {
-// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
+						// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
 						totalPrice = (Double) foodOrders.get(username);
 					}
 				}
 		%>
 	</table>
-	</br>
-	The total price is = <%=totalPrice%>
+	</br> The total price is =
+	<%=totalPrice%>
 	<%
 		}
 	%>
-	
-	
+
+
 </body>
 </html>

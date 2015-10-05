@@ -14,13 +14,11 @@ public class LoginController {
 	 * This method takes in userid and password for authentication.
 	 * This method returns an Employee object upon a successful authentication, otherwise, it will return null
 	 */
-	public Employee authenticateUser (int id, String inputPassword)  {
+	public Employee authenticateUser (String inputUsername, String inputPassword)  {
 
-		Employee e = null;
-		e = EmployeeDAO.getEmployee(id);
+		Employee e = EmployeeDAO.getEmployeeByUsername(inputUsername);
 		
-		int employeeid = e.getEmployeeId();
-		if (employeeid != 0) {
+		if (e != null) {
 			String employeePasswordinDB = e.getPassword();
 			//checking that the input password is correct as the password stored in DataBase
 			if (inputPassword.equals(employeePasswordinDB)) {
