@@ -58,7 +58,7 @@
 		%>
 		<tr>
 			<td rowspan=<%=listSize%>><%=++number%></td>
-			<td rowspan=<%=listSize%>><a href="RetrieveUserByUsernameServlet?username="<%=username%>><%=username%></a></td>
+			<td rowspan=<%=listSize%>><a href="RetrieveUserByUsernameServlet?username=<%=username%>"><%=username%></a></td>
 			<td><%=foodName%></td>
 			<td><%=foodOrderItemList.get(0).getQuantity()%></td>
 			<td><%=foodOrderItemList.get(0).getPrice()%></td>
