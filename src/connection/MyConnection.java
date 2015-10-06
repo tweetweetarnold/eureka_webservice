@@ -2,6 +2,7 @@ package connection;
 
 import java.util.List;
 
+import model.Admin;
 import model.Employee;
 import model.FoodOrder;
 
@@ -108,6 +109,17 @@ public class MyConnection {
 
 		// Criteria criteria = dc.getExecutableCriteria(session);
 		Query query = session.createSQLQuery(sql).addEntity(Employee.class);
+		List<Object> list = (List<Object>) query.list();
+		session.getTransaction().commit();
+		closeAll();
+		return list;
+	}
+	
+	public static List<Object> getAdmin(String sql) {
+		Session session = startSession();
+
+		// Criteria criteria = dc.getExecutableCriteria(session);
+		Query query = session.createSQLQuery(sql).addEntity(Admin.class);
 		List<Object> list = (List<Object>) query.list();
 		session.getTransaction().commit();
 		closeAll();
