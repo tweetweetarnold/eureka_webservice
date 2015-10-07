@@ -10,10 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.joda.time.DateTime;
 
 @Entity
+@Table(name="company")
 public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
