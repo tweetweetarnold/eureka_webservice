@@ -87,6 +87,7 @@
 // 				JSONObject allFood = (JSONObject) session.getAttribute("allFood");
 // 				ArrayList<Food> list = (ArrayList<Food>) allFood.get("allFood");
 				List<Food> list = (ArrayList<Food>) session.getAttribute("allFood");
+				if(list != null){
 				%>
 
 				<!-- Individual Food Item -->
@@ -129,6 +130,7 @@
 
 					<%
 						}
+}
 					%>
 
 

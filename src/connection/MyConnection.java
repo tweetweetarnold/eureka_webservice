@@ -23,7 +23,7 @@ public class MyConnection {
 
 	public static Session startSession() {
 		System.out.println("MyConnection: startSession");
-		try {
+//		try {
 			if (sessionFactory == null) {
 				sessionFactory = new Configuration().configure("hibernate.cfg.xml")
 						.buildSessionFactory();
@@ -33,9 +33,9 @@ public class MyConnection {
 			System.out.println("Session is set.");
 			session.beginTransaction();
 
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
+//		} catch (HibernateException e) {
+//			e.printStackTrace();
+//		}
 		return session;
 	}
 
@@ -78,7 +78,7 @@ public class MyConnection {
 		Criteria criteria = dc.getExecutableCriteria(session);
 		List<Object> list = criteria.list();
 		session.getTransaction().commit();
-		 closeAll();
+		closeAll();
 		return list;
 	}
 
@@ -89,7 +89,7 @@ public class MyConnection {
 		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max);
 		List<Object> list = criteria.list();
 		session.getTransaction().commit();
-		 closeAll();
+		closeAll();
 		return list;
 	}
 
@@ -100,10 +100,10 @@ public class MyConnection {
 		Query query = session.createSQLQuery(sql).addEntity(FoodOrder.class);
 		List<Object> list = (List<Object>) query.list();
 		session.getTransaction().commit();
-		 closeAll();
+		closeAll();
 		return list;
 	}
-	
+
 	public static List<Object> getEmployee(String sql) {
 		Session session = startSession();
 
@@ -114,7 +114,7 @@ public class MyConnection {
 		closeAll();
 		return list;
 	}
-	
+
 	public static List<Object> getAdmin(String sql) {
 		Session session = startSession();
 
@@ -129,7 +129,7 @@ public class MyConnection {
 	public static void closeAll() {
 		try {
 			session.close();
-//			sessionFactory.close();
+			// sessionFactory.close();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}

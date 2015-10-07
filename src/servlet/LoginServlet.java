@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 		JSONObject returnJson = new JSONObject();
 		JSONObject jsonMessage = new JSONObject();
 
-		try {
+//		try {
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
 
@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 			LoginController loginController = new LoginController();
 			if (isValid) {
 				
-				if (!username.equals("admin")) {
+//				if (!username.equals("admin")) {
 					Employee emp = loginController.authenticateUser(username,
 						PasswordService.encryptPassword(inputPwd));
 
@@ -104,53 +104,54 @@ public class LoginServlet extends HttpServlet {
 						System.out.println("LoginServlet foodListSize: " + allFoodList.size());
 						
 						session.setAttribute("allFood", allFoodList);
+						System.out.println(allFoodList);
 	
 	//					JSONObject obj = new JSONObject();
 	//					obj.put("allFood", allFoodList);
 	//					System.out.println("OBJ: " + obj);
-	//					session.setAttribute("allFood", obj);
+//						session.setAttribute("allFood", obj);
 	
 						response.sendRedirect("homepage.jsp");
-				} else {
-					Admin admin = loginController.authenticateAdmin(username,inputPwd);
-					HttpSession session = request.getSession();
-					session.setAttribute("admin", admin);
-					
-					//creates a tokenID using UUID (Universalised Unique Identifier Object)
-					//the admin's username is tagged at the end of the token
-					String tokenID = UUID.randomUUID().toString().toUpperCase() 
-			            + "|" + admin.getUsername() + "|";
-					
-					session.setAttribute("tokenID", tokenID);
-					response.sendRedirect("adminHomepage.jsp");
-					
-				}
+//				} else {
+//					Admin admin = loginController.authenticateAdmin(username,inputPwd);
+//					HttpSession session = request.getSession();
+//					session.setAttribute("admin", admin);
+//					
+//					//creates a tokenID using UUID (Universalised Unique Identifier Object)
+//					//the admin's username is tagged at the end of the token
+//					String tokenID = UUID.randomUUID().toString().toUpperCase() 
+//			            + "|" + admin.getUsername() + "|";
+//					
+//					session.setAttribute("tokenID", tokenID);
+//					response.sendRedirect("adminHomepage.jsp");
+//					
+//				}
 
 			} else {
 				// Error Response
 
-				throw new Exception(
-						"Please ensure that you have inserted valid ID and password into the fields.");
+//				throw new Exception(
+//						"Please ensure that you have inserted valid ID and password into the fields.");
 			}
-		} catch (NullPointerException e) {
-			returnJson.put("message", jsonMessage);
-			returnJson.put("error",
-					"Please ensure that you have inserted valid ID and password into the fields.");
-			returnJson.put("status", "fail");
-
-			HttpSession session = request.getSession();
-			session.setAttribute("error", returnJson);
-			response.sendRedirect("login.jsp");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			returnJson.put("message", jsonMessage);
-			returnJson.put("error", e.getMessage());
-			returnJson.put("status", "fail");
-
-			HttpSession session = request.getSession();
-			session.setAttribute("error", returnJson);
-			response.sendRedirect("login.jsp");
-		}
+//		} catch (NullPointerException e) {
+//			returnJson.put("message", jsonMessage);
+//			returnJson.put("error",
+//					"Please ensure that you have inserted valid ID and password into the fields.");
+//			returnJson.put("status", "fail");
+//
+//			HttpSession session = request.getSession();
+//			session.setAttribute("error", returnJson);
+//			response.sendRedirect("login.jsp");
+//		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			returnJson.put("message", jsonMessage);
+//			returnJson.put("error", e.getMessage());
+//			returnJson.put("status", "fail");
+//
+//			HttpSession session = request.getSession();
+//			session.setAttribute("error", returnJson);
+//			response.sendRedirect("login.jsp");
+//		}
 	}
 }
