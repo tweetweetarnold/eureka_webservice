@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="stall")
+@Table(name = "stall")
 public class Stall {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +34,8 @@ public class Stall {
 	public Stall() {
 	}
 
-	public Stall(String username, String password, String name, long contactNo,
-			Canteen canteen, Date createDate, Set<Food> foodList) {
+	public Stall(String username, String password, String name, long contactNo, Canteen canteen,
+			Date createDate, Set<Food> foodList) {
 		super();
 		this.username = username;
 		this.password = password;

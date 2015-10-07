@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import org.joda.time.DateTime;
 
 @Entity
-@Table(name="company")
+@Table(name = "company")
 public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +32,8 @@ public class Company {
 
 	}
 
-	public Company(String name, Set<Employee> employeeList, Date createDate,
-			Date cutoffTime, Set<Canteen> canteenList) {
+	public Company(String name, Set<Employee> employeeList, Date createDate, Date cutoffTime,
+			Set<Canteen> canteenList) {
 		super();
 		this.name = name;
 		this.employeeList = employeeList;

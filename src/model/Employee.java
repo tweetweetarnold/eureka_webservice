@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employee")
+@Table(name = "employee")
 public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,10 +40,9 @@ public class Employee {
 
 	}
 
-	public Employee(String username, String password, String name,
-			long creditCardNo, long eDollars, long contactNo, Company company,
-			Set<Food> favouriteList, Set<FoodOrder> orderHistory,
-			Date createDate) {
+	public Employee(String username, String password, String name, long creditCardNo,
+			long eDollars, long contactNo, Company company, Set<Food> favouriteList,
+			Set<FoodOrder> orderHistory, Date createDate) {
 		super();
 		this.username = username;
 		this.password = password;

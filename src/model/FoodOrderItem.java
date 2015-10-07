@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="foodorderitem")
+@Table(name = "foodorderitem")
 public class FoodOrderItem {
 
 	@Id
@@ -31,8 +31,8 @@ public class FoodOrderItem {
 	public FoodOrderItem() {
 	}
 
-	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity,
-			double price, String remarks, Date createDate) {
+	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, double price,
+			String remarks, Date createDate) {
 		super();
 		this.foodOrder = foodOrder;
 		this.food = food;
