@@ -15,9 +15,6 @@
 		<property name="hibernate.connection.url">jdbc:mysql://127.5.138.130:3306/eureka</property>
 		<property name="hibernate.connection.username">admin8wf2nLK</property>
 		<property name="hibernate.connection.password">7Dnx-K5zVUTC</property>
-<!-- 		<property name="hibernate.connection.url">jdbc:mysql://localhost/eureka</property> -->
-<!-- 		<property name="hibernate.connection.username">root</property> -->
-<!-- 		<property name="hibernate.connection.password"></property> -->
 		<property name="hibernate.connection.pool_size">1</property>
 		<property name="hibernate.connection.autocommit">false</property>
 
