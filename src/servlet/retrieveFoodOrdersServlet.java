@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 
 import controller.FoodOrderController;
-import model.FoodOrder;
+import model.FoodDisplayObject;
 import model.FoodOrderItem;
 import net.minidev.json.JSONObject;
 
@@ -53,10 +53,10 @@ public class retrieveFoodOrdersServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		FoodOrderController foodOrderController = new FoodOrderController();
-		ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>(foodOrderController.getFoodOrderforCutOff());
+		ArrayList<FoodDisplayObject> foodOrderList = new ArrayList<FoodDisplayObject>(foodOrderController.getFoodOrderforCutOff());
 		
 		RequestDispatcher rd = request.getRequestDispatcher("retrieveFoodOrders.jsp");
-		request.setAttribute("foodOrders", foodOrderList);
+		request.setAttribute("foodDisplay", foodOrderList);
 		rd.forward(request,response);
 		
 	}

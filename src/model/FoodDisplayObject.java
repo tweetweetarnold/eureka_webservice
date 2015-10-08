@@ -8,7 +8,7 @@ public class FoodDisplayObject {
 	private String stallName;
 	private ArrayList<FoodOrderItem> foodOrderItemList;
 	private HashMap<FoodOrderItem, Integer> quantity;
-	private ArrayList<String> username;
+	private HashMap<FoodOrderItem, ArrayList<String>> username;
 	
 	public FoodDisplayObject(int serialNumber){
 		this.serialNumber =serialNumber;
@@ -59,11 +59,11 @@ public class FoodDisplayObject {
 	}
 
 
-	public ArrayList<String> getUsername() {
+	public HashMap<FoodOrderItem, ArrayList<String>> getUsername() {
 		return username;
 	}
 
-	public void setUsername(ArrayList<String> username) {
+	public void setUsername(HashMap<FoodOrderItem, ArrayList<String>> username) {
 		this.username = username;
 	}
 	

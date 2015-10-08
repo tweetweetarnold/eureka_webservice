@@ -1,8 +1,11 @@
+<%@ tabglib prefix="c" uri="http//java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="model.FoodOrder"%>
+<%@ page import="java.util.*"%>
+<%@ page import="model.Modifier"%>
+<%@ page import="model.FoodDisplayObject"%>
 <%@ page import="model.FoodOrderItem"%>
-<%@ page import="model.Employee"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,33 +20,93 @@
 	</form>
 	<%
 		if (request.getAttribute("foodOrders") != null) {
-			
-	%>
-	
-	<table>
-		<tr>
-		<th>Serial Number</th><th>Stall</th><th>Orders</th><th>Add-ons</th><th>price</th><th>quantity</th><th>total price</th><th>user</th>
-		</tr>
-		
-	
-	
-	
-	
-	
-	
-	</table>
-	
-	
-	
-	
-	
-	
-	
-	
-	<%		
-		}
+			ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
+					.getAttribute("foodOrders");
 	%>
 
+
+
+	<table>
+		<tr>
+			<th>Serial Number</th>
+			<th>Stall</th>
+			<th>Orders</th>
+			<th>Add-ons</th>
+			<th>price</th>
+			<th>quantity</th>
+			<th>total price</th>
+			<th>user</th>
+		</tr>
+		<%
+			for (FoodDisplayObject fDO : foodDisplayObjectList) {
+					double totalPrice = 0.0;
+					int serialNumber = fDO.getSerialNumber();
+					String stallName = fDO.getStallName();
+					ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
+					HashMap<FoodOrderItem, Integer> quantityList = fDO.getQuantity();
+					HashMap<FoodOrderItem, ArrayList<String>> userList = fDO.getUsername();
+		%>
+		<tr>
+			<td><%=serialNumber%></td>
+			<td><%=stallName%></td>
+			<td><table>
+					<%
+						for (FoodOrderItem fOI : foodOrderItemList) {
+									String foodName = fOI.getFood().getName();
+									ArrayList<Modifier> modifierList = new ArrayList<Modifier>(fOI.getModifierSet());
+									double tempPrice = fOI.getPrice();
+									int tempQuantity = quantityList.get(fOI);
+									totalPrice+=(tempPrice*tempQuantity);
+									ArrayList<String> tempUserList = userList.get(fOI);
+					%>
+					<tr>
+						<td><%=foodName%></td>
+
+						<td><table>
+								<%
+									for (Modifier m : modifierList) {
+													String modifierName = m.getName();
+								%>
+								<tr>
+									<td><%=modifierName%></td>
+								</tr>
+								<%
+									}
+								%>
+							</table></td>
+						<td><%=tempPrice%></td>
+						<td><%=tempQuantity%></td>
+						<td><table>
+								<%
+									for (String user : tempUserList) {
+								%>
+								<tr>
+									<td><%=user%></td>
+								</tr>
+								<%
+									}
+								%>
+							</table></td>
+							<td><%=totalPrice %></td>
+					</tr>
+					<%
+						}
+					%>
+				</table></td>
+			<td></td>
+
+		</tr>
+
+
+
+
+
+
+
+		<%
+			}
+		}
+		%>
 
 
 
