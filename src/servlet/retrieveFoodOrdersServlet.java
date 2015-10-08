@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 
 import controller.FoodOrderController;
+import model.FoodOrder;
 import model.FoodOrderItem;
 import net.minidev.json.JSONObject;
 
@@ -51,22 +53,11 @@ public class retrieveFoodOrdersServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		FoodOrderController foodOrderController = new FoodOrderController();
-		JSONArray jsonArray = new JSONArray();
-		ArrayList<String> userList = new ArrayList<String>();
-		HashMap tempFoodOrderHash = foodOrderController.getFoodOrderToday();
-		Iterator iter = tempFoodOrderHash.keySet().iterator();
-		while(iter.hasNext()){
-			String username = (String)iter.next();
-			if(!username.equals("totalPrice")){
-				userList.add(username);
-			}
-		}
-		JSONObject userRowSpan = new JSONObject();
-		for(String s : userList){
-			FoodOrderItem tempFoodOrderItem = (FoodOrderItem)tempFoodOrderHash.get(s);
-			int userRowSpan = tempFoodOrderItem.getFood().getModifiersSize();
-			
-		}
+		ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>(foodOrderController.getFoodOrderforCutOff());
+		
+		RequestDispatcher rd = request.getRequestDispatcher("retrieveFoodOrders.jsp");
+		request.setAttribute("foodOrders", foodOrderList);
+		rd.forward(request,response);
 		
 	}
 

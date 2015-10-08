@@ -101,4 +101,22 @@ public class Food {
 		this.modifierSet = modifierSet;
 	}
 
+	// check if canteen, stall and food name are the same and returns true if
+	// they are all the same
+	public boolean equals(Food otherFood) {
+		if (this.stall.getCanteen().getName().equals(otherFood.getStall().getCanteen().getName())) {
+			if(this.stall.getName().equals(otherFood.getStall().getName())){
+				if(this.name.equals(otherFood.getName())){
+					return true;
+				}else{
+					return false;
+				}
+			}else{
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
 }

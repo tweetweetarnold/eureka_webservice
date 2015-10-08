@@ -83,5 +83,18 @@ public class Modifier {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+	//Check if otherModifier equal current modifier
+	public boolean equals(Modifier otherModifier){
+		if(this.food.equals(otherModifier.getFood())){
+			if(this.name.equals(otherModifier.getName())){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+		
+	}
 
 }

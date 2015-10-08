@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -38,8 +39,7 @@ public class FoodOrderItem {
 	public FoodOrderItem() {
 	}
 
-	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, double price,
-			String remarks, Date createDate) {
+	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, double price, String remarks, Date createDate) {
 		super();
 		this.foodOrder = foodOrder;
 		this.food = food;
@@ -84,11 +84,11 @@ public class FoodOrderItem {
 
 	public double getPrice() {
 		double price = food.getPrice();
-		if(!modifierSet.isEmpty()){
+		if (!modifierSet.isEmpty()) {
 			Iterator iter = modifierSet.iterator();
-			while(iter.hasNext()){
-				Modifier tempMod = (Modifier)iter.next();
-				price +=tempMod.getPrice();
+			while (iter.hasNext()) {
+				Modifier tempMod = (Modifier) iter.next();
+				price += tempMod.getPrice();
 			}
 		}
 		return price;
@@ -113,13 +113,37 @@ public class FoodOrderItem {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	
+
 	public Set<Modifier> getModifierSet() {
 		return modifierSet;
 	}
 
 	public void setCreateDate(HashSet<Modifier> modifierSet) {
 		this.modifierSet = modifierSet;
+	}
+
+	public boolean equals(FoodOrderItem otherFoodItem) {
+		if (this.food.equals(otherFoodItem.getFood())) {
+			ArrayList<Modifier> modifierListOrigin = new ArrayList<Modifier>(modifierSet);
+			ArrayList<Modifier> modifierListExternal = new ArrayList<Modifier>(otherFoodItem.getModifierSet());
+			int trueCount = 0;
+			for (Modifier m : modifierListOrigin) {
+				for (Modifier e : modifierListOrigin) {
+					if (m.equals(e)) {
+						trueCount++;
+					}
+				}
+			}
+			if (trueCount == modifierListOrigin.size()) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} else {
+			return false;
+		}
+
 	}
 
 }
