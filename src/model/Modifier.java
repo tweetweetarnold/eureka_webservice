@@ -9,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 @Entity
+@Table(name = "modifier")
 public class Modifier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +29,7 @@ public class Modifier {
 	public Modifier() {
 	}
 
-	public Modifier(String name, String description, double price, Food food,
-			Date createDate) {
+	public Modifier(String name, String description, double price, Food food, Date createDate) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -83,18 +85,19 @@ public class Modifier {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	//Check if otherModifier equal current modifier
-	public boolean equals(Modifier otherModifier){
-		if(this.food.equals(otherModifier.getFood())){
-			if(this.name.equals(otherModifier.getName())){
+
+	// Check if otherModifier equal current modifier
+	public boolean equals(Modifier otherModifier) {
+		if (this.food.equals(otherModifier.getFood())) {
+			if (this.name.equals(otherModifier.getName())) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
-		}else{
+		} else {
 			return false;
 		}
-		
+
 	}
 
 }
