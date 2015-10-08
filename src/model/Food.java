@@ -1,14 +1,18 @@
 package model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +29,8 @@ public class Food {
 	private Stall stall;
 	// private image byte[];
 	private Date createDate;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
+	private Set<Modifier> modifierSet;
 
 	public Food() {
 	}
@@ -36,6 +42,7 @@ public class Food {
 		this.price = price;
 		this.stall = stall;
 		this.createDate = createDate;
+		modifierSet = new HashSet<>();
 	}
 
 	public int getFoodId() {
@@ -84,6 +91,14 @@ public class Food {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public Set<Modifier> getModifierSet() {
+		return modifierSet;
+	}
+
+	public void setCreateDate(HashSet<Modifier> modifierSet) {
+		this.modifierSet = modifierSet;
 	}
 
 }

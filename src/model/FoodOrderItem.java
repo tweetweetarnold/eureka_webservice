@@ -1,13 +1,18 @@
 package model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +32,8 @@ public class FoodOrderItem {
 	private double price;
 	private String remarks;
 	private Date createDate;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
+	private Set<Modifier> modifierSet;
 
 	public FoodOrderItem() {
 	}
@@ -40,6 +47,7 @@ public class FoodOrderItem {
 		this.price = price;
 		this.remarks = remarks;
 		this.createDate = createDate;
+		modifierSet = new HashSet<>();
 	}
 
 	public int getFoodOrderItemId() {
@@ -75,6 +83,14 @@ public class FoodOrderItem {
 	}
 
 	public double getPrice() {
+		double price = food.getPrice();
+		if(!modifierSet.isEmpty()){
+			Iterator iter = modifierSet.iterator();
+			while(iter.hasNext()){
+				Modifier tempMod = (Modifier)iter.next();
+				price +=tempMod.getPrice();
+			}
+		}
 		return price;
 	}
 
@@ -96,6 +112,14 @@ public class FoodOrderItem {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	
+	public Set<Modifier> getModifierSet() {
+		return modifierSet;
+	}
+
+	public void setCreateDate(HashSet<Modifier> modifierSet) {
+		this.modifierSet = modifierSet;
 	}
 
 }
