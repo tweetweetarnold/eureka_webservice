@@ -22,9 +22,9 @@ public class CanteenController {
 		List<Canteen> canteenList = retrieveAll();
 		
 		for(Canteen c : canteenList) {
-			List<Stall> stallList = c.getStallList();
+			Set<Stall> stallList = c.getStallList();
 			for(Stall s : stallList) {
-				List<Food> foodList = s.getFoodList();
+				Set<Food> foodList = s.getFoodList();
 				returnList.addAll(foodList);
 			}
 		}

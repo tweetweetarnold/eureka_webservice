@@ -1,7 +1,7 @@
 package model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,7 +22,7 @@ public class Canteen {
 	private String address;
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "canteen")
-	private List<Stall> stallList;
+	private Set<Stall> stallList;
 
 	public Canteen() {
 		this.canteenId = 0;
@@ -32,7 +32,7 @@ public class Canteen {
 		this.stallList = null;
 	}
 
-	public Canteen(String name, String address, Date createDate, List<Stall> stallList) {
+	public Canteen(String name, String address, Date createDate, Set<Stall> stallList) {
 		super();
 		this.name = name;
 		this.address = address;
@@ -64,11 +64,11 @@ public class Canteen {
 		this.createDate = createDate;
 	}
 
-	public List<Stall> getStallList() {
+	public Set<Stall> getStallList() {
 		return stallList;
 	}
 
-	public void setStallList(List<Stall> stallList) {
+	public void setStallList(Set<Stall> stallList) {
 		this.stallList = stallList;
 	}
 

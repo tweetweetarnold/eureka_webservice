@@ -12,11 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Admin;
 import model.Employee;
 import model.Food;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import services.PasswordService;
@@ -26,7 +24,7 @@ import controller.LoginController;
 /**
  * Servlet implementation class Hello
  */
-@WebServlet("/LoginServlet")
+@WebServlet("/ProcessLoginServlet")
 public class ProcessLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -65,93 +63,95 @@ public class ProcessLoginServlet extends HttpServlet {
 		JSONObject returnJson = new JSONObject();
 		JSONObject jsonMessage = new JSONObject();
 
-//		try {
-			response.setContentType("application/json");
-			PrintWriter out = response.getWriter();
+		// try {
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
 
-			// Getting User Input Parameters
-			String username = (String) request.getParameter("username");
-			String inputPwd = (String) request.getParameter("password");
+		// Getting User Input Parameters
+		String username = (String) request.getParameter("username");
+		String inputPwd = (String) request.getParameter("password");
 
-			jsonMessage.put("username", username);
+		jsonMessage.put("username", username);
 
-			// User Input Validation
-			boolean isValid = (username != null && inputPwd != null && !username.equals("") && !inputPwd
-					.equals(""));
-			LoginController loginController = new LoginController();
-			if (isValid) {
-				
-//				if (!username.equals("admin")) {
-					Employee emp = loginController.authenticateUser(username,
-						PasswordService.encryptPassword(inputPwd));
+		// User Input Validation
+		boolean isValid = (username != null && inputPwd != null && !username.equals("") && !inputPwd
+				.equals(""));
+		LoginController loginController = new LoginController();
+		if (isValid) {
 
-						// *** For Development only ***
-						// creates a tokenID using UUID (Universalised Unique
-						// Identifier
-						// Object)
-						// the user's username is tagged at the end of the token
-						String tokenID = UUID.randomUUID().toString().toUpperCase() + "|"
-								+ emp.getUsername() + "|";
-	
-						HttpSession session = request.getSession();
-						session.setAttribute("user", emp);
-						session.setAttribute("tokenID", tokenID);
-	
-						// Get all food data from database and save into session for
-						// display
-						CanteenController canteenController = new CanteenController();
-						List<Food> allFoodList = canteenController.getAllFood();
-						System.out.println("LoginServlet foodListSize: " + allFoodList.size());
-						
-						session.setAttribute("allFood", allFoodList);
-						System.out.println(allFoodList);
-	
-	//					JSONObject obj = new JSONObject();
-	//					obj.put("allFood", allFoodList);
-	//					System.out.println("OBJ: " + obj);
-//						session.setAttribute("allFood", obj);
-	
-						response.sendRedirect("homepage.jsp");
-//				} else {
-//					Admin admin = loginController.authenticateAdmin(username,inputPwd);
-//					HttpSession session = request.getSession();
-//					session.setAttribute("admin", admin);
-//					
-//					//creates a tokenID using UUID (Universalised Unique Identifier Object)
-//					//the admin's username is tagged at the end of the token
-//					String tokenID = UUID.randomUUID().toString().toUpperCase() 
-//			            + "|" + admin.getUsername() + "|";
-//					
-//					session.setAttribute("tokenID", tokenID);
-//					response.sendRedirect("adminHomepage.jsp");
-//					
-//				}
+			// if (!username.equals("admin")) {
+			Employee emp = loginController.authenticateUser(username,
+					PasswordService.encryptPassword(inputPwd));
 
-			} else {
-				// Error Response
+			// *** For Development only ***
+			// creates a tokenID using UUID (Universalised Unique
+			// Identifier
+			// Object)
+			// the user's username is tagged at the end of the token
+			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getUsername()
+					+ "|";
 
-//				throw new Exception(
-//						"Please ensure that you have inserted valid ID and password into the fields.");
-			}
-//		} catch (NullPointerException e) {
-//			returnJson.put("message", jsonMessage);
-//			returnJson.put("error",
-//					"Please ensure that you have inserted valid ID and password into the fields.");
-//			returnJson.put("status", "fail");
-//
-//			HttpSession session = request.getSession();
-//			session.setAttribute("error", returnJson);
-//			response.sendRedirect("login.jsp");
-//		}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			returnJson.put("message", jsonMessage);
-//			returnJson.put("error", e.getMessage());
-//			returnJson.put("status", "fail");
-//
-//			HttpSession session = request.getSession();
-//			session.setAttribute("error", returnJson);
-//			response.sendRedirect("login.jsp");
-//		}
+			HttpSession session = request.getSession();
+			session.setAttribute("user", emp);
+			session.setAttribute("tokenID", tokenID);
+
+			// Get all food data from database and save into session for
+			// display
+			CanteenController canteenController = new CanteenController();
+			List<Food> allFoodList = canteenController.getAllFood();
+			System.out.println("LoginServlet foodListSize: " + allFoodList.size());
+
+			session.setAttribute("allFood", allFoodList);
+			System.out.println(allFoodList);
+
+			// JSONObject obj = new JSONObject();
+			// obj.put("allFood", allFoodList);
+			// System.out.println("OBJ: " + obj);
+			// session.setAttribute("allFood", obj);
+
+			response.sendRedirect("homepage.jsp");
+			// } else {
+			// Admin admin =
+			// loginController.authenticateAdmin(username,inputPwd);
+			// HttpSession session = request.getSession();
+			// session.setAttribute("admin", admin);
+			//
+			// //creates a tokenID using UUID (Universalised Unique Identifier
+			// Object)
+			// //the admin's username is tagged at the end of the token
+			// String tokenID = UUID.randomUUID().toString().toUpperCase()
+			// + "|" + admin.getUsername() + "|";
+			//
+			// session.setAttribute("tokenID", tokenID);
+			// response.sendRedirect("adminHomepage.jsp");
+			//
+			// }
+
+		} else {
+			// Error Response
+
+			// throw new Exception(
+			// "Please ensure that you have inserted valid ID and password into the fields.");
+		}
+		// } catch (NullPointerException e) {
+		// returnJson.put("message", jsonMessage);
+		// returnJson.put("error",
+		// "Please ensure that you have inserted valid ID and password into the fields.");
+		// returnJson.put("status", "fail");
+		//
+		// HttpSession session = request.getSession();
+		// session.setAttribute("error", returnJson);
+		// response.sendRedirect("login.jsp");
+		// }
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// returnJson.put("message", jsonMessage);
+		// returnJson.put("error", e.getMessage());
+		// returnJson.put("status", "fail");
+		//
+		// HttpSession session = request.getSession();
+		// session.setAttribute("error", returnJson);
+		// response.sendRedirect("login.jsp");
+		// }
 	}
 }

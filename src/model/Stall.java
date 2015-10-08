@@ -1,7 +1,7 @@
 package model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -29,13 +29,13 @@ public class Stall {
 	private Canteen canteen;
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "stall")
-	private List<Food> foodList;
+	private Set<Food> foodList;
 
 	public Stall() {
 	}
 
 	public Stall(String username, String password, String name, long contactNo, Canteen canteen,
-			Date createDate, List<Food> foodList) {
+			Date createDate, Set<Food> foodList) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -102,11 +102,11 @@ public class Stall {
 		this.canteen = canteen;
 	}
 
-	public List<Food> getFoodList() {
+	public Set<Food> getFoodList() {
 		return foodList;
 	}
 
-	public void setFoodList(List<Food> foodList) {
+	public void setFoodList(Set<Food> foodList) {
 		this.foodList = foodList;
 	}
 

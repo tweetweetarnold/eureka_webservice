@@ -2,8 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -33,12 +34,13 @@ public class FoodOrderItem {
 	private String remarks;
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
-	private List<Modifier> modifierList;
+	private Set<Modifier> modifierList;
 
 	public FoodOrderItem() {
 	}
 
-	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, double price, String remarks, Date createDate) {
+	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, double price,
+			String remarks, Date createDate) {
 		super();
 		this.foodOrder = foodOrder;
 		this.food = food;
@@ -46,7 +48,7 @@ public class FoodOrderItem {
 		this.price = price;
 		this.remarks = remarks;
 		this.createDate = createDate;
-		modifierList = new ArrayList<>();
+		modifierList = new HashSet<>();
 	}
 
 	public int getFoodOrderItemId() {
@@ -113,18 +115,19 @@ public class FoodOrderItem {
 		this.createDate = createDate;
 	}
 
-	public List<Modifier> getModifierList() {
+	public Set<Modifier> getModifierList() {
 		return modifierList;
 	}
 
-	public void setModifierList(ArrayList<Modifier> modifierList) {
+	public void setModifierList(HashSet<Modifier> modifierList) {
 		this.modifierList = modifierList;
 	}
 
 	public boolean equals(FoodOrderItem otherFoodItem) {
 		if (this.food.equals(otherFoodItem.getFood())) {
 			ArrayList<Modifier> modifierListOrigin = new ArrayList<Modifier>(modifierList);
-			ArrayList<Modifier> modifierListExternal = new ArrayList<Modifier>(otherFoodItem.getModifierList());
+			ArrayList<Modifier> modifierListExternal = new ArrayList<Modifier>(
+					otherFoodItem.getModifierList());
 			int trueCount = 0;
 			for (Modifier m : modifierListOrigin) {
 				for (Modifier e : modifierListOrigin) {

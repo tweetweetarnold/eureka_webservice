@@ -84,8 +84,8 @@
 					</div>
 				</div>
 				<%
-// 				JSONObject allFood = (JSONObject) session.getAttribute("allFood");
-// 				ArrayList<Food> list = (ArrayList<Food>) allFood.get("allFood");
+	// 				JSONObject allFood = (JSONObject) session.getAttribute("allFood");
+		// 				ArrayList<Food> list = (ArrayList<Food>) allFood.get("allFood");
 				List<Food> list = (ArrayList<Food>) session.getAttribute("allFood");
 				if(list != null){
 				%>
@@ -117,7 +117,7 @@
 							</div>
 							<div class="pull-right" style="margin-right: 5px;">
 								<form action="/eureka_webservice/AddFoodItemToSessionServlet">
-									<input type="hidden" value="<%=i %>" id="foodId" name="foodId">
+									<input type="hidden" value="<%=i%>" id="foodId" name="foodId">
 									<button type="submit" class="btn btn-danger">Add to Cart</button>
 								</form>
 							</div>
@@ -130,7 +130,7 @@
 
 					<%
 						}
-}
+								}
 					%>
 
 
@@ -160,20 +160,18 @@
 							</div>
 						</div>
 					</div>
-
-
-					<!-- 					<div class="col-sm-4 col-lg-4 col-md-4"> -->
-					<!-- 						<h4> -->
-					<!-- 							<a href="#">Like this template?</a> -->
-					<!-- 						</h4> -->
-					<!-- 						<p> -->
-					<!-- 							If you like this template, then check out -->
-					<!-- 							<a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a> -->
-					<!-- 							on how to build a working review system for your online store! -->
-					<!-- 						</p> -->
-					<!-- 						<a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View -->
-					<!-- 							Tutorial</a> -->
-					<!-- 					</div> -->
+					<div class="col-sm-4 col-lg-4 col-md-4">
+						<h4>
+							<a href="#">Like this template?</a>
+						</h4>
+						<p>
+							If you like this template, then check out
+							<a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a>
+							on how to build a working review system for your online store!
+						</p>
+						<a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View
+							Tutorial</a>
+					</div>
 
 				</div>
 

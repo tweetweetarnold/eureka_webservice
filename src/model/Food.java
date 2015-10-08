@@ -1,8 +1,8 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,7 +30,7 @@ public class Food {
 	// private image byte[];
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
-	private List<Modifier> modifierList;
+	private Set<Modifier> modifierList;
 
 	public Food() {
 	}
@@ -42,7 +42,7 @@ public class Food {
 		this.price = price;
 		this.stall = stall;
 		this.createDate = createDate;
-		this.modifierList = new ArrayList<>();
+		this.modifierList = new HashSet<>();
 	}
 
 	public int getFoodId() {
@@ -93,11 +93,11 @@ public class Food {
 		this.createDate = createDate;
 	}
 
-	public List<Modifier> getModifierList() {
+	public Set<Modifier> getModifierList() {
 		return modifierList;
 	}
 
-	public void setModifierList(List<Modifier> modifierList) {
+	public void setModifierList(Set<Modifier> modifierList) {
 		this.modifierList = modifierList;
 	}
 

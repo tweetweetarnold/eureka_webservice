@@ -20,7 +20,7 @@ import controller.RegistrationController;
 /**
  * Servlet implementation class RegistrationServlet
  */
-@WebServlet("/RegistrationServlet")
+@WebServlet("/ProcessRegistrationServlet")
 public class ProcessRegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

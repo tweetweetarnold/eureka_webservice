@@ -31,14 +31,14 @@ public class FoodOrder {
 	@JoinColumn(name = "admin")
 	private Admin admin;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")
-	private List<FoodOrderItem> foodOrderList;
+	private Set<FoodOrderItem> foodOrderList;
 	private Date createDate;
 
 	public FoodOrder() {
 	}
 
 	public FoodOrder(String status, Employee employee, Admin admin,
-			List<FoodOrderItem> foodOrderList, Date createDate) {
+			Set<FoodOrderItem> foodOrderList, Date createDate) {
 		super();
 		this.status = status;
 		this.employee = employee;
@@ -47,11 +47,11 @@ public class FoodOrder {
 		this.createDate = createDate;
 	}
 
-	public List<FoodOrderItem> getFoodOrderList() {
+	public Set<FoodOrderItem> getFoodOrderList() {
 		return foodOrderList;
 	}
 
-	public void setFoodOrderList(List<FoodOrderItem> foodOrderList) {
+	public void setFoodOrderList(Set<FoodOrderItem> foodOrderList) {
 		this.foodOrderList = foodOrderList;
 	}
 
@@ -98,7 +98,7 @@ public class FoodOrder {
 	// retrieve the total price for the particular food order
 	public double getFoodOrderTotalPrice() {
 		double result = 0.0;
-		List<FoodOrderItem> foodOrderList = getFoodOrderList();
+		Set<FoodOrderItem> foodOrderList = getFoodOrderList();
 		Iterator iter = foodOrderList.iterator();
 		while (iter.hasNext()) {
 			FoodOrderItem tempItem = (FoodOrderItem) iter.next();

@@ -1,7 +1,7 @@
 package model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,18 +20,18 @@ public class Company {
 	private int companyId;
 	private String name;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "company")
-	private List<Employee> employeeList;
+	private Set<Employee> employeeList;
 	private Date createDate;
 	private Date cutoffTime;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Canteen> canteenList;
+	private Set<Canteen> canteenList;
 
 	public Company() {
 
 	}
 
-	public Company(String name, List<Employee> employeeList, Date createDate, Date cutoffTime,
-			List<Canteen> canteenList) {
+	public Company(String name, Set<Employee> employeeList, Date createDate, Date cutoffTime,
+			Set<Canteen> canteenList) {
 		super();
 		this.name = name;
 		this.employeeList = employeeList;
@@ -48,11 +48,11 @@ public class Company {
 		this.name = name;
 	}
 
-	public List<Employee> getEmployeeList() {
+	public Set<Employee> getEmployeeList() {
 		return employeeList;
 	}
 
-	public void setEmployeeList(List<Employee> employeeList) {
+	public void setEmployeeList(Set<Employee> employeeList) {
 		this.employeeList = employeeList;
 	}
 
@@ -72,11 +72,11 @@ public class Company {
 		this.cutoffTime = cutoffTime;
 	}
 
-	public List<Canteen> getCanteenList() {
+	public Set<Canteen> getCanteenList() {
 		return canteenList;
 	}
 
-	public void setCanteenList(List<Canteen> canteenList) {
+	public void setCanteenList(Set<Canteen> canteenList) {
 		this.canteenList = canteenList;
 	}
 
