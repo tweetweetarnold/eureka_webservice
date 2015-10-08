@@ -188,12 +188,15 @@ public class MyConnection {
 	}
 
 	public static void close() {
+		System.out.println("MyConnection close");
 		try {
 			if (session.isOpen()) {
 				session.close();
+				System.out.println("MyConnection: Session has been closed");
 			}
 			if (!sessionFactory.isClosed()) {
 				sessionFactory.close();
+				System.out.println("MyConnection: SessionFactory has been closed");
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();

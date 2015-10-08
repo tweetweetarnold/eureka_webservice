@@ -1,8 +1,8 @@
 package test;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Admin;
 import model.Canteen;
@@ -33,22 +33,22 @@ public class Testt {
 		FoodOrderItem foodItem = new FoodOrderItem(order, food, 2, 2.5,
 				"remarks", new Date());
 		
-		Set<Canteen> canteenList = new HashSet<>();
+		List<Canteen> canteenList = new ArrayList<>();
 		canteenList.add(canteen);
 		company.setCanteenList(canteenList);
-		Set<FoodOrder> orderList = new HashSet<>();
+		List<FoodOrder> orderList = new ArrayList<>();
 		orderList.add(order);
 		employee.setOrderHistory(orderList);
-		Set<FoodOrderItem> foodOrderList = new HashSet<>();
+		List<FoodOrderItem> foodOrderList = new ArrayList<>();
 		foodOrderList.add(foodItem);
 		order.setFoodOrderList(foodOrderList);
-		Set<Employee> employeeList = new HashSet<>();
+		List<Employee> employeeList = new ArrayList<>();
 		employeeList.add(employee);
 		company.setEmployeeList(employeeList);
-		Set<Food> foodList = new HashSet<>();
+		List<Food> foodList = new ArrayList<>();
 		employee.setFavouriteList(foodList);
 		foodList.add(food);
-		Set<Stall> stallList = new HashSet<>();
+		List<Stall> stallList = new ArrayList<>();
 		stallList.add(stall);
 		stall.setFoodList(foodList);
 		canteen.setStallList(stallList);

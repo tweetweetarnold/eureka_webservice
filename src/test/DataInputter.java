@@ -1,17 +1,14 @@
 package test;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import model.Canteen;
 import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
 import model.Stall;
-import controller.CanteenController;
 import dao.FoodOrderDAO;
 
 public class DataInputter {
@@ -43,9 +40,9 @@ public class DataInputter {
 
 		// FoodOrder(String status, Employee employee, Driver driver,
 		// Set<FoodOrderItem> foodOrderList, Date createDate)
-		Set<FoodOrderItem> foodOrderSet1 = new HashSet();
-		Set<FoodOrderItem> foodOrderSet2 = new HashSet();
-		Set<FoodOrderItem> foodOrderSet3 = new HashSet();
+		List<FoodOrderItem> foodOrderSet1 = new ArrayList<>();
+		List<FoodOrderItem> foodOrderSet2 = new ArrayList<>();
+		List<FoodOrderItem> foodOrderSet3 = new ArrayList<>();
 		Canteen canteen = new Canteen("xiaodingdang", "123", new Date(), null);
 		Stall stall = new Stall("stall", "123", "foodrepublic", 123, canteen, new Date(), null);
 		FoodOrder foodOrder1 = new FoodOrder("In Progress", null, null, foodOrderSet1, new Date());

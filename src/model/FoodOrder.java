@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,14 +31,14 @@ public class FoodOrder {
 	@JoinColumn(name = "admin")
 	private Admin admin;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")
-	private Set<FoodOrderItem> foodOrderList;
+	private List<FoodOrderItem> foodOrderList;
 	private Date createDate;
 
 	public FoodOrder() {
 	}
 
 	public FoodOrder(String status, Employee employee, Admin admin,
-			Set<FoodOrderItem> foodOrderList, Date createDate) {
+			List<FoodOrderItem> foodOrderList, Date createDate) {
 		super();
 		this.status = status;
 		this.employee = employee;
@@ -46,11 +47,11 @@ public class FoodOrder {
 		this.createDate = createDate;
 	}
 
-	public Set<FoodOrderItem> getFoodOrderList() {
+	public List<FoodOrderItem> getFoodOrderList() {
 		return foodOrderList;
 	}
 
-	public void setFoodOrderList(Set<FoodOrderItem> foodOrderList) {
+	public void setFoodOrderList(List<FoodOrderItem> foodOrderList) {
 		this.foodOrderList = foodOrderList;
 	}
 
@@ -97,7 +98,7 @@ public class FoodOrder {
 	// retrieve the total price for the particular food order
 	public double getFoodOrderTotalPrice() {
 		double result = 0.0;
-		Set<FoodOrderItem> foodOrderList = getFoodOrderList();
+		List<FoodOrderItem> foodOrderList = getFoodOrderList();
 		Iterator iter = foodOrderList.iterator();
 		while (iter.hasNext()) {
 			FoodOrderItem tempItem = (FoodOrderItem) iter.next();

@@ -2,9 +2,9 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -61,7 +61,7 @@ public class LoadSampleTestDataServlet extends HttpServlet {
 		FoodOrderItem item1 = new FoodOrderItem(null, chickenRice, 1, 3.50, null, new Date());
 		FoodOrderItem item2 = new FoodOrderItem(null, duckRice, 1, 3.50, null, new Date());
 		FoodOrderItem item3 = new FoodOrderItem(null, wantonMee, 1, 3.50, null, new Date());
-		Set<FoodOrderItem> set = new HashSet<>();
+		List<FoodOrderItem> set = new ArrayList<>();
 		set.add(item1);
 		set.add(item2);
 		set.add(item3);

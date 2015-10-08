@@ -27,7 +27,7 @@
 						<a href="cart.jsp">Cart</a>
 					</li>
 					<li>
-						<a href="login.jsp">Logout</a>
+						<a href="ProcessLogoutServlet">Logout</a>
 					</li>
 				</ul>
 			</div>
