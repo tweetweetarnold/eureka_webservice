@@ -30,7 +30,7 @@
 <body>
 	<div class="container">
 
-		<form class="form-signin" method="post" action="LoginServlet">
+		<form class="form-signin" method="post" action="ProcessLoginServlet">
 			<%
 				String username = "";
 				String password = "";

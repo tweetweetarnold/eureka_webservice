@@ -4,7 +4,7 @@
 package model;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -31,9 +31,9 @@ public class Employee {
 	@JoinColumn(name = "companyId")
 	private Company company;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<Food> favouriteList;
+	private List<Food> favouriteList;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<FoodOrder> orderHistory;
+	private List<FoodOrder> orderHistory;
 	private Date createDate;
 
 	public Employee() {
@@ -41,8 +41,8 @@ public class Employee {
 	}
 
 	public Employee(String username, String password, String name, long creditCardNo,
-			long eDollars, long contactNo, Company company, Set<Food> favouriteList,
-			Set<FoodOrder> orderHistory, Date createDate) {
+			long eDollars, long contactNo, Company company, List<Food> favouriteList,
+			List<FoodOrder> orderHistory, Date createDate) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -120,19 +120,19 @@ public class Employee {
 		this.company = company;
 	}
 
-	public Set<Food> getFavouriteList() {
+	public List<Food> getFavouriteList() {
 		return favouriteList;
 	}
 
-	public void setFavouriteList(Set<Food> favouriteList) {
+	public void setFavouriteList(List<Food> favouriteList) {
 		this.favouriteList = favouriteList;
 	}
 
-	public Set<FoodOrder> getOrderHistory() {
+	public List<FoodOrder> getOrderHistory() {
 		return orderHistory;
 	}
 
-	public void setOrderHistory(Set<FoodOrder> orderHistory) {
+	public void setOrderHistory(List<FoodOrder> orderHistory) {
 		this.orderHistory = orderHistory;
 	}
 

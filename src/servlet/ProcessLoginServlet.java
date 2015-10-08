@@ -27,13 +27,13 @@ import controller.LoginController;
  * Servlet implementation class Hello
  */
 @WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+public class ProcessLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginServlet() {
+	public ProcessLoginServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

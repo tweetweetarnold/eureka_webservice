@@ -79,7 +79,7 @@ public class AddFoodItemToSessionServlet extends HttpServlet {
 			FoodOrder foodOrder = null;
 			if (session.getAttribute("foodOrder") == null) {
 				Employee emp = (Employee) session.getAttribute("user");
-				foodOrder = new FoodOrder("good", emp, null, new HashSet<FoodOrderItem>(),
+				foodOrder = new FoodOrder("good", emp, null, new ArrayList<FoodOrderItem>(),
 						new Date());
 				System.out.println("New FoodOrder created.");
 			}else {
@@ -94,7 +94,7 @@ public class AddFoodItemToSessionServlet extends HttpServlet {
 			Food food = allFood.get(Integer.parseInt(request.getParameter("foodId")));
 			System.out.println("AddFoodToItemSessionServlet Food: " + food);
 
-			Set<FoodOrderItem> list = foodOrder.getFoodOrderList();
+			List<FoodOrderItem> list = foodOrder.getFoodOrderList();
 			list.add(new FoodOrderItem(foodOrder, food, 1, food.getPrice(), null, new Date()));
 
 			foodOrder.setFoodOrderList(list);
