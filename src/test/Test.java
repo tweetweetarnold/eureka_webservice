@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import services.PasswordService;
+import value.StringValues;
 import model.Admin;
 import model.Canteen;
 import model.Company;
@@ -18,11 +20,51 @@ public class Test {
 
 	public static void main(String[] args) {
 
-		Canteen canteen = new Canteen("xiaodingdang", "123", new Date(), null);
-		Stall stall = new Stall("stall", "123", "foodrepublic", 123, canteen, new Date(), null);
-		Food food = new Food("chickenrice", "damn nice", 2.50, stall, new Date());
+		// **************************************** Arnold Data
+		// ****************************************
 
-		// Insert mock Data
+		Canteen canteen = new Canteen("Default Canteen", "123", new Date(), null);
+		Stall stall = new Stall("stall123", "123", "Default Stall", 123, canteen, new Date(), null);
+		Food food = new Food("Arnold's Fried Chicken", "Quite Nice", 2.50, stall, new Date());
+
+		Admin admin = new Admin("admin", PasswordService.encryptPassword("1234567"), "admin123",
+				123456789, new Date());
+		Company company = new Company("XiaoDingDang Co.", null, new Date(), null, null);
+		Employee employee = new Employee("arnold", PasswordService.encryptPassword("1234567"),
+				"arnold", 999999999, 10, 123, company, null, null, new Date());
+		FoodOrder order = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, admin, null, new Date());
+		FoodOrderItem foodItem = new FoodOrderItem(order, food, 1, 2.5, "More meat", new Date());
+
+		Set<Canteen> canteenList = new HashSet<>();
+		canteenList.add(canteen);
+		company.setCanteenList(canteenList);
+		Set<FoodOrder> orderList = new HashSet<>();
+		orderList.add(order);
+		employee.setOrderHistory(orderList);
+		Set<FoodOrderItem> foodOrderList = new HashSet<>();
+		foodOrderList.add(foodItem);
+		order.setFoodOrderList(foodOrderList);
+		Set<Employee> employeeList = new HashSet<>();
+		employeeList.add(employee);
+		company.setEmployeeList(employeeList);
+		Set<Food> foodList = new HashSet<>();
+		employee.setFavouriteList(foodList);
+		foodList.add(food);
+		Set<Stall> stallList = new HashSet<>();
+		stallList.add(stall);
+		stall.setFoodList(foodList);
+		canteen.setStallList(stallList);
+
+		MyConnection.save(admin);
+		MyConnection.save(company);
+		MyConnection.save(employee);
+		MyConnection.save(order);
+		MyConnection.save(foodItem);
+		// **************************************** End Arnold Data
+		// ****************************************
+
+		// **************************************** Insert mock Data
+		// ****************************************
 		Set<Stall> stallList2 = new HashSet<>();
 		Set<Food> foodListB1 = new HashSet<>();
 		Set<Food> foodListB2 = new HashSet<>();
@@ -346,41 +388,6 @@ public class Test {
 		newStallList.add(fruitStall);
 
 		canteen1.setStallList(newStallList);
-		// End of insert mock Data
-
-		Admin admin = new Admin("admin", "123", "admin123", 123, new Date());
-		Company company = new Company("xiaodingdang co.", null, new Date(), null, null);
-		Employee employee = new Employee("arnold123", "123", "arnold", 123, 10, 123, company, null,
-				null, new Date());
-		FoodOrder order = new FoodOrder("done", employee, admin, null, new Date());
-		FoodOrderItem foodItem = new FoodOrderItem(order, food, 2, 2.5, "remarks", new Date());
-
-		Set<Canteen> canteenList = new HashSet<>();
-		canteenList.add(canteen);
-		company.setCanteenList(canteenList);
-		Set<FoodOrder> orderList = new HashSet<>();
-		orderList.add(order);
-		employee.setOrderHistory(orderList);
-		Set<FoodOrderItem> foodOrderList = new HashSet<>();
-		foodOrderList.add(foodItem);
-		order.setFoodOrderList(foodOrderList);
-		Set<Employee> employeeList = new HashSet<>();
-		employeeList.add(employee);
-		company.setEmployeeList(employeeList);
-		Set<Food> foodList = new HashSet<>();
-		employee.setFavouriteList(foodList);
-		foodList.add(food);
-		Set<Stall> stallList = new HashSet<>();
-		stallList.add(stall);
-		stall.setFoodList(foodList);
-		canteen.setStallList(stallList);
-
-		MyConnection.save(admin);
-		MyConnection.save(company);
-		MyConnection.save(employee);
-		MyConnection.save(order);
-		MyConnection.save(foodItem);
-
 		MyConnection.save(canteen1);
 
 		MyConnection.save(kuehStall);
@@ -494,6 +501,9 @@ public class Test {
 		MyConnection.save(food44);
 		MyConnection.save(food45);
 		MyConnection.save(food46);
+
+		// **************************************** End insert of mock data
+		// ****************************************
 
 		System.out.println("Test.java completed");
 
