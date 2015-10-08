@@ -1,6 +1,5 @@
-<%@page import="model.FoodOrder"%>
-<%@page import="model.FoodOrderItem"%>
-<%@page import="java.util.List"%>
+<%@page import="model.*"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -39,7 +38,7 @@
 			<tbody>
 				<%
 					if(foodOrder != null){
-						List<FoodOrderItem> list = foodOrder.getFoodOrderList();	
+						Set<FoodOrderItem> list = foodOrder.getFoodOrderList();	
 						System.out.println("foodList: " + list.size());
 						if(list != null){
 							for(FoodOrderItem item : list){

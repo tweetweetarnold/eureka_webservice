@@ -53,7 +53,7 @@
 					<%
 						for (FoodOrderItem fOI : foodOrderItemList) {
 									String foodName = fOI.getFood().getName();
-									ArrayList<Modifier> modifierList = new ArrayList<Modifier>(fOI.getModifierSet());
+									Set<Modifier> modifierList = new HashSet<Modifier>(fOI.getModifierList());
 									double tempPrice = fOI.getPrice();
 									int tempQuantity = quantityList.get(fOI);
 									totalPrice+=(tempPrice*tempQuantity);

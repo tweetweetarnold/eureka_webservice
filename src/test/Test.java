@@ -1,8 +1,8 @@
 package test;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import model.Admin;
 import model.Canteen;
@@ -23,18 +23,18 @@ public class Test {
 		Food food = new Food("chickenrice", "damn nice", 2.50, stall, new Date());
 
 		// Insert mock Data
-		List<Stall> stallList2 = new ArrayList<>();
-		List<Food> foodListB1 = new ArrayList<>();
-		List<Food> foodListB2 = new ArrayList<>();
-		List<Food> foodListB3 = new ArrayList<>();
-		List<Food> foodListB4 = new ArrayList<>();
-		List<Food> foodListB5 = new ArrayList<>();
-		List<Food> foodListB6 = new ArrayList<>();
-		List<Food> foodListB7 = new ArrayList<>();
-		List<Food> foodListB8 = new ArrayList<>();
-		List<Food> foodListB9 = new ArrayList<>();
-		List<Food> foodListB10 = new ArrayList<>();
-		List<Food> foodListB11 = new ArrayList<>();
+		Set<Stall> stallList2 = new HashSet<>();
+		Set<Food> foodListB1 = new HashSet<>();
+		Set<Food> foodListB2 = new HashSet<>();
+		Set<Food> foodListB3 = new HashSet<>();
+		Set<Food> foodListB4 = new HashSet<>();
+		Set<Food> foodListB5 = new HashSet<>();
+		Set<Food> foodListB6 = new HashSet<>();
+		Set<Food> foodListB7 = new HashSet<>();
+		Set<Food> foodListB8 = new HashSet<>();
+		Set<Food> foodListB9 = new HashSet<>();
+		Set<Food> foodListB10 = new HashSet<>();
+		Set<Food> foodListB11 = new HashSet<>();
 
 		Stall stall1 = new Stall("Sliced Fish Bee Hoon Stall", "123", "Fish Slice Bee Hoon",
 				91379160, null, new Date(), null);
@@ -211,7 +211,7 @@ public class Test {
 		Food kuehfood5 = new Food("Lor Mai Kai", "damn nice", 1.50, kuehStall, new Date());
 		Food kuehfood6 = new Food("Fan Choy", "damn nice", 1.80, kuehStall, new Date());
 		// add food to list to the stall
-		List<Food> foodList1 = new ArrayList<Food>();
+		Set<Food> foodList1 = new HashSet<Food>();
 
 		foodList1.add(kuehfood1);
 		foodList1.add(kuehfood2);
@@ -225,7 +225,7 @@ public class Test {
 				new Date(), null);
 		Food mfood1 = new Food("mixed veg rice", "ask for more vegs, less fried meat", 3.70,
 				malayStall, new Date());
-		List<Food> foodList2 = new ArrayList<Food>();
+		Set<Food> foodList2 = new HashSet<Food>();
 		foodList2.add(mfood1);
 
 		malayStall.setFoodList(foodList2);
@@ -238,7 +238,7 @@ public class Test {
 		Food infood4 = new Food("fish Briyani", "daman nice", 5.00, indianStall, new Date());
 		Food infood5 = new Food("mutton Briyani", "daman nice", 5.00, indianStall, new Date());
 
-		List<Food> foodList3 = new ArrayList<Food>();
+		Set<Food> foodList3 = new HashSet<Food>();
 		foodList3.add(infood1);
 		foodList3.add(infood2);
 		foodList3.add(infood3);
@@ -251,7 +251,7 @@ public class Test {
 		Food mixVegRice1 = new Food("mix veg rice", "ask for more meat, less fried meat, $3.50",
 				3.00, chineseMixVegStall, new Date());
 
-		List<Food> foodList4 = new ArrayList<Food>();
+		Set<Food> foodList4 = new HashSet<Food>();
 		foodList4.add(mixVegRice1);
 		chineseMixVegStall.setFoodList(foodList4);
 
@@ -260,7 +260,7 @@ public class Test {
 		Food roastfood1 = new Food("roast chicken rice", "2 meat choices: $4", 3.00,
 				roastMeatStall, new Date());
 		Food roastfood2 = new Food("wanton mee", "daman nice", 3.20, roastMeatStall, new Date());
-		List<Food> foodList5 = new ArrayList<Food>();
+		Set<Food> foodList5 = new HashSet<Food>();
 		foodList5.add(roastfood1);
 		foodList5.add(roastfood2);
 
@@ -274,7 +274,7 @@ public class Test {
 		Food seafood4 = new Food("daily soup with rice and egg", "damn nice", 4.80,
 				seafoodTzeCharStall, new Date());
 
-		List<Food> foodList6 = new ArrayList<Food>();
+		Set<Food> foodList6 = new HashSet<Food>();
 		foodList6.add(seafood1);
 		foodList6.add(seafood2);
 		foodList6.add(seafood3);
@@ -291,7 +291,7 @@ public class Test {
 		Food fishBeehoonfood3 = new Food("fried fish", "add bittergourd: $0.50", 5.00,
 				fishBeehoonStall, new Date());
 
-		List<Food> foodList7 = new ArrayList<Food>();
+		Set<Food> foodList7 = new HashSet<Food>();
 		foodList7.add(fishBeehoonfood1);
 		foodList7.add(fishBeehoonfood2);
 		foodList7.add(fishBeehoonfood3);
@@ -317,7 +317,7 @@ public class Test {
 		Food largeMixedFruits = new Food("largeMixedFruits", "damn nice", 3.50, fruitStall,
 				new Date());
 
-		List<Food> foodList8 = new ArrayList<Food>();
+		Set<Food> foodList8 = new HashSet<Food>();
 		foodList8.add(apple);
 		foodList8.add(watermelon);
 		foodList8.add(dragonfruit);
@@ -335,7 +335,7 @@ public class Test {
 		fruitStall.setFoodList(foodList8);
 
 		// Stall List
-		List<Stall> newStallList = new ArrayList<Stall>();
+		Set<Stall> newStallList = new HashSet<Stall>();
 		newStallList.add(kuehStall);
 		newStallList.add(malayStall);
 		newStallList.add(indianStall);
@@ -355,22 +355,22 @@ public class Test {
 		FoodOrder order = new FoodOrder("done", employee, admin, null, new Date());
 		FoodOrderItem foodItem = new FoodOrderItem(order, food, 2, 2.5, "remarks", new Date());
 
-		List<Canteen> canteenList = new ArrayList<>();
+		Set<Canteen> canteenList = new HashSet<>();
 		canteenList.add(canteen);
 		company.setCanteenList(canteenList);
-		List<FoodOrder> orderList = new ArrayList<>();
+		Set<FoodOrder> orderList = new HashSet<>();
 		orderList.add(order);
 		employee.setOrderHistory(orderList);
-		List<FoodOrderItem> foodOrderList = new ArrayList<>();
+		Set<FoodOrderItem> foodOrderList = new HashSet<>();
 		foodOrderList.add(foodItem);
 		order.setFoodOrderList(foodOrderList);
-		List<Employee> employeeList = new ArrayList<>();
+		Set<Employee> employeeList = new HashSet<>();
 		employeeList.add(employee);
 		company.setEmployeeList(employeeList);
-		List<Food> foodList = new ArrayList<>();
+		Set<Food> foodList = new HashSet<>();
 		employee.setFavouriteList(foodList);
 		foodList.add(food);
-		List<Stall> stallList = new ArrayList<>();
+		Set<Stall> stallList = new HashSet<>();
 		stallList.add(stall);
 		stall.setFoodList(foodList);
 		canteen.setStallList(stallList);
