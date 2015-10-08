@@ -2,9 +2,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -34,7 +33,7 @@ public class FoodOrderItem {
 	private String remarks;
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
-	private Set<Modifier> modifierSet;
+	private List<Modifier> modifierList;
 
 	public FoodOrderItem() {
 	}
@@ -47,7 +46,7 @@ public class FoodOrderItem {
 		this.price = price;
 		this.remarks = remarks;
 		this.createDate = createDate;
-		modifierSet = new HashSet<>();
+		modifierList = new ArrayList<>();
 	}
 
 	public int getFoodOrderItemId() {
@@ -84,8 +83,8 @@ public class FoodOrderItem {
 
 	public double getPrice() {
 		double price = food.getPrice();
-		if (!modifierSet.isEmpty()) {
-			Iterator iter = modifierSet.iterator();
+		if (!modifierList.isEmpty()) {
+			Iterator iter = modifierList.iterator();
 			while (iter.hasNext()) {
 				Modifier tempMod = (Modifier) iter.next();
 				price += tempMod.getPrice();
@@ -114,18 +113,18 @@ public class FoodOrderItem {
 		this.createDate = createDate;
 	}
 
-	public Set<Modifier> getModifierSet() {
-		return modifierSet;
+	public List<Modifier> getModifierList() {
+		return modifierList;
 	}
 
-	public void setCreateDate(HashSet<Modifier> modifierSet) {
-		this.modifierSet = modifierSet;
+	public void setModifierList(ArrayList<Modifier> modifierList) {
+		this.modifierList = modifierList;
 	}
 
 	public boolean equals(FoodOrderItem otherFoodItem) {
 		if (this.food.equals(otherFoodItem.getFood())) {
-			ArrayList<Modifier> modifierListOrigin = new ArrayList<Modifier>(modifierSet);
-			ArrayList<Modifier> modifierListExternal = new ArrayList<Modifier>(otherFoodItem.getModifierSet());
+			ArrayList<Modifier> modifierListOrigin = new ArrayList<Modifier>(modifierList);
+			ArrayList<Modifier> modifierListExternal = new ArrayList<Modifier>(otherFoodItem.getModifierList());
 			int trueCount = 0;
 			for (Modifier m : modifierListOrigin) {
 				for (Modifier e : modifierListOrigin) {

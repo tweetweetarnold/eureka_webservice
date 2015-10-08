@@ -1,8 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,7 +30,7 @@ public class Food {
 	// private image byte[];
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
-	private Set<Modifier> modifierSet;
+	private List<Modifier> modifierList;
 
 	public Food() {
 	}
@@ -42,7 +42,7 @@ public class Food {
 		this.price = price;
 		this.stall = stall;
 		this.createDate = createDate;
-		modifierSet = new HashSet<>();
+		this.modifierList = new ArrayList<>();
 	}
 
 	public int getFoodId() {
@@ -93,25 +93,25 @@ public class Food {
 		this.createDate = createDate;
 	}
 
-	public Set<Modifier> getModifierSet() {
-		return modifierSet;
+	public List<Modifier> getModifierList() {
+		return modifierList;
 	}
 
-	public void setCreateDate(HashSet<Modifier> modifierSet) {
-		this.modifierSet = modifierSet;
+	public void setModifierList(List<Modifier> modifierList) {
+		this.modifierList = modifierList;
 	}
 
 	// check if canteen, stall and food name are the same and returns true if
 	// they are all the same
 	public boolean equals(Food otherFood) {
 		if (this.stall.getCanteen().getName().equals(otherFood.getStall().getCanteen().getName())) {
-			if(this.stall.getName().equals(otherFood.getStall().getName())){
-				if(this.name.equals(otherFood.getName())){
+			if (this.stall.getName().equals(otherFood.getStall().getName())) {
+				if (this.name.equals(otherFood.getName())) {
 					return true;
-				}else{
+				} else {
 					return false;
 				}
-			}else{
+			} else {
 				return false;
 			}
 		} else {
