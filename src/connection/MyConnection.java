@@ -21,8 +21,8 @@ public class MyConnection {
 	public MyConnection() {
 	}
 
-	static {
-		System.out.println("MyConnection is called");
+	public static void startSession() {
+		System.out.println("MyConnection startSession is called");
 
 		try {
 			if (sessionFactory == null) {
@@ -49,53 +49,15 @@ public class MyConnection {
 				System.out.println("SessionFactory is set.");
 				session = sessionFactory.openSession();
 				System.out.println("Session is set.");
-				// session.beginTransaction();
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
 	}
 
-	// public static Session startSession() {
-	// System.out.println("MyConnection: startSession");
-	//
-	// try {
-	// boolean onOpenshift = false;
-	// // if application is on OpenShift, sets onOpenshift to true
-	// if (System.getenv("OPENSHIFT_MYSQL_DB_HOST") != null) {
-	// onOpenshift = true;
-	// }
-	//
-	// // if application is on OpenShift
-	// if (onOpenshift) {
-	// if (sessionFactory == null) {
-	// sessionFactory = new Configuration().configure("hibernate.cfg.xml")
-	// .buildSessionFactory();
-	// System.out.println("SessionFactory is set.");
-	// }
-	// session = sessionFactory.openSession();
-	// System.out.println("Session is set.");
-	// session.beginTransaction();
-	// } else {
-	// // if application on localhost
-	// if (sessionFactory == null) {
-	// sessionFactory = new Configuration().configure("hibernate-local.cfg.xml")
-	// .buildSessionFactory();
-	// System.out.println("SessionFactory is set.");
-	// }
-	// session = sessionFactory.openSession();
-	// System.out.println("Session is set.");
-	// session.beginTransaction();
-	// }
-	//
-	// } catch (HibernateException e) {
-	// e.printStackTrace();
-	// }
-	// return session;
-	// }
-
 	public static void delete(Object o) {
 		System.out.println("MyConnection: delete");
+		startSession();
 		session.beginTransaction();
 		session.delete(o);
 		session.getTransaction().commit();
@@ -104,6 +66,7 @@ public class MyConnection {
 
 	public static void update(Object o) {
 		System.out.println("MyConnection: update");
+		startSession();
 		session.beginTransaction();
 		// Session session = startSession();
 		session.update(o);
@@ -113,6 +76,7 @@ public class MyConnection {
 
 	public static Object get(Class objClass, int id) {
 		System.out.println("MyConnection: get");
+		startSession();
 		session.beginTransaction();
 		// Session session = startSession();
 		Object o = session.get(objClass, id);
@@ -122,6 +86,7 @@ public class MyConnection {
 
 	public static void save(Object o) {
 		System.out.println("MyConnection: save");
+		startSession();
 		session.beginTransaction();
 		// Session session = startSession();
 		session.save(o);
@@ -132,6 +97,7 @@ public class MyConnection {
 	// for retrieve all
 	public static List<Object> retrieveAllRecords(DetachedCriteria dc) {
 		System.out.println("MyConnection: retrieveAllRecords");
+		startSession();
 		List<Object> list = null;
 		session.beginTransaction();
 		// Session session = startSession();
@@ -145,6 +111,7 @@ public class MyConnection {
 	// same as retrieveAll but with limit
 	public static List<Object> retrieveAllRecordsWithLimit(DetachedCriteria dc, int max) {
 		System.out.println("MyConnection: retrieveAllRecordsWithLimit");
+		startSession();
 		session.beginTransaction();
 		// Session session = startSession();
 		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max);
@@ -155,7 +122,7 @@ public class MyConnection {
 	}
 
 	public static List<Object> get(String sql) {
-		// Session session = startSession();
+		startSession();
 		session.beginTransaction();
 		// Criteria criteria = dc.getExecutableCriteria(session);
 		Query query = session.createSQLQuery(sql).addEntity(FoodOrder.class);
@@ -166,7 +133,7 @@ public class MyConnection {
 	}
 
 	public static List<Object> getEmployee(String sql) {
-		// Session session = startSession();
+		startSession();
 		session.beginTransaction();
 		// Criteria criteria = dc.getExecutableCriteria(session);
 		Query query = session.createSQLQuery(sql).addEntity(Employee.class);
@@ -177,7 +144,7 @@ public class MyConnection {
 	}
 
 	public static List<Object> getAdmin(String sql) {
-		// Session session = startSession();
+		startSession();
 		session.beginTransaction();
 		// Criteria criteria = dc.getExecutableCriteria(session);
 		Query query = session.createSQLQuery(sql).addEntity(Admin.class);
