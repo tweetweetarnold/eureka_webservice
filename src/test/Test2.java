@@ -39,7 +39,7 @@ public class Test2 {
 		Stall stall1 = new Stall("Sliced Fish Bee Hoon Stall", "123", "Fish Slice Bee Hoon",
 				91379160, null, new Date(), null);
 		Food food1 = new Food("Fish Slice Bee Hoon", "", 3.70, stall1, new Date());
-		Food food2 = new Food("Fish Soup and Rice", "", 4.70, stall1, new Date());
+		Food food2 = new Food("Fish Soup and Rice", "", 4.70, stall1, new Date());		
 		foodListB1.add(food1);
 		foodListB1.add(food2);
 		stall1.setFoodList(foodListB1);
@@ -49,6 +49,7 @@ public class Test2 {
 		Food food3 = new Food("Malay Chicken Set", "", 3.00, stall2, new Date());
 		Food food4 = new Food("Malay Fish Set", "", 3.00, stall2, new Date());
 		Food food5 = new Food("Malay Mutton Set", "", 3.00, stall2, new Date());
+		
 		foodListB2.add(food3);
 		foodListB2.add(food4);
 		foodListB2.add(food5);

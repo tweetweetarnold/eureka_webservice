@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -87,13 +88,7 @@ public class FoodOrderController {
 					stallToFoodItemLinkedHash.put(stallName, tempFoodOrderItemToCombi);
 				}
 
-				if (!stallToUserLinkedHash.containsKey(stallName)) {
-					stallToUserLinkedHash.put(stallName, tempUserList);
-				} else {
-					ArrayList<String> tempUserToCombi = stallToUserLinkedHash.get(stallName);
-					tempUserToCombi.addAll(tempUserList);
-					stallToUserLinkedHash.put(stallName, tempUserToCombi);
-				}
+				
 			}
 
 		}
@@ -101,11 +96,28 @@ public class FoodOrderController {
 		Iterator iter = stallToFoodItemLinkedHash.keySet().iterator();
 		int count = 1;
 		while (iter.hasNext()) {
+			HashMap<FoodOrderItem , ArrayList<String>> usernamesForFoodItem = new HashMap<FoodOrderItem, ArrayList<String>>();
 			String stallName = (String) iter.next();
+			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash.get(stallName);
+			for(FoodOrderItem i :tempFoodOrderItemForDisplay){
+				ArrayList<String> usernames = new ArrayList<String>();
+				FoodOrder tempFoodOrderToDisplay = i.getFoodOrder();
+				String username = tempFoodOrderToDisplay.getEmployee().getUsername();
+				usernames.add(username);
+				if(!usernamesForFoodItem.containsKey(i)){
+					usernamesForFoodItem.put(i, usernames);
+				}else{
+					ArrayList<String> newUsernamesInput = usernamesForFoodItem.get(i);
+					newUsernamesInput.addAll(usernames);
+					usernamesForFoodItem.put(i, newUsernamesInput);
+				}
+				
+			}
+			
 			FoodDisplayObject tempFoodDisplay = new FoodDisplayObject(count++);
 			tempFoodDisplay.setStallName(stallName);
-			tempFoodDisplay.setFoodOrderItem(stallToFoodItemLinkedHash.get(stallName));
-			tempFoodDisplay.setUsername(stallToUserLinkedHash.get(stallName));
+			tempFoodDisplay.setFoodOrderItem(tempFoodOrderItemForDisplay);
+			tempFoodDisplay.setUsername(usernamesForFoodItem);
 			tempFoodDisplay.setQuantity();
 			foodDisplayList.add(tempFoodDisplay);
 		}
