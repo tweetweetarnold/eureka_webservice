@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "food")
 public class Food {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +29,7 @@ public class Food {
 	public Food() {
 	}
 
-	public Food(String name, String description, double price, Stall stall,
-			Date createDate) {
+	public Food(String name, String description, double price, Stall stall, Date createDate) {
 		super();
 		this.name = name;
 		this.description = description;

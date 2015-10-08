@@ -9,11 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "canteen")
 public class Canteen {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +32,7 @@ public class Canteen {
 		this.stallList = null;
 	}
 
-	public Canteen(String name, String address, Date createDate,
-			Set<Stall> stallList) {
+	public Canteen(String name, String address, Date createDate, Set<Stall> stallList) {
 		super();
 		this.name = name;
 		this.address = address;

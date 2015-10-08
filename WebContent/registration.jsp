@@ -20,7 +20,7 @@
 
 	<div class="container">
 
-		<form class="form-signin" method="post" action="/eureka_webservice/RegistrationServlet">
+		<form class="form-signin" method="post" action="RegistrationServlet">
 			<h2 class="form-signin-heading">Please insert fields</h2>
 
 			<%

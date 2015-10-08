@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "admin")
 public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,12 +17,11 @@ public class Admin {
 	private String username, password, name;
 	private long contactNo;
 	private Date createDate;
-	
+
 	public Admin() {
 	}
 
-	public Admin(String username, String password, String name,
-			long contactNo, Date createDate) {
+	public Admin(String username, String password, String name, long contactNo, Date createDate) {
 		super();
 		this.username = username;
 		this.password = password;

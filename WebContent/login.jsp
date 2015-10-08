@@ -30,7 +30,7 @@
 <body>
 	<div class="container">
 
-		<form class="form-signin" method="post" action="/eureka_webservice/LoginServlet">
+		<form class="form-signin" method="post" action="LoginServlet">
 			<%
 				String username = "";
 				String password = "";
