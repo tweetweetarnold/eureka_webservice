@@ -20,7 +20,7 @@
 
 	<div class="container">
 
-		<form class="form-signin" method="post" action="RegistrationServlet">
+		<form class="form-signin" method="post" action="ProcessRegistrationServlet">
 			<h2 class="form-signin-heading">Please insert fields</h2>
 
 			<%
