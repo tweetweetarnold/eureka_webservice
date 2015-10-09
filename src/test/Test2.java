@@ -353,7 +353,7 @@ public class Test2 {
 		Employee employee = new Employee("arnold123", "123", "arnold", 123, 10, 123, company, null,
 				null, new Date());
 		FoodOrder order = new FoodOrder("done", employee, admin, null, new Date());
-		FoodOrderItem foodItem = new FoodOrderItem(order, food, 2, 2.5, "remarks", new Date());
+		FoodOrderItem foodItem = new FoodOrderItem(order, food, 2, "remarks", new Date());
 
 		Set<Canteen> canteenList = new HashSet<>();
 		canteenList.add(canteen);

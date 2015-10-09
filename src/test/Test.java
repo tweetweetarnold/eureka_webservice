@@ -33,7 +33,7 @@ public class Test {
 		Employee employee = new Employee("arnold", PasswordService.encryptPassword("1234567"),
 				"arnold", 999999999, 10, 123, company, null, null, new Date());
 		FoodOrder order = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, admin, null, new Date());
-		FoodOrderItem foodItem = new FoodOrderItem(order, food, 1, 2.5, "More meat", new Date());
+		FoodOrderItem foodItem = new FoodOrderItem(order, food, 1, "More meat", new Date());
 
 		Set<Canteen> canteenList = new HashSet<>();
 		canteenList.add(canteen);

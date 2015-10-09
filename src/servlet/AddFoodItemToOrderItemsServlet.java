@@ -83,8 +83,7 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 			}
 
 			// Create new FoodOrderItem
-			FoodOrderItem foodItem = new FoodOrderItem(null, food, 1, food.getPrice(), "",
-					new Date());
+			FoodOrderItem foodItem = new FoodOrderItem(null, food, 1, "", new Date());
 			System.out.println("new FoodOrderItem created");
 
 			// Add new FoodOrderItem to myFoodOrders

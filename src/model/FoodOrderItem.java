@@ -39,13 +39,12 @@ public class FoodOrderItem {
 	public FoodOrderItem() {
 	}
 
-	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, double price,
-			String remarks, Date createDate) {
+	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, String remarks,
+			Date createDate) {
 		super();
 		this.foodOrder = foodOrder;
 		this.food = food;
 		this.quantity = quantity;
-		this.price = price;
 		this.remarks = remarks;
 		this.createDate = createDate;
 		modifierList = new HashSet<>();
@@ -86,17 +85,13 @@ public class FoodOrderItem {
 	public double getPrice() {
 		double price = food.getPrice();
 		if (!modifierList.isEmpty()) {
-			Iterator iter = modifierList.iterator();
+			Iterator<Modifier> iter = modifierList.iterator();
 			while (iter.hasNext()) {
 				Modifier tempMod = (Modifier) iter.next();
 				price += tempMod.getPrice();
 			}
 		}
 		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
 	}
 
 	public String getRemarks() {
