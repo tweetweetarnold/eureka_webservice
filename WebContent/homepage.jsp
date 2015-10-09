@@ -1,15 +1,12 @@
 
 <!DOCTYPE html>
 <!-- Java imports -->
-<%@page import="java.util.List"%>
+<%@page import="java.util.*"%>
 <%@page import="org.json.simple.JSONArray"%>
-<%@page import="model.Canteen"%>
+<%@page import="model.*"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.text.DecimalFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="model.Food"%>
-<%@page import="java.util.ArrayList"%>
 <html lang="en">
 
 <head>
@@ -84,19 +81,19 @@
 					</div>
 				</div>
 				<%
-	// 				JSONObject allFood = (JSONObject) session.getAttribute("allFood");
-		// 				ArrayList<Food> list = (ArrayList<Food>) allFood.get("allFood");
-				List<Food> list = (ArrayList<Food>) session.getAttribute("allFood");
-				if(list != null){
+					// 				JSONObject allFood = (JSONObject) session.getAttribute("allFood");
+						// 				ArrayList<Food> list = (ArrayList<Food>) allFood.get("allFood");
+						List<Food> list = (ArrayList<Food>) session.getAttribute("allFood");
+						if(list != null){
 				%>
 
 				<!-- Individual Food Item -->
 				<div class="row">
 
 					<%
-// 						for(int i = 0; i < list.size(); i++){
-						for(int i = 0; i < 10; i++){
-							Food f = (Food) list.get(i);
+						// 						for(int i = 0; i < list.size(); i++){
+									for(int i = 0; i < 10; i++){
+										Food f = (Food) list.get(i);
 					%>
 					<div class="col-sm-4 col-lg-4 col-md-4">
 						<div class="thumbnail">
@@ -116,21 +113,19 @@
 
 							</div>
 							<div class="pull-right" style="margin-right: 5px;">
-								<form action="/eureka_webservice/AddFoodItemToSessionServlet">
+								<form action="AddFoodItemToSessionServlet">
 									<input type="hidden" value="<%=i%>" id="foodId" name="foodId">
 									<button type="submit" class="btn btn-danger">Add to Cart</button>
 								</form>
 							</div>
 							<br>
 							<br>
-
-
 						</div>
 					</div>
 
 					<%
 						}
-								}
+											}
 					%>
 
 

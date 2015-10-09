@@ -6,7 +6,7 @@
 			<p>Copyright &copy; Eureka 2015</p>
 		</div>
 		<div class="col-lg-12">
-			<p>Version 1.0</p>
+			<p>Version 1.1</p>
 		</div>
 	</div>
 </footer>

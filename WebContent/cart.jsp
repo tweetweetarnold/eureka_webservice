@@ -23,7 +23,7 @@
 
 		<h1>Your Orders</h1>
 		<%
-			FoodOrder foodOrder = (FoodOrder) session.getAttribute("foodOrder");
+			ArrayList<FoodOrderItem> myFoodOrderItems = (ArrayList<FoodOrderItem>) session.getAttribute("myFoodOrderItems");
 		%>
 
 		<table class="table table-striped">
@@ -37,11 +37,9 @@
 			</thead>
 			<tbody>
 				<%
-					if(foodOrder != null){
-						Set<FoodOrderItem> list = foodOrder.getFoodOrderList();	
-						System.out.println("foodList: " + list.size());
-						if(list != null){
-							for(FoodOrderItem item : list){
+					if(myFoodOrderItems != null){
+						System.out.println("myFoodOrderItems: " + myFoodOrderItems.size());
+						for(FoodOrderItem item : myFoodOrderItems){
 				%>
 				<tr>
 					<td>1</td>
@@ -52,8 +50,7 @@
 
 				<%
 					}
-							}
-							}
+					}
 				%>
 			</tbody>
 		</table>
