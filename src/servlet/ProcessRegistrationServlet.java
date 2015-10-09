@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,11 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.json.simple.JSONObject;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import controller.RegistrationController;
 
@@ -52,18 +48,18 @@ public class ProcessRegistrationServlet extends HttpServlet {
 		process(request, response);
 	}
 
-	@SuppressWarnings("unchecked")
 	public void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("application/json");
-		JSONObject returnObj = new JSONObject();
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		System.out.println("RegistrationServlet");
 
-//		try {
+		HttpSession session = request.getSession();
+		HashMap<String, String> userInput = new HashMap<>();
+
+		try {
 			RegistrationController registrationController = new RegistrationController();
-			JSONObject jsonMessage = new JSONObject();
 
 			String employeeName = (String) request.getParameter("name");
 			String username = (String) request.getParameter("username");
@@ -73,13 +69,11 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			String bankAcc = (String) request.getParameter("bankAcc");
 			String companyName = (String) request.getParameter("company");
 
-			jsonMessage.put("name", employeeName);
-			jsonMessage.put("username", username);
-			jsonMessage.put("contactNo", contactNo);
-			jsonMessage.put("bankAcc", bankAcc);
-			jsonMessage.put("company", companyName);
-
-			returnObj.put("message", jsonMessage);
+			userInput.put("name", employeeName);
+			userInput.put("username", username);
+			userInput.put("contactNo", contactNo);
+			userInput.put("bankAcc", bankAcc);
+			userInput.put("company", companyName);
 
 			// Check user parameters
 			boolean validation = !(employeeName.isEmpty() && username.isEmpty()
@@ -94,34 +88,24 @@ public class ProcessRegistrationServlet extends HttpServlet {
 				String generatedEmployeeId = registrationController.registerUser(username,
 						password, employeeName, creditCardNumber, contactNumber, companyName);
 
-				returnObj.put("success", "User created successfully. UserID: "
+				session.setAttribute("success", "User created successfully. UserID: "
 						+ generatedEmployeeId);
-				returnObj.put("status", "ok");
-				HttpSession session = request.getSession();
-				session.setAttribute("success", returnObj);
 
 				response.sendRedirect("registration.jsp");
 
 			} else {
-
 				System.out.println("RegistrationServlet: Validation failed.");
-//				throw new Exception(
-//						"Please ensure that you have inserted valid characters into the fields.");
+				throw new Exception();
 			}
 
-//		} catch (Exception e) {
-//			System.out.println("Exception@RegistrationServlet: " + e.getMessage());
-//			e.printStackTrace();
-//			returnObj.put("error", e.getMessage());
-//			returnObj.put("status", "fail");
-//			HttpSession session = request.getSession();
-//			session.setAttribute("error", returnObj);
-//
-//			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//			out.println(gson.toJson(returnObj));
-//			out.println(e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Exception@RegistrationServlet: " + e.getMessage());
+			e.printStackTrace();
 
-			// response.sendRedirect("/registration.jsp");
-//		}
+			session.setAttribute("userInput", userInput);
+			session.setAttribute("error", "Oops! Something went wrong! Please check your inputs.");
+
+			response.sendRedirect("/registration.jsp");
+		}
 	}
 }

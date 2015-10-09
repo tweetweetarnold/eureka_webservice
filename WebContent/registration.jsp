@@ -1,3 +1,4 @@
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,16 +31,13 @@
 				String bankAcc = "";
 				String company = "";
 
-				JSONObject obj = null;
-				obj = (JSONObject) session.getAttribute("error");
-				if (obj != null) {
-					JSONObject msg = (JSONObject) obj.get("message");
-
-					username = (String) msg.get("username");
-					name = (String) msg.get("name");
-					contactNo = (String) msg.get("contactNo");
-					bankAcc = (String) msg.get("bankAcc");
-					company = (String) msg.get("company");
+				if(session.getAttribute("userInput") != null){
+					HashMap<String,String> map = (HashMap<String,String>) session.getAttribute("userInput");
+					username = map.get("username");
+					name =  map.get("name");
+					contactNo = map.get("contactNo");
+					bankAcc = map.get("bankAcc");
+					company = map.get("company");
 				}
 			%>
 
@@ -63,33 +61,31 @@
 
 			<!-- Error message handling -->
 			<%
-				if (obj != null) {
+				if (session.getAttribute("error") != null) {
 			%>
 			<div class="alert alert-danger" role="alert">
 				<b>Error!</b>
 				<br>
-				<%=obj.get("error")%>
+				<%=session.getAttribute("error")%>
 			</div>
 			<%
 				session.removeAttribute("error");
-				}
+					}
 			%>
-			
-			
+
+
 			<!-- Success message handling -->
 			<%
-			JSONObject objSuccess = null;
-			objSuccess = (JSONObject) session.getAttribute("success");
-				if (objSuccess != null) {
+				if (request.getAttribute("success") != null) {
 			%>
-			<div class="alert alert-danger" role="alert">
+			<div class="alert alert-success" role="alert">
 				<b>Success!</b>
 				<br>
-				<%=objSuccess.get("success")%>
+				<%=request.getAttribute("success")%>
 			</div>
 			<%
 				session.removeAttribute("sucess");
-				}
+					}
 			%>
 		</form>
 
