@@ -132,7 +132,7 @@ public class MyConnection {
 	
 	
 	public static List<Object> get(String sql, String past, String present) {
-		startSession();
+		Session session = getSession();
 		session.beginTransaction();
 		// Criteria criteria = dc.getExecutableCriteria(session);
 		Query query = session.createSQLQuery(sql).addEntity(FoodOrder.class);
