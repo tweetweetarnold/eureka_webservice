@@ -76,12 +76,12 @@
 
 			<!-- Success message handling -->
 			<%
-				if (request.getAttribute("success") != null) {
+			if (session.getAttribute("success") != null) {
 			%>
 			<div class="alert alert-success" role="alert">
 				<b>Success!</b>
 				<br>
-				<%=request.getAttribute("success")%>
+				<%=session.getAttribute("success")%>
 			</div>
 			<%
 				session.removeAttribute("sucess");

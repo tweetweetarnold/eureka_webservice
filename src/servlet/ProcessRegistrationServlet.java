@@ -105,7 +105,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			session.setAttribute("userInput", userInput);
 			session.setAttribute("error", "Oops! Something went wrong! Please check your inputs.");
 
-			response.sendRedirect("/registration.jsp");
+			response.sendRedirect("registration.jsp");
 		}
 	}
 }
