@@ -131,6 +131,21 @@ public class MyConnection {
 		// closeAll();
 		return list;
 	}
+	
+	
+	public static List<Object> get(String sql, String past, String present) {
+		startSession();
+		session.beginTransaction();
+		// Criteria criteria = dc.getExecutableCriteria(session);
+		Query query = session.createSQLQuery(sql).addEntity(FoodOrder.class);
+		query.setParameter("date1", past);
+		query.setParameter("date2", present);
+		List<Object> list = (List<Object>) query.list();
+		session.getTransaction().commit();
+		// closeAll();
+		return list;
+	}
+	
 
 	public static List<Object> getEmployee(String sql) {
 		startSession();

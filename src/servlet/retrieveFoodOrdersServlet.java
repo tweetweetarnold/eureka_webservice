@@ -1,12 +1,17 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import controller.FoodOrderController;
+import model.FoodDisplayObject;
 
 
 /**
@@ -41,12 +46,12 @@ public class retrieveFoodOrdersServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		FoodOrderController foodOrderController = new FoodOrderController();
-//		ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>(foodOrderController.getFoodOrderforCutOff());
-//		
-//		RequestDispatcher rd = request.getRequestDispatcher("retrieveFoodOrders.jsp");
-//		request.setAttribute("foodOrders", foodOrderList);
-//		rd.forward(request,response);
+		FoodOrderController foodOrderController = new FoodOrderController();
+		ArrayList<FoodDisplayObject> foodOrderList = new ArrayList<FoodDisplayObject>(foodOrderController.getFoodOrderforCutOff());
+		
+		RequestDispatcher rd = request.getRequestDispatcher("retrieveFoodOrders.jsp");
+		request.setAttribute("foodOrders", foodOrderList);
+		rd.forward(request,response);
 		
 	}
 
