@@ -2,7 +2,6 @@ package model;
 
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -99,7 +98,7 @@ public class FoodOrder {
 	public double getFoodOrderTotalPrice() {
 		double result = 0.0;
 		Set<FoodOrderItem> foodOrderList = getFoodOrderList();
-		Iterator iter = foodOrderList.iterator();
+		Iterator<FoodOrderItem> iter = foodOrderList.iterator();
 		while (iter.hasNext()) {
 			FoodOrderItem tempItem = (FoodOrderItem) iter.next();
 			result += (tempItem.getQuantity() * tempItem.getPrice());

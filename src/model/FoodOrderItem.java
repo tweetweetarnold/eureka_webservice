@@ -30,7 +30,6 @@ public class FoodOrderItem {
 	@JoinColumn(name = "foodId")
 	private Food food;
 	private int quantity;
-	private double price;
 	private String remarks;
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
