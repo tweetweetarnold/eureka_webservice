@@ -1,4 +1,4 @@
-<%@ tabglib prefix="c" uri="http//java.sun.com/jsp/jstl/core"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
@@ -20,13 +20,12 @@
 	</form>
 	<%
 		if (request.getAttribute("foodOrders") != null) {
-			ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
-					.getAttribute("foodOrders");
+			ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request.getAttribute("foodOrders");
 	%>
 
 
 
-	<table>
+	<table border="1">
 		<tr>
 			<th>Serial Number</th>
 			<th>Stall</th>

@@ -20,10 +20,10 @@ public class FoodOrderDAO {
 	// Retrive FoodOrders from the DB between two datetimes with format
 	// "yyyy-MM-dd hh:mm:ss"
 	public static List<FoodOrder> getFoodOrderByDateAndTime(String past, String present) {
-		String sqlQuery = "SELECT * FROM  foodorder where createDate>=\"" + past + "\" and createDate<=\"" + present
-				+ "\"";
+		String sqlQuery = "SELECT * FROM  foodorder where createDate>= + :date1 and createDate<=:date2";
+		
 		List<FoodOrder> returnList = new ArrayList<>();
-		List<Object> lister = MyConnection.get(sqlQuery);
+		List<Object> lister = MyConnection.get(sqlQuery, past, present);
 		if (lister.size() != 0) {
 			for (Object o : lister) {
 				returnList.add((FoodOrder) o);
