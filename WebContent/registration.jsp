@@ -26,19 +26,19 @@
 
 			<%
 				String username = "";
-				String name = "";
-				String contactNo = "";
-				String bankAcc = "";
-				String company = "";
+							String name = "";
+							String contactNo = "";
+							String bankAcc = "";
+							String company = "";
 
-				if(session.getAttribute("userInput") != null){
-					HashMap<String,String> map = (HashMap<String,String>) session.getAttribute("userInput");
-					username = map.get("username");
-					name =  map.get("name");
-					contactNo = map.get("contactNo");
-					bankAcc = map.get("bankAcc");
-					company = map.get("company");
-				}
+							if(session.getAttribute("userInput") != null){
+								HashMap<String,String> map = (HashMap<String,String>) session.getAttribute("userInput");
+								username = map.get("username");
+								name =  map.get("name");
+								contactNo = map.get("contactNo");
+								bankAcc = map.get("bankAcc");
+								company = map.get("company");
+							}
 			%>
 
 			<!-- User input -->
@@ -76,7 +76,7 @@
 
 			<!-- Success message handling -->
 			<%
-			if (session.getAttribute("success") != null) {
+				if (session.getAttribute("success") != null) {
 			%>
 			<div class="alert alert-success" role="alert">
 				<b>Success!</b>
@@ -84,7 +84,7 @@
 				<%=session.getAttribute("success")%>
 			</div>
 			<%
-				session.removeAttribute("sucess");
+				session.removeAttribute("success");
 					}
 			%>
 		</form>

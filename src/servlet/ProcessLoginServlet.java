@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,11 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Admin;
 import model.Employee;
 import model.Food;
-
-import org.json.simple.JSONObject;
-
 import services.PasswordService;
 import controller.CanteenController;
 import controller.LoginController;
@@ -56,104 +53,76 @@ public class ProcessLoginServlet extends HttpServlet {
 		process(request, response);
 	}
 
-	@SuppressWarnings("unchecked")
 	public void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		JSONObject returnJson = new JSONObject();
-		JSONObject jsonMessage = new JSONObject();
-
-		// try {
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		// PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
 
 		// Getting User Input Parameters
 		String username = (String) request.getParameter("username");
 		String inputPwd = (String) request.getParameter("password");
 
-		jsonMessage.put("username", username);
+		try {
+			LoginController loginController = new LoginController();
 
-		// User Input Validation
-		boolean isValid = (username != null && inputPwd != null && !username.equals("") && !inputPwd
-				.equals(""));
-		LoginController loginController = new LoginController();
-		System.out.println("Logincontroller retrieved");
-		
-		if (isValid) {
-			// if (!username.equals("admin")) {
-			Employee emp = loginController.authenticateUser(username,
-					PasswordService.encryptPassword(inputPwd));
-			System.out.println("Employee retrieved" + emp.getName());
-			
-			// *** For Development only ***
-			// creates a tokenID using UUID (Universalised Unique
-			// Identifier
-			// Object)
-			// the user's username is tagged at the end of the token
-			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getUsername()
-					+ "|";
+			if (username.equals("admin")) {
+				// ** if user is admin
 
-			HttpSession session = request.getSession();
-			session.setAttribute("user", emp);
-			session.setAttribute("tokenID", tokenID);
+				// Verify admin credentials. if admin does not exist, returns
+				// null
+				Admin admin = loginController.authenticateAdmin(username, inputPwd);
+				System.out.println("Admin is authenticated: " + admin.getName());
 
-			// Get all food data from database and save into session for
-			// display
-			CanteenController canteenController = new CanteenController();
-			List<Food> allFoodList = canteenController.getAllFood();
-			System.out.println("LoginServlet foodListSize: " + allFoodList.size());
+				String tokenID = UUID.randomUUID().toString().toUpperCase() + "|"
+						+ admin.getUsername() + "|";
 
-			session.setAttribute("allFood", allFoodList);
-			System.out.println(allFoodList);
+				// Setting admin and token
+				session.setAttribute("admin", admin);
+				session.setAttribute("tokenID", tokenID);
+				System.out.println("TokenID is set in session");
 
-			// JSONObject obj = new JSONObject();
-			// obj.put("allFood", allFoodList);
-			// System.out.println("OBJ: " + obj);
-			// session.setAttribute("allFood", obj);
+				response.sendRedirect("adminHomepage.jsp");
 
-			response.sendRedirect("homepage.jsp");
-			// } else {
-			// Admin admin =
-			// loginController.authenticateAdmin(username,inputPwd);
-			// HttpSession session = request.getSession();
-			// session.setAttribute("admin", admin);
-			//
-			// //creates a tokenID using UUID (Universalised Unique Identifier
-			// Object)
-			// //the admin's username is tagged at the end of the token
-			// String tokenID = UUID.randomUUID().toString().toUpperCase()
-			// + "|" + admin.getUsername() + "|";
-			//
-			// session.setAttribute("tokenID", tokenID);
-			// response.sendRedirect("adminHomepage.jsp");
-			//
-			// }
+			} else {
+				// ** if normal user
 
-		} else {
-			// Error Response
+				// Verify user credentials. if user does not exist, returns null
+				Employee emp = loginController.authenticateUser(username,
+						PasswordService.encryptPassword(inputPwd));
+				System.out.println("User is authenticated: " + emp.getName());
 
-			// throw new Exception(
-			// "Please ensure that you have inserted valid ID and password into the fields.");
+				// *** For Development only ***
+				// creates a tokenID using UUID (Universalised Unique Identifier
+				// Object)
+				// the user's username is tagged at the end of the token
+				String tokenID = UUID.randomUUID().toString().toUpperCase() + "|"
+						+ emp.getUsername() + "|";
+
+				// Setting user and token
+				session.setAttribute("user", emp);
+				session.setAttribute("tokenID", tokenID);
+				System.out.println("TokenID is set in session");
+
+				// Get all food data from database and save into session for
+				// display
+				CanteenController canteenController = new CanteenController();
+				List<Food> allFoodList = canteenController.getAllFood();
+				System.out.println("LoginServlet foodListSize: " + allFoodList.size());
+
+				session.setAttribute("allFood", allFoodList);
+				System.out.println(allFoodList);
+
+				response.sendRedirect("homepage.jsp");
+			}
+
+		} catch (Exception e) {
+			System.out.println("Exception thrown. Incorrect credentials.");
+			session.setAttribute("username", username);
+			session.setAttribute("error", "Something went wrong! Please check your credentials.");
+			response.sendRedirect("login.jsp");
 		}
-		// } catch (NullPointerException e) {
-		// returnJson.put("message", jsonMessage);
-		// returnJson.put("error",
-		// "Please ensure that you have inserted valid ID and password into the fields.");
-		// returnJson.put("status", "fail");
-		//
-		// HttpSession session = request.getSession();
-		// session.setAttribute("error", returnJson);
-		// response.sendRedirect("login.jsp");
-		// }
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// returnJson.put("message", jsonMessage);
-		// returnJson.put("error", e.getMessage());
-		// returnJson.put("status", "fail");
-		//
-		// HttpSession session = request.getSession();
-		// session.setAttribute("error", returnJson);
-		// response.sendRedirect("login.jsp");
-		// }
+
 	}
 }

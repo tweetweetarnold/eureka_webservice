@@ -33,22 +33,17 @@
 		<form class="form-signin" method="post" action="ProcessLoginServlet">
 			<%
 				String username = "";
-				String password = "";
-				JSONObject obj = null;
-				obj = (JSONObject) session.getAttribute("error");
-				if (obj != null) {
-					JSONObject msg = (JSONObject) obj.get("message");
-
-					username = (String) msg.get("username");
-					password = (String) msg.get("inputPwd");
-
+				String error = (String) session.getAttribute("error");
+				if (error != null) {
+					username = (String) session.getAttribute("username");
+					session.removeAttribute("username");
 				}
 			%>
 			<h2 class="form-signin-heading">Please sign in</h2>
 
 			<!-- User input -->
 			<input type="text" name="username" class="form-control" placeholder="Username" value="<%=username%>" required>
-			<input type="password" name="password" class="form-control" placeholder="Password" value="<%=password%>" required>
+			<input type="password" name="password" class="form-control" placeholder="Password" required>
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 			<br>
@@ -58,12 +53,12 @@
 
 			<!-- Error message handling -->
 			<%
-				if (obj != null) {
+				if (error != null) {
 			%>
 			<div class="alert alert-danger" role="alert">
 				<b>Error!</b>
 				<br>
-				<%=obj.get("error")%>
+				<%=error%>
 			</div>
 			<%
 				session.removeAttribute("error");

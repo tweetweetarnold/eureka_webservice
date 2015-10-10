@@ -78,7 +78,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			// Check user parameters
 			boolean validation = !(employeeName.isEmpty() && username.isEmpty()
 					&& password.isEmpty() && confirmPwd.isEmpty() && contactNo.isEmpty()
-					&& contactNo.length() < 8 && bankAcc.isEmpty() && companyName.isEmpty()
+					&& contactNo.length() == 8 && bankAcc.isEmpty() && companyName.isEmpty()
 					&& password.equals(confirmPwd) && password.length() < 7);
 
 			if (validation) {
