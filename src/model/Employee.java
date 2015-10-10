@@ -3,10 +3,13 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,13 +20,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "employee")
-public class Employee {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int employeeId;
-	private String username, password, name;
+public class Employee implements Serializable {
+
+	@EmbeddedId
+	private EmployeePK pk;
+	private String password, name;
 	private long creditCardNo;
 	private long eDollars;
 	private long contactNo;
@@ -37,14 +42,13 @@ public class Employee {
 	private Date createDate;
 
 	public Employee() {
-
 	}
 
 	public Employee(String username, String password, String name, long creditCardNo,
 			long eDollars, long contactNo, Company company, Set<Food> favouriteList,
 			Set<FoodOrder> orderHistory, Date createDate) {
 		super();
-		this.username = username;
+		this.pk = new EmployeePK(username);
 		this.password = password;
 		this.name = name;
 		this.creditCardNo = creditCardNo;
@@ -56,20 +60,30 @@ public class Employee {
 		this.createDate = createDate;
 	}
 
-	public int getEmployeeId() {
-		return employeeId;
-	}
+	@Embeddable
+	public static class EmployeePK implements Serializable {
 
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+		private String username;
+
+		public EmployeePK() {
+		}
+
+		public EmployeePK(String username) {
+			this.username = username;
+		}
+
+		public String getUsername() {
+			return username;
+		}
+
+		public void setUsername(String username) {
+			this.username = username;
+		}
+
 	}
 
 	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+		return pk.getUsername();
 	}
 
 	public String getPassword() {

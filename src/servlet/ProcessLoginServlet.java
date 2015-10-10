@@ -77,12 +77,14 @@ public class ProcessLoginServlet extends HttpServlet {
 		boolean isValid = (username != null && inputPwd != null && !username.equals("") && !inputPwd
 				.equals(""));
 		LoginController loginController = new LoginController();
+		System.out.println("Logincontroller retrieved");
+		
 		if (isValid) {
-
 			// if (!username.equals("admin")) {
 			Employee emp = loginController.authenticateUser(username,
 					PasswordService.encryptPassword(inputPwd));
-
+			System.out.println("Employee retrieved" + emp.getName());
+			
 			// *** For Development only ***
 			// creates a tokenID using UUID (Universalised Unique
 			// Identifier

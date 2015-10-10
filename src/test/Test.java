@@ -32,8 +32,15 @@ public class Test {
 		Company company = new Company("XiaoDingDang Co.", null, new Date(), null, null);
 		Employee employee = new Employee("arnold", PasswordService.encryptPassword("1234567"),
 				"arnold", 999999999, 10, 123, company, null, null, new Date());
-		FoodOrder order = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, admin, null, new Date());
+		FoodOrder order = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, admin, null,
+				new Date());
 		FoodOrderItem foodItem = new FoodOrderItem(order, food, 1, "More meat", new Date());
+		Employee e2 = new Employee("abc", "ass", "assss", 789789789, 23, 123, null, null, null,
+				null);
+		Employee e3 = new Employee("abc4", "ass", "assss", 789789789, 23, 123, null, null, null,
+				null);
+		MyConnection.save(e2);
+		MyConnection.save(e3);
 
 		Set<Canteen> canteenList = new HashSet<>();
 		canteenList.add(canteen);
@@ -57,9 +64,9 @@ public class Test {
 
 		MyConnection.save(admin);
 		MyConnection.save(company);
-		MyConnection.save(employee);
+		// MyConnection.save(employee);
 		MyConnection.save(order);
-		MyConnection.save(foodItem);
+		// MyConnection.save(foodItem);
 		// **************************************** End Arnold Data
 		// ****************************************
 
