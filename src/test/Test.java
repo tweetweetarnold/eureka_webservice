@@ -35,12 +35,6 @@ public class Test {
 		FoodOrder order = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, admin, null,
 				new Date());
 		FoodOrderItem foodItem = new FoodOrderItem(order, food, 1, "More meat", new Date());
-		Employee e2 = new Employee("abc", "ass", "assss", 789789789, 23, 123, null, null, null,
-				null);
-		Employee e3 = new Employee("abc4", "ass", "assss", 789789789, 23, 123, null, null, null,
-				null);
-		MyConnection.save(e2);
-		MyConnection.save(e3);
 
 		Set<Canteen> canteenList = new HashSet<>();
 		canteenList.add(canteen);

@@ -76,12 +76,10 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			userInput.put("company", companyName);
 
 			// Check user parameters
-			boolean validation = !(employeeName.isEmpty() && username.isEmpty()
-					&& password.isEmpty() && confirmPwd.isEmpty() && contactNo.isEmpty()
-					&& contactNo.length() == 8 && bankAcc.isEmpty() && companyName.isEmpty()
-					&& password.equals(confirmPwd) && password.length() < 7);
+			boolean valid = (contactNo.length() == 8 && password.length() >= 7 && password
+					.equals(confirmPwd));
 
-			if (validation) {
+			if (valid) {
 				long contactNumber = Long.parseLong(contactNo);
 
 				long creditCardNumber = Long.parseLong(bankAcc);
