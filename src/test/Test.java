@@ -321,7 +321,7 @@ public class Test {
 
 		Stall chineseMixVegStall = new Stall("Chinese Stall", "123", "Oasis Chinese Mix Veg Stall",
 				93848341, canteen1, new Date(), null);
-		Food mixVegRice1 = new Food("Mix Veg Rice", "ask for more meat, less fried meat, $3.50",
+		Food mixVegRice1 = new Food("Mix Veg Rice", "ask for more meat, less fried meat, or upsize to $3.50",
 				3.00, chineseMixVegStall, new Date());
 		
 		//for mixVegRice1 modifiers
