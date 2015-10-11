@@ -7,6 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>DaBao - Cart</title>
 
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!-- Bootstrap Core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -22,9 +25,7 @@
 	<div class="container">
 
 		<h1>Your Orders</h1>
-		<%
-			ArrayList<FoodOrderItem> myFoodOrderItems = (ArrayList<FoodOrderItem>) session.getAttribute("myFoodOrderItems");
-		%>
+
 
 		<table class="table table-striped">
 			<thead>
@@ -36,22 +37,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%
-					if(myFoodOrderItems != null){
-								System.out.println("myFoodOrderItems: " + myFoodOrderItems.size());
-								for(FoodOrderItem item : myFoodOrderItems){
-				%>
-				<tr>
-					<td>1</td>
-					<td><%=item.getFood().getName()%></td>
-					<td><%=item.getQuantity()%></td>
-					<td><%=item.getPrice()%></td>
-				</tr>
-
-				<%
-					}
-							}
-				%>
+				<c:set var="count" value="0" />
+				<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodItem">
+					<tr>
+						<c:set var="count" value="${count + 1}" />
+						<td>
+							<c:out value="${count}" />
+						</td>
+						<td>
+							<c:out value="${foodItem.food.name}" />
+						</td>
+						<td>
+							<c:out value="${foodItem.quantity}" />
+						</td>
+						<td>
+							$
+							<c:out value="${foodItem.priceString}" />
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 
@@ -80,7 +84,6 @@
 			m.parentNode.insertBefore(a, m)
 		})(window, document, 'script',
 				'//www.google-analytics.com/analytics.js', 'ga');
-
 		ga('create', 'UA-68676403-1', 'auto');
 		ga('send', 'pageview');
 	</script>

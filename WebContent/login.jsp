@@ -51,7 +51,7 @@
 				<div class="alert alert-danger" role="alert">
 					<b>Error!</b>
 					<br>
-					<c:out value="${error}"/>
+					<c:out value="${error}" />
 				</div>
 			</c:if>
 		</form>

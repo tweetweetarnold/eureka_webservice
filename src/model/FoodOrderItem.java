@@ -1,5 +1,6 @@
 package model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -91,6 +92,11 @@ public class FoodOrderItem {
 			}
 		}
 		return price;
+	}
+	
+	public String getPriceString() {
+		DecimalFormat df = new DecimalFormat("0.00");
+		return df.format(getPrice());
 	}
 
 	public String getRemarks() {
