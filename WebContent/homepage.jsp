@@ -82,9 +82,9 @@
 				</div>
 				<%
 					// 				JSONObject allFood = (JSONObject) session.getAttribute("allFood");
-						// 				ArrayList<Food> list = (ArrayList<Food>) allFood.get("allFood");
-						List<Food> list = (ArrayList<Food>) session.getAttribute("allFood");
-						if(list != null){
+								// 				ArrayList<Food> list = (ArrayList<Food>) allFood.get("allFood");
+								List<Food> list = (ArrayList<Food>) session.getAttribute("allFood");
+								if(list != null){
 				%>
 
 				<!-- Individual Food Item -->
@@ -92,8 +92,8 @@
 
 					<%
 						// 						for(int i = 0; i < list.size(); i++){
-									for(int i = 0; i < 10; i++){
-										Food f = (Food) list.get(i);
+												for(int i = 0; i < 10; i++){
+													Food f = (Food) list.get(i);
 					%>
 					<div class="col-sm-4 col-lg-4 col-md-4">
 						<div class="thumbnail">
@@ -125,7 +125,7 @@
 
 					<%
 						}
-											}
+														}
 					%>
 
 
@@ -195,6 +195,24 @@
 
 	<!-- Arnold Test JavaScript -->
 	<!-- 	<script src="resources/js/pagedirect.js"></script> -->
+
+	<!-- 	Google Analytics -->
+	<script>
+		(function(i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r;
+			i[r] = i[r] || function() {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+			a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+			a.async = 1;
+			a.src = g;
+			m.parentNode.insertBefore(a, m)
+		})(window, document, 'script',
+				'//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'UA-68676403-1', 'auto');
+		ga('send', 'pageview');
+	</script>
 </body>
 
 </html>

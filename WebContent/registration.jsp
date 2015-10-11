@@ -26,19 +26,19 @@
 
 			<%
 				String username = "";
-							String name = "";
-							String contactNo = "";
-							String bankAcc = "";
-							String company = "";
+								String name = "";
+								String contactNo = "";
+								String bankAcc = "";
+								String company = "";
 
-							if(session.getAttribute("userInput") != null){
-								HashMap<String,String> map = (HashMap<String,String>) session.getAttribute("userInput");
-								username = map.get("username");
-								name =  map.get("name");
-								contactNo = map.get("contactNo");
-								bankAcc = map.get("bankAcc");
-								company = map.get("company");
-							}
+								if(session.getAttribute("userInput") != null){
+									HashMap<String,String> map = (HashMap<String,String>) session.getAttribute("userInput");
+									username = map.get("username");
+									name =  map.get("name");
+									contactNo = map.get("contactNo");
+									bankAcc = map.get("bankAcc");
+									company = map.get("company");
+								}
 			%>
 
 			<!-- User input -->
@@ -70,7 +70,7 @@
 			</div>
 			<%
 				session.removeAttribute("error");
-					}
+						}
 			%>
 
 
@@ -85,13 +85,31 @@
 			</div>
 			<%
 				session.removeAttribute("success");
-					}
+						}
 			%>
 		</form>
 
 	</div>
 
 	<script src="resources/js/ie10-viewport-bug-workaround.js"></script>
+	
+	<!-- 	Google Analytics -->
+	<script>
+		(function(i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r;
+			i[r] = i[r] || function() {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+			a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+			a.async = 1;
+			a.src = g;
+			m.parentNode.insertBefore(a, m)
+		})(window, document, 'script',
+				'//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'UA-68676403-1', 'auto');
+		ga('send', 'pageview');
+	</script>
 
 </body>
 </html>
