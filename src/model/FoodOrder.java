@@ -24,8 +24,6 @@ public class FoodOrder {
 	private int foodOrderId;
 	private String status;
 	@OneToOne(cascade = CascadeType.ALL)
-	// @JoinColumns({ @JoinColumn(name = "employeeId"), @JoinColumn(name =
-	// "username") })
 	@JoinColumn(name = "username")
 	private Employee employee;
 	@ManyToOne(cascade = CascadeType.ALL)

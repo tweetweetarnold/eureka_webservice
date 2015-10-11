@@ -72,9 +72,8 @@
 			</tbody>
 		</table>
 
-
+		<!-- Submit order button -->
 		<form action="AddNewFoodOrderServlet" method="post">
-			<%-- 			<input type="hidden" value="<%=request.setAttribute("foodOrder", order)%>" name="foodOrder"> --%>
 			<button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 50%;">Check Out</button>
 		</form>
 
