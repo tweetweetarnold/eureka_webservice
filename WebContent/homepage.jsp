@@ -2,11 +2,8 @@
 <!DOCTYPE html>
 <!-- Java imports -->
 <%@page import="java.util.*"%>
-<%@page import="org.json.simple.JSONArray"%>
 <%@page import="model.*"%>
-<%@page import="org.json.simple.JSONObject"%>
-<%@page import="java.text.NumberFormat"%>
-<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.text.*"%>
 <html lang="en">
 
 <head>
@@ -81,26 +78,24 @@
 					</div>
 				</div>
 				<%
-					// 				JSONObject allFood = (JSONObject) session.getAttribute("allFood");
-								// 				ArrayList<Food> list = (ArrayList<Food>) allFood.get("allFood");
-								List<Food> list = (ArrayList<Food>) session.getAttribute("allFood");
-								if(list != null){
+					List<Food> list = (ArrayList<Food>) session.getAttribute("allFood");
+							if(list != null){
+								DecimalFormat df = new DecimalFormat("#.00");
 				%>
 
 				<!-- Individual Food Item -->
 				<div class="row">
 
 					<%
-						// 						for(int i = 0; i < list.size(); i++){
-												for(int i = 0; i < 10; i++){
-													Food f = (Food) list.get(i);
+						for(int i = 0; i < 10; i++){
+									Food f = (Food) list.get(i);
 					%>
 					<div class="col-sm-4 col-lg-4 col-md-4">
 						<div class="thumbnail">
 							<img src="http://placehold.it/320x150" alt="">
 							<div class="caption">
 								<h4 class="pull-right">
-									$<%=f.getPrice()%>
+									$<%=df.format(f.getPrice())%>
 								</h4>
 								<h4>
 									<a href="#"><%=f.getName()%></a>
@@ -125,7 +120,7 @@
 
 					<%
 						}
-														}
+																				}
 					%>
 
 

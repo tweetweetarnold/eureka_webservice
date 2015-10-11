@@ -6,11 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<%@page import="org.json.simple.JSONObject"%>
 <title>DaBao - Sign In</title>
+
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Bootstrap core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -31,18 +34,10 @@
 	<div class="container">
 
 		<form class="form-signin" method="post" action="ProcessLoginServlet">
-			<%
-				String username = "";
-				String error = (String) session.getAttribute("error");
-				if (error != null) {
-					username = (String) session.getAttribute("username");
-					session.removeAttribute("username");
-				}
-			%>
 			<h2 class="form-signin-heading">Please sign in</h2>
 
 			<!-- User input -->
-			<input type="text" name="username" class="form-control" placeholder="Username" value="<%=username%>" required>
+			<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}" required>
 			<input type="password" name="password" class="form-control" placeholder="Password" required>
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
@@ -52,27 +47,27 @@
 			</div>
 
 			<!-- Error message handling -->
-			<%
-				if (error != null) {
-			%>
-			<div class="alert alert-danger" role="alert">
-				<b>Error!</b>
-				<br>
-				<%=error%>
-			</div>
-			<%
-				session.removeAttribute("error");
-				}
-			%>
+			<c:if test="${not empty sessionScope.error}">
+				<div class="alert alert-danger" role="alert">
+					<b>Error!</b>
+					<br>
+					<c:out value="${error}"/>
+				</div>
+			</c:if>
 		</form>
+
+		<!-- clearing attributes from session -->
+		<c:remove var="username" scope="session" />
+		<c:remove var="error" scope="session" />
 
 	</div>
 	<!-- /container -->
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="resources/js/ie10-viewport-bug-workaround.js"></script>
-	
-	<!-- 	Google Analytics -->
+
+
+	<!-- Google Analytics -->
 	<script>
 		(function(i, s, o, g, r, a, m) {
 			i['GoogleAnalyticsObject'] = r;
@@ -89,5 +84,6 @@
 		ga('create', 'UA-68676403-1', 'auto');
 		ga('send', 'pageview');
 	</script>
+
 </body>
 </html>
