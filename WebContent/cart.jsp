@@ -9,6 +9,7 @@
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- Bootstrap Core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -37,6 +38,7 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:set var="totalPrice" value="0" />
 				<c:set var="count" value="0" />
 				<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodItem">
 					<tr>
@@ -53,11 +55,23 @@
 						<td>
 							$
 							<c:out value="${foodItem.priceString}" />
+							<c:set value="${totalPrice + foodItem.priceString}" var="totalPrice" />
 						</td>
 					</tr>
 				</c:forEach>
+				<tr>
+					<td></td>
+					<td></td>
+					<td style="font-size: xx-large;">Total:</td>
+					<td style="font-size: xx-large;">
+						$
+						<fmt:formatNumber value="${totalPrice}" var="totalPrice2" minFractionDigits="2" />
+						<c:out value="${totalPrice2}" />
+					</td>
+				</tr>
 			</tbody>
 		</table>
+
 
 		<form action="AddNewFoodOrderServlet" method="post">
 			<%-- 			<input type="hidden" value="<%=request.setAttribute("foodOrder", order)%>" name="foodOrder"> --%>
