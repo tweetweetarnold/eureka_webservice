@@ -8,6 +8,9 @@
 
 <title>DaBao - Register</title>
 
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!-- Bootstrap core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -24,31 +27,16 @@
 		<form class="form-signin" method="post" action="ProcessRegistrationServlet">
 			<h2 class="form-signin-heading">Please insert fields</h2>
 
-			<%
-				String username = "";
-								String name = "";
-								String contactNo = "";
-								String bankAcc = "";
-								String company = "";
-
-								if(session.getAttribute("userInput") != null){
-									HashMap<String,String> map = (HashMap<String,String>) session.getAttribute("userInput");
-									username = map.get("username");
-									name =  map.get("name");
-									contactNo = map.get("contactNo");
-									bankAcc = map.get("bankAcc");
-									company = map.get("company");
-								}
-			%>
+			<c:set value="${sessionScope.userInput}" var="userInput" />
 
 			<!-- User input -->
-			<input type="text" name="username" class="form-control" placeholder="Username" value="<%=username%>" required>
-			<input type="text" name="name" class="form-control" placeholder="Name" value="<%=name%>" required>
+			<input type="text" name="username" class="form-control" placeholder="Username" value="<c:out value="${userInput['username']}"/>" required>
+			<input type="text" name="name" class="form-control" placeholder="Name" value="<c:out value="${userInput['name']}"/>" required>
 			<input type="password" name="password" class="form-control" placeholder="Password" required>
 			<input type="password" name="confirmPwd" class="form-control" placeholder="Confirm Password" required>
-			<input type="text" name="contactNo" class="form-control" placeholder="Contact Number" value="<%=contactNo%>" required>
-			<input type="text" name="bankAcc" class="form-control" placeholder="Bank Account Number" value="<%=bankAcc%>" required>
-			<input type="text" name="company" class="form-control" placeholder="Company" value="<%=company%>" required>
+			<input type="text" name="contactNo" class="form-control" placeholder="Contact Number" value="<c:out value="${userInput['contactNo']}"/>" required>
+			<input type="text" name="bankAcc" class="form-control" placeholder="Bank Account Number" value="<c:out value="${userInput['bankAcc']}"/>" required>
+			<input type="text" name="company" class="form-control" placeholder="Company" value="<c:out value="${userInput['company']}"/>" required>
 
 			<br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
@@ -60,24 +48,22 @@
 
 
 			<!-- Error message handling -->
-			<%
-				if (session.getAttribute("error") != null) {
-			%>
-			<div class="alert alert-danger" role="alert">
-				<b>Error!</b>
-				<br>
-				<%=session.getAttribute("error")%>
-			</div>
-			<%
-				session.removeAttribute("error");
-						}
-			%>
+			<c:if test="${not empty sessionScope.error}">
+				<div class="alert alert-danger" role="alert">
+					<b>Error!</b>
+					<br>
+					<c:out value="${error}" />
+				</div>
+			</c:if>
 		</form>
+
+		<c:remove var="error" scope="session" />
+		<c:remove var="userInput" scope="session" />
 
 	</div>
 
 	<script src="resources/js/ie10-viewport-bug-workaround.js"></script>
-	
+
 	<!-- 	Google Analytics -->
 	<script>
 		(function(i, s, o, g, r, a, m) {

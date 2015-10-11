@@ -16,6 +16,9 @@
 
 <title>DaBao - Homepage</title>
 
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!-- Bootstrap Core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -77,52 +80,43 @@
 						</div>
 					</div>
 				</div>
-				<%
-					List<Food> list = (ArrayList<Food>) session.getAttribute("allFood");
-							if(list != null){
-								DecimalFormat df = new DecimalFormat("#.00");
-				%>
+
 
 				<!-- Individual Food Item -->
 				<div class="row">
 
-					<%
-						for(int i = 0; i < 10; i++){
-									Food f = (Food) list.get(i);
-					%>
-					<div class="col-sm-4 col-lg-4 col-md-4">
-						<div class="thumbnail">
-							<img src="http://placehold.it/320x150" alt="">
-							<div class="caption">
-								<h4 class="pull-right">
-									$<%=df.format(f.getPrice())%>
-								</h4>
-								<h4>
-									<a href="#"><%=f.getName()%></a>
-								</h4>
-								<p>
-									See more snippets like this online store item at
-									<a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>
-									.
-								</p>
+					<c:forEach begin="0" end="10" var="food" items="${sessionScope.allFood}" varStatus="loop">
+						<div class="col-sm-4 col-lg-4 col-md-4">
+							<div class="thumbnail">
+								<img src="http://placehold.it/320x150" alt="">
+								<div class="caption">
+									<h4 class="pull-right">
+										$
+										<c:out value="${food.priceString}" />
+									</h4>
+									<h4>
+										<a href="#">
+											<c:out value="${food.name}" />
+										</a>
+									</h4>
+									<p>
+										See more snippets like this online store item at
+										<a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>
+										.
+									</p>
 
+								</div>
+								<div class="pull-right" style="margin-right: 5px;">
+									<form action="AddFoodItemToSessionServlet">
+										<input type="hidden" value='<c:out value="${loop.index}"/>' id="foodId" name="foodId">
+										<button type="submit" class="btn btn-danger">Add to Cart</button>
+									</form>
+								</div>
+								<br>
+								<br>
 							</div>
-							<div class="pull-right" style="margin-right: 5px;">
-								<form action="AddFoodItemToSessionServlet">
-									<input type="hidden" value="<%=i%>" id="foodId" name="foodId">
-									<button type="submit" class="btn btn-danger">Add to Cart</button>
-								</form>
-							</div>
-							<br>
-							<br>
 						</div>
-					</div>
-
-					<%
-						}
-																				}
-					%>
-
+					</c:forEach>
 
 					<div class="col-sm-4 col-lg-4 col-md-4">
 						<div class="thumbnail">
