@@ -86,10 +86,10 @@ public class ProcessRegistrationServlet extends HttpServlet {
 				String generatedEmployeeId = registrationController.registerUser(username,
 						password, employeeName, creditCardNumber, contactNumber, companyName);
 
-				session.setAttribute("success", "User created successfully. UserID: "
+				session.setAttribute("success", "Yay! Your account has been created. Username: "
 						+ generatedEmployeeId);
 
-				response.sendRedirect("registration.jsp");
+				response.sendRedirect("login.jsp");
 
 			} else {
 				System.out.println("RegistrationServlet: Validation failed.");

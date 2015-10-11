@@ -54,11 +54,21 @@
 					<c:out value="${error}" />
 				</div>
 			</c:if>
+			
+			<!-- Success message handling -->
+			<c:if test="${not empty sessionScope.success}">
+				<div class="alert alert-success" role="alert">
+					<b>Success!</b>
+					<br>
+					<c:out value="${success}" />
+				</div>
+			</c:if>
 		</form>
 
 		<!-- clearing attributes from session -->
 		<c:remove var="username" scope="session" />
 		<c:remove var="error" scope="session" />
+		<c:remove var="success" scope="session" />
 
 	</div>
 	<!-- /container -->

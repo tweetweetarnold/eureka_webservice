@@ -72,21 +72,6 @@
 				session.removeAttribute("error");
 						}
 			%>
-
-
-			<!-- Success message handling -->
-			<%
-				if (session.getAttribute("success") != null) {
-			%>
-			<div class="alert alert-success" role="alert">
-				<b>Success!</b>
-				<br>
-				<%=session.getAttribute("success")%>
-			</div>
-			<%
-				session.removeAttribute("success");
-						}
-			%>
 		</form>
 
 	</div>
