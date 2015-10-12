@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,9 +25,6 @@ public class FoodOrder {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "username")
 	private Employee employee;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "admin")
-	private Admin admin;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")
 	private Set<FoodOrderItem> foodOrderList;
 	private Date createDate;
@@ -36,12 +32,11 @@ public class FoodOrder {
 	public FoodOrder() {
 	}
 
-	public FoodOrder(String status, Employee employee, Admin admin,
-			Set<FoodOrderItem> foodOrderList, Date createDate) {
+	public FoodOrder(String status, Employee employee, Set<FoodOrderItem> foodOrderList,
+			Date createDate) {
 		super();
 		this.status = status;
 		this.employee = employee;
-		this.admin = admin;
 		this.foodOrderList = foodOrderList;
 		this.createDate = createDate;
 	}
@@ -76,14 +71,6 @@ public class FoodOrder {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}
-
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setDriver(Admin admin) {
-		this.admin = admin;
 	}
 
 	public Date getCreateDate() {

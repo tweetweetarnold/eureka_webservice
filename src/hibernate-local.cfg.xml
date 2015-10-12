@@ -30,7 +30,9 @@
 		<mapping class="model.FoodOrder" />
 		<mapping class="model.FoodOrderItem" />
 		<mapping class="model.Modifier" />
+		<mapping class="model.ModifierChosen" />
 		<mapping class="model.Stall" />
 		<!-- end of hibernate configuration settings -->
 	</session-factory>
 </hibernate-configuration>
+

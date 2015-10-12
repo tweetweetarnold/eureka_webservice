@@ -34,7 +34,9 @@ public class FoodOrderItem {
 	private String remarks;
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrderItem")
-	private Set<ModifierChosen> modifierList;
+
+	private Set<ModifierChosen> modifierChosenList;
+
 
 	public FoodOrderItem() {
 	}
@@ -46,7 +48,15 @@ public class FoodOrderItem {
 		this.quantity = quantity;
 		this.remarks = remarks;
 		this.createDate = createDate;
-		modifierList = new HashSet<>();
+		modifierChosenList = new HashSet<>();
+	}
+
+	public Set<ModifierChosen> getModifierChosenList() {
+		return modifierChosenList;
+	}
+
+	public void setModifierChosenList(Set<ModifierChosen> modifierChosenList) {
+		this.modifierChosenList = modifierChosenList;
 	}
 
 	public int getFoodOrderItemId() {
@@ -83,8 +93,10 @@ public class FoodOrderItem {
 
 	public double getPrice() {
 		double price = food.getPrice();
-		if (!modifierList.isEmpty()) {
-			Iterator<ModifierChosen> iter = modifierList.iterator();
+
+		if (!modifierChosenList.isEmpty()) {
+			Iterator<ModifierChosen> iter = modifierChosenList.iterator();
+
 			while (iter.hasNext()) {
 				ModifierChosen tempMod = (ModifierChosen) iter.next();
 				price += tempMod.getPrice();
@@ -114,18 +126,19 @@ public class FoodOrderItem {
 		this.createDate = createDate;
 	}
 
+
 	public Set<ModifierChosen> getModifierList() {
-		return modifierList;
+		return modifierChosenList;
 	}
 
 	public void setModifierList(HashSet<ModifierChosen> modifierList) {
-		this.modifierList = modifierList;
+		this.modifierChosenList = modifierList;
 	}
 
 	public boolean equals(FoodOrderItem otherFoodItem) {
 		System.out.println(this.food.equals(otherFoodItem.getFood()));
 		if (this.food.equals(otherFoodItem.getFood())) {
-			ArrayList<ModifierChosen> modifierListOrigin = new ArrayList<ModifierChosen>(modifierList);
+			ArrayList<ModifierChosen> modifierListOrigin = new ArrayList<ModifierChosen>(modifierChosenList);
 			ArrayList<ModifierChosen> modifierListExternal = new ArrayList<ModifierChosen>(
 					otherFoodItem.getModifierList());
 			int trueCount = 0;
@@ -148,5 +161,32 @@ public class FoodOrderItem {
 		}
 
 	}
+
+	// public boolean equals(FoodOrderItem otherFoodItem) {
+	// if (this.food.equals(otherFoodItem.getFood())) {
+	// ArrayList<Modifier> modifierListOrigin = new
+	// ArrayList<Modifier>(modifierList);
+	// ArrayList<Modifier> modifierListExternal = new ArrayList<Modifier>(
+	// otherFoodItem.getModifierList());
+	// int trueCount = 0;
+	// for (Modifier m : modifierListOrigin) {
+	// for (Modifier e : modifierListOrigin) {
+	// if (m.equals(e)) {
+	// trueCount++;
+	// }
+	// }
+	// }
+	// if (trueCount == modifierListOrigin.size()) {
+	// return true;
+	// } else {
+	// return false;
+	// }
+	//
+	// } else {
+	// return false;
+	// }
+	//
+	// }
+
 
 }

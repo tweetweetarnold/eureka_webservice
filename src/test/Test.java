@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import services.PasswordService;
-import value.StringValues;
 import model.Admin;
 import model.Canteen;
 import model.Company;
@@ -14,7 +12,10 @@ import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
 import model.Modifier;
+import model.ModifierChosen;
 import model.Stall;
+import services.PasswordService;
+import value.StringValues;
 import connection.MyConnection;
 
 public class Test {
@@ -30,9 +31,9 @@ public class Test {
 
 		Admin admin = new Admin("admin", PasswordService.encryptPassword("1234567"), "admin123", 123456789, new Date());
 		Company company = new Company("XiaoDingDang Co.", null, new Date(), null, null);
-		Employee employee = new Employee("arnold", PasswordService.encryptPassword("1234567"), "arnold", 999999999, 10,
+		Employee employee = new Employee("arnold", PasswordService.encryptPassword("1234567"), "Arnold Lee", 12345678, 10,
 				123, company, null, null, new Date());
-		FoodOrder order = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, admin, null, new Date());
+		FoodOrder order = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null, new Date());
 		FoodOrderItem foodItem = new FoodOrderItem(order, food, 1, "More meat", new Date());
 
 		Set<Canteen> canteenList = new HashSet<>();
@@ -54,6 +55,20 @@ public class Test {
 		stallList.add(stall);
 		stall.setFoodList(foodList);
 		canteen.setStallList(stallList);
+		
+		Modifier m1 = new Modifier("m1", "nice", 2.3, food, new Date());
+		Modifier m2 = new Modifier("m2", "nice", 2.3, food, new Date());
+		HashSet<Modifier> set = new HashSet<>();
+		set.add(m1);
+		set.add(m2);
+		food.setModifierList(set);
+		
+		ModifierChosen mc1 = new ModifierChosen("mc1", "nicenice", 2.33, foodItem, new Date());
+		ModifierChosen mc2 = new ModifierChosen("mc2", "nicenice", 2.33, foodItem, new Date());
+		HashSet<ModifierChosen> set2 = new HashSet<>();
+		set2.add(mc1);
+		set2.add(mc2);
+		foodItem.setModifierChosenList(set2);
 
 		MyConnection.save(admin);
 		MyConnection.save(company);
@@ -63,6 +78,8 @@ public class Test {
 		// **************************************** End Arnold Data
 		// ****************************************
 
+		
+		
 		// **************************************** Insert mock Data
 		// ****************************************
 		Set<Stall> stallList2 = new HashSet<>();
@@ -94,17 +111,17 @@ public class Test {
 		Modifier modifierA3 = new Modifier("Up size", "", 0.50, food3, new Date());
 		Set<Modifier> modifierListA1 = new HashSet<Modifier>();
 		modifierListA1.add(modifierA3);
-		food3.setModifierList(modifierListA1);
+//		food3.setModifierList(modifierListA1);
 
 		Modifier modifierA4 = new Modifier("Up size", "", 0.50, food4, new Date());
 		Set<Modifier> modifierListA2 = new HashSet<Modifier>();
 		modifierListA2.add(modifierA4);
-		food4.setModifierList(modifierListA2);
+//		food4.setModifierList(modifierListA2);
 
 		Modifier modifierA5 = new Modifier("Up size", "", 0.50, food5, new Date());
 		Set<Modifier> modifierListA3 = new HashSet<Modifier>();
 		modifierListA3.add(modifierA5);
-		food5.setModifierList(modifierListA3);
+//		food5.setModifierList(modifierListA3);
 
 		foodListB2.add(food3);
 		foodListB2.add(food4);
@@ -159,7 +176,7 @@ public class Test {
 		Modifier modifierA16 = new Modifier("Change to drumstick", "", 0.50, food16, new Date());
 		Set<Modifier> modifierListA16 = new HashSet<Modifier>();
 		modifierListA16.add(modifierA16);
-		food16.setModifierList(modifierListA16);
+//		food16.setModifierList(modifierListA16);
 
 		foodListB7.add(food16);
 		foodListB7.add(food17);
@@ -187,7 +204,7 @@ public class Test {
 		Modifier modifierA27 = new Modifier("upsize", "", 0.50, food27, new Date());
 		Set<Modifier> modifierListA27 = new HashSet<Modifier>();
 		modifierListA16.add(modifierA27);
-		food5.setModifierList(modifierListA27);
+//		food5.setModifierList(modifierListA27);
 
 		foodListB9.add(food27);
 		stall9.setFoodList(foodListB9);
@@ -293,7 +310,7 @@ public class Test {
 		Set<Modifier> modifierList1 = new HashSet<Modifier>();
 		modifierList1.add(modifier1);
 		modifierList1.add(modifier2);
-		mfood1.setModifierList(modifierList1);
+//		mfood1.setModifierList(modifierList1);
 
 		Set<Food> foodList2 = new HashSet<Food>();
 		foodList2.add(mfood1);
@@ -314,7 +331,7 @@ public class Test {
 		modifierList2.add(modifier3);
 		modifierList2.add(modifier4);
 		modifierList2.add(modifier5);
-		infood1.setModifierList(modifierList2);
+//		infood1.setModifierList(modifierList2);
 
 		// for infood3 modifiers
 		Modifier modifier6 = new Modifier("Chicken", "", 0.00, infood3, new Date());
@@ -325,7 +342,7 @@ public class Test {
 		modifierList3.add(modifier6);
 		modifierList3.add(modifier7);
 		modifierList3.add(modifier8);
-		infood3.setModifierList(modifierList3);
+//		infood3.setModifierList(modifierList3);
 
 		Set<Food> foodList3 = new HashSet<Food>();
 		foodList3.add(infood1);
@@ -347,7 +364,7 @@ public class Test {
 		modifierList4.add(modifier9);
 		modifierList4.add(modifier10);
 		modifierList4.add(modifier11);
-		mixVegRice1.setModifierList(modifierList4);
+//		mixVegRice1.setModifierList(modifierList4);
 
 		Set<Food> foodList4 = new HashSet<Food>();
 		foodList4.add(mixVegRice1);
@@ -367,7 +384,7 @@ public class Test {
 		Set<Modifier> modifierList5 = new HashSet<Modifier>();
 		modifierList5.add(modifier12);
 		modifierList5.add(modifier13);
-		roastfood1.setModifierList(modifierList5);
+//		roastfood1.setModifierList(modifierList5);
 
 		// for roastfood3 modifiers
 		Modifier modifier14 = new Modifier("Add roast chicken", "", 1.00, roastfood3, new Date());
@@ -376,7 +393,7 @@ public class Test {
 		Set<Modifier> modifierList6 = new HashSet<Modifier>();
 		modifierList6.add(modifier14);
 		modifierList6.add(modifier15);
-		roastfood3.setModifierList(modifierList6);
+//		roastfood3.setModifierList(modifierList6);
 
 		// for roastfood4 modifiers
 		Modifier modifier16 = new Modifier("Add charsiew", "", 1.00, roastfood4, new Date());
@@ -385,7 +402,7 @@ public class Test {
 		Set<Modifier> modifierList7 = new HashSet<Modifier>();
 		modifierList7.add(modifier16);
 		modifierList7.add(modifier17);
-		roastfood4.setModifierList(modifierList7);
+//		roastfood4.setModifierList(modifierList7);
 
 		Set<Food> foodList5 = new HashSet<Food>();
 		foodList5.add(roastfood1);
@@ -410,21 +427,21 @@ public class Test {
 		Set<Modifier> modifierList8 = new HashSet<Modifier>();
 		modifierList8.add(modifier18);
 		modifierList8.add(modifier19);
-		seafood1.setModifierList(modifierList8);
+//		seafood1.setModifierList(modifierList8);
 
 		// for seafood4 modifier
 		Modifier modifier20 = new Modifier("Ask for more vegetables", "", 0.00, seafood4, new Date());
 
 		Set<Modifier> modifierList9 = new HashSet<Modifier>();
 		modifierList9.add(modifier20);
-		seafood4.setModifierList(modifierList9);
+//		seafood4.setModifierList(modifierList9);
 
 		// for seafood5 modifier
 		Modifier modifier21 = new Modifier("Ask for more vegetables", "", 0.00, seafood5, new Date());
 
 		Set<Modifier> modifierList10 = new HashSet<Modifier>();
 		modifierList10.add(modifier21);
-		seafood5.setModifierList(modifierList10);
+//		seafood5.setModifierList(modifierList10);
 
 		Set<Food> foodList6 = new HashSet<Food>();
 		foodList6.add(seafood1);
@@ -447,19 +464,19 @@ public class Test {
 		Modifier modifier22 = new Modifier("Add bittergourd", "", 0.50, fishBeehoonfood1, new Date());
 		Set<Modifier> modifierList11 = new HashSet<Modifier>();
 		modifierList11.add(modifier22);
-		fishBeehoonfood1.setModifierList(modifierList11);
+//		fishBeehoonfood1.setModifierList(modifierList11);
 
 		// for fishBeehoonfood2 modifier
 		Modifier modifier23 = new Modifier("Add bittergourd", "", 0.50, fishBeehoonfood2, new Date());
 		Set<Modifier> modifierList12 = new HashSet<Modifier>();
 		modifierList12.add(modifier23);
-		fishBeehoonfood2.setModifierList(modifierList12);
+//		fishBeehoonfood2.setModifierList(modifierList12);
 
 		// for fishBeehoonfood3 modifier
 		Modifier modifier24 = new Modifier("Add bittergourd", "", 0.50, fishBeehoonfood3, new Date());
 		Set<Modifier> modifierList13 = new HashSet<Modifier>();
 		modifierList13.add(modifier24);
-		fishBeehoonfood3.setModifierList(modifierList13);
+//		fishBeehoonfood3.setModifierList(modifierList13);
 
 		Set<Food> foodList7 = new HashSet<Food>();
 		foodList7.add(fishBeehoonfood1);
@@ -486,62 +503,62 @@ public class Test {
 		Modifier modifier25 = new Modifier("Change to juice", "", 1.90, apple, new Date());
 		Set<Modifier> modifierList14 = new HashSet<Modifier>();
 		modifierList14.add(modifier25);
-		apple.setModifierList(modifierList14);
+//		apple.setModifierList(modifierList14);
 
 		Modifier modifier26 = new Modifier("Change to juice", "", 1.90, watermelon, new Date());
 		Set<Modifier> modifierList15 = new HashSet<Modifier>();
 		modifierList15.add(modifier26);
-		watermelon.setModifierList(modifierList14);
+//		watermelon.setModifierList(modifierList14);
 
 		Modifier modifier27 = new Modifier("Change to juice", "", 1.90, dragonfruit, new Date());
 		Set<Modifier> modifierList16 = new HashSet<Modifier>();
 		modifierList16.add(modifier27);
-		dragonfruit.setModifierList(modifierList16);
+//		dragonfruit.setModifierList(modifierList16);
 
 		Modifier modifier28 = new Modifier("Change to juice", "", 1.90, pear, new Date());
 		Set<Modifier> modifierList17 = new HashSet<Modifier>();
 		modifierList17.add(modifier28);
-		pear.setModifierList(modifierList17);
+//		pear.setModifierList(modifierList17);
 
 		Modifier modifier29 = new Modifier("Change to juice", "", 1.80, honeydew, new Date());
 		Set<Modifier> modifierList18 = new HashSet<Modifier>();
 		modifierList18.add(modifier29);
-		honeydew.setModifierList(modifierList18);
+//		honeydew.setModifierList(modifierList18);
 
 		Modifier modifier30 = new Modifier("Change to juice", "", 1.90, papaya, new Date());
 		Set<Modifier> modifierList19 = new HashSet<Modifier>();
 		modifierList19.add(modifier30);
-		papaya.setModifierList(modifierList19);
+//		papaya.setModifierList(modifierList19);
 
 		Modifier modifier31 = new Modifier("Change to juice", "", 1.90, pineapple, new Date());
 		Set<Modifier> modifierList20 = new HashSet<Modifier>();
 		modifierList20.add(modifier31);
-		pineapple.setModifierList(modifierList20);
+//		pineapple.setModifierList(modifierList20);
 
 		Modifier modifier32 = new Modifier("Change to juice", "", 1.90, banana, new Date());
 		Set<Modifier> modifierList21 = new HashSet<Modifier>();
 		modifierList21.add(modifier32);
-		banana.setModifierList(modifierList21);
+//		banana.setModifierList(modifierList21);
 
 		Modifier modifier33 = new Modifier("Change to juice", "", 1.90, orange, new Date());
 		Set<Modifier> modifierList22 = new HashSet<Modifier>();
 		modifierList22.add(modifier33);
-		orange.setModifierList(modifierList22);
+//		orange.setModifierList(modifierList22);
 
 		Modifier modifier34 = new Modifier("Change to juice", "", 1.80, guava, new Date());
 		Set<Modifier> modifierList23 = new HashSet<Modifier>();
 		modifierList23.add(modifier34);
-		guava.setModifierList(modifierList23);
+//		guava.setModifierList(modifierList23);
 
 		Modifier modifier35 = new Modifier("Change to juice", "", 1.90, sarawakPineapple, new Date());
 		Set<Modifier> modifierList24 = new HashSet<Modifier>();
 		modifierList24.add(modifier35);
-		sarawakPineapple.setModifierList(modifierList24);
+//		sarawakPineapple.setModifierList(modifierList24);
 
 		Modifier modifier36 = new Modifier("Mixed fruits upsize", "", 0.50, mixedFruits, new Date());
 		Set<Modifier> modifierList25 = new HashSet<Modifier>();
 		modifierList25.add(modifier36);
-		mixedFruits.setModifierList(modifierList25);
+//		mixedFruits.setModifierList(modifierList25);
 
 		Set<Food> foodList8 = new HashSet<Food>();
 		foodList8.add(apple);

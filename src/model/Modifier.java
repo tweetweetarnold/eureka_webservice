@@ -23,7 +23,6 @@ public class Modifier {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "foodId")
 	private Food food;
-	// private image byte[];
 	private Date createDate;
 
 	public Modifier() {
