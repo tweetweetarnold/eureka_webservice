@@ -1,7 +1,6 @@
 package model;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -33,8 +32,8 @@ public class FoodOrderItem {
 	private int quantity;
 	private String remarks;
 	private Date createDate;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
-	private Set<Modifier> modifierList;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrderItem")
+	private Set<ModifierChosen> modifierChosenList;
 
 	public FoodOrderItem() {
 	}
@@ -47,7 +46,15 @@ public class FoodOrderItem {
 		this.quantity = quantity;
 		this.remarks = remarks;
 		this.createDate = createDate;
-		modifierList = new HashSet<>();
+		modifierChosenList = new HashSet<>();
+	}
+
+	public Set<ModifierChosen> getModifierChosenList() {
+		return modifierChosenList;
+	}
+
+	public void setModifierChosenList(Set<ModifierChosen> modifierChosenList) {
+		this.modifierChosenList = modifierChosenList;
 	}
 
 	public int getFoodOrderItemId() {
@@ -84,16 +91,16 @@ public class FoodOrderItem {
 
 	public double getPrice() {
 		double price = food.getPrice();
-		if (!modifierList.isEmpty()) {
-			Iterator<Modifier> iter = modifierList.iterator();
+		if (!modifierChosenList.isEmpty()) {
+			Iterator<ModifierChosen> iter = modifierChosenList.iterator();
 			while (iter.hasNext()) {
-				Modifier tempMod = (Modifier) iter.next();
+				ModifierChosen tempMod = (ModifierChosen) iter.next();
 				price += tempMod.getPrice();
 			}
 		}
 		return price;
 	}
-	
+
 	public String getPriceString() {
 		DecimalFormat df = new DecimalFormat("0.00");
 		return df.format(getPrice());
@@ -115,37 +122,30 @@ public class FoodOrderItem {
 		this.createDate = createDate;
 	}
 
-	public Set<Modifier> getModifierList() {
-		return modifierList;
-	}
-
-	public void setModifierList(HashSet<Modifier> modifierList) {
-		this.modifierList = modifierList;
-	}
-
-	public boolean equals(FoodOrderItem otherFoodItem) {
-		if (this.food.equals(otherFoodItem.getFood())) {
-			ArrayList<Modifier> modifierListOrigin = new ArrayList<Modifier>(modifierList);
-			ArrayList<Modifier> modifierListExternal = new ArrayList<Modifier>(
-					otherFoodItem.getModifierList());
-			int trueCount = 0;
-			for (Modifier m : modifierListOrigin) {
-				for (Modifier e : modifierListOrigin) {
-					if (m.equals(e)) {
-						trueCount++;
-					}
-				}
-			}
-			if (trueCount == modifierListOrigin.size()) {
-				return true;
-			} else {
-				return false;
-			}
-
-		} else {
-			return false;
-		}
-
-	}
+	// public boolean equals(FoodOrderItem otherFoodItem) {
+	// if (this.food.equals(otherFoodItem.getFood())) {
+	// ArrayList<Modifier> modifierListOrigin = new
+	// ArrayList<Modifier>(modifierList);
+	// ArrayList<Modifier> modifierListExternal = new ArrayList<Modifier>(
+	// otherFoodItem.getModifierList());
+	// int trueCount = 0;
+	// for (Modifier m : modifierListOrigin) {
+	// for (Modifier e : modifierListOrigin) {
+	// if (m.equals(e)) {
+	// trueCount++;
+	// }
+	// }
+	// }
+	// if (trueCount == modifierListOrigin.size()) {
+	// return true;
+	// } else {
+	// return false;
+	// }
+	//
+	// } else {
+	// return false;
+	// }
+	//
+	// }
 
 }

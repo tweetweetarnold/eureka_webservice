@@ -12,19 +12,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "modifierchoosen")
+@Table(name = "modifierchosen")
 public class ModifierChosen {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int modifierId;
+	private int modifierChosenId;
 	private String name;
 	private String description;
 	private double price;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "foodOrderItemId")
 	private FoodOrderItem foodOrderItem;
-	// private image byte[];
 	private Date createDate;
 
 	public ModifierChosen() {
@@ -40,11 +39,11 @@ public class ModifierChosen {
 	}
 
 	public int getModifierId() {
-		return modifierId;
+		return modifierChosenId;
 	}
 
-	public void setModifierId(int modifierId) {
-		this.modifierId = modifierId;
+	public void setModifierId(int modifierChosenId) {
+		this.modifierChosenId = modifierChosenId;
 	}
 
 	public String getName() {
