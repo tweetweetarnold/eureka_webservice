@@ -33,14 +33,13 @@ public class FoodOrderItem {
 	private int quantity;
 	private String remarks;
 	private Date createDate;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
-	private Set<Modifier> modifierList;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrderItem")
+	private Set<ModifierChosen> modifierList;
 
 	public FoodOrderItem() {
 	}
 
-	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, String remarks,
-			Date createDate) {
+	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, String remarks, Date createDate) {
 		super();
 		this.foodOrder = foodOrder;
 		this.food = food;
@@ -85,15 +84,15 @@ public class FoodOrderItem {
 	public double getPrice() {
 		double price = food.getPrice();
 		if (!modifierList.isEmpty()) {
-			Iterator<Modifier> iter = modifierList.iterator();
+			Iterator<ModifierChosen> iter = modifierList.iterator();
 			while (iter.hasNext()) {
-				Modifier tempMod = (Modifier) iter.next();
+				ModifierChosen tempMod = (ModifierChosen) iter.next();
 				price += tempMod.getPrice();
 			}
 		}
 		return price;
 	}
-	
+
 	public String getPriceString() {
 		DecimalFormat df = new DecimalFormat("0.00");
 		return df.format(getPrice());
@@ -115,27 +114,29 @@ public class FoodOrderItem {
 		this.createDate = createDate;
 	}
 
-	public Set<Modifier> getModifierList() {
+	public Set<ModifierChosen> getModifierList() {
 		return modifierList;
 	}
 
-	public void setModifierList(HashSet<Modifier> modifierList) {
+	public void setModifierList(HashSet<ModifierChosen> modifierList) {
 		this.modifierList = modifierList;
 	}
 
 	public boolean equals(FoodOrderItem otherFoodItem) {
+		System.out.println(this.food.equals(otherFoodItem.getFood()));
 		if (this.food.equals(otherFoodItem.getFood())) {
-			ArrayList<Modifier> modifierListOrigin = new ArrayList<Modifier>(modifierList);
-			ArrayList<Modifier> modifierListExternal = new ArrayList<Modifier>(
+			ArrayList<ModifierChosen> modifierListOrigin = new ArrayList<ModifierChosen>(modifierList);
+			ArrayList<ModifierChosen> modifierListExternal = new ArrayList<ModifierChosen>(
 					otherFoodItem.getModifierList());
 			int trueCount = 0;
-			for (Modifier m : modifierListOrigin) {
-				for (Modifier e : modifierListOrigin) {
+			for (ModifierChosen m : modifierListOrigin) {
+				for (ModifierChosen e : modifierListExternal) {
 					if (m.equals(e)) {
 						trueCount++;
 					}
 				}
 			}
+			System.out.println(trueCount+ " VS "+ modifierListOrigin.size());
 			if (trueCount == modifierListOrigin.size()) {
 				return true;
 			} else {

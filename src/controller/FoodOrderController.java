@@ -12,12 +12,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
+import model.Admin;
+import model.Canteen;
+import model.Company;
 import model.Employee;
 import model.Food;
 import model.FoodDisplayObject;
 import model.FoodOrder;
 import model.FoodOrderItem;
+import model.ModifierChosen;
 import model.Stall;
+import services.PasswordService;
+import value.StringValues;
 
 import org.joda.time.JodaTimePermission;
 
@@ -62,9 +68,60 @@ public class FoodOrderController {
 		cal.add(Calendar.DATE, -1);
 		String dateAfter = sdf1.format(cal.getTime());
 
-		System.out.println(string);
-		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
-				foodOrderDAO.getFoodOrderByDateAndTime(dateAfter + " 10:00:00", string + " 10:00:00"));
+//		System.out.println(string);
+//		// Start of test
+//		ArrayList<FoodOrder> testFoodOrderList = new ArrayList<FoodOrder>();
+//		Canteen canteen = new Canteen("Default Canteen", "123", new Date(), null);
+//		Stall stall = new Stall("stall123", "123", "Default Stall", 123, canteen, new Date(), null);
+//		Food food = new Food("Arnold's Fried Chicken", "Quite Nice", 2.50, stall, new Date());
+//
+//		Admin admin = new Admin("admin", PasswordService.encryptPassword("1234567"), "admin123", 123456789, new Date());
+//		Company company = new Company("XiaoDingDang Co.", null, new Date(), null, null);
+//		Employee employee = new Employee("arnold", PasswordService.encryptPassword("1234567"), "arnold", 999999999, 10,
+//				123, company, null, null, new Date());
+//		FoodOrder order = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, admin, null, new Date());
+//		FoodOrderItem foodItem1 = new FoodOrderItem(order, food, 1, "More meat", new Date());
+//		HashSet<ModifierChosen> modifierList = new HashSet<ModifierChosen>();
+//		ModifierChosen modifierChosen = new ModifierChosen("Upsize", "Upsize Arnold", 0.50, foodItem1, new Date());
+//		modifierList.add(modifierChosen);
+//		foodItem1.setModifierList(modifierList);
+//		HashSet<FoodOrderItem> foodOrderList = new HashSet<FoodOrderItem>();
+//		foodOrderList.add(foodItem1);
+//		order.setFoodOrderList(foodOrderList);
+//		testFoodOrderList.add(order);
+//		// 2nd employee Chris same order
+//		Employee employee2 = new Employee("Chris", PasswordService.encryptPassword("1234567"), "Chris", 999999999, 10,
+//				123, company, null, null, new Date());
+//		FoodOrder order2 = new FoodOrder(StringValues.ORDER_CONFIRMED, employee2, admin, null, new Date());
+//		FoodOrderItem foodItem2 = new FoodOrderItem(order2, food, 1, "More meat", new Date());
+//		HashSet<ModifierChosen> modifierList2 = new HashSet<ModifierChosen>();
+//		ModifierChosen modifierChosen2 = new ModifierChosen("Upsize", "Upsize Arnold", 0.50, foodItem2, new Date());
+//		modifierList2.add(modifierChosen2);
+//		foodItem2.setModifierList(modifierList2);
+//		HashSet<FoodOrderItem> foodOrderList2 = new HashSet<FoodOrderItem>();
+//		foodOrderList2.add(foodItem2);
+//		order2.setFoodOrderList(foodOrderList2);
+//		testFoodOrderList.add(order2);
+//		// 3rd employee different foodOrder
+//		Food food3 = new Food("FANNYS Fried Chicken", "Quite Nice", 2.50, stall, new Date());
+//		Employee employee3 = new Employee("Angelia", PasswordService.encryptPassword("1234567"), "Angelia", 999999999,
+//				10, 123, company, null, null, new Date());
+//		FoodOrder order3 = new FoodOrder(StringValues.ORDER_CONFIRMED, employee3, admin, null, new Date());
+//		FoodOrderItem foodItem3 = new FoodOrderItem(order3, food3, 1, "More meat", new Date());
+//		HashSet<ModifierChosen> modifierList3 = new HashSet<ModifierChosen>();
+//		ModifierChosen modifierChosen3 = new ModifierChosen("Upsize", "Upsize Arnold", 0.50, foodItem3, new Date());
+//		modifierList3.add(modifierChosen3);
+//		foodItem3.setModifierList(modifierList3);
+//		HashSet<FoodOrderItem> foodOrderList3 = new HashSet<FoodOrderItem>();
+//		foodOrderList3.add(foodItem3);
+//		order3.setFoodOrderList(foodOrderList3);
+//		testFoodOrderList.add(order3);
+
+//		ArrayList<FoodOrder> tempFoodOrderList = testFoodOrderList;
+
+		 ArrayList<FoodOrder> tempFoodOrderList = new
+		 ArrayList<FoodOrder>(foodOrderDAO.getFoodOrderByDateAndTime(dateAfter
+		 + " 10:00:00", string + " 10:00:00"));
 		ArrayList<FoodDisplayObject> foodDisplayList = new ArrayList<FoodDisplayObject>();
 		LinkedHashMap<String, ArrayList<FoodOrderItem>> stallToFoodItemLinkedHash = new LinkedHashMap<String, ArrayList<FoodOrderItem>>();
 		LinkedHashMap<String, ArrayList<String>> stallToUserLinkedHash = new LinkedHashMap<String, ArrayList<String>>();
@@ -88,37 +145,102 @@ public class FoodOrderController {
 					stallToFoodItemLinkedHash.put(stallName, tempFoodOrderItemToCombi);
 				}
 
-				
 			}
 
 		}
 
 		Iterator iter = stallToFoodItemLinkedHash.keySet().iterator();
+
 		int count = 1;
 		while (iter.hasNext()) {
-			HashMap<FoodOrderItem , ArrayList<String>> usernamesForFoodItem = new HashMap<FoodOrderItem, ArrayList<String>>();
+			System.out.println("Number of Stalls" + stallToFoodItemLinkedHash.size());
+
+			LinkedHashMap<FoodOrderItem, ArrayList<String>> usernamesForFoodItem = new LinkedHashMap<FoodOrderItem, ArrayList<String>>();
 			String stallName = (String) iter.next();
 			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash.get(stallName);
-			for(FoodOrderItem i :tempFoodOrderItemForDisplay){
-				ArrayList<String> usernames = new ArrayList<String>();
-				FoodOrder tempFoodOrderToDisplay = i.getFoodOrder();
-				String username = tempFoodOrderToDisplay.getEmployee().getUsername();
-				usernames.add(username);
-				if(!usernamesForFoodItem.containsKey(i)){
-					usernamesForFoodItem.put(i, usernames);
-				}else{
-					ArrayList<String> newUsernamesInput = usernamesForFoodItem.get(i);
-					newUsernamesInput.addAll(usernames);
-					usernamesForFoodItem.put(i, newUsernamesInput);
-				}
-				
-			}
 			
+			LinkedHashMap<FoodOrderItem, Integer> quantityForFoodOrderItem = new LinkedHashMap<FoodOrderItem, Integer>();
+			for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
+
+				// FoodOrder tempFoodOrderToDisplay = i.getFoodOrder();
+				// String username =
+				// tempFoodOrderToDisplay.getEmployee().getUsername();
+				//
+				//
+				// int equalsCount1 = 0;
+				// Iterator uniqueIter =
+				// usernamesForFoodItem.keySet().iterator();
+				// while (uniqueIter.hasNext()) {
+				// FoodOrderItem tempFoodOrderItem = (FoodOrderItem)
+				// uniqueIter.next();
+				// if (tempFoodOrderItem.equals(i)) {
+				// equalsCount1++;
+				// }
+				// }
+				// if (equalsCount1 == 0) {
+				// usernamesForFoodItem.put(i, usernames);
+				// }
+
+				// FoodOrder tempFoodOrderToDisplay = i.getFoodOrder();
+				// String username =
+				// tempFoodOrderToDisplay.getEmployee().getUsername();
+				// usernames.add(username);
+				// if (!usernamesForFoodItem.containsKey(i)) {
+				// usernamesForFoodItem.put(i, usernames);
+				// } else {
+				// ArrayList<String> newUsernamesInput =
+				// usernamesForFoodItem.get(i);
+				// newUsernamesInput.addAll(usernames);
+				// usernamesForFoodItem.put(i, newUsernamesInput);
+				// }
+
+				FoodOrderItem currentFoodOrderItem = i;
+				int quantity = 0;
+				Iterator uniqueIter = tempFoodOrderItemForDisplay.iterator();
+				while (uniqueIter.hasNext()) {
+					FoodOrderItem tempFoodOrderItem = (FoodOrderItem) uniqueIter.next();
+					if (tempFoodOrderItem.equals(currentFoodOrderItem)) {
+						quantity++;
+						System.out.println("Quantity check: " + quantity);
+					}
+				}
+				System.out.println("Quantity check: " + quantity);
+
+				int equalsCount2 = 0;
+				uniqueIter = quantityForFoodOrderItem.keySet().iterator();
+				while (uniqueIter.hasNext()) {
+					FoodOrderItem tempFoodOrderItem = (FoodOrderItem) uniqueIter.next();
+					if (tempFoodOrderItem.equals(i)) {
+						equalsCount2++;
+					}
+				}
+				if (equalsCount2 == 0) {
+					quantityForFoodOrderItem.put(i, quantity);
+				}
+
+			}
+
+			ArrayList<FoodOrderItem> uniqueFoodOrderItems = new ArrayList<FoodOrderItem>(
+					quantityForFoodOrderItem.keySet());
+
+			for (FoodOrderItem f : uniqueFoodOrderItems) {
+				ArrayList<String> usernames = new ArrayList<String>();
+				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
+					if(f.equals(i)){
+						String tempUsername = i.getFoodOrder().getEmployee().getUsername();
+						usernames.add(tempUsername);
+					}
+					usernamesForFoodItem.put(f, usernames);
+				}
+			}
+			for (FoodOrderItem s : uniqueFoodOrderItems) {
+				System.out.println(s.getFood().getName());
+			}
 			FoodDisplayObject tempFoodDisplay = new FoodDisplayObject(count++);
 			tempFoodDisplay.setStallName(stallName);
-			tempFoodDisplay.setFoodOrderItem(tempFoodOrderItemForDisplay);
+			tempFoodDisplay.setFoodOrderItem(uniqueFoodOrderItems);
 			tempFoodDisplay.setUsername(usernamesForFoodItem);
-			tempFoodDisplay.setQuantity();
+			tempFoodDisplay.setQuantity(quantityForFoodOrderItem);
 			foodDisplayList.add(tempFoodDisplay);
 		}
 

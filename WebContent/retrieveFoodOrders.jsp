@@ -2,9 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
-<%@ page import="model.Modifier"%>
+<%@ page import="model.ModifierChosen"%>
 <%@ page import="model.FoodDisplayObject"%>
-<%@ page import="model.FoodOrderItem"%>
+<%@ page import="model.FoodOrderItem"%>\
+<%@ page import="model.FoodOrder"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,94 +21,81 @@
 	</form>
 	<%
 		if (request.getAttribute("foodOrders") != null) {
-			ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request.getAttribute("foodOrders");
+			ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
+					.getAttribute("foodOrders");
+
+			for (FoodDisplayObject fDO : foodDisplayObjectList) {
+				String stallName = fDO.getStallName();
+				ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
+	%>
+	</br>
+	<%=stallName%>
+	<table>
+		<tr>
+			<th>food</th>
+			<th>addons</th>
+			<th>quantity</th>
+			<th>price</th>
+			<th>users</th>
+		</tr>
+		<%	double totalPrice = 0;
+			
+			for (FoodOrderItem fOI : foodOrderItemList) {
+				String foodName = fOI.getFood().getName();
+				ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierList());
+				int quantity = fDO.getQuantity(fOI);
+				double price = fOI.getPrice();
+				totalPrice+=quantity*price;
+				ArrayList<String> userList = fDO.getUsernameList(fOI);
+		%>
+		<tr>
+			<td><%=foodName%></td>
+			<td>
+				<table>
+					<% 
+			for(ModifierChosen mod : modifierList){
+				String modName = mod.getName();
+				%>
+					<tr>
+						<td><%=modName %></td>
+					</tr>
+					<%} %>
+				</table>
+			</td>
+			<td><%=quantity%></td>
+			<td><%=price%></td>
+
+			<td>
+				<table>
+					<%for(String username :userList){
+						%>
+
+					<tr>
+						<td><%=username %></td>
+					</tr>
+					<%} %>
+				</table>
+			</td>
+
+		</tr>
+		<%
+			}
+		%>
+
+	</table>
+	Total Price = <%=totalPrice %>
+	</br>
+	</br>
+
+	<%
+		}
 	%>
 
 
 
-	<table border="1">
-		<tr>
-			<th>Serial Number</th>
-			<th>Stall</th>
-			<th>Orders</th>
-			<th>Add-ons</th>
-			<th>price</th>
-			<th>quantity</th>
-			<th>total price</th>
-			<th>user</th>
-		</tr>
-		<%
-			for (FoodDisplayObject fDO : foodDisplayObjectList) {
-					double totalPrice = 0.0;
-					int serialNumber = fDO.getSerialNumber();
-					String stallName = fDO.getStallName();
-					ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
-					HashMap<FoodOrderItem, Integer> quantityList = fDO.getQuantity();
-					HashMap<FoodOrderItem, ArrayList<String>> userList = fDO.getUsername();
-		%>
-		<tr>
-			<td><%=serialNumber%></td>
-			<td><%=stallName%></td>
-			<td><table>
-					<%
-						for (FoodOrderItem fOI : foodOrderItemList) {
-									String foodName = fOI.getFood().getName();
-									Set<Modifier> modifierList = new HashSet<Modifier>(fOI.getModifierList());
-									double tempPrice = fOI.getPrice();
-									int tempQuantity = quantityList.get(fOI);
-									totalPrice+=(tempPrice*tempQuantity);
-									ArrayList<String> tempUserList = userList.get(fOI);
-					%>
-					<tr>
-						<td><%=foodName%></td>
-
-						<td><table>
-								<%
-									for (Modifier m : modifierList) {
-													String modifierName = m.getName();
-								%>
-								<tr>
-									<td><%=modifierName%></td>
-								</tr>
-								<%
-									}
-								%>
-							</table></td>
-						<td><%=tempPrice%></td>
-						<td><%=tempQuantity%></td>
-						<td><table>
-								<%
-									for (String user : tempUserList) {
-								%>
-								<tr>
-									<td><%=user%></td>
-								</tr>
-								<%
-									}
-								%>
-							</table></td>
-							<td><%=totalPrice %></td>
-					</tr>
-					<%
-						}
-					%>
-				</table></td>
-			<td></td>
-
-		</tr>
-
-
-
-
-
-
-
-		<%
-			}
+	<%
 		}
-		%>
-
-
+	%>
 
 </body>
 </html>
