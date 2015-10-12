@@ -40,7 +40,7 @@
 			<tbody>
 				<c:set var="totalPrice" value="0" />
 				<c:set var="count" value="0" />
-				<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodItem">
+				<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodItem" varStatus="loop">
 					<tr>
 						<c:set var="count" value="${count + 1}" />
 						<td>
@@ -57,6 +57,13 @@
 							<c:out value="${foodItem.priceString}" />
 							<c:set value="${totalPrice + foodItem.priceString}" var="totalPrice" />
 						</td>
+						<td>
+							<form action="DeleteFoodItemFromOrderItemsServlet" method="post">
+								<input type="hidden" id="foodPosition" name="foodPosition" value="${loop.index}" />
+								<input type="hidden" id="hello" name="hello" value="potato" />
+								<button type="submit">Delete</button>
+							</form>
+						</td>
 					</tr>
 				</c:forEach>
 				<tr>
@@ -68,6 +75,7 @@
 						<fmt:formatNumber value="${totalPrice}" var="totalPrice2" minFractionDigits="2" />
 						<c:out value="${totalPrice2}" />
 					</td>
+					<td></td>
 				</tr>
 			</tbody>
 		</table>
@@ -77,6 +85,18 @@
 			<button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 50%;">Check Out</button>
 		</form>
 
+		<br>
+		<br>
+		<!-- Success message handling -->
+		<c:if test="${not empty sessionScope.success}">
+			<div class="alert alert-success" role="alert">
+				<b>Success!</b>
+				<br>
+				<c:out value="${success}" />
+			</div>
+			<c:remove var="success" scope="session" />
+		</c:if>
+
 
 		<!-- Footer JSP Include -->
 		<jsp:include page="headerfooter/footer.jsp" />
@@ -84,7 +104,7 @@
 	</div>
 	<!-- container -->
 
-	<!-- 	Google Analytics -->
+	<!-- Google Analytics -->
 	<script>
 		(function(i, s, o, g, r, a, m) {
 			i['GoogleAnalyticsObject'] = r;

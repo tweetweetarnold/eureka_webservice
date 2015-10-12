@@ -54,10 +54,10 @@
 					<br>
 					<c:out value="${error}" />
 				</div>
+				<c:remove var="error" scope="session" />
 			</c:if>
 		</form>
 
-		<c:remove var="error" scope="session" />
 		<c:remove var="userInput" scope="session" />
 
 	</div>

@@ -76,6 +76,7 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 		session.removeAttribute("myFoodOrderItems");
 		System.out.println("myFoodOrderItems cleared");
 
+		session.setAttribute("success", "Yay! Your order has been submitted!");
 		response.sendRedirect("cart.jsp");
 	}
 }
