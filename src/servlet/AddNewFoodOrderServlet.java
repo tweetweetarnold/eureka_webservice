@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import value.StringValues;
 import model.Employee;
 import model.FoodOrder;
 import model.FoodOrderItem;
@@ -20,7 +22,7 @@ import controller.FoodOrderController;
 /**
  * Servlet implementation class AddNewFoodOrder
  */
-@WebServlet("/AddNewFoodOrder")
+@WebServlet("/AddNewFoodOrderServlet")
 public class AddNewFoodOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -56,22 +58,25 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		// Retrieve myFoodOrders and User
-		Set<FoodOrderItem> myFoodOrderItems = (HashSet<FoodOrderItem>) session
-				.getAttribute("myFoodOrderItems");
+		List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session.getAttribute("myFoodOrderItems");
 		System.out.println("MyFoodOrderItems retrieved");
+		Set<FoodOrderItem> hashMyFoodOrderItems = new HashSet<>(myFoodOrderItems);
+		
 		Employee employee = (Employee) session.getAttribute("user");
 		System.out.println("Employee retrieved");
-
-		FoodOrder foodOrder = new FoodOrder("Confirmed", employee, null, myFoodOrderItems,
-				new Date());
+		
+		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null, hashMyFoodOrderItems, new Date());
 		System.out.println("New FoodOrder created");
 
 		// Process new FoodOrder
 		FoodOrderController controller = new FoodOrderController();
-		controller.addFoodOrder(foodOrder);
+		controller.addFoodOrder(myFoodOrder);
 		System.out.println("New FoodOrder added to database");
+		
+		session.removeAttribute("myFoodOrderItems");
+		System.out.println("myFoodOrderItems cleared");
 
+		session.setAttribute("success", "Yay! Your order has been submitted!");
 		response.sendRedirect("cart.jsp");
 	}
-
 }

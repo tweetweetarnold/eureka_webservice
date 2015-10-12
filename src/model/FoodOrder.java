@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -25,8 +24,6 @@ public class FoodOrder {
 	private int foodOrderId;
 	private String status;
 	@OneToOne(cascade = CascadeType.ALL)
-	// @JoinColumns({ @JoinColumn(name = "employeeId"), @JoinColumn(name =
-	// "username") })
 	@JoinColumn(name = "username")
 	private Employee employee;
 	@ManyToOne(cascade = CascadeType.ALL)
