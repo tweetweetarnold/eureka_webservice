@@ -1,8 +1,14 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
+
+import model.Employee;
 import model.FoodOrder;
 import connection.MyConnection;
 
@@ -15,6 +21,19 @@ public class FoodOrderDAO {
 	// Retrieve FoodOrder from the DB with foodOrderID
 	public static FoodOrder getFoodOrder(int foodOrderId) {
 		return (FoodOrder) MyConnection.get(FoodOrder.class, foodOrderId);
+	}
+	
+	
+	public static List<FoodOrder> getFoodOrderSet(Employee employee){
+		List<FoodOrder> returnList = new ArrayList<>();
+		
+		List<Object> hiberList = MyConnection.getFoodOrderList(employee);
+		if (hiberList.size() != 0) {
+			for (Object o : hiberList) {
+				returnList.add((FoodOrder) o);
+			}
+		} 
+		return returnList;
 	}
 
 	// Retrive FoodOrders from the DB between two datetimes with format

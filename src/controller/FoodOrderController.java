@@ -29,6 +29,8 @@ import org.joda.time.JodaTimePermission;
 
 import com.google.gson.Gson;
 
+import connection.MyConnection;
+import dao.EmployeeDAO;
 import dao.FoodOrderDAO;
 
 public class FoodOrderController {
@@ -42,6 +44,12 @@ public class FoodOrderController {
 		foodOrderDAO.saveFoodOrder(f);
 	}
 
+	public List<FoodOrder> getFoodOrderSet(String username){
+		System.out.println(username);
+		return FoodOrderDAO.getFoodOrderSet(EmployeeDAO.getEmployeeByUsername(username));	
+	}
+	
+	
 	// Retrieve a FoodOrder by id
 	public FoodOrder getFoodOrder(int foodOrderId) {
 		return foodOrderDAO.getFoodOrder(foodOrderId);

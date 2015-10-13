@@ -1,5 +1,6 @@
 package connection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Admin;
@@ -13,6 +14,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 
 public class MyConnection {
 	private static SessionFactory sessionFactory;
@@ -30,13 +32,11 @@ public class MyConnection {
 				// Setting SessionFactory
 				if (onOpenshift) {
 					// if application on OpenShift
-					sessionFactory = new Configuration().configure("hibernate.cfg.xml")
-							.buildSessionFactory();
+					sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 					System.out.println("hibernate.cfg.xml is loaded");
 				} else {
 					// if application on localhost
-					sessionFactory = new Configuration().configure("hibernate-local.cfg.xml")
-							.buildSessionFactory();
+					sessionFactory = new Configuration().configure("hibernate-local.cfg.xml").buildSessionFactory();
 					System.out.println("hibernate-local.cfg.xml is loaded");
 				}
 				System.out.println("SessionFactory is set: " + sessionFactory);
@@ -119,6 +119,23 @@ public class MyConnection {
 		return list;
 	}
 
+	public static List<Object> getFoodOrderList(Employee employee) {
+		Session session = getSession();
+		session.beginTransaction();
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(FoodOrder.class);
+		String username = employee.getUsername();
+		criteria.add(Restrictions.eq("employee", employee)).list();
+		list = (List<Object>) criteria.list();
+
+		// Criteria criteria = dc.getExecutableCriteria(session);
+
+		session.getTransaction().commit();
+		session.close();
+		return list;
+
+	}
+
 	public static List<Object> get(String sql) {
 		Session session = getSession();
 		session.beginTransaction();
@@ -129,8 +146,7 @@ public class MyConnection {
 		session.close();
 		return list;
 	}
-	
-	
+
 	public static List<Object> get(String sql, String past, String present) {
 		Session session = getSession();
 		session.beginTransaction();
@@ -143,7 +159,6 @@ public class MyConnection {
 		// closeAll();
 		return list;
 	}
-	
 
 	public static List<Object> getEmployee(String sql) {
 		Session session = getSession();
