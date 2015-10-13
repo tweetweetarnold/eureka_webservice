@@ -23,6 +23,7 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
+<link href="resources/css/sticky-footer.css" rel="stylesheet">
 <link href="resources/css/shop-homepage.css" rel="stylesheet">
 
 </head>
@@ -128,11 +129,11 @@
 
 		<hr>
 
-		<!-- Footer JSP Include -->
-		<jsp:include page="headerfooter/footer.jsp" />
-
 	</div>
 	<!-- /.container -->
+
+	<!-- Footer JSP Include -->
+	<jsp:include page="headerfooter/footer.jsp" />
 
 	<!-- jQuery -->
 	<script src="resources/js/jquery.js"></script>

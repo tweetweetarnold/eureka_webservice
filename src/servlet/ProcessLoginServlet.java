@@ -67,55 +67,33 @@ public class ProcessLoginServlet extends HttpServlet {
 		try {
 			LoginController loginController = new LoginController();
 
-			if (username.equals("admin")) {
-				// ** if user is admin
+			// Verify user credentials. if user does not exist, returns null
+			Employee emp = loginController.authenticateUser(username,
+					PasswordService.encryptPassword(inputPwd));
+			System.out.println("User is authenticated: " + emp.getName());
 
-				// Verify admin credentials. if admin does not exist, returns
-				// null
-				Admin admin = loginController.authenticateAdmin(username, inputPwd);
-				System.out.println("Admin is authenticated: " + admin.getName());
+			// *** For Development only ***
+			// creates a tokenID using UUID (Universalised Unique Identifier
+			// Object)
+			// the user's username is tagged at the end of the token
+			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getUsername()
+					+ "|";
 
-				String tokenID = UUID.randomUUID().toString().toUpperCase() + "|"
-						+ admin.getUsername() + "|";
+			// Setting user and token
+			session.setAttribute("user", emp);
+			session.setAttribute("tokenID", tokenID);
+			System.out.println("TokenID is set in session");
 
-				// Setting admin and token
-				session.setAttribute("admin", admin);
-				session.setAttribute("tokenID", tokenID);
-				System.out.println("TokenID is set in session");
+			// Get all food data from database and save into session for
+			// display
+			CanteenController canteenController = new CanteenController();
+			List<Food> allFoodList = canteenController.getAllFood();
+			System.out.println("LoginServlet foodListSize: " + allFoodList.size());
 
-				response.sendRedirect("adminHomepage.jsp");
+			session.setAttribute("allFood", allFoodList);
+			System.out.println(allFoodList);
 
-			} else {
-				// ** if normal user
-
-				// Verify user credentials. if user does not exist, returns null
-				Employee emp = loginController.authenticateUser(username,
-						PasswordService.encryptPassword(inputPwd));
-				System.out.println("User is authenticated: " + emp.getName());
-
-				// *** For Development only ***
-				// creates a tokenID using UUID (Universalised Unique Identifier
-				// Object)
-				// the user's username is tagged at the end of the token
-				String tokenID = UUID.randomUUID().toString().toUpperCase() + "|"
-						+ emp.getUsername() + "|";
-
-				// Setting user and token
-				session.setAttribute("user", emp);
-				session.setAttribute("tokenID", tokenID);
-				System.out.println("TokenID is set in session");
-
-				// Get all food data from database and save into session for
-				// display
-				CanteenController canteenController = new CanteenController();
-				List<Food> allFoodList = canteenController.getAllFood();
-				System.out.println("LoginServlet foodListSize: " + allFoodList.size());
-
-				session.setAttribute("allFood", allFoodList);
-				System.out.println(allFoodList);
-
-				response.sendRedirect("homepage.jsp");
-			}
+			response.sendRedirect("homepage.jsp");
 
 		} catch (Exception e) {
 			System.out.println("Exception thrown. Incorrect credentials.");

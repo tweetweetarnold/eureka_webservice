@@ -16,6 +16,7 @@
 
 <!-- Custom CSS -->
 <link href="resources/css/shop-homepage.css" rel="stylesheet">
+<link href="resources/css/sticky-footer.css" rel="stylesheet">
 
 </head>
 <body>
@@ -97,12 +98,11 @@
 			<c:remove var="success" scope="session" />
 		</c:if>
 
-
-		<!-- Footer JSP Include -->
-		<jsp:include page="headerfooter/footer.jsp" />
-
 	</div>
 	<!-- container -->
+
+	<!-- Footer JSP Include -->
+	<jsp:include page="headerfooter/footer.jsp" />
 
 	<!-- Google Analytics -->
 	<script>

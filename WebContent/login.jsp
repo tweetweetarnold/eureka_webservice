@@ -69,8 +69,6 @@
 
 		<c:remove var="username" scope="session" />
 
-
-
 	</div>
 	<!-- /container -->
 

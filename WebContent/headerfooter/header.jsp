@@ -18,6 +18,9 @@
 						<a href="profile.jsp">Profile</a>
 					</li>
 					<li>
+						<a href="payment.jsp">Payment</a>
+					</li>
+					<li>
 						<a href="cart.jsp">Cart</a>
 					</li>
 					<li>

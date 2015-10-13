@@ -1,11 +1,9 @@
 <!-- Footer -->
 <%@page import="java.util.Date"%>
-<footer>
+<footer class="footer">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="container">
 			<p>Copyright &copy; Eureka 2015</p>
-		</div>
-		<div class="col-lg-12">
 			<p>Version 1.1</p>
 		</div>
 	</div>

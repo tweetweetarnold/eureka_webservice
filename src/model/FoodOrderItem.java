@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,7 +23,7 @@ import javax.persistence.Table;
 public class FoodOrderItem {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int foodOrderItemId;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "foodOrderId")
@@ -34,14 +35,13 @@ public class FoodOrderItem {
 	private String remarks;
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrderItem")
-
 	private Set<ModifierChosen> modifierChosenList;
-
 
 	public FoodOrderItem() {
 	}
 
-	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, String remarks, Date createDate) {
+	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, String remarks,
+			Date createDate) {
 		super();
 		this.foodOrder = foodOrder;
 		this.food = food;
@@ -126,7 +126,6 @@ public class FoodOrderItem {
 		this.createDate = createDate;
 	}
 
-
 	public Set<ModifierChosen> getModifierList() {
 		return modifierChosenList;
 	}
@@ -138,7 +137,8 @@ public class FoodOrderItem {
 	public boolean equals(FoodOrderItem otherFoodItem) {
 		System.out.println(this.food.equals(otherFoodItem.getFood()));
 		if (this.food.equals(otherFoodItem.getFood())) {
-			ArrayList<ModifierChosen> modifierListOrigin = new ArrayList<ModifierChosen>(modifierChosenList);
+			ArrayList<ModifierChosen> modifierListOrigin = new ArrayList<ModifierChosen>(
+					modifierChosenList);
 			ArrayList<ModifierChosen> modifierListExternal = new ArrayList<ModifierChosen>(
 					otherFoodItem.getModifierList());
 			int trueCount = 0;
@@ -149,7 +149,7 @@ public class FoodOrderItem {
 					}
 				}
 			}
-			System.out.println(trueCount+ " VS "+ modifierListOrigin.size());
+			System.out.println(trueCount + " VS " + modifierListOrigin.size());
 			if (trueCount == modifierListOrigin.size()) {
 				return true;
 			} else {
@@ -187,6 +187,5 @@ public class FoodOrderItem {
 	// }
 	//
 	// }
-
 
 }

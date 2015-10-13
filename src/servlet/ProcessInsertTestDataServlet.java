@@ -48,7 +48,7 @@ public class ProcessInsertTestDataServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		Test.main(null);
-		out.println("Data is inserted.");
+		out.println("Database is overridden with data from Test.java.");
 	}
 
 }

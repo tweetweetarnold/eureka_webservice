@@ -10,6 +10,7 @@
 
 <!-- Custom CSS -->
 <link href="resources/css/shop-homepage.css" rel="stylesheet">
+<link href="resources/css/sticky-footer.css" rel="stylesheet">
 
 </head>
 <body>
@@ -44,12 +45,12 @@
 
 		</div>
 		<!-- center align -->
-		
-		<!-- Footer JSP Include -->
-			<jsp:include page="headerfooter/footer.jsp" />
-			
+
 	</div>
 	<!-- container -->
+
+	<!-- Footer JSP Include -->
+	<jsp:include page="headerfooter/footer.jsp" />
 
 
 </body>
