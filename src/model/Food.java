@@ -25,25 +25,35 @@ public class Food {
 	private String name;
 	private String description;
 	private double price;
+	private byte[] image;
+	private Date createDate;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "stallId")
 	private Stall stall;
-	// private image byte[];
-	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<Modifier> modifierList;
 
 	public Food() {
 	}
 
-	public Food(String name, String description, double price, Stall stall, Date createDate) {
+	public Food(String name, String description, double price, byte[] image, Stall stall,
+			Date createDate) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.stall = stall;
+		this.image = image;
 		this.createDate = createDate;
 		this.modifierList = new HashSet<>();
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	public int getFoodId() {

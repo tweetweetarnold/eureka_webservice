@@ -18,12 +18,6 @@
 						<a href="profile.jsp">Profile</a>
 					</li>
 					<li>
-						<a href="#">How to order</a>
-					</li>
-					<li>
-						<a href="#">Contact</a>
-					</li>
-					<li>
 						<a href="cart.jsp">Cart</a>
 					</li>
 					<li>
