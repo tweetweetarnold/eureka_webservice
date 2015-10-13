@@ -49,7 +49,6 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doProcess(request, response);
-
 	}
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
@@ -58,21 +57,26 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		// Retrieve myFoodOrders and User
-		List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session.getAttribute("myFoodOrderItems");
+		List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session
+				.getAttribute("myFoodOrderItems");
 		System.out.println("MyFoodOrderItems retrieved");
 		Set<FoodOrderItem> hashMyFoodOrderItems = new HashSet<>(myFoodOrderItems);
-		
+
 		Employee employee = (Employee) session.getAttribute("user");
 		System.out.println("Employee retrieved");
-		
-		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, hashMyFoodOrderItems, new Date());
+
+		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_CONFIRMED, employee,
+				hashMyFoodOrderItems, new Date());
 		System.out.println("New FoodOrder created");
+
+		employee.setAmountOwed(employee.getAmountOwed() + myFoodOrder.getFoodOrderTotalPrice());
+		System.out.println("Employee amount owed updated");
 
 		// Process new FoodOrder
 		FoodOrderController controller = new FoodOrderController();
 		controller.addFoodOrder(myFoodOrder);
 		System.out.println("New FoodOrder added to database");
-		
+
 		session.removeAttribute("myFoodOrderItems");
 		System.out.println("myFoodOrderItems cleared");
 

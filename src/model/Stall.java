@@ -20,8 +20,6 @@ public class Stall {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int stallId;
-	private String username;
-	private String password;
 	private String name;
 	private long contactNo;
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -34,11 +32,8 @@ public class Stall {
 	public Stall() {
 	}
 
-	public Stall(String username, String password, String name, long contactNo, Canteen canteen,
-			Date createDate, Set<Food> foodList) {
+	public Stall(String name, long contactNo, Canteen canteen, Date createDate, Set<Food> foodList) {
 		super();
-		this.username = username;
-		this.password = password;
 		this.name = name;
 		this.contactNo = contactNo;
 		this.canteen = canteen;
@@ -52,22 +47,6 @@ public class Stall {
 
 	public void setStallId(int stallId) {
 		this.stallId = stallId;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getName() {

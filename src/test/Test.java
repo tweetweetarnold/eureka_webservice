@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.Session;
-
 import model.Admin;
 import model.Canteen;
 import model.Company;
@@ -16,9 +14,13 @@ import model.FoodOrderItem;
 import model.Modifier;
 import model.ModifierChosen;
 import model.Stall;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import services.PasswordService;
 import value.StringValues;
-import connection.MyConnection;
 
 public class Test {
 
@@ -27,18 +29,26 @@ public class Test {
 		// **************************************** Arnold Data
 		// ****************************************
 
-		Session session = MyConnection.getSession();
+		// ************* WARNING, THIS HIBERNATE CONFIG FILE WILL CLEAR
+		// EVERYTHING IN DATABASE AND POPULATE WITH BELOW
+		// ************************************************************************************************************
+		SessionFactory sessionFactory = new Configuration()
+				.configure("hibernate-localtest.cfg.xml").buildSessionFactory();
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+		// ************************************************************************************************************
+		// ************* WARNING, THIS HIBERNATE CONFIG FILE WILL CLEAR
+		// EVERYTHING IN DATABASE AND POPULATE WITH BELOW
 
 		Canteen canteen = new Canteen("Default Canteen", "123", new Date(), null);
-		Stall stall = new Stall("stall123", "123", "Default Stall", 123, canteen, new Date(), null);
+		Stall stall = new Stall("Default Stall", 123456789, canteen, new Date(), null);
 		Food food = new Food("Arnold's Fried Chicken", "Quite Nice", 2.50, null, stall, new Date());
 
 		Admin admin = new Admin("admin", PasswordService.encryptPassword("1234567"), "admin123",
 				123456789, new Date());
-		Company company = new Company("XiaoDingDang Co.", null, new Date(), null, null);
+		Company company = new Company("XiaoDingDang Co.", new Date(), null, null);
 		Employee employee = new Employee("arnold", PasswordService.encryptPassword("1234567"),
-				"Arnold Lee", 12345678, 10, 123, company, null, null, new Date());
+				"Arnold Lee", 987654321, 12345678, company, new Date());
 		FoodOrder order = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null, new Date());
 		FoodOrderItem foodItem = new FoodOrderItem(order, food, 1, "More meat", new Date());
 
@@ -53,7 +63,7 @@ public class Test {
 		order.setFoodOrderList(foodOrderList);
 		Set<Employee> employeeList = new HashSet<>();
 		employeeList.add(employee);
-		company.setEmployeeList(employeeList);
+		// company.setEmployeeList(employeeList);
 		Set<Food> foodList = new HashSet<>();
 		employee.setFavouriteList(foodList);
 		foodList.add(food);
@@ -83,8 +93,8 @@ public class Test {
 		session.save(order);
 		session.save(foodItem);
 
-//		session.getTransaction().commit();
-//		session.close();
+		// session.getTransaction().commit();
+		// session.close();
 
 		// **************************************** End Arnold Data
 		// ****************************************
@@ -105,16 +115,14 @@ public class Test {
 		Set<Food> foodListB10 = new HashSet<>();
 		Set<Food> foodListB11 = new HashSet<>();
 
-		Stall stall1 = new Stall("Sliced Fish Bee Hoon Stall", "123", "Fish Slice Bee Hoon",
-				91379160, null, new Date(), null);
+		Stall stall1 = new Stall("Sliced Fish Bee Hoon Stall", 91379160, null, new Date(), null);
 		Food food1 = new Food("Fish Slice Bee Hoon", "", 3.70, null, stall1, new Date());
 		Food food2 = new Food("Fish Soup and Rice", "", 4.70, null, stall1, new Date());
 		foodListB1.add(food1);
 		foodListB1.add(food2);
 		stall1.setFoodList(foodListB1);
 
-		Stall stall2 = new Stall("Malay food Stall", "123", "Malay food Stall", 81145966, null,
-				new Date(), null);
+		Stall stall2 = new Stall("Malay food Stall", 81145966, null, new Date(), null);
 		Food food3 = new Food("Malay Chicken List", "", 3.00, null, stall2, new Date());
 		Food food4 = new Food("Malay Fish List", "", 3.00, null, stall2, new Date());
 		Food food5 = new Food("Malay Mutton List", "", 3.00, null, stall2, new Date());
@@ -139,22 +147,19 @@ public class Test {
 		foodListB2.add(food5);
 		stall2.setFoodList(foodListB2);
 
-		Stall stall3 = new Stall("Mixed Rice Stall", "123", "Mixed Rice Stall", 93482772, null,
-				new Date(), null);
+		Stall stall3 = new Stall("Mixed Rice Stall", 93482772, null, new Date(), null);
 		Food food6 = new Food("Mixed Rice", "", 3.00, null, stall3, new Date());
 		Food food7 = new Food("Porridge", "", 3.00, null, stall3, new Date());
 		foodListB3.add(food6);
 		foodListB3.add(food7);
 		stall3.setFoodList(foodListB3);
 
-		Stall stall4 = new Stall("Wanton Mee Stall", "123", "Wanton Mee Stall", 0, null,
-				new Date(), foodListB4);
+		Stall stall4 = new Stall("Wanton Mee Stall", 0, null, new Date(), foodListB4);
 		Food food8 = new Food("Wanton Mee", "", 3.00, null, stall4, new Date());
 		foodListB4.add(food8);
 		stall4.setFoodList(foodListB4);
 
-		Stall stall5 = new Stall("Indian Food Stall", "123", "Indian Food Stall", 93841009, null,
-				new Date(), null);
+		Stall stall5 = new Stall("Indian Food Stall", 93841009, null, new Date(), null);
 		Food food9 = new Food("Indian Chicken List", "", 3.50, null, stall5, new Date());
 		Food food10 = new Food("Indian Fish List", "", 3.50, null, stall5, new Date());
 		Food food11 = new Food("Mutton Briyani", "", 4.00, null, stall5, new Date());
@@ -165,8 +170,8 @@ public class Test {
 		foodListB5.add(food12);
 		stall5.setFoodList(foodListB5);
 
-		Stall stall6 = new Stall("Roast Duck & Chicken Rice Stall", "123",
-				"Roast Duck & Chicken Rice Stall", 98427347, null, new Date(), null);
+		Stall stall6 = new Stall("Roast Duck & Chicken Rice Stall", 98427347, null, new Date(),
+				null);
 		Food food13 = new Food("Roast Chicken Rice", "", 2.50, null, stall6, new Date());
 		Food food14 = new Food("CharSiew Rice", "", 2.50, null, stall6, new Date());
 		Food food15 = new Food("Roast Meat Rice", "", 2.50, null, stall6, new Date());
@@ -177,8 +182,7 @@ public class Test {
 		foodListB6.add(food15);
 		stall6.setFoodList(foodListB6);
 
-		Stall stall7 = new Stall("REX(Halal)", "123", "REX(Halal)", 62684806, null, new Date(),
-				null);
+		Stall stall7 = new Stall("REX(Halal)", 62684806, null, new Date(), null);
 		Food food16 = new Food("Chicken Rice", "", 3.00, null, stall7, new Date());
 		Food food17 = new Food("Chicken Fried Rice", "", 3.00, null, stall7, new Date());
 		Food food18 = new Food("Seafood Fried Rice", "", 3.50, null, stall7, new Date());
@@ -203,8 +207,7 @@ public class Test {
 		foodListB7.add(food23);
 		stall7.setFoodList(foodListB7);
 
-		Stall stall8 = new Stall("Vegetarian Stall", "123", "Vegetarian Stall", 91182963, null,
-				new Date(), null);
+		Stall stall8 = new Stall("Vegetarian Stall", 91182963, null, new Date(), null);
 		Food food24 = new Food("Vegetarian Rice", "", 2.50, null, stall8, new Date());
 		Food food25 = new Food("Vegetarian Beehoon", "", 2.50, null, stall8, new Date());
 		Food food26 = new Food("Vegetarian Mee", "", 2.50, null, stall8, new Date());
@@ -213,8 +216,8 @@ public class Test {
 		foodListB8.add(food26);
 		stall8.setFoodList(foodListB8);
 
-		Stall stall9 = new Stall("Minced Meat Noodles Stall(Closed On Tuesday)", "123",
-				"Minced Meat Noodles Stall(Closed On Tuesday)", 93686070, null, new Date(), null);
+		Stall stall9 = new Stall("Minced Meat Noodles Stall(Closed On Tuesday)", 93686070, null,
+				new Date(), null);
 		Food food27 = new Food("Minced Meat Noodles", "upsize 3.20", 2.70, null, stall9, new Date());
 
 		Modifier modifierA27 = new Modifier("upsize", "", 0.50, food27, new Date());
@@ -225,8 +228,7 @@ public class Test {
 		foodListB9.add(food27);
 		stall9.setFoodList(foodListB9);
 
-		Stall stall10 = new Stall("Noodle Stall", "123", "Noodles Stall", 96946576, null,
-				new Date(), null);
+		Stall stall10 = new Stall("Noodle Stall", 96946576, null, new Date(), null);
 		Food food28 = new Food("Lor Mee", "", 3.00, null, stall10, new Date());
 		Food food29 = new Food("Prawn Mee", "", 3.00, null, stall10, new Date());
 		Food food30 = new Food("Fishball Noodles", "", 3.00, null, stall10, new Date());
@@ -241,8 +243,7 @@ public class Test {
 		foodListB10.add(food33);
 		stall10.setFoodList(foodListB10);
 
-		Stall stall11 = new Stall("Fruit Stall", "123", "Fruit Stall", 91151608, null, new Date(),
-				null);
+		Stall stall11 = new Stall("Fruit Stall", 91151608, null, new Date(), null);
 		Food food34 = new Food("Apple", "", 0.60, null, stall11, new Date());
 		Food food35 = new Food("Watermelon", "", 0.60, null, stall11, new Date());
 		Food food36 = new Food("DragonFruit", "", 0.60, null, stall11, new Date());
@@ -300,8 +301,7 @@ public class Test {
 
 		Canteen canteen1 = new Canteen("Jurong Canteen", "123", new Date(), null);
 
-		Stall kuehStall = new Stall("Kueh Stall", "123", "Oasis Kueh Stall", 90685620, canteen1,
-				new Date(), null);
+		Stall kuehStall = new Stall("Oasis Kueh Stall", 90685620, canteen1, new Date(), null);
 		Food kuehfood1 = new Food("Chee Cheong Fun", "", 0.60, null, kuehStall, new Date());
 		Food kuehfood2 = new Food("Yam cake", "", 1.20, null, kuehStall, new Date());
 		Food kuehfood3 = new Food("Dumpling", "", 0.90, null, kuehStall, new Date());
@@ -319,8 +319,7 @@ public class Test {
 		foodList1.add(kuehfood6);
 		kuehStall.setFoodList(foodList1);
 
-		Stall malayStall = new Stall("Malay Stall", "123", "Oasis Malay Stall", 93848341, canteen1,
-				new Date(), null);
+		Stall malayStall = new Stall("Oasis Malay Stall", 93848341, canteen1, new Date(), null);
 		Food mfood1 = new Food("Mixed Veg Rice", "ask for more vegs, less fried meat", 3.70, null,
 				malayStall, new Date());
 
@@ -338,8 +337,7 @@ public class Test {
 
 		malayStall.setFoodList(foodList2);
 
-		Stall indianStall = new Stall("Indian Stall", "123", "Indian Stall", 98717752, canteen1,
-				new Date(), null);
+		Stall indianStall = new Stall("Indian Stall", 98717752, canteen1, new Date(), null);
 		Food infood1 = new Food("White Rice", "Chicken/Fish/Mutton", 4.00, null, indianStall,
 				new Date());
 		Food infood2 = new Food("Vegetable White Rice", "", 3.00, null, indianStall, new Date());
@@ -374,8 +372,8 @@ public class Test {
 		foodList3.add(infood3);
 		indianStall.setFoodList(foodList3);
 
-		Stall chineseMixVegStall = new Stall("Chinese Stall", "123", "Oasis Chinese Mix Veg Stall",
-				93848341, canteen1, new Date(), null);
+		Stall chineseMixVegStall = new Stall("Oasis Chinese Mix Veg Stall", 93848341, canteen1,
+				new Date(), null);
 		Food mixVegRice1 = new Food("Mix Veg Rice",
 				"ask for more meat, less fried meat, or upsize to $3.50", 3.00, null,
 				chineseMixVegStall, new Date());
@@ -397,8 +395,7 @@ public class Test {
 		foodList4.add(mixVegRice1);
 		chineseMixVegStall.setFoodList(foodList4);
 
-		Stall roastMeatStall = new Stall("Roast Meat Stall", "123", "Roast Meat Stall", 123,
-				canteen1, new Date(), null);
+		Stall roastMeatStall = new Stall("Roast Meat Stall", 123, canteen1, new Date(), null);
 		Food roastfood1 = new Food("Roast Chicken Rice", "2 meat choices $4", 3.00, null,
 				roastMeatStall, new Date());
 		Food roastfood2 = new Food("Wanton Mee", "", 3.20, null, roastMeatStall, new Date());
@@ -441,8 +438,8 @@ public class Test {
 		foodList5.add(roastfood4);
 		roastMeatStall.setFoodList(foodList5);
 
-		Stall seafoodTzeCharStall = new Stall("Tze Char Stall", "123", "Seafood Tze Char Stall",
-				92262376, canteen1, new Date(), null);
+		Stall seafoodTzeCharStall = new Stall("Seafood Tze Char Stall", 92262376, canteen1,
+				new Date(), null);
 
 		Food seafood1 = new Food("Hor Fun", "dry type $4.00", 3.70, null, seafoodTzeCharStall,
 				new Date());
@@ -486,8 +483,8 @@ public class Test {
 		foodList6.add(seafood5);
 		seafoodTzeCharStall.setFoodList(foodList6);
 
-		Stall fishBeehoonStall = new Stall("Fish Bee Hoon Stall", "123", "Fish Beehoon Stall",
-				98367790, canteen1, new Date(), null);
+		Stall fishBeehoonStall = new Stall("Fish Beehoon Stall", 98367790, canteen1, new Date(),
+				null);
 		Food fishBeehoonfood1 = new Food("Fish Soup With Bee Hoon", "add bittergourd: $0.50", 3.50,
 				null, fishBeehoonStall, new Date());
 		Food fishBeehoonfood2 = new Food("Fish Soup With Rice", "add bittergourd: $0.50", 4.00,
@@ -523,8 +520,7 @@ public class Test {
 
 		fishBeehoonStall.setFoodList(foodList7);
 
-		Stall fruitStall = new Stall("Fruit Stall", "123", "Fruit Stall", 91151608, canteen1,
-				new Date(), null);
+		Stall fruitStall = new Stall("Fruit Stall", 91151608, canteen1, new Date(), null);
 		Food apple = new Food("Apple", "change to juice $2.50", 0.60, null, fruitStall, new Date());
 		Food watermelon = new Food("Watermelon", "change to juice $2.50", 0.60, null, fruitStall,
 				new Date());
@@ -797,7 +793,7 @@ public class Test {
 
 		// **************************************** End insert of mock data
 		// ****************************************
-		
+
 		session.getTransaction().commit();
 		session.close();
 

@@ -1,11 +1,7 @@
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
-<%@ page import="model.ModifierChosen"%>
-<%@ page import="model.FoodDisplayObject"%>
-<%@ page import="model.FoodOrderItem"%>\
-<%@ page import="model.FoodOrder"%>
+<%@ page import="model.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -16,17 +12,17 @@
 <body>
 	Hi there! are you ready to retrieve today's orders?
 
-	<form action="retrieveFoodOrdersServlet" method="post">
+	<form action="RetrieveFoodOrdersServlet" method="post">
 		<input type="submit" value="YES">
 	</form>
 	<%
 		if (request.getAttribute("foodOrders") != null) {
-			ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
-					.getAttribute("foodOrders");
+		ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
+		.getAttribute("foodOrders");
 
-			for (FoodDisplayObject fDO : foodDisplayObjectList) {
-				String stallName = fDO.getStallName();
-				ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
+		for (FoodDisplayObject fDO : foodDisplayObjectList) {
+			String stallName = fDO.getStallName();
+			ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
 	%>
 	</br>
 	<%=stallName%>
@@ -38,7 +34,8 @@
 			<th>price</th>
 			<th>users</th>
 		</tr>
-		<%	double totalPrice = 0;
+		<%
+			double totalPrice = 0;
 			
 			for (FoodOrderItem fOI : foodOrderItemList) {
 				String foodName = fOI.getFood().getName();
@@ -52,14 +49,16 @@
 			<td><%=foodName%></td>
 			<td>
 				<table>
-					<% 
-			for(ModifierChosen mod : modifierList){
-				String modName = mod.getName();
-				%>
+					<%
+						for(ModifierChosen mod : modifierList){
+																			String modName = mod.getName();
+					%>
 					<tr>
-						<td><%=modName %></td>
+						<td><%=modName%></td>
 					</tr>
-					<%} %>
+					<%
+						}
+					%>
 				</table>
 			</td>
 			<td><%=quantity%></td>
@@ -67,13 +66,16 @@
 
 			<td>
 				<table>
-					<%for(String username :userList){
-						%>
+					<%
+						for(String username :userList){
+					%>
 
 					<tr>
-						<td><%=username %></td>
+						<td><%=username%></td>
 					</tr>
-					<%} %>
+					<%
+						}
+					%>
 				</table>
 			</td>
 
@@ -83,7 +85,8 @@
 		%>
 
 	</table>
-	Total Price = <%=totalPrice %>
+	Total Price =
+	<%=totalPrice%>
 	</br>
 	</br>
 

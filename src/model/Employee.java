@@ -3,29 +3,31 @@
  */
 package model;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import value.StringValues;
+
 @Entity
 @Table(name = "employee")
-public class Employee implements Serializable {
+public class Employee {
 
-	@EmbeddedId
-	private EmployeePK pk;
+	// @EmbeddedId
+	@Id
+	private String username;
 	private String password, name;
 	private long creditCardNo;
-	private long eDollars;
+	private double amountOwed;
 	private long contactNo;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "companyId")
@@ -34,51 +36,71 @@ public class Employee implements Serializable {
 	private Set<Food> favouriteList;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<FoodOrder> orderHistory;
+	private String status;
 	private Date createDate;
 
 	public Employee() {
 	}
 
 	public Employee(String username, String password, String name, long creditCardNo,
-			long eDollars, long contactNo, Company company, Set<Food> favouriteList,
-			Set<FoodOrder> orderHistory, Date createDate) {
+			long contactNo, Company company, Date createDate) {
 		super();
-		this.pk = new EmployeePK(username);
+		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.creditCardNo = creditCardNo;
-		this.eDollars = eDollars;
+		this.amountOwed = 0;
 		this.contactNo = contactNo;
 		this.company = company;
-		this.favouriteList = favouriteList;
-		this.orderHistory = orderHistory;
+		this.status = StringValues.EMPLOYEE_OK;
+		this.favouriteList = new HashSet<>();
+		this.orderHistory = new HashSet<>();
 		this.createDate = createDate;
 	}
 
-	@Embeddable
-	public static class EmployeePK implements Serializable {
-
-		private String username;
-
-		public EmployeePK() {
-		}
-
-		public EmployeePK(String username) {
-			this.username = username;
-		}
-
-		public String getUsername() {
-			return username;
-		}
-
-		public void setUsername(String username) {
-			this.username = username;
-		}
-
-	}
+	// @Embeddable
+	// public static class EmployeePK implements Serializable {
+	//
+	// private String username;
+	//
+	// public EmployeePK() {
+	// }
+	//
+	// public EmployeePK(String username) {
+	// this.username = username;
+	// }
+	//
+	// public String getUsername() {
+	// return username;
+	// }
+	//
+	// public void setUsername(String username) {
+	// this.username = username;
+	// }
+	// }
 
 	public String getUsername() {
-		return pk.getUsername();
+		return username;
+	}
+
+	public double getAmountOwed() {
+		return amountOwed;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setAmountOwed(double amountOwed) {
+		this.amountOwed = amountOwed;
 	}
 
 	public String getPassword() {
@@ -103,14 +125,6 @@ public class Employee implements Serializable {
 
 	public void setCreditCardNo(long creditCardNo) {
 		this.creditCardNo = creditCardNo;
-	}
-
-	public long geteDollars() {
-		return eDollars;
-	}
-
-	public void seteDollars(long eDollars) {
-		this.eDollars = eDollars;
 	}
 
 	public long getContactNo() {

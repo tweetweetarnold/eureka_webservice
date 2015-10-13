@@ -6,3 +6,4 @@
 target
 .settings/*
 !.settings/.jsdtscope
+composite_primary_key_example.txt

@@ -12,11 +12,11 @@ public class RegistrationController {
 	public String registerUser(String username, String password, String name, long creditCardNo,
 			long contactNo, String companyName) {
 
-		Company company = new Company(companyName, null, new Date(), null, null);
+		Company company = new Company(companyName, new Date(), null, null);
 		String encryptPassword = PasswordService.encryptPassword(password);
 
-		Employee newEmployee = new Employee(username, encryptPassword, name, creditCardNo, 10,
-				contactNo, company, null, null, new Date());
+		Employee newEmployee = new Employee(username, encryptPassword, name, creditCardNo,
+				contactNo, company, new Date());
 		EmployeeDAO.saveEmployee(newEmployee);
 		String id = newEmployee.getUsername();
 
