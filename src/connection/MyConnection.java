@@ -151,7 +151,23 @@ public class MyConnection {
 		session.close();
 		return list.get(0);
 	}
+	
+	//getting list of users whose payment status is owed(the input parameter)
+	public static List<Object> getPaymentOwedList(String status) {
+		Session session = getSession();
+		session.beginTransaction();
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(Employee.class);
+		criteria.add(Restrictions.eq("status", status)).list();
+		list = (List<Object>) criteria.list();
 
+		// Criteria criteria = dc.getExecutableCriteria(session);
+
+		session.getTransaction().commit();
+		session.close();
+		return list;
+	}
+	
 	public static List<Object> get(String sql) {
 		Session session = getSession();
 		session.beginTransaction();
