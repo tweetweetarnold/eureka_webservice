@@ -81,7 +81,7 @@ public class FoodOrder {
 	}
 
 	// retrieve the total price for the particular food order
-	public double getFoodOrderTotalPrice() {
+	public double getTotalPrice() {
 		double result = 0;
 		Set<FoodOrderItem> set = getFoodOrderList();
 		for (FoodOrderItem item : set) {

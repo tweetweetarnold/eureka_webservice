@@ -6,30 +6,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
 
-import model.Admin;
-import model.Canteen;
-import model.Company;
 import model.Employee;
 import model.Food;
 import model.FoodDisplayObject;
 import model.FoodOrder;
 import model.FoodOrderItem;
-import model.ModifierChosen;
 import model.Stall;
-import services.PasswordService;
-import value.StringValues;
-
-import org.joda.time.JodaTimePermission;
-
-import com.google.gson.Gson;
-
-import connection.MyConnection;
 import dao.EmployeeDAO;
 import dao.FoodOrderDAO;
 
@@ -305,7 +291,7 @@ public class FoodOrderController {
 			} else {
 				foodOrders.put("Unknown", foodOrderList);
 			}
-			double price = tempFoodOrder.getFoodOrderTotalPrice();
+			double price = tempFoodOrder.getTotalPrice();
 			totalPrice += price;
 		}
 
