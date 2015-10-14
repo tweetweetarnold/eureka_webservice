@@ -66,14 +66,14 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			String password = (String) request.getParameter("password");
 			String confirmPwd = (String) request.getParameter("confirmPwd");
 			String contactNo = (String) request.getParameter("contactNo");
-			String bankAcc = (String) request.getParameter("bankAcc");
-			String companyName = (String) request.getParameter("company");
+			String email = (String) request.getParameter("email");
+			String companyCode = (String) request.getParameter("companyCode");
 
 			userInput.put("name", employeeName);
 			userInput.put("username", username);
+			userInput.put("email", email);
 			userInput.put("contactNo", contactNo);
-			userInput.put("bankAcc", bankAcc);
-			userInput.put("company", companyName);
+			userInput.put("companyCode", companyCode);
 
 			// Check user parameters
 			boolean valid = (contactNo.length() == 8 && password.length() >= 7 && password
@@ -82,9 +82,8 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			if (valid) {
 				long contactNumber = Long.parseLong(contactNo);
 
-				long creditCardNumber = Long.parseLong(bankAcc);
 				String generatedEmployeeId = registrationController.registerUser(username,
-						password, employeeName, creditCardNumber, contactNumber, companyName);
+						password, employeeName, email, contactNumber, companyCode);
 
 				session.setAttribute("success", "Yay! Your account has been created. Username: "
 						+ generatedEmployeeId);

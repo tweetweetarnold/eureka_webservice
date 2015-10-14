@@ -43,12 +43,14 @@ public class Test {
 		Canteen canteen = new Canteen("Default Canteen", "123", new Date(), null);
 		Stall stall = new Stall("Default Stall", 123456789, canteen, new Date(), null);
 		Food food = new Food("Arnold's Fried Chicken", "Quite Nice", 2.50, null, stall, new Date());
+//		Food firstFood = new Food("myfirstfood", "", 2.3, null, stall, new Date());
+//		session.save(firstFood);
 
 		Admin admin = new Admin("admin", PasswordService.encryptPassword("1234567"), "admin123",
 				123456789, new Date());
-		Company company = new Company("XiaoDingDang Co.", new Date(), null, null);
+		Company company = new Company("XiaoDingDang Co.", new Date(), null, null, "XDD123");
 		Employee employee = new Employee("arnold", PasswordService.encryptPassword("1234567"),
-				"Arnold Lee", 987654321, 12345678, company, new Date());
+				"Arnold Lee", "arnold.lee.2013@smu.edu.sg", 987654321, company, new Date());
 		FoodOrder order = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null, new Date());
 		FoodOrderItem foodItem = new FoodOrderItem(order, food, 1, "More meat", new Date());
 

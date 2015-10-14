@@ -23,8 +23,9 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="resources/css/sticky-footer.css" rel="stylesheet">
 <link href="resources/css/shop-homepage.css" rel="stylesheet">
+<link href="resources/css/sticky-footer.css" rel="stylesheet">
+
 
 </head>
 
@@ -125,12 +126,6 @@
 	</div>
 	<!-- /.container -->
 
-	<div class="container">
-
-		<hr>
-
-	</div>
-	<!-- /.container -->
 
 	<!-- Footer JSP Include -->
 	<jsp:include page="headerfooter/footer.jsp" />
@@ -140,9 +135,6 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="resources/js/bootstrap.min.js"></script>
-
-	<!-- Arnold Test JavaScript -->
-	<!-- 	<script src="resources/js/pagedirect.js"></script> -->
 
 	<!-- 	Google Analytics -->
 	<script>

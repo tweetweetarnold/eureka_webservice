@@ -34,12 +34,9 @@
 			<input type="text" name="name" class="form-control" placeholder="Name" value="<c:out value="${userInput['name']}"/>" required>
 			<input type="password" name="password" class="form-control" placeholder="Password" onfocus="" required>
 			<input type="password" name="confirmPwd" class="form-control" placeholder="Confirm Password" required>
+			<input type="email" name="email" class="form-control" placeholder="Email" value="<c:out value="${userInput['email']}"/>" required>
 			<input type="text" name="contactNo" class="form-control" placeholder="Contact Number" value="<c:out value="${userInput['contactNo']}"/>" required>
-			<input type="text" name="bankAcc" class="form-control" placeholder="Bank Account Number" value="<c:out value="${userInput['bankAcc']}"/>" required>
-			<select class="form-control" name="Company">
-				<option value="">-- Select company --</option>
-				<option value="Eastman Chemicals">Eastman Chemicals</option>
-			</select>
+			<input type="text" name="companyCode" class="form-control" placeholder="Company Code" value="<c:out value="${userInput['companyCode']}"/>" required>
 
 			<br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>

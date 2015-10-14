@@ -3,11 +3,15 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -25,8 +29,10 @@ public class Employee {
 	// @EmbeddedId
 	@Id
 	private String username;
+	// private EmployeePK pk;
+	@Column(unique = true)
+	private String email;
 	private String password, name;
-	private long creditCardNo;
 	private double amountOwed;
 	private long contactNo;
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -42,13 +48,14 @@ public class Employee {
 	public Employee() {
 	}
 
-	public Employee(String username, String password, String name, long creditCardNo,
-			long contactNo, Company company, Date createDate) {
+	public Employee(String username, String password, String name, String email, long contactNo,
+			Company company, Date createDate) {
 		super();
+		// this.pk = new EmployeePK(username, email);
 		this.username = username;
+		this.email = email;
 		this.password = password;
 		this.name = name;
-		this.creditCardNo = creditCardNo;
 		this.amountOwed = 0;
 		this.contactNo = contactNo;
 		this.company = company;
@@ -62,12 +69,14 @@ public class Employee {
 	// public static class EmployeePK implements Serializable {
 	//
 	// private String username;
+	// private String email;
 	//
 	// public EmployeePK() {
 	// }
 	//
-	// public EmployeePK(String username) {
+	// public EmployeePK(String username, String email) {
 	// this.username = username;
+	// this.email = email;
 	// }
 	//
 	// public String getUsername() {
@@ -77,10 +86,35 @@ public class Employee {
 	// public void setUsername(String username) {
 	// this.username = username;
 	// }
+	//
+	// public String getEmail() {
+	// return email;
+	// }
+	//
+	// public void setEmail(String email) {
+	// this.email = email;
+	// }
+	//
 	// }
 
 	public String getUsername() {
+		// return pk.getUsername();
 		return username;
+	}
+
+	public void setUsername(String username) {
+		// pk.setUsername(username);
+		this.username = username;
+	}
+
+	public String getEmail() {
+		// return pk.getEmail();
+		return email;
+	}
+
+	public void setEmail(String email) {
+		// pk.setEmail(email);
+		this.email = email;
 	}
 
 	public double getAmountOwed() {
@@ -93,10 +127,6 @@ public class Employee {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public void setAmountOwed(double amountOwed) {
@@ -117,14 +147,6 @@ public class Employee {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public long getCreditCardNo() {
-		return creditCardNo;
-	}
-
-	public void setCreditCardNo(long creditCardNo) {
-		this.creditCardNo = creditCardNo;
 	}
 
 	public long getContactNo() {

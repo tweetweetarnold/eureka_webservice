@@ -12,6 +12,10 @@ public class CompanyDAO {
 	public static Company getCompany(int companyId) {
 		return (Company) MyConnection.get(Company.class, companyId);
 	}
+	
+	public static Company getCompanyByCompanyCode(String companyCode) {
+		return (Company) MyConnection.getCompanyByCompanyCode(companyCode);
+	}
 
 	// Save new Company to the DB
 	public static void saveCompany(Company c) {

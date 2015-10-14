@@ -48,7 +48,7 @@
 
 			<!-- Error message handling -->
 			<c:if test="${not empty sessionScope.error}">
-				<div class="alert alert-danger" role="alert">
+				<div class="alert alert-danger" >
 					<b>Error!</b>
 					<br>
 					<c:out value="${error}" />
@@ -58,7 +58,7 @@
 
 			<!-- Success message handling -->
 			<c:if test="${not empty sessionScope.success}">
-				<div class="alert alert-success" role="alert">
+				<div class="alert alert-success" >
 					<b>Success!</b>
 					<br>
 					<c:out value="${success}" />

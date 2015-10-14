@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,6 +23,8 @@ public class FoodOrder {
 	private int foodOrderId;
 	private String status;
 	@OneToOne(cascade = CascadeType.ALL)
+	// @JoinColumns({ @JoinColumn(name = "username"), @JoinColumn(name =
+	// "email")})
 	@JoinColumn(name = "username")
 	private Employee employee;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")

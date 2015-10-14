@@ -22,6 +22,7 @@ public class Company {
 	// @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy =
 	// "company")
 	// private Set<Employee> employeeList;
+	private String companyCode;
 	private Date createDate;
 	private Date cutoffTime;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -31,13 +32,23 @@ public class Company {
 
 	}
 
-	public Company(String name, Date createDate, Date cutoffTime, Set<Canteen> canteenList) {
+	public Company(String name, Date createDate, Date cutoffTime, Set<Canteen> canteenList,
+			String companyCode) {
 		super();
 		this.name = name;
 		// this.employeeList = new HashSet<>();
 		this.createDate = createDate;
 		this.cutoffTime = cutoffTime;
 		this.canteenList = canteenList;
+		this.companyCode = companyCode;
+	}
+
+	public String getCompanyCode() {
+		return companyCode;
+	}
+
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
 	}
 
 	public String getName() {
