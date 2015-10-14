@@ -1,7 +1,9 @@
 package dao;
 
 import model.Admin;
+import model.Employee;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import connection.MyConnection;
@@ -29,6 +31,19 @@ public class AdminDAO {
 
 		}
 		return null;
+	}
+	
+	//getting the list of payment that is based on the input parameter (i.e "owed")
+	public static List<Employee> getListOfOwedPayment(String paymentOwedStatus){
+		List<Employee> returnList = new ArrayList<>();
+		
+		List<Object> hiberList = MyConnection.getPaymentOwedList(paymentOwedStatus);
+		if (hiberList.size() != 0) {
+			for (Object o : hiberList) {
+				returnList.add((Employee) o);
+			}
+		} 
+		return returnList;
 	}
 
 	// Save Admin to the DB
