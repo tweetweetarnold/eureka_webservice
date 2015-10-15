@@ -9,6 +9,7 @@
 </head>
 <body>
 	<form action="GetEmployeesPaymentOwedServlet" method="post">
+		Enter the payment status(i.e "Ok")</br>
 		<input type="text" name="paymentStatus"/>
 		<input type="submit" value="Query"/>
 	</form>
