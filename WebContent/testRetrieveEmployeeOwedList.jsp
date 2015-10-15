@@ -16,11 +16,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% List<Employee> employeeList = (List<Employee>)request.getAttribute("employeeList"); %>
+	<% List<Employee> employeeList = (List<Employee>)request.getAttribute("employeeList"); 
+		if (employeeList != null && employeeList.size()!=0) {%>
 	
 		
 		The following list are still owing their payment
 		<table>
+		<th>Username</th>
+		<th>Amount owed</th>
+		<th>Email address</th>
+		<th>Current Status</th>
+		<th>Company</th>
 		<%
 			for (Employee e : employeeList) {
 		String username = e.getUsername();
@@ -37,6 +43,8 @@
 			<td><%=companyName%></td></tr>
 			<%} %>
 		</table>
-		
+		<%} else {%>
+				There are no users having outstanding payment
+		<%} %>
 </body>
 </html>
