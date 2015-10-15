@@ -47,7 +47,7 @@ public class GetEmployeesPaymentOwedServlet extends HttpServlet {
 		AdminController adminController = new AdminController();
 		List<Employee> employeeList = adminController.getListOfOwedPayment(paymentStatus);
 		System.out.println(employeeList.size());
-		RequestDispatcher rd = request.getRequestDispatcher("retrieveEmployeeOrderHistory.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/testRetrieveEmployeeOwedList.jsp");
 		request.setAttribute("employeeList", employeeList);
 		rd.forward(request, response);
 	}
