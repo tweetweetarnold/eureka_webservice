@@ -32,10 +32,10 @@
 			<!-- User input -->
 			<input type="text" name="username" class="form-control" placeholder="Username" value="<c:out value="${userInput['username']}"/>" required>
 			<input type="text" name="name" class="form-control" placeholder="Name" value="<c:out value="${userInput['name']}"/>" required>
-			<input type="password" name="password" class="form-control" placeholder="Password" onfocus="" required>
+			<input type="password" name="password" class="form-control" placeholder="Password (Min length 8 Characters)" onfocus="" required>
 			<input type="password" name="confirmPwd" class="form-control" placeholder="Confirm Password" required>
 			<input type="email" name="email" class="form-control" placeholder="Email" value="<c:out value="${userInput['email']}"/>" required>
-			<input type="text" name="contactNo" class="form-control" placeholder="Contact Number" value="<c:out value="${userInput['contactNo']}"/>" required>
+			<input type="text" name="contactNo" class="form-control" placeholder="Contact Number (8 Digits)" value="<c:out value="${userInput['contactNo']}"/>" required>
 			<input type="text" name="companyCode" class="form-control" placeholder="Company Code" value="<c:out value="${userInput['companyCode']}"/>" required>
 
 			<br>
