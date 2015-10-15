@@ -14,6 +14,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -159,12 +160,14 @@ public class MyConnection {
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(Employee.class);
 		criteria.add(Restrictions.eq("status", status)).list();
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
-
+		
 		// Criteria criteria = dc.getExecutableCriteria(session);
 
 		session.getTransaction().commit();
 		session.close();
+		
 		return list;
 	}
 	
