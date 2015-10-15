@@ -101,6 +101,7 @@
 											<c:out value="${food.name}" />
 										</a>
 									</h4>
+
 									<p>
 										<c:out value="${food.description}" />
 									</p>

@@ -74,10 +74,14 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			userInput.put("email", email);
 			userInput.put("contactNo", contactNo);
 			userInput.put("companyCode", companyCode);
+			
+			// Check valid email
+			String dotCom = email.substring(email.length()-4, email.length());
+			boolean validEmail = (dotCom.equalsIgnoreCase(".com"));
 
 			// Check user parameters
 			boolean valid = (contactNo.length() == 8 && password.length() >= 7 && password
-					.equals(confirmPwd));
+					.equals(confirmPwd) && validEmail);
 
 			if (valid) {
 				long contactNumber = Long.parseLong(contactNo);
