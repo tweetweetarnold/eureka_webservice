@@ -302,6 +302,8 @@
 								<li><a href="blank.html">Blank Page</a></li>
 								<li><a href="login.html">Login Page</a></li>
 							</ul> <!-- /.nav-second-level --></li>
+							<li><a href="adminRegistration.jsp"><i class="fa fa-files-o fa-fw"></i>
+								Create New Admin User<span class="fa arrow"></span></a>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
