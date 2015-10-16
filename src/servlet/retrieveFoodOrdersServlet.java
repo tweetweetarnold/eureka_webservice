@@ -18,13 +18,13 @@ import model.FoodDisplayObject;
  * Servlet implementation class retrieveFoodOrdersServlet
  */
 @WebServlet("/retrieveFoodOrdersServlet")
-public class RetrieveFoodOrdersServlet extends HttpServlet {
+public class retrieveFoodOrdersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public RetrieveFoodOrdersServlet() {
+	public retrieveFoodOrdersServlet() {
 		super();
 	}
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import controller.AdminController;
 import controller.CanteenController;
 import controller.LoginController;
 import model.Admin;
@@ -79,10 +80,10 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 			session.setAttribute("admin", admin);
 			session.setAttribute("tokenID", tokenID);
 			System.out.println("TokenID is set in session");
-
-
-
-			response.sendRedirect("adminHomepage.jsp");
+			AdminController adminController = new AdminController();
+			session.setAttribute("outstandingPayments", adminController.getListOfOwedPayment("Owe"));
+//			response.sendRedirect("adminHomepage.jsp");
+			response.sendRedirect("adminHomepageTest.jsp");
 
 		} catch (Exception e) {
 			System.out.println("Exception thrown. Incorrect credentials.");

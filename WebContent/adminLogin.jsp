@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<% //@ include file="/protect.jsp"%>
+    <%@page import="controller.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="GetEmployeesPaymentOwedServlet" method="post">
-		Enter the payment status(i.e "Ok")</br>
-		<input type="hidden" name="paymentStatus" value="Ok"/>
-		<input type="submit" value="Query"/>
-	</form>
+	<%
+	AdminController adminController = new AdminController();
+	session.setAttribute("outstandingPayments", adminController.getListOfOwedPayment("Owe"));
+	
+	%>
 </body>
 </html>

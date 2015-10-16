@@ -29,20 +29,21 @@
 		<th>Company</th>
 		<%
 			for (Employee e : employeeList) {
-		String username = e.getUsername();
-		double amountOwed =	e.getAmountOwed();
-		String userEmail = e.getEmail();
-		String currentStatus = e.getStatus();
-		String companyName = e.getCompany().getName();
-		
-			%>
-		<tr><td>	<%=username%></td>
+					String username = e.getUsername();
+					double amountOwed = e.getAmountOwed();
+					String userEmail = e.getEmail();
+					String currentStatus = e.getStatus();
+					String companyName = e.getCompany().getName();
+		%>
+		<tr>
+			<td><%=username%></td>
 			<td>$<%=amountOwed%></td>
 			<td><%=userEmail%></td>
 			<td><%=currentStatus%></td>
-			<td><%=companyName%></td></tr>
-			<%} %>
-		</table>
+			<td><%=companyName%></td>
+		</tr>
+		<%} %>
+	</table>
 		<%} else {%>
 				There are no users having outstanding payment
 		<%} %>
