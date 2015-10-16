@@ -1,6 +1,7 @@
 package connection;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import model.Admin;
@@ -97,7 +98,22 @@ public class MyConnection {
 		session.getTransaction().commit();
 		session.close();
 	}
+	
+	public static List<Object> getFoodOrderBetween(Date earlier, Date later) {
+		Session session = getSession();
+		session.beginTransaction();
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(FoodOrder.class);
+		criteria.add(Restrictions.between("createDate", earlier, later)).list();
+		list = (List<Object>) criteria.list();
 
+		// Criteria criteria = dc.getExecutableCriteria(session);
+
+		session.getTransaction().commit();
+		session.close();
+		return list;
+	}
+	
 	// for retrieve all
 	public static List<Object> retrieveAllRecords(DetachedCriteria dc) {
 		System.out.println("MyConnection: retrieveAllRecords");

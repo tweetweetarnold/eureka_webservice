@@ -257,6 +257,32 @@ public class FoodOrderController {
 
 	// Retrieve FoodOrders from today 00:00:00 to today 23:59:59 with total
 	// price as object in HashMap with key "totalPrice"
+	
+	
+	public List<FoodOrder> getFoodOrderBetweenCutOff(){
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String strDate = sdf.format(cal.getTime());
+		Date earlierDate = null;
+		try {
+			earlierDate = sdf.parse(strDate + " 10:00");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cal.add(Calendar.DATE, -1);
+		strDate = sdf.format(cal.getTime());
+		Date laterDate = null;
+		try {
+			laterDate = sdf.parse(strDate + " 10:00");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return FoodOrderDAO.getFoodOrderByDate(earlierDate, laterDate);
+	}
+	
 	public HashMap getFoodOrderToday() {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
