@@ -42,9 +42,7 @@
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 			<br>
-			<div align="center">
-				<a href="registration.jsp">Register new user</a>
-			</div>
+			
 
 			<!-- Error message handling -->
 			<c:if test="${not empty sessionScope.error}">
