@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,6 +39,19 @@ public class FoodOrderDAO {
 
 	// Retrive FoodOrders from the DB between two datetimes with format
 	// "yyyy-MM-dd hh:mm:ss"
+	
+	
+	public static List<FoodOrder> getFoodOrderByDate(Date past, Date present) {
+		List<FoodOrder> returnList = new ArrayList<>();
+		List<Object> lister = MyConnection.getFoodOrderBetween(past, present);
+		if (lister.size() != 0) {
+			for (Object o : lister) {
+				returnList.add((FoodOrder) o);
+			}
+		} 
+		return returnList;
+	}
+	
 	public static List<FoodOrder> getFoodOrderByDateAndTime(String past, String present) {
 		String sqlQuery = "SELECT * FROM  foodorder where createDate>= + :date1 and createDate<=:date2";
 		
