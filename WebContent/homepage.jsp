@@ -4,6 +4,7 @@
 <%@page import="java.util.*"%>
 <%@page import="model.*"%>
 <%@page import="java.text.*"%>
+<%@include file="protect.jsp"%>
 <html lang="en">
 
 <head>
