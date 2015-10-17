@@ -27,7 +27,7 @@ public class FoodOrder {
 	// "email")})
 	@JoinColumn(name = "username")
 	private Employee employee;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "foodOrder")
 	private Set<FoodOrderItem> foodOrderList;
 	private Date createDate;
 
