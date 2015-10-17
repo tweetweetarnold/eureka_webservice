@@ -99,11 +99,13 @@ public class MyConnection {
 		session.close();
 	}
 	
-	public static List<Object> getFoodOrderBetween(Date earlier, Date later) {
+	public static List<Object> getFoodOrderBetween(Date later, Date earlier) {
 		Session session = getSession();
+		System.out.println("here");
 		session.beginTransaction();
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(FoodOrder.class);
+		System.out.println(earlier +" "+  later);
 		criteria.add(Restrictions.between("createDate", earlier, later)).list();
 		list = (List<Object>) criteria.list();
 
@@ -111,7 +113,9 @@ public class MyConnection {
 
 		session.getTransaction().commit();
 		session.close();
+		System.out.println("here " + list.size());
 		return list;
+		
 	}
 	
 	// for retrieve all

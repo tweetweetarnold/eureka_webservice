@@ -12,7 +12,7 @@
 <body>
 	Hi there! are you ready to retrieve today's orders?
 
-	<form action="RetrieveFoodOrdersServlet" method="post">
+	<form action="retrieveFoodOrdersServlet" method="post">
 		<input type="submit" value="YES">
 	</form>
 	<%
