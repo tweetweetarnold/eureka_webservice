@@ -9,11 +9,6 @@ import dao.EmployeeDAO;
 public class UserController {
 	EmployeeDAO employeeDAO = new EmployeeDAO();
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void updateEmployee(Employee e) {
 		EmployeeDAO.updateEmployee(e);
 		// EmployeeDAO.saveEmployee(e);
