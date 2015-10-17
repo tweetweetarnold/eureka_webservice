@@ -1,57 +1,85 @@
 <%@page import="model.*"%>
-<%@page import="java.util.*"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>DaBao - Modifier</title>
+
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<!-- Bootstrap Core CSS -->
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="resources/css/shop-homepage.css" rel="stylesheet">
+<link href="resources/css/sticky-footer.css" rel="stylesheet">
+
 </head>
 <body>
-	<h1>Modifiers</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>S/N</th>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Price</th>
-				<th>Option</th>
-			</tr>
-		</thead>
-		<tbody>
 
-			<%
-				// 				Food food = (Food) session.getAttribute("selectedFood");
-					Modifier m1 = new Modifier("m1", "abc", 2.0, null, new Date());
-					Modifier m2 = new Modifier("m2", "abc", 2.0, null, new Date());
-					Modifier m3 = new Modifier("m3", "abc", 2.0, null, new Date());
-					List<Modifier> modifierList = new ArrayList<Modifier>();
-					modifierList.add(m1);
-					modifierList.add(m2);
-					modifierList.add(m3);
-					
-						if(modifierList != null){		
-							for(int i = 0; i < modifierList.size(); i++){
-								Modifier m = modifierList.get(i);
-			%>
-			<tr>
-				<td><%=i+1%></td>
-				<td><%=m.getName()%></td>
-				<td><%=m.getDescription()%></td>
-				<td><%=m.getPrice()%></td>
-				<td>
-					<button type="submit">Add</button>
-				</td>
-
-			</tr>
-			<%
-				}
-						}
-			%>
-		</tbody>
-	</table>
+	<!-- Headerbar JSP Include -->
+	<jsp:include page="headerfooter/header.jsp" />
 
 
+	<div class="container">
+		<div align="center">
+			<h1>Modifier</h1>
+
+			<c:set value="${sessionScope.allFood[param.foodId]}" var="selectedFood" />
+			<h3>
+				Food:
+				<c:out value="${selectedFood.name}" />
+			</h3>
+
+			<form action="AddFoodItemToOrderItemsServlet" method="post">
+				<input type="hidden" name="foodId" value="${param.foodId}">
+				<table class="table table-striped" style="width: 60%;">
+					<thead>
+						<tr>
+							<th>S/N</th>
+							<th>Modifier</th>
+							<th>Price</th>
+							<th>Add</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach varStatus="loop" items="${selectedFood.modifierList}" var="modifier">
+							<tr>
+								<td>
+									<c:out value="${loop.index + 1}" />
+								</td>
+								<td>
+									<c:out value="${modifier.name}" />
+								</td>
+								<td>
+									<fmt:formatNumber value="${modifier.price}" var="modPrice" minFractionDigits="2" />
+									+ $
+									<c:out value="${modPrice}" />
+								</td>
+								<td>
+									<input type="checkbox" value="true" name="${modifier.name}">
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+
+				</table>
+
+				<button class="btn btn-lg btn-danger" type="submit" style="width: 50%;">Add to Cart</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- container -->
+
+	<!-- Footer JSP Include -->
+	<jsp:include page="headerfooter/footer.jsp" />
 </body>
+
+
 </html>

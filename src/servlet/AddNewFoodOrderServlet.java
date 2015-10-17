@@ -72,8 +72,7 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 		Employee employee = (Employee) session.getAttribute("user");
 		System.out.println("Employee retrieved");
 
-		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null,
-				new Date());
+		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null);
 		for (FoodOrderItem item : hashMyFoodOrderItems) {
 			item.setFoodOrder(myFoodOrder);
 		}

@@ -28,13 +28,13 @@ public class Modifier {
 	public Modifier() {
 	}
 
-	public Modifier(String name, String description, double price, Food food, Date createDate) {
+	public Modifier(String name, String description, double price, Food food) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.food = food;
-		this.createDate = createDate;
+		this.createDate = new Date();
 	}
 
 	public int getModifierId() {

@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.Date;
-
 import model.Admin;
 import model.Company;
 import model.Employee;
@@ -18,7 +16,7 @@ public class RegistrationController {
 		Company company = CompanyController.getCompanyByCompanyCode(companyCode);
 
 		Employee newEmployee = new Employee(username, encryptPassword, name, email, contactNo,
-				company, new Date());
+				company);
 		EmployeeDAO.saveEmployee(newEmployee);
 		String id = newEmployee.getUsername();
 
@@ -30,7 +28,7 @@ public class RegistrationController {
 
 		String encryptPassword = PasswordService.encryptPassword(password);
 		
-		Admin newAdmin = new Admin(username, encryptPassword, name, contactNo, new Date());
+		Admin newAdmin = new Admin(username, encryptPassword, name, contactNo);
 		AdminDAO.saveadmin(newAdmin);
 		String id = newAdmin.getUsername();
 

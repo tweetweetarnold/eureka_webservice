@@ -32,12 +32,12 @@ public class Company {
 
 	}
 
-	public Company(String name, Date createDate, Date cutoffTime, Set<Canteen> canteenList,
+	public Company(String name, Date cutoffTime, Set<Canteen> canteenList,
 			String companyCode) {
 		super();
 		this.name = name;
 		// this.employeeList = new HashSet<>();
-		this.createDate = createDate;
+		this.createDate = new Date();
 		this.cutoffTime = cutoffTime;
 		this.canteenList = canteenList;
 		this.companyCode = companyCode;
