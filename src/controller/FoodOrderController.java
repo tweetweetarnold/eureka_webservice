@@ -150,6 +150,15 @@ public class FoodOrderController {
 		cal.add(Calendar.DATE, -1);
 		Date earlierDate = cal.getTime();
 		earlierDate.setHours(10);
+		Date nowDate = new Date();
+		if(nowDate.after(laterDate)){
+			cal.setTime(laterDate);
+	        cal.add(Calendar.DATE, +1);
+	        laterDate = cal.getTime();
+	        cal.setTime(earlierDate);
+	        cal.add(Calendar.DATE, +1);
+	        earlierDate = cal.getTime();
+		}
 		
 		System.out.println(earlierDate +" "+  laterDate);
 
