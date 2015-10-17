@@ -108,7 +108,7 @@
 
 								</div>
 								<div class="pull-right" style="margin-right: 5px;">
-									<form action="AddFoodItemToSessionServlet">
+									<form action="foodModifier.jsp">
 										<input type="hidden" value='<c:out value="${loop.index}"/>' id="foodId" name="foodId">
 										<button type="submit" class="btn btn-danger">Add to Cart</button>
 									</form>

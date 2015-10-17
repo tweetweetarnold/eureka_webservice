@@ -90,6 +90,6 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 		
 
 		session.setAttribute("success", "Yay! Your order has been submitted!");
-//		response.sendRedirect("cart.jsp");
+		response.sendRedirect("cart.jsp");
 	}
 }

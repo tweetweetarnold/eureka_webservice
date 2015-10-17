@@ -25,11 +25,6 @@ public class Canteen {
 	private Set<Stall> stallList;
 
 	public Canteen() {
-		this.canteenId = 0;
-		this.name = "";
-		this.address = "";
-		this.createDate = null;
-		this.stallList = null;
 	}
 
 	public Canteen(String name, String address, Set<Stall> stallList) {
