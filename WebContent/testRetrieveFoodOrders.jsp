@@ -15,11 +15,7 @@
 <title>Test Jsp to retrieve orders from the database</title>
 </head>
 <body>
-	Hi there! are you ready to retrieve today's orders?
-
-	<form action="GetTodayOrdersServlet" method="post">
-		<input type="submit" value="YES">
-	</form>
+	
 
 
 	<%
@@ -90,7 +86,9 @@
 	<%
 		}
 	%>
-
+<form action="retrieveFoodOrdersServlet" method="post">
+	<input type="submit" value="Go to print"/>
+</form>
 
 </body>
 </html>
