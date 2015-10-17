@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -27,20 +26,19 @@ public class FoodOrder {
 	// "email")})
 	@JoinColumn(name = "username")
 	private Employee employee;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "foodOrder")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")
 	private Set<FoodOrderItem> foodOrderList;
 	private Date createDate;
 
 	public FoodOrder() {
 	}
 
-	public FoodOrder(String status, Employee employee, Set<FoodOrderItem> foodOrderList,
-			Date createDate) {
+	public FoodOrder(String status, Employee employee, Set<FoodOrderItem> foodOrderList) {
 		super();
 		this.status = status;
 		this.employee = employee;
 		this.foodOrderList = foodOrderList;
-		this.createDate = createDate;
+		this.createDate = new Date();
 	}
 
 	public Set<FoodOrderItem> getFoodOrderList() {

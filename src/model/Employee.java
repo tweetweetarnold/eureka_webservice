@@ -3,15 +3,12 @@
  */
 package model;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -49,7 +46,7 @@ public class Employee {
 	}
 
 	public Employee(String username, String password, String name, String email, long contactNo,
-			Company company, Date createDate) {
+			Company company) {
 		super();
 		// this.pk = new EmployeePK(username, email);
 		this.username = username;
@@ -62,7 +59,7 @@ public class Employee {
 		this.status = StringValues.EMPLOYEE_OK;
 		this.favouriteList = new HashSet<>();
 		this.orderHistory = new HashSet<>();
-		this.createDate = createDate;
+		this.createDate = new Date();
 	}
 
 	// @Embeddable

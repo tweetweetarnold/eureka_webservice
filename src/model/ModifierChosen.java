@@ -29,13 +29,12 @@ public class ModifierChosen {
 	public ModifierChosen() {
 	}
 
-	public ModifierChosen(String name, String description, double price, FoodOrderItem foodOrderItem, Date createDate) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.foodOrderItem = foodOrderItem;
-		this.createDate = createDate;
+	public ModifierChosen(Modifier m, FoodOrderItem item) {
+		this.name = m.getName();
+		this.description = m.getDescription();
+		this.price = m.getPrice();
+		this.createDate = new Date();
+		this.foodOrderItem = item;
 	}
 
 	public int getModifierId() {
@@ -88,11 +87,11 @@ public class ModifierChosen {
 
 	// Check if otherModifier equal current modifier
 	public boolean equals(ModifierChosen otherModifier) {
-			if (this.name.equals((otherModifier).getName())) {
-				return true;
-			} else {
-				return false;
-			}
+		if (this.name.equals((otherModifier).getName())) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

@@ -32,11 +32,11 @@ public class Canteen {
 		this.stallList = null;
 	}
 
-	public Canteen(String name, String address, Date createDate, Set<Stall> stallList) {
+	public Canteen(String name, String address, Set<Stall> stallList) {
 		super();
 		this.name = name;
 		this.address = address;
-		this.createDate = createDate;
+		this.createDate = new Date();
 		this.stallList = stallList;
 	}
 

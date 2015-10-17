@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,9 +16,6 @@ import javax.servlet.http.HttpSession;
 import model.Employee;
 import model.FoodOrder;
 import model.FoodOrderItem;
-
-import org.hibernate.HibernateException;
-
 import value.StringValues;
 import controller.FoodOrderController;
 
@@ -59,7 +55,7 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
+		response.setContentType("text");
 
 		HttpSession session = request.getSession();
 
@@ -72,10 +68,10 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 		Employee employee = (Employee) session.getAttribute("user");
 		System.out.println("Employee retrieved");
 
-		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null,
-				new Date());
+		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null);
 		for (FoodOrderItem item : hashMyFoodOrderItems) {
 			item.setFoodOrder(myFoodOrder);
+			out.println("size: " + item.getModifierChosenList().size());
 		}
 		myFoodOrder.setFoodOrderList(hashMyFoodOrderItems);
 		System.out.println("New FoodOrder created");
@@ -87,11 +83,13 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 		FoodOrderController controller = new FoodOrderController();
 		controller.addFoodOrder(myFoodOrder);
 		System.out.println("New FoodOrder added to database");
-
+		
 		session.removeAttribute("myFoodOrderItems");
 		System.out.println("myFoodOrderItems cleared");
+		
+		
 
 		session.setAttribute("success", "Yay! Your order has been submitted!");
-		response.sendRedirect("cart.jsp");
+//		response.sendRedirect("cart.jsp");
 	}
 }

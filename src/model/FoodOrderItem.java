@@ -40,14 +40,13 @@ public class FoodOrderItem {
 	public FoodOrderItem() {
 	}
 
-	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, String remarks,
-			Date createDate) {
+	public FoodOrderItem(FoodOrder foodOrder, Food food, int quantity, String remarks) {
 		super();
 		this.foodOrder = foodOrder;
 		this.food = food;
 		this.quantity = quantity;
 		this.remarks = remarks;
-		this.createDate = createDate;
+		this.createDate = new Date();
 		modifierChosenList = new HashSet<>();
 	}
 

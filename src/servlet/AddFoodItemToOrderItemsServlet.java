@@ -1,9 +1,11 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,11 +16,13 @@ import javax.servlet.http.HttpSession;
 
 import model.Food;
 import model.FoodOrderItem;
+import model.Modifier;
+import model.ModifierChosen;
 
 /**
  * Servlet implementation class AddFoodItemToSessionServlet
  */
-@WebServlet(description = "This servlet adds a food item to be stored in session", urlPatterns = { "/AddFoodItemToSessionServlet" })
+@WebServlet(description = "This servlet adds a food item to be stored in session", urlPatterns = { "/AddFoodItemToOrderItemsServlet" })
 public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -56,7 +60,9 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		response.setContentType("text/html");
-		System.out.println("AddFoodItemToSessionServlet");
+		PrintWriter out = response.getWriter();
+		System.out.println("AddFoodItemToOrderItemsServlet");
+		out.println("AddFoodItemToOrderItemsServlet");
 
 		try {
 			HttpSession session = request.getSession(); // Get Session
@@ -83,11 +89,28 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 			}
 
 			// Create new FoodOrderItem
-			FoodOrderItem foodItem = new FoodOrderItem(null, food, 1, "", new Date());
+			FoodOrderItem foodItem = new FoodOrderItem(null, food, 1, "");
 			System.out.println("new FoodOrderItem created");
 
 			// Add new FoodOrderItem to myFoodOrders
 			myFoodOrderItems.add(foodItem);
+
+			// Get Modifiers
+			Set<Modifier> modifierList = food.getModifierList();
+			for (Modifier m : modifierList) {
+				String name = m.getName();
+				String value = request.getParameter(name);
+				if (value != null) {
+					Set<ModifierChosen> list = foodItem.getModifierChosenList();
+					out.println("<br>List: " + list);
+					ModifierChosen mc = new ModifierChosen(m, foodItem);
+					out.println(mc);
+					list.add(mc);
+					foodItem.setModifierChosenList(list);
+					out.println("fooditem: " + foodItem.getModifierChosenList());
+				}
+				System.out.println("name: " + name + ", value: " + value);
+			}
 
 			// Set myFoodOrders in Session
 			session.setAttribute("myFoodOrderItems", myFoodOrderItems);
@@ -100,5 +123,4 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 }

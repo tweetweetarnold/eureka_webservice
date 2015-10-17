@@ -21,13 +21,13 @@ public class Admin {
 	public Admin() {
 	}
 
-	public Admin(String username, String password, String name, long contactNo, Date createDate) {
+	public Admin(String username, String password, String name, long contactNo) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.contactNo = contactNo;
-		this.createDate = createDate;
+		this.createDate = new Date();
 	}
 
 	public int getAdminId() {

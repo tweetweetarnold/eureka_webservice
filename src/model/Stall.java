@@ -32,12 +32,12 @@ public class Stall {
 	public Stall() {
 	}
 
-	public Stall(String name, long contactNo, Canteen canteen, Date createDate, Set<Food> foodList) {
+	public Stall(String name, long contactNo, Canteen canteen, Set<Food> foodList) {
 		super();
 		this.name = name;
 		this.contactNo = contactNo;
 		this.canteen = canteen;
-		this.createDate = createDate;
+		this.createDate = new Date();
 		this.foodList = foodList;
 	}
 

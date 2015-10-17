@@ -37,8 +37,9 @@
 			<h2 class="form-signin-heading">Please sign in</h2>
 
 			<!-- User input -->
-			<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}" required>
-			<input type="password" name="password" class="form-control" placeholder="Password" required>
+<%-- 			<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}" required> --%>
+			<input type="text" name="username" class="form-control" placeholder="Username" value="arnold" required>
+			<input type="password" name="password" class="form-control" placeholder="Password" value="1234567" required>
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 			<br>
@@ -48,7 +49,7 @@
 
 			<!-- Error message handling -->
 			<c:if test="${not empty sessionScope.error}">
-				<div class="alert alert-danger" >
+				<div class="alert alert-danger">
 					<b>Error!</b>
 					<br>
 					<c:out value="${error}" />
@@ -58,7 +59,7 @@
 
 			<!-- Success message handling -->
 			<c:if test="${not empty sessionScope.success}">
-				<div class="alert alert-success" >
+				<div class="alert alert-success">
 					<b>Success!</b>
 					<br>
 					<c:out value="${success}" />
