@@ -158,24 +158,7 @@ public class FoodOrderController {
 	}
 
 	public HashMap getFoodOrderToday() {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String strDate = sdf.format(cal.getTime());
-		System.out.println("Current date in String Format: " + strDate);
-		SimpleDateFormat sdf1 = new SimpleDateFormat();
-		sdf1.applyPattern("yyyy-MM-dd");
-		Date date = null;
-		try {
-			date = sdf1.parse(strDate);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String string = sdf1.format(date);
-		System.out.println("Current date in Date Format: " + string);
-
-		System.out.println(string);
-		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(string);
+		List<FoodOrder> tempFoodOrderList = getFoodOrderBetweenCutOff();
 
 		// foodOrderItems With Employee name as key
 		HashMap foodOrders = new HashMap();
