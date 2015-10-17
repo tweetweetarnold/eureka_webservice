@@ -10,11 +10,15 @@ import dao.EmployeeDAO;
 public class RegistrationController {
 
 	public String registerUser(String username, String password, String name, String email,
-			long contactNo, String companyCode) {
+			long contactNo, String companyCode)throws Exception {
 
 		String encryptPassword = PasswordService.encryptPassword(password);
-		Company company = CompanyController.getCompanyByCompanyCode(companyCode);
-
+		Company company = null;
+		try{
+		company = CompanyController.getCompanyByCompanyCode(companyCode);
+		}catch(Exception exception){
+			throw new Exception("Failed to find company");
+		}
 		Employee newEmployee = new Employee(username, encryptPassword, name, email, contactNo,
 				company);
 		EmployeeDAO.saveEmployee(newEmployee);

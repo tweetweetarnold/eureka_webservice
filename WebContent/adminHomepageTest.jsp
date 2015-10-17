@@ -1,5 +1,6 @@
 <%@page import="java.util.*"%>
-<%@page import="model.Employee"%>
+<%@page import="model.*"%>
+<%@page import="controller.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,6 +51,8 @@
     <![endif]-->
 <%
 	List<Employee> employeeOweList = (List<Employee>) session.getAttribute("outstandingPayments");
+	FoodOrderController foodOrderController = new FoodOrderController();
+	List<FoodOrder> foodOrderList = (List<FoodOrder>) foodOrderController.getFoodOrderBetweenCutOff();
 %>
 </head>
 
@@ -302,8 +305,9 @@
 								<li><a href="blank.html">Blank Page</a></li>
 								<li><a href="login.html">Login Page</a></li>
 							</ul> <!-- /.nav-second-level --></li>
-							<li><a href="adminRegistration.jsp"><i class="fa fa-files-o fa-fw"></i>
-								Create New Admin User<span class="fa arrow"></span></a>
+						<li><a href="adminRegistration.jsp"><i
+								class="fa fa-files-o fa-fw"></i> Create New Admin User<span
+								class="fa arrow"></span></a>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
@@ -372,7 +376,8 @@
 									<i class="fa fa-shopping-cart fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">124</div>
+									<div class="huge"><%=foodOrderList.size()%>
+									</div>
 									<div>New Orders!</div>
 								</div>
 							</div>
