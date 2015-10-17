@@ -82,29 +82,67 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			// Check user parameters
 			boolean valid = (contactNo.length() == 8 && password.length() >= 7 && password
 					.equals(confirmPwd) && validEmail);
-
-			if (valid) {
+			boolean validContactNo = contactNo.length()==8;
+			boolean validPasswordLength = password.length() >= 7;
+			boolean validPasswordConfirmation = password.equals(confirmPwd);
+			
+			if(validContactNo){
 				long contactNumber = Long.parseLong(contactNo);
+				if(validPasswordLength){
+					if(validPasswordConfirmation){
+						if(validEmail){
+							String generatedEmployeeId = registrationController.registerUser(username,
+									password, employeeName, email, contactNumber, companyCode);
 
-				String generatedEmployeeId = registrationController.registerUser(username,
-						password, employeeName, email, contactNumber, companyCode);
+							session.setAttribute("success", "Yay! Your account has been created. Username: "
+									+ generatedEmployeeId);
 
-				session.setAttribute("success", "Yay! Your account has been created. Username: "
-						+ generatedEmployeeId);
-
-				response.sendRedirect("login.jsp");
-
-			} else {
+							response.sendRedirect("login.jsp");
+						}else{
+							System.out.println("RegistrationServlet: Validation failed.");
+							throw new Exception("The Email that you provided is not valid");
+						}
+					}else{
+						System.out.println("RegistrationServlet: Validation failed.");
+						throw new Exception("Password Confirmation does not match original Password");
+					}
+				}else{
+					System.out.println("RegistrationServlet: Validation failed.");
+					throw new Exception("Password must be at least 7 characters long");
+				}
+			}else{
 				System.out.println("RegistrationServlet: Validation failed.");
-				throw new Exception();
+				throw new Exception("Contact Number must be 8 digits");
 			}
+			
+			
+			
+//			if (valid) {
+//				long contactNumber = Long.parseLong(contactNo);
+//
+//				String generatedEmployeeId = registrationController.registerUser(username,
+//						password, employeeName, email, contactNumber, companyCode);
+//
+//				session.setAttribute("success", "Yay! Your account has been created. Username: "
+//						+ generatedEmployeeId);
+//
+//				response.sendRedirect("login.jsp");
+//
+//			} else {
+//				System.out.println("RegistrationServlet: Validation failed.");
+//				throw new Exception();
+//			}
 
 		} catch (Exception e) {
 			System.out.println("Exception@RegistrationServlet: " + e.getMessage());
 			e.printStackTrace();
-
+			if(!e.getMessage().isEmpty()){
+				session.setAttribute("error",e.getMessage());
+			}else{
+				session.setAttribute("error", "Oops! Something went wrong! Please check your inputs.");
+			}
 			session.setAttribute("userInput", userInput);
-			session.setAttribute("error", "Oops! Something went wrong! Please check your inputs.");
+			
 
 			response.sendRedirect("registration.jsp");
 		}
