@@ -27,46 +27,56 @@ import model.FoodOrder;
 @WebServlet("/GetTodayOrdersServlet")
 public class GetTodayOrdersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GetTodayOrdersServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(request,response);
+	public GetTodayOrdersServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-//		String date = new Data().toString();
-//		int index = date.indexOf(" ");
-//		date = date.substring(0, index);
-//		date+=" 00:00:00";
+		// String date = new Data().toString();
+		// int index = date.indexOf(" ");
+		// date = date.substring(0, index);
+		// date+=" 00:00:00";
 		FoodOrderController foodOrderController = new FoodOrderController();
-		
+
 		JSONArray jsonArray = new JSONArray();
 		HashMap tempFoodOrderHash = foodOrderController.getFoodOrderToday();
-//		Iterator iter = tempFoodOrderHash.keySet().iterator();
-		
-		Gson gson = new Gson(); 
-		JSONObject json = new JSONObject(tempFoodOrderHash); 
-		
-		
+		// Iterator iter = tempFoodOrderHash.keySet().iterator();
+
+		Gson gson = new Gson();
+		JSONObject json = null;
+		try {
+			json = new JSONObject(tempFoodOrderHash);
+		} catch (NullPointerException e) {
+			RequestDispatcher rd = request.getRequestDispatcher("testRetrieveFoodOrders.jsp");
+			request.setAttribute("NoOrders", "There are no orders for today");
+			rd.forward(request, response);
+		}
+
 		RequestDispatcher rd = request.getRequestDispatcher("testRetrieveFoodOrders.jsp");
 		request.setAttribute("foodOrders", json);
-		rd.forward(request,response);
+		rd.forward(request, response);
 		System.out.println("HELLO");
 	}
 

@@ -15,15 +15,16 @@
 <title>Test Jsp to retrieve orders from the database</title>
 </head>
 <body>
-	
+
 
 
 	<%
-		if (request.getAttribute("foodOrders") != null) {
-			JSONObject foodOrders = (JSONObject) request.getAttribute("foodOrders");
-			Iterator iter = foodOrders.keySet().iterator();
+		if (request.getAttribute("NoOrders") == null) {
+			if (request.getAttribute("foodOrders") != null) {
+				JSONObject foodOrders = (JSONObject) request.getAttribute("foodOrders");
+				Iterator iter = foodOrders.keySet().iterator();
 
-			out.println("Number of people " + (foodOrders.size() - 1));
+				out.println("Number of people " + (foodOrders.size() - 1));
 	%>
 	</br>
 
@@ -41,20 +42,21 @@
 		%>
 		<%
 			double totalPrice = 0.0;
-				int listSize = 0;
-				int number = 0;
-				while (iter.hasNext()) {
-					String username = (String) iter.next();
-					if (!username.equals("totalPrice")) {
-						ArrayList<FoodOrderItem> foodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
-								.get(username);
+					int listSize = 0;
+					int number = 0;
+					while (iter.hasNext()) {
+						String username = (String) iter.next();
+						if (!username.equals("totalPrice")) {
+							ArrayList<FoodOrderItem> foodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
+									.get(username);
 
-						listSize = foodOrderItemList.size();
-						String foodName = foodOrderItemList.get(0).getFood().getName();
+							listSize = foodOrderItemList.size();
+							String foodName = foodOrderItemList.get(0).getFood().getName();
 		%>
 		<tr>
 			<td rowspan=<%=listSize%>><%=++number%></td>
-			<td rowspan=<%=listSize%>><a href="RetrieveUserByUsernameServlet?username=<%=username%>"><%=username%></a></td>
+			<td rowspan=<%=listSize%>><a
+				href="RetrieveUserByUsernameServlet?username=<%=username%>"><%=username%></a></td>
 			<td><%=foodName%></td>
 			<td><%=foodOrderItemList.get(0).getQuantity()%></td>
 			<td><%=foodOrderItemList.get(0).getPrice()%></td>
@@ -62,10 +64,10 @@
 		<tr>
 			<%
 				for (int i = 1; i < listSize; i++) {
-								FoodOrderItem tempItem = foodOrderItemList.get(i);
-								foodName = tempItem.getFood().getName();
-								int quantity = tempItem.getQuantity();
-								double price = tempItem.getPrice();
+									FoodOrderItem tempItem = foodOrderItemList.get(i);
+									foodName = tempItem.getFood().getName();
+									int quantity = tempItem.getQuantity();
+									double price = tempItem.getPrice();
 			%>
 			<td><%=foodName%></td>
 			<td><%=quantity%></td>
@@ -74,21 +76,28 @@
 		</tr>
 		<%
 			}
-					} else {
-						// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
-						totalPrice = (Double) foodOrders.get(username);
+						} else {
+							// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
+							totalPrice = (Double) foodOrders.get(username);
+						}
 					}
-				}
 		%>
 	</table>
 	</br> The total price is =
 	<%=totalPrice%>
 	<%
 		}
+		}else{
+			%>
+			<h1>No Orders Today!</h1>
+			
+			<%
+		}
+	
 	%>
-<form action="retrieveFoodOrdersServlet" method="post">
-	<input type="submit" value="Go to print"/>
-</form>
+	<form action="retrieveFoodOrdersServlet" method="post">
+		<input type="submit" value="Go to print" />
+	</form>
 
 </body>
 </html>
