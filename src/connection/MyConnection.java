@@ -107,6 +107,7 @@ public class MyConnection {
 		Criteria criteria = session.createCriteria(FoodOrder.class);
 		System.out.println(earlier +" "+  later);
 		criteria.add(Restrictions.between("createDate", earlier, later)).list();
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
 
 		// Criteria criteria = dc.getExecutableCriteria(session);
