@@ -10,15 +10,15 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<title>DaBao - Sign In</title>
+<title>DABAO</title>
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!-- import JQuery -->
 <script src="resources/js/jquery-1.11.3.js"></script>
 
 <!-- Bootstrap core CSS -->
-<!-- <link href="resources/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="resources/css/eureka.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
@@ -37,7 +37,7 @@
 					<h1>DABAO</h1>
 					<form class="form-signin" action="ProcessLoginServlet">
 
-						<input type="text" name="username" class="form-control" placeholder="Username" required>
+						<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}" required>
 						<input type="password" name="password" class="form-control" placeholder="Password" required>
 
 						<button class="btn btn-primary btn-block" type="submit">
@@ -53,6 +53,29 @@
 
 				</div>
 				<!-- /container -->
+
+				<!-- Error message handling -->
+				<c:if test="${not empty sessionScope.error}">
+					<div class="alert alert-danger">
+						<b>Error!</b>
+						<br>
+						<c:out value="${error}" />
+					</div>
+					<c:remove var="error" scope="session" />
+				</c:if>
+
+				<!-- Success message handling -->
+				<c:if test="${not empty sessionScope.success}">
+					<div class="alert alert-success">
+						<b>Success!</b>
+						<br>
+						<c:out value="${success}" />
+					</div>
+					<c:remove var="success" scope="session" />
+				</c:if>
+				
+				<c:remove var="username" scope="session" />
+
 
 				<div class="mastfoot">
 					<div class="inner">
