@@ -114,7 +114,7 @@ public class Test {
 		Set<Food> foodListB8 = new HashSet<>();
 		Set<Food> foodListB9 = new HashSet<>();
 		Set<Food> foodListB10 = new HashSet<>();
-		Set<Food> foodListB11 = new HashSet<>();
+		
 
 		Stall stall1 = new Stall("Sliced Fish Bee Hoon Stall", 91379160, null, null);
 		Food food1 = new Food("Fish Slice Bee Hoon", "", 3.70, null, stall1);
@@ -124,21 +124,21 @@ public class Test {
 		stall1.setFoodList(foodListB1);
 
 		Stall stall2 = new Stall("Malay food Stall", 81145966, null,  null);
-		Food food3 = new Food("Malay Chicken List", "", 3.00, null, stall2);
-		Food food4 = new Food("Malay Fish List", "", 3.00, null, stall2);
-		Food food5 = new Food("Malay Mutton List", "", 3.00, null, stall2);
+		Food food3 = new Food("Malay Chicken List", "upsize to $3.50", 3.00, null, stall2);
+		Food food4 = new Food("Malay Fish List", "upsize to $3.50", 3.00, null, stall2);
+		Food food5 = new Food("Malay Mutton List", "upsize to $3.50", 3.00, null, stall2);
 
-		Modifier modifierA3 = new Modifier("Up size", "", 0.50, food3);
+		Modifier modifierA3 = new Modifier("Upsize to $3.50", "", 0.50, food3);
 		Set<Modifier> modifierListA1 = new HashSet<Modifier>();
 		modifierListA1.add(modifierA3);
 		food3.setModifierList(modifierListA1);
 
-		Modifier modifierA4 = new Modifier("Up size", "", 0.50, food4);
+		Modifier modifierA4 = new Modifier("Upsize to $3.50", "", 0.50, food4);
 		Set<Modifier> modifierListA2 = new HashSet<Modifier>();
 		modifierListA2.add(modifierA4);
 		food4.setModifierList(modifierListA2);
 
-		Modifier modifierA5 = new Modifier("Up size", "", 0.50, food5);
+		Modifier modifierA5 = new Modifier("Upsize to $3.50", "", 0.50, food5);
 		Set<Modifier> modifierListA3 = new HashSet<Modifier>();
 		modifierListA3.add(modifierA5);
 		food5.setModifierList(modifierListA3);
@@ -219,9 +219,9 @@ public class Test {
 
 		Stall stall9 = new Stall("Minced Meat Noodles Stall(Closed On Tuesday)", 93686070, null,
 				 null);
-		Food food27 = new Food("Minced Meat Noodles", "upsize 3.20", 2.70, null, stall9);
+		Food food27 = new Food("Minced Meat Noodles", "upsize to $3.20", 2.70, null, stall9);
 
-		Modifier modifierA27 = new Modifier("upsize", "", 0.50, food27);
+		Modifier modifierA27 = new Modifier("Upsize to $3.20", "", 0.50, food27);
 		Set<Modifier> modifierListA27 = new HashSet<Modifier>();
 		modifierListA16.add(modifierA27);
 		food5.setModifierList(modifierListA27);
@@ -244,35 +244,6 @@ public class Test {
 		foodListB10.add(food33);
 		stall10.setFoodList(foodListB10);
 
-		Stall stall11 = new Stall("Fruit Stall", 91151608, null,  null);
-		Food food34 = new Food("Apple", "", 0.60, null, stall11);
-		Food food35 = new Food("Watermelon", "", 0.60, null, stall11);
-		Food food36 = new Food("DragonFruit", "", 0.60, null, stall11);
-		Food food37 = new Food("Pear", "", 0.60, null, stall11);
-		Food food38 = new Food("Honeydew", "", 0.60, null, stall11);
-		Food food39 = new Food("Papaya", "", 0.60, null, stall11);
-		Food food40 = new Food("Pineapple", "", 0.60, null, stall11);
-		Food food41 = new Food("Banana", "", 0.60, null, stall11 );
-		Food food42 = new Food("Agar Agar", "", 0.60, null, stall11);
-		Food food43 = new Food("Orange", "", 0.60, null, stall11);
-		Food food44 = new Food("Guava", "", 0.60, null, stall11);
-		Food food45 = new Food("Sarawak Pineapple", "", 1.00, null, stall11);
-		Food food46 = new Food("Mixed Fruits", "Upsize 3.50", 3.00, null, stall11);
-		foodListB11.add(food34);
-		foodListB11.add(food35);
-		foodListB11.add(food36);
-		foodListB11.add(food37);
-		foodListB11.add(food38);
-		foodListB11.add(food39);
-		foodListB11.add(food40);
-		foodListB11.add(food41);
-		foodListB11.add(food42);
-		foodListB11.add(food43);
-		foodListB11.add(food44);
-		foodListB11.add(food45);
-		foodListB11.add(food46);
-		stall11.setFoodList(foodListB11);
-
 		Canteen canteen2 = new Canteen("Bedok", "123",  null);
 		stall1.setCanteen(canteen2);
 		stall2.setCanteen(canteen2);
@@ -284,7 +255,7 @@ public class Test {
 		stall8.setCanteen(canteen2);
 		stall9.setCanteen(canteen2);
 		stall10.setCanteen(canteen2);
-		stall11.setCanteen(canteen2);
+		
 
 		stallList2.add(stall1);
 		stallList2.add(stall2);
@@ -296,7 +267,7 @@ public class Test {
 		stallList2.add(stall8);
 		stallList2.add(stall9);
 		stallList2.add(stall10);
-		stallList2.add(stall11);
+		
 
 		canteen2.setStallList(stallList2);
 
@@ -442,7 +413,7 @@ public class Test {
 		Stall seafoodTzeCharStall = new Stall("Seafood Tze Char Stall", 92262376, canteen1,
 				 null);
 
-		Food seafood1 = new Food("Hor Fun", "dry type $4.00", 3.70, null, seafoodTzeCharStall
+		Food seafood1 = new Food("Horfun", "dry type $4.00", 3.70, null, seafoodTzeCharStall
 			);
 		Food seafood2 = new Food("Fried Rice", "", 4.00, null, seafoodTzeCharStall);
 		Food seafood3 = new Food("Daily Soup With Rice And Egg", "", 4.80, null,
@@ -736,7 +707,6 @@ public class Test {
 		session.save(stall8);
 		session.save(stall9);
 		session.save(stall10);
-		session.save(stall11);
 		session.save(food1);
 		session.save(food2);
 		session.save(food3);
@@ -770,19 +740,6 @@ public class Test {
 		session.save(food31);
 		session.save(food32);
 		session.save(food33);
-		session.save(food34);
-		session.save(food35);
-		session.save(food36);
-		session.save(food37);
-		session.save(food38);
-		session.save(food39);
-		session.save(food40);
-		session.save(food41);
-		session.save(food42);
-		session.save(food43);
-		session.save(food44);
-		session.save(food45);
-		session.save(food46);
 
 		// **************************************** End insert of mock data
 		// ****************************************
