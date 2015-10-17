@@ -10,11 +10,7 @@
 <title></title>
 </head>
 <body>
-	Hi there! are you ready to retrieve today's orders?
-
-	<form action="retrieveFoodOrdersServlet" method="post">
-		<input type="submit" value="YES">
-	</form>
+	
 	<%
 		if (request.getAttribute("foodOrders") != null) {
 		ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
