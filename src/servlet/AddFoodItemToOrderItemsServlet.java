@@ -78,17 +78,6 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 			Food food = allFood.get(Integer.parseInt(request.getParameter("foodId")));
 			System.out.println("allFood: " + allFood); // testing
 			System.out.println("chosenFood: " + food); // testing
-			
-			// Get Modifiers
-			Set<Modifier> modifierList = food.getModifierList();
-			for(Modifier m : modifierList) {
-				String name = m.getName();
-				String value = request.getParameter(name);
-				if(value.equalsIgnoreCase("true")) {
-					ModifierChosen mc = new ModifierChosen();
-				}
-				System.out.println("name: " + name + ", value: " + value);
-			}
 
 			// Retrieve user's current food orders
 			List<FoodOrderItem> myFoodOrderItems = (ArrayList<FoodOrderItem>) session
@@ -106,6 +95,23 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 			// Add new FoodOrderItem to myFoodOrders
 			myFoodOrderItems.add(foodItem);
 
+			// Get Modifiers
+			Set<Modifier> modifierList = food.getModifierList();
+			for (Modifier m : modifierList) {
+				String name = m.getName();
+				String value = request.getParameter(name);
+				if (value != null) {
+					Set<ModifierChosen> list = foodItem.getModifierChosenList();
+					out.println("<br>List: " + list);
+					ModifierChosen mc = new ModifierChosen(m, foodItem);
+					out.println(mc);
+					list.add(mc);
+					foodItem.setModifierChosenList(list);
+					out.println("fooditem: " + foodItem.getModifierChosenList());
+				}
+				System.out.println("name: " + name + ", value: " + value);
+			}
+
 			// Set myFoodOrders in Session
 			session.setAttribute("myFoodOrderItems", myFoodOrderItems);
 
@@ -117,5 +123,4 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 }
