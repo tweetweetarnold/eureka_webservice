@@ -7138,11 +7138,11 @@ button.close {
 
 @font-face {
     font-family: Urban_Elegance_Bold;
-    src: url(../fonts/Urban_Elegance_Bold.ttf);
+    src: url(../../fonts/Urban_Elegance_Bold.ttf);
 }
 @font-face {
     font-family: Verdana;
-    src: url(../fonts/Verdana.ttf);
+    src: url(../../fonts/Verdana.ttf);
 }
 
 div {

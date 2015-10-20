@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,81 +8,58 @@
 
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
-<title>DABAO</title>
+<title>DaBao - Sign In</title>
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- import JQuery -->
-<script src="resources/js/jquery-1.11.3.js"></script>
-
 <!-- Bootstrap core CSS -->
-<link href="resources/css/eureka.css" rel="stylesheet">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="resources/css/cover.css" rel="stylesheet">
-
-<!-- <script src="resources/js/ie-emulation-modes-warning.js"></script> -->
+<link href="resources/css/signin.css" rel="stylesheet">
 
 </head>
 
 <body>
-	<div class="site-wrapper">
+	<div class="container">
 
-		<div class="site-wrapper-inner">
-			<div class="cover-container">
-				<div class="inner cover">
-					<h1>DABAO</h1>
-					<form class="form-signin" action="ProcessLoginServlet">
+		<form class="form-signin" method="post" action="ProcessLoginServlet">
+			<h2 class="form-signin-heading">Please sign in</h2>
 
-						<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}" required>
-						<input type="password" name="password" class="form-control" placeholder="Password" required>
+			<!-- User input -->
+			<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}" required>
+			<input type="password" name="password" class="form-control" placeholder="Password" required>
 
-						<button class="btn btn-primary btn-block" type="submit">
-							<font face="verdana">Sign in</font>
-						</button>
-					</form>
-
-					<form action="registration.jsp">
-						<button class="btn btn-primary btn-block" type="submit">
-							<font face="verdana">Register as a New User</font>
-						</button>
-					</form>
-
-				</div>
-				<!-- /container -->
-
-				<!-- Error message handling -->
-				<c:if test="${not empty sessionScope.error}">
-					<div class="alert alert-danger">
-						<b>Error!</b>
-						<br>
-						<c:out value="${error}" />
-					</div>
-					<c:remove var="error" scope="session" />
-				</c:if>
-
-				<!-- Success message handling -->
-				<c:if test="${not empty sessionScope.success}">
-					<div class="alert alert-success">
-						<b>Success!</b>
-						<br>
-						<c:out value="${success}" />
-					</div>
-					<c:remove var="success" scope="session" />
-				</c:if>
-				
-				<c:remove var="username" scope="session" />
-
-
-				<div class="mastfoot">
-					<div class="inner">
-						<p>Created by Eureka!</p>
-					</div>
-				</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<br>
+			<div align="center">
+				<a href="registration.jsp">Register new user</a>
 			</div>
-		</div>
+
+			<!-- Error message handling -->
+			<c:if test="${not empty sessionScope.error}">
+				<div class="alert alert-danger">
+					<b>Error!</b>
+					<br>
+					<c:out value="${error}" />
+				</div>
+				<c:remove var="error" scope="session" />
+			</c:if>
+
+			<!-- Success message handling -->
+			<c:if test="${not empty sessionScope.success}">
+				<div class="alert alert-success">
+					<b>Success!</b>
+					<br>
+					<c:out value="${success}" />
+				</div>
+				<c:remove var="success" scope="session" />
+			</c:if>
+		</form>
+
+		<c:remove var="username" scope="session" />
+
 	</div>
 	<!-- /container -->
 
@@ -101,7 +77,6 @@
 			m.parentNode.insertBefore(a, m)
 		})(window, document, 'script',
 				'//www.google-analytics.com/analytics.js', 'ga');
-
 		ga('create', 'UA-68676403-1', 'auto');
 		ga('send', 'pageview');
 	</script>
