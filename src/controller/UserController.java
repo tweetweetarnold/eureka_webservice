@@ -1,9 +1,6 @@
 package controller;
 
 import model.Employee;
-
-import java.util.List;
-
 import dao.EmployeeDAO;
 
 public class UserController {

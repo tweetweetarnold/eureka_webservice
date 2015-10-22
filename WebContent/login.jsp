@@ -8,7 +8,7 @@
 
 <meta name="description" content="">
 <meta name="author" content="">
-<title>DaBao - Sign In</title>
+<title>DABAO</title>
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

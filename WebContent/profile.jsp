@@ -3,7 +3,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>DaBao - Profile</title>
+<title>DABAO</title>
+
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Bootstrap Core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -11,6 +14,8 @@
 <!-- Custom CSS -->
 <link href="resources/css/shop-homepage.css" rel="stylesheet">
 <link href="resources/css/sticky-footer.css" rel="stylesheet">
+
+
 
 </head>
 <body>
@@ -33,18 +38,38 @@
 					<td>Gender:</td>
 					<td>Male</td>
 				</tr>
-				<tr>
-					<td>Credit:</td>
-					<td>$200.00</td>
-				</tr>
 			</table>
 
 			<br>
-			<br>
-			check it out
+
+
+
+			<table style="width: 50%;
+	font-size: 15px;" border="1">
+				<thead>
+					<tr>
+						<th>OrderId</th>
+						<th>Date</th>
+						<th>Food</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${sessionScope.orderHistory}" varStatus="loop" var="order">
+						<tr>
+							<td>
+								<c:out value="${order.foodOrderId}" />
+							</td>
+							<td><c:out value="${order.createDate}"/></td>
+							<td></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 
 		</div>
 		<!-- center align -->
+
+		<c:remove var="orderHistory" scope="session" />
 
 	</div>
 	<!-- container -->

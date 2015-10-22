@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>DaBao - Homepage</title>
+<title>DABAO</title>
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -43,9 +43,6 @@
 				<p class="lead"></p>
 				<div class="list-group">
 					<a href="#" class="list-group-item">Food Court 1</a>
-					<a href="#" class="list-group-item">Food Court 2</a>
-					<a href="#" class="list-group-item">Food Court 3</a>
-					<a href="#" class="list-group-item">Food Court 4</a>
 				</div>
 			</div>
 
@@ -85,7 +82,7 @@
 				<!-- Individual Food Item -->
 				<div class="row">
 
-					<c:forEach begin="0" end="10" var="food" items="${sessionScope.allFood}" varStatus="loop">
+					<c:forEach begin="0" end="11" var="food" items="${sessionScope.allFood}" varStatus="loop">
 						<div class="col-sm-4 col-lg-4 col-md-4">
 							<div class="thumbnail">
 								<img src="http://placehold.it/320x150" alt="">

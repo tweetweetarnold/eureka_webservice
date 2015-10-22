@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>DaBao - Profile</title>
+<title>DABAO</title>
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -68,9 +68,9 @@
 
 		<br>
 		<br>
-		<form action="#" method="post">
-			<button type="submit" class="btn btn-lg btn-primary btn-block">Make Payment</button>
-		</form>
+<!-- 		<form action="#" method="post"> -->
+<!-- 			<button type="submit" class="btn btn-lg btn-primary btn-block">Make Payment</button> -->
+<!-- 		</form> -->
 
 
 	</div>

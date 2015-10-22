@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,10 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Admin;
 import model.Employee;
 import model.Food;
 import services.PasswordService;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import controller.CanteenController;
 import controller.LoginController;
 
@@ -57,7 +61,7 @@ public class ProcessLoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		// PrintWriter out = response.getWriter();
+//		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 
 		// Getting User Input Parameters
@@ -92,6 +96,10 @@ public class ProcessLoginServlet extends HttpServlet {
 
 			session.setAttribute("allFood", allFoodList);
 			System.out.println(allFoodList);
+
+			// Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			//
+			// out.println(gson.toJson(allFoodList));
 
 			response.sendRedirect("homepage.jsp");
 

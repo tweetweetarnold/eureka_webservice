@@ -1,6 +1,5 @@
 package controller;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,7 +26,7 @@ public class FoodOrderController {
 	}
 
 	public void addFoodOrder(FoodOrder f) {
-		foodOrderDAO.saveFoodOrder(f);
+		FoodOrderDAO.saveFoodOrder(f);
 	}
 
 	public List<FoodOrder> getFoodOrderSet(String username) {
@@ -37,7 +36,7 @@ public class FoodOrderController {
 
 	// Retrieve a FoodOrder by id
 	public FoodOrder getFoodOrder(int foodOrderId) {
-		return foodOrderDAO.getFoodOrder(foodOrderId);
+		return FoodOrderDAO.getFoodOrder(foodOrderId);
 	}
 
 	// Retrieve all FoodOrders from yesterday 10:00:00 to today 10:00:00 with

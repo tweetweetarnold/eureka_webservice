@@ -4,7 +4,7 @@
 	String tokenID = (String) session.getAttribute("tokenID");
 	
 	if (emp == null && tokenID == null) {
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("ProcessLogoutServlet");
 	}
 %>
 
