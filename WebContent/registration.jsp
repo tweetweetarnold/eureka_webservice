@@ -1,10 +1,8 @@
-<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<%@page import="org.json.simple.JSONObject"%>
 
 <title>DaBao - Register</title>
 
@@ -16,8 +14,6 @@
 
 <!-- Custom styles for this template -->
 <link href="resources/css/signin.css" rel="stylesheet">
-
-<script src="resources/js/ie-emulation-modes-warning.js"></script>
 
 </head>
 <body>
@@ -63,8 +59,6 @@
 	</div>
 
 
-	<script src="resources/js/ie10-viewport-bug-workaround.js"></script>
-
 	<!-- 	Google Analytics -->
 	<script>
 		(function(i, s, o, g, r, a, m) {
@@ -78,7 +72,6 @@
 			m.parentNode.insertBefore(a, m)
 		})(window, document, 'script',
 				'//www.google-analytics.com/analytics.js', 'ga');
-
 		ga('create', 'UA-68676403-1', 'auto');
 		ga('send', 'pageview');
 	</script>

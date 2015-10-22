@@ -59,24 +59,25 @@ public class GetTodayOrdersServlet extends HttpServlet {
 		// date = date.substring(0, index);
 		// date+=" 00:00:00";
 		FoodOrderController foodOrderController = new FoodOrderController();
-
+		JSONObject json = null;
 		JSONArray jsonArray = new JSONArray();
+		try {
 		HashMap tempFoodOrderHash = foodOrderController.getFoodOrderToday();
 		// Iterator iter = tempFoodOrderHash.keySet().iterator();
 
 		Gson gson = new Gson();
-		JSONObject json = null;
-		try {
+		
+		
 			json = new JSONObject(tempFoodOrderHash);
-		} catch (NullPointerException e) {
+			RequestDispatcher rd = request.getRequestDispatcher("testRetrieveFoodOrders.jsp");
+			request.setAttribute("foodOrders", json);
+			rd.forward(request, response);
+		} catch (Exception e) {
 			RequestDispatcher rd = request.getRequestDispatcher("testRetrieveFoodOrders.jsp");
 			request.setAttribute("NoOrders", "There are no orders for today");
 			rd.forward(request, response);
+			
 		}
-
-		RequestDispatcher rd = request.getRequestDispatcher("testRetrieveFoodOrders.jsp");
-		request.setAttribute("foodOrders", json);
-		rd.forward(request, response);
 		System.out.println("HELLO");
 	}
 

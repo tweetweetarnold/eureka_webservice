@@ -1,6 +1,7 @@
 <%@page import="java.util.*"%>
 <%@page import="model.*"%>
 <%@page import="controller.*"%>
+<%@page import="java.text.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -404,15 +405,16 @@
 										for (Employee e : employeeOweList) {
 											String username = e.getUsername();
 											double amountOwed = e.getAmountOwed();
+											DecimalFormat f = new DecimalFormat("#.00");
 											String userEmail = e.getEmail();
 											String currentStatus = e.getStatus();
 											String companyName = e.getCompany().getName();
 									%>
 									<tr>
-										<td><a
-											href="processAdminGetEmployeeServlet?username=<%=username%>"><%=username%></a></td>
-										</td>
-										<td>$<%=amountOwed%></td>
+
+										<td><a href="processAdminGetEmployeeServlet?username=<%=username%>"><%=username%></a></td></td>
+										<td>$<%=f.format(amountOwed)%></td>
+
 										<td><%=userEmail%></td>
 										<td><%=currentStatus%></td>
 										<td><%=companyName%></td>
@@ -421,9 +423,12 @@
 										}
 									%>
 								</tbody>
+								
 							</table>
+									<a href="SendEmailServlet" class="btn btn-default btn-block">Send Email to All</a>
+
 						</div>
-					</div>
+
 
 					<!-- /.panel -->
 					<div class="panel panel-default">
