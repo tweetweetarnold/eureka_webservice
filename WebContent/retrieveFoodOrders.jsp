@@ -1,5 +1,6 @@
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
 <%@ page import="model.*"%>
 
@@ -50,132 +51,146 @@
     <![endif]-->
 </head>
 <body>
-<div id="wrapper">
+	<div id="wrapper">
 
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.html">SB Admin v2.0</a>
-			</div>
-			<!-- /.navbar-header -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+		</div>
+		<!-- /.navbar-header -->
 
-			<ul class="nav navbar-top-links navbar-left">
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <i
-						class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
-				</a>
-	
-	<%
-		if (request.getAttribute("foodOrders") != null) {
-		ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
-		.getAttribute("foodOrders");
+		<ul class="nav navbar-top-links navbar-left">
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> <!-- Navigation --> <nav
+						class="navbar navbar-default navbar-static-top" role="navigation"
+						style="margin-bottom: 0"> <jsp:include
+						page="headerfooter/adminHeader.jsp" /> </nav>
+			</a> <%
+ 	if (request.getAttribute("foodOrders") != null) {
+ 		ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
+ 				.getAttribute("foodOrders");
+ 		%>
+ 		
+ 		<form action="ChineseRetrieveFoodOrderServlet" method="post">
+ 			<input type = "submit" value="Get Chinese Food Names">
+ 		</form>
+ 		
+ 		<% 
 
-		for (FoodDisplayObject fDO : foodDisplayObjectList) {
-			String stallName = fDO.getStallName();
-			ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
-	%>
-	</br>
-	<%=stallName%>
-	<div class="table-responsive">
-	<table class="table table-striped">
-		<tr>
-			<th>food</th>
-			<th>addons</th>
-			<th>quantity</th>
-			<th>price</th>
-			<th>users</th>
-		</tr>
-		<%
-			double totalPrice = 0;
-			
-			for (FoodOrderItem fOI : foodOrderItemList) {
-				String foodName = fOI.getFood().getName();
-				ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierList());
-				int quantity = fDO.getQuantity(fOI);
-				double price = fOI.getPrice();
-				totalPrice+=quantity*price;
-				ArrayList<String> userList = fDO.getUsernameList(fOI);
-		%>
-		<tr>
-			<td><%=foodName%></td>
-			<td>
-				<table>
-					<%
-						for(ModifierChosen mod : modifierList){
-																			String modName = mod.getName();
-					%>
-					<tr>
-						<td><%=modName%></td>
-					</tr>
-					<%
-						}
-					%>
-				</table>
-			</td>
-			<td><%=quantity%></td>
-			<td><%=price%></td>
+ 		for (FoodDisplayObject fDO : foodDisplayObjectList) {
+ 			String stallName = fDO.getStallName();
+ 			ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
+ %> </br>
+				<div class="row">
+					<div class="col-lg-12">
+						<!-- /.panel -->
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<%=stallName%>
+							</div>
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<tr>
+										<th>food</th>
+										<th>addons</th>
+										<th>quantity</th>
+										<th>price</th>
+										<th>users</th>
+									</tr>
+									<%
+										double totalPrice = 0;
 
-			<td>
-				<table>
-					<%
-						for(String username :userList){
-					%>
+												for (FoodOrderItem fOI : foodOrderItemList) {
+													String foodName = fOI.getFood().getName();
+													ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierList());
+													int quantity = fDO.getQuantity(fOI);
+													double price = fOI.getPrice();
+													totalPrice += quantity * price;
+													ArrayList<String> userList = fDO.getUsernameList(fOI);
+									%>
+									<tr>
+										<td><%=foodName%></td>
+										<td>
+											<table>
+												<%
+													for (ModifierChosen mod : modifierList) {
+																	String modName = mod.getName();
+												%>
+												<tr>
+													<td><%=modName%></td>
+												</tr>
+												<%
+													}
+												%>
+											</table>
+										</td>
+										<td><%=quantity%></td>
+										<td><%=price%></td>
 
-					<tr>
-						<td><%=username%></td>
-					</tr>
-					<%
-						}
-					%>
-				</table>
-			</td>
+										<td>
+											<table>
+												<%
+													for (String username : userList) {
+												%>
 
-		</tr>
-		<%
-			}
-		%>
+												<tr>
+													<td><%=username%></td>
+												</tr>
+												<%
+													}
+												%>
+											</table>
+										</td>
 
-	</table>
+									</tr>
+									<%
+										}
+									%>
+
+								</table>
+								Total Price =<%=totalPrice%>
+							</div>
+						</div>
+
+					</div>
+				</div> </br> </br> <%
+ 	}
+ %> <%
+ 	}
+ %>
 	</div>
-	Total Price =
-	<%=totalPrice%>
-	</br>
-	</br>
-
-	<%
-		}
-	%>
-
-
-
-	<%
-		}
-	%>
-</div>
 	<!-- /#wrapper -->
 
 	<!-- jQuery -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
 	<!-- Morris Charts JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script>
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script>
 
 	<!-- Custom Theme JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 </body>
 </html>
