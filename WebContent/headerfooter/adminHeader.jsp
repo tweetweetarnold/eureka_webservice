@@ -9,13 +9,13 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="homepage.jsp">DaBao</a>
+				<a class="navbar-brand" href="adminHomepageTest.jsp">DaBao</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul id="headerbar" class="nav navbar-nav">
 					<li>
-						<a href="testRetrieveFoodOrders.jsp">Todays orders</a>
+						<a href="GetTodayOrdersServlet">Todays orders</a>
 					</li>
 					<li>
 						<a href="adminHomepageTest.jsp">DABAO Admin</a>

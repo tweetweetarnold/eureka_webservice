@@ -151,16 +151,16 @@ public class FoodOrderController {
 		Date earlierDate = cal.getTime();
 		earlierDate.setHours(10);
 		Date nowDate = new Date();
-		if(nowDate.after(laterDate)){
+		if (nowDate.after(laterDate)) {
 			cal.setTime(laterDate);
-	        cal.add(Calendar.DATE, +1);
-	        laterDate = cal.getTime();
-	        cal.setTime(earlierDate);
-	        cal.add(Calendar.DATE, +1);
-	        earlierDate = cal.getTime();
+			cal.add(Calendar.DATE, +1);
+			laterDate = cal.getTime();
+			cal.setTime(earlierDate);
+			cal.add(Calendar.DATE, +1);
+			earlierDate = cal.getTime();
 		}
-		
-		System.out.println(earlierDate +" "+  laterDate);
+
+		System.out.println(earlierDate + " " + laterDate);
 
 		return FoodOrderDAO.getFoodOrderByDate(laterDate, earlierDate);
 
@@ -168,7 +168,7 @@ public class FoodOrderController {
 
 	public HashMap getFoodOrderToday() {
 		List<FoodOrder> tempFoodOrderList = getFoodOrderBetweenCutOff();
-
+		ArrayList<String> uniqueEmployee = new ArrayList<String>();
 		// foodOrderItems With Employee name as key
 		HashMap foodOrders = new HashMap();
 		Iterator iter = tempFoodOrderList.iterator();
@@ -177,9 +177,19 @@ public class FoodOrderController {
 			FoodOrder tempFoodOrder = (FoodOrder) iter.next();
 			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
 			Employee tempEmployee = tempFoodOrder.getEmployee();
+			String username = tempEmployee.getUsername();
 			System.out.println(tempEmployee);
 			if (tempEmployee != null) {
-				foodOrders.put(tempFoodOrder.getEmployee().getUsername(), foodOrderList);
+
+				if (!uniqueEmployee.contains(username)) {
+					foodOrders.put(tempFoodOrder.getEmployee().getUsername(), foodOrderList);
+					uniqueEmployee.add(username);
+				}else{
+					ArrayList<FoodOrderItem> tempFoodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders.get(username);
+					tempFoodOrderItemList.addAll(foodOrderList);
+					foodOrders.put(username, tempFoodOrderItemList);
+					System.out.println("Username: " + username + foodOrderList.size() );
+				}
 			} else {
 				foodOrders.put("Unknown", foodOrderList);
 			}

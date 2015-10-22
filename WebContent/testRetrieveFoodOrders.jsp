@@ -55,136 +55,120 @@
     <![endif]-->
 </head>
 <body>
-<div id="wrapper">
+	<div id="wrapper">
 
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
-			style="margin-bottom: 0">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.html">SB Admin v2.0</a>
-			</div>
-			<!-- /.navbar-header -->
+			style="margin-bottom: 0"> <jsp:include
+			page="headerfooter/adminHeader.jsp" /> </nav>
 
-			<ul class="nav navbar-top-links navbar-left">
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <i
-						class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
-				</a>
-
-
-	<%
-		if (request.getAttribute("NoOrders") == null) {
-			if (request.getAttribute("foodOrders") != null) {
-				JSONObject foodOrders = (JSONObject) request.getAttribute("foodOrders");
-				Iterator iter = foodOrders.keySet().iterator();
-
-				out.println("Number of people " + (foodOrders.size() - 1));
-	%>
-	</br>
-	<div class="row">
-				<div class="col-lg-8">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
-<div class="table-responsive">
-<table class="table table-striped">
-	
-		<tr>
-			<th>Number</th>
-			<th>Name</th>
-			<th>Items</th>
-			<th>Quantity</th>
-			<th>Price</th>
-		</tr>
 		<%
-			
-		%>
-		<%
-			double totalPrice = 0.0;
-					int listSize = 0;
-					int number = 0;
-					while (iter.hasNext()) {
-						String username = (String) iter.next();
-						if (!username.equals("totalPrice")) {
-							ArrayList<FoodOrderItem> foodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
-									.get(username);
+			if (request.getAttribute("NoOrders") == null) {
+				if (request.getAttribute("foodOrders") != null) {
+					JSONObject foodOrders = (JSONObject) request.getAttribute("foodOrders");
+					Iterator iter = foodOrders.keySet().iterator();
 
-							listSize = foodOrderItemList.size();
-							String foodName = foodOrderItemList.get(0).getFood().getName();
+					out.println("Number of people " + (foodOrders.size() - 1));
 		%>
-		<tr>
-			<td rowspan=<%=listSize%>><%=++number%></td>
-			<td rowspan=<%=listSize%>><a
-				href="RetrieveUserByUsernameServlet?username=<%=username%>"><%=username%></a></td>
-			<td><%=foodName%></td>
-			<td><%=foodOrderItemList.get(0).getQuantity()%></td>
-			<td><%=foodOrderItemList.get(0).getPrice()%></td>
-		</tr>
-		<tr>
-			<%
-				for (int i = 1; i < listSize; i++) {
-									FoodOrderItem tempItem = foodOrderItemList.get(i);
-									foodName = tempItem.getFood().getName();
-									int quantity = tempItem.getQuantity();
-									double price = tempItem.getPrice();
-			%>
-			<td><%=foodName%></td>
-			<td><%=quantity%></td>
-			<td><%=price%></td>
+		</br>
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="table-responsive">
+					<table class="table table-striped">
 
-		</tr>
-		<%
-			}
-						} else {
-							// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
-							totalPrice = (Double) foodOrders.get(username);
-						}
-					}
-		%>
-	</table>
-	</div>
-		</div>
-			</div>
+						<tr>
+							<th>Number</th>
+							<th>Name</th>
+							<th>Items</th>
+							<th>Quantity</th>
+							<th>Price</th>
+						</tr>
+						<%
+							
+						%>
+						<%
+							double totalPrice = 0.0;
+									int listSize = 0;
+									int number = 0;
+									while (iter.hasNext()) {
+										String username = (String) iter.next();
+										if (!username.equals("totalPrice")) {
+											ArrayList<FoodOrderItem> foodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders.get(username);
+											listSize = foodOrderItemList.size();
+											String foodName = foodOrderItemList.get(0).getFood().getName();
+						%>
+						<tr>
+							<td rowspan=<%=listSize%>><%=++number%></td>
+							<td rowspan=<%=listSize%>><a
+								href="RetrieveUserByUsernameServlet?username=<%=username%>"><%=username%></a></td>
+							<td><%=foodName%></td>
+							<td><%=foodOrderItemList.get(0).getQuantity()%></td>
+							<td><%=foodOrderItemList.get(0).getPrice()%></td>
+						</tr>
+						<tr>
+							<%
+								for (int i = 1; i < listSize; i++) {
+													FoodOrderItem tempItem = foodOrderItemList.get(i);
+													foodName = tempItem.getFood().getName();
+													int quantity = tempItem.getQuantity();
+													double price = tempItem.getPrice();
+							%>
+							<td><%=foodName%></td>
+							<td><%=quantity%></td>
+							<td><%=price%></td>
+
+						</tr>
+						<%
+							}
+										} else {
+											// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
+											totalPrice = (Double) foodOrders.get(username);
+										}
+									}
+						%>
+					</table>
 				</div>
-					</div>
+			</div>
+		</div>
+	</div>
 	</br> The total price is =
 	<%=totalPrice%>
 	<%
 		}
-		}else{
-			%>
-			<h1>No Orders Today!</h1>
-			
-			<%
+		} else {
+	%>
+	<h1>No Orders Today!</h1>
+
+	<%
 		}
-	
 	%>
 	<form action="retrieveFoodOrdersServlet" method="post">
 		<input type="submit" value="Go to print" />
 	</form>
-<!-- /#wrapper -->
+	<!-- /#wrapper -->
 
 	<!-- jQuery -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
 	<!-- Morris Charts JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script>
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script>
 
 	<!-- Custom Theme JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+	<script
+		src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 </body>
 </html>
