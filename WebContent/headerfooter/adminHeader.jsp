@@ -18,14 +18,11 @@
 						<a href="testRetrieveFoodOrders.jsp">Todays orders</a>
 					</li>
 					<li>
-						<a href="#">How to order</a>
-					</li>
-					<li>
-						<a href="#">Contact</a>
+						<a href="adminHomepageTest.jsp">DABAO Admin</a>
 					</li>
 					
 					<li>
-						<a href="login.jsp">Logout</a>
+						<a href="adminLogin.jsp">Logout</a>
 					</li>
 				</ul>
 			</div>

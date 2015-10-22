@@ -19,7 +19,7 @@
 <body>
 
 	<!-- Headerbar JSP Include -->
-	<jsp:include page="headerfooter/header.jsp" />
+	<jsp:include page="headerfooter/adminHeader.jsp" />
 
 
 	<div class="container">
