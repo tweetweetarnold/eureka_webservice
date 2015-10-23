@@ -59,7 +59,9 @@
 							<td>
 								<c:out value="${order.foodOrderId}" />
 							</td>
-							<td><c:out value="${order.createDate}"/></td>
+							<td>
+								<c:out value="${order.createDate}" />
+							</td>
 							<td></td>
 						</tr>
 					</c:forEach>
