@@ -56,64 +56,16 @@ public class Test {
 		// ************* WARNING, THIS HIBERNATE CONFIG FILE WILL CLEAR
 		// EVERYTHING IN DATABASE AND POPULATE WITH BELOW
 
-		Canteen canteen = new Canteen("Default Canteen", "123", null);
-		Stall stall = new Stall("Default Stall", 123456789, canteen, null);
-		Food food = new Food("Arnold's Fried Chicken", "Quite Nice", 2.50, null, stall);
-		// Food firstFood = new Food("myfirstfood", "", 2.3, null, stall, new
-		// Date());
-		// session.save(firstFood);
-
-		Admin admin = new Admin("admin", PasswordService.encryptPassword("1234567"), "admin123",
-				123456789);
 		Company company = new Company("XiaoDingDang Co.", null, null, "XDD123");
-		Employee employee = new Employee("arnold", PasswordService.encryptPassword("1234567"),
-				"Arnold Lee", "arnold.lee.2013@smu.edu.sg", 987654321, company);
-		FoodOrder order = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null);
-		FoodOrderItem foodItem = new FoodOrderItem(order, food, 1, "More meat");
+		Employee arnold = new Employee("arnold", PasswordService.encryptPassword("1234567"),
+				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
 
-		Set<Canteen> canteenList = new HashSet<>();
-		canteenList.add(canteen);
-		company.setCanteenList(canteenList);
-		Set<FoodOrder> orderList = new HashSet<>();
-		orderList.add(order);
-		employee.setOrderHistory(orderList);
-		Set<FoodOrderItem> foodOrderList = new HashSet<>();
-		foodOrderList.add(foodItem);
-		order.setFoodOrderList(foodOrderList);
-		Set<Employee> employeeList = new HashSet<>();
-		employeeList.add(employee);
-		// company.setEmployeeList(employeeList);
-		Set<Food> foodList = new HashSet<>();
-		employee.setFavouriteList(foodList);
-		foodList.add(food);
-		Set<Stall> stallList = new HashSet<>();
-		stallList.add(stall);
-		stall.setFoodList(foodList);
-		canteen.setStallList(stallList);
-
-		Modifier m1 = new Modifier("m1", "nice", 2.3, food);
-		Modifier m2 = new Modifier("m2", "nice", 2.3, food);
-		HashSet<Modifier> set = new HashSet<>();
-		set.add(m1);
-		set.add(m2);
-		food.setModifierList(set);
-
-		ModifierChosen mc1 = new ModifierChosen(m1, foodItem);
-		ModifierChosen mc2 = new ModifierChosen(m2, foodItem);
-
-		HashSet<ModifierChosen> set2 = new HashSet<>();
-		set2.add(mc1);
-		set2.add(mc2);
-		foodItem.setModifierChosenList(set2);
-
-		session.save(admin);
 		session.save(company);
-		session.save(employee);
-		session.save(order);
-		session.save(foodItem);
+		session.save(arnold);
 
-		// session.getTransaction().commit();
-		// session.close();
+		Admin admin = new Admin("admin", PasswordService.encryptPassword("1234567"), "admin1",
+				45678925);
+		session.save(admin);
 
 		// **************************************** End Arnold Data
 		// ****************************************
@@ -744,6 +696,7 @@ public class Test {
 		// ****************************************
 
 		session.getTransaction().commit();
+		session.flush();
 		session.close();
 
 		System.out.println("Test.java completed");

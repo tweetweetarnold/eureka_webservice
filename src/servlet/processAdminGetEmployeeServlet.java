@@ -48,7 +48,7 @@ public class processAdminGetEmployeeServlet extends HttpServlet {
 		request.setAttribute("username", username);
 		request.setAttribute("email", employee.getEmail());
 		request.setAttribute("contactNumber", employee.getContactNo());
-		request.setAttribute("orderHistory", employee.getOrderHistory());
+//		request.setAttribute("orderHistory", employee.getOrderHistory());
 		request.setAttribute("status", employee.getStatus());
 		request.setAttribute("amountOwed", employee.getAmountOwed());
 		rd.forward(request,response);

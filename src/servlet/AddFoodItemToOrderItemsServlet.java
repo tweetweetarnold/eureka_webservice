@@ -61,7 +61,9 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		System.out.println("AddFoodItemToOrderItemsServlet");
+		
+		System.out.println("");
+		System.out.println("****** AddFoodItemToOrderItemsServlet ******");
 		out.println("AddFoodItemToOrderItemsServlet");
 
 		try {
@@ -69,15 +71,15 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 
 			// Retrieve foodId from parameters
 			// ** might need to change in future because its from foodlist array
-			String foodId = request.getParameter("foodId");
-			System.out.println("foodId: " + foodId);
+			String foodPos = request.getParameter("foodPos");
+			System.out.println("foodPos: " + foodPos);
 
 			// Retrieve corresponding food from food list
 			// ** Temporary
 			List<Food> allFood = (ArrayList<Food>) session.getAttribute("allFood");
-			Food food = allFood.get(Integer.parseInt(request.getParameter("foodId")));
+			Food food = allFood.get(Integer.parseInt(request.getParameter("foodPos")));
 			System.out.println("allFood: " + allFood); // testing
-			System.out.println("chosenFood: " + food); // testing
+			System.out.println("chosenFood: " + food.getName() + ", id: " + food.getFoodId()); // testing
 
 			// Retrieve user's current food orders
 			List<FoodOrderItem> myFoodOrderItems = (ArrayList<FoodOrderItem>) session

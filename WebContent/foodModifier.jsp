@@ -38,7 +38,7 @@
 			</h3>
 
 			<form action="AddFoodItemToOrderItemsServlet" method="post">
-				<input type="hidden" name="foodId" value="${param.foodId}">
+				<input type="hidden" name="foodPos" value="${param.foodPos}">
 				<table class="table table-striped" style="width: 60%;">
 					<thead>
 						<tr>

@@ -56,11 +56,10 @@ public class ProcessProfileServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		Employee emp = (Employee) session.getAttribute("user");
-		System.out.println(emp.getUsername());
 
 		FoodOrderController foodOrderController = new FoodOrderController();
 		List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSet(emp.getUsername());
-		System.out.println("sizehere: " + foodOrderList.size());
+		System.out.println(foodOrderList.size());
 
 		session.setAttribute("orderHistory", foodOrderList);
 		response.sendRedirect("profile.jsp");

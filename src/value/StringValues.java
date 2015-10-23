@@ -8,5 +8,6 @@ public final class StringValues {
 
 	public static final String EMPLOYEE_OK = "Ok";
 	public static final String EMPLOYEE_SUSPENDED = "Suspended";
+	public static final String EMPLOYEE_DESTROYED = "Destroyed";
 
 }

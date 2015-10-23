@@ -27,7 +27,6 @@ public class CanteenController {
 				returnList.addAll(foodList);
 			}
 		}
-		System.out.println("returnList : " + returnList);
 		return returnList;
 	}
 	
