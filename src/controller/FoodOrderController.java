@@ -38,6 +38,25 @@ public class FoodOrderController {
 	public FoodOrder getFoodOrder(int foodOrderId) {
 		return FoodOrderDAO.getFoodOrder(foodOrderId);
 	}
+	
+	public ArrayList<FoodOrder> getFoodOrderForUsernameWeek(String username, Date sundayDate){
+		ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>();
+		Calendar cal = Calendar.getInstance();
+		sundayDate.setHours(10);
+		sundayDate.setMinutes(0);
+		cal.setTime(sundayDate);
+		cal.add(Calendar.DATE, 7);
+		Date laterDate = cal.getTime();
+		System.out.println("Start date: " + sundayDate + " End date: " + laterDate);
+		Employee tempEmployee = EmployeeDAO.getEmployeeByUsername(username);
+		foodOrderList = FoodOrderDAO.getFoodOrderByDateUsername(sundayDate, laterDate, tempEmployee);
+		System.out.println(foodOrderList.size() + foodOrderList.get(0).getEmployee().getUsername());
+		System.out.println(foodOrderList.get(0).getFoodOrderList().size());
+		
+		
+		return foodOrderList;
+	}
+	
 
 	// Retrieve all FoodOrders from yesterday 10:00:00 to today 10:00:00 with
 	// total price as object in HashMap with key "totalPrice"
@@ -149,8 +168,11 @@ public class FoodOrderController {
 		cal.add(Calendar.DATE, -1);
 		Date earlierDate = cal.getTime();
 		earlierDate.setHours(10);
+		Date fivePm = laterDate;
+		fivePm.setHours(5);
+		fivePm.setMinutes(00);
 		Date nowDate = new Date();
-		if (nowDate.after(laterDate)) {
+		if (nowDate.after(fivePm)) {
 			cal.setTime(laterDate);
 			cal.add(Calendar.DATE, +1);
 			laterDate = cal.getTime();

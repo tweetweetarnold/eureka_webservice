@@ -16,6 +16,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -159,7 +160,27 @@ public class MyConnection {
 		session.close();
 		return list;
 	}
+	
+	public static List<Object> getFoodForDatesAndUser(Date earlierDate, Date laterDate, Employee tempEmployee){
+		Session session = getSession();
+		session.beginTransaction();
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(FoodOrder.class);
+		Criterion thirdCondition = Restrictions.conjunction().add(Restrictions.between("createDate", earlierDate, laterDate)).add(Restrictions.eq("employee", tempEmployee));
+		criteria.add(thirdCondition).list();
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		list = (List<Object>) criteria.list();
+		
+		// Criteria criteria = dc.getExecutableCriteria(session);
 
+		session.getTransaction().commit();
+		session.close();
+		
+		return list;
+		
+	}
+	
+	
 	// used for registration in registrationcontroller
 	public static Object getCompanyByCompanyCode(String companyCode) {
 		Session session = getSession();
