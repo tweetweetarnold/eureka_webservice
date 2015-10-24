@@ -10,6 +10,7 @@ import model.Employee;
 import model.FoodOrder;
 
 import org.hibernate.Criteria;
+import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -126,9 +127,10 @@ public class MyConnection {
 		Session session = getSession();
 		List<Object> list = null;
 		session.beginTransaction();
-		Criteria criteria = dc.getExecutableCriteria(session);
+		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		list = criteria.list();
 		session.getTransaction().commit();
+		session.flush();
 		session.close();
 		return list;
 	}
@@ -138,7 +140,7 @@ public class MyConnection {
 		System.out.println("MyConnection: retrieveAllRecordsWithLimit");
 		Session session = getSession();
 		session.beginTransaction();
-		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max);
+		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Object> list = criteria.list();
 		session.getTransaction().commit();
 		session.close();
@@ -149,7 +151,7 @@ public class MyConnection {
 		Session session = getSession();
 		session.beginTransaction();
 		List<Object> list = new ArrayList<>();
-		Criteria criteria = session.createCriteria(FoodOrder.class);
+		Criteria criteria = session.createCriteria(FoodOrder.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		String username = employee.getUsername();
 		criteria.add(Restrictions.eq("employee", employee)).list();
 		list = (List<Object>) criteria.list();

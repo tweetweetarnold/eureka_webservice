@@ -30,7 +30,6 @@ public class FoodOrderController {
 	}
 
 	public List<FoodOrder> getFoodOrderSet(String username) {
-		System.out.println(username);
 		return FoodOrderDAO.getFoodOrderSet(EmployeeDAO.getEmployeeByUsername(username));
 	}
 

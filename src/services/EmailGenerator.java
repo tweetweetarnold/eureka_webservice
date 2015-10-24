@@ -42,7 +42,9 @@ public class EmailGenerator {
 			MessagingException {
 		//String[] toEmails = { "ginji_volts@hotmail.com","boonhui.koh.2013@sis.smu.edu.sg" };
 		String emailSubject = "Outstanding Payment";
-		String emailBody = "Dear User,</br>"+ " This is an email sent by JavaMail api.</br></br>Regards,</br>Admin</br>"
+		String emailBody = "Dear User,</br>"+ " You have an outsanding payments.Please log in to the DABAO App to resolve your outstanding payments.</br>"
+				+ " You will not be able to place new orders until these outstanding payments have been resolved.</br>"
+				+ "</br>Regards,</br>Admin</br>"
 				+ "</br>This is a system-generated email; please DO NOT REPLY to this email.";
 
 		mailSession = Session.getDefaultInstance(emailProperties, null);

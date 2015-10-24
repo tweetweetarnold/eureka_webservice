@@ -55,7 +55,9 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		PrintWriter out = response.getWriter();
-		response.setContentType("text");
+		response.setContentType("text/html");
+		
+		System.out.println("****** AddNewFoodOrderServlet ******");
 
 		HttpSession session = request.getSession();
 

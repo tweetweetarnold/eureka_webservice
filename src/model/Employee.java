@@ -35,10 +35,8 @@ public class Employee {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "companyId")
 	private Company company;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<Food> favouriteList;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<FoodOrder> orderHistory;
+//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	private Set<Food> favouriteList;
 	private String status;
 	private Date createDate;
 
@@ -57,8 +55,7 @@ public class Employee {
 		this.contactNo = contactNo;
 		this.company = company;
 		this.status = StringValues.EMPLOYEE_OK;
-		this.favouriteList = new HashSet<>();
-		this.orderHistory = new HashSet<>();
+//		this.favouriteList = new HashSet<>();
 		this.createDate = new Date();
 	}
 
@@ -162,21 +159,13 @@ public class Employee {
 		this.company = company;
 	}
 
-	public Set<Food> getFavouriteList() {
-		return favouriteList;
-	}
-
-	public void setFavouriteList(Set<Food> favouriteList) {
-		this.favouriteList = favouriteList;
-	}
-
-	public Set<FoodOrder> getOrderHistory() {
-		return orderHistory;
-	}
-
-	public void setOrderHistory(Set<FoodOrder> orderHistory) {
-		this.orderHistory = orderHistory;
-	}
+//	public Set<Food> getFavouriteList() {
+//		return favouriteList;
+//	}
+//
+//	public void setFavouriteList(Set<Food> favouriteList) {
+//		this.favouriteList = favouriteList;
+//	}
 
 	public Date getCreateDate() {
 		return createDate;

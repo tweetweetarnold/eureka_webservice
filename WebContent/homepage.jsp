@@ -104,7 +104,7 @@
 								</div>
 								<div class="pull-right" style="margin-right: 5px;">
 									<form action="foodModifier.jsp">
-										<input type="hidden" value='<c:out value="${loop.index}"/>' id="foodId" name="foodId">
+										<input type="hidden" value='<c:out value="${loop.index}"/>' id="foodId" name="foodPos">
 										<button type="submit" class="btn btn-danger">Add to Cart</button>
 									</form>
 								</div>
