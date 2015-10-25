@@ -14,10 +14,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Bootstrap core CSS -->
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="resources/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="resources/css/dabao/dabao.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="resources/css/signin.css" rel="stylesheet">
+<!-- <link href="resources/css/signin.css" rel="stylesheet"> -->
+<link href="resources/css/dabao/signin.css" rel="stylesheet">
 
 </head>
 
@@ -25,38 +27,48 @@
 	<div class="container">
 
 		<form class="form-signin" method="post" action="ProcessLoginServlet">
-			<h2 class="form-signin-heading">Please sign in</h2>
+			<h2 class="form-signin-heading">Welcome to...</h2>
+			<h1 class="form-signin-heading">DABAO</h1>
 
 			<!-- User input -->
+			<%-- 			<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}" required> --%>
+			<!-- 			<input type="password" name="password" class="form-control" placeholder="Password" required> -->
+			<label for="username" class="sr-only">Username</label>
 			<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}" required>
+			<label for="password" class="sr-only">Password</label>
 			<input type="password" name="password" class="form-control" placeholder="Password" required>
 
+			<!-- 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
+			<!-- 			<br> -->
+			<!-- 			<div align="center"> -->
+			<!-- 				<a href="registration.jsp">Register new user</a> -->
+			<!-- 			</div> -->
+
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			<br>
-			<div align="center">
-				<a href="registration.jsp">Register new user</a>
-			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Register as a New User</button>
 
-			<!-- Error message handling -->
-			<c:if test="${not empty sessionScope.error}">
-				<div class="alert alert-danger">
-					<b>Error!</b>
-					<br>
-					<c:out value="${error}" />
-				</div>
-				<c:remove var="error" scope="session" />
-			</c:if>
-
-			<!-- Success message handling -->
-			<c:if test="${not empty sessionScope.success}">
-				<div class="alert alert-success">
-					<b>Success!</b>
-					<br>
-					<c:out value="${success}" />
-				</div>
-				<c:remove var="success" scope="session" />
-			</c:if>
 		</form>
+
+		<!-- Error message handling -->
+		<c:if test="${not empty sessionScope.error}">
+			<div class="alert alert-danger" role="alert">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				<c:out value="${error}" />
+			</div>
+			<c:remove var="error" scope="session" />
+		</c:if>
+
+		<!-- Success message handling -->
+		<c:if test="${not empty sessionScope.success}">
+			<div class="alert alert-success" role="alert">
+				<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+				<span class="sr-only">Success:</span>
+				<c:out value="${success}" />
+			</div>
+			<c:remove var="success" scope="session" />
+		</c:if>
+
 
 		<c:remove var="username" scope="session" />
 
