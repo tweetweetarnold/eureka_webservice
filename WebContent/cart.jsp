@@ -108,9 +108,12 @@
 										<input type="text" class="form-control input-sm" value="${foodItem.quantity}">
 									</div>
 									<div class="col-xs-2">
-										<button type="button" class="btn btn-link btn-xs">
-											<span class="glyphicon glyphicon-trash"> </span>
-										</button>
+										<form action="DeleteFoodItemFromOrderItemsServlet">
+											<input type="hidden" id="foodPosition" name="foodPosition" value="${loop.index}" />
+											<button type="submit" class="btn btn-link btn-xs">
+												<span class="glyphicon glyphicon-trash"></span>
+											</button>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -154,6 +157,19 @@
 						</div>
 					</div>
 					<!-- panel footer end -->
+					<br>
+
+
+					<!-- Success message handling -->
+					<c:if test="${not empty sessionScope.success}">
+						<div class="alert alert-success" role="alert">
+							<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+							<span class="sr-only">Success:</span>
+							<c:out value="${success}" />
+						</div>
+						<c:remove var="success" scope="session" />
+					</c:if>
+
 
 				</div>
 			</div>

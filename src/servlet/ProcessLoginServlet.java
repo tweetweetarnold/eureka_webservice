@@ -13,8 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import model.Canteen;
 import model.Employee;
-import model.Food;
+
+import org.hibernate.Session;
+
 import services.PasswordService;
+import connection.MyConnection;
 import controller.CanteenController;
 import controller.LoginController;
 
@@ -87,16 +90,16 @@ public class ProcessLoginServlet extends HttpServlet {
 			// Get all food data from database and save into session for
 			// display
 			CanteenController canteenController = new CanteenController();
-			List<Food> allFoodList = canteenController.getAllFood();
-			System.out.println("LoginServlet foodListSize: " + allFoodList.size());
+//			List<Food> allFoodList = canteenController.getAllFood();
+//			System.out.println("LoginServlet foodListSize: " + allFoodList.size());
 			
 			//for login2
 			List<Canteen> canteenList = canteenController.retrieveAll();
 			System.out.println("canteen size: " + canteenList.size());
 			session.setAttribute("canteenList", canteenList);
-
-			session.setAttribute("allFood", allFoodList);
-			System.out.println(allFoodList);
+//
+//			session.setAttribute("allFood", allFoodList);
+//			System.out.println(allFoodList);
 
 			response.sendRedirect("homepage.jsp");
 

@@ -18,24 +18,22 @@ public class FoodOrderDAO {
 	public static FoodOrder getFoodOrder(int foodOrderId) {
 		return (FoodOrder) MyConnection.get(FoodOrder.class, foodOrderId);
 	}
-	
-	
-	public static List<FoodOrder> getFoodOrderSet(Employee employee){
+
+	public static List<FoodOrder> getFoodOrderSet(Employee employee) {
 		List<FoodOrder> returnList = new ArrayList<>();
-		
+
 		List<Object> hiberList = MyConnection.getFoodOrderList(employee);
 		if (hiberList.size() != 0) {
 			for (Object o : hiberList) {
 				returnList.add((FoodOrder) o);
 			}
-		} 
+		}
 		return returnList;
 	}
 
 	// Retrive FoodOrders from the DB between two datetimes with format
 	// "yyyy-MM-dd hh:mm:ss"
-	
-	
+
 	public static List<FoodOrder> getFoodOrderByDate(Date past, Date present) {
 		List<FoodOrder> returnList = new ArrayList<>();
 		List<Object> lister = MyConnection.getFoodOrderBetween(past, present);
@@ -43,34 +41,35 @@ public class FoodOrderDAO {
 			for (Object o : lister) {
 				returnList.add((FoodOrder) o);
 			}
-		} 
+		}
 		return returnList;
 	}
-	
-	public static ArrayList<FoodOrder> getFoodOrderByDateUsername(Date earlierDate, Date laterDate, Employee tempEmployee) {
+
+	public static ArrayList<FoodOrder> getFoodOrderByDateUsername(Date earlierDate, Date laterDate,
+			Employee tempEmployee) {
 		String sqlQuery = "SELECT * FROM  foodorder where createDate>= + :date1 and createDate<=:date2";
-		
+
 		ArrayList<FoodOrder> returnList = new ArrayList<>();
-		List<Object> lister = MyConnection.getFoodForDatesAndUser(earlierDate, laterDate, tempEmployee);
+		List<Object> lister = MyConnection.getFoodForDatesAndUser(earlierDate, laterDate,
+				tempEmployee);
 		if (lister.size() != 0) {
 			for (Object o : lister) {
 				returnList.add((FoodOrder) o);
 			}
-		} 
+		}
 		return returnList;
 	}
-	
-	
+
 	public static List<FoodOrder> getFoodOrderByDateAndTime(String past, String present) {
 		String sqlQuery = "SELECT * FROM  foodorder where createDate>= + :date1 and createDate<=:date2";
-		
+
 		List<FoodOrder> returnList = new ArrayList<>();
 		List<Object> lister = MyConnection.get(sqlQuery, past, present);
 		if (lister.size() != 0) {
 			for (Object o : lister) {
 				returnList.add((FoodOrder) o);
 			}
-		} 
+		}
 		return returnList;
 	}
 
@@ -101,4 +100,5 @@ public class FoodOrderDAO {
 	public static void deleteFoodOrder(FoodOrder f) {
 		MyConnection.delete(f);
 	}
+
 }

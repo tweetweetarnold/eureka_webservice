@@ -100,14 +100,14 @@ public class MyConnection {
 		session.getTransaction().commit();
 		session.close();
 	}
-	
+
 	public static List<Object> getFoodOrderBetween(Date later, Date earlier) {
 		Session session = getSession();
 		System.out.println("here");
 		session.beginTransaction();
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(FoodOrder.class);
-		System.out.println(earlier +" "+  later);
+		System.out.println(earlier + " " + later);
 		criteria.add(Restrictions.between("createDate", earlier, later)).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
@@ -118,19 +118,20 @@ public class MyConnection {
 		session.close();
 		System.out.println("here " + list.size());
 		return list;
-		
+
 	}
-	
+
 	// for retrieve all
 	public static List<Object> retrieveAllRecords(DetachedCriteria dc) {
 		System.out.println("MyConnection: retrieveAllRecords");
 		Session session = getSession();
 		List<Object> list = null;
 		session.beginTransaction();
-		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(
+				Criteria.DISTINCT_ROOT_ENTITY);
 		list = criteria.list();
 		session.getTransaction().commit();
-		session.flush();
+		// session.flush();
 		session.close();
 		return list;
 	}
@@ -140,7 +141,8 @@ public class MyConnection {
 		System.out.println("MyConnection: retrieveAllRecordsWithLimit");
 		Session session = getSession();
 		session.beginTransaction();
-		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Object> list = criteria.list();
 		session.getTransaction().commit();
 		session.close();
@@ -151,7 +153,8 @@ public class MyConnection {
 		Session session = getSession();
 		session.beginTransaction();
 		List<Object> list = new ArrayList<>();
-		Criteria criteria = session.createCriteria(FoodOrder.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		Criteria criteria = session.createCriteria(FoodOrder.class).setResultTransformer(
+				Criteria.DISTINCT_ROOT_ENTITY);
 		String username = employee.getUsername();
 		criteria.add(Restrictions.eq("employee", employee)).list();
 		list = (List<Object>) criteria.list();
@@ -162,27 +165,29 @@ public class MyConnection {
 		session.close();
 		return list;
 	}
-	
-	public static List<Object> getFoodForDatesAndUser(Date earlierDate, Date laterDate, Employee tempEmployee){
+
+	public static List<Object> getFoodForDatesAndUser(Date earlierDate, Date laterDate,
+			Employee tempEmployee) {
 		Session session = getSession();
 		session.beginTransaction();
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(FoodOrder.class);
-		Criterion thirdCondition = Restrictions.conjunction().add(Restrictions.between("createDate", earlierDate, laterDate)).add(Restrictions.eq("employee", tempEmployee));
+		Criterion thirdCondition = Restrictions.conjunction()
+				.add(Restrictions.between("createDate", earlierDate, laterDate))
+				.add(Restrictions.eq("employee", tempEmployee));
 		criteria.add(thirdCondition).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
-		
+
 		// Criteria criteria = dc.getExecutableCriteria(session);
 
 		session.getTransaction().commit();
 		session.close();
-		
+
 		return list;
-		
+
 	}
-	
-	
+
 	// used for registration in registrationcontroller
 	public static Object getCompanyByCompanyCode(String companyCode) {
 		Session session = getSession();
@@ -196,8 +201,8 @@ public class MyConnection {
 		session.close();
 		return list.get(0);
 	}
-	
-	//getting list of users whose payment status is owed(the input parameter)
+
+	// getting list of users whose payment status is owed(the input parameter)
 	public static List<Object> getPaymentOwedList(String status) {
 		Session session = getSession();
 		session.beginTransaction();
@@ -206,15 +211,15 @@ public class MyConnection {
 		criteria.add(Restrictions.eq("status", status)).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
-		
+
 		// Criteria criteria = dc.getExecutableCriteria(session);
 
 		session.getTransaction().commit();
 		session.close();
-		
+
 		return list;
 	}
-	
+
 	public static List<Object> get(String sql) {
 		Session session = getSession();
 		session.beginTransaction();

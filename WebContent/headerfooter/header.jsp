@@ -13,7 +13,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Food Menu <span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="homepage.jsp">Food Menu <span class="sr-only">(current)</span></a></li>
                         <li><a href="cart.jsp">Cart</a></li>
                         <li><a href="payment.jsp">Payment</a></li>
                         <li><a href="profile.jsp">History</a></li>

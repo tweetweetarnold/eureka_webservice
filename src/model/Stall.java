@@ -26,7 +26,7 @@ public class Stall {
 	@JoinColumn(name = "canteenId")
 	private Canteen canteen;
 	private Date createDate;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "stall")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "stall")
 	private Set<Food> foodList;
 
 	public Stall() {
