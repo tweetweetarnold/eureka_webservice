@@ -45,9 +45,14 @@
 			<!-- 			</div> -->
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Register as a New User</button>
-
+			<div align="center">
+				<a href="registration.jsp">Register as a New User</a>
+			</div>
 		</form>
+
+
+
+		<!-- 		<button class="btn btn-lg btn-primary btn-block" type="submit">Register as a New User</button> -->
 
 		<!-- Error message handling -->
 		<c:if test="${not empty sessionScope.error}">

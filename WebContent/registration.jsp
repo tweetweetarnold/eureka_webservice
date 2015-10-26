@@ -30,29 +30,41 @@
 			<c:set value="${sessionScope.userInput}" var="userInput" />
 
 			<!-- User input -->
-			<input type="text" name="username" class="form-control-table" placeholder="Username" value="<c:out value="${userInput['username']}"/>" required>
-			<input type="text" name="name" class="form-control-table" placeholder="Name" value="<c:out value="${userInput['name']}"/>" required>
-			<input type="password" name="password" class="form-control-table" placeholder="Password (Min length 8 Characters)" onfocus="" required>
+			<input type="text" name="username" class="form-control-table" placeholder="Username"
+				value="<c:out value="${userInput['username']}"/>" required
+			>
+			<input type="text" name="name" class="form-control-table" placeholder="Name"
+				value="<c:out value="${userInput['name']}"/>" required
+			>
+			<input type="password" name="password" class="form-control-table" placeholder="Password (Min length 8 Characters)"
+				onfocus="" required
+			>
 			<input type="password" name="confirmPwd" class="form-control-table" placeholder="Confirm Password" required>
-			<input type="email" name="email" class="form-control-table" placeholder="Email" value="<c:out value="${userInput['email']}"/>" required>
+			<input type="email" name="email" class="form-control-table" placeholder="Email"
+				value="<c:out value="${userInput['email']}"/>" required
+			>
 			<input type="text" name="contactNo" class="form-control-table" placeholder="Contact Number (8 Digits)"
 				value="<c:out value="${userInput['contactNo']}"/>" required
 			>
-			<input type="text" name="companyCode" class="form-control-table" placeholder="Company Code" value="<c:out value="${userInput['companyCode']}"/>"
-				required
+			<input type="text" name="companyCode" class="form-control-table" placeholder="Company Code"
+				value="<c:out value="${userInput['companyCode']}"/>" required
 			>
 
 			<br>
 			<button class="btn btn-primary btn-block" type="submit">
 				<font face="verdana">Register</font>
 			</button>
+
+			<div align="center">
+				<a href="login.jsp">Back to Login Page</a>
+			</div>
 		</form>
 
-		<form action="login.jsp" class="form-signin">
-			<button class="btn btn-primary btn-block">
-				<font face="verdana">Back to Login Page</font>
-			</button>
-		</form>
+		<!-- 		<form action="login.jsp" class="form-signin"> -->
+		<!-- 			<button class="btn btn-primary btn-block"> -->
+		<!-- 				<font face="verdana"></font> -->
+		<!-- 			</button> -->
+		<!-- 		</form> -->
 
 		<br>
 

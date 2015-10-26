@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.FoodDAO;
 import model.Food;
 import model.FoodOrderItem;
 import model.Modifier;
@@ -71,15 +72,17 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 
 			// Retrieve foodId from parameters
 			// ** might need to change in future because its from foodlist array
-			String foodPos = request.getParameter("foodPos");
-			System.out.println("foodPos: " + foodPos);
+			String foodId = request.getParameter("foodId");
+			System.out.println("foodId: " + foodId);
 
 			// Retrieve corresponding food from food list
 			// ** Temporary
-			List<Food> allFood = (ArrayList<Food>) session.getAttribute("allFood");
-			Food food = allFood.get(Integer.parseInt(request.getParameter("foodPos")));
-			System.out.println("allFood: " + allFood); // testing
-			System.out.println("chosenFood: " + food.getName() + ", id: " + food.getFoodId()); // testing
+//			List<Food> allFood = (ArrayList<Food>) session.getAttribute("allFood");
+//			Food food = allFood.get(Integer.parseInt(request.getParameter("foodPos")));
+//			System.out.println("allFood: " + allFood); // testing
+//			System.out.println("chosenFood: " + food.getName() + ", id: " + food.getFoodId()); // testing
+			
+			Food food = FoodDAO.getFood(Integer.parseInt(foodId));
 
 			// Retrieve user's current food orders
 			List<FoodOrderItem> myFoodOrderItems = (ArrayList<FoodOrderItem>) session

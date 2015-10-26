@@ -54,7 +54,6 @@ public class DeleteFoodItemFromOrderItemsServlet extends HttpServlet {
 			response.setContentType("text/html");
 
 			out.println(request.getParameter("foodPosition"));
-			out.println(request.getParameter("hello"));
 			int pos = Integer.parseInt((String) request.getParameter("foodPosition"));
 
 			HttpSession session = request.getSession();

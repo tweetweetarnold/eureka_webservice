@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,13 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Canteen;
 import model.Employee;
 import model.Food;
 import services.PasswordService;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import controller.CanteenController;
 import controller.LoginController;
 
@@ -93,13 +89,14 @@ public class ProcessLoginServlet extends HttpServlet {
 			CanteenController canteenController = new CanteenController();
 			List<Food> allFoodList = canteenController.getAllFood();
 			System.out.println("LoginServlet foodListSize: " + allFoodList.size());
+			
+			//for login2
+			List<Canteen> canteenList = canteenController.retrieveAll();
+			System.out.println("canteen size: " + canteenList.size());
+			session.setAttribute("canteenList", canteenList);
 
 			session.setAttribute("allFood", allFoodList);
 			System.out.println(allFoodList);
-
-			// Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			//
-			// out.println(gson.toJson(allFoodList));
 
 			response.sendRedirect("homepage.jsp");
 

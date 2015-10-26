@@ -1,30 +1,50 @@
 
 <!DOCTYPE html>
-<!-- Java imports -->
 <%@include file="protect.jsp"%>
 <html lang="en">
-
 <head>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
 <meta name="description" content="">
 <meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
 
 <title>DABAO</title>
 
-<!-- library import for JSTL -->
+<!-- JavaScript imports -->
+<script src="resources/js/jquery-1.11.3.js"></script>
+
+<!-- <script src="resources/js/jquery-1.11.3.min.js"></script> -->
+<!-- <script src="resources/js/ie-emulation-modes-warning.js"></script> -->
+<!-- <script src="resources/js/dabao/dabao.js"></script> -->
+
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/dabao/transition.js"></script>
+<script src="resources/js/dabao/carousel.js"></script>
+<script src="resources/js/dabao/collapse.js"></script>
+
+<!-- Library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- Bootstrap Core CSS -->
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+<link href="resources/css/dabao/dabao.css" rel="stylesheet">
 
-<!-- Custom CSS -->
-<link href="resources/css/shop-homepage.css" rel="stylesheet">
-<link href="resources/css/sticky-footer.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="resources/css/dabao/carousel.css" rel="stylesheet">
+<link href="resources/css/dabao/starter-template.css" rel="stylesheet">
 
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
 </head>
 
 <body>
@@ -32,123 +52,94 @@
 	<!-- Headerbar JSP Include -->
 	<jsp:include page="headerfooter/header.jsp" />
 
-	<!-- Page Content -->
+
 	<div class="container">
-		<h1>Homepage</h1>
 
-		<div id="content"></div>
-
-		<div class="row">
-			<div class="col-md-3">
-				<p class="lead"></p>
-				<div class="list-group">
-					<a href="#" class="list-group-item">Food Court 1</a>
+		<!-- Carousel Holder -->
+		<div class="row carousel-holder">
+			<div class="col-md-12">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+					</ol>
+					<div class="carousel-inner">
+						<div class="item active">
+							<img class="slide-image" src="resources/img/img-friedrice.jpg" alt="">
+						</div>
+						<div class="item">
+							<img class="slide-image" src="resources/img/img-noodles.jpg" alt="">
+						</div>
+						<div class="item">
+							<img class="slide-image" src="resources/img/img-spaghetti.jpg" alt="">
+						</div>
+					</div>
+					<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left"></span>
+					</a>
+					<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
 				</div>
 			</div>
+		</div>
+		<!-- End Carousel Holder -->
 
-			<div class="col-md-9">
 
-				<!-- Carousel Holder -->
-				<div class="row carousel-holder">
-					<div class="col-md-12">
-						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-							<ol class="carousel-indicators">
-								<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-								<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-								<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-							</ol>
-							<div class="carousel-inner">
-								<div class="item active">
-									<img class="slide-image" src="assets/images/img-friedrice.jpg" alt="">
-								</div>
-								<div class="item">
-									<img class="slide-image" src="assets/images/img-noodles.jpg" alt="">
-								</div>
-								<div class="item">
-									<img class="slide-image" src="assets/images/img-spaghetti.jpg" alt="">
-								</div>
+		<!-- JSTL get variables -->
+		<c:set value="${sessionScope.canteenList}" var="canteenList" />
+
+		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+			<!-- Per canteen -->
+			<c:forEach items="${canteenList}" varStatus="canteenLoop" var="canteen">
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="heading">
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${canteenLoop.index}" aria-expanded="true"
+								aria-controls="collapse"
+							>
+								<c:out value="${canteen.name}" />
+							</a>
+						</h4>
+					</div>
+					<div id="collapse${canteenLoop.index}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="" heading"">
+						<div class="panel-body">
+							<div class="row">
+
+								<c:forEach items="${canteen.stallList}" var="stall" varStatus="stallLoop">
+									<div class="thumbnail">
+										<img src="resources/img/img-chickenRiceStall.jpg" alt="...">
+										<div class="caption">
+											<a class="button" href='RenderStallFoodListServlet?stallId=${stall.stallId}'>
+												<c:out value="${stall.name}" />
+											</a>
+										</div>
+									</div>
+								</c:forEach>
+
 							</div>
-							<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-								<span class="glyphicon glyphicon-chevron-left"></span>
-							</a>
-							<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-								<span class="glyphicon glyphicon-chevron-right"></span>
-							</a>
 						</div>
 					</div>
 				</div>
 
-
-				<!-- Individual Food Item -->
-				<div class="row">
-
-					<c:forEach begin="0" end="11" var="food" items="${sessionScope.allFood}" varStatus="loop">
-						<div class="col-sm-4 col-lg-4 col-md-4">
-							<div class="thumbnail">
-								<img src="http://placehold.it/320x150" alt="">
-								<div class="caption">
-									<h4 class="pull-right">
-										$
-										<c:out value="${food.priceString}" />
-									</h4>
-									<h4>
-										<a href="#">
-											<c:out value="${food.name}" />
-										</a>
-									</h4>
-
-									<p>
-										<c:out value="${food.description}" />
-									</p>
-
-								</div>
-								<div class="pull-right" style="margin-right: 5px;">
-									<form action="foodModifier.jsp">
-										<input type="hidden" value='<c:out value="${loop.index}"/>' id="foodId" name="foodPos">
-										<button type="submit" class="btn btn-danger">Add to Cart</button>
-									</form>
-								</div>
-								<br>
-								<br>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-
-			</div>
+			</c:forEach>
 
 		</div>
 
 	</div>
-	<!-- /.container -->
+	<!-- close container -->
 
 
-	<!-- Footer JSP Include -->
-	<jsp:include page="headerfooter/footer.jsp" />
+	<!-- Bootstrap core JavaScript
+        ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+	<!-- 	<script src="../../dist/js/bootstrap.min.js"></script> -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<!-- 	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
 
-	<!-- jQuery -->
-	<script src="resources/js/jquery.js"></script>
 
-	<!-- Bootstrap Core JavaScript -->
-	<script src="resources/js/bootstrap.min.js"></script>
-
-	<!-- 	Google Analytics -->
-	<script>
-		(function(i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r;
-			i[r] = i[r] || function() {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-			a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore(a, m)
-		})(window, document, 'script',
-				'//www.google-analytics.com/analytics.js', 'ga');
-
-		ga('create', 'UA-68676403-1', 'auto');
-		ga('send', 'pageview');
-	</script>
 </body>
-
 </html>
