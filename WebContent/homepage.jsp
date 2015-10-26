@@ -97,14 +97,14 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="heading">
 						<h4 class="panel-title">
-							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${canteenLoop.index}" aria-expanded="true"
-								aria-controls="collapse"
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${canteenLoop.index}"
+								aria-expanded="true" aria-controls="collapse"
 							>
 								<c:out value="${canteen.name}" />
 							</a>
 						</h4>
 					</div>
-					<div id="collapse${canteenLoop.index}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="" heading"">
+					<div id="collapse${canteenLoop.index}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby=""heading"">
 						<div class="panel-body">
 							<div class="row">
 

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ public class Food {
 	private String name;
 	private String description;
 	private double price;
+	@Column(columnDefinition="longblob")
 	private byte[] image;
 	private Date createDate;
 	@ManyToOne(cascade = CascadeType.ALL)
