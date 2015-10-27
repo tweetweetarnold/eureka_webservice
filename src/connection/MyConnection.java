@@ -149,11 +149,11 @@ public class MyConnection {
 	public static List<Object> queryWithCriteria(DetachedCriteria dc) {
 		System.out.println("MyConnection: getWithCriteria");
 		Session session = startSession();
-		
+
 		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(
 				Criteria.DISTINCT_ROOT_ENTITY);
 		List<Object> l = criteria.list();
-		
+
 		endSession(session);
 		return l;
 	}
@@ -164,7 +164,7 @@ public class MyConnection {
 		Session session = startSession();
 		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		List<Object> list = criteria.list();
+		List<Object> list = (List<Object>) criteria.list();
 		session.getTransaction().commit();
 		session.close();
 		return list;
