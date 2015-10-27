@@ -33,7 +33,7 @@ public class RegistrationController {
 		String encryptPassword = PasswordService.encryptPassword(password);
 		
 		Admin newAdmin = new Admin(username, encryptPassword, name, contactNo);
-		AdminDAO.saveadmin(newAdmin);
+		AdminDAO.saveAdmin(newAdmin);
 		String id = newAdmin.getUsername();
 
 		return id;

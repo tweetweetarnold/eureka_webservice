@@ -24,23 +24,7 @@ public class AdminDAO {
 		return (Admin) MyConnection.get(Admin.class, adminId);
 	}
 
-	// Retrieve Admin from DB using username
-	// public static Admin getadminByUsername(String username) {
-	// String sqlQuery = "SELECT * FROM admin where username=\"" + username +
-	// "\"";
-	// List<Object> lister = MyConnection.getAdmin(sqlQuery);
-	//
-	// for (Object o : lister) {
-	// Admin admin = (Admin) o;
-	// if (admin.getUsername().equals(username)) {
-	// return admin;
-	// }
-	// }
-	// return null;
-	// }
-
 	public static Admin getAdminByUsername(String username) {
-
 		DetachedCriteria dc = DetachedCriteria.forClass(Admin.class);
 		dc.add(Restrictions.eq("username", username));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
@@ -65,17 +49,32 @@ public class AdminDAO {
 	}
 
 	// Save Admin to the DB
-	public static void saveadmin(Admin d) {
+	public static void saveAdmin(Admin d) {
 		MyConnection.save(d);
 	}
 
 	// Update Admin in the DB
-	public static void updateadmin(Admin d) {
+	public static void updateAdmin(Admin d) {
 		MyConnection.update(d);
 	}
 
 	// Delete Admin from the DB
-	public static void deleteadmin(Admin d) {
+	public static void deleteAdmin(Admin d) {
 		MyConnection.delete(d);
 	}
+
+	// Retrieve Admin from DB using username
+	// public static Admin getadminByUsername(String username) {
+	// String sqlQuery = "SELECT * FROM admin where username=\"" + username +
+	// "\"";
+	// List<Object> lister = MyConnection.getAdmin(sqlQuery);
+	//
+	// for (Object o : lister) {
+	// Admin admin = (Admin) o;
+	// if (admin.getUsername().equals(username)) {
+	// return admin;
+	// }
+	// }
+	// return null;
+	// }
 }
