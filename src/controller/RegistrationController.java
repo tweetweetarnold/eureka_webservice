@@ -4,6 +4,9 @@ import model.Admin;
 import model.Company;
 import model.Employee;
 import services.PasswordService;
+
+import org.hibernate.exception.ConstraintViolationException;
+
 import dao.AdminDAO;
 import dao.EmployeeDAO;
 
@@ -21,7 +24,11 @@ public class RegistrationController {
 		}
 		Employee newEmployee = new Employee(username, encryptPassword, name, email, contactNo,
 				company);
+		try{
 		EmployeeDAO.saveEmployee(newEmployee);
+		}catch(ConstraintViolationException e){
+			throw new Exception("Username already exists! Please choose another username.");
+		}
 		String id = newEmployee.getUsername();
 
 		return id;
