@@ -36,7 +36,7 @@
 			<input type="text" name="name" class="form-control-table" placeholder="Name"
 				value="<c:out value="${userInput['name']}"/>" required
 			>
-			<input type="password" name="password" class="form-control-table" placeholder="Password (Min length 8 Characters)"
+			<input type="password" name="password" class="form-control-table" placeholder="Password (Min length 7 Characters)"
 				onfocus="" required
 			>
 			<input type="password" name="confirmPwd" class="form-control-table" placeholder="Confirm Password" required>
