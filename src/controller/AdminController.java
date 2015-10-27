@@ -7,9 +7,8 @@ import dao.AdminDAO;
 
 public class AdminController {
 
-	
-	public List<Employee> getListOfOwedPayment(String paymentStatus){
+	public List<Employee> getListOfOwedPayment(String paymentStatus) {
 		System.out.println(paymentStatus);
-		return AdminDAO.getListOfOwedPayment(paymentStatus);	
+		return AdminDAO.getListOfOwedPayment(paymentStatus);
 	}
 }
