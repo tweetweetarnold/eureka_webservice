@@ -1,20 +1,16 @@
 package test;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.util.HashSet;
+import java.util.Set;
 
 import model.Admin;
 import model.Canteen;
 import model.Company;
 import model.Employee;
 import model.Food;
-import model.FoodOrder;
-import model.FoodOrderItem;
 import model.Modifier;
-import model.ModifierChosen;
 import model.Stall;
 
 import org.hibernate.Session;
@@ -22,7 +18,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import services.PasswordService;
-import value.StringValues;
 
 public class Test {
 

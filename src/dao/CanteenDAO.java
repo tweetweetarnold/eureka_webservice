@@ -18,7 +18,7 @@ public class CanteenDAO {
 	// Retrieve all Canteens from the DB
 	public static List<Canteen> getAllCanteens() {
 		List<Canteen> returnList = new ArrayList<>();
-		List<Object> list = MyConnection.retrieveAllRecords(DetachedCriteria
+		List<Object> list = MyConnection.queryWithCriteria(DetachedCriteria
 				.forClass(Canteen.class));
 		for (Object o : list) {
 			returnList.add((Canteen) o);
