@@ -46,7 +46,7 @@ public class retrieveFoodOrdersServlet extends HttpServlet {
 		FoodOrderController foodOrderController = new FoodOrderController();
 		ArrayList<FoodDisplayObject> foodOrderList = new ArrayList<FoodDisplayObject>(foodOrderController.getFoodOrderforCutOff());
 		
-		RequestDispatcher rd = request.getRequestDispatcher("retrieveFoodOrders.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("adminFoodOrderByStall.jsp");
 		request.setAttribute("foodOrders", foodOrderList);
 		rd.forward(request,response);
 		

@@ -69,11 +69,11 @@ public class GetTodayOrdersServlet extends HttpServlet {
 		
 		
 			json = new JSONObject(tempFoodOrderHash);
-			RequestDispatcher rd = request.getRequestDispatcher("testRetrieveFoodOrders.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("adminFoodOrders.jsp");
 			request.setAttribute("foodOrders", json);
 			rd.forward(request, response);
 		} catch (Exception e) {
-			RequestDispatcher rd = request.getRequestDispatcher("testRetrieveFoodOrders.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("adminFoodOrders.jsp");
 			request.setAttribute("NoOrders", "There are no orders for today");
 			rd.forward(request, response);
 			
