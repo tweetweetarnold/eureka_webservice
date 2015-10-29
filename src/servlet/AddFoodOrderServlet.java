@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -72,26 +73,43 @@ public class AddFoodOrderServlet extends HttpServlet {
 
 		Employee employee = (Employee) session.getAttribute("user");
 		System.out.println("Employee retrieved");
-
+		HashSet<FoodOrderItem> foodOrderItemsToAdd = new HashSet<FoodOrderItem>();
 		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null);
 		for (FoodOrderItem item : myFoodOrderItems) {
 			// Loop for uniqueFoodOrderItems
-			if (!uniqueFoodOrderItems.isEmpty()) {
-				for (FoodOrderItem uniqueItem : uniqueFoodOrderItems) {
-					if(uniqueItem.equals(item)){
-						uniqueItem.setQuantity(item.getQuantity()+1);
-					}
+			int count = 0;
+			for (FoodOrderItem uniqueItem : myFoodOrderItems) {
+				if (uniqueItem.equals(item)) {
+					count++;
 				}
-				
-			}else{
-				uniqueFoodOrderItems.add(item);
 			}
-			//item.setFoodOrder(myFoodOrder);
-
+			System.out.println("NUMBER OF DUPLICATES " + count);
+			item.setQuantity(count);
+			Iterator iter = foodOrderItemsToAdd.iterator();
+			boolean duplicatesExist = false;
+			while(iter.hasNext()){
+				FoodOrderItem tempFoodOrderItem = (FoodOrderItem)iter.next();
+				if(item.equals(tempFoodOrderItem)){
+					duplicatesExist = true;
+				}
+			}
+			if(!duplicatesExist){
+				foodOrderItemsToAdd.add(item);
+			}
+			// item.setFoodOrder(myFoodOrder);	
+			System.out.println("WHY : " + item.toString());
 			out.println("size: " + item.getModifierChosenList().size());
 		}
+
+		Iterator iter = foodOrderItemsToAdd.iterator();
+		while(iter.hasNext()){
+			FoodOrderItem foodItem =  (FoodOrderItem) iter.next();
+			foodItem.setFoodOrder(myFoodOrder);
+		}
+		
 		HashSet tempHashSet = new HashSet(uniqueFoodOrderItems);
-		myFoodOrder.setFoodOrderList(tempHashSet);
+		System.out.println("99999999999999999999999999999999           " + foodOrderItemsToAdd.size());
+		myFoodOrder.setFoodOrderList(foodOrderItemsToAdd);
 		System.out.println("New FoodOrder created");
 
 		employee.setAmountOwed(employee.getAmountOwed() + myFoodOrder.getTotalPrice());

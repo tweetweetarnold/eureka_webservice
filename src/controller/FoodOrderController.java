@@ -109,7 +109,7 @@ public class FoodOrderController {
 				while (uniqueIter.hasNext()) {
 					FoodOrderItem tempFoodOrderItem = (FoodOrderItem) uniqueIter.next();
 					if (tempFoodOrderItem.equals(currentFoodOrderItem)) {
-						quantity++;
+						quantity+=tempFoodOrderItem.getQuantity()+currentFoodOrderItem.getQuantity();
 						System.out.println("Quantity check: " + quantity);
 					}
 				}
@@ -124,7 +124,7 @@ public class FoodOrderController {
 					}
 				}
 				if (equalsCount2 == 0) {
-					quantityForFoodOrderItem.put(i, quantity);
+					quantityForFoodOrderItem.put(i, quantity/2);
 				}
 
 			}
@@ -168,7 +168,7 @@ public class FoodOrderController {
 		Date earlierDate = cal.getTime();
 		earlierDate.setHours(10);
 		Date fivePm = laterDate;
-		fivePm.setHours(5);
+		fivePm.setHours(17);
 		fivePm.setMinutes(00);
 		Date nowDate = new Date();
 		if (nowDate.after(fivePm)) {
