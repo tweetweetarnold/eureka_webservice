@@ -125,12 +125,35 @@ public class FoodOrderItem {
 		this.createDate = createDate;
 	}
 
-	public Set<ModifierChosen> getModifierList() {
-		return modifierChosenList;
-	}
+	public boolean equals2(FoodOrderItem other) {
+		// check if same food
+		if (other.getFood().equals(food)) {
 
-	public void setModifierList(HashSet<ModifierChosen> modifierList) {
-		this.modifierChosenList = modifierList;
+			// check which one has longer modifierchosenlist
+			int listALength = modifierChosenList.size();
+			int listBLength = other.getModifierChosenList().size();
+			
+			//check length, if same, continue
+			if(listALength == listBLength) {
+				
+				Set<ModifierChosen> listA = modifierChosenList;
+				Set<ModifierChosen> listB = other.getModifierChosenList();
+				
+				int counter = 0;
+				for(ModifierChosen c1 : listA) {
+					for(ModifierChosen c2 : listB) {
+						if(c1.getModifierId() == c2.getModifierId()) {
+							counter++;
+						}
+					}
+				}
+				
+				if(counter == listA.size()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public boolean equals(FoodOrderItem otherFoodItem) {
@@ -139,7 +162,7 @@ public class FoodOrderItem {
 			ArrayList<ModifierChosen> modifierListOrigin = new ArrayList<ModifierChosen>(
 					modifierChosenList);
 			ArrayList<ModifierChosen> modifierListExternal = new ArrayList<ModifierChosen>(
-					otherFoodItem.getModifierList());
+					otherFoodItem.getModifierChosenList());
 			int trueCount = 0;
 			for (ModifierChosen m : modifierListOrigin) {
 				for (ModifierChosen e : modifierListExternal) {
