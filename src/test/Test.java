@@ -101,9 +101,9 @@ public class Test {
 		stall1.setFoodList(foodListB1);
 
 		Stall stall2 = new Stall("Malay food Stall", 81145966, null, null);
-		Food food3 = new Food("Malay Chicken List", "upsize to $3.50", 3.00, null, stall2);
-		Food food4 = new Food("Malay Fish List", "upsize to $3.50", 3.00, null, stall2);
-		Food food5 = new Food("Malay Mutton List", "upsize to $3.50", 3.00, null, stall2);
+		Food food3 = new Food("Malay Mixed Rice(Chicken)", "upsize to $3.50", 3.00, null, stall2);
+		Food food4 = new Food("Malay Mixed Rice(Fish)", "upsize to $3.50", 3.00, null, stall2);
+		Food food5 = new Food("Malay Mixed Rice(Mutton)", "upsize to $3.50", 3.00, null, stall2);
 		
         byte[] bFile39 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food3.setImage(bFile39);
@@ -160,8 +160,8 @@ public class Test {
 		stall4.setFoodList(foodListB4);
 
 		Stall stall5 = new Stall("Indian Food Stall", 93841009, null, null);
-		Food food9 = new Food("Indian Chicken List", "", 3.50, null, stall5);
-		Food food10 = new Food("Indian Fish List", "", 3.50, null, stall5);
+		Food food9 = new Food("Indian Mixed Rice(Chicken)", "", 3.50, null, stall5);
+		Food food10 = new Food("Indian Mixed Rice(Fish)", "", 3.50, null, stall5);
 		Food food11 = new Food("Mutton Briyani", "", 4.00, null, stall5);
 		Food food12 = new Food("Ayam Penyat", "", 4.00, null, stall5);
 		
@@ -342,7 +342,7 @@ public class Test {
 		foodListB10.add(food33);
 		stall10.setFoodList(foodListB10);
 
-//		Canteen canteen2 = new Canteen("Bedok Canteen", "123", null);
+//		Canteen canteen2 = new Canteen("Feng Shan Market and Food Centre", "123", null);
 //		stall1.setCanteen(canteen2);
 //		stall2.setCanteen(canteen2);
 //		stall3.setCanteen(canteen2);
@@ -367,7 +367,7 @@ public class Test {
 
 //		canteen2.setStallList(stallList2);
 
-		Canteen canteen1 = new Canteen("Jurong Canteen", "123", null);
+		Canteen canteen1 = new Canteen("Taman Jurong Market and Food Centre", "123", null);
 
 		Stall kuehStall = new Stall("Oasis Kueh Stall", 90685620, canteen1, null);
 		Food kuehfood1 = new Food("Chee Cheong Fun", "", 0.60, null, kuehStall);
