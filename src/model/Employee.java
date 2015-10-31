@@ -28,7 +28,7 @@ public class Employee {
 	private String password, name;
 	private double amountOwed;
 	private long contactNo;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "companyId")
 	private Company company;
 //	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

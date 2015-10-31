@@ -28,7 +28,7 @@ public class FoodOrderItem {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "foodOrderId")
 	private FoodOrder foodOrder;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "foodId")
 	private Food food;
 	private int quantity;

@@ -75,7 +75,7 @@ public class AddFoodOrderServlet extends HttpServlet {
 		Employee employee = (Employee) session.getAttribute("user");
 		System.out.println("Employee retrieved");
 		HashSet<FoodOrderItem> foodOrderItemsToAdd = new HashSet<FoodOrderItem>();
-		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null);
+		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_SUBMITTED, employee, null);
 		for (FoodOrderItem item : myFoodOrderItems) {
 			// Loop for uniqueFoodOrderItems
 			int count = 0;
@@ -109,7 +109,7 @@ public class AddFoodOrderServlet extends HttpServlet {
 		}
 
 		HashSet tempHashSet = new HashSet(uniqueFoodOrderItems);
-		System.out.println("99999999999999999999999999999999           "
+		System.out.println("99999999999999999999999999999999"
 				+ foodOrderItemsToAdd.size());
 		myFoodOrder.setFoodOrderList(foodOrderItemsToAdd);
 		System.out.println("New FoodOrder created");
@@ -125,7 +125,7 @@ public class AddFoodOrderServlet extends HttpServlet {
 		session.removeAttribute("myFoodOrderItems");
 		System.out.println("myFoodOrderItems cleared");
 
-		session.setAttribute("success", "Yay! Your order has been submitted!");
+		session.setAttribute("success", "Your order has been submitted!");
 		response.sendRedirect("cart.jsp");
 	}
 }

@@ -101,7 +101,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 									companyCode);
 
 							session.setAttribute("success",
-									"Yay! Your account has been created. Username: "
+									"Your account has been created. Username: "
 											+ generatedEmployeeId);
 
 							response.sendRedirect("login.jsp");

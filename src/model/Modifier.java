@@ -20,7 +20,7 @@ public class Modifier {
 	private String name;
 	private String description;
 	private double price;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "foodId")
 	private Food food;
 	private Date createDate;

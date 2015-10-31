@@ -138,7 +138,7 @@
 								</h4>
 							</div>
 							<div class="col-xs-3">
-								<form action="AddFoodOrderServlet">
+								<form action="AddNewFoodOrderServlet">
 									<button type="submit" class="btn btn-success btn-block">Check Out</button>
 								</form>
 							</div>

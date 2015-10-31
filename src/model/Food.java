@@ -29,7 +29,7 @@ public class Food {
 	@Column(columnDefinition="longblob")
 	private byte[] image;
 	private Date createDate;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "stallId")
 	private Stall stall;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")

@@ -25,7 +25,7 @@ public class Company {
 	private String companyCode;
 	private Date createDate;
 	private Date cutoffTime;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Set<Canteen> canteenList;
 
 	public Company() {

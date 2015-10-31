@@ -21,7 +21,7 @@ public class FoodOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int foodOrderId;
 	private String status;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	// @JoinColumns({ @JoinColumn(name = "username"), @JoinColumn(name =
 	// "email")})
 	@JoinColumn(name = "username")

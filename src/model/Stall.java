@@ -22,11 +22,11 @@ public class Stall {
 	private int stallId;
 	private String name;
 	private long contactNo;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "canteenId")
 	private Canteen canteen;
 	private Date createDate;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "stall")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "stall")
 	private Set<Food> foodList;
 
 	public Stall() {

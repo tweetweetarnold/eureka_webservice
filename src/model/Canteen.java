@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.Hibernate;
-
 @Entity
 @Table(name = "canteen")
 public class Canteen {
@@ -23,7 +21,7 @@ public class Canteen {
 	private String name;
 	private String address;
 	private Date createDate;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "canteen")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "canteen")
 	private Set<Stall> stallList;
 
 	public Canteen() {
