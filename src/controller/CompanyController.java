@@ -26,7 +26,6 @@ public class CompanyController {
 	}
 
 	public static Company getCompanyByCompanyCode(String companyCode) {
-		Company c = CompanyDAO.getCompanyByCompanyCode(companyCode);
-		return c;
+		return CompanyDAO.getCompanyByCompanyCode(companyCode.toUpperCase());
 	}
 }

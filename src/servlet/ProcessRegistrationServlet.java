@@ -53,7 +53,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		System.out.println("RegistrationServlet");
+		System.out.println("*********** RegistrationServlet ***********");
 
 		HttpSession session = request.getSession();
 		HashMap<String, String> userInput = new HashMap<>();
@@ -106,8 +106,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 						}
 					} else {
 						System.out.println("RegistrationServlet: Validation failed.");
-						throw new Exception(
-								"Password Confirmation does not match original Password");
+						throw new Exception("Passwords do not match");
 					}
 				} else {
 					System.out.println("RegistrationServlet: Validation failed.");

@@ -678,17 +678,17 @@ public class Test {
 		foodListB10.add(food33);
 		stall10.setFoodList(foodListB10);
 
-		Canteen canteen2 = new Canteen("Bedok", "123", null);
-		stall1.setCanteen(canteen2);
-		stall2.setCanteen(canteen2);
-		stall3.setCanteen(canteen2);
-		stall4.setCanteen(canteen2);
-		stall5.setCanteen(canteen2);
-		stall6.setCanteen(canteen2);
-		stall7.setCanteen(canteen2);
-		stall8.setCanteen(canteen2);
-		stall9.setCanteen(canteen2);
-		stall10.setCanteen(canteen2);
+//		Canteen canteen2 = new Canteen("Bedok", "123", null);
+//		stall1.setCanteen(canteen2);
+//		stall2.setCanteen(canteen2);
+//		stall3.setCanteen(canteen2);
+//		stall4.setCanteen(canteen2);
+//		stall5.setCanteen(canteen2);
+//		stall6.setCanteen(canteen2);
+//		stall7.setCanteen(canteen2);
+//		stall8.setCanteen(canteen2);
+//		stall9.setCanteen(canteen2);
+//		stall10.setCanteen(canteen2);
 
 		stallList2.add(stall1);
 		stallList2.add(stall2);
@@ -701,7 +701,7 @@ public class Test {
 		stallList2.add(stall9);
 		stallList2.add(stall10);
 
-		canteen2.setStallList(stallList2);
+//		canteen2.setStallList(stallList2);
 
 		Canteen canteen1 = new Canteen("Jurong Canteen", "123", null);
 
@@ -1601,7 +1601,7 @@ public class Test {
 		session.save(modifierA16);
 		session.save(modifierA27);
 
-		session.save(canteen2);
+//		session.save(canteen2);
 		session.save(stall1);
 		session.save(stall2);
 		session.save(stall3);
