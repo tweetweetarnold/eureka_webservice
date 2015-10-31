@@ -67,7 +67,8 @@ public class AddFoodOrderServlet extends HttpServlet {
 		ArrayList<FoodOrderItem> uniqueFoodOrderItems = new ArrayList<FoodOrderItem>();
 		// Retrieve myFoodOrders and User
 
-		List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session.getAttribute("myFoodOrderItems");
+		List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session
+				.getAttribute("myFoodOrderItems");
 		System.out.println("MyFoodOrderItems retrieved");
 		Set<FoodOrderItem> hashMyFoodOrderItems = new HashSet<>(myFoodOrderItems);
 
@@ -87,28 +88,29 @@ public class AddFoodOrderServlet extends HttpServlet {
 			item.setQuantity(count);
 			Iterator iter = foodOrderItemsToAdd.iterator();
 			boolean duplicatesExist = false;
-			while(iter.hasNext()){
-				FoodOrderItem tempFoodOrderItem = (FoodOrderItem)iter.next();
-				if(item.equals(tempFoodOrderItem)){
+			while (iter.hasNext()) {
+				FoodOrderItem tempFoodOrderItem = (FoodOrderItem) iter.next();
+				if (item.equals(tempFoodOrderItem)) {
 					duplicatesExist = true;
 				}
 			}
-			if(!duplicatesExist){
+			if (!duplicatesExist) {
 				foodOrderItemsToAdd.add(item);
 			}
-			// item.setFoodOrder(myFoodOrder);	
+			// item.setFoodOrder(myFoodOrder);
 			System.out.println("WHY : " + item.toString());
 			out.println("size: " + item.getModifierChosenList().size());
 		}
 
 		Iterator iter = foodOrderItemsToAdd.iterator();
-		while(iter.hasNext()){
-			FoodOrderItem foodItem =  (FoodOrderItem) iter.next();
+		while (iter.hasNext()) {
+			FoodOrderItem foodItem = (FoodOrderItem) iter.next();
 			foodItem.setFoodOrder(myFoodOrder);
 		}
-		
+
 		HashSet tempHashSet = new HashSet(uniqueFoodOrderItems);
-		System.out.println("99999999999999999999999999999999           " + foodOrderItemsToAdd.size());
+		System.out.println("99999999999999999999999999999999           "
+				+ foodOrderItemsToAdd.size());
 		myFoodOrder.setFoodOrderList(foodOrderItemsToAdd);
 		System.out.println("New FoodOrder created");
 

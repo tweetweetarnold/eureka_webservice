@@ -17,17 +17,17 @@
                         <li><a href="cart.jsp">Cart</a></li>
                         <li><a href="payment.jsp">Payment</a></li>
                         <li><a href="profile.jsp">History</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="#">Userguide</a></li>
+<!--                         <li><a href="#">Settings</a></li> -->
+<!--                         <li><a href="#">Userguide</a></li> -->
                     </ul>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
+<!--                     <form class="navbar-form navbar-left" role="search"> -->
+<!--                         <div class="form-group"> -->
+<!--                             <input type="text" class="form-control" placeholder="Search"> -->
+<!--                         </div> -->
+<!--                         <button type="submit" class="btn btn-default">Submit</button> -->
+<!--                     </form> -->
 
+                    <ul class="nav navbar-nav navbar-right">
                         <li><a href="ProcessLogoutServlet">Logout</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

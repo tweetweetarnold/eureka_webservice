@@ -36,10 +36,14 @@
 			<input type="text" name="name" class="form-control-table" placeholder="Name"
 				value="<c:out value="${userInput['name']}"/>" required
 			>
-			<input type="password" name="password" class="form-control-table" placeholder="Password (Min length 7 Characters)"
+
+			<br>
+			<input type="password" name="password" class="form-control-table" placeholder="Password (Min length 7 characters)"
 				onfocus="" required
 			>
 			<input type="password" name="confirmPwd" class="form-control-table" placeholder="Confirm Password" required>
+
+			<br>
 			<input type="email" name="email" class="form-control-table" placeholder="Email"
 				value="<c:out value="${userInput['email']}"/>" required
 			>
@@ -51,7 +55,7 @@
 			>
 
 			<br>
-			<button class="btn btn-primary btn-block" type="submit">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
 				<font face="verdana">Register</font>
 			</button>
 
