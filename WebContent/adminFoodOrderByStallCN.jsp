@@ -40,12 +40,14 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <%
-	ResourceBundle resourceBundle = ResourceBundle.getBundle("RBExample2", Locale.CHINA);
+	ResourceBundle resourceBundle = ResourceBundle.getBundle("RBExample", Locale.CHINA);
 %>
 </head>
 
 <body>
-
+	<nav class="navbar navbar-default navbar-static-top" role="navigation"
+	style="margin-bottom: 0"> <jsp:include
+	page="headerfooter/adminHeader.jsp" /> </nav>
 	<%
 		if (request.getAttribute("foodOrders") != null) {
 		ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
@@ -72,7 +74,7 @@
 				<div class="panel panel-default">
 
 					<div class="panel-heading">
-						<%=stallName%>
+						<%=stallName + "/t" + foodOrderItemList.get(0).getFood().getStall().getContactNo()%> 
 					</div>
 					<table class="table table-striped">
 						<tr>

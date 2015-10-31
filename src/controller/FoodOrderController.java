@@ -169,13 +169,13 @@ public class FoodOrderController {
 					quantityForFoodOrderItem.keySet());
 			
 			for (FoodOrderItem f : uniqueFoodOrderItems) {
-				ArrayList<String> usernames = new ArrayList<String>();
+				HashSet<String> usernames = new HashSet<String>();
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 					if (f.equals2(i)) {
 						String tempUsername = i.getFoodOrder().getEmployee().getUsername();
 						usernames.add(tempUsername);
 					}
-					usernamesForFoodItem.put(f, usernames);
+					usernamesForFoodItem.put(f, new ArrayList<String>(usernames));
 				}
 			}
 			
