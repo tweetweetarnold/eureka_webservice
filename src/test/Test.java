@@ -87,31 +87,12 @@ public class Test {
 		Food food1 = new Food("Fish Slice Bee Hoon", "", 3.70, null, stall1);
 		Food food2 = new Food("Fish Soup and Rice", "", 4.70, null, stall1);
 		
-		File file37 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile37 = new byte[(int) file37.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file37);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile37);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+		
+        byte[] bFile37 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food1.setImage(bFile37);
+                
         
-        
-        File file38 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile38 = new byte[(int) file38.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file38);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile38);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile38 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food2.setImage(bFile38);
         
         
@@ -124,44 +105,13 @@ public class Test {
 		Food food4 = new Food("Malay Fish List", "upsize to $3.50", 3.00, null, stall2);
 		Food food5 = new Food("Malay Mutton List", "upsize to $3.50", 3.00, null, stall2);
 		
-		File file39 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile39 = new byte[(int) file39.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file39);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile39);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile39 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food3.setImage(bFile39);
-        
-        File file40 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile40 = new byte[(int) file40.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file40);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile40);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+         
+        byte[] bFile40 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food4.setImage(bFile40);
-        
-        
-        File file41 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile41 = new byte[(int) file41.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file41);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile41);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+      
+        byte[] bFile41 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food5.setImage(bFile41);
 
 		Modifier modifierA3 = new Modifier("Upsize to $3.50", "", 0.50, food3);
@@ -188,30 +138,12 @@ public class Test {
 		Food food6 = new Food("Mixed Rice", "", 3.00, null, stall3);
 		Food food7 = new Food("Porridge", "", 3.00, null, stall3);
 		
-		File file42 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile42 = new byte[(int) file42.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file42);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile42);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+		 
+        byte[] bFile42 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food6.setImage(bFile42);
         
-        File file43 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile43 = new byte[(int) file43.length()];
         
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file43);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile43);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile43 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food7.setImage(bFile43);
 		
 		foodListB3.add(food6);
@@ -221,17 +153,7 @@ public class Test {
 		Stall stall4 = new Stall("Wanton Mee Stall", 0, null, foodListB4);
 		Food food8 = new Food("Wanton Mee", "", 3.00, null, stall4);
 		
-		File file44 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile44 = new byte[(int) file44.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file44);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile44);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile44 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food8.setImage(bFile44);
         
 		foodListB4.add(food8);
@@ -243,58 +165,18 @@ public class Test {
 		Food food11 = new Food("Mutton Briyani", "", 4.00, null, stall5);
 		Food food12 = new Food("Ayam Penyat", "", 4.00, null, stall5);
 		
-		File file45 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile45 = new byte[(int) file45.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file45);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile45);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
-        food9.setImage(bFile45);
-        
-        
-        File file46 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile46 = new byte[(int) file46.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file46);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile46);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+		
+        byte[] bFile45 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        food9.setImage(bFile45); 
+
+        byte[] bFile46 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food10.setImage(bFile46);
         
-        
-        File file47 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile47 = new byte[(int) file47.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file47);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile47);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile47 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food11.setImage(bFile47);
         
-        File file48 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile48 = new byte[(int) file48.length()];
         
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file48);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile48);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile48 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food12.setImage(bFile48);
 		
 		
@@ -310,57 +192,19 @@ public class Test {
 		Food food15 = new Food("Roast Meat Rice", "", 2.50, null, stall6);
 		Food foodC16 = new Food("CharSiew + Roast Meat Rice", "", 3.00, null, stall6);
 		
-		File file49 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile49 = new byte[(int) file49.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file49);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile49);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+		
+        byte[] bFile49 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food13.setImage(bFile49);
-        
-        
-        File file50 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile50 = new byte[(int) file50.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file50);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile50);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+
+        byte[] bFile50 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food14.setImage(bFile50);
         
-        File file51 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile51 = new byte[(int) file51.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file51);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile51);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+
+        byte[] bFile51 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food15.setImage(bFile51);
         
-        File file52 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile52 = new byte[(int) file52.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file52);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile52);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+
+        byte[] bFile52 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         foodC16.setImage(bFile52);
         
         
@@ -380,114 +224,30 @@ public class Test {
 		Food food22 = new Food("Chicken Porridge", "", 3.00, null, stall7);
 		Food food23 = new Food("Fish Porridge", "", 3.00, null, stall7);
 
-		File file53 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile53 = new byte[(int) file53.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file53);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile53);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile53 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food16.setImage(bFile53);
-        
-        
-        File file54 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile54 = new byte[(int) file54.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file54);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile54);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+
+        byte[] bFile54 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food17.setImage(bFile54);
-        
-        
-        File file55 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile55 = new byte[(int) file55.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file55);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile55);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+          
+        byte[] bFile55 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food18.setImage(bFile55);
-        
-        
-        File file56 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile56 = new byte[(int) file56.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file56);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile56);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+ 
+        byte[] bFile56 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food19.setImage(bFile56);
         
-        File file57 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile57 = new byte[(int) file57.length()];
         
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file57);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile57);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile57 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food20.setImage(bFile57);
         
-        
-        File file58 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile58 = new byte[(int) file58.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file58);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile58);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile58 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food21.setImage(bFile58);
-        
-        
-        File file59 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile59 = new byte[(int) file59.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file59);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile59);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+
+        byte[] bFile59 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food22.setImage(bFile59);
+ 
         
-        
-        File file60 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile60 = new byte[(int) file60.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file60);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile60);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile60 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food23.setImage(bFile60);
 		
 		
@@ -511,44 +271,16 @@ public class Test {
 		Food food25 = new Food("Vegetarian Beehoon", "", 2.50, null, stall8);
 		Food food26 = new Food("Vegetarian Mee", "", 2.50, null, stall8);
 		
-		File file61 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile61 = new byte[(int) file61.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file61);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile61);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+		
+        byte[] bFile61 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food24.setImage(bFile61);
         
-        File file62 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile62 = new byte[(int) file62.length()];
         
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file62);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile62);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile62 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food25.setImage(bFile62);
         
         
-        File file63 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile63 = new byte[(int) file63.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file63);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile63);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile63 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food26.setImage(bFile63);
         
         
@@ -561,18 +293,9 @@ public class Test {
 				null);
 		Food food27 = new Food("Minced Meat Noodles", "upsize to $3.20", 2.70, null, stall9);
 		
-		File file64 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile64 = new byte[(int) file64.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file64);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile64);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
-        food27.setImage(bFile64);
+		 
+        byte[] bFile64 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+		food27.setImage(bFile64);
 
 		Modifier modifierA27 = new Modifier("Upsize to $3.20", "", 0.50, food27);
 		Set<Modifier> modifierListA27 = new HashSet<Modifier>();
@@ -590,84 +313,25 @@ public class Test {
 		Food food32 = new Food("Hokkien Mee", "", 3.00, null, stall10);
 		Food food33 = new Food("Dumpling Noodles", "", 3.00, null, stall10);
 		
-		File file65 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile65 = new byte[(int) file65.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file65);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile65);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile65 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food28.setImage(bFile65);
         
-        File file66 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile66 = new byte[(int) file66.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file66);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile66);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile66 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food29.setImage(bFile66);
         
         
-        File file67 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile67 = new byte[(int) file67.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file67);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile67);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile67 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food30.setImage(bFile67);
         
-        File file68 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile68 = new byte[(int) file68.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file68);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile68);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+       
+        byte[] bFile68 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food31.setImage(bFile68);
-        
-        
-        File file69 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile69 = new byte[(int) file69.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file69);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile69);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+       
+        byte[] bFile69 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food32.setImage(bFile69);
         
-        File file70 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile70 = new byte[(int) file70.length()];
         
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file70);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile70);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile70 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         food33.setImage(bFile70);
 		
 		foodListB10.add(food28);
@@ -678,7 +342,7 @@ public class Test {
 		foodListB10.add(food33);
 		stall10.setFoodList(foodListB10);
 
-//		Canteen canteen2 = new Canteen("Bedok", "123", null);
+//		Canteen canteen2 = new Canteen("Bedok Canteen", "123", null);
 //		stall1.setCanteen(canteen2);
 //		stall2.setCanteen(canteen2);
 //		stall3.setCanteen(canteen2);
@@ -714,86 +378,29 @@ public class Test {
 		Food kuehfood6 = new Food("Fan Choy", "", 1.80, null, kuehStall);
 		// add food to list to the stall
 		
-		File file1 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile1 = new byte[(int) file1.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file1);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile1);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+		//load image file
+		byte[] bFile1 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         kuehfood1.setImage(bFile1);
 		
-        File file2 = new File("WebContent\\assets\\images\\img-noodles.jpg");
-        byte[] bFile2 = new byte[(int) file2.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file2);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile2);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+
+        byte[] bFile2 = loadImageFile("WebContent\\resources\\img\\img-noodles.jpg");
         kuehfood2.setImage(bFile2);
         
-        
-        File file3 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile3 = new byte[(int) file3.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file3);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile3);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+       
+        byte[] bFile3 = loadImageFile("WebContent\\resources\\img\\img-noodles.jpg");
         kuehfood3.setImage(bFile3);
 		
         
-        File file4 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile4 = new byte[(int) file4.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file4);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile4);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile4 = loadImageFile("WebContent\\resources\\img\\img-chickencutlet.jpg");
         kuehfood4.setImage(bFile4);
         
         
-        File file5 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile5 = new byte[(int) file1.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file5);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile5);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+       
+        byte[] bFile5 = loadImageFile("WebContent\\resources\\img\\img-chickencutlet.jpg");
         kuehfood5.setImage(bFile5);
         
         
-        File file6 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile6 = new byte[(int) file6.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file6);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile6);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile6 = loadImageFile("WebContent\\resources\\img\\img-chickencutlet.jpg");
         kuehfood6.setImage(bFile6);
 		
 		
@@ -811,17 +418,8 @@ public class Test {
 		Food mfood1 = new Food("Mixed Veg Rice", "ask for more vegs, less fried meat", 3.70, null,
 				malayStall);
 		
-		File file7 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile7 = new byte[(int) file7.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file7);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile7);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+		
+        byte[] bFile7 = loadImageFile("WebContent\\resources\\img\\img-chickencutlet.jpg");
         mfood1.setImage(bFile7);
         
 		// for mfood1 modifiers
@@ -842,46 +440,15 @@ public class Test {
 		Food infood1 = new Food("White Rice", "Chicken/Fish/Mutton", 4.00, null, indianStall);
 		Food infood2 = new Food("Vegetable White Rice", "", 3.00, null, indianStall);
 		Food infood3 = new Food("Briyani", "Chicken/Fish/Mutton", 5.00, null, indianStall);
-		 
-		File file8 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-	        byte[] bFile8 = new byte[(int) file8.length()];
-	        
-	        try {
-		     FileInputStream fileInputStream = new FileInputStream(file8);
-		     //convert file into array of bytes
-		     fileInputStream.read(bFile8);
-		     fileInputStream.close();
-	        } catch (Exception e) {
-		     e.printStackTrace();
-	        }
-	        infood1.setImage(bFile8);
-	        
-	        File file9 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-	        byte[] bFile9 = new byte[(int) file9.length()];
-	        
-	        try {
-		     FileInputStream fileInputStream = new FileInputStream(file9);
-		     //convert file into array of bytes
-		     fileInputStream.read(bFile9);
-		     fileInputStream.close();
-	        } catch (Exception e) {
-		     e.printStackTrace();
-	        }
-	        infood2.setImage(bFile9);
-	        
-	        
-	        File file10 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-	        byte[] bFile10 = new byte[(int) file10.length()];
-	        
-	        try {
-		     FileInputStream fileInputStream = new FileInputStream(file10);
-		     //convert file into array of bytes
-		     fileInputStream.read(bFile10);
-		     fileInputStream.close();
-	        } catch (Exception e) {
-		     e.printStackTrace();
-	        }
-	        infood3.setImage(bFile10);
+ 
+	    byte[] bFile8 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");   
+	    infood1.setImage(bFile8);
+  
+	    byte[] bFile9 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");     
+	    infood2.setImage(bFile9);
+   
+	    byte[] bFile10 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+	    infood3.setImage(bFile10);
 
 		// for infood1 modifiers
 		Modifier modifier3 = new Modifier("Chicken", "", 0.00, infood1);
@@ -917,17 +484,7 @@ public class Test {
 				"ask for more meat, less fried meat, or upsize to $3.50", 3.00, null,
 				chineseMixVegStall);
 		
-		File file11 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile11 = new byte[(int) file11.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file11);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile11);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile11 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         mixVegRice1.setImage(bFile11);
 
 		// for mixVegRice1 modifiers
@@ -953,58 +510,21 @@ public class Test {
 		Food roastfood4 = new Food("Roast Meat Rice", "2 meat choices $4", 3.00, null,
 				roastMeatStall);
 		
-		File file12 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile12 = new byte[(int) file12.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file12);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile12);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+		
+        byte[] bFile12 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         roastfood1.setImage(bFile12);
         
-        File file13 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile13 = new byte[(int) file13.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file13);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile13);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+       
+        byte[] bFile13 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         roastfood2.setImage(bFile13);
         
         
-        File file14 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile14 = new byte[(int) file14.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file14);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile14);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile14 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         roastfood3.setImage(bFile14);
         
         
-        File file15 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile15 = new byte[(int) file15.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file15);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile15);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+       
+        byte[] bFile15 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         roastfood4.setImage(bFile15);
 
 		// for roastfood1 modifiers
@@ -1050,71 +570,21 @@ public class Test {
 		Food seafood4 = new Food("Hokkien Noodle", "", 4.20, null, seafoodTzeCharStall);
 		Food seafood5 = new Food("Mee Goreng", "", 4.20, null, seafoodTzeCharStall);
 		
-		File file16 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile16 = new byte[(int) file16.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file16);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile16);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+		
+        byte[] bFile16 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         seafood1.setImage(bFile16);
-        
-        File file17 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile17 = new byte[(int) file17.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file17);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile17);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+
+        byte[] bFile17 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         seafood2.setImage(bFile17);
-        
-        
-        File file18 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile18 = new byte[(int) file18.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file18);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile18);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+
+        byte[] bFile18 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         seafood3.setImage(bFile18);
         
-        File file19 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile19 = new byte[(int) file19.length()];
         
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file19);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile19);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile19 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");        
         seafood4.setImage(bFile19);
         
-        
-        File file20 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile20 = new byte[(int) file20.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file20);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile20);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile20 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         seafood5.setImage(bFile20);
 		
 		// for seafood1 modifier
@@ -1157,43 +627,13 @@ public class Test {
 				5.00, null, fishBeehoonStall);
 		
 		//save image into database
-    	File file21 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile21 = new byte[(int) file21.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file21);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile21);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+    	byte[] bFile21 =loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         fishBeehoonfood1.setImage(bFile21);
         
-        File file22 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile22 = new byte[(int) file22.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file22);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile22);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile22 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         fishBeehoonfood2.setImage(bFile22);
         
-        File file23 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile23 = new byte[(int) file23.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file23);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile23);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile23 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         fishBeehoonfood3.setImage(bFile23);
 
 		// for fishBeehoonfood1 modifier
@@ -1238,179 +678,51 @@ public class Test {
 		Food mixedFruits = new Food("Mixed Fruits", "upsize $3.50", 3.00, null, fruitStall);
 
 		
-		File file24 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile24 = new byte[(int) file24.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file24);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile24);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+		
+        byte[] bFile24 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         apple.setImage(bFile24);
         
-        File file25 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile25 = new byte[(int) file25.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file25);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile25);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile25 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         watermelon.setImage(bFile25);
         
         
-        File file26 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile26 = new byte[(int) file26.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file26);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile26);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile26 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         dragonfruit.setImage(bFile26);
         
         
-        File file27 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile27 = new byte[(int) file27.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file27);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile27);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile27 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         pear.setImage(bFile27);
         
         
-        File file28 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile28 = new byte[(int) file1.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file28);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile28);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile28 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         honeydew.setImage(bFile28);
         
-        File file29 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile29 = new byte[(int) file29.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file29);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile29);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile29 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         papaya.setImage(bFile29);
         
         
-        File file30 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile30 = new byte[(int) file30.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file30);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile30);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile30 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         pineapple.setImage(bFile30);
         
-        File file31 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile31 = new byte[(int) file31.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file31);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile31);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile31 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         banana.setImage(bFile31);
         
-        File file32 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile32 = new byte[(int) file32.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file32);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile32);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+       
+        byte[] bFile32 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         agaragar.setImage(bFile32);
         
         
-        File file33 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile33 = new byte[(int) file33.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file33);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile33);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile33 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         orange.setImage(bFile33);
         
         
-        File file34 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile34 = new byte[(int) file34.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file34);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile34);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile34 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         guava.setImage(bFile34);
         
-        File file35 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile35 = new byte[(int) file35.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file35);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile35);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile35 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         sarawakPineapple.setImage(bFile35);
         
-        File file36 = new File("WebContent\\assets\\images\\img-friedrice.jpg");
-        byte[] bFile36 = new byte[(int) file36.length()];
-        
-        try {
-	     FileInputStream fileInputStream = new FileInputStream(file36);
-	     //convert file into array of bytes
-	     fileInputStream.read(bFile36);
-	     fileInputStream.close();
-        } catch (Exception e) {
-	     e.printStackTrace();
-        }
+        byte[] bFile36 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
         mixedFruits.setImage(bFile36);
 		
 		
@@ -1655,5 +967,20 @@ public class Test {
 
 		System.out.println("Test.java completed");
 
+	}
+	
+	public static byte[] loadImageFile(String relativePath) {
+		File file = new File(relativePath);
+        byte[] bFile = new byte[(int) file.length()];
+        
+        try {
+	     FileInputStream fileInputStream = new FileInputStream(file);
+	     //convert file into array of bytes
+	     fileInputStream.read(bFile);
+	     fileInputStream.close();
+        } catch (Exception e) {
+	     e.printStackTrace();
+        }
+        return bFile;
 	}
 }
