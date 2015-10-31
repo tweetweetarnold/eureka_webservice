@@ -95,57 +95,91 @@ public class FoodOrderController {
 
 		int count = 1;
 		while (iter.hasNext()) {
-			System.out.println("Number of Stalls" + stallToFoodItemLinkedHash.size());
 
 			LinkedHashMap<FoodOrderItem, ArrayList<String>> usernamesForFoodItem = new LinkedHashMap<FoodOrderItem, ArrayList<String>>();
 			String stallName = (String) iter.next();
 			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash.get(stallName);
-
+			System.out.println("Number of initial FoodOrderItems :))))))))))):"  + tempFoodOrderItemForDisplay.size());
 			LinkedHashMap<FoodOrderItem, Integer> quantityForFoodOrderItem = new LinkedHashMap<FoodOrderItem, Integer>();
-			for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
-
-				FoodOrderItem currentFoodOrderItem = i;
-				int quantity = 0;
-				Iterator uniqueIter = tempFoodOrderItemForDisplay.iterator();
-				while (uniqueIter.hasNext()) {
-					FoodOrderItem tempFoodOrderItem = (FoodOrderItem) uniqueIter.next();
-					if (tempFoodOrderItem.equals(currentFoodOrderItem)) {
-						quantity+=tempFoodOrderItem.getQuantity()+currentFoodOrderItem.getQuantity();
-						System.out.println("Quantity check: " + quantity);
+			ArrayList<FoodOrderItem> uniqueFoodOrderItem = new ArrayList<FoodOrderItem>();
+			for (FoodOrderItem i : tempFoodOrderItemForDisplay){
+				
+				Iterator iterator = uniqueFoodOrderItem.iterator();
+				int equalCount = 0;
+				while(iterator.hasNext()){
+					FoodOrderItem tempFoodOrderItem = (FoodOrderItem) iterator.next();
+					if(tempFoodOrderItem.equals2(i)){
+						equalCount++;
+						System.out.println("FUCK");
 					}
 				}
-				System.out.println("Quantity check: " + quantity);
-
-				int equalsCount2 = 0;
-				uniqueIter = quantityForFoodOrderItem.keySet().iterator();
-				while (uniqueIter.hasNext()) {
-					FoodOrderItem tempFoodOrderItem = (FoodOrderItem) uniqueIter.next();
-					if (tempFoodOrderItem.equals(i)) {
-						equalsCount2++;
-					}
+				if(equalCount==0){
+					uniqueFoodOrderItem.add(i);
 				}
-				if (equalsCount2 == 0) {
-					quantityForFoodOrderItem.put(i, quantity/2);
-				}
+				
+				
+				
+				
+				
+				
+//				FoodOrderItem currentFoodOrderItem = i;
+//				int quantity = 0;
+//				Iterator uniqueIter = tempFoodOrderItemForDisplay.iterator();
+//				while (uniqueIter.hasNext()) {
+//					FoodOrderItem tempFoodOrderItem = (FoodOrderItem) uniqueIter.next();
+//					if (tempFoodOrderItem.equals(currentFoodOrderItem)) {
+//						System.out.println("Equals? " + tempFoodOrderItem.equals(currentFoodOrderItem));
+//						quantity+=tempFoodOrderItem.getQuantity()+currentFoodOrderItem.getQuantity();
+//						
+//					}
+//				}
+//				
+//
+//				int equalsCount2 = 0;
+//				uniqueIter = quantityForFoodOrderItem.keySet().iterator();
+//				while (uniqueIter.hasNext()) {
+//					FoodOrderItem tempFoodOrderItem = (FoodOrderItem) uniqueIter.next();
+//					if (tempFoodOrderItem.equals(i)) {
+//						equalsCount2++;
+//					}
+//				}
+//				if (equalsCount2 == 0) {
+//					quantityForFoodOrderItem.put(i, quantity/2);
+//				}
 
 			}
+			
+			
+			for(FoodOrderItem tempItem : uniqueFoodOrderItem){
+				int tempquantity = 0;
+				for(FoodOrderItem i : tempFoodOrderItemForDisplay){
+					if(i.equals2(tempItem)){
+						tempquantity++;
+					}
+				}
+				System.out.println("HIHIHI "+ tempquantity);
+				quantityForFoodOrderItem.put(tempItem, tempquantity);
+			}
+			
+			
+			
+			System.out.println("Number of unique1 FoodOrderItems :))))))))))):"  + uniqueFoodOrderItem.size());
 
 			ArrayList<FoodOrderItem> uniqueFoodOrderItems = new ArrayList<FoodOrderItem>(
 					quantityForFoodOrderItem.keySet());
-
+			
 			for (FoodOrderItem f : uniqueFoodOrderItems) {
 				ArrayList<String> usernames = new ArrayList<String>();
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
-					if (f.equals(i)) {
+					if (f.equals2(i)) {
 						String tempUsername = i.getFoodOrder().getEmployee().getUsername();
 						usernames.add(tempUsername);
 					}
 					usernamesForFoodItem.put(f, usernames);
 				}
 			}
-			for (FoodOrderItem s : uniqueFoodOrderItems) {
-				System.out.println(s.getFood().getName());
-			}
+			
+			System.out.println("Number of unique FoodOrderItems :))))))))))):"  + uniqueFoodOrderItems.size());
 			FoodDisplayObject tempFoodDisplay = new FoodDisplayObject(count++);
 			tempFoodDisplay.setStallName(stallName);
 			tempFoodDisplay.setFoodOrderItem(uniqueFoodOrderItems);

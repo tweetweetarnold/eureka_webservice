@@ -88,7 +88,7 @@
 													for (FoodOrderItem fOI : foodOrderItemList) {
 														String foodName = fOI.getFood().getName();
 														String foodNameUnderscore = foodName.replaceAll(" ", "_");
-														ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierList());
+														ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
 														int quantity = fDO.getQuantity(fOI);
 														double price = fOI.getPrice();
 														totalPrice += quantity * price;
@@ -134,7 +134,10 @@
 						%>
 
 					</table>
-					Total Price =<%=totalPrice%>
+					<%
+						DecimalFormat df = new DecimalFormat("####0.00");
+					%>
+					<h3>Total Price : $<%=df.format(totalPrice)%></h3>
 				</div>
 			</div>
 

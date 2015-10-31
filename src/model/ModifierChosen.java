@@ -87,7 +87,7 @@ public class ModifierChosen {
 
 	// Check if otherModifier equal current modifier
 	public boolean equals(ModifierChosen otherModifier) {
-		if (this.name.equals((otherModifier).getName())) {
+		if (this.modifierChosenId==otherModifier.getModifierId()) {
 			return true;
 		} else {
 			return false;

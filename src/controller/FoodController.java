@@ -11,5 +11,12 @@ public class FoodController {
 		
 		return food.getImage();
 	}
+	
+	
+	public Food getFood(int id) {
+		Food food = FoodDAO.getFood(id);
+		
+		return food;
+	}
 
 }
