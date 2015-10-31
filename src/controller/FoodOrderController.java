@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -158,7 +159,6 @@ public class FoodOrderController {
 
 	// Retrieve FoodOrders from today 00:00:00 to today 23:59:59 with total
 	// price as object in HashMap with key "totalPrice"
-
 	public List<FoodOrder> getFoodOrderBetweenCutOff() {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -185,6 +185,38 @@ public class FoodOrderController {
 		return FoodOrderDAO.getFoodOrderByDate(laterDate, earlierDate);
 
 	}
+	
+	
+	public HashMap<String, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall(){
+		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(getFoodOrderBetweenCutOff());
+		ArrayList<FoodOrderItem> allFoodOrderItems = new ArrayList<FoodOrderItem>();
+		HashSet<String> uniqueStallNames = new HashSet<String>();
+		HashMap<String, ArrayList<FoodOrderItem>> mapToReturn = new HashMap<String, ArrayList<FoodOrderItem>>();
+		for(FoodOrder tempFoodOrder: tempFoodOrderList){
+			allFoodOrderItems.addAll(tempFoodOrder.getFoodOrderList());
+		}
+		System.out.print("Number of FoodOrderItems: " + allFoodOrderItems.size());
+		for(FoodOrderItem tempFoodOrderItem: allFoodOrderItems){
+			Stall tempStall =tempFoodOrderItem.getFood().getStall();
+			String tempStallName = tempStall.getName();
+			uniqueStallNames.add(tempStallName);
+		}
+		System.out.print("Number of Unique Stalls: " + allFoodOrderItems.size());
+		for(String tempStallName : uniqueStallNames){
+			ArrayList<FoodOrderItem> foodOrderListForStallName = new ArrayList<FoodOrderItem>();
+			for(FoodOrderItem tempFoodOrderItem : allFoodOrderItems){
+				String tempFoodOrderItemStallName = tempFoodOrderItem.getFood().getStall().getName();
+				if(tempFoodOrderItemStallName.equals(tempStallName)){
+					foodOrderListForStallName.add(tempFoodOrderItem);
+				}
+			}
+			mapToReturn.put(tempStallName,foodOrderListForStallName);
+		}
+		
+		return mapToReturn;
+	}
+	
+	
 
 	public HashMap getFoodOrderToday() {
 		List<FoodOrder> tempFoodOrderList = getFoodOrderBetweenCutOff();
