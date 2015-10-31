@@ -56,42 +56,46 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-		
-		System.out.println("****** AddNewFoodOrderServlet ******");
 
+		System.out.println("****** AddNewFoodOrderServlet ******");
 		HttpSession session = request.getSession();
 
-		// Retrieve myFoodOrders and User
-		List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session
-				.getAttribute("myFoodOrderItems");
-		System.out.println("MyFoodOrderItems retrieved");
-		Set<FoodOrderItem> hashMyFoodOrderItems = new HashSet<>(myFoodOrderItems);
+		try {
+			// Retrieve myFoodOrders and User
+			List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session
+					.getAttribute("myFoodOrderItems");
+			System.out.println("MyFoodOrderItems retrieved");
+			Set<FoodOrderItem> hashMyFoodOrderItems = new HashSet<>(myFoodOrderItems);
 
-		Employee employee = (Employee) session.getAttribute("user");
-		System.out.println("Employee retrieved");
+			Employee employee = (Employee) session.getAttribute("user");
+			System.out.println("Employee retrieved");
 
-		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_SUBMITTED, employee, null);
-		for (FoodOrderItem item : hashMyFoodOrderItems) {
-			item.setFoodOrder(myFoodOrder);
-			out.println("size: " + item.getModifierChosenList().size());
+			FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_SUBMITTED, employee, null);
+			for (FoodOrderItem item : hashMyFoodOrderItems) {
+				item.setFoodOrder(myFoodOrder);
+				out.println("size: " + item.getModifierChosenList().size());
+			}
+			myFoodOrder.setFoodOrderList(hashMyFoodOrderItems);
+			System.out.println("New FoodOrder created");
+
+			employee.setAmountOwed(employee.getAmountOwed() + myFoodOrder.getTotalPrice());
+			System.out.println("Employee amount owed updated");
+
+			// Process new FoodOrder
+			FoodOrderController controller = new FoodOrderController();
+			controller.addFoodOrder(myFoodOrder);
+			System.out.println("New FoodOrder added to database");
+
+			session.removeAttribute("myFoodOrderItems");
+			System.out.println("myFoodOrderItems cleared");
+
+			session.setAttribute("success", "Your order has been submitted!");
+			response.sendRedirect("cart.jsp");
+
+		} catch (NullPointerException e) {
+			session.setAttribute("error", "Add an item to cart to checkout");
+			response.sendRedirect("cart.jsp");
 		}
-		myFoodOrder.setFoodOrderList(hashMyFoodOrderItems);
-		System.out.println("New FoodOrder created");
 
-		employee.setAmountOwed(employee.getAmountOwed() + myFoodOrder.getTotalPrice());
-		System.out.println("Employee amount owed updated");
-
-		// Process new FoodOrder
-		FoodOrderController controller = new FoodOrderController();
-		controller.addFoodOrder(myFoodOrder);
-		System.out.println("New FoodOrder added to database");
-		
-		session.removeAttribute("myFoodOrderItems");
-		System.out.println("myFoodOrderItems cleared");
-		
-		
-
-		session.setAttribute("success", "Yay! Your order has been submitted!");
-		response.sendRedirect("cart.jsp");
 	}
 }
