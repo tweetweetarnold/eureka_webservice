@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.validator.routines.EmailValidator;
+
 import controller.RegistrationController;
 
 /**
@@ -76,9 +78,12 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			userInput.put("companyCode", companyCode);
 
 			// Check valid email
-			String dotCom = email.substring(email.length() - 4, email.length());
-			boolean validEmail = (dotCom.equalsIgnoreCase(".com"));
-
+//			String dotCom = email.substring(email.length() - 4, email.length());
+//			boolean validEmail = (dotCom.equalsIgnoreCase(".com"));
+			
+			EmailValidator emailValidator = EmailValidator.getInstance();
+			boolean validEmail = emailValidator.isValid(email);
+			
 			// Check user parameters
 			boolean valid = (contactNo.length() == 8 && password.length() >= 7
 					&& password.equals(confirmPwd) && validEmail);
