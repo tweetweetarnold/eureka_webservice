@@ -1,16 +1,10 @@
 <!DOCTYPE html>
-<%@ page import="model.FoodOrder"%>
-<%@ page import="model.ModifierChosen"%>
-<%@ page import="model.FoodOrderItem"%>
-<%@ page import="model.FoodDisplayObject"%>
-<%@ page import="model.Employee"%>
-<%@page import="org.json.simple.JSONObject"%>
-<%@page import="org.json.simple.JSONArray"%>
+<%@ page import="model.*"%>
+<%@page import="org.json.simple.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.*"%>
 <html lang="en">
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <head>
 
 <meta charset="utf-8">
@@ -22,7 +16,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>DABAO Food Cart</title>
+<title>DABAO</title>
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -54,14 +48,13 @@
 
 	<%
 		if (request.getAttribute("foodOrders") != null) {
-			ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
-					.getAttribute("foodOrders");
+		ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
+				.getAttribute("foodOrders");
 	%>
 	<div class="row center">
 		<div class="col-xs-3 center">
 			<form action="ChineseRetrieveFoodOrderServlet" method="post">
-				<button type="submit" class="btn btn-success btn-block">Get
-					Chinese Food Names</button>
+				<button type="submit" class="btn btn-success btn-block">Get Chinese Food Names</button>
 			</form>
 		</div>
 	</div>
@@ -69,8 +62,8 @@
 
 	<%
 		for (FoodDisplayObject fDO : foodDisplayObjectList) {
-				String stallName = fDO.getStallName();
-				ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
+			String stallName = fDO.getStallName();
+			ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
 	%>
 	</br>
 	<div class="container">
@@ -92,14 +85,14 @@
 						<%
 							double totalPrice = 0;
 
-									for (FoodOrderItem fOI : foodOrderItemList) {
-										String foodName = fOI.getFood().getName();
-										String foodNameUnderscore = foodName.replaceAll(" ", "_");
-										ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierList());
-										int quantity = fDO.getQuantity(fOI);
-										double price = fOI.getPrice();
-										totalPrice += quantity * price;
-										ArrayList<String> userList = fDO.getUsernameList(fOI);
+													for (FoodOrderItem fOI : foodOrderItemList) {
+														String foodName = fOI.getFood().getName();
+														String foodNameUnderscore = foodName.replaceAll(" ", "_");
+														ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierList());
+														int quantity = fDO.getQuantity(fOI);
+														double price = fOI.getPrice();
+														totalPrice += quantity * price;
+														ArrayList<String> userList = fDO.getUsernameList(fOI);
 						%>
 						<tr>
 							<td><%=resourceBundle.getString(foodNameUnderscore)%></td>
@@ -107,7 +100,7 @@
 								<table>
 									<%
 										for (ModifierChosen mod : modifierList) {
-														String modName = mod.getName();
+																					String modName = mod.getName();
 									%>
 									<tr>
 										<td><%=modName%></td>
@@ -155,7 +148,7 @@
 	<%
 		}
 	%>
-	
+
 
 
 

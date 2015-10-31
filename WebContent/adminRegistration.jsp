@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <%@page import="org.json.simple.JSONObject"%>
 
-<title>DaBao - Admin Register</title>
+<title>DABAO</title>
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

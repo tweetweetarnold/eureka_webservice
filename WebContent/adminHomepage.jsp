@@ -5,7 +5,7 @@
 <%@ include file="/adminProtect.jsp"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>DaBao - Admin Homepage</title>
+<title>DABAO</title>
 <!-- Bootstrap Core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 

@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -14,11 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.FoodDAO;
 import model.Food;
 import model.FoodOrderItem;
 import model.Modifier;
 import model.ModifierChosen;
+import dao.FoodDAO;
 
 /**
  * Servlet implementation class AddFoodItemToSessionServlet
@@ -83,6 +82,7 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 //			System.out.println("chosenFood: " + food.getName() + ", id: " + food.getFoodId()); // testing
 			
 			Food food = FoodDAO.getFood(Integer.parseInt(foodId));
+			System.out.println("food retrieved: " + food.getName());
 
 			// Retrieve user's current food orders
 			List<FoodOrderItem> myFoodOrderItems = (ArrayList<FoodOrderItem>) session

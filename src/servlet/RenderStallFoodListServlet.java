@@ -73,6 +73,7 @@ public class RenderStallFoodListServlet extends HttpServlet {
 			session2.close();
 
 			HttpSession session = request.getSession();
+			session.setAttribute("stallName", s.getName());
 			session.setAttribute("stallFoodList", foodList);
 
 			response.sendRedirect("stallFoodList.jsp");

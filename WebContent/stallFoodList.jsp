@@ -55,7 +55,9 @@
 			<li>
 				<a href="homepage.jsp">Home</a>
 			</li>
-			<li class="active">Chomp Chomp</li>
+			<li class="active">
+				<c:out value="${sessionScope.stallName}" />
+			</li>
 		</ol>
 		<br>
 		<!-- end breadcrumb -->
@@ -71,12 +73,12 @@
 						<div class="caption">
 
 							<!-- Button trigger modal -->
-							<button type="button" class="button" data-toggle="modal" data-target="#myModal">
+							<button type="button" class="button" data-toggle="modal" data-target="#myModal${food.foodId}">
 								<c:out value="${food.name}" />
 							</button>
 
 							<!-- Modal -->
-							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal fade" id="myModal${food.foodId}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 
