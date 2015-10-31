@@ -10,7 +10,6 @@
 
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
 
 <title>DABAO</title>
 
@@ -19,12 +18,10 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <script src="resources/js/jquery-1.11.3.js"></script>
-<!-- <script src="resources/js/jquery-1.11.3.min.js"></script> -->
 <script src="resources/js/dabao/dabao.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
 
 <link href="resources/css/dabao/dabao.css" rel="stylesheet">
-<!-- <link href="resources/css/bootstap.min.css" rel="stylesheet"> -->
 <link href="resources/css/dabao/starter-template.css" rel="stylesheet">
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -60,10 +57,13 @@
 									</h4>
 								</div>
 								<div class="col-xs-4">
-									<button type="button" class="btn btn-primary btn-sm btn-block">
-										<span class="glyphicon glyphicon-share-alt"></span>
-										<u>Continue</u>
-									</button>
+									<form action="homepage.jsp">
+										<button type="submit" class="btn btn-primary btn-sm btn-block">
+											<span class="glyphicon glyphicon-share-alt"></span>
+											<u>Continue</u>
+										</button>
+									</form>
+
 								</div>
 							</div>
 						</div>
@@ -80,32 +80,46 @@
 						<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodItem" varStatus="loop">
 							<div class="row">
 								<div class="col-xs-2">
-									<img class="img-responsive" src="http://placehold.it/100x70">
+									<img class="img-responsive" src="resources/img/img-chickencutlet.jpg">
 								</div>
-								<div class="col-xs-4">
-									<h4 class="product-name">
+								<div class="col-xs-4 text-left">
+									<h4>
 										<strong>
 											<c:out value="${foodItem.food.name}" />
 										</strong>
 									</h4>
-									<h4>
-										<small>everyone loves chris</small>
-									</h4>
+									<ul>
+										<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen">
+											<li>
+												<small>
+													<c:out value="${modifierChosen.name}" />
+												</small>
+												<small style="float: right;">
+													<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />
+													+ $
+													<c:out value="${newModifierPrice}" />
+												</small>
+											</li>
+										</c:forEach>
+									</ul>
+
+									<!-- 									<h4> -->
+									<!-- 										<small>everyone loves chris</small> -->
+									<!-- 									</h4> -->
 								</div>
 								<div class="col-xs-6">
 									<div class="col-xs-6 text-right">
-										<h6>
+										<h4>
 											<strong>
 												<fmt:formatNumber value="${foodItem.price}" var="price2" minFractionDigits="2" />
 												$
 												<c:out value="${price2}" />
 												<c:set value="${totalPrice + foodItem.priceString}" var="totalPrice" />
-												<span class="text-muted">x</span>
 											</strong>
-										</h6>
+										</h4>
 									</div>
 									<div class="col-xs-4">
-										<input type="text" class="form-control input-sm" value="${foodItem.quantity}">
+										<%-- 										<input type="text" class="form-control input-sm" value="${foodItem.quantity}"> --%>
 									</div>
 									<div class="col-xs-2">
 										<form action="DeleteFoodItemFromOrderItemsServlet">
@@ -156,6 +170,16 @@
 							<c:out value="${success}" />
 						</div>
 						<c:remove var="success" scope="session" />
+					</c:if>
+
+					<!-- Error message handling -->
+					<c:if test="${not empty sessionScope.error}">
+						<div class="alert alert-danger" role="alert">
+							<b>Error!</b>
+							<br>
+							<c:out value="${error}" />
+						</div>
+						<c:remove var="error" scope="session" />
 					</c:if>
 
 
