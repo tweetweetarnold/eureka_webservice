@@ -43,7 +43,7 @@ public class RetrieveFoodOrderItemByStallServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		FoodOrderController foodOrderController = new FoodOrderController();
-		HashMap<String, ArrayList<FoodOrderItem>> hashMapToReturn = foodOrderController.getFoodOrderItemsForStall();
+		HashMap<Integer, ArrayList<FoodOrderItem>> hashMapToReturn = foodOrderController.getFoodOrderItemsForStall();
 		RequestDispatcher rd = request.getRequestDispatcher("adminFoodOrderByStall.jsp");
 		request.setAttribute("foodOrderItemByStall", hashMapToReturn);
 		rd.forward(request,response);
