@@ -125,46 +125,37 @@ public class FoodOrderItem {
 		this.createDate = createDate;
 	}
 
-	public Set<ModifierChosen> getModifierList() {
-		return modifierChosenList;
-	}
-
-	public void setModifierList(HashSet<ModifierChosen> modifierList) {
-		this.modifierChosenList = modifierList;
-	}
-
-	
 	public boolean equals2(FoodOrderItem other) {
-		 // check if same food
-		 if (other.getFood().equals(food)) {
+		// check if same food
+		if (other.getFood().equals(food)) {
 
-		 // check which one has longer modifierchosenlist
-		 int listALength = modifierChosenList.size();
-		 int listBLength = other.getModifierChosenList().size();
-		 
-		 //check length, if same, continue
-		 if(listALength == listBLength) {
-		 
-		 Set<ModifierChosen> listA = modifierChosenList;
-		 Set<ModifierChosen> listB = other.getModifierChosenList();
-		 
-		 int counter = 0;
-		 for(ModifierChosen c1 : listA) {
-		 for(ModifierChosen c2 : listB) {
-		 if(c1.getName().equals(c2.getName())) {
-		 counter++;
-		 }
-		 }
-		 }
-		 
-		 if(counter == listA.size()) {
-		 return true;
-		 }
-		 }
-		 }
-		 return false;
-		 }
-	
+			// check which one has longer modifierchosenlist
+			int listALength = modifierChosenList.size();
+			int listBLength = other.getModifierChosenList().size();
+
+			// check length, if same, continue
+			if (listALength == listBLength) {
+
+				Set<ModifierChosen> listA = modifierChosenList;
+				Set<ModifierChosen> listB = other.getModifierChosenList();
+
+				int counter = 0;
+				for (ModifierChosen c1 : listA) {
+					for (ModifierChosen c2 : listB) {
+						if (c1.getName().equals(c2.getName())) {
+							counter++;
+						}
+					}
+				}
+
+				if (counter == listA.size()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	// public boolean equals(FoodOrderItem otherFoodItem) {
 	// if (this.food.equals(otherFoodItem.getFood())) {
 	// ArrayList<Modifier> modifierListOrigin = new

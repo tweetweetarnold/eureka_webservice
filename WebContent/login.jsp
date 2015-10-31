@@ -31,28 +31,21 @@
 			<h1 class="form-signin-heading">DABAO</h1>
 
 			<!-- User input -->
-			<%-- 			<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}" required> --%>
-			<!-- 			<input type="password" name="password" class="form-control" placeholder="Password" required> -->
 			<label for="username" class="sr-only">Username</label>
-			<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}" required>
+			<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}"
+				required
+			>
 			<label for="password" class="sr-only">Password</label>
 			<input type="password" name="password" class="form-control" placeholder="Password" required>
 
-			<!-- 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
-			<!-- 			<br> -->
-			<!-- 			<div align="center"> -->
-			<!-- 				<a href="registration.jsp">Register new user</a> -->
-			<!-- 			</div> -->
-
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			
+			<br>
 			<div align="center">
 				<a href="registration.jsp">Register as a New User</a>
 			</div>
 		</form>
-
-
-
-		<!-- 		<button class="btn btn-lg btn-primary btn-block" type="submit">Register as a New User</button> -->
+		
 
 		<!-- Error message handling -->
 		<c:if test="${not empty sessionScope.error}">
@@ -73,7 +66,6 @@
 			</div>
 			<c:remove var="success" scope="session" />
 		</c:if>
-
 
 		<c:remove var="username" scope="session" />
 

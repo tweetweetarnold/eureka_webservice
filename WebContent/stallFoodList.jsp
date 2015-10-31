@@ -18,18 +18,14 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <script src="resources/js/jquery-1.11.3.js"></script>
-<!-- <script src="resources/js/jquery-1.11.3.min.js"></script> -->
 <script src="resources/js/dabao/transition.js"></script>
 <script src="resources/js/dabao/dabao.js"></script>
-<!-- <script src="resources/js/bootstrap.min.js"></script> -->
 
 <!-- Bootstrap core CSS -->
 <link href="resources/css/dabao/dabao.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="resources/css/dabao/starter-template.css" rel="stylesheet">
-<!-- <link href="resources/css/bootstap.theme.css" rel="stylesheet"> -->
-<!-- <link href="resources/css/bootstap.min.css" rel="stylesheet"> -->
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
