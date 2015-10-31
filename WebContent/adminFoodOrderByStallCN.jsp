@@ -134,7 +134,10 @@
 						%>
 
 					</table>
-					Total Price =<%=totalPrice%>
+					<%
+						DecimalFormat df = new DecimalFormat("####0.00");
+					%>
+					<h3>Total Price : $<%=df.format(totalPrice)%></h3>
 				</div>
 			</div>
 

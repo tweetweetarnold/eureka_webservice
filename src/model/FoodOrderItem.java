@@ -133,34 +133,38 @@ public class FoodOrderItem {
 		this.modifierChosenList = modifierList;
 	}
 
-	public boolean equals(FoodOrderItem otherFoodItem) {
-		System.out.println(this.food.equals(otherFoodItem.getFood()));
-		if (this.food.equals(otherFoodItem.getFood())) {
-			ArrayList<ModifierChosen> modifierListOrigin = new ArrayList<ModifierChosen>(
-					modifierChosenList);
-			ArrayList<ModifierChosen> modifierListExternal = new ArrayList<ModifierChosen>(
-					otherFoodItem.getModifierList());
-			int trueCount = 0;
-			for (ModifierChosen m : modifierListOrigin) {
-				for (ModifierChosen e : modifierListExternal) {
-					if (m.equals(e)) {
-						trueCount++;
-					}
-				}
-			}
-			System.out.println(trueCount + " VS " + modifierListOrigin.size());
-			if (trueCount == modifierListOrigin.size()) {
-				return true;
-			} else {
-				return false;
-			}
+	
+	public boolean equals2(FoodOrderItem other) {
+		 // check if same food
+		 if (other.getFood().equals(food)) {
 
-		} else {
-			return false;
-		}
-
-	}
-
+		 // check which one has longer modifierchosenlist
+		 int listALength = modifierChosenList.size();
+		 int listBLength = other.getModifierChosenList().size();
+		 
+		 //check length, if same, continue
+		 if(listALength == listBLength) {
+		 
+		 Set<ModifierChosen> listA = modifierChosenList;
+		 Set<ModifierChosen> listB = other.getModifierChosenList();
+		 
+		 int counter = 0;
+		 for(ModifierChosen c1 : listA) {
+		 for(ModifierChosen c2 : listB) {
+		 if(c1.getName().equals(c2.getName())) {
+		 counter++;
+		 }
+		 }
+		 }
+		 
+		 if(counter == listA.size()) {
+		 return true;
+		 }
+		 }
+		 }
+		 return false;
+		 }
+	
 	// public boolean equals(FoodOrderItem otherFoodItem) {
 	// if (this.food.equals(otherFoodItem.getFood())) {
 	// ArrayList<Modifier> modifierListOrigin = new

@@ -44,13 +44,14 @@
 <body>
 	<%
 		if (request.getAttribute("foodOrders") != null) {
-		ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
-				.getAttribute("foodOrders");
+			ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
+					.getAttribute("foodOrders");
 	%>
 	<div class="row center">
 		<div class="col-xs-3 center">
 			<form action="ChineseRetrieveFoodOrderServlet" method="post">
-				<button type="submit" class="btn btn-success btn-block">Get Chinese Food Names</button>
+				<button type="submit" class="btn btn-success btn-block">Get
+					Chinese Food Names</button>
 			</form>
 		</div>
 	</div>
@@ -58,8 +59,8 @@
 
 	<%
 		for (FoodDisplayObject fDO : foodDisplayObjectList) {
-			String stallName = fDO.getStallName();
-			ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
+				String stallName = fDO.getStallName();
+				ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
 	%>
 	</br>
 	<div class="container">
@@ -81,13 +82,13 @@
 						<%
 							double totalPrice = 0;
 
-													for (FoodOrderItem fOI : foodOrderItemList) {
-														String foodName = fOI.getFood().getName();
-														ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierList());
-														int quantity = fDO.getQuantity(fOI);
-														double price = fOI.getPrice();
-														totalPrice += quantity * price;
-														ArrayList<String> userList = fDO.getUsernameList(fOI);
+									for (FoodOrderItem fOI : foodOrderItemList) {
+										String foodName = fOI.getFood().getName();
+										ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierList());
+										int quantity = fDO.getQuantity(fOI);
+										double price = fOI.getPrice();
+										totalPrice += quantity * price;
+										ArrayList<String> userList = fDO.getUsernameList(fOI);
 						%>
 						<tr>
 							<td><%=foodName%></td>
@@ -95,7 +96,7 @@
 								<table>
 									<%
 										for (ModifierChosen mod : modifierList) {
-																					String modName = mod.getName();
+														String modName = mod.getName();
 									%>
 									<tr>
 										<td><%=modName%></td>
@@ -129,7 +130,11 @@
 						%>
 
 					</table>
-					Total Price =<%=totalPrice%>
+
+					<%
+						DecimalFormat df = new DecimalFormat("####0.00");
+					%>
+					<h3>Total Price : $<%=df.format(totalPrice)%></h3>
 				</div>
 			</div>
 
