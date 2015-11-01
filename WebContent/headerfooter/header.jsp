@@ -4,27 +4,24 @@
 		var endPath = fullPath.substring(fullPath.lastIndexOf("/") + 1,
 				fullPath.length);
 
-		var pages = [ [ "cart.jsp", "Cart" ], [ "payment.jsp", "Payment" ],
-				[ "profile.jsp", "History" ] ];
+		var pages = [ [ "cart.jsp", "Cart", "cart.jsp" ], [ "payment.jsp", "Payment", "payment.jsp"],
+				[ "profile.jsp", "Profile", "RenderProfileServlet" ] ];
 
 		var html = '<ul class="nav navbar-nav">';
-		
-		for(var i = 0; i < pages.length; i++){
+
+		for (var i = 0; i < pages.length; i++) {
 			var record = pages[i];
-			var link = record[0];
+			var path = record[0];
 			var name = record[1];
-			
-			if(endPath == link){
-				html += '<li class="active"><a href="' + link + '">' + name + '</a></li>';
-			}else{
+			var link = record[2];
+
+			if (endPath == path) {
+				html += '<li class="active"><a href="' + link + '">' + name
+						+ '</a></li>';
+			} else {
 				html += '<li><a href="' + link + '">' + name + '</a></li>';
 			}
 		}
-		
-// 		+'<li class="active"><a href="cart.jsp">Cart</a></li>'
-// 				+ '<li class="active"><a href="payment.jsp">Payment</a></li>'
-// 				+ '<li class="active"><a href="profile.jsp">History</a></li>'
-// 				+ '</ul>';
 
 		document.getElementById("#myNav").innerHTML = html;
 	};

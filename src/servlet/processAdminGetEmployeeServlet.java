@@ -17,14 +17,14 @@ import model.FoodOrder;
 /**
  * Servlet implementation class processGetEmployeeServlet
  */
-@WebServlet("/processAdminGetEmployeeServlet")
-public class processAdminGetEmployeeServlet extends HttpServlet {
+@WebServlet("/ProcessAdminGetEmployeeServlet")
+public class ProcessAdminGetEmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public processAdminGetEmployeeServlet() {
+    public ProcessAdminGetEmployeeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

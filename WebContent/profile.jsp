@@ -1,86 +1,110 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+
 <title>DABAO</title>
 
-<!-- library import for JSTL -->
+<link rel="icon" href="../../favicon.ico">
+
+<!-- Library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- Bootstrap Core CSS -->
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<!-- JavaScript imports -->
+<script src="resources/js/jquery-1.11.3.js"></script>
+<script src="resources/js/dabao/dabao.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
 
-<!-- Custom CSS -->
-<link href="resources/css/shop-homepage.css" rel="stylesheet">
-<link href="resources/css/sticky-footer.css" rel="stylesheet">
+<!-- CSS imports -->
+<link href="resources/css/dabao/dabao.css" rel="stylesheet">
+<link href="resources/css/bootstap.min.css" rel="stylesheet">
+<link href="resources/css/dabao/starter-template.css" rel="stylesheet">
 
 
-
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
 </head>
+
 <body>
 
 	<!-- Headerbar JSP Include -->
 	<jsp:include page="headerfooter/header.jsp" />
 
+	<br>
+	<br>
+
+	<c:set value="${sessionScope.user}" var="user" />
 
 	<div class="container">
-		<div align="center">
-			<h1>My Profile</h1>
+		<div class="row">
+			<div
+				class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad"
+			>
 
-			<table style="width: 50%;
-	font-size: 15px;" border="1">
-				<tr>
-					<td>Name:</td>
-					<td>Arnold</td>
-				</tr>
-				<tr>
-					<td>Gender:</td>
-					<td>Male</td>
-				</tr>
-			</table>
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<!-- 						<h3 class="panel-title">JOAN TAN</h3> -->
+					</div>
 
-			<br>
+					<div class="panel-body">
 
+						<table class="table table-striped">
+							<tr>
+								<td>
+									<strong>Name:</strong>
+								</td>
+								<td>
+									<c:out value="${user.name}" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<strong>Company:</strong>
+								</td>
+								<td>
+									<c:out value="${user.company.name}" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<strong>Email:</strong>
+								</td>
+								<td>
+									<c:out value="${user.email}" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<strong>Phone No:</strong>
+								</td>
+								<td>
+									<c:out value="${user.contactNo}" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<strong>Current spending:</strong>
+								</td>
+								<td>
+									<c:out value="${user.amountOwed}" />
+								</td>
+							</tr>
+						</table>
 
+					</div>
 
-			<table style="width: 50%;
-	font-size: 15px;" border="1">
-				<thead>
-					<tr>
-						<th>OrderId</th>
-						<th>Date</th>
-						<th>Food</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${sessionScope.orderHistory}" varStatus="loop" var="order">
-						<tr>
-							<td>
-								<c:out value="${order.foodOrderId}" />
-							</td>
-							<td>
-								<c:out value="${order.createDate}" />
-							</td>
-							<td></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-
+				</div>
+			</div>
 		</div>
-		<!-- center align -->
-
-		<c:remove var="orderHistory" scope="session" />
-
 	</div>
-	<!-- container -->
-
-	<!-- Footer JSP Include -->
-	<jsp:include page="headerfooter/footer.jsp" />
-
-
 </body>
-
-
 </html>

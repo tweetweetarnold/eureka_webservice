@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,14 +17,14 @@ import controller.FoodOrderController;
 /**
  * Servlet implementation class GetEmployeeOrderHistoryServlet
  */
-@WebServlet("/ProcessProfileServlet")
-public class ProcessProfileServlet extends HttpServlet {
+@WebServlet("/RenderOrderHistoryServlet")
+public class RenderOrderHistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ProcessProfileServlet() {
+	public RenderOrderHistoryServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
