@@ -42,6 +42,11 @@
 </head>
 
 <body>
+<nav class="navbar navbar-default navbar-static-top" role="navigation"
+	style="margin-bottom: 0"> <jsp:include
+	page="headerfooter/adminHeader.jsp" /> </nav>
+
+
 	<div class="container">
 		<div class="row center">
 			<div class="col-xs-10 col center"">
@@ -87,7 +92,7 @@
 						<tr>
 							<td rowspan=<%=listSize%>><%=++number%></td>
 							<td rowspan=<%=listSize%>><a
-								href="RetrieveUserByUsernameServlet?username=<%=username%>"><%=username%></a></td>
+								href="processAdminGetEmployeeServlet?username=<%=username%>"><%=username%></a></td>
 							<td><%=foodName%></td>
 							<td><%=foodOrderItemList.get(0).getQuantity()%></td>
 							<td><%=foodOrderItemList.get(0).getPrice()%></td>

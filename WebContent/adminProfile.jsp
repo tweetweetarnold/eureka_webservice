@@ -71,7 +71,7 @@
 				</tr>
 				<%
 					ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>(
-							(Set<FoodOrder>) request.getAttribute("orderHistory"));
+							(ArrayList<FoodOrder>) request.getAttribute("orderHistory"));
 					int i = 1;
 					for (FoodOrder f : foodOrderList) {
 				%>

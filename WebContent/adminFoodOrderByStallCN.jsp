@@ -40,7 +40,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <%
-	ResourceBundle resourceBundle = ResourceBundle.getBundle("RBExample", Locale.CHINA);
+	ResourceBundle resourceBundle = ResourceBundle.getBundle("RBExample2", Locale.CHINA);
 %>
 </head>
 
@@ -74,7 +74,7 @@
 				<div class="panel panel-default">
 
 					<div class="panel-heading">
-						<%=stallName + "/t" + foodOrderItemList.get(0).getFood().getStall().getContactNo()%> 
+						<%=stallName + "          " + foodOrderItemList.get(0).getFood().getStall().getContactNo()%> 
 					</div>
 					<table class="table table-striped">
 						<tr>

@@ -83,7 +83,7 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 			AdminController adminController = new AdminController();
 			session.setAttribute("outstandingPayments", adminController.getListOfOwedPayment("Owe"));
 //			response.sendRedirect("adminHomepage.jsp");
-			response.sendRedirect("adminHomepageTest.jsp");
+			response.sendRedirect("adminHomepage.jsp");
 
 		} catch (Exception e) {
 			System.out.println("Exception thrown. Incorrect credentials.");

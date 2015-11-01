@@ -72,7 +72,7 @@
 				<div class="panel panel-default">
 
 					<div class="panel-heading">
-						<%=stallName  + "/t" + foodOrderItemList.get(0).getFood().getStall().getContactNo()%>
+						<%=stallName  + "          " + foodOrderItemList.get(0).getFood().getStall().getContactNo()%>
 					</div>
 					<table class="table table-striped">
 						<tr>
