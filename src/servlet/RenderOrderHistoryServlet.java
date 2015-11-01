@@ -51,7 +51,6 @@ public class RenderOrderHistoryServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		// PrintWriter out = response.getWriter();
 
 		HttpSession session = request.getSession();
 		Employee emp = (Employee) session.getAttribute("user");
@@ -61,12 +60,8 @@ public class RenderOrderHistoryServlet extends HttpServlet {
 		System.out.println(foodOrderList.size());
 
 		session.setAttribute("orderHistory", foodOrderList);
-		response.sendRedirect("profile.jsp");
+		response.sendRedirect("orderHistory.jsp");
 
-		// RequestDispatcher rd =
-		// request.getRequestDispatcher("retrieveEmployeeOrderHistory.jsp");
-		// request.setAttribute("foodOrderList", foodOrderList);
-		// rd.forward(request, response);
 	}
 
 }

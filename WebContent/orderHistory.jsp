@@ -14,6 +14,10 @@
 
 <link rel="icon" href="../../favicon.ico">
 
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!-- Javascript imports -->
 <script src="resources/js/jquery-1.11.3.js"></script>
 <script src="resources/js/dabao/dabao.js"></script>
@@ -42,53 +46,101 @@
 	<jsp:include page="headerfooter/header.jsp" />
 
 
-	<div class="container">
+	<div class="container" style="margin-top: 100px;">
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-			<div class="panel panel-default">
-				<div class="panel-heading" role="tab" id="headingOne">
-					<h4 class="panel-title">
-						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
-							aria-controls="collapseOne"
-						> Month Of October 2015 </a>
-					</h4>
-				</div>
-				<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-					<div class="panel-body">
-						<img src="resources/img/img-outstandingPayment.png" alt="" style="width: 536px;
-	height: 489px;">
-						<img src="resources/img/img-outstandingPayment.png" alt="" style="width: 536px;
-	height: 489px;">
-						<img src="resources/img/img-outstandingPayment.png" alt="" style="width: 536px;
-	height: 489px;">
-						<img src="resources/img/img-outstandingPayment.png" alt="" style="width: 536px;
-	height: 489px;">
+
+			<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">
+
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
+								aria-expanded="false" aria-controls="collapse${orderLoop.index}"
+							>
+								<c:out value="${order.createDate}" />
+								<p style="float: right;">
+									<c:out value="${order.status}" />
+								</p>
+							</a>
+						</h4>
+					</div>
+
+					<div id="collapse${orderLoop.index}" class="panel-collapse collapse" role="tabpanel"
+						aria-labelledby="heading${orderLoop.index}"
+					>
+						<div class="panel-body">
+							<div style="font-size: 18px;">
+
+								<table>
+									<tr>
+										<td style="padding-right: 10px;">
+											<strong>Canteen:</strong>
+										</td>
+										<td>Taman Jurong Market and Food Centre</td>
+									</tr>
+									<tr>
+										<td style="padding-right: 10px;">
+											<strong>Price:</strong>
+										</td>
+										<td>
+											<fmt:formatNumber value="${order.totalPrice}" var="totalPrice" minFractionDigits="2" />
+											$
+											<c:out value="${totalPrice}" />
+										</td>
+									</tr>
+								</table>
+							</div>
+							<br>
+
+							<table class="table table-striped" border="1">
+								<thead>
+									<th>Stall</th>
+									<th>Food</th>
+									<th>Quantity</th>
+									<th>Price</th>
+								</thead>
+
+								<tbody>
+									<c:forEach items="${order.foodOrderList}" var="foodItem">
+										<tr>
+											<td>
+												<c:out value="${foodItem.food.stall.name}" />
+											</td>
+											<td>
+												<c:out value="${foodItem.food.name}" />
+												<ul>
+													<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen">
+														<li>
+															<small>
+																<c:out value="${modifierChosen.name}" />
+																<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />
+																+ $
+																<c:out value="${newModifierPrice}" />
+															</small>
+														</li>
+													</c:forEach>
+												</ul>
+											</td>
+											<td>
+												<c:out value="${foodItem.quantity}" />
+											</td>
+											<td>
+												<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
+												$
+												<c:out value="${newPrice}" />
+											</td>
+										</tr>
+									</c:forEach>
+
+								</tbody>
+							</table>
+
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading" role="tab" id="headingTwo">
-					<h4 class="panel-title">
-						<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
-							aria-expanded="false" aria-controls="collapseTwo"
-						> Month Of November 2015 </a>
-					</h4>
-				</div>
-				<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-					<div class="panel-body"></div>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading" role="tab" id="headingThree">
-					<h4 class="panel-title">
-						<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
-							aria-expanded="false" aria-controls="collapseThree"
-						> Month Of December 2015 </a>
-					</h4>
-				</div>
-				<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-					<div class="panel-body"></div>
-				</div>
-			</div>
+			</c:forEach>
+
+
 		</div>
 	</div>
 
@@ -97,10 +149,10 @@
 	<!-- Bootstrap core JavaScript
         ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-<!-- 	<script src="../../dist/js/bootstrap.min.js"></script> -->
+	<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+	<!-- 	<script src="../../dist/js/bootstrap.min.js"></script> -->
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<!-- 	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+	<!-- 	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
 
 
 </body>

@@ -7,7 +7,7 @@
 		var pages = [ [ "cart.jsp", "Cart", "cart.jsp" ],
 				[ "payment.jsp", "Payment", "payment.jsp" ],
 				[ "profile.jsp", "Profile", "RenderProfileServlet" ],
-				[ "orderHistory.jsp", "History", "orderHistory.jsp" ] ];
+				[ "orderHistory.jsp", "History", "RenderOrderHistoryServlet" ] ];
 
 		var html = '<ul class="nav navbar-nav">';
 

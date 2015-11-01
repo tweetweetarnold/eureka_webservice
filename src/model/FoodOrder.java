@@ -22,8 +22,6 @@ public class FoodOrder {
 	private int foodOrderId;
 	private String status;
 	@OneToOne(cascade = CascadeType.MERGE)
-	// @JoinColumns({ @JoinColumn(name = "username"), @JoinColumn(name =
-	// "email")})
 	@JoinColumn(name = "username")
 	private Employee employee;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")
