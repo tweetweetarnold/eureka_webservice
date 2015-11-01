@@ -94,10 +94,12 @@
 
 							<table class="table table-striped" border="1">
 								<thead>
-									<th>Stall</th>
-									<th>Food</th>
-									<th>Quantity</th>
-									<th>Price</th>
+									<tr>
+										<th>Stall</th>
+										<th>Food</th>
+										<th>Quantity</th>
+										<th>Price</th>
+									</tr>
 								</thead>
 
 								<tbody>

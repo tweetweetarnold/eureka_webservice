@@ -71,6 +71,7 @@
 							<!-- Button trigger modal -->
 							<button type="button" class="button" data-toggle="modal" data-target="#myModal${food.foodId}">
 								<c:out value="${food.name}" />
+								<c:out value="${food.image} }"/>
 							</button>
 
 							<!-- Modal -->

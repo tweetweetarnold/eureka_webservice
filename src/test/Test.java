@@ -88,11 +88,11 @@ public class Test {
 		Food food2 = new Food("Fish Soup and Rice", "", 4.70, null, stall1);
 		
 		
-        byte[] bFile37 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile37 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food1.setImage(bFile37);
                 
         
-        byte[] bFile38 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile38 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food2.setImage(bFile38);
         
         
@@ -105,13 +105,13 @@ public class Test {
 		Food food4 = new Food("Malay Mixed Rice(Fish)", "upsize to $3.50", 3.00, null, stall2);
 		Food food5 = new Food("Malay Mixed Rice(Mutton)", "upsize to $3.50", 3.00, null, stall2);
 		
-        byte[] bFile39 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile39 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food3.setImage(bFile39);
          
-        byte[] bFile40 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile40 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food4.setImage(bFile40);
       
-        byte[] bFile41 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile41 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food5.setImage(bFile41);
 
 		Modifier modifierA3 = new Modifier("Upsize to $3.50", "", 0.50, food3);
@@ -139,11 +139,11 @@ public class Test {
 		Food food7 = new Food("Porridge", "", 3.00, null, stall3);
 		
 		 
-        byte[] bFile42 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile42 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food6.setImage(bFile42);
         
         
-        byte[] bFile43 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile43 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food7.setImage(bFile43);
 		
 		foodListB3.add(food6);
@@ -153,7 +153,7 @@ public class Test {
 		Stall stall4 = new Stall("Wanton Mee Stall", 0, null, foodListB4);
 		Food food8 = new Food("Wanton Mee", "", 3.00, null, stall4);
 		
-        byte[] bFile44 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile44 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food8.setImage(bFile44);
         
 		foodListB4.add(food8);
@@ -166,17 +166,17 @@ public class Test {
 		Food food12 = new Food("Ayam Penyat", "", 4.00, null, stall5);
 		
 		
-        byte[] bFile45 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile45 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food9.setImage(bFile45); 
 
-        byte[] bFile46 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile46 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food10.setImage(bFile46);
         
-        byte[] bFile47 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile47 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food11.setImage(bFile47);
         
         
-        byte[] bFile48 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile48 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food12.setImage(bFile48);
 		
 		
@@ -193,18 +193,18 @@ public class Test {
 		Food foodC16 = new Food("CharSiew + Roast Meat Rice", "", 3.00, null, stall6);
 		
 		
-        byte[] bFile49 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile49 = loadImageFile("WebContent\\resources\\img\\img-roastchickenrice.jpg");
         food13.setImage(bFile49);
 
-        byte[] bFile50 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile50 = loadImageFile("WebContent\\resources\\img\\img-charsiewrice.jpg");
         food14.setImage(bFile50);
         
 
-        byte[] bFile51 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile51 = loadImageFile("WebContent\\resources\\img\\img-roastmeatrice.jpg");
         food15.setImage(bFile51);
         
 
-        byte[] bFile52 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile52 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         foodC16.setImage(bFile52);
         
         
@@ -224,30 +224,30 @@ public class Test {
 		Food food22 = new Food("Chicken Porridge", "", 3.00, null, stall7);
 		Food food23 = new Food("Fish Porridge", "", 3.00, null, stall7);
 
-        byte[] bFile53 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile53 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food16.setImage(bFile53);
 
-        byte[] bFile54 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile54 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food17.setImage(bFile54);
           
-        byte[] bFile55 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile55 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food18.setImage(bFile55);
  
-        byte[] bFile56 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile56 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food19.setImage(bFile56);
         
         
-        byte[] bFile57 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile57 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food20.setImage(bFile57);
         
-        byte[] bFile58 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile58 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food21.setImage(bFile58);
 
-        byte[] bFile59 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile59 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food22.setImage(bFile59);
  
         
-        byte[] bFile60 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile60 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food23.setImage(bFile60);
 		
 		
@@ -272,15 +272,15 @@ public class Test {
 		Food food26 = new Food("Vegetarian Mee", "", 2.50, null, stall8);
 		
 		
-        byte[] bFile61 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile61 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food24.setImage(bFile61);
         
         
-        byte[] bFile62 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile62 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food25.setImage(bFile62);
         
         
-        byte[] bFile63 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile63 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food26.setImage(bFile63);
         
         
@@ -294,7 +294,7 @@ public class Test {
 		Food food27 = new Food("Minced Meat Noodles", "upsize to $3.20", 2.70, null, stall9);
 		
 		 
-        byte[] bFile64 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile64 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
 		food27.setImage(bFile64);
 
 		Modifier modifierA27 = new Modifier("Upsize to $3.20", "", 0.50, food27);
@@ -313,25 +313,25 @@ public class Test {
 		Food food32 = new Food("Hokkien Mee", "", 3.00, null, stall10);
 		Food food33 = new Food("Dumpling Noodles", "", 3.00, null, stall10);
 		
-        byte[] bFile65 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile65 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food28.setImage(bFile65);
         
-        byte[] bFile66 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile66 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food29.setImage(bFile66);
         
         
-        byte[] bFile67 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile67 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food30.setImage(bFile67);
         
        
-        byte[] bFile68 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile68 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food31.setImage(bFile68);
        
-        byte[] bFile69 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile69 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food32.setImage(bFile69);
         
         
-        byte[] bFile70 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile70 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         food33.setImage(bFile70);
 		
 		foodListB10.add(food28);
@@ -379,7 +379,7 @@ public class Test {
 		// add food to list to the stall
 		
 		//load image file
-		byte[] bFile1 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+		byte[] bFile1 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         kuehfood1.setImage(bFile1);
 		
 
@@ -441,13 +441,13 @@ public class Test {
 		Food infood2 = new Food("Vegetable White Rice", "", 3.00, null, indianStall);
 		Food infood3 = new Food("Briyani", "Chicken/Fish/Mutton", 5.00, null, indianStall);
  
-	    byte[] bFile8 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");   
+	    byte[] bFile8 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");   
 	    infood1.setImage(bFile8);
   
-	    byte[] bFile9 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");     
+	    byte[] bFile9 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");     
 	    infood2.setImage(bFile9);
    
-	    byte[] bFile10 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+	    byte[] bFile10 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
 	    infood3.setImage(bFile10);
 
 		// for infood1 modifiers
@@ -484,7 +484,7 @@ public class Test {
 				"ask for more meat, less fried meat, or upsize to $3.50", 3.00, null,
 				chineseMixVegStall);
 		
-        byte[] bFile11 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile11 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         mixVegRice1.setImage(bFile11);
 
 		// for mixVegRice1 modifiers
@@ -511,20 +511,20 @@ public class Test {
 				roastMeatStall);
 		
 		
-        byte[] bFile12 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile12 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         roastfood1.setImage(bFile12);
         
        
-        byte[] bFile13 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile13 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         roastfood2.setImage(bFile13);
         
         
-        byte[] bFile14 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile14 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         roastfood3.setImage(bFile14);
         
         
        
-        byte[] bFile15 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile15 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         roastfood4.setImage(bFile15);
 
 		// for roastfood1 modifiers
@@ -571,20 +571,20 @@ public class Test {
 		Food seafood5 = new Food("Mee Goreng", "", 4.20, null, seafoodTzeCharStall);
 		
 		
-        byte[] bFile16 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile16 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         seafood1.setImage(bFile16);
 
-        byte[] bFile17 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile17 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         seafood2.setImage(bFile17);
 
-        byte[] bFile18 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile18 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         seafood3.setImage(bFile18);
         
         
-        byte[] bFile19 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");        
+        byte[] bFile19 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");        
         seafood4.setImage(bFile19);
         
-        byte[] bFile20 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile20 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         seafood5.setImage(bFile20);
 		
 		// for seafood1 modifier
@@ -627,13 +627,13 @@ public class Test {
 				5.00, null, fishBeehoonStall);
 		
 		//save image into database
-    	byte[] bFile21 =loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+    	byte[] bFile21 =loadImageFile("WebContent\\resources\\img\\img-fishsoupwithbeehoon.jpg");
         fishBeehoonfood1.setImage(bFile21);
         
-        byte[] bFile22 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile22 = loadImageFile("WebContent\\resources\\img\\img-fishsoupwithrice.jpg");
         fishBeehoonfood2.setImage(bFile22);
         
-        byte[] bFile23 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile23 = loadImageFile("WebContent\\resources\\img\\img-friedfishsoupwithbeehoon.jpg");
         fishBeehoonfood3.setImage(bFile23);
 
 		// for fishBeehoonfood1 modifier
@@ -679,50 +679,50 @@ public class Test {
 
 		
 		
-        byte[] bFile24 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile24 = loadImageFile("WebContent\\resources\\img\\img-apple.jpg");
         apple.setImage(bFile24);
         
-        byte[] bFile25 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile25 = loadImageFile("WebContent\\resources\\img\\img-watermelon.jpg");
         watermelon.setImage(bFile25);
         
         
-        byte[] bFile26 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile26 = loadImageFile("WebContent\\resources\\img\\img-dragonfruit.jpg");
         dragonfruit.setImage(bFile26);
         
         
-        byte[] bFile27 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile27 = loadImageFile("WebContent\\resources\\img\\img-pear.jpg");
         pear.setImage(bFile27);
         
         
-        byte[] bFile28 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile28 = loadImageFile("WebContent\\resources\\img\\img-honeydew.jpg");
         honeydew.setImage(bFile28);
         
-        byte[] bFile29 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile29 = loadImageFile("WebContent\\resources\\img\\img-papaya.jpg");
         papaya.setImage(bFile29);
         
         
-        byte[] bFile30 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile30 = loadImageFile("WebContent\\resources\\img\\img-pineapple.jpg");
         pineapple.setImage(bFile30);
         
-        byte[] bFile31 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile31 = loadImageFile("WebContent\\resources\\img\\img-banana.jpg");
         banana.setImage(bFile31);
         
        
-        byte[] bFile32 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile32 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         agaragar.setImage(bFile32);
         
         
-        byte[] bFile33 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile33 = loadImageFile("WebContent\\resources\\img\\img-orange.jpg");
         orange.setImage(bFile33);
         
         
-        byte[] bFile34 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile34 = loadImageFile("WebContent\\resources\\img\\img-guava.jpg");
         guava.setImage(bFile34);
         
-        byte[] bFile35 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile35 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         sarawakPineapple.setImage(bFile35);
         
-        byte[] bFile36 = loadImageFile("WebContent\\resources\\img\\img-friedrice.jpg");
+        byte[] bFile36 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
         mixedFruits.setImage(bFile36);
 		
 		
