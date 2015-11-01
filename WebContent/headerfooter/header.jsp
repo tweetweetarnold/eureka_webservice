@@ -4,8 +4,10 @@
 		var endPath = fullPath.substring(fullPath.lastIndexOf("/") + 1,
 				fullPath.length);
 
-		var pages = [ [ "cart.jsp", "Cart", "cart.jsp" ], [ "payment.jsp", "Payment", "payment.jsp"],
-				[ "profile.jsp", "Profile", "RenderProfileServlet" ] ];
+		var pages = [ [ "cart.jsp", "Cart", "cart.jsp" ],
+				[ "payment.jsp", "Payment", "payment.jsp" ],
+				[ "profile.jsp", "Profile", "RenderProfileServlet" ],
+				[ "orderHistory.jsp", "History", "orderHistory.jsp" ] ];
 
 		var html = '<ul class="nav navbar-nav">';
 
