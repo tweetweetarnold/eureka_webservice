@@ -63,14 +63,14 @@ public class ProcessRegistrationServlet extends HttpServlet {
 		try {
 			RegistrationController registrationController = new RegistrationController();
 
-			String employeeName = (String) request.getParameter("name");
-			String username = (String) request.getParameter("username");
+			String employeeName = (String) request.getParameter("name").trim();
+			String username = (String) request.getParameter("username").trim();
 			String password = (String) request.getParameter("password");
 			String confirmPwd = (String) request.getParameter("confirmPwd");
 			String contactNo = (String) request.getParameter("contactNo");
-			String email = (String) request.getParameter("email");
+			String email = (String) request.getParameter("email").trim();
 			String companyCode = (String) request.getParameter("companyCode");
-
+			
 			userInput.put("name", employeeName);
 			userInput.put("username", username);
 			userInput.put("email", email);
@@ -85,41 +85,54 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			boolean validEmail = emailValidator.isValid(email);
 			
 			// Check user parameters
+			boolean validUsername = (!username.equals("")) && username.length() > 0;
+			boolean validEmployeeName = (!employeeName.equals(""))&& employeeName.length() > 0;
+			
 			boolean valid = (contactNo.length() == 8 && password.length() >= 7
 					&& password.equals(confirmPwd) && validEmail);
 			boolean validContactNo = contactNo.length() == 8;
 			boolean validPasswordLength = password.length() >= 7;
 			boolean validPasswordConfirmation = password.equals(confirmPwd);
-
-			if (validContactNo) {
-				long contactNumber = Long.parseLong(contactNo);
-				if (validPasswordLength) {
-					if (validPasswordConfirmation) {
-						if (validEmail) {
-							String generatedEmployeeId = registrationController.registerUser(
-									username, password, employeeName, email, contactNumber,
-									companyCode);
-
-							session.setAttribute("success",
-									"Your account has been created. Username: "
-											+ generatedEmployeeId);
-
-							response.sendRedirect("login.jsp");
+			
+			if (validUsername) {
+				if (validEmployeeName) {
+					if (validContactNo) {
+						long contactNumber = Long.parseLong(contactNo);
+						if (validPasswordLength) {
+							if (validPasswordConfirmation) {
+								if (validEmail) {
+									String generatedEmployeeId = registrationController.registerUser(
+											username, password, employeeName, email, contactNumber,
+											companyCode);
+		
+									session.setAttribute("success",
+											"Your account has been created. Username: "
+													+ generatedEmployeeId);
+		
+									response.sendRedirect("login.jsp");
+								} else {
+									System.out.println("RegistrationServlet: Validation failed.");
+									throw new Exception("The Email that you provided is not valid");
+								}
+							} else {
+								System.out.println("RegistrationServlet: Validation failed.");
+								throw new Exception("Passwords do not match");
+							}
 						} else {
 							System.out.println("RegistrationServlet: Validation failed.");
-							throw new Exception("The Email that you provided is not valid");
+							throw new Exception("Password must be at least 7 characters long");
 						}
 					} else {
 						System.out.println("RegistrationServlet: Validation failed.");
-						throw new Exception("Passwords do not match");
+						throw new Exception("Contact Number must be 8 digits");
 					}
 				} else {
 					System.out.println("RegistrationServlet: Validation failed.");
-					throw new Exception("Password must be at least 7 characters long");
+					throw new Exception("Employee name cannot be empty");
 				}
 			} else {
 				System.out.println("RegistrationServlet: Validation failed.");
-				throw new Exception("Contact Number must be 8 digits");
+				throw new Exception("Username cannot be empty");
 			}
 
 			// if (valid) {
