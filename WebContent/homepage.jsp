@@ -141,6 +141,14 @@
 	<!-- 	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
 
 
+	<!-- item has been added to cart alert -->
+	<c:if test="${not empty sessionScope.success}">
+		<script>
+			alert("Item has been added to cart");
+		</script>
+		<c:remove var="success" scope="session" />
+	</c:if>
+
 	<!-- Google Analytics -->
 	<script>
 		(function(i, s, o, g, r, a, m) {

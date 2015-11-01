@@ -4,6 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.*"%>
 <html lang="en">
+<%@include file="adminProtect.jsp"%>
 <head>
 
 <meta charset="utf-8">
@@ -42,14 +43,14 @@
 </head>
 
 <body>
-<nav class="navbar navbar-default navbar-static-top" role="navigation"
-	style="margin-bottom: 0"> <jsp:include
-	page="headerfooter/adminHeader.jsp" /> </nav>
+	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+		<jsp:include page="headerfooter/adminHeader.jsp" />
+	</nav>
 
 	<%
 		if (request.getAttribute("foodOrders") != null) {
-			ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
-			.getAttribute("foodOrders");
+		ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
+		.getAttribute("foodOrders");
 	%>
 	<div class="row center">
 		<div class="col-xs-3 center">
@@ -62,8 +63,8 @@
 
 	<%
 		for (FoodDisplayObject fDO : foodDisplayObjectList) {
-		String stallName = fDO.getStallName();
-		ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
+			String stallName = fDO.getStallName();
+			ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
 	%>
 	</br>
 	<div class="container">
@@ -85,13 +86,13 @@
 						<%
 							double totalPrice = 0;
 
-																	for (FoodOrderItem fOI : foodOrderItemList) {
-																		String foodName = fOI.getFood().getName();
-																		ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
-																		int quantity = fDO.getQuantity(fOI);
-																		double price = fOI.getPrice();
-																		totalPrice += quantity * price;
-																		ArrayList<String> userList = fDO.getUsernameList(fOI);
+																					for (FoodOrderItem fOI : foodOrderItemList) {
+																						String foodName = fOI.getFood().getName();
+																						ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
+																						int quantity = fDO.getQuantity(fOI);
+																						double price = fOI.getPrice();
+																						totalPrice += quantity * price;
+																						ArrayList<String> userList = fDO.getUsernameList(fOI);
 						%>
 						<tr>
 							<td><%=foodName%></td>
@@ -99,7 +100,7 @@
 								<table>
 									<%
 										for (ModifierChosen mod : modifierList) {
-																												String modName = mod.getName();
+																																			String modName = mod.getName();
 									%>
 									<tr>
 										<td><%=modName%></td>

@@ -2,6 +2,8 @@
 <%@page import="model.*"%>
 <%@page import="controller.*"%>
 <%@page import="java.text.*"%>
+
+<%@include file="adminProtect.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 

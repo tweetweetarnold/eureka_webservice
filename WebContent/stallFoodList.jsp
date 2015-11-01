@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@include file="protect.jsp"%>
 <head>
 
 <meta charset="utf-8">
@@ -65,13 +66,13 @@
 
 				<c:forEach items="${sessionScope.stallFoodList}" var="food" varStatus="foodListLoop">
 					<div class="thumbnail">
-						<img src="resources/img/img-chickencutlet.jpg" alt="...">
+						<img src="${pageContext.request.contextPath}/ImageServlet?id=${food.foodId}" />
+
 						<div class="caption">
 
 							<!-- Button trigger modal -->
 							<button type="button" class="button" data-toggle="modal" data-target="#myModal${food.foodId}">
 								<c:out value="${food.name}" />
-								<c:out value="${food.image} }"/>
 							</button>
 
 							<!-- Modal -->

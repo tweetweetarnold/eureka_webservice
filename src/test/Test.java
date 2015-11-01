@@ -511,20 +511,20 @@ public class Test {
 				roastMeatStall);
 		
 		
-        byte[] bFile12 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
+        byte[] bFile12 = loadImageFile("WebContent\\resources\\img\\img-roastchickenrice.jpg");
         roastfood1.setImage(bFile12);
         
        
-        byte[] bFile13 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
+        byte[] bFile13 = loadImageFile("WebContent\\resources\\img\\img-wantonmee.jpg");
         roastfood2.setImage(bFile13);
         
         
-        byte[] bFile14 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
+        byte[] bFile14 = loadImageFile("WebContent\\resources\\img\\img-charsiewrice.jpg");
         roastfood3.setImage(bFile14);
         
         
        
-        byte[] bFile15 = loadImageFile("WebContent\\resources\\img\\img-error.jpg");
+        byte[] bFile15 = loadImageFile("WebContent\\resources\\img\\img-roastmeatrice.jpg");
         roastfood4.setImage(bFile15);
 
 		// for roastfood1 modifiers

@@ -1,22 +1,16 @@
 package controller;
 
-import dao.FoodDAO;
 import model.Food;
+import dao.FoodDAO;
 
 public class FoodController {
-	
-	
+
 	public byte[] getFoodImage(int id) {
-		Food food = FoodDAO.getFood(id);
-		
-		return food.getImage();
+		return FoodDAO.getFood(id).getImage();
 	}
-	
-	
+
 	public Food getFood(int id) {
-		Food food = FoodDAO.getFood(id);
-		
-		return food;
+		return FoodDAO.getFood(id);
 	}
 
 }

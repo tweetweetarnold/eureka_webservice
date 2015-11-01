@@ -3,6 +3,7 @@
 <%@page import="org.json.simple.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.*"%>
+<%@include file="adminProtect.jsp"%>
 <html lang="en">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <head>

@@ -61,7 +61,7 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		
+
 		System.out.println("");
 		System.out.println("****** AddFoodItemToOrderItemsServlet ******");
 		out.println("AddFoodItemToOrderItemsServlet");
@@ -76,11 +76,14 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 
 			// Retrieve corresponding food from food list
 			// ** Temporary
-//			List<Food> allFood = (ArrayList<Food>) session.getAttribute("allFood");
-//			Food food = allFood.get(Integer.parseInt(request.getParameter("foodPos")));
-//			System.out.println("allFood: " + allFood); // testing
-//			System.out.println("chosenFood: " + food.getName() + ", id: " + food.getFoodId()); // testing
-			
+			// List<Food> allFood = (ArrayList<Food>)
+			// session.getAttribute("allFood");
+			// Food food =
+			// allFood.get(Integer.parseInt(request.getParameter("foodPos")));
+			// System.out.println("allFood: " + allFood); // testing
+			// System.out.println("chosenFood: " + food.getName() + ", id: " +
+			// food.getFoodId()); // testing
+
 			Food food = FoodDAO.getFood(Integer.parseInt(foodId));
 			System.out.println("food retrieved: " + food.getName());
 
@@ -122,6 +125,8 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 
 			// Redirect back to homepage
 			System.out.println("new FoodOrderItem added to myFoodOrderItems successfully");
+			session.setAttribute("success", "Item has been added to cart!");
+
 			response.sendRedirect("homepage.jsp");
 
 		} catch (Exception e) {
