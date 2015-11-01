@@ -53,7 +53,16 @@
 			<input type="text" name="companyCode" class="form-control-table" placeholder="Company Code"
 				value="<c:out value="${userInput['companyCode']}"/>" required
 			>
+			<div style="margin: 0px 32px;">
+				<input type="checkbox" name="tc" required />
+				<small>
+					I agree to the
+					<a href="#">terms and conditions</a>
+					of using DABAO.
+				</small>
+			</div>
 
+			<br>
 			<br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">
 				<font face="verdana">Register</font>
