@@ -20,7 +20,7 @@ import model.FoodOrder;
  * Servlet implementation class processGetEmployeeServlet
  */
 @WebServlet("/ProcessAdminGetEmployeeServlet")
-public class ProcessAdminGetEmployeeServlet extends HttpServlet {
+public class ProcessAdminGetEmployeeServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
