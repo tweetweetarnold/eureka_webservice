@@ -58,6 +58,9 @@
 							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
 								aria-expanded="false" aria-controls="collapse${orderLoop.index}"
 							>
+								Order ID:
+								<c:out value="${order.foodOrderId}" />
+								-
 								<c:out value="${order.createDate}" />
 								<p style="float: right;">
 									<c:out value="${order.status}" />

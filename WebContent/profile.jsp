@@ -52,7 +52,7 @@
 
 				<div class="panel panel-info">
 					<div class="panel-heading">
-						<!-- 						<h3 class="panel-title">JOAN TAN</h3> -->
+						<h3 class="panel-title">User Profile</h3>
 					</div>
 
 					<div class="panel-body">

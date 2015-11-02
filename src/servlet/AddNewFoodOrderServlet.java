@@ -18,6 +18,7 @@ import model.FoodOrder;
 import model.FoodOrderItem;
 import value.StringValues;
 import controller.FoodOrderController;
+import dao.EmployeeDAO;
 
 /**
  * Servlet implementation class AddNewFoodOrder
@@ -79,6 +80,7 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 			System.out.println("New FoodOrder created");
 
 			employee.setAmountOwed(employee.getAmountOwed() + myFoodOrder.getTotalPrice());
+			EmployeeDAO.updateEmployee(employee);
 			System.out.println("Employee amount owed updated");
 
 			// Process new FoodOrder
