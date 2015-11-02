@@ -198,13 +198,18 @@ public class FoodOrderController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date laterDate = cal.getTime();
 		laterDate.setHours(10);
+		laterDate.setMinutes(0);
 		cal.add(Calendar.DATE, -1);
 		Date earlierDate = cal.getTime();
 		earlierDate.setHours(10);
-		Date fivePm = laterDate;
+		earlierDate.setMinutes(0);
+		System.out.println("earlier Later : "+ laterDate);
+		Date fivePm = new Date();
 		fivePm.setHours(17);
 		fivePm.setMinutes(00);
 		Date nowDate = new Date();
+		nowDate.setMinutes(0);
+		System.out.println("Later : " +laterDate);
 		if (nowDate.after(fivePm)) {
 			cal.setTime(laterDate);
 			cal.add(Calendar.DATE, +1);

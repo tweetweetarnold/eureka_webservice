@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.FoodOrderController;
 import controller.UserController;
 import model.Employee;
 import model.FoodOrder;
@@ -43,6 +45,9 @@ public class ProcessAdminGetEmployeeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
+		FoodOrderController foodOrderController = new FoodOrderController();
+		List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSet(username);
+		System.out.println(foodOrderList.size());
 		UserController userController = new UserController();
 		Employee employee = userController.retrieveEmployeeViaUsername(username);
 		RequestDispatcher rd = request.getRequestDispatcher("adminProfile.jsp");
@@ -50,9 +55,11 @@ public class ProcessAdminGetEmployeeServlet extends HttpServlet {
 		request.setAttribute("username", username);
 		request.setAttribute("email", employee.getEmail());
 		request.setAttribute("contactNumber", employee.getContactNo());
-		request.setAttribute("orderHistory", new ArrayList<FoodOrder>());
 		request.setAttribute("status", employee.getStatus());
+		request.setAttribute("orderHistory", foodOrderList);
 		request.setAttribute("amountOwed", employee.getAmountOwed());
+	
+		
 		rd.forward(request,response);
 	}
 

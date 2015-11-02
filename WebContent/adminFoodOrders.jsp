@@ -93,7 +93,7 @@
 						<tr>
 							<td rowspan=<%=listSize%>><%=++number%></td>
 							<td rowspan=<%=listSize%>><a
-								href="processAdminGetEmployeeServlet?username=<%=username%>"><%=username%></a></td>
+								href="ProcessAdminGetEmployeeServlet?username=<%=username%>"><%=username%></a></td>
 							<td><%=foodName%></td>
 							<td><%=foodOrderItemList.get(0).getQuantity()%></td>
 							<td><%=foodOrderItemList.get(0).getPrice()%></td>
