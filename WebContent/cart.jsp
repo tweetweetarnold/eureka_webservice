@@ -77,89 +77,99 @@
 					<div class="panel-body">
 
 						<c:set var="totalPrice" value="0" />
-						<%-- 						<c:set var="count" value="0" /> --%>
 
-						<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodItem" varStatus="loop">
-							<div class="row">
-								<div class="col-xs-2">
-									<img class="img-responsive" src="resources/img/img-chickencutlet.jpg">
-								</div>
-								<div class="col-xs-4 text-left">
-									<h4>
-										<strong>
-											<c:out value="${foodItem.food.name}" />
-										</strong>
-									</h4>
-									<ul>
-										<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen">
-											<li>
-												<small>
-													<c:out value="${modifierChosen.name}" />
-												</small>
-												<small style="float: right;">
-													<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />
-													+ $
-													<c:out value="${newModifierPrice}" />
-												</small>
-											</li>
-										</c:forEach>
-									</ul>
+						<c:choose>
+							<c:when test="${empty sessionScope.myFoodOrderItems}">
+								<p>Your cart is empty! Go and add some food!</p>
+							</c:when>
 
-									<!-- 									<h4> -->
-									<!-- 										<small>everyone loves chris</small> -->
-									<!-- 									</h4> -->
-								</div>
-								<div class="col-xs-6">
-									<div class="col-xs-6 text-right">
-										<h4>
-											<strong>
-												<fmt:formatNumber value="${foodItem.price}" var="price2" minFractionDigits="2" />
-												$
-												<c:out value="${price2}" />
-												<c:set value="${totalPrice + foodItem.priceString}" var="totalPrice" />
-											</strong>
-										</h4>
+							<c:otherwise>
+								<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodItem" varStatus="loop">
+									<div class="row">
+										<div class="col-xs-2">
+											<img class="img-responsive" src="${pageContext.request.contextPath}/ImageServlet?id=${foodItem.food.foodId}">
+										</div>
+										<div class="col-xs-4 text-left">
+											<h4>
+												<strong>
+													<c:out value="${foodItem.food.name}" />
+												</strong>
+											</h4>
+											<ul>
+												<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen">
+													<li>
+														<small>
+															<c:out value="${modifierChosen.name}" />
+														</small>
+														<small style="float: right;">
+															<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />
+															+ $
+															<c:out value="${newModifierPrice}" />
+														</small>
+													</li>
+												</c:forEach>
+											</ul>
+
+											<!-- 									<h4> -->
+											<!-- 										<small>everyone loves chris</small> -->
+											<!-- 									</h4> -->
+										</div>
+										<div class="col-xs-6">
+											<div class="col-xs-6 text-right">
+												<h4>
+													<strong>
+														<fmt:formatNumber value="${foodItem.price}" var="price2" minFractionDigits="2" />
+														$
+														<c:out value="${price2}" />
+														<c:set value="${totalPrice + foodItem.priceString}" var="totalPrice" />
+													</strong>
+												</h4>
+											</div>
+											<div class="col-xs-4">
+												<%-- 										<input type="text" class="form-control input-sm" value="${foodItem.quantity}"> --%>
+											</div>
+											<div class="col-xs-2">
+												<form action="DeleteFoodItemFromOrderItemsServlet">
+													<input type="hidden" id="foodPosition" name="foodPosition" value="${loop.index}" />
+													<button type="submit" class="btn btn-link btn-xs">
+														<span class="glyphicon glyphicon-trash"></span>
+													</button>
+												</form>
+											</div>
+										</div>
 									</div>
-									<div class="col-xs-4">
-										<%-- 										<input type="text" class="form-control input-sm" value="${foodItem.quantity}"> --%>
-									</div>
-									<div class="col-xs-2">
-										<form action="DeleteFoodItemFromOrderItemsServlet">
-											<input type="hidden" id="foodPosition" name="foodPosition" value="${loop.index}" />
-											<button type="submit" class="btn btn-link btn-xs">
-												<span class="glyphicon glyphicon-trash"></span>
-											</button>
-										</form>
-									</div>
-								</div>
-							</div>
-							<hr>
-						</c:forEach>
+									<hr>
+								</c:forEach>
+							</c:otherwise>
+
+						</c:choose>
 
 					</div>
 					<!-- panel body end -->
 
 
 					<!-- panel footer -->
-					<div class="panel-footer">
-						<div class="row text-center">
-							<div class="col-xs-9">
-								<fmt:formatNumber value="${totalPrice}" var="totalPrice2" minFractionDigits="2" />
-								<h4 class="text-right">
-									Total
-									<strong>
-										$
-										<c:out value="${totalPrice2}" />
-									</strong>
-								</h4>
-							</div>
-							<div class="col-xs-3">
-								<form action="AddNewFoodOrderServlet">
-									<button type="submit" class="btn btn-success btn-block">Check Out</button>
-								</form>
+					<c:if test="${not empty sessionScope.myFoodOrderItems}">
+						<div class="panel-footer">
+							<div class="row text-center">
+								<div class="col-xs-9">
+									<fmt:formatNumber value="${totalPrice}" var="totalPrice2" minFractionDigits="2" />
+									<h4 class="text-right">
+										Total Payable: 
+										<strong>
+											$
+											<c:out value="${totalPrice2}" />
+										</strong>
+									</h4>
+								</div>
+								<div class="col-xs-3">
+									<form action="AddNewFoodOrderServlet">
+										<button type="submit" class="btn btn-success btn-block">Check Out</button>
+									</form>
+								</div>
 							</div>
 						</div>
-					</div>
+					</c:if>
 					<!-- panel footer end -->
 					<br>
 

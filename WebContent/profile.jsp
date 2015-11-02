@@ -16,6 +16,7 @@
 
 <!-- Library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- JavaScript imports -->
 <script src="resources/js/jquery-1.11.3.js"></script>
@@ -43,7 +44,7 @@
 
 	<c:set value="${sessionScope.user}" var="user" />
 
-	<div class="container" style="margin-top: 100px;">
+	<div class="container" style="margin-top: 70px;">
 		<div class="row">
 			<div
 				class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad"
@@ -94,7 +95,9 @@
 									<strong>Current spending:</strong>
 								</td>
 								<td>
-									<c:out value="${user.amountOwed}" />
+									<fmt:formatNumber value="${user.amountOwed}" var="owedMoney" minFractionDigits="2" />
+									$
+									<c:out value="${owedMoney}" />
 								</td>
 							</tr>
 						</table>

@@ -63,11 +63,11 @@
 			</div>
 
 			<br>
-			<br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">
 				<font face="verdana">Register</font>
 			</button>
 
+			<br>
 			<div align="center">
 				<a href="login.jsp">Back to Login Page</a>
 			</div>
