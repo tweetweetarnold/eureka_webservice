@@ -104,9 +104,10 @@
 									<%
 										for (ModifierChosen mod : modifierList) {
 																					String modName = mod.getName();
+																					String modNameUnderscore = modName.replaceAll(" ", "_");
 									%>
 									<tr>
-										<td><%=modName%></td>
+										<td><%=resourceBundle.getString(modNameUnderscore)%></td>
 									</tr>
 									<%
 										}
