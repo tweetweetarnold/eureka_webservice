@@ -73,6 +73,10 @@
 							<!-- Button trigger modal -->
 							<button type="button" class="button" data-toggle="modal" data-target="#myModal${food.foodId}">
 								<c:out value="${food.name}" />
+								<br>
+								<fmt:formatNumber value="${food.price}" var="foodPrice2" minFractionDigits="2" />
+								$
+								<c:out value="${foodPrice2}" />
 							</button>
 
 							<!-- Modal -->

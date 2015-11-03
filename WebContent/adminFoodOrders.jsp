@@ -134,7 +134,7 @@
 	</div></div>
 	<div class="row center">
 	<div class="col-xs-3 center">
-		<form action="retrieveFoodOrdersServlet" method="post">
+		<form action="RetrieveFoodOrdersServlet" method="post">
 			<button type="submit"  class="btn btn-success btn-block">Go to print</button>
 		</form>
 </div></div>

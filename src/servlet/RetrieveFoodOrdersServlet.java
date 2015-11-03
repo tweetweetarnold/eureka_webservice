@@ -17,7 +17,7 @@ import model.FoodDisplayObject;
 /**
  * Servlet implementation class retrieveFoodOrdersServlet
  */
-@WebServlet("/retrieveFoodOrdersServlet")
+@WebServlet("/RetrieveFoodOrdersServlet")
 public class RetrieveFoodOrdersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
