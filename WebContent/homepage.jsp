@@ -66,13 +66,13 @@
 					</ol>
 					<div class="carousel-inner">
 						<div class="item active">
-							<img class="slide-image" src="resources/img/img-friedrice.jpg" alt="">
+							<img class="slide-image" src="resources/img/home-carousel/img-onion.jpg" alt="">
 						</div>
 						<div class="item">
-							<img class="slide-image" src="resources/img/img-noodles.jpg" alt="">
+							<img class="slide-image" src="resources/img/home-carousel/img-noodles.jpg" alt="">
 						</div>
 						<div class="item">
-							<img class="slide-image" src="resources/img/img-spaghetti.jpg" alt="">
+							<img class="slide-image" src="resources/img/home-carousel/img-spaghetti.jpg" alt="">
 						</div>
 					</div>
 					<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -110,7 +110,7 @@
 
 								<c:forEach items="${canteen.stallList}" var="stall" varStatus="stallLoop">
 									<div class="thumbnail">
-										<img src="resources/img/img-chickenRiceStall.jpg" alt="...">
+										<img src="resources/img/stall/img-chickenricestall.jpg" alt="...">
 										<div class="caption">
 											<a class="button" href='RenderStallFoodListServlet?stallId=${stall.stallId}'>
 												<c:out value="${stall.name}" />

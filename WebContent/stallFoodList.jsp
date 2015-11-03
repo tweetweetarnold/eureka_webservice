@@ -66,7 +66,8 @@
 
 				<c:forEach items="${sessionScope.stallFoodList}" var="food" varStatus="foodListLoop">
 					<div class="thumbnail">
-						<img src="${pageContext.request.contextPath}/ImageServlet?id=${food.foodId}" />
+						<%-- 						<img src="${pageContext.request.contextPath}/ImageServlet?id=${food.foodId}" /> --%>
+						<img id="image${foodListLoop.index}" onerror="onImageError(${foodListLoop.index})" src="${food.imageDirectory}">
 
 						<div class="caption">
 
@@ -178,6 +179,14 @@
 				'//www.google-analytics.com/analytics.js', 'ga');
 		ga('create', 'UA-68676403-1', 'auto');
 		ga('send', 'pageview');
+	</script>
+
+	<!-- image not found -->
+	<script>
+		function onImageError(num) {
+			var s1 = "image" + num.toString();
+			document.getElementById(s1).src = "resources/img/img-error.jpg";
+		}
 	</script>
 
 </body>

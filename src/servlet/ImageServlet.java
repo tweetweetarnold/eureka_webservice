@@ -32,15 +32,15 @@ public class ImageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("image/jpeg");
-
-		String input = (String) request.getParameter("id");
-		Integer id = Integer.parseInt(input);
-		FoodController foodController = new FoodController();
-		byte[] imageBytes = foodController.getFoodImage(id);
-		response.setContentLength(imageBytes.length);
-
-		response.getOutputStream().write(imageBytes);
+//		response.setContentType("image/jpeg");
+//
+//		String input = (String) request.getParameter("id");
+//		Integer id = Integer.parseInt(input);
+//		FoodController foodController = new FoodController();
+//		byte[] imageBytes = foodController.getFoodImage(id);
+//		response.setContentLength(imageBytes.length);
+//
+//		response.getOutputStream().write(imageBytes);
 	}
 
 	/**
