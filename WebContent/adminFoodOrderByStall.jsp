@@ -91,13 +91,13 @@
 						<%
 							double totalPrice = 0;
 
-																																	for (FoodOrderItem fOI : foodOrderItemList) {
-																																		String foodName = fOI.getFood().getName();
-																																		ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
-																																		int quantity = fDO.getQuantity(fOI);
-																																		double price = fOI.getPrice();
-																																		totalPrice += quantity * price;
-																																		ArrayList<String> userList = fDO.getUsernameList(fOI);
+								for (FoodOrderItem fOI : foodOrderItemList) {
+									String foodName = fOI.getFood().getName();
+									ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
+									int quantity = fDO.getQuantity(fOI);
+									double price = fOI.getPrice();
+									totalPrice += quantity * price;
+									ArrayList<String> userList = fDO.getUsernameList(fOI);
 						%>
 						<tr>
 							<td><%=foodName%></td>

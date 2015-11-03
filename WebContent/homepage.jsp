@@ -110,7 +110,7 @@
 
 								<c:forEach items="${canteen.stallList}" var="stall" varStatus="stallLoop">
 									<div class="thumbnail">
-										<img src="resources/img/stall/img-chickenricestall.jpg" onerror="onImageError(${stallLoop.index})"
+										<img src="${stall.imageDirectory}" onerror="onImageError(${stallLoop.index})"
 											id="image${stallLoop.index}"
 										>
 										<div class="caption">
