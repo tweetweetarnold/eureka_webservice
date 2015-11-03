@@ -60,7 +60,7 @@ public class RenderStallFoodListServlet extends HttpServlet {
 		
 //		try {
 			String stallId = request.getParameter("stallId");
-			System.out.println(stallId);
+			System.out.println("StallID: " + stallId);
 
 			Session session2 = MyConnection.getSession();
 			Stall s = StallDAO.getStall(Integer.parseInt(stallId));

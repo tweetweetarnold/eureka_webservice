@@ -72,7 +72,7 @@
 						<div class="caption">
 
 							<!-- Button trigger modal -->
-							<button type="button" class="button" data-toggle="modal" data-target="#myModal${food.foodId}">
+							<button type="button" class="button" data-toggle="modal" data-target="#myModal${food.foodId}" style="white-space: normal;">
 								<c:out value="${food.name}" />
 								<br>
 								<fmt:formatNumber value="${food.price}" var="foodPrice2" minFractionDigits="2" />

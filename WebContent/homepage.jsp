@@ -110,13 +110,13 @@
 
 								<c:forEach items="${canteen.stallList}" var="stall" varStatus="stallLoop">
 									<div class="thumbnail">
-										<img src="${stall.imageDirectory}" onerror="onImageError(${stallLoop.index})"
-											id="image${stallLoop.index}"
-										>
+										<img src="${stall.imageDirectory}" onerror="onImageError(${stallLoop.index})" id="image${stallLoop.index}">
 										<div class="caption">
-											<a class="button" href='RenderStallFoodListServlet?stallId=${stall.stallId}'>
-												<c:out value="${stall.name}" />
-											</a>
+											<form method="post" action="RenderStallFoodListServlet?stallId=${stall.stallId}">
+												<button class="button" style="white-space: normal;">
+													<c:out value="${stall.name}" />
+												</button>
+											</form>
 										</div>
 									</div>
 								</c:forEach>
