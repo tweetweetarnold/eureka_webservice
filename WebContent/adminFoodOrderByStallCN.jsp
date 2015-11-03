@@ -57,8 +57,8 @@
 	%>
 	<div class="row center">
 		<div class="col-xs-3 center">
-			<form action="ChineseRetrieveFoodOrderServlet" method="post">
-				<button type="submit" class="btn btn-success btn-block">Get Chinese Food Names</button>
+			<form action="RetrieveFoodOrdersServlet" method="post">
+				<button type="submit" class="btn btn-success btn-block">Get English Food Names</button>
 			</form>
 		</div>
 	</div>
