@@ -25,6 +25,7 @@ public class Stall {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "canteenId")
 	private Canteen canteen;
+	private String imageDirectory;
 	private Date createDate;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "stall")
 	private Set<Food> foodList;
@@ -32,13 +33,23 @@ public class Stall {
 	public Stall() {
 	}
 
-	public Stall(String name, long contactNo, Canteen canteen, Set<Food> foodList) {
+	public Stall(String name, long contactNo, Canteen canteen, Set<Food> foodList,
+			String imageDirectory) {
 		super();
 		this.name = name;
 		this.contactNo = contactNo;
+		this.imageDirectory = imageDirectory;
 		this.canteen = canteen;
 		this.createDate = new Date();
 		this.foodList = foodList;
+	}
+
+	public String getImageDirectory() {
+		return imageDirectory;
+	}
+
+	public void setImageDirectory(String imageDirectory) {
+		this.imageDirectory = imageDirectory;
 	}
 
 	public int getStallId() {
