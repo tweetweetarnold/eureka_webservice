@@ -23,16 +23,11 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <script src="resources/js/jquery-1.11.3.js"></script>
-<!-- <script src="resources/js/jquery-1.11.3.min.js"></script> -->
 <script src="resources/js/dabao/dabao.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
 
 <link href="resources/css/dabao/dabao.css" rel="stylesheet">
-<!-- <link href="resources/css/bootstap.min.css" rel="stylesheet"> -->
 <link href="resources/css/dabao/starter-template.css" rel="stylesheet">
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -43,30 +38,30 @@
 </head>
 
 <body>
-<nav class="navbar navbar-default navbar-static-top" role="navigation"
-	style="margin-bottom: 0"> <jsp:include
-	page="headerfooter/adminHeader.jsp" /> </nav>
+
+	<!-- header -->
+	<jsp:include page="headerfooter/adminHeader.jsp" />
 
 
-	<div class="container">
+	<div class="container" style="margin-top: 50px;"" >
 		<div class="row center">
-			<div class="col-xs-10 col center"">
-				<div class="panel panel-default">
+			<div class="col-xs-10 col center" style="float: none;">
+				<div class="panel panel-default" style="float: none;">
 
 					<div class="panel-heading">
-						<%
-							if (request.getAttribute("NoOrders") == null) {
-								if (request.getAttribute("foodOrders") != null) {
-									JSONObject foodOrders = (JSONObject) request.getAttribute("foodOrders");
-									Iterator iter = foodOrders.keySet().iterator();
-									out.println("Number of people " + (foodOrders.size() - 1));
-						%>
+						<div class="panel-title">
+							<%
+								if (request.getAttribute("NoOrders") == null) {
+														DecimalFormat df2 = new DecimalFormat("####0.00");
+														if (request.getAttribute("foodOrders") != null) {
+															JSONObject foodOrders = (JSONObject) request.getAttribute("foodOrders");
+															Iterator iter = foodOrders.keySet().iterator();
+															out.println("Number of people: " + (foodOrders.size() - 1));
+							%>
+						</div>
 					</div>
 
-
-
 					<table class="table table-striped">
-
 
 						<tr>
 							<th>Number</th>
@@ -80,20 +75,21 @@
 						%>
 						<%
 							double totalPrice = 0.0;
-									int listSize = 0;
-									int number = 0;
-									while (iter.hasNext()) {
-										String username = (String) iter.next();
-										if (!username.equals("totalPrice")) {
-											ArrayList<FoodOrderItem> foodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
-													.get(username);
-											listSize = foodOrderItemList.size();
-											String foodName = foodOrderItemList.get(0).getFood().getName();
+															int listSize = 0;
+															int number = 0;
+															while (iter.hasNext()) {
+																String username = (String) iter.next();
+																if (!username.equals("totalPrice")) {
+																	ArrayList<FoodOrderItem> foodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
+																			.get(username);
+																	listSize = foodOrderItemList.size();
+																	String foodName = foodOrderItemList.get(0).getFood().getName();
 						%>
 						<tr>
 							<td rowspan=<%=listSize%>><%=++number%></td>
-							<td rowspan=<%=listSize%>><a
-								href="ProcessAdminGetEmployeeServlet?username=<%=username%>"><%=username%></a></td>
+							<td rowspan=<%=listSize%>>
+								<a href="ProcessAdminGetEmployeeServlet?username=<%=username%>"><%=username%></a>
+							</td>
 							<td><%=foodName%></td>
 							<td><%=foodOrderItemList.get(0).getQuantity()%></td>
 							<td><%=foodOrderItemList.get(0).getPrice()%></td>
@@ -101,23 +97,23 @@
 						<tr>
 							<%
 								for (int i = 1; i < listSize; i++) {
-													FoodOrderItem tempItem = foodOrderItemList.get(i);
-													foodName = tempItem.getFood().getName();
-													int quantity = tempItem.getQuantity();
-													double price = tempItem.getPrice();
+														FoodOrderItem tempItem = foodOrderItemList.get(i);
+														foodName = tempItem.getFood().getName();
+														int quantity = tempItem.getQuantity();
+														double price = tempItem.getPrice();
 							%>
 							<td><%=foodName%></td>
 							<td><%=quantity%></td>
-							<td><%=price%></td>
+							<td><%=df2.format(price)%></td>
 
 						</tr>
 						<%
 							}
-										} else {
-											// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
-											totalPrice = (Double) foodOrders.get(username);
-										}
-									}
+												} else {
+													// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
+													totalPrice = (Double) foodOrders.get(username);
+												}
+											}
 						%>
 					</table>
 				</div>
@@ -128,17 +124,23 @@
 		DecimalFormat df = new DecimalFormat("####0.00");
 	%>
 	</div>
+
+
+
 	<div class="row center">
-			<div class="col-xs-10 col center"">
-	<h3>Total Price : $<%=df.format(totalPrice)%></h3>
-	</div></div>
-	<div class="row center">
-	<div class="col-xs-3 center">
-		<form action="RetrieveFoodOrdersServlet" method="post">
-			<button type="submit"  class="btn btn-success btn-block">Go to print</button>
-		</form>
-</div></div>
-	
+		<div class="col-xs-10 col center" style="float: none;">
+			<h3>
+				Total Price : $<%=df.format(totalPrice)%></h3>
+		</div>
+	</div>
+	<div class="row center" style="">
+		<div class="col-xs-3 center" style="float: none;">
+			<form action="RetrieveFoodOrdersServlet" method="post">
+				<button style="margin: 0px, auto;" type="submit" class="btn btn-lg btn-success btn-block">Go to print</button>
+			</form>
+		</div>
+	</div>
+
 
 	<%
 		}
@@ -150,7 +152,7 @@
 		}
 	%>
 
-	
+
 
 
 

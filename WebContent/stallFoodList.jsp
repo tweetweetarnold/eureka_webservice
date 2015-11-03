@@ -181,13 +181,8 @@
 		ga('send', 'pageview');
 	</script>
 
-	<!-- image not found -->
-	<script>
-		function onImageError(num) {
-			var s1 = "image" + num.toString();
-			document.getElementById(s1).src = "resources/img/img-error.jpg";
-		}
-	</script>
+	<!-- no image error -->
+	<script src="resources/js/myerrors.js"></script>
 
 </body>
 </html>

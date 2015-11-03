@@ -53,9 +53,9 @@
 			.getAttribute("foodOrders");
 	%>
 	<div class="row center">
-		<div class="col-xs-3 center">
+		<div class="col-xs-3 center" style="float: right;">
 			<form action="ChineseRetrieveFoodOrderServlet" method="post">
-				<button type="submit" class="btn btn-success btn-block">Get Chinese Food Names</button>
+				<button type="submit" class="btn btn-lg btn-success btn-block">Change to Chinese</button>
 			</form>
 		</div>
 	</div>
@@ -74,7 +74,10 @@
 
 					<div class="panel-heading">
 						<h4 class="panel-title">
-							<%=stallName  + "          " + foodOrderItemList.get(0).getFood().getStall().getContactNo()%>
+							<%=stallName%>
+							<div style="float: right;">
+								<%=foodOrderItemList.get(0).getFood().getStall().getContactNo()%>
+							</div>
 						</h4>
 					</div>
 					<table class="table table-striped">
@@ -88,13 +91,13 @@
 						<%
 							double totalPrice = 0;
 
-																									for (FoodOrderItem fOI : foodOrderItemList) {
-																										String foodName = fOI.getFood().getName();
-																										ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
-																										int quantity = fDO.getQuantity(fOI);
-																										double price = fOI.getPrice();
-																										totalPrice += quantity * price;
-																										ArrayList<String> userList = fDO.getUsernameList(fOI);
+																																	for (FoodOrderItem fOI : foodOrderItemList) {
+																																		String foodName = fOI.getFood().getName();
+																																		ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
+																																		int quantity = fDO.getQuantity(fOI);
+																																		double price = fOI.getPrice();
+																																		totalPrice += quantity * price;
+																																		ArrayList<String> userList = fDO.getUsernameList(fOI);
 						%>
 						<tr>
 							<td><%=foodName%></td>
@@ -102,7 +105,7 @@
 								<table>
 									<%
 										for (ModifierChosen mod : modifierList) {
-																																										String modName = mod.getName();
+																																																								String modName = mod.getName();
 									%>
 									<tr>
 										<td><%=modName%></td>

@@ -110,7 +110,9 @@
 
 								<c:forEach items="${canteen.stallList}" var="stall" varStatus="stallLoop">
 									<div class="thumbnail">
-										<img src="resources/img/stall/img-chickenricestall.jpg" alt="...">
+										<img src="resources/img/stall/img-chickenricestall.jpg" onerror="onImageError(${stallLoop.index})"
+											id="image${stallLoop.index}"
+										>
 										<div class="caption">
 											<a class="button" href='RenderStallFoodListServlet?stallId=${stall.stallId}'>
 												<c:out value="${stall.name}" />
@@ -165,6 +167,9 @@
 		ga('create', 'UA-68676403-1', 'auto');
 		ga('send', 'pageview');
 	</script>
+
+	<!-- no image error -->
+	<script src="resources/js/myerrors.js"></script>
 
 
 </body>
