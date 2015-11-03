@@ -87,7 +87,9 @@
 								<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodItem" varStatus="loop">
 									<div class="row">
 										<div class="col-xs-2">
-											<img class="img-responsive" src="${pageContext.request.contextPath}/ImageServlet?id=${foodItem.food.foodId}">
+											<img class="img-responsive" id="image${loop.index}" onerror="onImageError(${loop.index})"
+												src="${foodItem.food.imageDirectory}"
+											>
 										</div>
 										<div class="col-xs-4 text-left">
 											<h4>
@@ -155,7 +157,7 @@
 								<div class="col-xs-9">
 									<fmt:formatNumber value="${totalPrice}" var="totalPrice2" minFractionDigits="2" />
 									<h4 class="text-right">
-										Total Payable: 
+										Total Payable:
 										<strong>
 											$
 											<c:out value="${totalPrice2}" />
@@ -227,6 +229,9 @@
 		ga('create', 'UA-68676403-1', 'auto');
 		ga('send', 'pageview');
 	</script>
+
+	<!-- no image error -->
+	<script src="resources/js/myerrors.js"></script>
 
 
 </body>

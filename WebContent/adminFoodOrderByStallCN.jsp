@@ -46,13 +46,14 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-default navbar-static-top" role="navigation"
-	style="margin-bottom: 0"> <jsp:include
-	page="headerfooter/adminHeader.jsp" /> </nav>
+	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+		<jsp:include page="headerfooter/adminHeader.jsp" />
+	</nav>
 	<%
 		if (request.getAttribute("foodOrders") != null) {
-		ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
-				.getAttribute("foodOrders");
+		DecimalFormat df2 = new DecimalFormat("####0.00");
+			ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
+			.getAttribute("foodOrders");
 	%>
 	<div class="row center">
 		<div class="col-xs-3 center">
@@ -65,8 +66,8 @@
 
 	<%
 		for (FoodDisplayObject fDO : foodDisplayObjectList) {
-			String stallName = fDO.getStallName();
-			ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
+		String stallName = fDO.getStallName();
+		ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
 	%>
 	</br>
 	<div class="container">
@@ -75,7 +76,10 @@
 				<div class="panel panel-default">
 
 					<div class="panel-heading">
-						<%=stallName + "          " + foodOrderItemList.get(0).getFood().getStall().getContactNo()%> 
+						<%=stallName%>
+						<div style="float: right;">
+							<%=foodOrderItemList.get(0).getFood().getStall().getContactNo()%>
+						</div>
 					</div>
 					<table class="table table-striped">
 						<tr>
@@ -88,14 +92,14 @@
 						<%
 							double totalPrice = 0;
 
-													for (FoodOrderItem fOI : foodOrderItemList) {
-														String foodName = fOI.getFood().getName();
-														String foodNameUnderscore = foodName.replaceAll(" ", "_");
-														ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
-														int quantity = fDO.getQuantity(fOI);
-														double price = fOI.getPrice();
-														totalPrice += quantity * price;
-														ArrayList<String> userList = fDO.getUsernameList(fOI);
+																	for (FoodOrderItem fOI : foodOrderItemList) {
+																		String foodName = fOI.getFood().getName();
+																		String foodNameUnderscore = foodName.replaceAll(" ", "_");
+																		ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
+																		int quantity = fDO.getQuantity(fOI);
+																		double price = fOI.getPrice();
+																		totalPrice += quantity * price;
+																		ArrayList<String> userList = fDO.getUsernameList(fOI);
 						%>
 						<tr>
 							<td><%=resourceBundle.getString(foodNameUnderscore)%></td>
@@ -103,8 +107,8 @@
 								<table>
 									<%
 										for (ModifierChosen mod : modifierList) {
-																					String modName = mod.getName();
-																					String modNameUnderscore = modName.replaceAll(" ", "_");
+																												String modName = mod.getName();
+																												String modNameUnderscore = modName.replaceAll(" ", "_");
 									%>
 									<tr>
 										<td><%=resourceBundle.getString(modNameUnderscore)%></td>
@@ -115,7 +119,8 @@
 								</table>
 							</td>
 							<td><%=quantity%></td>
-							<td><%=price%></td>
+							<td>
+								$<%=df2.format(price)%></td>
 
 							<td>
 								<table>
@@ -141,7 +146,8 @@
 					<%
 						DecimalFormat df = new DecimalFormat("####0.00");
 					%>
-					<h3>Total Price : $<%=df.format(totalPrice)%></h3>
+					<h3>
+						Total Price : $<%=df.format(totalPrice)%></h3>
 				</div>
 			</div>
 
