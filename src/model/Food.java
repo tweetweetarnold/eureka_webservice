@@ -26,8 +26,9 @@ public class Food {
 	private String name;
 	private String description;
 	private double price;
-	@Column(columnDefinition="longblob")
-	private byte[] image;
+	// @Column(columnDefinition="longblob")
+	// private byte[] image;
+	private String imageDir;
 	private Date createDate;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "stallId")
@@ -38,23 +39,23 @@ public class Food {
 	public Food() {
 	}
 
-	public Food(String name, String description, double price, byte[] image, Stall stall) {
+	public Food(String name, String description, double price, String imageDir, Stall stall) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.stall = stall;
-		this.image = image;
+		this.imageDir = imageDir;
 		this.createDate = new Date();
 		this.modifierList = new HashSet<>();
 	}
 
-	public byte[] getImage() {
-		return image;
+	public String getImageDir() {
+		return imageDir;
 	}
 
-	public void setImage(byte[] image) {
-		this.image = image;
+	public void setImageDir(String imageDir) {
+		this.imageDir = imageDir;
 	}
 
 	public int getFoodId() {

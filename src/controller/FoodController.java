@@ -5,8 +5,8 @@ import dao.FoodDAO;
 
 public class FoodController {
 
-	public byte[] getFoodImage(int id) {
-		return FoodDAO.getFood(id).getImage();
+	public String getImageDirectory(int id) {
+		return FoodDAO.getFood(id).getImageDir();
 	}
 
 	public Food getFood(int id) {
