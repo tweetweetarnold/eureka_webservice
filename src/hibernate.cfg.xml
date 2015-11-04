@@ -9,8 +9,8 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.url">jdbc:mysql://127.11.104.130:3306/eureka</property>
-		<property name="hibernate.connection.username">admin8wf2nLK</property>
-		<property name="hibernate.connection.password">7Dnx-K5zVUTC</property>
+		<property name="hibernate.connection.username">adminQiabME6</property>
+		<property name="hibernate.connection.password">DD4GXYy1UBW5</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.pool_size">1</property>
 		<property name="hibernate.connection.autocommit">false</property>
