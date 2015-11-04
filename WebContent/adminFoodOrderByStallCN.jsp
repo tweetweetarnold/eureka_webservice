@@ -49,14 +49,14 @@
 	<jsp:include page="headerfooter/adminHeader.jsp" />
 	<%
 		if (request.getAttribute("foodOrders") != null) {
-		DecimalFormat df2 = new DecimalFormat("####0.00");
-			ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
-			.getAttribute("foodOrders");
+			DecimalFormat df2 = new DecimalFormat("####0.00");
+		ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
+		.getAttribute("foodOrders");
 	%>
 	<div class="row center">
 		<div class="col-xs-3 center" style="float: right;">
 			<form action="RetrieveFoodOrdersServlet" method="post">
-				<button type="submit" class="btn btn-lg btn-success btn-block"><%=resourceBundle.getString("Translate_to_English")%>
+				<button type="submit" class="btn btn-lg btn-success btn-block"><%=resourceBundle.getString("translate_to_english")%>
 				</button>
 			</form>
 		</div>
@@ -65,8 +65,8 @@
 
 	<%
 		for (FoodDisplayObject fDO : foodDisplayObjectList) {
-		String stallName = fDO.getStallName();
-		ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
+			String stallName = fDO.getStallName();
+			ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
 	%>
 	</br>
 	<div class="container">
@@ -84,23 +84,23 @@
 					</div>
 					<table class="table table-striped">
 						<tr>
-							<th>food</th>
+							<th><%=resourceBundle.getString("food")%></th>
 							<th>addons</th>
-							<th style="text-align: center;">quantity</th>
-							<th style="text-align: center;">price</th>
-							<th>users</th>
+							<th style="text-align: center;"><%=resourceBundle.getString("quantity")%></th>
+							<th style="text-align: center;"><%=resourceBundle.getString("price")%></th>
+							<th><%=resourceBundle.getString("user")%></th>
 						</tr>
 						<%
 							double totalPrice = 0;
 
-																for (FoodOrderItem fOI : foodOrderItemList) {
-																	String foodName = fOI.getFood().getName();
-																	String foodNameUnderscore = foodName.replaceAll(" ", "_");
-																	ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
-																	int quantity = fDO.getQuantity(fOI);
-																	double price = fOI.getPrice();
-																	totalPrice += quantity * price;
-																	ArrayList<String> userList = fDO.getUsernameList(fOI);
+																				for (FoodOrderItem fOI : foodOrderItemList) {
+																					String foodName = fOI.getFood().getName();
+																					String foodNameUnderscore = foodName.replaceAll(" ", "_");
+																					ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
+																					int quantity = fDO.getQuantity(fOI);
+																					double price = fOI.getPrice();
+																					totalPrice += quantity * price;
+																					ArrayList<String> userList = fDO.getUsernameList(fOI);
 						%>
 						<tr>
 							<td style="text-align: left;"><%=resourceBundle.getString(foodNameUnderscore)%></td>
@@ -108,8 +108,8 @@
 								<table>
 									<%
 										for (ModifierChosen mod : modifierList) {
-																																String modName = mod.getName();
-																																String modNameUnderscore = modName.replaceAll(" ", "_");
+																																							String modName = mod.getName();
+																																							String modNameUnderscore = modName.replaceAll(" ", "_");
 									%>
 									<tr>
 										<td><%=resourceBundle.getString(modNameUnderscore)%></td>
@@ -148,7 +148,8 @@
 						DecimalFormat df = new DecimalFormat("####0.00");
 					%>
 					<h3>
-						Total Price : $<%=df.format(totalPrice)%></h3>
+						<%=resourceBundle.getString("total_price")%>
+						: $<%=df.format(totalPrice)%></h3>
 				</div>
 			</div>
 
