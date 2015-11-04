@@ -50,7 +50,7 @@ public class ProcessLogoutServlet extends HttpServlet {
 		
 		System.out.println("ProcessLogoutServlet");
 		
-//		MyConnection.closeAll();
+		MyConnection.closeSessionFactory();
 		HttpSession session = request.getSession();
 		session.invalidate();
 		response.sendRedirect("login.jsp");

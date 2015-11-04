@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import model.Admin;
 import model.Company;
 import model.Employee;
 import model.FoodOrder;
@@ -255,26 +254,14 @@ public class MyConnection {
 		return list;
 	}
 
-	// public static List<Object> getEmployee(String sql) {
-	// Session session = getSession();
-	// session.beginTransaction();
-	// // Criteria criteria = dc.getExecutableCriteria(session);
-	// Query query = session.createSQLQuery(sql).addEntity(Employee.class);
-	// List<Object> list = (List<Object>) query.list();
-	// session.getTransaction().commit();
-	// session.close();
-	// return list;
-	// }
-	//
-	// public static List<Object> getAdmin(String sql) {
-	// Session session = getSession();
-	// session.beginTransaction();
-	// // Criteria criteria = dc.getExecutableCriteria(session);
-	// Query query = session.createSQLQuery(sql).addEntity(Admin.class);
-	// List<Object> list = (List<Object>) query.list();
-	// session.getTransaction().commit();
-	// session.close();
-	// return list;
-	// }
+	public static void closeSessionFactory() {
+		try {
+			sessionFactory.getCurrentSession().close();
+			sessionFactory.close();
+			System.out.println("SessionFactory is closed.");
+		} catch (Exception e) {
+			System.out.println("SessionFactory is already closed.");
+		}
+	}
 
 }

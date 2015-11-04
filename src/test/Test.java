@@ -282,10 +282,10 @@ public class Test {
 
 		Stall kuehStall = new Stall("Oasis Kueh Stall", 90685620, canteen1, null,
 				"resources/img/stall/img-oasiskuehstall.jpg");
-		Food kuehfood1 = new Food("Chee Cheong Fun", "", 0.60, null, kuehStall);
+		Food kuehfood1 = new Food("Chee Cheong Fun", "", 0.60, "resources/img/food/img-cheecheongfun.jpg", kuehStall);
 		Food kuehfood2 = new Food("Yam cake", "", 1.20, "resources/img/food/img-yamcake.jpg",
 				kuehStall);
-		Food kuehfood3 = new Food("Dumpling", "", 0.90, "resources/img/food/img-dumpling.jpg",
+		Food kuehfood3 = new Food("Dumpling", "", 0.90, "resources/img/food/img-dumpling.png",
 				kuehStall);
 		Food kuehfood4 = new Food("Pau", "", 0.80, "resources/img/food/img-pau.jpg", kuehStall);
 		Food kuehfood5 = new Food("Lor Mai Kai", "", 1.50, "resources/img/food/img-lormaikai.jpg",
@@ -382,7 +382,7 @@ public class Test {
 		chineseMixVegStall.setFoodList(foodList4);
 
 		Stall roastMeatStall = new Stall("Roast Meat Stall", 123, canteen1, null, "resources/img/stall/img-roastmeatstall.jpg");
-		Food roastfood1 = new Food("Roast Chicken Rice", "2 meat choices $4", 3.00, null,
+		Food roastfood1 = new Food("Roast Chicken Rice", "2 meat choices $4", 3.00, "resources/img/food/img-roastchickenrice.jpg",
 				roastMeatStall);
 		Food roastfood2 = new Food("Wanton Mee", "", 3.20, "resources/img/food/img-wantonmee.jpg",
 				roastMeatStall);
