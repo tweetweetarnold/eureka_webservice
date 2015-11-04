@@ -360,7 +360,7 @@ public class Test {
 		foodList3.add(infood3);
 		indianStall.setFoodList(foodList3);
 
-		Stall chineseMixVegStall = new Stall("Oasis Chinese Mix Veg Stall", 93848341, canteen1,
+		Stall chineseMixVegStall = new Stall("Chinese Mix Veg Stall", 93848341, canteen1,
 				null, "resources/img/stall/img-oasischinesemixvegstall.jpg");
 		Food mixVegRice1 = new Food("Mix Veg Rice",
 				"ask for more meat, less fried meat, or upsize to $3.50", 3.00,
@@ -431,7 +431,7 @@ public class Test {
 				"resources/img/food/img-horfun.jpg", seafoodTzeCharStall);
 		Food seafood2 = new Food("Fried Rice", "", 4.00, "resources/img/food/img-friedrice.jpg",
 				seafoodTzeCharStall);
-		Food seafood3 = new Food("Daily Soup With Rice And Egg", "", 4.80,
+		Food seafood3 = new Food("Soup With Rice And Egg", "", 4.80,
 				"resources/img/food/img-dailysoupwithriceandegg.jpg", seafoodTzeCharStall);
 		Food seafood4 = new Food("Hokkien Noodle", "", 4.20,
 				"resources/img/food/img-hokkiennoodle.jpg", seafoodTzeCharStall);

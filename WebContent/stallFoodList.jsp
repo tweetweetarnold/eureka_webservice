@@ -72,7 +72,9 @@
 						<div class="caption">
 
 							<!-- Button trigger modal -->
-							<button type="button" class="button" data-toggle="modal" data-target="#myModal${food.foodId}" style="white-space: normal;">
+							<button type="button" class="button" data-toggle="modal" data-target="#myModal${food.foodId}"
+								style="white-space: normal;"
+							>
 								<c:out value="${food.name}" />
 								<br>
 								<fmt:formatNumber value="${food.price}" var="foodPrice2" minFractionDigits="2" />
@@ -99,31 +101,41 @@
 												<table class="table table-striped">
 													<thead>
 														<tr>
-															<th>S/N</th>
+															<th style="text-align: center;">S/N</th>
 															<th>Modifier</th>
 															<th>Price</th>
 															<th>Add</th>
 														</tr>
 													</thead>
 													<tbody>
-														<c:forEach varStatus="loop" items="${food.modifierList}" var="modifier">
-															<tr>
-																<td>
-																	<c:out value="${loop.index + 1}" />
-																</td>
-																<td>
-																	<c:out value="${modifier.name}" />
-																</td>
-																<td>
-																	<fmt:formatNumber value="${modifier.price}" var="modPrice" minFractionDigits="2" />
-																	+ $
-																	<c:out value="${modPrice}" />
-																</td>
-																<td>
-																	<input type="checkbox" value="true" name="${modifier.name}">
-																</td>
-															</tr>
-														</c:forEach>
+														<c:choose>
+															<c:when test="${not empty food.modifierList}">
+																<c:forEach varStatus="loop" items="${food.modifierList}" var="modifier">
+																	<tr>
+																		<td style="text-align: center;">
+																			<c:out value="${loop.index + 1}" />
+																		</td>
+																		<td style="text-align: left;">
+																			<c:out value="${modifier.name}" />
+																		</td>
+																		<td style="text-align: left;">
+																			<fmt:formatNumber value="${modifier.price}" var="modPrice" minFractionDigits="2" />
+																			+ $
+																			<c:out value="${modPrice}" />
+																		</td>
+																		<td style="text-align: center;">
+																			<input type="checkbox" value="true" name="${modifier.name}">
+																		</td>
+																	</tr>
+																</c:forEach>
+															</c:when>
+															<c:otherwise>
+																<tr>
+																	<td colspan="4">No modifiers available</td>
+																</tr>
+															</c:otherwise>
+														</c:choose>
+
 													</tbody>
 
 												</table>

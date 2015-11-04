@@ -102,6 +102,8 @@ public class ProcessLoginServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			System.out.println("Exception thrown. Incorrect credentials.");
+			System.out.println("Exception message: " + e.getMessage());
+			e.printStackTrace();
 			session.setAttribute("username", username);
 			session.setAttribute("error", "Something went wrong! Please check your credentials.");
 			response.sendRedirect("login.jsp");

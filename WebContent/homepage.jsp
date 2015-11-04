@@ -86,6 +86,16 @@
 		<!-- JSTL get variables -->
 		<c:set value="${sessionScope.canteenList}" var="canteenList" />
 
+		<!-- Success message handling -->
+		<c:if test="${not empty sessionScope.success}">
+			<div class="alert alert-success" role="alert">
+				<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+				<span class="sr-only">Success:</span>
+				<c:out value="${success}" />
+			</div>
+			<c:remove var="success" scope="session" />
+		</c:if>
+
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 			<!-- Per canteen -->
@@ -139,13 +149,6 @@
 	<!-- 	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
 
 
-	<!-- item has been added to cart alert -->
-	<c:if test="${not empty sessionScope.success}">
-		<script>
-			alert("Item has been added to cart");
-		</script>
-		<c:remove var="success" scope="session" />
-	</c:if>
 
 	<!-- Google Analytics -->
 	<script>
