@@ -53,14 +53,21 @@ public class RenderOrderHistoryServlet extends HttpServlet {
 		response.setContentType("text/html");
 
 		HttpSession session = request.getSession();
-		Employee emp = (Employee) session.getAttribute("user");
+		try {
+			Employee emp = (Employee) session.getAttribute("user");
 
-		FoodOrderController foodOrderController = new FoodOrderController();
-		List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSet(emp.getUsername());
-		System.out.println(foodOrderList.size());
+			FoodOrderController foodOrderController = new FoodOrderController();
+			List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSet(emp.getUsername());
+			System.out.println(foodOrderList.size());
 
-		session.setAttribute("orderHistory", foodOrderList);
-		response.sendRedirect("orderHistory.jsp");
+			session.setAttribute("orderHistory", foodOrderList);
+			response.sendRedirect("orderHistory.jsp");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error msg: " + e.getMessage());
+			session.setAttribute("error", "Something went wrong");
+			response.sendRedirect("homepage.jsp");
+		}
 
 	}
 

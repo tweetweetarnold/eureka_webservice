@@ -52,13 +52,20 @@ public class RenderProfileServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		HttpSession session = request.getSession();
-		Employee emp = (Employee) session.getAttribute("user");
-		String username = emp.getUsername();
 
-		emp = EmployeeDAO.getEmployeeByUsername(username);
-		session.setAttribute("user", emp);
+		try {
+			Employee emp = (Employee) session.getAttribute("user");
+			String username = emp.getUsername();
 
-		response.sendRedirect("profile.jsp");
+			emp = EmployeeDAO.getEmployeeByUsername(username);
+			session.setAttribute("user", emp);
+
+			response.sendRedirect("profile.jsp");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error: " + e.getMessage());
+			session.setAttribute("error", "Something went wrong!");
+			response.sendRedirect("homepage.jsp");
+		}
 	}
-
 }

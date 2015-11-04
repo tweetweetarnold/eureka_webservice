@@ -96,6 +96,16 @@
 			<c:remove var="success" scope="session" />
 		</c:if>
 
+		<!-- Error message handling -->
+		<c:if test="${not empty sessionScope.error}">
+			<div class="alert alert-danger" role="alert">
+				<b>Error!</b>
+				<br>
+				<c:out value="${error}" />
+			</div>
+			<c:remove var="error" scope="session" />
+		</c:if>
+
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 			<!-- Per canteen -->

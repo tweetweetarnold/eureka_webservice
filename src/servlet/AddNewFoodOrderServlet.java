@@ -97,6 +97,11 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 		} catch (NullPointerException e) {
 			session.setAttribute("error", "Add an item to cart to checkout");
 			response.sendRedirect("cart.jsp");
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+			session.setAttribute("error", "Soemthing went wrong");
+			response.sendRedirect("homepage,jsp");
 		}
 
 	}
