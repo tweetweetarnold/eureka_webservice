@@ -44,6 +44,16 @@
 
 
 	<div class="container" style="margin-top: 50px;"" >
+
+		<div class="row center" style="">
+			<div class="col-xs-3 center" style="float: none;">
+				<form action="RetrieveFoodOrdersServlet" method="post">
+					<button style="margin: 0px, auto;" type="submit" class="btn btn-lg btn-success btn-block">Group by stalls</button>
+				</form>
+			</div>
+		</div>
+		
+		<br><br>
 		<div class="row center">
 			<div class="col-xs-10 col center" style="float: none;">
 				<div class="panel panel-default" style="float: none;">
@@ -52,11 +62,11 @@
 						<div class="panel-title">
 							<%
 								if (request.getAttribute("NoOrders") == null) {
-														DecimalFormat df2 = new DecimalFormat("####0.00");
-														if (request.getAttribute("foodOrders") != null) {
-															JSONObject foodOrders = (JSONObject) request.getAttribute("foodOrders");
-															Iterator iter = foodOrders.keySet().iterator();
-															out.println("Number of people: " + (foodOrders.size() - 1));
+																																		
+																			if (request.getAttribute("foodOrders") != null) {
+																				JSONObject foodOrders = (JSONObject) request.getAttribute("foodOrders");
+																				Iterator iter = foodOrders.keySet().iterator();
+																				out.println("Number of people: " + (foodOrders.size() - 1));
 							%>
 						</div>
 					</div>
@@ -64,56 +74,60 @@
 					<table class="table table-striped">
 
 						<tr>
-							<th>Number</th>
-							<th>Name</th>
-							<th>Items</th>
-							<th>Quantity</th>
-							<th>Price</th>
+							<th style="text-align: center;">Number</th>
+							<th style="text-align: left;">Name</th>
+							<th style="text-align: left;">Items</th>
+							<th style="text-align: center;">Quantity</th>
+							<th style="text-align: center;">Price</th>
 						</tr>
 						<%
 							
 						%>
 						<%
 							double totalPrice = 0.0;
-															int listSize = 0;
-															int number = 0;
-															while (iter.hasNext()) {
-																String username = (String) iter.next();
-																if (!username.equals("totalPrice")) {
-																	ArrayList<FoodOrderItem> foodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
-																			.get(username);
-																	listSize = foodOrderItemList.size();
-																	String foodName = foodOrderItemList.get(0).getFood().getName();
+																int listSize = 0;
+																int number = 0;
+																while (iter.hasNext()) {
+																	String username = (String) iter.next();
+																	if (!username.equals("totalPrice")) {
+																		ArrayList<FoodOrderItem> foodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
+																				.get(username);
+																		listSize = foodOrderItemList.size();
+																		String foodName = foodOrderItemList.get(0).getFood().getName();
+																		DecimalFormat df3 = new DecimalFormat("####0.00");
 						%>
 						<tr>
-							<td rowspan=<%=listSize%>><%=++number%></td>
-							<td rowspan=<%=listSize%>>
+							<td style="text-align: center;" rowspan=<%=listSize%>><%=++number%></td>
+							<td style="text-align: left;" rowspan=<%=listSize%>>
 								<a href="ProcessAdminGetEmployeeServlet?username=<%=username%>"><%=username%></a>
 							</td>
-							<td><%=foodName%></td>
-							<td><%=foodOrderItemList.get(0).getQuantity()%></td>
-							<td><%=foodOrderItemList.get(0).getPrice()%></td>
+							<td style="text-align: left;"><%=foodName%></td>
+							<td style="text-align: center;"><%=foodOrderItemList.get(0).getQuantity()%></td>
+							<td style="text-align: center;">
+								$<%=df3.format(foodOrderItemList.get(0).getPrice())%></td>
 						</tr>
 						<tr>
 							<%
 								for (int i = 1; i < listSize; i++) {
-														FoodOrderItem tempItem = foodOrderItemList.get(i);
-														foodName = tempItem.getFood().getName();
-														int quantity = tempItem.getQuantity();
-														double price = tempItem.getPrice();
+																			FoodOrderItem tempItem = foodOrderItemList.get(i);
+																			foodName = tempItem.getFood().getName();
+																			int quantity = tempItem.getQuantity();
+																			double price = tempItem.getPrice();
+																			DecimalFormat df2 = new DecimalFormat("####0.00");
 							%>
-							<td><%=foodName%></td>
+							<td style="text-align: left;"><%=foodName%></td>
 							<td><%=quantity%></td>
-							<td><%=df2.format(price)%></td>
+							<td>
+								$<%=df2.format(price)%></td>
 
 						</tr>
 						<%
 							}
-												} else {
-													// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
-													totalPrice = (Double) foodOrders.get(username);
-												}
-											}
+														} else {
+															// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
+															totalPrice = (Double) foodOrders.get(username);
+														}
+													}
 						%>
 					</table>
 				</div>
@@ -133,13 +147,7 @@
 				Total Price : $<%=df.format(totalPrice)%></h3>
 		</div>
 	</div>
-	<div class="row center" style="">
-		<div class="col-xs-3 center" style="float: none;">
-			<form action="RetrieveFoodOrdersServlet" method="post">
-				<button style="margin: 0px, auto;" type="submit" class="btn btn-lg btn-success btn-block">Go to print</button>
-			</form>
-		</div>
-	</div>
+
 
 
 	<%
