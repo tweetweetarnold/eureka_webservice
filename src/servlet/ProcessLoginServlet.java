@@ -107,16 +107,16 @@ public class ProcessLoginServlet extends HttpServlet {
 			e.printStackTrace();
 			session.setAttribute("username", username);
 			//problem test here
-			String ciphertext = PasswordService.encryptPassword(inputPwd);
-			String decryptedLoginInput = PasswordService.decryptPassword(ciphertext);
-			session.setAttribute("loginCipherText",ciphertext);
-			UserController userController = new UserController();
-			Employee tempe = userController.retrieveEmployeeViaUsername(username);
-			String actualCiphertext = tempe.getPassword();
-			String decryptedPassword = PasswordService.decryptPassword(actualCiphertext);
+//			String ciphertext = PasswordService.encryptPassword(inputPwd);
+//			String decryptedLoginInput = PasswordService.decryptPassword(ciphertext);
+//			session.setAttribute("loginCipherText",ciphertext);
+//			UserController userController = new UserController();
+//			Employee tempe = userController.retrieveEmployeeViaUsername(username);
+//			String actualCiphertext = tempe.getPassword();
+//			String decryptedPassword = PasswordService.decryptPassword(actualCiphertext);
 			
-//			session.setAttribute("error", "Something went wrong! Please check your credentials.");
-			session.setAttribute("error", "Something went wrong! Please check your credentials. password input:<" + ciphertext + ">Password needed:<"+ actualCiphertext+">"+"Decrypted input:<"+decryptedLoginInput+"> User Actual Decrypted:<"+ decryptedPassword+">");
+			session.setAttribute("error", "Something went wrong! Please check your credentials.");
+//			session.setAttribute("error", "Something went wrong! Please check your credentials. password input:<" + ciphertext + ">Password needed:<"+ actualCiphertext+">"+"Decrypted input:<"+decryptedLoginInput+"> User Actual Decrypted:<"+ decryptedPassword+">");
 			response.sendRedirect("login.jsp");
 		}
 
