@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -46,18 +46,19 @@ public class ProcessAdminGetEmployeeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
 		FoodOrderController foodOrderController = new FoodOrderController();
-		List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSet(username);
+		List<FoodOrder> foodOrderList= foodOrderController.getFoodOrderSet(username);
 		System.out.println(foodOrderList.size());
 		UserController userController = new UserController();
 		Employee employee = userController.retrieveEmployeeViaUsername(username);
 		RequestDispatcher rd = request.getRequestDispatcher("adminProfile.jsp");
-		request.setAttribute("Name", employee.getName());
+		request.setAttribute("name", employee.getName());
 		request.setAttribute("username", username);
 		request.setAttribute("email", employee.getEmail());
 		request.setAttribute("contactNumber", employee.getContactNo());
 		request.setAttribute("status", employee.getStatus());
 		request.setAttribute("orderHistory", foodOrderList);
-		request.setAttribute("amountOwed", employee.getAmountOwed());
+		DecimalFormat df = new DecimalFormat("####0.00");
+		request.setAttribute("amountOwed", df.format(employee.getAmountOwed()));
 	
 		
 		rd.forward(request,response);

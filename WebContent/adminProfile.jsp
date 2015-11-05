@@ -47,13 +47,19 @@
 
 	<div class="container">
 		<div align="center">
-			<h1>My Profile</h1>
+		
+		<div class="container">
+		<div class="row center">
+			<div class="col-xs-10 col center">
+				<div class="panel panel-default">
 
-			<%
-				request.getAttribute("name");
-			%>
+					<div class="panel-heading">
+						<div class="panel-title">
+			<h1>User Profile</h1>
+			</div>
+					</div>
 
-			<table style="width: 50%; font-size: 15px;" border="1">
+			<table class="table table-striped">
 				<tr>
 					<td>Name:</td>
 					<td><%=request.getAttribute("name")%></td>
@@ -76,11 +82,11 @@
 				</tr>
 				<tr>
 					<td>Amount Owed:</td>
-					<td><%=request.getAttribute("amountOwed")%></td>
+					<td>$<%=request.getAttribute("amountOwed")%></td>
 				</tr>
 
 			</table>
-
+</div></div></div></div>
 			<br> <br>
 			<H1>Order History</h1>
 			<br>
