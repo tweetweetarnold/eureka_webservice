@@ -8,9 +8,12 @@
 	<session-factory name="">
 		<property name="hibernate.hbm2ddl.auto">create</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="hibernate.connection.url">jdbc:mysql://127.11.104.130:3306/eureka</property>
-		<property name="hibernate.connection.username">adminQiabME6</property>
-		<property name="hibernate.connection.password">DD4GXYy1UBW5</property>
+<!-- 		<property name="hibernate.connection.url">jdbc:mysql://127.11.104.130:3306/eureka</property> -->
+<!-- 		<property name="hibernate.connection.username">adminQiabME6</property> -->
+<!-- 		<property name="hibernate.connection.password">DD4GXYy1UBW5</property> -->
+		<property name="hibernate.connection.url">jdbc:mysql://127.3.95.130:3306/eureka</property>
+		<property name="hibernate.connection.username">adminklX5V5K</property>
+		<property name="hibernate.connection.password">bDGsDaKQCPg-</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.pool_size">1</property>
 		<property name="hibernate.connection.autocommit">false</property>
