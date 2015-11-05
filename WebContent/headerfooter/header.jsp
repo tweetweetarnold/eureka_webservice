@@ -29,15 +29,19 @@
 	};
 </script>
 
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <nav class="navbar navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<!--                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> -->
-			<!--                         <span class="sr-only">Toggle navigation</span> -->
-			<!--                         <span class="icon-bar"></span> -->
-			<!--                         <span class="icon-bar"></span> -->
-			<!--                         <span class="icon-bar"></span> -->
-			<!--                     </button> -->
+			<!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> -->
+			<!-- <span class="sr-only">Toggle navigation</span> -->
+			<!-- <span class="icon-bar"></span> -->
+			<!-- <span class="icon-bar"></span> -->
+			<!-- <span class="icon-bar"></span> -->
+			<!-- </button> -->
 			<a class="navbar-brand" href="homepage.jsp"> DABAO </a>
 		</div>
 
@@ -45,16 +49,28 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<div id="#myNav"></div>
 
-			<!--                     <form class="navbar-form navbar-left" role="search"> -->
-			<!--                         <div class="form-group"> -->
-			<!--                             <input type="text" class="form-control" placeholder="Search"> -->
-			<!--                         </div> -->
-			<!--                         <button type="submit" class="btn btn-default">Submit</button> -->
-			<!--                     </form> -->
+			<!-- <form class="navbar-form navbar-left" role="search"> -->
+			<!-- <div class="form-group"> -->
+			<!-- <input type="text" class="form-control" placeholder="Search"> -->
+			<!-- </div> -->
+			<!-- <button type="submit" class="btn btn-default">Submit</button> -->
+			<!--  </form> -->
+
+
 
 			<ul class="nav navbar-nav navbar-right">
 				<li>
 					<a href="ProcessLogoutServlet">Logout</a>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<fmt:formatNumber value="${sessionScope.user.amountOwed}" var="owedPrice" minFractionDigits="2" />
+					<a href="RenderOrderHistoryServlet">
+						Amount Owed: $
+						<c:out value="${owedPrice}" />
+					</a>
 				</li>
 			</ul>
 		</div>

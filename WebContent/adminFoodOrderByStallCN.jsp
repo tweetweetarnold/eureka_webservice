@@ -85,7 +85,7 @@
 					<table class="table table-striped">
 						<tr>
 							<th><%=resourceBundle.getString("food")%></th>
-							<th>addons</th>
+							<th><%=resourceBundle.getString("addon")%></th>
 							<th style="text-align: center;"><%=resourceBundle.getString("quantity")%></th>
 							<th style="text-align: center;"><%=resourceBundle.getString("price")%></th>
 							<th><%=resourceBundle.getString("user")%></th>
