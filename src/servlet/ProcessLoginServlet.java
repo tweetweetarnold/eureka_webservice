@@ -16,6 +16,7 @@ import model.Employee;
 import services.PasswordService;
 import controller.CanteenController;
 import controller.LoginController;
+import controller.UserController;
 
 /**
  * Servlet implementation class Hello
@@ -105,7 +106,17 @@ public class ProcessLoginServlet extends HttpServlet {
 			System.out.println("Exception message: " + e.getMessage());
 			e.printStackTrace();
 			session.setAttribute("username", username);
-			session.setAttribute("error", "Something went wrong! Please check your credentials.");
+			//problem test here
+			String ciphertext = PasswordService.encryptPassword(inputPwd);
+			String decryptedLoginInput = PasswordService.decryptPassword(ciphertext);
+			session.setAttribute("loginCipherText",ciphertext);
+			UserController userController = new UserController();
+			Employee tempe = userController.retrieveEmployeeViaUsername(username);
+			String actualCiphertext = tempe.getPassword();
+			String decryptedPassword = PasswordService.decryptPassword(actualCiphertext);
+			
+//			session.setAttribute("error", "Something went wrong! Please check your credentials.");
+			session.setAttribute("error", "Something went wrong! Please check your credentials. password input:<" + ciphertext + ">Password needed:<"+ actualCiphertext+">"+"Decrypted input:<"+decryptedLoginInput+"> User Actual Decrypted:<"+ decryptedPassword+">");
 			response.sendRedirect("login.jsp");
 		}
 
