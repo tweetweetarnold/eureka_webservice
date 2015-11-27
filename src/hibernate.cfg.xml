@@ -8,9 +8,9 @@
 	<session-factory name="">
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-	<!-- <property name="hibernate.connection.url">jdbc:mysql://127.11.104.130:3306/eureka</property> -->
-	<!-- <property name="hibernate.connection.username">adminQiabME6</property> -->
-	<!-- <property name="hibernate.connection.password">DD4GXYy1UBW5</property> -->
+<!-- 	<property name="hibernate.connection.url">jdbc:mysql://127.11.104.130:3306/eureka</property> -->
+<!-- 	<property name="hibernate.connection.username">adminQiabME6</property> -->
+<!-- 	<property name="hibernate.connection.password">DD4GXYy1UBW5</property> -->
 		<property name="hibernate.connection.url">jdbc:mysql://127.3.95.130:3306/eureka</property>
 		<property name="hibernate.connection.username">adminklX5V5K</property>
 		<property name="hibernate.connection.password">bDGsDaKQCPg-</property>
