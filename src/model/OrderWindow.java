@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
 import org.joda.time.Interval;
+
+import value.StringValues;
 
 @Entity
 @Table(name = "orderwindow")
@@ -24,24 +29,48 @@ public class OrderWindow {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "companyId")
 	private Company company;
+	private String status;
+	private Date createDate;
 
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.company = company;
+		this.status = StringValues.ORDERWINDOW_DRAFT;
+		this.createDate = new Date();
 	}
 
-	public Interval getInterval() {
-		return new Interval(startDate.getMillis(), endDate.getMillis());
+	public OrderWindow(DateTime startDate, Duration duration, Company company) {
+		this.startDate = startDate;
+		this.endDate = startDate.plus(duration);
+		this.company = company;
+		this.status = StringValues.ORDERWINDOW_DRAFT;
+		this.createDate = new Date();
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 	// returns true if intervals overlap one another
 	public boolean overlaps(Interval other) {
-		return getInterval().overlaps(other);
+		return new Interval(startDate.getMillis(), endDate.getMillis()).overlaps(other);
 	}
 
-	public long getDuration() {
-		return endDate.getMillis() - startDate.getMillis();
+	public Duration getDuration() {
+		return new Duration(endDate.getMillis() - startDate.getMillis());
 	}
 
 	public int getWindowId() {

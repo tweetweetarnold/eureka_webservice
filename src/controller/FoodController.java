@@ -5,7 +5,7 @@ import dao.FoodDAO;
 
 public class FoodController {
 
-	public String getImageDirectory(int id) {
+	public String getFoodImageDirectory(int id) {
 		return FoodDAO.getFood(id).getImageDirectory();
 	}
 

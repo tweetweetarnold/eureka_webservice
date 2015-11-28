@@ -11,14 +11,15 @@ import dao.CanteenDAO;
 
 public class CanteenController {
 	
-	public List<Canteen> retrieveAll(){
-		System.out.println(CanteenDAO.getAllCanteens());
-		return CanteenDAO.getAllCanteens();
+	public List<Canteen> retrieveAllCanteens(){
+		List<Canteen> list = CanteenDAO.getAllCanteens();
+		System.out.println(list);
+		return list;
 	}
 	
 	public List<Food> getAllFood(){
 		List<Food> returnList = new ArrayList<Food>();
-		List<Canteen> canteenList = retrieveAll();
+		List<Canteen> canteenList = retrieveAllCanteens();
 		
 		for(Canteen c : canteenList) {
 			Set<Stall> stallList = c.getStallList();

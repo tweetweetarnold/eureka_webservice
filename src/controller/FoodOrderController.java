@@ -38,8 +38,8 @@ public class FoodOrderController {
 	public FoodOrder getFoodOrder(int foodOrderId) {
 		return FoodOrderDAO.getFoodOrder(foodOrderId);
 	}
-	
-	public ArrayList<FoodOrder> getFoodOrderForUsernameWeek(String username, Date sundayDate){
+
+	public ArrayList<FoodOrder> getFoodOrderForUsernameWeek(String username, Date sundayDate) {
 		ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>();
 		Calendar cal = Calendar.getInstance();
 		sundayDate.setHours(10);
@@ -49,27 +49,28 @@ public class FoodOrderController {
 		Date laterDate = cal.getTime();
 		System.out.println("Start date: " + sundayDate + " End date: " + laterDate);
 		Employee tempEmployee = EmployeeDAO.getEmployeeByUsername(username);
-		foodOrderList = FoodOrderDAO.getFoodOrderByDateUsername(sundayDate, laterDate, tempEmployee);
+		foodOrderList = FoodOrderDAO
+				.getFoodOrderByDateUsername(sundayDate, laterDate, tempEmployee);
 		System.out.println(foodOrderList.size() + foodOrderList.get(0).getEmployee().getUsername());
 		System.out.println(foodOrderList.get(0).getFoodOrderList().size());
-		
-		
+
 		return foodOrderList;
 	}
-	
 
 	// Retrieve all FoodOrders from yesterday 10:00:00 to today 10:00:00 with
 	// total price as object in HashMap with key "totalPrice"
 	public ArrayList<FoodDisplayObject> getFoodOrderforCutOff() {
 
-		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(getFoodOrderBetweenCutOff());
+		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
+				getFoodOrderBetweenCutOff());
 		System.out.println("Size from DAO:  " + tempFoodOrderList.size());
 		ArrayList<FoodDisplayObject> foodDisplayList = new ArrayList<FoodDisplayObject>();
 		LinkedHashMap<String, ArrayList<FoodOrderItem>> stallToFoodItemLinkedHash = new LinkedHashMap<String, ArrayList<FoodOrderItem>>();
 		LinkedHashMap<String, ArrayList<String>> stallToUserLinkedHash = new LinkedHashMap<String, ArrayList<String>>();
 		for (int i = 0; i < tempFoodOrderList.size(); i++) {
 			FoodOrder tempFoodOrder = tempFoodOrderList.get(i);
-			ArrayList<FoodOrderItem> tempFoodOrderItem = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
+			ArrayList<FoodOrderItem> tempFoodOrderItem = new ArrayList<FoodOrderItem>(
+					tempFoodOrder.getFoodOrderList());
 			for (FoodOrderItem foodItem : tempFoodOrderItem) {
 				FoodOrderItem foodItemd = foodItem;
 				Food tempFood = foodItemd.getFood();
@@ -82,7 +83,8 @@ public class FoodOrderController {
 				if (!stallToFoodItemLinkedHash.containsKey(stallName)) {
 					stallToFoodItemLinkedHash.put(stallName, tempFoodOrderItemList);
 				} else {
-					ArrayList<FoodOrderItem> tempFoodOrderItemToCombi = stallToFoodItemLinkedHash.get(stallName);
+					ArrayList<FoodOrderItem> tempFoodOrderItemToCombi = stallToFoodItemLinkedHash
+							.get(stallName);
 					tempFoodOrderItemToCombi.addAll(tempFoodOrderItemList);
 					stallToFoodItemLinkedHash.put(stallName, tempFoodOrderItemToCombi);
 				}
@@ -98,76 +100,74 @@ public class FoodOrderController {
 
 			LinkedHashMap<FoodOrderItem, ArrayList<String>> usernamesForFoodItem = new LinkedHashMap<FoodOrderItem, ArrayList<String>>();
 			String stallName = (String) iter.next();
-			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash.get(stallName);
-			System.out.println("Number of initial FoodOrderItems :))))))))))):"  + tempFoodOrderItemForDisplay.size());
+			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash
+					.get(stallName);
+			System.out.println("Number of initial FoodOrderItems :))))))))))):"
+					+ tempFoodOrderItemForDisplay.size());
 			LinkedHashMap<FoodOrderItem, Integer> quantityForFoodOrderItem = new LinkedHashMap<FoodOrderItem, Integer>();
 			ArrayList<FoodOrderItem> uniqueFoodOrderItem = new ArrayList<FoodOrderItem>();
-			for (FoodOrderItem i : tempFoodOrderItemForDisplay){
-				
+			for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
+
 				Iterator iterator = uniqueFoodOrderItem.iterator();
 				int equalCount = 0;
-				while(iterator.hasNext()){
+				while (iterator.hasNext()) {
 					FoodOrderItem tempFoodOrderItem = (FoodOrderItem) iterator.next();
-					if(tempFoodOrderItem.equals2(i)){
+					if (tempFoodOrderItem.equals2(i)) {
 						equalCount++;
 						System.out.println("FUCK");
 					}
 				}
-				if(equalCount==0){
+				if (equalCount == 0) {
 					uniqueFoodOrderItem.add(i);
 				}
-				
-				
-				
-				
-				
-				
-//				FoodOrderItem currentFoodOrderItem = i;
-//				int quantity = 0;
-//				Iterator uniqueIter = tempFoodOrderItemForDisplay.iterator();
-//				while (uniqueIter.hasNext()) {
-//					FoodOrderItem tempFoodOrderItem = (FoodOrderItem) uniqueIter.next();
-//					if (tempFoodOrderItem.equals(currentFoodOrderItem)) {
-//						System.out.println("Equals? " + tempFoodOrderItem.equals(currentFoodOrderItem));
-//						quantity+=tempFoodOrderItem.getQuantity()+currentFoodOrderItem.getQuantity();
-//						
-//					}
-//				}
-//				
-//
-//				int equalsCount2 = 0;
-//				uniqueIter = quantityForFoodOrderItem.keySet().iterator();
-//				while (uniqueIter.hasNext()) {
-//					FoodOrderItem tempFoodOrderItem = (FoodOrderItem) uniqueIter.next();
-//					if (tempFoodOrderItem.equals(i)) {
-//						equalsCount2++;
-//					}
-//				}
-//				if (equalsCount2 == 0) {
-//					quantityForFoodOrderItem.put(i, quantity/2);
-//				}
+
+				// FoodOrderItem currentFoodOrderItem = i;
+				// int quantity = 0;
+				// Iterator uniqueIter = tempFoodOrderItemForDisplay.iterator();
+				// while (uniqueIter.hasNext()) {
+				// FoodOrderItem tempFoodOrderItem = (FoodOrderItem)
+				// uniqueIter.next();
+				// if (tempFoodOrderItem.equals(currentFoodOrderItem)) {
+				// System.out.println("Equals? " +
+				// tempFoodOrderItem.equals(currentFoodOrderItem));
+				// quantity+=tempFoodOrderItem.getQuantity()+currentFoodOrderItem.getQuantity();
+				//
+				// }
+				// }
+				//
+				//
+				// int equalsCount2 = 0;
+				// uniqueIter = quantityForFoodOrderItem.keySet().iterator();
+				// while (uniqueIter.hasNext()) {
+				// FoodOrderItem tempFoodOrderItem = (FoodOrderItem)
+				// uniqueIter.next();
+				// if (tempFoodOrderItem.equals(i)) {
+				// equalsCount2++;
+				// }
+				// }
+				// if (equalsCount2 == 0) {
+				// quantityForFoodOrderItem.put(i, quantity/2);
+				// }
 
 			}
-			
-			
-			for(FoodOrderItem tempItem : uniqueFoodOrderItem){
+
+			for (FoodOrderItem tempItem : uniqueFoodOrderItem) {
 				int tempquantity = 0;
-				for(FoodOrderItem i : tempFoodOrderItemForDisplay){
-					if(i.equals2(tempItem)){
+				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
+					if (i.equals2(tempItem)) {
 						tempquantity++;
 					}
 				}
-				System.out.println("HIHIHI "+ tempquantity);
+				System.out.println("HIHIHI " + tempquantity);
 				quantityForFoodOrderItem.put(tempItem, tempquantity);
 			}
-			
-			
-			
-			System.out.println("Number of unique1 FoodOrderItems :))))))))))):"  + uniqueFoodOrderItem.size());
+
+			System.out.println("Number of unique1 FoodOrderItems :))))))))))):"
+					+ uniqueFoodOrderItem.size());
 
 			ArrayList<FoodOrderItem> uniqueFoodOrderItems = new ArrayList<FoodOrderItem>(
 					quantityForFoodOrderItem.keySet());
-			
+
 			for (FoodOrderItem f : uniqueFoodOrderItems) {
 				HashSet<String> usernames = new HashSet<String>();
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
@@ -178,8 +178,9 @@ public class FoodOrderController {
 					usernamesForFoodItem.put(f, new ArrayList<String>(usernames));
 				}
 			}
-			
-			System.out.println("Number of unique FoodOrderItems :))))))))))):"  + uniqueFoodOrderItems.size());
+
+			System.out.println("Number of unique FoodOrderItems :))))))))))):"
+					+ uniqueFoodOrderItems.size());
 			FoodDisplayObject tempFoodDisplay = new FoodDisplayObject(count++);
 			tempFoodDisplay.setStallName(stallName);
 			tempFoodDisplay.setFoodOrderItem(uniqueFoodOrderItems);
@@ -203,13 +204,13 @@ public class FoodOrderController {
 		Date earlierDate = cal.getTime();
 		earlierDate.setHours(10);
 		earlierDate.setMinutes(0);
-		System.out.println("earlier Later : "+ laterDate);
+		System.out.println("earlier Later : " + laterDate);
 		Date fivePm = new Date();
 		fivePm.setHours(17);
 		fivePm.setMinutes(00);
 		Date nowDate = new Date();
 		nowDate.setMinutes(0);
-		System.out.println("Later : " +laterDate);
+		System.out.println("Later : " + laterDate);
 		if (nowDate.after(fivePm)) {
 			cal.setTime(laterDate);
 			cal.add(Calendar.DATE, +1);
@@ -224,38 +225,37 @@ public class FoodOrderController {
 		return FoodOrderDAO.getFoodOrderByDate(laterDate, earlierDate);
 
 	}
-	
-	
-	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall(){
-		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(getFoodOrderBetweenCutOff());
+
+	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall() {
+		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
+				getFoodOrderBetweenCutOff());
 		ArrayList<FoodOrderItem> allFoodOrderItems = new ArrayList<FoodOrderItem>();
 		HashSet<Integer> uniqueStallNames = new HashSet<Integer>();
 		HashMap<Integer, ArrayList<FoodOrderItem>> mapToReturn = new HashMap<Integer, ArrayList<FoodOrderItem>>();
-		for(FoodOrder tempFoodOrder: tempFoodOrderList){
+		for (FoodOrder tempFoodOrder : tempFoodOrderList) {
 			allFoodOrderItems.addAll(tempFoodOrder.getFoodOrderList());
 		}
 		System.out.print("Number of FoodOrderItems: " + allFoodOrderItems.size());
-		for(FoodOrderItem tempFoodOrderItem: allFoodOrderItems){
-			Stall tempStall =tempFoodOrderItem.getFood().getStall();
+		for (FoodOrderItem tempFoodOrderItem : allFoodOrderItems) {
+			Stall tempStall = tempFoodOrderItem.getFood().getStall();
 			Integer tempStallName = tempStall.getStallId();
 			uniqueStallNames.add(tempStallName);
 		}
 		System.out.print("Number of Unique Stalls: " + allFoodOrderItems.size());
-		for(Integer tempStallID : uniqueStallNames){
+		for (Integer tempStallID : uniqueStallNames) {
 			ArrayList<FoodOrderItem> foodOrderListForStallName = new ArrayList<FoodOrderItem>();
-			for(FoodOrderItem tempFoodOrderItem : allFoodOrderItems){
-				Integer tempFoodOrderItemStallID = tempFoodOrderItem.getFood().getStall().getStallId();
-				if(tempFoodOrderItemStallID==tempStallID){
+			for (FoodOrderItem tempFoodOrderItem : allFoodOrderItems) {
+				Integer tempFoodOrderItemStallID = tempFoodOrderItem.getFood().getStall()
+						.getStallId();
+				if (tempFoodOrderItemStallID == tempStallID) {
 					foodOrderListForStallName.add(tempFoodOrderItem);
 				}
 			}
-			mapToReturn.put(tempStallID,foodOrderListForStallName);
+			mapToReturn.put(tempStallID, foodOrderListForStallName);
 		}
-		
+
 		return mapToReturn;
 	}
-	
-	
 
 	public HashMap getFoodOrderToday() {
 		List<FoodOrder> tempFoodOrderList = getFoodOrderBetweenCutOff();
@@ -266,7 +266,8 @@ public class FoodOrderController {
 		double totalPrice = 0.0;
 		while (iter.hasNext()) {
 			FoodOrder tempFoodOrder = (FoodOrder) iter.next();
-			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
+			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(
+					tempFoodOrder.getFoodOrderList());
 			Employee tempEmployee = tempFoodOrder.getEmployee();
 			String username = tempEmployee.getUsername();
 			System.out.println(tempEmployee);
@@ -275,11 +276,12 @@ public class FoodOrderController {
 				if (!uniqueEmployee.contains(username)) {
 					foodOrders.put(tempFoodOrder.getEmployee().getUsername(), foodOrderList);
 					uniqueEmployee.add(username);
-				}else{
-					ArrayList<FoodOrderItem> tempFoodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders.get(username);
+				} else {
+					ArrayList<FoodOrderItem> tempFoodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
+							.get(username);
 					tempFoodOrderItemList.addAll(foodOrderList);
 					foodOrders.put(username, tempFoodOrderItemList);
-					System.out.println("Username: " + username + foodOrderList.size() );
+					System.out.println("Username: " + username + foodOrderList.size());
 				}
 			} else {
 				foodOrders.put("Unknown", foodOrderList);

@@ -9,7 +9,6 @@ public class UserController {
 	public void updateEmployee(Employee e) {
 		EmployeeDAO.updateEmployee(e);
 		// EmployeeDAO.saveEmployee(e);
-
 	}
 
 	public void removeEmployee(Employee e) {
@@ -18,16 +17,8 @@ public class UserController {
 
 	public Employee retrieveEmployeeViaUsername(String username) {
 		Employee employee = EmployeeDAO.getEmployeeByUsername(username);
-		
+
 		return employee;
 
 	}
-
-	// Employee ID not set yet so search by username
-//	public Employee retrieveEmployeeTEMPORARY(String username) {
-//		Employee tempE = employeeDAO.getEmployeeTEMPORARY(username);
-//		return tempE;
-//
-//	}
-
 }

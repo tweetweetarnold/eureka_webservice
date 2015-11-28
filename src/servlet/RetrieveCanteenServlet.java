@@ -47,7 +47,7 @@ public class RetrieveCanteenServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		CanteenController canteenController = new CanteenController();
-		List<Canteen> canteenList = canteenController.retrieveAll();
+		List<Canteen> canteenList = canteenController.retrieveAllCanteens();
 		JSONArray jsonArray = new JSONArray();
 		Iterator iter = canteenList.iterator();
 		

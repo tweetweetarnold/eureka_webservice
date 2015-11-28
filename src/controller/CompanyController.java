@@ -21,8 +21,7 @@ public class CompanyController {
 
 	// Retrieve a Company from the DB by companyID
 	public static Company getCompany(int companyId) {
-		Company c = CompanyDAO.getCompany(companyId);
-		return c;
+		return CompanyDAO.getCompany(companyId);
 	}
 
 	public static Company getCompanyByCompanyCode(String companyCode) {
