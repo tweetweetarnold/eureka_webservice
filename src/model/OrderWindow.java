@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,14 +25,16 @@ public class OrderWindow {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int windowId;
+//	@Column(columnDefinition="DATETIME")
 	private DateTime startDate;
+//	@Column(columnDefinition="DATETIME")
 	private DateTime endDate;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "companyId")
 	private Company company;
 	private String status;
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "companyId")
+	@JoinColumn(name = "canteenId")
 	private Canteen canteen;
 	private Date createDate;
 
