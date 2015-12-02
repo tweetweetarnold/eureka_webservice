@@ -3,6 +3,7 @@ package test;
 
 import java.util.HashSet;
 
+import connection.MyConnection;
 import controller.FoodController;
 import dao.EmployeeDAO;
 import model.Employee;
@@ -23,7 +24,7 @@ public class AddFoodOrderTest{
 		HashSet<FoodOrderItem> foodOrderItemSet = new HashSet<FoodOrderItem>();
 		foodOrderItemSet.add(newFoodOrderItem);
 		FoodOrder newFoodOrder = new FoodOrder("TEST", tempEmployee, foodOrderItemSet);
-		
+
 		MyConnection.save(newFoodOrder);
 		
 	}

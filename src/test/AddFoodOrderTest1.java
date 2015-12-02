@@ -33,7 +33,7 @@ public class AddFoodOrderTest1 {
 		ModifierChosen modifierChosen1 = new ModifierChosen(newModifier, newFoodOrderItem);
 		HashSet<ModifierChosen> modifierList = new HashSet<ModifierChosen>();
 		modifierList.add(modifierChosen1);
-		newFoodOrderItem.setModifierList(modifierList);
+		newFoodOrderItem.setModifierChosenList(modifierList);;
 		FoodOrderItem newFoodOrderItem2 = new FoodOrderItem(null, newFood, 1, null);
 		ArrayList<FoodOrderItem> foodOrderItemSet = new ArrayList<FoodOrderItem>();
 		foodOrderItemSet.add(newFoodOrderItem);
