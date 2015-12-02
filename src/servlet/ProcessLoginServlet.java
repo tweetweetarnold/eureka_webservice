@@ -68,8 +68,7 @@ public class ProcessLoginServlet extends HttpServlet {
 			AccessController loginController = new AccessController();
 
 			// Verify user credentials. if user does not exist, returns null
-			Employee emp = loginController.authenticateUser(username,
-					PasswordService.encryptPassword(inputPwd));
+			Employee emp =  loginController.authenticateUser(username,inputPwd);
 			System.out.println("User is authenticated: " + emp.getName());
 
 			// *** For Development only ***

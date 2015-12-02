@@ -55,9 +55,15 @@ public class Test {
 		// EVERYTHING IN DATABASE AND POPULATE WITH BELOW
 
 		Company company = new Company("XiaoDingDang Co.", null, null, "XDD123");
+		Set<String> buildingList = new HashSet<String>();
+		buildingList.add("SEMBCORP");
+		buildingList.add("PSN");
+		buildingList.add("CONTROL");
+		buildingList.add("MAINTAINANCE");
+		company.setBuildingList(buildingList);
 		Employee arnold = new Employee("arnold", PasswordService.encryptPassword("1234567"),
 				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
-
+		arnold.setBuilding("HQ");
 		session.save(company);
 		session.save(arnold);
 

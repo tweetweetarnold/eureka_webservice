@@ -35,7 +35,8 @@ public class Employee {
 //	private Set<Food> favouriteList;
 	private String status;
 	private Date createDate;
-
+	private String building;
+	
 	public Employee() {
 	}
 
@@ -53,6 +54,7 @@ public class Employee {
 		this.status = StringValues.EMPLOYEE_OK;
 //		this.favouriteList = new HashSet<>();
 		this.createDate = new Date();
+
 	}
 
 	// @Embeddable
@@ -154,7 +156,14 @@ public class Employee {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-
+	
+	public String getBuilding(){
+		return building;
+	}
+	
+	public void setBuilding(String building){
+		this.building = building;
+	}
 //	public Set<Food> getFavouriteList() {
 //		return favouriteList;
 //	}

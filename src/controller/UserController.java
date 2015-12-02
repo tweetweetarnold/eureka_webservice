@@ -14,7 +14,13 @@ public class UserController {
 	public void removeEmployee(Employee e) {
 		EmployeeDAO.deleteEmployee(e);
 	}
-
+	public void updateDefaultBuilding(String username, String buildingName){
+		Employee employee = retrieveEmployeeViaUsername(username);
+		employee.setBuilding(buildingName);
+		EmployeeDAO.updateEmployee(employee);
+		
+	}
+	
 	public Employee retrieveEmployeeViaUsername(String username) {
 		Employee employee = EmployeeDAO.getEmployeeByUsername(username);
 

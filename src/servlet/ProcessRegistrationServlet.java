@@ -104,12 +104,13 @@ public class ProcessRegistrationServlet extends HttpServlet {
 									String generatedEmployeeId = registrationController.registerUser(
 											username, password, employeeName, email, contactNumber,
 											companyCode);
-		
+									session.setAttribute("username",username);
+									session.setAttribute("companyCode", companyCode);
 									session.setAttribute("success",
 											"Your account has been created. Username: "
 													+ generatedEmployeeId);
 		
-									response.sendRedirect("login.jsp");
+									response.sendRedirect("RetrieveBuildingsServlet");
 								} else {
 									System.out.println("RegistrationServlet: Validation failed.");
 									throw new Exception("The Email that you provided is not valid");

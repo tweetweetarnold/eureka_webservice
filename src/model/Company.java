@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,8 @@ public class Company {
 	private Date cutoffTime;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Set<Canteen> canteenList;
-
+	@ElementCollection(fetch = FetchType.EAGER)
+	private Set<String> buildingList;
 	public Company() {
 
 	}
@@ -66,7 +68,14 @@ public class Company {
 	// public void setEmployeeList(Set<Employee> employeeList) {
 	// this.employeeList = employeeList;
 	// }
-
+	public void setBuildingList(Set<String> buildingList){
+		this.buildingList = buildingList;
+	}
+	
+	public Set<String> getBuildingList(){
+		return this.buildingList;
+	}
+	
 	public Date getCreateDate() {
 		return createDate;
 	}

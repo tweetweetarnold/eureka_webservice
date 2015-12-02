@@ -14,7 +14,9 @@ public class CompanyDAO {
 	}
 	
 	public static Company getCompanyByCompanyCode(String companyCode) {
+		System.out.println(companyCode);
 		return (Company) MyConnection.getCompanyByCompanyCode(companyCode);
+		
 	}
 
 	// Save new Company to the DB
