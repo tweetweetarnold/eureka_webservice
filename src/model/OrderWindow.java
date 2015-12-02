@@ -30,22 +30,35 @@ public class OrderWindow {
 	@JoinColumn(name = "companyId")
 	private Company company;
 	private String status;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "companyId")
+	private Canteen canteen;
 	private Date createDate;
 
-	public OrderWindow(DateTime startDate, DateTime endDate, Company company) {
+	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen) {
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.company = company;
+		this.canteen = canteen;
+		this.status = StringValues.ORDERWINDOW_DRAFT;
+		this.createDate = new Date();
+	}
+
+	public OrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen) {
+		this.startDate = startDate;
+		this.endDate = startDate.plus(duration);
+		this.canteen = canteen;
 		this.company = company;
 		this.status = StringValues.ORDERWINDOW_DRAFT;
 		this.createDate = new Date();
 	}
 
-	public OrderWindow(DateTime startDate, Duration duration, Company company) {
-		this.startDate = startDate;
-		this.endDate = startDate.plus(duration);
-		this.company = company;
-		this.status = StringValues.ORDERWINDOW_DRAFT;
-		this.createDate = new Date();
+	public Canteen getCanteen() {
+		return canteen;
+	}
+
+	public void setCanteen(Canteen canteen) {
+		this.canteen = canteen;
 	}
 
 	public Date getCreateDate() {
