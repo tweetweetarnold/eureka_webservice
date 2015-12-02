@@ -15,7 +15,7 @@ import model.Canteen;
 import model.Employee;
 import services.PasswordService;
 import controller.CanteenController;
-import controller.LoginController;
+import controller.AccessController;
 import controller.UserController;
 
 /**
@@ -65,7 +65,7 @@ public class ProcessLoginServlet extends HttpServlet {
 		String inputPwd = (String) request.getParameter("password");
 
 		try {
-			LoginController loginController = new LoginController();
+			AccessController loginController = new AccessController();
 
 			// Verify user credentials. if user does not exist, returns null
 			Employee emp = loginController.authenticateUser(username,

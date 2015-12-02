@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import controller.AdminController;
 import controller.CanteenController;
-import controller.LoginController;
+import controller.AccessController;
 import model.Admin;
 import model.Employee;
 import model.Food;
@@ -62,7 +62,7 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 		String adminInputPwd = (String) request.getParameter("adminPassword");
 
 		try {
-			LoginController loginController = new LoginController();
+			AccessController loginController = new AccessController();
 
 			// Verify user credentials. if user does not exist, returns null
 			Admin admin = loginController.authenticateAdmin(adminUsername,

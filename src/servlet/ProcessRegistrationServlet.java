@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
-import controller.RegistrationController;
+import controller.AccessController;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -61,7 +61,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 		HashMap<String, String> userInput = new HashMap<>();
 
 		try {
-			RegistrationController registrationController = new RegistrationController();
+			AccessController registrationController = new AccessController();
 
 			String employeeName = (String) request.getParameter("name").trim();
 			String username = (String) request.getParameter("username").trim();

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controller.RegistrationController;
+import controller.AccessController;
 
 /**
  * Servlet implementation class ProcessAdminRegistrationServlet
@@ -55,7 +55,7 @@ public class ProcessAdminRegistrationServlet extends HttpServlet {
 		HashMap<String, String> userInput = new HashMap<>();
 
 		try {
-			RegistrationController registrationController = new RegistrationController();
+			AccessController registrationController = new AccessController();
 
 			String adminName = (String) request.getParameter("name");
 			String username = (String) request.getParameter("username");
