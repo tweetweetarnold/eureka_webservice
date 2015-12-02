@@ -11,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
@@ -25,10 +27,14 @@ public class OrderWindow {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int windowId;
-//	@Column(columnDefinition="DATETIME")
+	@Transient
 	private DateTime startDate;
-//	@Column(columnDefinition="DATETIME")
+	@Transient
 	private DateTime endDate;
+	@Column(name = "startDate")
+	private Date startDateFormatted;
+	@Column(name = "endDate")
+	private Date endDateFormatted;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "companyId")
 	private Company company;
@@ -41,6 +47,8 @@ public class OrderWindow {
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen) {
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.startDateFormatted = startDate.toDate();
+		this.endDateFormatted = endDate.toDate();
 		this.company = company;
 		this.canteen = canteen;
 		this.status = StringValues.ORDERWINDOW_DRAFT;
@@ -50,6 +58,8 @@ public class OrderWindow {
 	public OrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen) {
 		this.startDate = startDate;
 		this.endDate = startDate.plus(duration);
+		this.startDateFormatted = startDate.toDate();
+		this.endDateFormatted = endDate.toDate();
 		this.canteen = canteen;
 		this.company = company;
 		this.status = StringValues.ORDERWINDOW_DRAFT;
@@ -98,19 +108,21 @@ public class OrderWindow {
 	}
 
 	public DateTime getStartDate() {
-		return startDate;
+		return new DateTime(startDateFormatted);
 	}
 
 	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
+		this.startDateFormatted = startDate.toDate();
 	}
 
 	public DateTime getEndDate() {
-		return endDate;
+		return new DateTime(endDateFormatted);
 	}
 
 	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
+		this.endDateFormatted = endDate.toDate();
 	}
 
 	public Company getCompany() {

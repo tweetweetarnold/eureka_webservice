@@ -71,8 +71,6 @@ public class Test {
 				45678925);
 		session.save(admin);
 
-		
-
 		// **************************************** End Arnold Data
 		// ****************************************
 
@@ -786,10 +784,10 @@ public class Test {
 
 		// **************************************** End insert of mock data
 		// ****************************************
-		
-//		OrderWindow window = new OrderWindow(new DateTime(2015, 12, 2, 16, 36, 0), new DateTime(
-//				2015, 12, 5, 16, 36, 0), company, canteen1);
-//		session.save(window); // arnold test data
+
+		OrderWindow window = new OrderWindow(new DateTime(2015, 12, 2, 16, 36, 0), new DateTime(
+				2015, 12, 5, 16, 36, 0), company, canteen1);
+		session.save(window); // arnold test data
 
 		session.getTransaction().commit();
 		session.flush();
