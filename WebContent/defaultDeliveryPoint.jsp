@@ -10,6 +10,7 @@
 <body>
 	<%
 		Set<String> buildingSet = (Set<String>) request.getAttribute("buildingSet");
+		System.out.println("JSP ... " + buildingSet.size());
 		Iterator iter = buildingSet.iterator();
 	%>
 	Hey There! Please select the building where you want your food

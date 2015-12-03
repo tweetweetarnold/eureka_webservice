@@ -73,6 +73,8 @@ public class Company {
 	}
 	
 	public Set<String> getDeliveryPointSet(){
+		System.out.println(" SHHSADdsafafsfdafdsfdsafadfadsfadsf " + this.deliveryPointSet.size());
+		
 		return this.deliveryPointSet;
 	}
 	

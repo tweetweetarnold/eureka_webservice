@@ -51,9 +51,11 @@ public class RetrieveDeliveryPointsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String companyCode =(String) session.getAttribute("companyCode");
+		System.out.println(companyCode + "SADA");
 		Company company = CompanyController.getCompanyByCompanyCode(companyCode);
 		Set<String> buildingSet = company.getDeliveryPointSet();
-		RequestDispatcher rd = request.getRequestDispatcher("defaultBuilding.jsp");
+		System.out.println(" Servelytsfas " + buildingSet.size());
+		RequestDispatcher rd = request.getRequestDispatcher("defaultDeliveryPoint.jsp");
 		request.setAttribute("buildingSet", buildingSet);
 		rd.forward(request, response);
 		

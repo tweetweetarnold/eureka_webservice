@@ -13,14 +13,14 @@ import model.Company;
 /**
  * Servlet implementation class ProcessSetDefaultBuilding
  */
-@WebServlet("/ProcessSetDefaultDeliveryPoint")
-public class ProcessSetDefaultDeliveryPoint extends HttpServlet {
+@WebServlet("/ProcessSetDefaultDeliveryPointServlet")
+public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProcessSetDefaultDeliveryPoint() {
+    public ProcessSetDefaultDeliveryPointServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
