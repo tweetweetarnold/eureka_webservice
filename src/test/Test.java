@@ -63,7 +63,7 @@ public class Test {
 		company.setBuildingList(buildingList);
 		Employee arnold = new Employee(PasswordService.encryptPassword("1234567"),
 				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
-		arnold.setBuilding("HQ");
+		arnold.setBuilding("CONTROL");
 		session.save(company);
 		session.save(arnold);
 

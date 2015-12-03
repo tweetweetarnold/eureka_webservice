@@ -22,54 +22,103 @@
 
 	<div class="container">
 
-		<form class="form-signin" method="post" action="ProcessRegistrationServlet">
-			<h2 class="form-signin-heading">Create an account:</h2>
-			<br>
-			<br>
+		<div style="max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;">
+			<form class="form-signin" method="post" action="ProcessRegistrationServlet" style="max-width: 500px;">
+				<h2 class="form-signin-heading">Create an account:</h2>
+				<br>
+				<br>
+				<br>
 
-			<c:set value="${sessionScope.userInput}" var="userInput" />
+				<c:set value="${sessionScope.userInput}" var="userInput" />
 
-			<!-- User input -->
-			<input type="email" name="email" class="form-control-table" placeholder="Email"
-				value="<c:out value="${userInput['email']}"/>" required
-			>
+				<!-- User input -->
+				<table>
+					<tr>
+						<td>Email</td>
+						<td>
+							<input type="email" name="email" class="form-control-table" placeholder="Email"
+								value="<c:out value="${userInput['email']}"/>" required
+							>
+						</td>
+					</tr>
+					<tr>
+						<td>Password</td>
+						<td>
+							<input type="password" name="password" class="form-control-table"
+								placeholder="Password (Min length 7 characters)" onfocus="" required
+							>
+						</td>
+					</tr>
+					<tr>
+						<td>Confirm Password</td>
+						<td>
+							<input type="password" name="confirmPwd" class="form-control-table" placeholder="Confirm Password" required>
+						</td>
+					</tr>
+					<tr>
+						<td>Name</td>
+						<td>
+							<input type="text" name="name" class="form-control-table" placeholder="Name"
+								value="<c:out value="${userInput['name']}"/>" required
+							>
+						</td>
+					</tr>
+					<tr>
+						<td>Contact No</td>
+						<td>
+							<input type="text" name="contactNo" class="form-control-table" placeholder="Contact Number (8 Digits)"
+								value="<c:out value="${userInput['contactNo']}"/>" required
+							>
+						</td>
+					</tr>
+					<tr>
+						<td>Company Code</td>
+						<td>
+							<input type="text" name="companyCode" class="form-control-table" placeholder="Company Code"
+								value="<c:out value="${userInput['companyCode']}"/>" required
+							>
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Terms and Conditions</td>
+						<td>
+							<div style="margin: 0px 32px;">
+								<input type="checkbox" name="tc" required />
+								<small>
+									I agree to the
+									<a href="#">terms and conditions</a>
+									of using DABAO.
+								</small>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td></td>
+					</tr>
 
-			<br>
-			<input type="password" name="password" class="form-control-table" placeholder="Password (Min length 7 characters)"
-				onfocus="" required
-			>
-			<input type="password" name="confirmPwd" class="form-control-table" placeholder="Confirm Password" required>
+					<tr>
+						<td></td>
+						<td>
+							<button class="btn btn-lg btn-primary btn-block" type="submit">
+								<font face="verdana">Register</font>
+							</button>
+						</td>
+					</tr>
+				</table>
 
-			<br>
-			<input type="text" name="name" class="form-control-table" placeholder="Name"
-				value="<c:out value="${userInput['name']}"/>" required
-			>
-
-			<input type="text" name="contactNo" class="form-control-table" placeholder="Contact Number (8 Digits)"
-				value="<c:out value="${userInput['contactNo']}"/>" required
-			>
-			<input type="text" name="companyCode" class="form-control-table" placeholder="Company Code"
-				value="<c:out value="${userInput['companyCode']}"/>" required
-			>
-			<div style="margin: 0px 32px;">
-				<input type="checkbox" name="tc" required />
-				<small>
-					I agree to the
-					<a href="#">terms and conditions</a>
-					of using DABAO.
-				</small>
-			</div>
-
-			<br>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">
-				<font face="verdana">Register</font>
-			</button>
-
-			<br>
-			<div align="center">
-				<a href="login.jsp">Back to Login Page</a>
-			</div>
-		</form>
+				<br>
+				<div align="center">
+					<a href="login.jsp">Back to Login Page</a>
+				</div>
+			</form>
+		</div>
 
 		<!-- 		<form action="login.jsp" class="form-signin"> -->
 		<!-- 			<button class="btn btn-primary btn-block"> -->
