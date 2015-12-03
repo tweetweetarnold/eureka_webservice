@@ -14,8 +14,8 @@
 	%>
 	Hey There! Please select the building where you want your food
 	delivered to!
-	<form action="ProcessSetDefaultBuilding" method="post">
-		<select name="building">
+	<form action="ProcessSetDefaultDeliveryPointServlet" method="post">
+		<select name="deliveryPoint">
 		<%
 			while (iter.hasNext()) {
 				String buildingName = (String)iter.next();

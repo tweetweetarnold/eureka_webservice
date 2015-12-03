@@ -60,10 +60,10 @@ public class Test {
 		buildingList.add("PSN");
 		buildingList.add("CONTROL");
 		buildingList.add("MAINTAINANCE");
-		company.setBuildingList(buildingList);
+		company.setDeliveryPointSet(buildingList);
 		Employee arnold = new Employee(PasswordService.encryptPassword("1234567"),
 				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
-		arnold.setBuilding("HQ");
+		arnold.setDefaultDeliveryPoint("HQ");
 		session.save(company);
 		session.save(arnold);
 
