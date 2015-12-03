@@ -193,7 +193,6 @@
 								<tbody>
 									<%
 										for (Employee e : employeeOweList) {
-											String username = e.getUsername();
 											double amountOwed = e.getAmountOwed();
 											DecimalFormat f = new DecimalFormat("#.00");
 											String userEmail = e.getEmail();
@@ -202,7 +201,7 @@
 									%>
 									<tr>
 
-										<td><a href="processAdminGetEmployeeServlet?username=<%=username%>"><%=username%></a></td></td>
+										<td><a href="processAdminGetEmployeeServlet?email=<%=userEmail%>"><%=userEmail%></a></td></td>
 										<td>$<%=f.format(amountOwed)%></td>
 
 										<td><%=userEmail%></td>
