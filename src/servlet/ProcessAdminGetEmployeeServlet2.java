@@ -44,15 +44,16 @@ public class ProcessAdminGetEmployeeServlet2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String username = request.getParameter("username");
+		String email = request.getParameter("email");
 		FoodOrderController foodOrderController = new FoodOrderController();
-		List<FoodOrder> foodOrderList= foodOrderController.getFoodOrderSet(username);
+		List<FoodOrder> foodOrderList= foodOrderController.getFoodOrderSet(email);
 		System.out.println(foodOrderList.size());
 		UserController userController = new UserController();
-		Employee employee = userController.retrieveEmployeeViaUsername(username);
+		Employee employee = userController.retrieveEmployeeViaEmail(email);
 		RequestDispatcher rd = request.getRequestDispatcher("adminProfile.jsp");
 		request.setAttribute("name", employee.getName());
-		request.setAttribute("username", username);
+		//USERNAME!?@#
+		request.setAttribute("username", employee.getName());
 		request.setAttribute("email", employee.getEmail());
 		request.setAttribute("contactNumber", employee.getContactNo());
 		request.setAttribute("status", employee.getStatus());

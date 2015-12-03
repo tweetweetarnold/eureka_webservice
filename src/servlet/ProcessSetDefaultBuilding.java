@@ -40,11 +40,11 @@ public class ProcessSetDefaultBuilding extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String buildingName = (String) request.getParameter("building");
-		String username = (String) session.getAttribute("username");
+		String email = (String) session.getAttribute("email");
 		
 		UserController userController = new UserController();
 		
-		userController.updateDefaultBuilding(username, buildingName);
+		userController.updateDefaultBuilding(email, buildingName);
 		response.sendRedirect("login.jsp");
 		
 	}

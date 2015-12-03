@@ -14,14 +14,14 @@ public class UserController {
 	public void removeEmployee(Employee e) {
 		EmployeeDAO.deleteEmployee(e);
 	}
-	public void updateDefaultBuilding(String username, String buildingName){
-		Employee employee = retrieveEmployeeViaUsername(username);
+	public void updateDefaultBuilding(String email, String buildingName){
+		Employee employee = retrieveEmployeeViaEmail(email);
 		employee.setBuilding(buildingName);
 		EmployeeDAO.updateEmployee(employee);
 		
 	}
 	
-	public Employee retrieveEmployeeViaUsername(String email) {
+	public Employee retrieveEmployeeViaEmail(String email) {
 		Employee employee = EmployeeDAO.getEmployeeByEmail(email);
 
 		return employee;

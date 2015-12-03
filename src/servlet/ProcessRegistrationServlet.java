@@ -104,7 +104,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 									String generatedEmployeeId = registrationController.registerUser(
 											username, password, employeeName, email, contactNumber,
 											companyCode);
-									session.setAttribute("username",username);
+									session.setAttribute("email",email);
 									session.setAttribute("companyCode", companyCode);
 									session.setAttribute("success",
 											"Your account has been created. Username: "
