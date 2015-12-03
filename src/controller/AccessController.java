@@ -39,21 +39,20 @@ public class AccessController {
 		}
 		return null;
 	}
-	
-	public String registerUser(String username, String password, String name, String email,
-			long contactNo, String companyCode) throws Exception {
+
+	public String registerUser(String password, String name, String email, long contactNo,
+			String companyCode) throws Exception {
 
 		String encryptPassword = PasswordService.encryptPassword(password);
 		Company company = null;
-		
+
 		try {
 			company = CompanyController.getCompanyByCompanyCode(companyCode);
 		} catch (Exception exception) {
 			throw new Exception("Failed to find company");
 		}
-		
-		Employee newEmployee = new Employee(encryptPassword, name, email, contactNo,
-				company);
+
+		Employee newEmployee = new Employee(encryptPassword, name, email, contactNo, company);
 		try {
 			EmployeeDAO.saveEmployee(newEmployee);
 		} catch (ConstraintViolationException e) {

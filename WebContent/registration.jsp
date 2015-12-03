@@ -30,11 +30,8 @@
 			<c:set value="${sessionScope.userInput}" var="userInput" />
 
 			<!-- User input -->
-			<input type="text" name="username" class="form-control-table" placeholder="Username"
-				value="<c:out value="${userInput['username']}"/>" required
-			>
-			<input type="text" name="name" class="form-control-table" placeholder="Name"
-				value="<c:out value="${userInput['name']}"/>" required
+			<input type="email" name="email" class="form-control-table" placeholder="Email"
+				value="<c:out value="${userInput['email']}"/>" required
 			>
 
 			<br>
@@ -44,9 +41,10 @@
 			<input type="password" name="confirmPwd" class="form-control-table" placeholder="Confirm Password" required>
 
 			<br>
-			<input type="email" name="email" class="form-control-table" placeholder="Email"
-				value="<c:out value="${userInput['email']}"/>" required
+			<input type="text" name="name" class="form-control-table" placeholder="Name"
+				value="<c:out value="${userInput['name']}"/>" required
 			>
+
 			<input type="text" name="contactNo" class="form-control-table" placeholder="Contact Number (8 Digits)"
 				value="<c:out value="${userInput['contactNo']}"/>" required
 			>
@@ -95,6 +93,7 @@
 		<c:remove var="userInput" scope="session" />
 
 	</div>
+
 
 
 	<!-- 	Google Analytics -->

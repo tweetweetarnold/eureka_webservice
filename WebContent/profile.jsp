@@ -55,7 +55,7 @@
 						<h3 class="panel-title">User Profile</h3>
 					</div>
 
-					<div class="panel-body">
+					<div class="panel-body" align="left">
 
 						<table class="table table-striped">
 							<tr>

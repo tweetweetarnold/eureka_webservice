@@ -37,6 +37,7 @@ public class OrderWindow {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "companyId")
 	private Company company;
+	@Transient
 	private String status;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "canteenId")
@@ -50,7 +51,6 @@ public class OrderWindow {
 		this.endDateFormatted = endDate.toDate();
 		this.company = company;
 		this.canteen = canteen;
-		this.status = StringValues.ORDERWINDOW_DRAFT;
 		this.createDate = new Date();
 	}
 
@@ -61,7 +61,6 @@ public class OrderWindow {
 		this.endDateFormatted = endDate.toDate();
 		this.canteen = canteen;
 		this.company = company;
-		this.status = StringValues.ORDERWINDOW_DRAFT;
 		this.createDate = new Date();
 	}
 
@@ -78,11 +77,17 @@ public class OrderWindow {
 	}
 
 	public String getStatus() {
-		return status;
-	}
+		Interval i = new Interval(startDate.getMillis(), endDate.getMillis());
+		String status = "Error";
 
-	public void setStatus(String status) {
-		this.status = status;
+		if (i.containsNow()) {
+			status = StringValues.ORDERWINDOW_OPENED;
+		} else if (i.isBeforeNow()) {
+			status = StringValues.ORDERWINDOW_QUEUED;
+		} else if (i.isAfterNow()) {
+			status = StringValues.ORDERWINDOW_CLOSED;
+		}
+		return status;
 	}
 
 	public void setCreateDate(Date createDate) {

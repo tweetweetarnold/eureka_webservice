@@ -17,6 +17,5 @@ public final class StringValues {
 	public static final String ORDERWINDOW_OPENED = "Opened";
 	public static final String ORDERWINDOW_CLOSED = "Closed";
 	public static final String ORDERWINDOW_QUEUED = "Queued";
-	public static final String ORDERWINDOW_DRAFT = "Draft";
 
 }
