@@ -174,7 +174,7 @@ public class MyConnection {
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(FoodOrder.class).setResultTransformer(
 				Criteria.DISTINCT_ROOT_ENTITY);
-		String username = employee.getUsername();
+		String email = employee.getEmail();
 		criteria.add(Restrictions.eq("employee", employee)).list();
 		list = (List<Object>) criteria.list();
 

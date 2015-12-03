@@ -57,7 +57,7 @@ public class RenderOrderHistoryServlet extends HttpServlet {
 			Employee emp = (Employee) session.getAttribute("user");
 
 			FoodOrderController foodOrderController = new FoodOrderController();
-			List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSet(emp.getUsername());
+			List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSet(emp.getEmail());
 			System.out.println(foodOrderList.size());
 
 			session.setAttribute("orderHistory", foodOrderList);

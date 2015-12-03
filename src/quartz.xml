@@ -32,7 +32,7 @@
 
         <schedule>
                 <job>
-                        <name>MyJob</name>
+                        <name>MyJob1</name>
                         <job-class>background.PaymentNotification</job-class>
                 </job>
                 <trigger>

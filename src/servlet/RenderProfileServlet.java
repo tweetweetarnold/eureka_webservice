@@ -55,9 +55,9 @@ public class RenderProfileServlet extends HttpServlet {
 
 		try {
 			Employee emp = (Employee) session.getAttribute("user");
-			String username = emp.getUsername();
+			String email = emp.getEmail();
 
-			emp = EmployeeDAO.getEmployeeByUsername(username);
+			emp = EmployeeDAO.getEmployeeByEmail(email);
 			session.setAttribute("user", emp);
 
 			response.sendRedirect("profile.jsp");

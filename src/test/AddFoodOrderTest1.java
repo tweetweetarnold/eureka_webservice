@@ -27,7 +27,7 @@ public class AddFoodOrderTest1 {
 		Food newFood2 = foodController.getFood(37);
 		Stall newStall = newFood.getStall();
 		Stall newStall2 = newFood2.getStall();
-		Employee tempEmployee = EmployeeDAO.getEmployeeByUsername("metan");
+		Employee tempEmployee = EmployeeDAO.getEmployeeByEmail("metan");
 		FoodOrderItem newFoodOrderItem = new FoodOrderItem(null, newFood, 1, null);
 		Modifier newModifier = new Modifier("LOL", "", 5, newFood);
 		ModifierChosen modifierChosen1 = new ModifierChosen(newModifier, newFoodOrderItem);

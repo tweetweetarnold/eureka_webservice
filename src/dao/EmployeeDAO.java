@@ -21,7 +21,7 @@ public class EmployeeDAO {
 	}
 
 	// Retrieve Employee from DB using Employee username
-	public static Employee getEmployeeByUsername(String username) {
+	public static Employee getEmployeeByEmail(String email) {
 		// String sqlQuery = "SELECT * FROM  employee where username=\"" +
 		// username + "\"";
 		// List<Object> lister = MyConnection.getEmployee(sqlQuery);
@@ -36,7 +36,7 @@ public class EmployeeDAO {
 		// return null;
 
 		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
-		dc.add(Restrictions.eq("username", username));
+		dc.add(Restrictions.eq("email", email));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		
 		List<Object> l = MyConnection.queryWithCriteria(dc);

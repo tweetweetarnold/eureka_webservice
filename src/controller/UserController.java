@@ -21,8 +21,8 @@ public class UserController {
 		
 	}
 	
-	public Employee retrieveEmployeeViaUsername(String username) {
-		Employee employee = EmployeeDAO.getEmployeeByUsername(username);
+	public Employee retrieveEmployeeViaUsername(String email) {
+		Employee employee = EmployeeDAO.getEmployeeByEmail(email);
 
 		return employee;
 

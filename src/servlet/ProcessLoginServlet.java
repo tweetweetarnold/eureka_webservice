@@ -61,21 +61,21 @@ public class ProcessLoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		// Getting User Input Parameters
-		String username = (String) request.getParameter("username");
+		String email = (String) request.getParameter("email");
 		String inputPwd = (String) request.getParameter("password");
 
 		try {
 			AccessController loginController = new AccessController();
 
 			// Verify user credentials. if user does not exist, returns null
-			Employee emp =  loginController.authenticateUser(username,inputPwd);
+			Employee emp = loginController.authenticateUser(email, inputPwd);
 			System.out.println("User is authenticated: " + emp.getName());
 
 			// *** For Development only ***
 			// creates a tokenID using UUID (Universalised Unique Identifier
 			// Object)
 			// the user's username is tagged at the end of the token
-			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getUsername()
+			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
 					+ "|";
 
 			// Setting user and token
@@ -104,18 +104,25 @@ public class ProcessLoginServlet extends HttpServlet {
 			System.out.println("Exception thrown. Incorrect credentials.");
 			System.out.println("Exception message: " + e.getMessage());
 			e.printStackTrace();
-			session.setAttribute("username", username);
-			//problem test here
-//			String ciphertext = PasswordService.encryptPassword(inputPwd);
-//			String decryptedLoginInput = PasswordService.decryptPassword(ciphertext);
-//			session.setAttribute("loginCipherText",ciphertext);
-//			UserController userController = new UserController();
-//			Employee tempe = userController.retrieveEmployeeViaUsername(username);
-//			String actualCiphertext = tempe.getPassword();
-//			String decryptedPassword = PasswordService.decryptPassword(actualCiphertext);
-			
+			session.setAttribute("email", email);
+			// problem test here
+			// String ciphertext = PasswordService.encryptPassword(inputPwd);
+			// String decryptedLoginInput =
+			// PasswordService.decryptPassword(ciphertext);
+			// session.setAttribute("loginCipherText",ciphertext);
+			// UserController userController = new UserController();
+			// Employee tempe =
+			// userController.retrieveEmployeeViaUsername(username);
+			// String actualCiphertext = tempe.getPassword();
+			// String decryptedPassword =
+			// PasswordService.decryptPassword(actualCiphertext);
+
 			session.setAttribute("error", "Something went wrong! Please check your credentials.");
-//			session.setAttribute("error", "Something went wrong! Please check your credentials. password input:<" + ciphertext + ">Password needed:<"+ actualCiphertext+">"+"Decrypted input:<"+decryptedLoginInput+"> User Actual Decrypted:<"+ decryptedPassword+">");
+			// session.setAttribute("error",
+			// "Something went wrong! Please check your credentials. password input:<"
+			// + ciphertext + ">Password needed:<"+
+			// actualCiphertext+">"+"Decrypted input:<"+decryptedLoginInput+"> User Actual Decrypted:<"+
+			// decryptedPassword+">");
 			response.sendRedirect("login.jsp");
 		}
 

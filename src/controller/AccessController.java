@@ -16,8 +16,8 @@ public class AccessController {
 	 * returns an Employee object upon a successful authentication, otherwise,
 	 * it will return null
 	 */
-	public Employee authenticateUser(String inputUsername, String inputPassword) {
-		Employee e = EmployeeDAO.getEmployeeByUsername(inputUsername);
+	public Employee authenticateUser(String inputEmail, String inputPassword) {
+		Employee e = EmployeeDAO.getEmployeeByEmail(inputEmail);
 		if (e != null) {
 			String employeePasswordinDB = e.getPassword();
 			// checking that the input password is correct as the password
@@ -52,14 +52,14 @@ public class AccessController {
 			throw new Exception("Failed to find company");
 		}
 		
-		Employee newEmployee = new Employee(username, encryptPassword, name, email, contactNo,
+		Employee newEmployee = new Employee(encryptPassword, name, email, contactNo,
 				company);
 		try {
 			EmployeeDAO.saveEmployee(newEmployee);
 		} catch (ConstraintViolationException e) {
 			throw new Exception("Username already exists! Please choose another username.");
 		}
-		String id = newEmployee.getUsername();
+		String id = newEmployee.getEmail();
 
 		return id;
 	}

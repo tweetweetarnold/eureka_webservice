@@ -30,8 +30,8 @@ public class FoodOrderController {
 		FoodOrderDAO.saveFoodOrder(f);
 	}
 
-	public List<FoodOrder> getFoodOrderSet(String username) {
-		return FoodOrderDAO.getFoodOrderSet(EmployeeDAO.getEmployeeByUsername(username));
+	public List<FoodOrder> getFoodOrderSet(String email) {
+		return FoodOrderDAO.getFoodOrderSet(EmployeeDAO.getEmployeeByEmail(email));
 	}
 
 	// Retrieve a FoodOrder by id
@@ -39,7 +39,7 @@ public class FoodOrderController {
 		return FoodOrderDAO.getFoodOrder(foodOrderId);
 	}
 
-	public ArrayList<FoodOrder> getFoodOrderForUsernameWeek(String username, Date sundayDate) {
+	public ArrayList<FoodOrder> getFoodOrderForUsernameWeek(String email, Date sundayDate) {
 		ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>();
 		Calendar cal = Calendar.getInstance();
 		sundayDate.setHours(10);
@@ -48,10 +48,10 @@ public class FoodOrderController {
 		cal.add(Calendar.DATE, 7);
 		Date laterDate = cal.getTime();
 		System.out.println("Start date: " + sundayDate + " End date: " + laterDate);
-		Employee tempEmployee = EmployeeDAO.getEmployeeByUsername(username);
+		Employee tempEmployee = EmployeeDAO.getEmployeeByEmail(email);
 		foodOrderList = FoodOrderDAO
 				.getFoodOrderByDateUsername(sundayDate, laterDate, tempEmployee);
-		System.out.println(foodOrderList.size() + foodOrderList.get(0).getEmployee().getUsername());
+		System.out.println(foodOrderList.size() + foodOrderList.get(0).getEmployee().getEmail());
 		System.out.println(foodOrderList.get(0).getFoodOrderList().size());
 
 		return foodOrderList;
@@ -78,7 +78,7 @@ public class FoodOrderController {
 				ArrayList<FoodOrderItem> tempFoodOrderItemList = new ArrayList<FoodOrderItem>();
 				tempFoodOrderItemList.add(foodItemd);
 				ArrayList<String> tempUserList = new ArrayList<String>();
-				tempUserList.add(tempFoodOrder.getEmployee().getUsername());
+				tempUserList.add(tempFoodOrder.getEmployee().getEmail());
 				String stallName = tempStall.getName();
 				if (!stallToFoodItemLinkedHash.containsKey(stallName)) {
 					stallToFoodItemLinkedHash.put(stallName, tempFoodOrderItemList);
@@ -172,7 +172,7 @@ public class FoodOrderController {
 				HashSet<String> usernames = new HashSet<String>();
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 					if (f.equals2(i)) {
-						String tempUsername = i.getFoodOrder().getEmployee().getUsername();
+						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
 						usernames.add(tempUsername);
 					}
 					usernamesForFoodItem.put(f, new ArrayList<String>(usernames));
@@ -269,12 +269,12 @@ public class FoodOrderController {
 			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(
 					tempFoodOrder.getFoodOrderList());
 			Employee tempEmployee = tempFoodOrder.getEmployee();
-			String username = tempEmployee.getUsername();
+			String username = tempEmployee.getEmail();
 			System.out.println(tempEmployee);
 			if (tempEmployee != null) {
 
 				if (!uniqueEmployee.contains(username)) {
-					foodOrders.put(tempFoodOrder.getEmployee().getUsername(), foodOrderList);
+					foodOrders.put(tempFoodOrder.getEmployee().getEmail(), foodOrderList);
 					uniqueEmployee.add(username);
 				} else {
 					ArrayList<FoodOrderItem> tempFoodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders

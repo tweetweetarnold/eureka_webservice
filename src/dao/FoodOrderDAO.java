@@ -47,7 +47,7 @@ public class FoodOrderDAO {
 
 	public static ArrayList<FoodOrder> getFoodOrderByDateUsername(Date earlierDate, Date laterDate,
 			Employee tempEmployee) {
-		String sqlQuery = "SELECT * FROM  foodorder where createDate>= + :date1 and createDate<=:date2";
+//		String sqlQuery = "SELECT * FROM  foodorder where createDate>= + :date1 and createDate<=:date2";
 
 		ArrayList<FoodOrder> returnList = new ArrayList<>();
 		List<Object> lister = MyConnection.getFoodForDatesAndUser(earlierDate, laterDate,

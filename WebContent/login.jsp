@@ -31,8 +31,8 @@
 			<h1 class="form-signin-heading">DABAO</h1>
 
 			<!-- User input -->
-			<label for="username" class="sr-only">Username</label>
-			<input type="text" name="username" class="form-control" placeholder="Username" value="${sessionScope.username}"
+			<label for="username" class="sr-only">Email</label>
+			<input type="email" name="email" class="form-control" placeholder="Username" value="${sessionScope.username}"
 				required
 			>
 			<label for="password" class="sr-only">Password</label>

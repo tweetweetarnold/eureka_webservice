@@ -61,7 +61,7 @@ public class Test {
 		buildingList.add("CONTROL");
 		buildingList.add("MAINTAINANCE");
 		company.setBuildingList(buildingList);
-		Employee arnold = new Employee("arnold", PasswordService.encryptPassword("1234567"),
+		Employee arnold = new Employee(PasswordService.encryptPassword("1234567"),
 				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
 		arnold.setBuilding("HQ");
 		session.save(company);

@@ -61,8 +61,8 @@ public class Test2 {
 		buildingList.add("CONTROL");
 		buildingList.add("MAINTAINANCE");
 		company.setBuildingList(buildingList);
-		Employee arnold = new Employee("arnold", PasswordService.encryptPassword("1234567"),
-				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
+		Employee arnold = new Employee(PasswordService.encryptPassword("1234567"), "Arnold Lee",
+				"arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
 
 		session.save(company);
 		session.save(arnold);
@@ -70,8 +70,6 @@ public class Test2 {
 		Admin admin = new Admin("admin", PasswordService.encryptPassword("1234567"), "admin1",
 				45678925);
 		session.save(admin);
-
-		
 
 		// **************************************** End Arnold Data
 		// ****************************************
@@ -786,10 +784,11 @@ public class Test2 {
 
 		// **************************************** End insert of mock data
 		// ****************************************
-		
-//		OrderWindow window = new OrderWindow(new DateTime(2015, 12, 2, 16, 36, 0), new DateTime(
-//				2015, 12, 5, 16, 36, 0), company, canteen1);
-//		session.save(window); // arnold test data
+
+		// OrderWindow window = new OrderWindow(new DateTime(2015, 12, 2, 16,
+		// 36, 0), new DateTime(
+		// 2015, 12, 5, 16, 36, 0), company, canteen1);
+		// session.save(window); // arnold test data
 
 		session.getTransaction().commit();
 		session.flush();
