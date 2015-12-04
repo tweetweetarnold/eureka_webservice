@@ -31,7 +31,7 @@ public class Employee {
 	// private Set<Food> favouriteList;
 	private String status;
 	private Date createDate;
-	private String building;
+	private String deliveryPoint;
 
 	public Employee() {
 	}
@@ -106,12 +106,12 @@ public class Employee {
 		this.company = company;
 	}
 
-	public String getBuilding() {
-		return building;
+	public String getDefaultDeliveryPoint() {
+		return deliveryPoint;
 	}
 
-	public void setBuilding(String building) {
-		this.building = building;
+	public void setDefaultDeliveryPoint(String deliveryPoint) {
+		this.deliveryPoint = deliveryPoint;
 	}
 
 	// public Set<Food> getFavouriteList() {

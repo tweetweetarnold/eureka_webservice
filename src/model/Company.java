@@ -29,7 +29,7 @@ public class Company {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Set<Canteen> canteenList;
 	@ElementCollection(fetch = FetchType.EAGER)
-	private Set<String> buildingList;
+	private Set<String> deliveryPointSet;
 
 	public Company() {
 
@@ -76,12 +76,14 @@ public class Company {
 	// public void setEmployeeList(Set<Employee> employeeList) {
 	// this.employeeList = employeeList;
 	// }
-	public void setBuildingList(Set<String> buildingList) {
-		this.buildingList = buildingList;
+	public void setDeliveryPointSet(Set<String> deliveryPointSet) {
+		this.deliveryPointSet = deliveryPointSet;
 	}
 
-	public Set<String> getBuildingList() {
-		return this.buildingList;
+	public Set<String> getDeliveryPointSet() {
+		System.out.println(" SHHSADdsafafsfdafdsfdsafadfadsfadsf " + this.deliveryPointSet.size());
+
+		return this.deliveryPointSet;
 	}
 
 	public Date getCreateDate() {

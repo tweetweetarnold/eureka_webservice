@@ -13,14 +13,14 @@ import model.Company;
 /**
  * Servlet implementation class ProcessSetDefaultBuilding
  */
-@WebServlet("/ProcessSetDefaultBuilding")
-public class ProcessSetDefaultBuilding extends HttpServlet {
+@WebServlet("/ProcessSetDefaultDeliveryPointServlet")
+public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProcessSetDefaultBuilding() {
+    public ProcessSetDefaultDeliveryPointServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,12 +39,12 @@ public class ProcessSetDefaultBuilding extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		String buildingName = (String) request.getParameter("building");
+		String buildingName = (String) request.getParameter("deliveryPoint");
 		String email = (String) session.getAttribute("email");
 		
 		UserController userController = new UserController();
 		
-		userController.updateDefaultBuilding(email, buildingName);
+		userController.updateDefaultDeliveryPoint(email, buildingName);
 		response.sendRedirect("login.jsp");
 		
 	}

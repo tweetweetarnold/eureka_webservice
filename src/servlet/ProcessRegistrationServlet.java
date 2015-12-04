@@ -106,7 +106,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 										"Your account has been created. Username: "
 												+ generatedEmployeeId);
 
-								response.sendRedirect("RetrieveBuildingsServlet");
+								response.sendRedirect("RetrieveDeliveryPointsServlet");
 							} else {
 								System.out.println("RegistrationServlet: Validation failed.");
 								throw new Exception("The Email that you provided is not valid");

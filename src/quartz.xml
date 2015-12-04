@@ -32,16 +32,15 @@
 
         <schedule>
                 <job>
-                        <name>MyJob1</name>
+                        <name>MyJob</name>
                         <job-class>background.PaymentNotification</job-class>
                 </job>
                 <trigger>
-                        <simple>
+                        <cron>
                                 <name>TenSecondIntervals</name>
                                 <job-name>MyJob</job-name>
-                                <repeat-count>-1</repeat-count> <!-- repeat forever  -->
-                                <repeat-interval>10000</repeat-interval>  <!--  every 10 seconds -->
-                        </simple>
+                                 <cron-expression>0 0 9 ? * MON-FRI</cron-expression>
+                        </cron>
                 </trigger>
 
         </schedule>

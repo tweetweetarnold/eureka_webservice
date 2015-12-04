@@ -24,14 +24,14 @@ import model.Company;
 /**
  * Servlet implementation class RetrieveBuildingsServlet
  */
-@WebServlet("/RetrieveBuildingsServlet")
-public class RetrieveBuildingsServlet extends HttpServlet {
+@WebServlet("/RetrieveDeliveryPointsServlet")
+public class RetrieveDeliveryPointsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RetrieveBuildingsServlet() {
+    public RetrieveDeliveryPointsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,9 +51,11 @@ public class RetrieveBuildingsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String companyCode =(String) session.getAttribute("companyCode");
+		System.out.println(companyCode + "SADA");
 		Company company = CompanyController.getCompanyByCompanyCode(companyCode);
-		Set<String> buildingSet = company.getBuildingList();
-		RequestDispatcher rd = request.getRequestDispatcher("defaultBuilding.jsp");
+		Set<String> buildingSet = company.getDeliveryPointSet();
+		System.out.println(" Servelytsfas " + buildingSet.size());
+		RequestDispatcher rd = request.getRequestDispatcher("defaultDeliveryPoint.jsp");
 		request.setAttribute("buildingSet", buildingSet);
 		rd.forward(request, response);
 		
