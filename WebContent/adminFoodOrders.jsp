@@ -43,7 +43,7 @@
 	<jsp:include page="headerfooter/adminHeader.jsp" />
 
 
-	<div class="container" style="margin-top: 50px;"" >
+	<div class="container" style="margin-top: 50px;">
 
 		<div class="row center" style="">
 			<div class="col-xs-3 center" style="float: none;">
@@ -52,8 +52,9 @@
 				</form>
 			</div>
 		</div>
-		
-		<br><br>
+
+		<br>
+		<br>
 		<div class="row center">
 			<div class="col-xs-10 col center" style="float: none;">
 				<div class="panel panel-default" style="float: none;">
@@ -61,12 +62,13 @@
 					<div class="panel-heading">
 						<div class="panel-title">
 							<%
-								if (request.getAttribute("NoOrders") == null) {
-																																		
-																			if (request.getAttribute("foodOrders") != null) {
-																				JSONObject foodOrders = (JSONObject) request.getAttribute("foodOrders");
-																				Iterator iter = foodOrders.keySet().iterator();
-																				out.println("Number of people: " + (foodOrders.size() - 1));
+								/* HttpSession session = request.getSession(); */
+													if (session.getAttribute("NoOrders") == null) {
+																																							
+														if (session.getAttribute("foodOrders") != null) {
+															JSONObject foodOrders = (JSONObject) session.getAttribute("foodOrders");
+															Iterator iter = foodOrders.keySet().iterator();
+															out.println("Number of people: " + (foodOrders.size() - 1));
 							%>
 						</div>
 					</div>
@@ -85,21 +87,21 @@
 						%>
 						<%
 							double totalPrice = 0.0;
-																int listSize = 0;
-																int number = 0;
-																while (iter.hasNext()) {
-																	String username = (String) iter.next();
-																	if (!username.equals("totalPrice")) {
-																		ArrayList<FoodOrderItem> foodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
-																				.get(username);
-																		listSize = foodOrderItemList.size();
-																		String foodName = foodOrderItemList.get(0).getFood().getName();
-																		DecimalFormat df3 = new DecimalFormat("####0.00");
+								int listSize = 0;
+								int number = 0;
+								while (iter.hasNext()) {
+									String email = (String) iter.next();
+									if (!email.equals("totalPrice")) {
+										ArrayList<FoodOrderItem> foodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
+												.get(email);
+										listSize = foodOrderItemList.size();
+										String foodName = foodOrderItemList.get(0).getFood().getName();
+										DecimalFormat df3 = new DecimalFormat("####0.00");
 						%>
 						<tr>
 							<td style="text-align: center;" rowspan=<%=listSize%>><%=++number%></td>
 							<td style="text-align: left;" rowspan=<%=listSize%>>
-								<a href="ProcessAdminGetEmployeeServlet?username=<%=username%>"><%=username%></a>
+								<a href="ProcessAdminGetEmployeeServlet?email=<%=email%>"><%=email%></a>
 							</td>
 							<td style="text-align: left;"><%=foodName%></td>
 							<td style="text-align: center;"><%=foodOrderItemList.get(0).getQuantity()%></td>
@@ -109,11 +111,11 @@
 						<tr>
 							<%
 								for (int i = 1; i < listSize; i++) {
-																			FoodOrderItem tempItem = foodOrderItemList.get(i);
-																			foodName = tempItem.getFood().getName();
-																			int quantity = tempItem.getQuantity();
-																			double price = tempItem.getPrice();
-																			DecimalFormat df2 = new DecimalFormat("####0.00");
+									FoodOrderItem tempItem = foodOrderItemList.get(i);
+									foodName = tempItem.getFood().getName();
+									int quantity = tempItem.getQuantity();
+									double price = tempItem.getPrice();
+									DecimalFormat df2 = new DecimalFormat("####0.00");
 							%>
 							<td style="text-align: left;"><%=foodName%></td>
 							<td><%=quantity%></td>
@@ -123,11 +125,11 @@
 						</tr>
 						<%
 							}
-														} else {
-															// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
-															totalPrice = (Double) foodOrders.get(username);
-														}
-													}
+							} else {
+								// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
+								totalPrice = (Double) foodOrders.get(email);
+							}
+						}
 						%>
 					</table>
 				</div>
@@ -152,7 +154,7 @@
 
 	<%
 		}
-		} else {
+			} else {
 	%>
 	<h1>No Orders Today!</h1>
 

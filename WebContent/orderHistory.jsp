@@ -51,7 +51,7 @@
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 			<c:if test="${empty sessionScope.orderHistory}">
-				<h3>You haven't ordered anything before! Go order something!</h2>
+				<h3a>You haven't ordered anything before! Go order something!</h2>
 			</c:if>
 
 			<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">
