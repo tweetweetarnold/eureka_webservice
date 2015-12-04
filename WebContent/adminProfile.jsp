@@ -47,149 +47,160 @@
 
 	<div class="container">
 		<div align="center">
-		
-		<div class="container">
-		<div class="row center">
-			<div class="col-xs-10 col center">
-				<div class="panel panel-default">
 
-					<div class="panel-heading">
-						<div class="panel-title">
-			<h1>User Profile</h1>
-			</div>
+			<div class="container">
+				<div class="row center">
+					<div class="col-xs-10 col center">
+						<div class="panel panel-default">
+
+							<div class="panel-heading">
+								<div class="panel-title">
+									<h1>User Profile</h1>
+								</div>
+							</div>
+
+							<table class="table table-striped">
+								<tr>
+									<td>Name:</td>
+									<td>
+										<c:out value="${sessionScope.name}" />
+									</td>
+								</tr>
+								<tr>
+									<td>Email:</td>
+									<td>
+										<c:out value="${sessionScope.email}" />
+									</td>
+								</tr>
+								<tr>
+									<td>Contact Number:</td>
+									<td>
+										<c:out value="${sessionScope.contactNumber}" />
+									</td>
+								</tr>
+								<tr>
+									<td>Status:</td>
+									<td>
+										<c:out value="${sessionScope.status}" />
+									</td>
+								</tr>
+								<tr>
+									<td>Amount Owed:</td>
+									<td>
+										$
+										<c:out value="${sessionScope.amountOwed}" />
+									</td>
+								</tr>
+
+							</table>
+						</div>
 					</div>
-
-			<table class="table table-striped">
-				<tr>
-					<td>Name:</td>
-					<td><%=request.getAttribute("name")%></td>
-				</tr>
-				<tr>
-					<td>Username:</td>
-					<td><%=request.getAttribute("username")%></td>
-				</tr>
-				<tr>
-					<td>Email:</td>
-					<td><%=request.getAttribute("email")%></td>
-				</tr>
-				<tr>
-					<td>Contact Number:</td>
-					<td><%=request.getAttribute("contactNumber")%></td>
-				</tr>
-				<tr>
-					<td>Status:</td>
-					<td><%=request.getAttribute("status")%></td>
-				</tr>
-				<tr>
-					<td>Amount Owed:</td>
-					<td>$<%=request.getAttribute("amountOwed")%></td>
-				</tr>
-
-			</table>
-</div></div></div></div>
-			<br> <br>
+				</div>
+			</div>
+			<br>
+			<br>
 			<H1>Order History</h1>
 			<br>
 
 			<div class="container" style="margin-top: 100px;">
-		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-			<c:forEach items="${requestScope.orderHistory}" var="order" varStatus="orderLoop">
+					<c:forEach items="${requestScope.orderHistory}" var="order" varStatus="orderLoop">
 
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
-						<h4 class="panel-title">
-							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
-								aria-expanded="false" aria-controls="collapse${orderLoop.index}"
-							>
-								<c:out value="${order.createDate}" />
-								<p style="float: right;">
-									<c:out value="${order.status}" />
-								</p>
-							</a>
-						</h4>
-					</div>
-
-					<div id="collapse${orderLoop.index}" class="panel-collapse collapse" role="tabpanel"
-						aria-labelledby="heading${orderLoop.index}"
-					>
-						<div class="panel-body">
-							<div style="font-size: 18px;">
-
-								<table>
-									<tr>
-										<td style="padding-right: 10px;">
-											<strong>Canteen:</strong>
-										</td>
-										<td>Taman Jurong Market and Food Centre</td>
-									</tr>
-									<tr>
-										<td style="padding-right: 10px;">
-											<strong>Price:</strong>
-										</td>
-										<td>
-											<fmt:formatNumber value="${order.totalPrice}" var="totalPrice" minFractionDigits="2" />
-											$
-											<c:out value="${totalPrice}" />
-										</td>
-									</tr>
-								</table>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
+								<h4 class="panel-title">
+									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
+										aria-expanded="false" aria-controls="collapse${orderLoop.index}"
+									>
+										<c:out value="${order.createDate}" />
+										<p style="float: right;">
+											<c:out value="${order.status}" />
+										</p>
+									</a>
+								</h4>
 							</div>
-							<br>
 
-							<table class="table table-striped" border="1">
-								<thead>
-									<tr>
-										<th>Stall</th>
-										<th>Food</th>
-										<th>Quantity</th>
-										<th>Price</th>
-									</tr>
-								</thead>
+							<div id="collapse${orderLoop.index}" class="panel-collapse collapse" role="tabpanel"
+								aria-labelledby="heading${orderLoop.index}"
+							>
+								<div class="panel-body">
+									<div style="font-size: 18px;">
 
-								<tbody>
-									<c:forEach items="${order.foodOrderList}" var="foodItem">
-										<tr>
-											<td>
-												<c:out value="${foodItem.food.stall.name}" />
-											</td>
-											<td>
-												<c:out value="${foodItem.food.name}" />
-												<ul>
-													<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen">
-														<li>
-															<small>
-																<c:out value="${modifierChosen.name}" />
-																<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />
-																+ $
-																<c:out value="${newModifierPrice}" />
-															</small>
-														</li>
-													</c:forEach>
-												</ul>
-											</td>
-											<td>
-												<c:out value="${foodItem.quantity}" />
-											</td>
-											<td>
-												<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
-												$
-												<c:out value="${newPrice}" />
-											</td>
-										</tr>
-									</c:forEach>
+										<table>
+											<tr>
+												<td style="padding-right: 10px;">
+													<strong>Canteen:</strong>
+												</td>
+												<td>Taman Jurong Market and Food Centre</td>
+											</tr>
+											<tr>
+												<td style="padding-right: 10px;">
+													<strong>Price:</strong>
+												</td>
+												<td>
+													<fmt:formatNumber value="${order.totalPrice}" var="totalPrice" minFractionDigits="2" />
+													$
+													<c:out value="${totalPrice}" />
+												</td>
+											</tr>
+										</table>
+									</div>
+									<br>
 
-								</tbody>
-							</table>
+									<table class="table table-striped" border="1">
+										<thead>
+											<tr>
+												<th>Stall</th>
+												<th>Food</th>
+												<th>Quantity</th>
+												<th>Price</th>
+											</tr>
+										</thead>
 
+										<tbody>
+											<c:forEach items="${order.foodOrderList}" var="foodItem">
+												<tr>
+													<td>
+														<c:out value="${foodItem.food.stall.name}" />
+													</td>
+													<td>
+														<c:out value="${foodItem.food.name}" />
+														<ul>
+															<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen">
+																<li>
+																	<small>
+																		<c:out value="${modifierChosen.name}" />
+																		<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />
+																		+ $
+																		<c:out value="${newModifierPrice}" />
+																	</small>
+																</li>
+															</c:forEach>
+														</ul>
+													</td>
+													<td>
+														<c:out value="${foodItem.quantity}" />
+													</td>
+													<td>
+														<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
+														$
+														<c:out value="${newPrice}" />
+													</td>
+												</tr>
+											</c:forEach>
+
+										</tbody>
+									</table>
+
+								</div>
+							</div>
 						</div>
-					</div>
+					</c:forEach>
+
+
 				</div>
-			</c:forEach>
-
-
-		</div>
-	</div>
+			</div>
 
 
 		</div>
