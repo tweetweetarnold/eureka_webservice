@@ -27,40 +27,44 @@ import model.Company;
 @WebServlet("/RetrieveDeliveryPointsServlet")
 public class RetrieveDeliveryPointsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RetrieveDeliveryPointsServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	CompanyController companyController = new CompanyController();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(request,response);
+	public RetrieveDeliveryPointsServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		String companyCode =(String) session.getAttribute("companyCode");
+		String companyCode = (String) session.getAttribute("companyCode");
 		System.out.println(companyCode + "SADA");
-		Company company = CompanyController.getCompanyByCompanyCode(companyCode);
+		Company company = companyController.getCompanyByCompanyCode(companyCode);
 		Set<String> buildingSet = company.getDeliveryPointSet();
 		System.out.println(" Servelytsfas " + buildingSet.size());
 		RequestDispatcher rd = request.getRequestDispatcher("defaultDeliveryPoint.jsp");
 		request.setAttribute("buildingSet", buildingSet);
 		rd.forward(request, response);
-		
-		
+
 	}
-	
 
 }
