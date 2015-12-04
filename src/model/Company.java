@@ -30,12 +30,12 @@ public class Company {
 	private Set<Canteen> canteenList;
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> buildingList;
+
 	public Company() {
 
 	}
 
-	public Company(String name, Date cutoffTime, Set<Canteen> canteenList,
-			String companyCode) {
+	public Company(String name, Date cutoffTime, Set<Canteen> canteenList, String companyCode) {
 		super();
 		this.name = name;
 		// this.employeeList = new HashSet<>();
@@ -53,6 +53,14 @@ public class Company {
 		this.companyCode = companyCode;
 	}
 
+	public int getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -68,14 +76,14 @@ public class Company {
 	// public void setEmployeeList(Set<Employee> employeeList) {
 	// this.employeeList = employeeList;
 	// }
-	public void setBuildingList(Set<String> buildingList){
+	public void setBuildingList(Set<String> buildingList) {
 		this.buildingList = buildingList;
 	}
-	
-	public Set<String> getBuildingList(){
+
+	public Set<String> getBuildingList() {
 		return this.buildingList;
 	}
-	
+
 	public Date getCreateDate() {
 		return createDate;
 	}
