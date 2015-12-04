@@ -2,6 +2,7 @@ package controller;
 
 import org.hibernate.exception.ConstraintViolationException;
 
+import services.AESAlgorithm;
 import services.PasswordService;
 import model.Admin;
 import model.Company;
@@ -18,13 +19,19 @@ public class AccessController {
 	 */
 	public Employee authenticateUser(String inputEmail, String inputPassword) {
 		Employee e = EmployeeDAO.getEmployeeByEmail(inputEmail);
-		if (e != null) {
-			String employeePasswordinDB = e.getPassword();
-			// checking that the input password is correct as the password
-			// stored in DataBase
-			if (inputPassword.equals(employeePasswordinDB)) {
-				return e;
+		try {
+			if (e != null) {
+				AESAlgorithm aesAlgo = new AESAlgorithm();
+				String employeePasswordinDB = e.getPassword();
+				String password = aesAlgo.Decrypt(employeePasswordinDB);
+				// checking that the input password is correct as the password
+				// stored in DataBase
+				if (inputPassword.equals(password)) {
+					return e;
+				}
 			}
+		} catch (Exception ex) {
+
 		}
 		return null;
 	}
@@ -40,10 +47,10 @@ public class AccessController {
 		return null;
 	}
 
-	public String registerUser(String password, String name, String email, long contactNo,
-			String companyCode) throws Exception {
-
-		String encryptPassword = PasswordService.encryptPassword(password);
+	public String registerUser(String password, String name, String email, long contactNo, String companyCode)
+			throws Exception {
+		AESAlgorithm aesAlgo = new AESAlgorithm();
+		String encryptPassword = aesAlgo.encrypt(password);
 		Company company = null;
 
 		try {
