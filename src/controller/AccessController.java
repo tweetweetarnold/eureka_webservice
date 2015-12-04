@@ -1,17 +1,19 @@
 package controller;
 
-import org.hibernate.exception.ConstraintViolationException;
-
-import services.PasswordService;
 import model.Admin;
 import model.Company;
 import model.Employee;
+
+import org.hibernate.exception.ConstraintViolationException;
+
+import services.PasswordService;
 import dao.AdminDAO;
 import dao.EmployeeDAO;
 
 public class AccessController {
 	EmployeeDAO employeeDAO = new EmployeeDAO();
 	AdminDAO adminDAO = new AdminDAO();
+	CompanyController companyController = new CompanyController();
 
 	/*
 	 * This method takes in userid and password for authentication. This method
@@ -20,13 +22,19 @@ public class AccessController {
 	 */
 	public Employee authenticateUser(String inputEmail, String inputPassword) {
 		Employee e = employeeDAO.getEmployeeByEmail(inputEmail);
-		if (e != null) {
-			String employeePasswordinDB = e.getPassword();
-			// checking that the input password is correct as the password
-			// stored in DataBase
-			if (inputPassword.equals(employeePasswordinDB)) {
-				return e;
+		try {
+			if (e != null) {
+				AESAlgorithm aesAlgo = new AESAlgorithm();
+				String employeePasswordinDB = e.getPassword();
+				String password = aesAlgo.Decrypt(employeePasswordinDB);
+				// checking that the input password is correct as the password
+				// stored in DataBase
+				if (inputPassword.equals(password)) {
+					return e;
+				}
 			}
+		} catch (Exception ex) {
+
 		}
 		return null;
 	}
@@ -44,10 +52,8 @@ public class AccessController {
 
 	public String registerUser(String password, String name, String email, long contactNo,
 			String companyCode) throws Exception {
-
-		CompanyController companyController = new CompanyController();
-
-		String encryptPassword = PasswordService.encryptPassword(password);
+		AESAlgorithm aesAlgo = new AESAlgorithm();
+		String encryptPassword = aesAlgo.encrypt(password);
 		Company company = null;
 
 		try {
