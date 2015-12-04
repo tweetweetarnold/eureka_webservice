@@ -17,22 +17,23 @@ import connection.MyConnection;
 import dao.OrderWindowDAO;
 
 public class OrderWindowController {
+	OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
 
-	public static void createNewOrderindow(DateTime startDate, DateTime endDate, Company company,
+	public void createNewOrderindow(DateTime startDate, DateTime endDate, Company company,
 			Canteen canteen) {
-		OrderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen));
+		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen));
 	}
 
-	public static void createNewOrderWindow(DateTime startDate, Duration duration, Company company,
+	public void createNewOrderWindow(DateTime startDate, Duration duration, Company company,
 			Canteen canteen) {
-		OrderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen));
+		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen));
 	}
 
 	// Check for any active window under given company
-	public static boolean checkForActiveWindow(Company company) {
+	public boolean checkForActiveWindow(Company company) {
 		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
 		dc.add(Restrictions.eq("companyId", company.getCompanyId()));
-//		dc.add(Restrictions.eq("companyId", company.getCompanyId()));
+		// dc.add(Restrictions.eq("status", company.getCompanyId()));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);

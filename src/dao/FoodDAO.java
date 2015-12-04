@@ -5,26 +5,23 @@ import connection.MyConnection;
 
 public class FoodDAO {
 
-	public FoodDAO() {
-	}
-
 	// Retrieve Food from the DB with foodID
-	public static Food getFood(int foodId) {
+	public Food getFood(int foodId) {
 		return (Food) MyConnection.get(Food.class, foodId);
 	}
 
 	// Save new Food in the DB
-	public static void saveFood(Food f) {
+	public void saveFood(Food f) {
 		MyConnection.save(f);
 	}
 
 	// Update existing Food in the DB
-	public static void updateFood(Food f) {
+	public void updateFood(Food f) {
 		MyConnection.update(f);
 	}
 
 	// Delete Food from the DB
-	public static void deleteFood(Food f) {
+	public void deleteFood(Food f) {
 		MyConnection.delete(f);
 	}
 }

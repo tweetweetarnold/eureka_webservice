@@ -10,9 +10,10 @@ import model.Stall;
 import dao.CanteenDAO;
 
 public class CanteenController {
+	CanteenDAO canteenDAO = new CanteenDAO();
 
 	public List<Canteen> retrieveAllCanteens() {
-		List<Canteen> list = CanteenDAO.getAllCanteens();
+		List<Canteen> list = canteenDAO.getAllCanteens();
 		System.out.println(list);
 		return list;
 	}

@@ -18,6 +18,8 @@ import model.Employee;
 @WebServlet("/RenderProfileServlet")
 public class RenderProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	EmployeeDAO employeeDAO = new EmployeeDAO();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -57,7 +59,7 @@ public class RenderProfileServlet extends HttpServlet {
 			Employee emp = (Employee) session.getAttribute("user");
 			String email = emp.getEmail();
 
-			emp = EmployeeDAO.getEmployeeByEmail(email);
+			emp = employeeDAO.getEmployeeByEmail(email);
 			session.setAttribute("user", emp);
 
 			response.sendRedirect("profile.jsp");

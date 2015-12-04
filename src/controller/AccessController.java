@@ -10,6 +10,8 @@ import dao.AdminDAO;
 import dao.EmployeeDAO;
 
 public class AccessController {
+	EmployeeDAO employeeDAO = new EmployeeDAO();
+	AdminDAO adminDAO = new AdminDAO();
 
 	/*
 	 * This method takes in userid and password for authentication. This method
@@ -17,7 +19,7 @@ public class AccessController {
 	 * it will return null
 	 */
 	public Employee authenticateUser(String inputEmail, String inputPassword) {
-		Employee e = EmployeeDAO.getEmployeeByEmail(inputEmail);
+		Employee e = employeeDAO.getEmployeeByEmail(inputEmail);
 		if (e != null) {
 			String employeePasswordinDB = e.getPassword();
 			// checking that the input password is correct as the password
@@ -30,7 +32,7 @@ public class AccessController {
 	}
 
 	public Admin authenticateAdmin(String inputUsername, String inputPassword) {
-		Admin admin = AdminDAO.getAdminByUsername(inputUsername);
+		Admin admin = adminDAO.getAdminByUsername(inputUsername);
 		if (admin != null) {
 			String adminPasswordinDB = admin.getPassword();
 			if (inputPassword.equals(adminPasswordinDB)) {
@@ -43,18 +45,20 @@ public class AccessController {
 	public String registerUser(String password, String name, String email, long contactNo,
 			String companyCode) throws Exception {
 
+		CompanyController companyController = new CompanyController();
+
 		String encryptPassword = PasswordService.encryptPassword(password);
 		Company company = null;
 
 		try {
-			company = CompanyController.getCompanyByCompanyCode(companyCode);
+			company = companyController.getCompanyByCompanyCode(companyCode);
 		} catch (Exception exception) {
 			throw new Exception("Failed to find company");
 		}
 
 		Employee newEmployee = new Employee(encryptPassword, name, email, contactNo, company);
 		try {
-			EmployeeDAO.saveEmployee(newEmployee);
+			employeeDAO.saveEmployee(newEmployee);
 		} catch (ConstraintViolationException e) {
 			throw new Exception("Username already exists! Please choose another username.");
 		}
@@ -67,7 +71,7 @@ public class AccessController {
 		String encryptPassword = PasswordService.encryptPassword(password);
 
 		Admin newAdmin = new Admin(username, encryptPassword, name, contactNo);
-		AdminDAO.saveAdmin(newAdmin);
+		adminDAO.saveAdmin(newAdmin);
 		String id = newAdmin.getUsername();
 
 		return id;

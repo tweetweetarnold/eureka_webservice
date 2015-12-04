@@ -26,6 +26,7 @@ import dao.EmployeeDAO;
 @WebServlet("/AddNewFoodOrderServlet")
 public class AddNewFoodOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	EmployeeDAO employeeDAO = new EmployeeDAO();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -80,7 +81,7 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 			System.out.println("New FoodOrder created");
 
 			employee.setAmountOwed(employee.getAmountOwed() + myFoodOrder.getTotalPrice());
-			EmployeeDAO.updateEmployee(employee);
+			employeeDAO.updateEmployee(employee);
 			System.out.println("Employee amount owed updated");
 
 			// Process new FoodOrder

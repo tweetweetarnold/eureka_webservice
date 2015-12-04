@@ -10,16 +10,12 @@ import connection.MyConnection;
 
 public class FoodOrderDAO {
 
-	public FoodOrderDAO() {
-
-	}
-
 	// Retrieve FoodOrder from the DB with foodOrderID
-	public static FoodOrder getFoodOrder(int foodOrderId) {
+	public FoodOrder getFoodOrder(int foodOrderId) {
 		return (FoodOrder) MyConnection.get(FoodOrder.class, foodOrderId);
 	}
 
-	public static List<FoodOrder> getFoodOrderSet(Employee employee) {
+	public List<FoodOrder> getFoodOrderSet(Employee employee) {
 		List<FoodOrder> returnList = new ArrayList<>();
 
 		List<Object> hiberList = MyConnection.getFoodOrderList(employee);
@@ -33,8 +29,7 @@ public class FoodOrderDAO {
 
 	// Retrive FoodOrders from the DB between two datetimes with format
 	// "yyyy-MM-dd hh:mm:ss"
-
-	public static List<FoodOrder> getFoodOrderByDate(Date past, Date present) {
+	public List<FoodOrder> getFoodOrderByDate(Date past, Date present) {
 		List<FoodOrder> returnList = new ArrayList<>();
 		List<Object> lister = MyConnection.getFoodOrderBetween(past, present);
 		if (lister.size() != 0) {
@@ -45,9 +40,8 @@ public class FoodOrderDAO {
 		return returnList;
 	}
 
-	public static ArrayList<FoodOrder> getFoodOrderByDateUsername(Date earlierDate, Date laterDate,
+	public ArrayList<FoodOrder> getFoodOrderByDateUsername(Date earlierDate, Date laterDate,
 			Employee tempEmployee) {
-//		String sqlQuery = "SELECT * FROM  foodorder where createDate>= + :date1 and createDate<=:date2";
 
 		ArrayList<FoodOrder> returnList = new ArrayList<>();
 		List<Object> lister = MyConnection.getFoodForDatesAndUser(earlierDate, laterDate,
@@ -60,7 +54,7 @@ public class FoodOrderDAO {
 		return returnList;
 	}
 
-	public static List<FoodOrder> getFoodOrderByDateAndTime(String past, String present) {
+	public List<FoodOrder> getFoodOrderByDateAndTime(String past, String present) {
 		String sqlQuery = "SELECT * FROM  foodorder where createDate>= + :date1 and createDate<=:date2";
 
 		List<FoodOrder> returnList = new ArrayList<>();
@@ -74,7 +68,7 @@ public class FoodOrderDAO {
 	}
 
 	// Retrieve FoodOrders from the DB by date with fomat "yyyy-MM-dd"
-	public static List<FoodOrder> getFoodOrderByDate(String date) {
+	public List<FoodOrder> getFoodOrderByDate(String date) {
 		String sqlQuery = "SELECT * FROM  foodorder where createDate>=\"" + date + "\"";
 		List<FoodOrder> returnList = new ArrayList<>();
 		List<Object> lister = MyConnection.get(sqlQuery);
@@ -87,17 +81,17 @@ public class FoodOrderDAO {
 	}
 
 	// Save new FoodOrder to DB
-	public static void saveFoodOrder(FoodOrder f) {
+	public void saveFoodOrder(FoodOrder f) {
 		MyConnection.save(f);
 	}
 
 	// Update existing FoodOrder in DB
-	public static void updateFoodOrder(FoodOrder f) {
+	public void updateFoodOrder(FoodOrder f) {
 		MyConnection.update(f);
 	}
 
 	// Delete FoodOrder from DB
-	public static void deleteFoodOrder(FoodOrder f) {
+	public void deleteFoodOrder(FoodOrder f) {
 		MyConnection.delete(f);
 	}
 

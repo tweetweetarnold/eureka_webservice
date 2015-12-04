@@ -21,22 +21,22 @@ import dao.FoodOrderDAO;
 
 public class FoodOrderController {
 	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
+	EmployeeDAO employeeDAO = new EmployeeDAO();
 
 	public FoodOrderController() {
-
 	}
 
 	public void addFoodOrder(FoodOrder f) {
-		FoodOrderDAO.saveFoodOrder(f);
+		foodOrderDAO.saveFoodOrder(f);
 	}
 
 	public List<FoodOrder> getFoodOrderSet(String email) {
-		return FoodOrderDAO.getFoodOrderSet(EmployeeDAO.getEmployeeByEmail(email));
+		return foodOrderDAO.getFoodOrderSet(employeeDAO.getEmployeeByEmail(email));
 	}
 
 	// Retrieve a FoodOrder by id
 	public FoodOrder getFoodOrder(int foodOrderId) {
-		return FoodOrderDAO.getFoodOrder(foodOrderId);
+		return foodOrderDAO.getFoodOrder(foodOrderId);
 	}
 
 	public ArrayList<FoodOrder> getFoodOrderForUsernameWeek(String email, Date sundayDate) {
@@ -48,8 +48,8 @@ public class FoodOrderController {
 		cal.add(Calendar.DATE, 7);
 		Date laterDate = cal.getTime();
 		System.out.println("Start date: " + sundayDate + " End date: " + laterDate);
-		Employee tempEmployee = EmployeeDAO.getEmployeeByEmail(email);
-		foodOrderList = FoodOrderDAO
+		Employee tempEmployee = employeeDAO.getEmployeeByEmail(email);
+		foodOrderList = foodOrderDAO
 				.getFoodOrderByDateUsername(sundayDate, laterDate, tempEmployee);
 		System.out.println(foodOrderList.size() + foodOrderList.get(0).getEmployee().getEmail());
 		System.out.println(foodOrderList.get(0).getFoodOrderList().size());
@@ -121,34 +121,6 @@ public class FoodOrderController {
 					uniqueFoodOrderItem.add(i);
 				}
 
-				// FoodOrderItem currentFoodOrderItem = i;
-				// int quantity = 0;
-				// Iterator uniqueIter = tempFoodOrderItemForDisplay.iterator();
-				// while (uniqueIter.hasNext()) {
-				// FoodOrderItem tempFoodOrderItem = (FoodOrderItem)
-				// uniqueIter.next();
-				// if (tempFoodOrderItem.equals(currentFoodOrderItem)) {
-				// System.out.println("Equals? " +
-				// tempFoodOrderItem.equals(currentFoodOrderItem));
-				// quantity+=tempFoodOrderItem.getQuantity()+currentFoodOrderItem.getQuantity();
-				//
-				// }
-				// }
-				//
-				//
-				// int equalsCount2 = 0;
-				// uniqueIter = quantityForFoodOrderItem.keySet().iterator();
-				// while (uniqueIter.hasNext()) {
-				// FoodOrderItem tempFoodOrderItem = (FoodOrderItem)
-				// uniqueIter.next();
-				// if (tempFoodOrderItem.equals(i)) {
-				// equalsCount2++;
-				// }
-				// }
-				// if (equalsCount2 == 0) {
-				// quantityForFoodOrderItem.put(i, quantity/2);
-				// }
-
 			}
 
 			for (FoodOrderItem tempItem : uniqueFoodOrderItem) {
@@ -158,12 +130,8 @@ public class FoodOrderController {
 						tempquantity++;
 					}
 				}
-				System.out.println("HIHIHI " + tempquantity);
 				quantityForFoodOrderItem.put(tempItem, tempquantity);
 			}
-
-			System.out.println("Number of unique1 FoodOrderItems :))))))))))):"
-					+ uniqueFoodOrderItem.size());
 
 			ArrayList<FoodOrderItem> uniqueFoodOrderItems = new ArrayList<FoodOrderItem>(
 					quantityForFoodOrderItem.keySet());
@@ -179,8 +147,6 @@ public class FoodOrderController {
 				}
 			}
 
-			System.out.println("Number of unique FoodOrderItems :))))))))))):"
-					+ uniqueFoodOrderItems.size());
 			FoodDisplayObject tempFoodDisplay = new FoodDisplayObject(count++);
 			tempFoodDisplay.setStallName(stallName);
 			tempFoodDisplay.setFoodOrderItem(uniqueFoodOrderItems);
@@ -188,7 +154,6 @@ public class FoodOrderController {
 			tempFoodDisplay.setQuantity(quantityForFoodOrderItem);
 			foodDisplayList.add(tempFoodDisplay);
 		}
-
 		return foodDisplayList;
 	}
 
@@ -220,10 +185,7 @@ public class FoodOrderController {
 			earlierDate = cal.getTime();
 		}
 
-		System.out.println(earlierDate + " " + laterDate);
-
-		return FoodOrderDAO.getFoodOrderByDate(laterDate, earlierDate);
-
+		return foodOrderDAO.getFoodOrderByDate(laterDate, earlierDate);
 	}
 
 	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall() {

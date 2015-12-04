@@ -5,32 +5,29 @@ import connection.MyConnection;
 
 public class CompanyDAO {
 
-	public CompanyDAO() {
-	}
-
 	// Retrieve Company from the DB with companyID
-	public static Company getCompany(int companyId) {
+	public Company getCompany(int companyId) {
 		return (Company) MyConnection.get(Company.class, companyId);
 	}
-	
-	public static Company getCompanyByCompanyCode(String companyCode) {
+
+	public Company getCompanyByCompanyCode(String companyCode) {
 		System.out.println(companyCode);
 		return (Company) MyConnection.getCompanyByCompanyCode(companyCode);
-		
+
 	}
 
 	// Save new Company to the DB
-	public static void saveCompany(Company c) {
+	public void saveCompany(Company c) {
 		MyConnection.save(c);
 	}
 
 	// Update existing Company in the DB
-	public static void updateCompany(Company c) {
+	public void updateCompany(Company c) {
 		MyConnection.update(c);
 	}
 
 	// Delete Company from the DB
-	public static void deleteCompany(Company c) {
+	public void deleteCompany(Company c) {
 		MyConnection.delete(c);
 	}
 }

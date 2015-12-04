@@ -26,6 +26,8 @@ import dao.FoodDAO;
 public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	FoodDAO foodDAO = new FoodDAO();
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -84,7 +86,7 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 			// System.out.println("chosenFood: " + food.getName() + ", id: " +
 			// food.getFoodId()); // testing
 
-			Food food = FoodDAO.getFood(Integer.parseInt(foodId));
+			Food food = foodDAO.getFood(Integer.parseInt(foodId));
 			System.out.println("food retrieved: " + food.getName());
 
 			// Retrieve user's current food orders

@@ -16,10 +16,11 @@ public class AddFoodOrderTest{
 	public static void main(String[] args){
 		System.out.println("Starting Test");
 		FoodController foodController = new FoodController();
+		EmployeeDAO employeeDAO = new EmployeeDAO();
 		//fan choy
 		Food newFood = foodController.getFood(36);
 		Stall newStall = newFood.getStall();
-		Employee tempEmployee = EmployeeDAO.getEmployeeByEmail("metan");
+		Employee tempEmployee = employeeDAO.getEmployeeByEmail("metan");
 		FoodOrderItem newFoodOrderItem = new FoodOrderItem(null, newFood, 1, null);
 		HashSet<FoodOrderItem> foodOrderItemSet = new HashSet<FoodOrderItem>();
 		foodOrderItemSet.add(newFoodOrderItem);
