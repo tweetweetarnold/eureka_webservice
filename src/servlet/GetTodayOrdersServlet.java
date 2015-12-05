@@ -53,11 +53,8 @@ public class GetTodayOrdersServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		FoodOrderController foodOrderController = new FoodOrderController();
-		JSONObject json = null;
 		try {
-			json = new JSONObject(foodOrderController.getFoodOrderToday());
-
-			session.setAttribute("foodOrders", json);
+			session.setAttribute("foodOrders", foodOrderController.getFoodOrderToday());
 			response.sendRedirect("adminFoodOrders.jsp");
 		} catch (Exception e) {
 			session.setAttribute("NoOrders", "There are no orders for today");

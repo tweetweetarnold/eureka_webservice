@@ -22,7 +22,7 @@ public class FoodOrder {
 	private int foodOrderId;
 	private String status;
 	@OneToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "username")
+	@JoinColumn(name = "email")
 	private Employee employee;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")
 	private Set<FoodOrderItem> foodOrderList;

@@ -1,205 +1,454 @@
 <!DOCTYPE html>
-<%@ page import="model.*"%>
-<%@page import="org.json.simple.*"%>
-<%@ page import="java.util.*"%>
-<%@ page import="java.text.*"%>
-<%@include file="adminProtect.jsp"%>
 <html lang="en">
+
+<%@include file="adminProtect.jsp"%>
+
 <head>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
 
 <title>DABAO</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+>
+
+<!-- MetisMenu CSS -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css"
+	rel="stylesheet"
+>
+
+<!-- Timeline CSS -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/timeline.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Morris Charts CSS -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css"
+>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<script src="resources/js/jquery-1.11.3.js"></script>
-<script src="resources/js/dabao/dabao.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-
-<link href="resources/css/dabao/dabao.css" rel="stylesheet">
-<link href="resources/css/dabao/starter-template.css" rel="stylesheet">
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body>
 
-	<!-- header -->
-	<jsp:include page="headerfooter/adminHeader.jsp" />
+	<div id="wrapper">
+
+		<%@include file="headerfooter/adminHeader2.jsp"%>
 
 
-	<div class="container" style="margin-top: 50px;">
-
-		<div class="row center" style="">
-			<div class="col-xs-3 center" style="float: none;">
-				<form action="RetrieveFoodOrdersServlet" method="post">
-					<button style="margin: 0px, auto;" type="submit" class="btn btn-lg btn-success btn-block">Group by stalls</button>
-				</form>
-			</div>
-		</div>
-
-		<br>
-		<br>
-		<div class="row center">
-			<div class="col-xs-10 col center" style="float: none;">
-				<div class="panel panel-default" style="float: none;">
-
-					<div class="panel-heading">
-						<div class="panel-title">
-							<%
-								/* HttpSession session = request.getSession(); */
-													if (session.getAttribute("NoOrders") == null) {
-																																							
-														if (session.getAttribute("foodOrders") != null) {
-															JSONObject foodOrders = (JSONObject) session.getAttribute("foodOrders");
-															Iterator iter = foodOrders.keySet().iterator();
-															out.println("Number of people: " + (foodOrders.size() - 1));
-							%>
-						</div>
-					</div>
-
-					<table class="table table-striped">
-
-						<tr>
-							<th style="text-align: center;">Number</th>
-							<th style="text-align: left;">Name</th>
-							<th style="text-align: left;">Items</th>
-							<th style="text-align: center;">Quantity</th>
-							<th style="text-align: center;">Price</th>
-						</tr>
-						<%
-							
-						%>
-						<%
-							double totalPrice = 0.0;
-								int listSize = 0;
-								int number = 0;
-								while (iter.hasNext()) {
-									String email = (String) iter.next();
-									if (!email.equals("totalPrice")) {
-										ArrayList<FoodOrderItem> foodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
-												.get(email);
-										listSize = foodOrderItemList.size();
-										String foodName = foodOrderItemList.get(0).getFood().getName();
-										DecimalFormat df3 = new DecimalFormat("####0.00");
-						%>
-						<tr>
-							<td style="text-align: center;" rowspan=<%=listSize%>><%=++number%></td>
-							<td style="text-align: left;" rowspan=<%=listSize%>>
-								<a href="ProcessAdminGetEmployeeServlet?email=<%=email%>"><%=email%></a>
-							</td>
-							<td style="text-align: left;"><%=foodName%></td>
-							<td style="text-align: center;"><%=foodOrderItemList.get(0).getQuantity()%></td>
-							<td style="text-align: center;">
-								$<%=df3.format(foodOrderItemList.get(0).getPrice())%></td>
-						</tr>
-						<tr>
-							<%
-								for (int i = 1; i < listSize; i++) {
-									FoodOrderItem tempItem = foodOrderItemList.get(i);
-									foodName = tempItem.getFood().getName();
-									int quantity = tempItem.getQuantity();
-									double price = tempItem.getPrice();
-									DecimalFormat df2 = new DecimalFormat("####0.00");
-							%>
-							<td style="text-align: left;"><%=foodName%></td>
-							<td><%=quantity%></td>
-							<td>
-								$<%=df2.format(price)%></td>
-
-						</tr>
-						<%
-							}
-							} else {
-								// 						totalPrice =Double.parseDouble((String)foodOrders.get(username));
-								totalPrice = (Double) foodOrders.get(email);
-							}
-						}
-						%>
-					</table>
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Tables</h1>
 				</div>
+				<!-- /.col-lg-12 -->
 			</div>
+			<!-- /.row -->
+
+
+			<c:set scope="session" value="foodOrders" var="foodOrdersList" />
+
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">DataTables Advanced Tables</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<div class="dataTable_wrapper">
+								<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+									<thead>
+										<tr>
+											<th>Number</th>
+											<th>Name</th>
+											<th>Item(s)</th>
+											<th>Quantity</th>
+											<th>Price</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${foodOrdersList}" var="order" varStatus="loop">
+											<tr class="odd gradeX">
+												<td>
+													<c:out value="${loop.index + 1}" />
+												</td>
+												<td>hi</td>
+												<td>Win 95+</td>
+												<td class="center">4</td>
+												<td class="center">4</td>
+											</tr>
+										</c:forEach>
+										<tr class="odd gradeX">
+											<td>Trident</td>
+											<td>Internet Explorer 4.0</td>
+											<td>Win 95+</td>
+											<td class="center">4</td>
+											<td class="center">X</td>
+										</tr>
+										<tr class="even gradeC">
+											<td>Trident</td>
+											<td>Internet Explorer 5.0</td>
+											<td>Win 95+</td>
+											<td class="center">5</td>
+											<td class="center">C</td>
+										</tr>
+										<tr class="odd gradeA">
+											<td>Trident</td>
+											<td>Internet Explorer 5.5</td>
+											<td>Win 95+</td>
+											<td class="center">5.5</td>
+											<td class="center">A</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.table-responsive -->
+							<div class="well">
+								<h4>DataTables Usage Information</h4>
+								<p>
+									DataTables is a very flexible, advanced tables plugin for jQuery. In SB Admin, we are using a specialized
+									version of DataTables built for Bootstrap 3. We have also customized the table headings to use Font Awesome
+									icons in place of images. For complete documentation on DataTables, visit their website at
+									<a target="_blank" href="https://datatables.net/">https://datatables.net/</a>
+									.
+								</p>
+								<a class="btn btn-default btn-lg btn-block" target="_blank" href="https://datatables.net/">View DataTables
+									Documentation</a>
+							</div>
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+
+
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">Kitchen Sink</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Username</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Jacob</td>
+											<td>Thornton</td>
+											<td>@fat</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>Larry</td>
+											<td>the Bird</td>
+											<td>@twitter</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.table-responsive -->
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">Basic Table</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Username</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Jacob</td>
+											<td>Thornton</td>
+											<td>@fat</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>Larry</td>
+											<td>the Bird</td>
+											<td>@twitter</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.table-responsive -->
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-6 -->
+			</div>
+			<!-- /.row -->
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">Striped Rows</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Username</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Jacob</td>
+											<td>Thornton</td>
+											<td>@fat</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>Larry</td>
+											<td>the Bird</td>
+											<td>@twitter</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.table-responsive -->
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">Bordered Table</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<div class="table-responsive table-bordered">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Username</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Jacob</td>
+											<td>Thornton</td>
+											<td>@fat</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>Larry</td>
+											<td>the Bird</td>
+											<td>@twitter</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.table-responsive -->
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-6 -->
+			</div>
+			<!-- /.row -->
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">Hover Rows</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Username</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Jacob</td>
+											<td>Thornton</td>
+											<td>@fat</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>Larry</td>
+											<td>the Bird</td>
+											<td>@twitter</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.table-responsive -->
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">Context Classes</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Username</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="success">
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr class="info">
+											<td>2</td>
+											<td>Jacob</td>
+											<td>Thornton</td>
+											<td>@fat</td>
+										</tr>
+										<tr class="warning">
+											<td>3</td>
+											<td>Larry</td>
+											<td>the Bird</td>
+											<td>@twitter</td>
+										</tr>
+										<tr class="danger">
+											<td>4</td>
+											<td>John</td>
+											<td>Smith</td>
+											<td>@jsmith</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.table-responsive -->
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-6 -->
+			</div>
+			<!-- /.row -->
 		</div>
+		<!-- /#page-wrapper -->
+
 	</div>
-	<%
-		DecimalFormat df = new DecimalFormat("####0.00");
-	%>
-	</div>
+	<!-- /#wrapper -->
 
 
+	<!-- jQuery -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
 
-	<div class="row center">
-		<div class="col-xs-10 col center" style="float: none;">
-			<h3>
-				Total Price : $<%=df.format(totalPrice)%></h3>
-		</div>
-	</div>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+	<!-- Metis Menu Plugin JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
+	<!-- Morris Charts JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
+	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
+	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 
-	<%
-		}
-			} else {
-	%>
-	<h1>No Orders Today!</h1>
-
-	<%
-		}
-	%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-	<!--     <script src="../../dist/js/bootstrap.min.js"></script> -->
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<!--     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
-
-
-	<!-- Google Analytics -->
-	<script>
-		(function(i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r;
-			i[r] = i[r] || function() {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-			a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore(a, m)
-		})(window, document, 'script',
-				'//www.google-analytics.com/analytics.js', 'ga');
-		ga('create', 'UA-68676403-1', 'auto');
-		ga('send', 'pageview');
-	</script>
-
+	<!-- Custom Theme JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 </body>
+
 </html>
