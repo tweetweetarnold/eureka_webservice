@@ -52,16 +52,35 @@
 		<br>
 
 		<!-- PayPal -->
-		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-			<input type="hidden" name="cmd" value="_s-xclick">
-			<input type="hidden" name="hosted_button_id" value="3XYC3F6Q6QL54">
-			<input type="image" src="https://www.paypalobjects.com/en_GB/SG/i/btn/btn_buynowCC_LG.gif" border="0" name="submit"
-				alt="PayPal – The safer, easier way to pay online."
-			>
-			<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-		</form>
+		
 		<!-- End of PayPal -->
+		<form action="${initParam['posturl']}" method="post">
+		<input type="hidden" name="upload" value="1"/>
+		<input type="hidden" name="return" value="${initParam['returnurl']}"/>
+		<input type="hidden" name="cmd" value="_cart"/>
+		<input type="hidden" name="business" value="${initParam['business']}"/>
+		
+		<c:set var="count" value="0" />
+		
 
+		<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">		
+			<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
+				<c:set var="count" value="${count + 1}" />
+				<c:out value="${count}"/>
+				<c:out value="${foodItem.food.stall.name}" />
+				<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${foodItem.food.name}" />">
+				<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen" varStatus="modifierChosenLoop">
+					
+					<input type="hidden" name="modifier_name_${modifierChosenLoop.index+1}" value="<c:out value="${modifierChosen.name}" />
+					<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />+$<c:out value="${newModifierPrice}" />">			
+				</c:forEach>
+				<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${foodItem.quantity}" />">
+				<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
+				<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
+			</c:forEach>
+		</c:forEach>
+		<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
+		</form>
 	</div>
 
 
