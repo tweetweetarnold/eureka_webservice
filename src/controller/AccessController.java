@@ -15,6 +15,7 @@ public class AccessController {
 	EmployeeDAO employeeDAO = new EmployeeDAO();
 	AdminDAO adminDAO = new AdminDAO();
 	CompanyController companyController = new CompanyController();
+	AESAlgorithm aesAlgo = new AESAlgorithm();
 
 	/*
 	 * This method takes in userid and password for authentication. This method
@@ -22,20 +23,19 @@ public class AccessController {
 	 * it will return null
 	 */
 	public Employee authenticateUser(String inputEmail, String inputPassword) {
-		Employee e = employeeDAO.getEmployeeByEmail(inputEmail);
+		Employee emp = employeeDAO.getEmployeeByEmail(inputEmail);
 		try {
-			if (e != null) {
-				AESAlgorithm aesAlgo = new AESAlgorithm();
-				String employeePasswordinDB = e.getPassword();
-				String password = aesAlgo.Decrypt(employeePasswordinDB);
+			if (emp != null) {
+				String password = emp.getPassword();
 				// checking that the input password is correct as the password
 				// stored in DataBase
-				if (inputPassword.equals(password)) {
-					return e;
+				if (aesAlgo.encrypt(inputPassword).equals(password)) {
+					return emp;
 				}
 			}
-		} catch (Exception ex) {
-
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -53,7 +53,6 @@ public class AccessController {
 
 	public String registerUser(String password, String name, String email, long contactNo,
 			String companyCode) throws Exception {
-		AESAlgorithm aesAlgo = new AESAlgorithm();
 		String encryptPassword = aesAlgo.encrypt(password);
 		Company company = null;
 

@@ -4,26 +4,27 @@
 		var endPath = fullPath.substring(fullPath.lastIndexOf("/") + 1,
 				fullPath.length);
 
-		var pages = [ ["GetTodayOrdersServlet","Todays Orders" ] ];
+		var pages = [ [ "GetTodayOrdersServlet", "Todays Orders" ] ];
 
 		var html = '<ul class="nav navbar-nav">';
-		
-		for(var i = 0; i < pages.length; i++){
+
+		for (var i = 0; i < pages.length; i++) {
 			var record = pages[i];
 			var link = record[0];
 			var name = record[1];
-			
-			if(endPath == link){
-				html += '<li class="active"><a href="' + link + '">' + name + '</a></li>';
-			}else{
+
+			if (endPath == link) {
+				html += '<li class="active"><a href="' + link + '">' + name
+						+ '</a></li>';
+			} else {
 				html += '<li><a href="' + link + '">' + name + '</a></li>';
 			}
 		}
-		
-// 		+'<li class="active"><a href="cart.jsp">Cart</a></li>'
-// 				+ '<li class="active"><a href="payment.jsp">Payment</a></li>'
-// 				+ '<li class="active"><a href="profile.jsp">History</a></li>'
-// 				+ '</ul>';
+
+		// 		+'<li class="active"><a href="cart.jsp">Cart</a></li>'
+		// 				+ '<li class="active"><a href="payment.jsp">Payment</a></li>'
+		// 				+ '<li class="active"><a href="profile.jsp">History</a></li>'
+		// 				+ '</ul>';
 
 		document.getElementById("#myNav").innerHTML = html;
 	};
@@ -42,8 +43,8 @@
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<div id="#myNav"></div>
+		 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<div id="#myNav"></div> 
 
 			<!--                     <form class="navbar-form navbar-left" role="search"> -->
 			<!--                         <div class="form-group"> -->
@@ -57,7 +58,7 @@
 					<a href="ProcessAdminLogoutServlet">Logout</a>
 				</li>
 			</ul>
-		</div>
+		</div> 
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container-fluid -->

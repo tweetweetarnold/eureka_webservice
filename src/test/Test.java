@@ -17,6 +17,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.joda.time.DateTime;
 
+import services.AESAlgorithm;
 import services.PasswordService;
 
 public class Test {
@@ -60,10 +61,12 @@ public class Test {
 		buildingList.add("PSN");
 		buildingList.add("CONTROL");
 		buildingList.add("MAINTAINANCE");
-		
+
+		AESAlgorithm aes = new AESAlgorithm();
+
 		company.setDeliveryPointSet(buildingList);
-		Employee arnold = new Employee(PasswordService.encryptPassword("1234567"),
-				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
+		Employee arnold = new Employee(aes.encrypt("1234567"), "Arnold Lee",
+				"arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
 
 		arnold.setDefaultDeliveryPoint("CONTROL");
 

@@ -79,10 +79,11 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 			// Setting user and token
 			session.setAttribute("admin", admin);
 			session.setAttribute("tokenID", tokenID);
+			
 			System.out.println("TokenID is set in session");
 			AdminController adminController = new AdminController();
+			
 			session.setAttribute("outstandingPayments", adminController.getListOfOwedPayment("Owe"));
-//			response.sendRedirect("adminHomepage.jsp");
 			response.sendRedirect("adminHomepage.jsp");
 
 		} catch (Exception e) {

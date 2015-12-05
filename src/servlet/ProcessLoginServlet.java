@@ -13,10 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import model.Canteen;
 import model.Employee;
-import services.PasswordService;
-import controller.CanteenController;
 import controller.AccessController;
-import controller.UserController;
+import controller.CanteenController;
 
 /**
  * Servlet implementation class Hello
@@ -56,8 +54,6 @@ public class ProcessLoginServlet extends HttpServlet {
 	public void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		// PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 
 		// Getting User Input Parameters
@@ -65,10 +61,11 @@ public class ProcessLoginServlet extends HttpServlet {
 		String inputPwd = (String) request.getParameter("password");
 
 		try {
-			AccessController loginController = new AccessController();
-
+			AccessController accessController = new AccessController();
+			
 			// Verify user credentials. if user does not exist, returns null
-			Employee emp = loginController.authenticateUser(email, inputPwd);
+			Employee emp = accessController.authenticateUser(email, inputPwd);
+			System.out.println("emp: " + emp);
 			System.out.println("User is authenticated: " + emp.getName());
 
 			// *** For Development only ***
