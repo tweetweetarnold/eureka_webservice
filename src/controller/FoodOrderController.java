@@ -16,6 +16,9 @@ import model.FoodDisplayObject;
 import model.FoodOrder;
 import model.FoodOrderItem;
 import model.Stall;
+
+import org.joda.time.DateTime;
+
 import dao.EmployeeDAO;
 import dao.FoodOrderDAO;
 
@@ -223,7 +226,7 @@ public class FoodOrderController {
 
 	public HashMap getFoodOrderToday() {
 		List<FoodOrder> tempFoodOrderList = getFoodOrderBetweenCutOff();
-		
+
 		ArrayList<String> uniqueEmployee = new ArrayList<String>();
 
 		// foodOrderItems With Employee name as key
@@ -270,11 +273,12 @@ public class FoodOrderController {
 	public HashMap<String, ArrayList<FoodOrderItem>> getFoodOrderToday2() {
 		// get all orders made today
 		FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
-		Date now = new Date();
-		Date yest = new Date(10000);
-		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(yest, now);
-//		List<FoodOrder> tempFoodOrderList = getFoodOrderBetweenCutOff();
+		DateTime today = new DateTime();
+
+		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(today.minusDays(1)
+				.toDate(), today.toDate());
 		System.out.println("Tempfoodorderlist size: " + tempFoodOrderList.size());
+
 		// hashmap for return later
 		HashMap<String, ArrayList<FoodOrderItem>> map = new HashMap<String, ArrayList<FoodOrderItem>>();
 

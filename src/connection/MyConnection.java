@@ -127,7 +127,7 @@ public class MyConnection {
 
 	// ****** End of MyConnection methods ******
 
-	public static List<Object> getFoodOrderBetween(Date later, Date earlier) {
+	public static List<Object> getFoodOrderBetween(Date earlier, Date later) {
 		Session session = startSession();
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(FoodOrder.class);
