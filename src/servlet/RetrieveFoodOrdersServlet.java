@@ -3,16 +3,15 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import controller.FoodOrderController;
 import model.FoodDisplayObject;
-
+import controller.FoodOrderController;
 
 /**
  * Servlet implementation class retrieveFoodOrdersServlet
@@ -29,8 +28,7 @@ public class RetrieveFoodOrdersServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -38,18 +36,20 @@ public class RetrieveFoodOrdersServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+
 		FoodOrderController foodOrderController = new FoodOrderController();
-		ArrayList<FoodDisplayObject> foodOrderList = new ArrayList<FoodDisplayObject>(foodOrderController.getFoodOrderforCutOff());
-		
-		RequestDispatcher rd = request.getRequestDispatcher("adminFoodOrderByStall.jsp");
-		request.setAttribute("foodOrders", foodOrderList);
-		rd.forward(request,response);
-		
+		ArrayList<FoodDisplayObject> foodOrderList = new ArrayList<FoodDisplayObject>(
+				foodOrderController.getFoodOrderforCutOff());
+
+		session.setAttribute("foodOrders", foodOrderList);
+		response.sendRedirect("adminFoodOrderByStall.jsp");
+
 	}
 
 }

@@ -41,21 +41,24 @@ public class FoodOrderController {
 	public FoodOrder getFoodOrder(int foodOrderId) {
 		return foodOrderDAO.getFoodOrder(foodOrderId);
 	}
-	//retrieve an ArrayList of FoodOrders made by a user in a week. sundayDate should be the starting sunday for
-	//the week of orders you wish to retrieve. (Currently used by viewWeeklyConsolidatedPaymentServlet.java)
+
+	// retrieve an ArrayList of FoodOrders made by a user in a week. sundayDate should be the
+	// starting sunday for
+	// the week of orders you wish to retrieve. (Currently used by
+	// viewWeeklyConsolidatedPaymentServlet.java)
 	public ArrayList<FoodOrder> getFoodOrderForUsernameWeek(String email, Date sundayDate) {
 		ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>();
 		Calendar cal = Calendar.getInstance();
-		//this is to set the time of the sundayDate to 10AM
+		// this is to set the time of the sundayDate to 10AM
 		sundayDate.setHours(10);
 		sundayDate.setMinutes(0);
 		cal.setTime(sundayDate);
-	
-		//this advances the calendar by 7 days. We need this in order to get the laterDate
+
+		// this advances the calendar by 7 days. We need this in order to get the laterDate
 		cal.add(Calendar.DATE, 7);
 		Date laterDate = cal.getTime();
 		System.out.println("Start date: " + sundayDate + " End date: " + laterDate);
-		//retrieving the employee whose food order history we want to examine
+		// retrieving the employee whose food order history we want to examine
 		Employee tempEmployee = employeeDAO.getEmployeeByEmail(email);
 		foodOrderList = foodOrderDAO
 				.getFoodOrderByDateUsername(sundayDate, laterDate, tempEmployee);
@@ -65,28 +68,31 @@ public class FoodOrderController {
 		return foodOrderList;
 	}
 
-	//this is to get the FoodDisplayObject for displaying food orders for the day filtered by stores each food display object corresponds to one store
+	// this is to get the FoodDisplayObject for displaying food orders for the day filtered by
+	// stores each food display object corresponds to one store
 	public ArrayList<FoodDisplayObject> getFoodOrderforCutOff() {
-		//retrieve the FoodOrders from yesterday 10am to today 10am
+		// retrieve the FoodOrders from yesterday 10am to today 10am
 		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
 				getFoodOrderBetweenCutOff());
 		System.out.println("Size from DAO:  " + tempFoodOrderList.size());
-		//This is what we will eventually return. (FINAL)
+		// This is what we will eventually return. (FINAL)
 		ArrayList<FoodDisplayObject> foodDisplayList = new ArrayList<FoodDisplayObject>();
-		
-		//(A) LinkedHashMap for all the FoodOrderItems with the store as the key
+
+		// (A) LinkedHashMap for all the FoodOrderItems with the store as the key
 		LinkedHashMap<String, ArrayList<FoodOrderItem>> stallToFoodItemLinkedHash = new LinkedHashMap<String, ArrayList<FoodOrderItem>>();
-		
-		//retrieving all the FoodOrderItems from a FoodOrder in order to populate the (A)stallToFoodItemLinkedHash
+
+		// retrieving all the FoodOrderItems from a FoodOrder in order to populate the
+		// (A)stallToFoodItemLinkedHash
 		for (int i = 0; i < tempFoodOrderList.size(); i++) {
 			FoodOrder tempFoodOrder = tempFoodOrderList.get(i);
 			ArrayList<FoodOrderItem> tempFoodOrderItem = new ArrayList<FoodOrderItem>(
 					tempFoodOrder.getFoodOrderList());
-			
-			//looping through the FoodOrderItems in the tempFoodOrderItemList and then checking 
-			//if the stall of the FoodOrderItem already exists in (A)stallToFoodItemLinkedHash
-			//if it does then add the foodOrderItem into the existing list with the stall as the key in (A)
-			//else create a new Stall Key in (A)
+
+			// looping through the FoodOrderItems in the tempFoodOrderItemList and then checking
+			// if the stall of the FoodOrderItem already exists in (A)stallToFoodItemLinkedHash
+			// if it does then add the foodOrderItem into the existing list with the stall as the
+			// key in (A)
+			// else create a new Stall Key in (A)
 			for (FoodOrderItem foodItem : tempFoodOrderItem) {
 				FoodOrderItem foodItemd = foodItem;
 				Food tempFood = foodItemd.getFood();
@@ -104,27 +110,27 @@ public class FoodOrderController {
 					tempFoodOrderItemToCombi.addAll(tempFoodOrderItemList);
 					stallToFoodItemLinkedHash.put(stallName, tempFoodOrderItemToCombi);
 				}
-
 			}
-
 		}
-		
-		//Iterate through the stallToFoodItemLinkedHash 
+
+		// Iterate through the stallToFoodItemLinkedHash
 		Iterator iter = stallToFoodItemLinkedHash.keySet().iterator();
 
 		int count = 1;
-		//This will populate the (FINAL) list
+		// This will populate the (FINAL) list
 		while (iter.hasNext()) {
-			//this (B)LinkedHashMap will store all the users who ordered the particular FoodOrderItem.
+			// this (B)LinkedHashMap will store all the users who ordered the particular
+			// FoodOrderItem.
 			LinkedHashMap<FoodOrderItem, ArrayList<String>> usernamesForFoodItem = new LinkedHashMap<FoodOrderItem, ArrayList<String>>();
 			String stallName = (String) iter.next();
-			//(AA)This holds all the FoodOrderItems for the stall. 
+			// (AA)This holds all the FoodOrderItems for the stall.
 			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash
 					.get(stallName);
-			//this (C)LinkedHashMap will store the quantity of the particular FoodOrderItem.
+			// this (C)LinkedHashMap will store the quantity of the particular FoodOrderItem.
 			LinkedHashMap<FoodOrderItem, Integer> quantityForFoodOrderItem = new LinkedHashMap<FoodOrderItem, Integer>();
 			ArrayList<FoodOrderItem> uniqueFoodOrderItem = new ArrayList<FoodOrderItem>();
-			//this loops Through the foodOrderItems in (AA) in order to take out the unique FoodOrderItems and stores them in UniqueFoodOrderItem
+			// this loops Through the foodOrderItems in (AA) in order to take out the unique
+			// FoodOrderItems and stores them in UniqueFoodOrderItem
 			for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 				Iterator iterator = uniqueFoodOrderItem.iterator();
 				int equalCount = 0;
@@ -137,10 +143,9 @@ public class FoodOrderController {
 				if (equalCount == 0) {
 					uniqueFoodOrderItem.add(i);
 				}
-
 			}
-			
-			//this populates (C) (Quantity)
+
+			// this populates (C) (Quantity)
 			for (FoodOrderItem tempItem : uniqueFoodOrderItem) {
 				int tempquantity = 0;
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
@@ -150,11 +155,11 @@ public class FoodOrderController {
 				}
 				quantityForFoodOrderItem.put(tempItem, tempquantity);
 			}
-			
-			//not too sure if we can use the old uniqueFoodOrderItemList.... 
+
+			// not too sure if we can use the old uniqueFoodOrderItemList....
 			ArrayList<FoodOrderItem> uniqueFoodOrderItems = new ArrayList<FoodOrderItem>(
 					quantityForFoodOrderItem.keySet());
-			//Populating (B) (Users)
+			// Populating (B) (Users)
 			for (FoodOrderItem f : uniqueFoodOrderItems) {
 				HashSet<String> usernames = new HashSet<String>();
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
@@ -165,8 +170,8 @@ public class FoodOrderController {
 					usernamesForFoodItem.put(f, new ArrayList<String>(usernames));
 				}
 			}
-			
-			//Each FoodDisplayObject represents one stall 
+
+			// Each FoodDisplayObject represents one stall
 			FoodDisplayObject tempFoodDisplay = new FoodDisplayObject(count++);
 			tempFoodDisplay.setStallName(stallName);
 			tempFoodDisplay.setFoodOrderItem(uniqueFoodOrderItems);
@@ -192,7 +197,6 @@ public class FoodOrderController {
 		return foodOrderDAO.getFoodOrderByDate(earlierDate, laterDate);
 	}
 
-	
 	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall() {
 		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
 				getFoodOrderBetweenCutOff());

@@ -96,14 +96,9 @@
 									</thead>
 									<tbody>
 										<c:forEach items="${sessionScope.todayOrders}" var="order" varStatus="loop">
-											<%-- <c:out value="${fn:length(order.value) }" /> --%>
 											<tr class="odd gradeX">
-												<td rowspan="${fn:length(order.value) + 1}">
-													<c:out value="${loop.index + 1}" />
-												</td>
-												<td rowspan="${fn:length(order.value) + 1}">
-													<c:out value="${order.key}" />
-												</td>
+												<td rowspan="${fn:length(order.value) + 1}">${loop.index + 1}</td>
+												<td rowspan="${fn:length(order.value) + 1}">${order.key}</td>
 
 												<c:forEach items="${order.value}" var="foodOrderItem">
 													<tr>
@@ -119,19 +114,10 @@
 							</div>
 							<!-- /.table-responsive -->
 
-
-							<div class="well">
-								<h4>DataTables Usage Information</h4>
-								<p>
-									DataTables is a very flexible, advanced tables plugin for jQuery. In SB Admin, we are using a specialized
-									version of DataTables built for Bootstrap 3. We have also customized the table headings to use Font Awesome
-									icons in place of images. For complete documentation on DataTables, visit their website at
-									<a target="_blank" href="https://datatables.net/">https://datatables.net/</a>
-									.
-								</p>
-								<a class="btn btn-default btn-lg btn-block" target="_blank" href="https://datatables.net/">View DataTables
-									Documentation</a>
+							<div style="text-align: right;">
+								<a href="https://datatables.net">DataTable Help</a>
 							</div>
+
 						</div>
 						<!-- /.panel-body -->
 					</div>

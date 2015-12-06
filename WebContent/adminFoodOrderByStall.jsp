@@ -1,201 +1,163 @@
 <!DOCTYPE html>
-<%@ page import="model.*"%>
-<%@page import="org.json.simple.*"%>
-<%@ page import="java.util.*"%>
-<%@ page import="java.text.*"%>
 <html lang="en">
+
 <%@include file="adminProtect.jsp"%>
+
 <head>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
 
 <title>DABAO</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+>
+
+<!-- MetisMenu CSS -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css"
+	rel="stylesheet"
+>
+
+<!-- Timeline CSS -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/timeline.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Morris Charts CSS -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css"
+>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<script src="resources/js/jquery-1.11.3.js"></script>
-<!-- <script src="resources/js/jquery-1.11.3.min.js"></script> -->
-<script src="resources/js/dabao/dabao.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-
-<link href="resources/css/dabao/dabao.css" rel="stylesheet">
-<!-- <link href="resources/css/bootstap.min.css" rel="stylesheet"> -->
-<link href="resources/css/dabao/starter-template.css" rel="stylesheet">
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 </head>
 
 <body>
-	<jsp:include page="headerfooter/adminHeader.jsp" />
 
-	<%
-		if (request.getAttribute("foodOrders") != null) {
-		ArrayList<FoodDisplayObject> foodDisplayObjectList = (ArrayList<FoodDisplayObject>) request
-		.getAttribute("foodOrders");
-	%>
-	<div class="row center">
-		<div class="col-xs-3 center" style="float: right;">
-			<form action="ChineseRetrieveFoodOrderServlet" method="post">
-				<button type="submit" class="btn btn-lg btn-success btn-block">Translate to Chinese</button>
-			</form>
-		</div>
-	</div>
+	<div id="wrapper">
+
+		<%@include file="headerfooter/adminHeader2.jsp"%>
 
 
-	<%
-		for (FoodDisplayObject fDO : foodDisplayObjectList) {
-			String stallName = fDO.getStallName();
-			ArrayList<FoodOrderItem> foodOrderItemList = fDO.getFoodOrderItem();
-	%>
-	</br>
-	<div class="container">
-		<div class="row center">
-			<div class="col-xs-10 col center">
-				<div class="panel panel-default">
-
-					<div class="panel-heading">
-						<h4 class="panel-title">
-							<%=stallName%>
-							<div style="float: right;">
-								<%=foodOrderItemList.get(0).getFood().getStall().getContactNo()%>
-							</div>
-						</h4>
-					</div>
-					<table class="table table-striped">
-						<tr>
-							<th>food</th>
-							<th>addons</th>
-							<th>quantity</th>
-							<th>price</th>
-							<th>users</th>
-						</tr>
-						<%
-							double totalPrice = 0;
-
-												for (FoodOrderItem fOI : foodOrderItemList) {
-													String foodName = fOI.getFood().getName();
-													ArrayList<ModifierChosen> modifierList = new ArrayList<ModifierChosen>(fOI.getModifierChosenList());
-													int quantity = fDO.getQuantity(fOI);
-													double price = fOI.getPrice();
-													totalPrice += quantity * price;
-													ArrayList<String> userList = fDO.getUsernameList(fOI);
-						%>
-						<tr>
-							<td><%=foodName%></td>
-							<td>
-								<table>
-									<%
-										for (ModifierChosen mod : modifierList) {
-																																																															String modName = mod.getName();
-									%>
-									<tr>
-										<td><%=modName%></td>
-									</tr>
-									<%
-										}
-									%>
-								</table>
-							</td>
-							<td><%=quantity%></td>
-							<td><%=price%></td>
-
-							<td>
-								<table>
-									<%
-										for (String username : userList) {
-									%>
-
-									<tr>
-										<td><%=username%></td>
-									</tr>
-									<%
-										}
-									%>
-								</table>
-							</td>
-
-						</tr>
-						<%
-							}
-						%>
-
-					</table>
-
-					<%
-						DecimalFormat df = new DecimalFormat("####0.00");
-					%>
-					<h3>
-						Total Price : $<%=df.format(totalPrice)%></h3>
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Today's Orders</h1>
 				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+
+			<div style="float: right;
+	margin-bottom: 20px;">
+				<form action="RetrieveFoodOrdersServlet" method="post">
+					<button style="margin: 0px, auto;" type="submit" class="btn btn-lg btn-success btn-block">Group by stalls</button>
+				</form>
 			</div>
 
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">Data</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<div class="dataTable_wrapper">
+								<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+									<thead>
+										<tr>
+											<th>Stall</th>
+											<th>Stall Number</th>
+											<th>Food</th>
+											<th>Add Ons</th>
+											<th>Quantity</th>
+											<th>Price</th>
+											<th>Users</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${sessionScope.foodOrders}" var="foodOrderList" varStatus="loop">
+
+											<tr class="odd gradeX">
+												<%-- 												<td rowspan="${fn:length(foodOrderList.foodOrderItemList) + 1}"> --%>
+												<td>${foodOrderList.stallName}</td>
+												<%-- 												<td rowspan="${fn:length(foodOrderList.foodOrderItemList) + 1}"> --%>
+												<td>
+													<c:out value="${foodOrderList.serialNumber}" />
+													<%-- 													<c:forEach items="${qty}" var="qty1"> --%>
+													<%-- 														${qty.key} --%>
+													<%-- 													</c:forEach> --%>
+													<%-- 													<c:out value="${foodOrderList.foodOrderItemList[0].food.stall.contactNo}" /> --%>
+												</td>
+
+												<%-- 												<c:forEach items="${foodOrderList.foodOrderItemList}" var="foodOrderItemList"> --%>
+												<!-- 													<tr> -->
+												<%-- 														<td>${foodOrderItemList.food}</td> --%>
+												<%-- 														<td>${foodOrderItemList.modifierChosenList}</td> --%>
+												<!-- 														<td>${foodOrderItemList.quantity}</td> -->
+												<!-- 														<td>$${foodOrderItemList.priceString}</td> -->
+												<%-- 														<td>${foodOrderItemList.getUsernameList}</td> --%>
+												<!-- 													</tr> -->
+												<%-- 												</c:forEach> --%>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.table-responsive -->
+
+
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+
 		</div>
+		<!-- /#page-wrapper -->
+
 	</div>
-	<br>
-	<br>
-	<%
-		}
-	%>
-	<%
-		}
-	%>
+	<!-- /#wrapper -->
 
 
+	<!-- jQuery -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
 
+	<!-- Bootstrap Core JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+	<!-- Metis Menu Plugin JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
+	<!-- Morris Charts JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
+	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
+	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 
-
-
-
-
-
-
-
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-	<!--     <script src="../../dist/js/bootstrap.min.js"></script> -->
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<!--     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
-
-
-	<!-- Google Analytics -->
-	<script>
-		(function(i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r;
-			i[r] = i[r] || function() {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-			a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore(a, m)
-		})(window, document, 'script',
-				'//www.google-analytics.com/analytics.js', 'ga');
-		ga('create', 'UA-68676403-1', 'auto');
-		ga('send', 'pageview');
-	</script>
-
+	<!-- Custom Theme JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 </body>
+
 </html>

@@ -10,9 +10,9 @@ public class FoodDisplayObject {
 	private ArrayList<FoodOrderItem> foodOrderItemList = new ArrayList<FoodOrderItem>();
 	private LinkedHashMap<FoodOrderItem, Integer> quantity = new LinkedHashMap<FoodOrderItem, Integer>();
 	private LinkedHashMap<FoodOrderItem, ArrayList<String>> username = new LinkedHashMap<FoodOrderItem, ArrayList<String>>();
-	
-	public FoodDisplayObject(int serialNumber){
-		this.serialNumber =serialNumber;
+
+	public FoodDisplayObject(int serialNumber) {
+		this.serialNumber = serialNumber;
 	}
 
 	public int getSerialNumber() {
@@ -41,44 +41,39 @@ public class FoodDisplayObject {
 
 	public void setQuantity(LinkedHashMap<FoodOrderItem, Integer> quantityToFoodOrderItem) {
 		this.quantity = quantityToFoodOrderItem;
-//		for(FoodOrderItem f : foodOrderItemList){
-//			FoodOrderItem foodItemd = f;
-//			if(quantity.containsKey(foodItemd)){
-//				int quant = quantity.get(foodItemd);
-//				quant++;
-//				quantity.put(foodItemd,quant);
-//			}else{
-//				quantity.put(foodItemd, 1);
-//			}
-//			Food tempFood = foodItemd.getFood();
-//			Stall tempStall = tempFood.getStall();
-//			ArrayList<FoodOrderItem> tempFoodOrderItemList = new ArrayList<FoodOrderItem>();
-//		}
+		// for(FoodOrderItem f : foodOrderItemList){
+		// FoodOrderItem foodItemd = f;
+		// if(quantity.containsKey(foodItemd)){
+		// int quant = quantity.get(foodItemd);
+		// quant++;
+		// quantity.put(foodItemd,quant);
+		// }else{
+		// quantity.put(foodItemd, 1);
+		// }
+		// Food tempFood = foodItemd.getFood();
+		// Stall tempStall = tempFood.getStall();
+		// ArrayList<FoodOrderItem> tempFoodOrderItemList = new ArrayList<FoodOrderItem>();
+		// }
 	}
-	
+
 	public HashMap<FoodOrderItem, Integer> getQuantityList() {
 		return quantity;
 	}
-	
-	public int getQuantity(FoodOrderItem f){
+
+	public int getQuantity(FoodOrderItem f) {
 		return quantity.get(f);
 	}
-
 
 	public HashMap<FoodOrderItem, ArrayList<String>> getUsernameHash() {
 		return username;
 	}
-	
-	public ArrayList<String> getUsernameList(FoodOrderItem f){
+
+	public ArrayList<String> getUsernameList(FoodOrderItem f) {
 		return username.get(f);
 	}
 
 	public void setUsername(LinkedHashMap<FoodOrderItem, ArrayList<String>> username) {
 		this.username = username;
 	}
-	
-	
-	
-	
-	
+
 }
