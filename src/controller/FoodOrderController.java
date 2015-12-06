@@ -163,6 +163,7 @@ public class FoodOrderController {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date laterDate = cal.getTime();
+
 		laterDate.setHours(10);
 		laterDate.setMinutes(0);
 		cal.add(Calendar.DATE, -1);
@@ -170,12 +171,14 @@ public class FoodOrderController {
 		earlierDate.setHours(10);
 		earlierDate.setMinutes(0);
 		System.out.println("earlier Later : " + laterDate);
+
 		Date fivePm = new Date();
 		fivePm.setHours(17);
 		fivePm.setMinutes(00);
 		Date nowDate = new Date();
 		nowDate.setMinutes(0);
 		System.out.println("Later : " + laterDate);
+
 		if (nowDate.after(fivePm)) {
 			cal.setTime(laterDate);
 			cal.add(Calendar.DATE, +1);
@@ -184,7 +187,6 @@ public class FoodOrderController {
 			cal.add(Calendar.DATE, +1);
 			earlierDate = cal.getTime();
 		}
-
 		return foodOrderDAO.getFoodOrderByDate(laterDate, earlierDate);
 	}
 
@@ -221,29 +223,33 @@ public class FoodOrderController {
 
 	public HashMap getFoodOrderToday() {
 		List<FoodOrder> tempFoodOrderList = getFoodOrderBetweenCutOff();
+		
 		ArrayList<String> uniqueEmployee = new ArrayList<String>();
+
 		// foodOrderItems With Employee name as key
-		HashMap foodOrders = new HashMap();
+		HashMap<String, ArrayList<FoodOrderItem>> foodOrders = new HashMap<String, ArrayList<FoodOrderItem>>();
+
 		Iterator iter = tempFoodOrderList.iterator();
 		double totalPrice = 0.0;
+
 		while (iter.hasNext()) {
 			FoodOrder tempFoodOrder = (FoodOrder) iter.next();
 			ArrayList<FoodOrderItem> foodOrderList = new ArrayList<FoodOrderItem>(
 					tempFoodOrder.getFoodOrderList());
 			Employee tempEmployee = tempFoodOrder.getEmployee();
-			String username = tempEmployee.getEmail();
+			String email = tempEmployee.getEmail();
 			System.out.println(tempEmployee);
 			if (tempEmployee != null) {
 
-				if (!uniqueEmployee.contains(username)) {
+				if (!uniqueEmployee.contains(email)) {
 					foodOrders.put(tempFoodOrder.getEmployee().getEmail(), foodOrderList);
-					uniqueEmployee.add(username);
+					uniqueEmployee.add(email);
 				} else {
 					ArrayList<FoodOrderItem> tempFoodOrderItemList = (ArrayList<FoodOrderItem>) foodOrders
-							.get(username);
+							.get(email);
 					tempFoodOrderItemList.addAll(foodOrderList);
-					foodOrders.put(username, tempFoodOrderItemList);
-					System.out.println("Username: " + username + foodOrderList.size());
+					foodOrders.put(email, tempFoodOrderItemList);
+					System.out.println("Email: " + email + foodOrderList.size());
 				}
 			} else {
 				foodOrders.put("Unknown", foodOrderList);
@@ -252,12 +258,41 @@ public class FoodOrderController {
 			totalPrice += price;
 		}
 
-		if (foodOrders.size() > 0) {
-			foodOrders.put("totalPrice", totalPrice);
-			return foodOrders;
-		} else {
-			return null;
-		}
+		// if (foodOrders.size() > 0) {
+		// foodOrders.put("totalPrice", totalPrice);
+		// return foodOrders;
+		// } else {
+		// return null;
+		// }
+		return null;
 	}
 
+	public HashMap<String, ArrayList<FoodOrderItem>> getFoodOrderToday2() {
+		// get all orders made today
+		FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
+		Date now = new Date();
+		Date yest = new Date(10000);
+		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(yest, now);
+//		List<FoodOrder> tempFoodOrderList = getFoodOrderBetweenCutOff();
+		System.out.println("Tempfoodorderlist size: " + tempFoodOrderList.size());
+		// hashmap for return later
+		HashMap<String, ArrayList<FoodOrderItem>> map = new HashMap<String, ArrayList<FoodOrderItem>>();
+
+		// iterate through each foodorder from tempfoodorderlist and add it into hashmap. if
+		// already have record of existing user, add to that same list
+		for (FoodOrder o : tempFoodOrderList) {
+			String email = o.getEmployee().getEmail();
+
+			// check if entry exists. if not, create new arraylist and add into map
+			ArrayList<FoodOrderItem> tempItems = map.get(email);
+			if (tempItems == null) {
+				tempItems = new ArrayList<FoodOrderItem>();
+			}
+			tempItems.addAll(o.getFoodOrderList());
+			map.put(email, tempItems);
+			System.out.println("Tempitems size: " + tempItems.size());
+
+		}
+		return map;
+	}
 }

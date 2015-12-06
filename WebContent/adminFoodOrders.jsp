@@ -81,45 +81,31 @@
 									<thead>
 										<tr>
 											<th>Number</th>
-											<th>Name</th>
+											<th>Email</th>
 											<th>Item(s)</th>
 											<th>Quantity</th>
 											<th>Price</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${foodOrdersList}" var="order" varStatus="loop">
+										<c:forEach items="${sessionScope.todayOrders}" var="order" varStatus="loop">
 											<tr class="odd gradeX">
 												<td>
 													<c:out value="${loop.index + 1}" />
 												</td>
-												<td>hi</td>
-												<td>Win 95+</td>
+												<td>
+													<c:out value="${order.key}" />
+												</td>
+												<td>
+													<c:forEach items="${order.value}" var="foodOrderItem">
+														<c:out value="${foodOrderItem.food.name}" />
+													</c:forEach>
+
+												</td>
 												<td class="center">4</td>
 												<td class="center">4</td>
 											</tr>
 										</c:forEach>
-										<tr class="odd gradeX">
-											<td>Trident</td>
-											<td>Internet Explorer 4.0</td>
-											<td>Win 95+</td>
-											<td class="center">4</td>
-											<td class="center">X</td>
-										</tr>
-										<tr class="even gradeC">
-											<td>Trident</td>
-											<td>Internet Explorer 5.0</td>
-											<td>Win 95+</td>
-											<td class="center">5</td>
-											<td class="center">C</td>
-										</tr>
-										<tr class="odd gradeA">
-											<td>Trident</td>
-											<td>Internet Explorer 5.5</td>
-											<td>Win 95+</td>
-											<td class="center">5.5</td>
-											<td class="center">A</td>
-										</tr>
 									</tbody>
 								</table>
 							</div>
