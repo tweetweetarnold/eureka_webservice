@@ -32,7 +32,11 @@ public class FoodOrderController {
 	public void addFoodOrder(FoodOrder f) {
 		foodOrderDAO.saveFoodOrder(f);
 	}
-
+	
+	public void updateFoodOrder(FoodOrder f) {
+		foodOrderDAO.updateFoodOrder(f);
+	}
+	
 	public List<FoodOrder> getFoodOrderSet(String email) {
 		return foodOrderDAO.getFoodOrderSet(employeeDAO.getEmployeeByEmail(email));
 	}

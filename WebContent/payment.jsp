@@ -64,10 +64,10 @@
 		
 
 		<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">		
+			<c:if test="${order.status == 'Submitted'}">
 			<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
 				<c:set var="count" value="${count + 1}" />
-				<c:out value="${count}"/>
-				<c:out value="${foodItem.food.stall.name}" />
+				
 				<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${foodItem.food.name}" />">
 				<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen" varStatus="modifierChosenLoop">
 					
@@ -78,6 +78,7 @@
 				<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
 				<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
 			</c:forEach>
+			</c:if>
 		</c:forEach>
 		<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
 		</form>
