@@ -53,6 +53,12 @@
 
 		<!-- PayPal -->
 		
+		<p>***Please ensure that you have confirmed your food orders.<br>
+		Have sufficient funds in your account before proceeding to Paypal.</p>
+			
+		
+		<br>
+		
 		<!-- End of PayPal -->
 		<form action="${initParam['posturl']}" method="post">
 		<input type="hidden" name="upload" value="1"/>
@@ -62,9 +68,10 @@
 		
 		<c:set var="count" value="0" />
 		
-
+		
 		<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">		
 			<c:if test="${order.status == 'Submitted'}">
+			
 			<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
 				<c:set var="count" value="${count + 1}" />
 				
@@ -78,12 +85,32 @@
 				<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
 				<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
 			</c:forEach>
+			
 			</c:if>
 		</c:forEach>
 		<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
 		</form>
 	</div>
-
+	
+	<!-- Error message handling -->
+		<c:if test="${not empty sessionScope.error}">
+			<div class="alert alert-danger" role="alert">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				<c:out value="${error}" />
+			</div>
+			<c:remove var="error" scope="session" />
+		</c:if>
+	
+	<!-- Success message handling -->
+		<c:if test="${not empty sessionScope.paymentSuccess}">
+			<div class="alert alert-success" role="alert">
+				<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+				<span class="sr-only">Success:</span>
+				<c:out value="${paymentSuccess}" />
+			</div>
+			<c:remove var="paymentSuccess" scope="session" />
+		</c:if>
 
 
 	<!-- Bootstrap core JavaScript

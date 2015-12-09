@@ -67,17 +67,24 @@ public class ProcessPaymentServlet extends HttpServlet {
 						foodOrderController.updateFoodOrder(f);
 					}
 				}
-				
+				System.out.println("Updated amount owed: " + employee.getAmountOwed());
+				session.setAttribute("paymentSuccess", "Your payment has been received");
+			} else if (transactionStatus.equals("Failed")) {
+				throw new Exception("Payment transaction has encountered some problems. Please check your Paypal account.");
+			} else if (transactionStatus.equals("Pending")) {
+				throw new Exception("This payment is being processed. Allow up to 4 days for it to complete.");
+			} else if (transactionStatus.equals("Held")) {
+				throw new Exception("This payment is being held. The payment may be under review by Paypal.");
 			}
 			
-			System.out.println("Updated amount owed: " + employee.getAmountOwed());
 			
-			//session.setAttribute("paymentSuccess", "Your payment has been received");
+			
+			
 			response.sendRedirect("payment.jsp");
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 			e.printStackTrace();
-			session.setAttribute("error", "Soemthing went wrong");
+			session.setAttribute("error", e.getMessage());
 			response.sendRedirect("payment.jsp");
 		}
 	}
