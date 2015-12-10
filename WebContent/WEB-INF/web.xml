@@ -9,15 +9,15 @@
   </listener>
   <context-param>
     <param-name>authtoken</param-name>
-    <param-value>pkRjbXRtjNP66b5zdYIqfqP0HlxN3AQ5_votoD4xgtnZCacLuKfx43Ejwd4</param-value>
+    <param-value>pmH89uwqihq6afWdjp80j5A0WpFggMl8nfG6ddWRjnaWv1N0FQtrPRdXU38</param-value>
   </context-param>
   <context-param>
     <param-name>posturl</param-name>
-    <param-value>https://www.sandbox.paypal.com/cgi-bin/webscr</param-value>
+    <param-value>https://www.paypal.com/cgi-bin/webscr</param-value>
   </context-param>
   <context-param>
     <param-name>business</param-name>
-    <param-value>dabaoapp@gmail.com</param-value>
+    <param-value>boonhui.koh.2013@sis.smu.edu.sg</param-value>
   </context-param>
   <context-param>
     <param-name>returnurl</param-name>
