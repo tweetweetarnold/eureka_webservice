@@ -58,6 +58,7 @@
 			
 		
 		<br>
+
 		
 		<!-- End of PayPal -->
 		<form action="${initParam['posturl']}" method="post">
@@ -65,6 +66,7 @@
 		<input type="hidden" name="return" value="${initParam['returnurl']}"/>
 		<input type="hidden" name="cmd" value="_cart"/>
 		<input type="hidden" name="business" value="${initParam['business']}"/>
+		<input type="hidden" name="currency_code" value="SGD">
 		
 		<c:set var="count" value="0" />
 		
