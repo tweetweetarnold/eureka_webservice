@@ -5,7 +5,7 @@
 				fullPath.length);
 
 		var pages = [ [ "cart.jsp", "Cart", "cart.jsp" ],
-				[ "payment.jsp", "Payment", "payment.jsp" ],
+				[ "payment.jsp", "Payment", "RenderSubmittedOrdersServlet" ],
 				[ "profile.jsp", "Profile", "RenderProfileServlet" ],
 				[ "orderHistory.jsp", "History", "RenderOrderHistoryServlet" ] ];
 

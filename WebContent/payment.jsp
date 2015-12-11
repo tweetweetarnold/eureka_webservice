@@ -55,12 +55,12 @@
 	<!--	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"> -->
 			
 			<c:set var="haveOrder" value="false"/>
-			<c:if test="${empty sessionScope.orderHistory}">
+			<c:if test="${empty sessionScope.submittedOrders}">
 				<h3a>You haven't ordered anything before! Go order something!</h2>
 			</c:if>
 
-			<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">
-				<c:if test="${order.status == 'Submitted'}">
+			<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">
+				
 				<c:set var="haveOrder" value="true"/>
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
@@ -154,7 +154,7 @@
 						</div>
 					</div>
 				</div>
-				</c:if>
+				
 			</c:forEach>
 
 		
@@ -174,8 +174,8 @@
 			<c:set var="count" value="0" />
 			
 			
-			<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">		
-				<c:if test="${order.status == 'Submitted'}">
+			<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">		
+				
 				
 				<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
 					<c:set var="count" value="${count + 1}" />
@@ -190,15 +190,13 @@
 					<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
 					<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
 				</c:forEach>
-				
-				</c:if>
 			</c:forEach>
 			
 			<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
 			
 			</form>
 		</c:when>
-		<c:otherwise>There are orders to be processed.
+		<c:otherwise>There are no orders to be processed.
       	<br />
       	</c:otherwise>
 		</c:choose>

@@ -40,6 +40,18 @@ public class FoodOrderController {
 	public List<FoodOrder> getFoodOrderSet(String email) {
 		return foodOrderDAO.getFoodOrderSet(employeeDAO.getEmployeeByEmail(email));
 	}
+	
+	public List<FoodOrder> getFoodOrderSetWithSubmittedStatus(String email,String status) {
+		List<FoodOrder> foodOrderListWithSubmittedStatus = new ArrayList<FoodOrder>();
+		List<FoodOrder> foodOrderList = foodOrderDAO.getFoodOrderSet(employeeDAO.getEmployeeByEmail(email));
+		for (FoodOrder f : foodOrderList) {
+			String orderStatus = f.getStatus();
+			if (orderStatus.equals(status)) {
+				foodOrderListWithSubmittedStatus.add(f);
+			}
+		}
+		return foodOrderListWithSubmittedStatus;
+	}
 
 	// Retrieve a FoodOrder by id
 	public FoodOrder getFoodOrder(int foodOrderId) {
