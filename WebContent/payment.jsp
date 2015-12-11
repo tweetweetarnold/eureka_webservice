@@ -18,6 +18,7 @@
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!-- Javascript imports -->
 <script src="resources/js/jquery-1.11.3.js"></script>
@@ -56,7 +57,7 @@
 			
 			<c:set var="haveOrder" value="false"/>
 			<c:if test="${empty sessionScope.submittedOrders}">
-				<h3a>You haven't ordered anything before! Go order something!</h2>
+				<h3a>You haven't ordered anything! Go order something!</h2>
 			</c:if>
 
 			<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">
@@ -161,7 +162,7 @@
 		
 
 		<br>
-		<!-- Paypal form -->
+		<!-- PayPal form -->
 		<c:choose>
 		<c:when test="${haveOrder eq true}">
 			<form action="${initParam['posturl']}" method="post">
@@ -173,23 +174,32 @@
 			
 			<c:set var="count" value="0" />
 			
-			
 			<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">		
-				
-				
+
 				<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
 					<c:set var="count" value="${count + 1}" />
+					<c:set var="modifiedFoodName" value="${foodItem.food.name}" />
+					<c:set var="quantity" value="0"/>
+					<c:set var="newPrice" value="0"/>
 					
-					<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${foodItem.food.name}" />" required>
 					<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen" varStatus="modifierChosenLoop">
+						<c:choose>
+							<c:when test="${fn:contains(modifierChosen.name, 'Upsize')}">
+	   							<c:set var="modifiedFoodName" value="${modifiedFoodName} with Upsize"/>	
+							</c:when>
 						
-						<input type="hidden" name="modifier_name_${modifierChosenLoop.index+1}" value="<c:out value="${modifierChosen.name}" />
-						<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />+$<c:out value="${newModifierPrice}" />">			
+							<c:otherwise>
+								<c:set var="modifiedFoodName" value="${modifiedFoodName} with ${modifierChosen.name}"/>	
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
-					<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${foodItem.quantity}" />">
+					<c:set var="quantity" value="${foodItem.quantity}" />
 					<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
-					<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
+					<c:set var="newPrice" value="${newPrice}" />
 				</c:forEach>
+				<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${modifiedFoodName}" />">
+				<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${quantity}" />">
+				<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
 			</c:forEach>
 			
 			<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
