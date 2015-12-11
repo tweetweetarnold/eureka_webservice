@@ -53,7 +53,7 @@
 		<!-- PayPal -->
 	<!--  	<div class="container" style="margin-top: 100px;">-->
 	<!--	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"> -->
-			<p>Refresh the page if it does not load the submitted orders</p>
+			
 			<c:set var="haveOrder" value="false"/>
 			<c:if test="${empty sessionScope.orderHistory}">
 				<h3a>You haven't ordered anything before! Go order something!</h2>
