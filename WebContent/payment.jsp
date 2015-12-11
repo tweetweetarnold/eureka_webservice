@@ -50,49 +50,159 @@
 	<div class="container">
 		<h2>PayPal</h2>
 		<br>
-
 		<!-- PayPal -->
-		
-		<p>***Please ensure that you have confirmed your food orders.<br>
-		Have sufficient funds in your account before proceeding to Paypal.</p>
-			
-		
-		<br>
+	<!--  	<div class="container" style="margin-top: 100px;">-->
+	<!--	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"> -->
+			<p>Refresh the page if it does not load the submitted orders</p>
+			<c:set var="haveOrder" value="false"/>
+			<c:if test="${empty sessionScope.orderHistory}">
+				<h3a>You haven't ordered anything before! Go order something!</h2>
+			</c:if>
+
+			<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">
+				<c:if test="${order.status == 'Submitted'}">
+				<c:set var="haveOrder" value="true"/>
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
+								aria-expanded="false" aria-controls="collapse${orderLoop.index}"
+							>
+								Order ID:
+								<c:out value="${order.foodOrderId}" />
+								-
+								<c:out value="${order.createDate}" />
+								<p style="float: right;">
+									<c:out value="${order.status}" />
+								</p>
+							</a>
+						</h4>
+					</div>
+
+					<div id="collapse${orderLoop.index}" class="panel-collapse collapse" role="tabpanel"
+						aria-labelledby="heading${orderLoop.index}"
+					>
+						<div class="panel-body">
+							<div style="font-size: 18px;">
+
+								<table>
+									<tr>
+										<td style="padding-right: 10px;">
+											<strong>Canteen:</strong>
+										</td>
+										<td>Taman Jurong Market and Food Centre</td>
+									</tr>
+									<tr>
+										<td style="padding-right: 10px;">
+											<strong>Price:</strong>
+										</td>
+										<td>
+											<fmt:formatNumber value="${order.totalPrice}" var="totalPrice" minFractionDigits="2" />
+											$
+											<c:out value="${totalPrice}" />
+										</td>
+									</tr>
+								</table>
+							</div>
+							<br>
+
+							<table class="table table-striped" border="1">
+								<thead>
+									<tr>
+										<th>Stall</th>
+										<th>Food</th>
+										<th>Quantity</th>
+										<th>Price</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<c:forEach items="${order.foodOrderList}" var="foodItem">
+										<tr>
+											<td>
+												<c:out value="${foodItem.food.stall.name}" />
+											</td>
+											<td>
+												<c:out value="${foodItem.food.name}" />
+												<ul>
+													<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen">
+														<li>
+															<small>
+																<c:out value="${modifierChosen.name}" />
+																<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />
+																+ $
+																<c:out value="${newModifierPrice}" />
+															</small>
+														</li>
+													</c:forEach>
+												</ul>
+											</td>
+											<td>
+												<c:out value="${foodItem.quantity}" />
+											</td>
+											<td>
+												<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
+												$
+												<c:out value="${newPrice}" />
+											</td>
+										</tr>
+									</c:forEach>
+
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+				</c:if>
+			</c:forEach>
 
 		
-		<!-- End of PayPal -->
-		<form action="${initParam['posturl']}" method="post">
-		<input type="hidden" name="upload" value="1"/>
-		<input type="hidden" name="return" value="${initParam['returnurl']}"/>
-		<input type="hidden" name="cmd" value="_cart"/>
-		<input type="hidden" name="business" value="${initParam['business']}"/>
-		<input type="hidden" name="currency_code" value="SGD">
 		
-		<c:set var="count" value="0" />
-		
-		
-		<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">		
-			<c:if test="${order.status == 'Submitted'}">
+
+		<br>
+		<!-- Paypal form -->
+		<c:choose>
+		<c:when test="${haveOrder eq true}">
+			<form action="${initParam['posturl']}" method="post">
+			<input type="hidden" name="upload" value="1"/>
+			<input type="hidden" name="return" value="${initParam['returnurl']}"/>
+			<input type="hidden" name="cmd" value="_cart"/>
+			<input type="hidden" name="business" value="${initParam['business']}"/>
+			<input type="hidden" name="currency_code" value="SGD">
 			
-			<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
-				<c:set var="count" value="${count + 1}" />
+			<c:set var="count" value="0" />
+			
+			
+			<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">		
+				<c:if test="${order.status == 'Submitted'}">
 				
-				<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${foodItem.food.name}" />">
-				<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen" varStatus="modifierChosenLoop">
+				<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
+					<c:set var="count" value="${count + 1}" />
 					
-					<input type="hidden" name="modifier_name_${modifierChosenLoop.index+1}" value="<c:out value="${modifierChosen.name}" />
-					<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />+$<c:out value="${newModifierPrice}" />">			
+					<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${foodItem.food.name}" />" required>
+					<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen" varStatus="modifierChosenLoop">
+						
+						<input type="hidden" name="modifier_name_${modifierChosenLoop.index+1}" value="<c:out value="${modifierChosen.name}" />
+						<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />+$<c:out value="${newModifierPrice}" />">			
+					</c:forEach>
+					<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${foodItem.quantity}" />">
+					<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
+					<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
 				</c:forEach>
-				<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${foodItem.quantity}" />">
-				<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
-				<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
+				
+				</c:if>
 			</c:forEach>
 			
-			</c:if>
-		</c:forEach>
-		<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
-		</form>
-	</div>
+			<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
+			
+			</form>
+		</c:when>
+		<c:otherwise>There are orders to be processed.
+      	<br />
+      	</c:otherwise>
+		</c:choose>
+	<!-- End of PayPal -->
 	
 	<!-- Error message handling -->
 		<c:if test="${not empty sessionScope.error}">
@@ -113,7 +223,8 @@
 			</div>
 			<c:remove var="paymentSuccess" scope="session" />
 		</c:if>
-
+</div>
+	</div>
 
 	<!-- Bootstrap core JavaScript
         ================================================== -->
