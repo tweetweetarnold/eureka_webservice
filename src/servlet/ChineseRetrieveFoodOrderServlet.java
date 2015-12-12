@@ -43,7 +43,7 @@ public class ChineseRetrieveFoodOrderServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		FoodOrderController foodOrderController = new FoodOrderController();
-		ArrayList<FoodDisplayObject> foodOrderList = new ArrayList<FoodDisplayObject>(foodOrderController.getFoodOrderforCutOff());
+		ArrayList<FoodDisplayObject> foodOrderList = new ArrayList<FoodDisplayObject>(foodOrderController.getFoodOrderForCutOff());
 		
 		RequestDispatcher rd = request.getRequestDispatcher("adminFoodOrderByStallCN.jsp");
 		request.setAttribute("foodOrders", foodOrderList);

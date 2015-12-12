@@ -45,7 +45,7 @@ public class GetTodayOrdersServlet extends HttpServlet {
 
 		FoodOrderController foodOrderController = new FoodOrderController();
 		try {
-			session.setAttribute("todayOrders", foodOrderController.getFoodOrderToday2());
+			session.setAttribute("todayOrders", foodOrderController.getFoodOrderToday());
 			response.sendRedirect("adminFoodOrders.jsp");
 
 		} catch (Exception e) {

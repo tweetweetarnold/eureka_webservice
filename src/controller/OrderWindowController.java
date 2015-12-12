@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Canteen;
 import model.Company;
-import model.Employee;
 import model.OrderWindow;
 
 import org.hibernate.criterion.CriteriaSpecification;

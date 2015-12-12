@@ -45,7 +45,9 @@ public class RetrieveFoodOrdersServlet extends HttpServlet {
 
 		FoodOrderController foodOrderController = new FoodOrderController();
 		ArrayList<FoodDisplayObject> foodOrderList = new ArrayList<FoodDisplayObject>(
-				foodOrderController.getFoodOrderforCutOff());
+				foodOrderController.getFoodOrderForCutOff());
+		
+		System.out.println("foodOrderList: " + foodOrderList.size());
 
 		session.setAttribute("foodOrders", foodOrderList);
 		response.sendRedirect("adminFoodOrderByStall.jsp");
