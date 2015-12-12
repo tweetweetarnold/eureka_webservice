@@ -32,6 +32,17 @@ public class Employee {
 	private String status;
 	private Date createDate;
 	private String deliveryPoint;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "foodId")
+	private Food favoriteFood;
+
+	public Food getFavoriteFood() {
+		return favoriteFood;
+	}
+
+	public void setFavoriteFood(Food favoriteFood) {
+		this.favoriteFood = favoriteFood;
+	}
 
 	public Employee() {
 	}
@@ -47,6 +58,7 @@ public class Employee {
 		this.status = StringValues.EMPLOYEE_OK;
 		// this.favouriteList = new HashSet<>();
 		this.createDate = new Date();
+		this.favoriteFood = null;
 
 	}
 

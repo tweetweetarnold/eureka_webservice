@@ -1,7 +1,10 @@
 package servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -11,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.FoodOrderController;
 import model.FoodOrderItem;
+import controller.FoodOrderController;
 
 /**
  * Servlet implementation class RetrieveFoodOrderItemByStallServlet
@@ -45,11 +48,23 @@ public class RetrieveFoodOrderItemByStallServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		FoodOrderController foodOrderController = new FoodOrderController();
+
+		// date processing
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date laterDate = cal.getTime();
+
+		laterDate.setHours(10);
+		laterDate.setMinutes(0);
+		cal.add(Calendar.DATE, -1);
+		Date earlierDate = cal.getTime();
+		earlierDate.setHours(10);
+		earlierDate.setMinutes(0);
+
 		HashMap<Integer, ArrayList<FoodOrderItem>> hashMapToReturn = foodOrderController
-				.getFoodOrderItemsForStall();
+				.getFoodOrderItemsForStall(earlierDate, laterDate);
 		RequestDispatcher rd = request.getRequestDispatcher("adminFoodOrderByStall.jsp");
 		request.setAttribute("foodOrderItemByStall", hashMapToReturn);
 		rd.forward(request, response);
 	}
-
 }

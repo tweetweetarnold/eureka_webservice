@@ -1,7 +1,10 @@
 package servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,11 +46,21 @@ public class RetrieveFoodOrdersServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
+		// date processing
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date laterDate = cal.getTime();
+
+		laterDate.setHours(10);
+		laterDate.setMinutes(0);
+		cal.add(Calendar.DATE, -1);
+		Date earlierDate = cal.getTime();
+		earlierDate.setHours(10);
+		earlierDate.setMinutes(0);
+
 		FoodOrderController foodOrderController = new FoodOrderController();
 		ArrayList<FoodDisplayObject> foodOrderList = new ArrayList<FoodDisplayObject>(
-				foodOrderController.getFoodOrderForCutOff());
-		
-		System.out.println("foodOrderList: " + foodOrderList.size());
+				foodOrderController.getFoodOrderforCutOff(earlierDate, laterDate));
 
 		session.setAttribute("foodOrders", foodOrderList);
 		response.sendRedirect("adminFoodOrderByStall.jsp");
