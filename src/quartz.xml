@@ -35,6 +35,17 @@
                         <name>MyJob</name>
                         <job-class>background.PaymentNotification</job-class>
                 </job>
+                <job>
+                        <name>MyJob2</name>
+                        <job-class>background.WeeklySuspension</job-class>
+                </job>
+                <trigger>
+                        <cron>
+                                <name>TenSecondIntervals</name>
+                                <job-name>MyJob2</job-name>
+                                 <cron-expression>0 59 23 ? * SUN</cron-expression>
+                        </cron>
+                </trigger>
                 <trigger>
                         <cron>
                                 <name>TenSecondIntervals</name>

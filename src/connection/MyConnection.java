@@ -232,6 +232,27 @@ public class MyConnection {
 		return list;
 	}
 
+	public static List<Object> getUsersWithOutstandingPaymentFromCompany(int companyID) {
+		Session session = startSession();
+		
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(Employee.class);
+		
+		criteria.add(Restrictions.eq("companyId", companyID)).list();
+		criteria.add(Restrictions.ge("amountOwed", 0.01)).list();
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		list = (List<Object>) criteria.list();
+
+		// Criteria criteria = dc.getExecutableCriteria(session);
+
+		session.getTransaction().commit();
+		session.close();
+
+		return list;
+	}
+	
+	
+	
 	public static List<Object> get(String sql) {
 		Session session = startSession();
 		// Criteria criteria = dc.getExecutableCriteria(session);

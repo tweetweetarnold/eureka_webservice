@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import controller.UserController;
+import model.Employee;
+
 /**
  * Servlet implementation class ProcessSuspendUserServlet
  */
@@ -41,7 +44,7 @@ public class ProcessSuspendUserServlet extends HttpServlet {
 		doProcess(request, response);
 	}
 
-	
+	//Suspend employee with email
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -53,5 +56,22 @@ public class ProcessSuspendUserServlet extends HttpServlet {
 		System.out.println("****** ProcessSuspendUserServlet ******");
 		out.println("ProcessSuspendUserServlet");
 		HttpSession session = request.getSession();
+		
+		try{
+			String userInput = request.getParameter("email");
+			UserController userController = new UserController();
+			Employee employee = userController.retrieveEmployeeViaEmail(userInput);
+			employee.setStatus("Suspended");
+			userController.updateEmployee(employee);
+			System.out.println(userInput + " suspended.");
+			session.setAttribute("success", userInput + "has been suspended.");
+			response.sendRedirect("adminHomepage.jsp");
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Error: " + e.getMessage());
+			session.setAttribute("error",
+					"Oops! Something went wrong! Please check your inputs.");
+			response.sendRedirect("PLEASECHANGEME.jsp");
+		}
 	}
 }
