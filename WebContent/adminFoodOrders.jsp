@@ -83,74 +83,89 @@
 						<div class="panel-heading">Data</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<div class="dataTable_wrapper">
-								<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-									<thead>
-										<tr>
-											<th>Number</th>
-											<th>Email</th>
-											<th>Item(s)</th>
-											<th>Quantity</th>
-											<th>Price</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${sessionScope.todayOrders}" var="order" varStatus="loop">
-											<tr class="odd gradeX">
-												<td rowspan="${fn:length(order.value) + 1}">${loop.index + 1}</td>
-												<td rowspan="${fn:length(order.value) + 1}">${order.key}</td>
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a href="#no-group" data-toggle="tab">No Group</a>
+								</li>
+								<li>
+									<a href="#profile" data-toggle="tab">Group by Stalls</a>
+								</li>
+							</ul>
 
-												<c:forEach items="${order.value}" var="foodOrderItem">
-													<tr>
-														<td>${foodOrderItem.food.name}</td>
-														<td>${foodOrderItem.quantity}</td>
-														<td>$${foodOrderItem.priceString}</td>
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane fade in active" id="no-group">
+									<div class="dataTable_wrapper">
+										<br>
+										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+											<thead>
+												<tr>
+													<th>Number</th>
+													<th>Email</th>
+													<th>Item(s)</th>
+													<th>Quantity</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${sessionScope.todayOrders}" var="order" varStatus="loop">
+													<tr class="odd gradeX">
+														<td rowspan="${fn:length(order.value) + 1}">${loop.index + 1}</td>
+														<td rowspan="${fn:length(order.value) + 1}">${order.key}</td>
+
+														<c:forEach items="${order.value}" var="foodOrderItem">
+															<tr>
+																<td>${foodOrderItem.food.name}</td>
+																<td>${foodOrderItem.quantity}</td>
+																<td>$${foodOrderItem.priceString}</td>
+															</tr>
+														</c:forEach>
 													</tr>
 												</c:forEach>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+											</tbody>
+										</table>
+									</div>
+									<!-- /.table-responsive -->
+								</div>
+								<div class="tab-pane fade" id="profile">
+									<h4>Profile Tab</h4>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+										commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+										nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+										id est laborum.</p>
+								</div>
 							</div>
-							<!-- /.table-responsive -->
-
-							<div style="text-align: right;">
-								<a href="https://datatables.net">DataTable Help</a>
-							</div>
-
 						</div>
 						<!-- /.panel-body -->
 					</div>
 					<!-- /.panel -->
 				</div>
-				<!-- /.col-lg-12 -->
+				<!-- /.col-lg-6 -->
 			</div>
 			<!-- /.row -->
 
 		</div>
-		<!-- /#page-wrapper -->
-
-	</div>
-	<!-- /#wrapper -->
+		<!-- /#wrapper -->
 
 
-	<!-- jQuery -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
+		<!-- jQuery -->
+		<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
 
-	<!-- Bootstrap Core JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-	<!-- Metis Menu Plugin JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+		<!-- Metis Menu Plugin JavaScript -->
+		<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-	<!-- Morris Charts JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
+		<!-- Morris Charts JavaScript -->
+		<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
+		<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
+		<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 
-	<!-- Custom Theme JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
-
+		<!-- Custom Theme JavaScript -->
+		<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 </body>
 
 </html>

@@ -14,8 +14,9 @@ public final class StringValues {
 	public static final String EMPLOYEE_PENDING_VERIFICATION = "Pending verification";
 
 	// For OrderWindow status
-	public static final String ORDERWINDOW_OPENED = "Opened";
-	public static final String ORDERWINDOW_CLOSED = "Closed";
 	public static final String ORDERWINDOW_QUEUED = "Queued";
+	public static final String ORDERWINDOW_OPENED = "Opened";
+	public static final String ORDERWINDOW_PROCESSING = "Processing";
+	public static final String ORDERWINDOW_CLOSED = "Closed";
 
 }
