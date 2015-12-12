@@ -68,6 +68,8 @@ public class ProcessChangePasswordServlet extends HttpServlet {
 					employee.setPassword(PasswordService.encryptPassword(newPassword));
 					UserController userController = new UserController();
 					userController.updateEmployee(employee);
+					session.setAttribute("success", "Password has been updated!");
+					response.sendRedirect("PLEASECHANGEME.jsp");
 				}else{
 					throw new Exception("new passwords do not match");
 				}

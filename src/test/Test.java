@@ -800,7 +800,7 @@ public class Test {
 		session.close();
 
 		System.out.println("Test.java completed");
-		System.out.println("TEST = " + company.getDeliveryPointSet().size());
+	
 
 	}
 

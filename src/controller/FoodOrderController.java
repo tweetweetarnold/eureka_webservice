@@ -52,7 +52,14 @@ public class FoodOrderController {
 		}
 		return foodOrderListWithSubmittedStatus;
 	}
+	
+	
+	// Retrieve FoodOrders between earlierDate and laterDate
+		public List<FoodOrder> getFoodOrderBetweenCutOff(Date earlierDate, Date laterDate) {
+			return foodOrderDAO.getFoodOrderByDate(earlierDate, laterDate);
+		}
 
+		
 	// Retrieve a FoodOrder by id
 	public FoodOrder getFoodOrder(int foodOrderId) {
 		return foodOrderDAO.getFoodOrder(foodOrderId);
@@ -86,10 +93,10 @@ public class FoodOrderController {
 
 	// this is to get the FoodDisplayObject for displaying food orders for the day filtered by
 	// stores each food display object corresponds to one store
-	public ArrayList<FoodDisplayObject> getFoodOrderforCutOff() {
+	public ArrayList<FoodDisplayObject> getFoodOrderforCutOff(Date earlierDate, Date laterDate) {
 		// retrieve the FoodOrders from yesterday 10am to today 10am
 		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
-				getFoodOrderBetweenCutOff());
+				getFoodOrderBetweenCutOff(earlierDate, laterDate));
 		System.out.println("Size from DAO:  " + tempFoodOrderList.size());
 		// This is what we will eventually return. (FINAL)
 		ArrayList<FoodDisplayObject> foodDisplayList = new ArrayList<FoodDisplayObject>();
@@ -198,24 +205,11 @@ public class FoodOrderController {
 		return foodDisplayList;
 	}
 
-	// Retrieve FoodOrders from Yesterday 10:00:00 to today 10:00:00
-	public List<FoodOrder> getFoodOrderBetweenCutOff() {
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		Date laterDate = cal.getTime();
+	
 
-		laterDate.setHours(10);
-		laterDate.setMinutes(0);
-		cal.add(Calendar.DATE, -1);
-		Date earlierDate = cal.getTime();
-		earlierDate.setHours(10);
-		earlierDate.setMinutes(0);
-		return foodOrderDAO.getFoodOrderByDate(earlierDate, laterDate);
-	}
-
-	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall() {
+	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall(Date earlierDate, Date laterDate) {
 		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
-				getFoodOrderBetweenCutOff());
+				getFoodOrderBetweenCutOff(earlierDate,laterDate));
 		ArrayList<FoodOrderItem> allFoodOrderItems = new ArrayList<FoodOrderItem>();
 		HashSet<Integer> uniqueStallNames = new HashSet<Integer>();
 		HashMap<Integer, ArrayList<FoodOrderItem>> mapToReturn = new HashMap<Integer, ArrayList<FoodOrderItem>>();
