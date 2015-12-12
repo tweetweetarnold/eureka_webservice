@@ -80,6 +80,14 @@
 							<div style="font-size: 18px;">
 
 								<table>
+									<c:if test="${order.status ne 'Submitted'}">
+										<tr>
+										<td style="padding-right: 10px;">
+											<strong>Transaction ID:</strong>
+										</td>
+										<td><c:out value="${order.transactionId}"/></td>
+									</tr>
+									</c:if>
 									<tr>
 										<td style="padding-right: 10px;">
 											<strong>Canteen:</strong>

@@ -166,43 +166,41 @@
 		<c:choose>
 		<c:when test="${haveOrder eq true}">
 			<form action="${initParam['posturl']}" method="post">
-			<input type="hidden" name="upload" value="1"/>
-			<input type="hidden" name="return" value="${initParam['returnurl']}"/>
-			<input type="hidden" name="cmd" value="_cart"/>
-			<input type="hidden" name="business" value="${initParam['business']}"/>
-			<input type="hidden" name="currency_code" value="SGD">
+				<input type="hidden" name="upload" value="1"/>
+				<input type="hidden" name="return" value="${initParam['returnurl']}"/>
+				<input type="hidden" name="cmd" value="_cart"/>
+				<input type="hidden" name="business" value="${initParam['business']}"/>
+				<input type="hidden" name="currency_code" value="SGD">
 			
-			<c:set var="count" value="0" />
+				<c:set var="count" value="0" />
 			
-			<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">		
-
-				<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
-					<c:set var="count" value="${count + 1}" />
-					<c:set var="modifiedFoodName" value="${foodItem.food.name}" />
-					<c:set var="quantity" value="0"/>
-					<c:set var="newPrice" value="0"/>
-					
-					<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen" varStatus="modifierChosenLoop">
-						<c:choose>
-							<c:when test="${fn:contains(modifierChosen.name, 'Upsize')}">
-	   							<c:set var="modifiedFoodName" value="${modifiedFoodName} with Upsize"/>	
-							</c:when>
+				<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">		
+	
+					<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
+						<c:set var="count" value="${count + 1}" />
+						<c:set var="modifiedFoodName" value="${foodItem.food.name}" />
 						
-							<c:otherwise>
-								<c:set var="modifiedFoodName" value="${modifiedFoodName} with ${modifierChosen.name}"/>	
-							</c:otherwise>
-						</c:choose>
+						<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen" varStatus="modifierChosenLoop">
+							<c:choose>
+								<c:when test="${fn:contains(modifierChosen.name, 'Upsize')}">
+		   							<c:set var="modifiedFoodName" value="${modifiedFoodName} with Upsize"/>	
+								</c:when>
+								<c:otherwise>
+									<c:set var="modifiedFoodName" value="${modifiedFoodName} with ${modifierChosen.name}"/>	
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						
+						<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${modifiedFoodName}" />">
+						<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${foodItem.quantity}" />">
+						<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
+						<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
+					
 					</c:forEach>
-					<c:set var="quantity" value="${foodItem.quantity}" />
-					<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
-					<c:set var="newPrice" value="${newPrice}" />
+					
 				</c:forEach>
-				<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${modifiedFoodName}" />">
-				<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${quantity}" />">
-				<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
-			</c:forEach>
 			
-			<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
+				<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
 			
 			</form>
 		</c:when>

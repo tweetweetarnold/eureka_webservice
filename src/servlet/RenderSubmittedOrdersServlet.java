@@ -55,7 +55,7 @@ public class RenderSubmittedOrdersServlet extends HttpServlet {
 			Employee emp = (Employee) session.getAttribute("user");
 
 			FoodOrderController foodOrderController = new FoodOrderController();
-			List<FoodOrder> foodOrderListWithSubmittedStatus = foodOrderController.getFoodOrderSetWithSubmittedStatus(emp.getEmail(),"Submitted");
+			List<FoodOrder> foodOrderListWithSubmittedStatus = foodOrderController.getUserFoodOrdersByStatus(emp.getEmail(),"Submitted");
 			System.out.println(foodOrderListWithSubmittedStatus.size());
 
 			session.setAttribute("submittedOrders", foodOrderListWithSubmittedStatus);

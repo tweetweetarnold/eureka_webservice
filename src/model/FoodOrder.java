@@ -27,6 +27,7 @@ public class FoodOrder {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")
 	private Set<FoodOrderItem> foodOrderList;
 	private Date createDate;
+	private String transactionId;
 
 	public FoodOrder() {
 	}
@@ -37,6 +38,7 @@ public class FoodOrder {
 		this.employee = employee;
 		this.foodOrderList = foodOrderList;
 		this.createDate = new Date();
+		this.transactionId = null;
 	}
 
 	public Set<FoodOrderItem> getFoodOrderList() {
@@ -61,6 +63,10 @@ public class FoodOrder {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
 	}
 
 	public Employee getEmployee() {
@@ -87,6 +93,10 @@ public class FoodOrder {
 			result += (item.getQuantity() * item.getPrice());
 		}
 		return result;
+	}
+	
+	public String getTransactionId() {
+		return transactionId;
 	}
 
 }

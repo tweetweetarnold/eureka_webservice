@@ -47,7 +47,7 @@ public class ProcessPaymentServlet extends HttpServlet {
 			System.out.println(transactionAmount);
 			Employee employee = (Employee) session.getAttribute("user");
 			FoodOrderController foodOrderController = new FoodOrderController();
-			List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSetWithSubmittedStatus(employee.getEmail(),"Submitted");
+			List<FoodOrder> foodOrderList = foodOrderController.getUserFoodOrdersByStatus(employee.getEmail(),"Submitted");
 			//if transaction is successful, it will update the amount owed and status of the order to "Paid"
 			if (transactionStatus.equals("Completed")) {
 			//retrieve the user to update its amount owed
@@ -58,6 +58,7 @@ public class ProcessPaymentServlet extends HttpServlet {
 				//iterate through user's list of food orders and update the status to "Paid"
 				for (FoodOrder f: foodOrderList) {
 						f.setStatus("Paid");
+						f.setTransactionId(transactionId);
 						foodOrderController.updateFoodOrder(f);
 				}
 				System.out.println("Updated amount owed: " + employee.getAmountOwed());
@@ -68,6 +69,7 @@ public class ProcessPaymentServlet extends HttpServlet {
 					
 					
 						f.setStatus("Failed");
+						f.setTransactionId(transactionId);
 						foodOrderController.updateFoodOrder(f);
 					
 				}
@@ -76,6 +78,7 @@ public class ProcessPaymentServlet extends HttpServlet {
 				for (FoodOrder f: foodOrderList) {
 					
 						f.setStatus("Pending");
+						f.setTransactionId(transactionId);
 						foodOrderController.updateFoodOrder(f);
 					
 				}
@@ -84,6 +87,7 @@ public class ProcessPaymentServlet extends HttpServlet {
 				for (FoodOrder f: foodOrderList) {
 					
 						f.setStatus("Held");
+						f.setTransactionId(transactionId);
 						foodOrderController.updateFoodOrder(f);
 					
 				}
