@@ -140,7 +140,6 @@ public class MyConnection {
 
 		session.getTransaction().commit();
 		session.close();
-		System.out.println("here " + list.size());
 		return list;
 	}
 

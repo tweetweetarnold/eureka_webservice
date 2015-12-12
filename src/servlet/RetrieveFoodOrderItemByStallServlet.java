@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.FoodOrderController;
 import model.FoodOrderItem;
+import controller.FoodOrderController;
 
 /**
  * Servlet implementation class RetrieveFoodOrderItemByStallServlet
@@ -33,8 +33,7 @@ public class RetrieveFoodOrderItemByStallServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -43,8 +42,7 @@ public class RetrieveFoodOrderItemByStallServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -63,10 +61,10 @@ public class RetrieveFoodOrderItemByStallServlet extends HttpServlet {
 		earlierDate.setHours(10);
 		earlierDate.setMinutes(0);
 
-		HashMap<Integer, ArrayList<FoodOrderItem>> hashMapToReturn = foodOrderController.getFoodOrderItemsForStall(earlierDate, laterDate);
+		HashMap<Integer, ArrayList<FoodOrderItem>> hashMapToReturn = foodOrderController
+				.getFoodOrderItemsForStall(earlierDate, laterDate);
 		RequestDispatcher rd = request.getRequestDispatcher("adminFoodOrderByStall.jsp");
 		request.setAttribute("foodOrderItemByStall", hashMapToReturn);
 		rd.forward(request, response);
 	}
-
 }

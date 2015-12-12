@@ -45,8 +45,8 @@ public class RetrieveFoodOrdersServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		
-		//date processing
+
+		// date processing
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date laterDate = cal.getTime();
@@ -57,7 +57,6 @@ public class RetrieveFoodOrdersServlet extends HttpServlet {
 		Date earlierDate = cal.getTime();
 		earlierDate.setHours(10);
 		earlierDate.setMinutes(0);
-		
 
 		FoodOrderController foodOrderController = new FoodOrderController();
 		ArrayList<FoodDisplayObject> foodOrderList = new ArrayList<FoodDisplayObject>(
