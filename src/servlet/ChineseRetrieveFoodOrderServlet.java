@@ -61,7 +61,7 @@ public class ChineseRetrieveFoodOrderServlet extends HttpServlet {
 
 		FoodOrderController foodOrderController = new FoodOrderController();
 		ArrayList<FoodDisplayObject> foodOrderList = new ArrayList<FoodDisplayObject>(
-				foodOrderController.getFoodOrderforCutOff(earlierDate, laterDate));
+				foodOrderController.getFoodOrderForCutOff(earlierDate, laterDate));
 
 		RequestDispatcher rd = request.getRequestDispatcher("adminFoodOrderByStallCN.jsp");
 		request.setAttribute("foodOrders", foodOrderList);

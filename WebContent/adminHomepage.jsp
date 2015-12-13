@@ -78,7 +78,7 @@
 								</div>
 							</div>
 						</div>
-						<a href="GetTodayOrdersServlet">
+						<a href="LoadOrderWindowOpenedServlet">
 							<div class="panel-footer">
 								<span class="pull-left">View Details</span>
 								<span class="pull-right">

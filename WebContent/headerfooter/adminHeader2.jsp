@@ -283,7 +283,7 @@
 							<a href="#">Window: Queued</a>
 						</li>
 						<li>
-							<a href="GetTodayOrdersServlet">Window: Opened</a>
+							<a href="LoadOrderWindowOpenedServlet">Window: Opened</a>
 						</li>
 						<li>
 							<a href="#">Window: Processing</a>

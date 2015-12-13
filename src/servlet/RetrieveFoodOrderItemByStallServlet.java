@@ -7,12 +7,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.FoodOrderItem;
 import controller.FoodOrderController;
@@ -47,6 +47,8 @@ public class RetrieveFoodOrderItemByStallServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+
 		FoodOrderController foodOrderController = new FoodOrderController();
 
 		// date processing
@@ -63,8 +65,9 @@ public class RetrieveFoodOrderItemByStallServlet extends HttpServlet {
 
 		HashMap<Integer, ArrayList<FoodOrderItem>> hashMapToReturn = foodOrderController
 				.getFoodOrderItemsForStall(earlierDate, laterDate);
-		RequestDispatcher rd = request.getRequestDispatcher("adminFoodOrderByStall.jsp");
-		request.setAttribute("foodOrderItemByStall", hashMapToReturn);
-		rd.forward(request, response);
+
+		session.setAttribute("foodOrderItemByStall", hashMapToReturn);
+		response.sendRedirect("adminFoodOrderByStall.jsp");
+
 	}
 }

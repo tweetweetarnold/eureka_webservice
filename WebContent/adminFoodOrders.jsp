@@ -2,6 +2,7 @@
 <html lang="en">
 
 <%@include file="adminProtect.jsp"%>
+ <%@ page  import="java.util.*" %>
 
 <head>
 
@@ -61,21 +62,12 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Today's Orders</h1>
+					<h1 class="page-header">Orders</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
 
-			<div style="float: right;
-	margin-bottom: 20px;">
-				<form action="RetrieveFoodOrdersServlet" method="post">
-					<button style="margin: 0px, auto;" type="submit" class="btn btn-lg btn-success btn-block">Group by stalls</button>
-				</form>
-			</div>
-
-
-			<c:set scope="session" value="foodOrders" var="foodOrdersList" />
 
 			<div class="row">
 				<div class="col-lg-12">
@@ -86,30 +78,33 @@
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs">
 								<li class="active">
-									<a href="#no-group" data-toggle="tab">No Group</a>
+									<a href="#nogroup" data-toggle="tab">No Group</a>
 								</li>
 								<li>
-									<a href="#profile" data-toggle="tab">Group by Stalls</a>
+									<a href="#groupByStall" data-toggle="tab">Group by Stalls</a>
+								</li>
+								<li>
+									<a href="#groupByStallCN" data-toggle="tab">Group by Stalls (CN)</a>
 								</li>
 							</ul>
 
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div class="tab-pane fade in active" id="no-group">
+								<div class="tab-pane fade" id="nogroup">
 									<div class="dataTable_wrapper">
 										<br>
 										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 											<thead>
 												<tr>
-													<th>Number</th>
-													<th>Email</th>
-													<th>Item(s)</th>
-													<th>Quantity</th>
-													<th>Price</th>
+													<th>S/N</th>
+													<th>User Email</th>
+													<th>Food Item(s)</th>
+													<th>Qty</th>
+													<th>Price ($)</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${sessionScope.todayOrders}" var="order" varStatus="loop">
+												<c:forEach items="${sessionScope.orderWindowOpenedNogroup}" var="order" varStatus="loop">
 													<tr class="odd gradeX">
 														<td rowspan="${fn:length(order.value) + 1}">${loop.index + 1}</td>
 														<td rowspan="${fn:length(order.value) + 1}">${order.key}</td>
@@ -128,13 +123,85 @@
 									</div>
 									<!-- /.table-responsive -->
 								</div>
-								<div class="tab-pane fade" id="profile">
-									<h4>Profile Tab</h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-										nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-										id est laborum.</p>
+
+								<div class="tab-pane fade in active" id="groupByStall">
+									<div class="dataTable_wrapper">
+										<br>
+										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+											<thead>
+												<tr>
+													<th>Stall</th>
+													<th>Stall Number</th>
+													<th>Food</th>
+													<th>Add Ons</th>
+													<th>Quantity</th>
+													<th>Price</th>
+													<th>Users</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${sessionScope.orderWindowOpenedStalls}" var="foodDisplayObj" varStatus="loop">
+
+													<tr class="odd gradeX">
+														<td rowspan="${fn:length(foodDisplayObj.foodOrderItem) + 1}">${foodDisplayObj.stallName}</td>
+														<td rowspan="${fn:length(foodDisplayObj.foodOrderItem) + 1}">
+
+															<c:out value="${foodDisplayObj.serialNumber}" />
+															<c:forEach items="${foodDisplayObj.foodOrderItem}" var="item">
+																<tr>
+																	<td>${item.food.name}</td>
+																	<td>
+																		<c:forEach items="${item.modifierChosenList}" var="modifierChosen">
+																			${modifierChosen.name}<br>
+																		</c:forEach>
+																	</td>
+																	<td>${FoodDisplayObject.foodDisplayObj.quantity[item]}</td>
+																	<td>price</td>
+																	<td>${FoodDisplayObject.foodDisplayObj.username[item]}</td>
+																</tr>
+															</c:forEach>
+														</td>
+
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+									<!-- /.table-responsive -->
+								</div>
+
+
+								<div class="tab-pane fade" id="groupByStallCN">
+									<div class="dataTable_wrapper">
+										<br>
+										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+											<thead>
+												<tr>
+													<th>Stall</th>
+													<th>Stall Number</th>
+													<th>Food</th>
+													<th>Add Ons</th>
+													<th>Quantity</th>
+													<th>Price</th>
+													<th>Users</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${sessionScope.orderWindowOpenedStalls}" var="foodOrderList" varStatus="loop">
+
+													<tr class="odd gradeX">
+														<%-- 												<td rowspan="${fn:length(foodOrderList.foodOrderItemList) + 1}"> --%>
+														<td>${foodOrderList.stallName}</td>
+														<%-- 												<td rowspan="${fn:length(foodOrderList.foodOrderItemList) + 1}"> --%>
+														<td>
+															<c:out value="${foodOrderList.serialNumber}" />
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+									<!-- /.table-responsive -->
 								</div>
 							</div>
 						</div>

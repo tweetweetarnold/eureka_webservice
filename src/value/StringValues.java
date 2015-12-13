@@ -19,4 +19,14 @@ public final class StringValues {
 	public static final String ORDERWINDOW_PROCESSING = "Processing";
 	public static final String ORDERWINDOW_CLOSED = "Closed";
 
+	
+	
+	
+	// *********************************************************************************
+	// For Session attributes
+	public static final String SESSION_ERROR = "error";
+	public static final String SESSION_MESSAGE = "message";
+	public static final String SESSION_ORDERS_WINDOW_OPENED_NOGROUP = "orderWindowOpenedNogroup";
+	public static final String SESSION_ORDERS_WINDOW_OPENED_STALLS = "orderWindowOpenedStalls";
+
 }
