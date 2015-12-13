@@ -24,6 +24,7 @@ import dao.FoodOrderDAO;
 public class FoodOrderController {
 	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
 	EmployeeDAO employeeDAO = new EmployeeDAO();
+	DateTime today = new DateTime();
 
 	public FoodOrderController() {
 	}
@@ -40,6 +41,16 @@ public class FoodOrderController {
 		return foodOrderDAO.getFoodOrderSet(employeeDAO.getEmployeeByEmail(email));
 	}
 
+	// Retrieve FoodOrders between earlierDate and laterDate
+	public List<FoodOrder> getFoodOrderBetweenCutOff(Date earlierDate, Date laterDate) {
+		return foodOrderDAO.getFoodOrderByDate(earlierDate, laterDate);
+	}
+
+	// Retrieve a FoodOrder by id
+	public FoodOrder getFoodOrder(int foodOrderId) {
+		return foodOrderDAO.getFoodOrder(foodOrderId);
+	}
+
 	public List<FoodOrder> getUserFoodOrdersByStatus(String email, String status) {
 		List<FoodOrder> returnList = new ArrayList<FoodOrder>();
 		List<FoodOrder> foodOrderList = foodOrderDAO.getFoodOrderSet(employeeDAO
@@ -51,16 +62,6 @@ public class FoodOrderController {
 			}
 		}
 		return returnList;
-	}
-
-	// Retrieve FoodOrders between earlierDate and laterDate
-	public List<FoodOrder> getFoodOrderBetweenCutOff(Date earlierDate, Date laterDate) {
-		return foodOrderDAO.getFoodOrderByDate(earlierDate, laterDate);
-	}
-
-	// Retrieve a FoodOrder by id
-	public FoodOrder getFoodOrder(int foodOrderId) {
-		return foodOrderDAO.getFoodOrder(foodOrderId);
 	}
 
 	// retrieve an ArrayList of FoodOrders made by a user in a week. sundayDate should be the
@@ -88,7 +89,7 @@ public class FoodOrderController {
 
 	// this is to get the FoodDisplayObject for displaying food orders for the day filtered by
 	// stores each food display object corresponds to one store
-	public ArrayList<FoodDisplayObject> getFoodOrderforCutOff(Date earlierDate, Date laterDate) {
+	public ArrayList<FoodDisplayObject> getFoodOrderForCutOff(Date earlierDate, Date laterDate) {
 		// retrieve the FoodOrders from yesterday 10am to today 10am
 		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
 				getFoodOrderBetweenCutOff(earlierDate, laterDate));
@@ -201,8 +202,11 @@ public class FoodOrderController {
 
 	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall(Date earlierDate,
 			Date laterDate) {
-		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
-				getFoodOrderBetweenCutOff(earlierDate, laterDate));
+		// ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
+		// getFoodOrderBetweenCutOff(earlierDate, laterDate));
+		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(today.minusDays(1)
+				.toDate(), today.toDate());
+
 		ArrayList<FoodOrderItem> allFoodOrderItems = new ArrayList<FoodOrderItem>();
 		HashSet<Integer> uniqueStallNames = new HashSet<Integer>();
 		HashMap<Integer, ArrayList<FoodOrderItem>> mapToReturn = new HashMap<Integer, ArrayList<FoodOrderItem>>();
@@ -227,14 +231,12 @@ public class FoodOrderController {
 			}
 			mapToReturn.put(tempStallID, foodOrderListForStallName);
 		}
-
 		return mapToReturn;
 	}
 
 	public HashMap<String, ArrayList<FoodOrderItem>> getFoodOrderToday() {
 		// get all orders made today
 		FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
-		DateTime today = new DateTime();
 
 		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(today.minusDays(1)
 				.toDate(), today.toDate());
