@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Employee;
@@ -17,18 +18,6 @@ public class EmployeeDAO {
 		return (Employee) MyConnection.get(Employee.class, employeeId);
 	}
 
-	// Retrieve Employee from DB using Employee username
-	public Employee getEmployeeByEmail(String email) {
-
-		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
-		dc.add(Restrictions.eq("email", email));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		return (Employee) l.get(0);
-	}
-
 	// Save new Employee into the DB
 	public void saveEmployee(Employee e) {
 		MyConnection.save(e);
@@ -42,5 +31,33 @@ public class EmployeeDAO {
 	// Delete Employee from the DB
 	public void deleteEmployee(Employee e) {
 		MyConnection.delete(e);
+	}
+
+	// Retrieve Employee from DB using Employee username
+	public Employee getEmployeeByEmail(String email) {
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
+		dc.add(Restrictions.eq("email", email));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		return (Employee) l.get(0);
+	}
+
+	public ArrayList<Employee> getAllEmployees() {
+		ArrayList<Employee> returnList = null;
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		returnList = new ArrayList<Employee>();
+
+		for (Object o : l) {
+			returnList.add((Employee) o);
+		}
+		return returnList;
 	}
 }

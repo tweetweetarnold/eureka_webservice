@@ -28,5 +28,6 @@ public final class StringValues {
 	public static final String SESSION_MESSAGE = "message";
 	public static final String SESSION_ORDERS_WINDOW_OPENED_NOGROUP = "orderWindowOpenedNogroup";
 	public static final String SESSION_ORDERS_WINDOW_OPENED_STALLS = "orderWindowOpenedStalls";
+	public static final String SESSION_USERMGMT_VIEW = "userMgmtView";
 
 }

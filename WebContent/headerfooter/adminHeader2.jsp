@@ -345,7 +345,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="#">#</a>
+							<a href="LoadAdminViewUsersDetailsServlet">View</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->

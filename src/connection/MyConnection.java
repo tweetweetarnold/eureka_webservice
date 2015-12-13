@@ -168,6 +168,18 @@ public class MyConnection {
 		return list;
 	}
 
+	// retrieve all records
+	public static List<Object> retrieveAll(DetachedCriteria dc) {
+		System.out.println("MyConnection: retrieveAll");
+		Session session = startSession();
+		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(
+				Criteria.DISTINCT_ROOT_ENTITY);
+		List<Object> list = (List<Object>) criteria.list();
+		session.getTransaction().commit();
+		session.close();
+		return list;
+	}
+
 	public static List<Object> getFoodOrderList(Employee employee) {
 		Session session = startSession();
 		List<Object> list = new ArrayList<>();
@@ -233,10 +245,10 @@ public class MyConnection {
 
 	public static List<Object> getUsersWithOutstandingPaymentFromCompany(int companyID) {
 		Session session = startSession();
-		
+
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(Employee.class);
-		
+
 		criteria.add(Restrictions.eq("companyId", companyID)).list();
 		criteria.add(Restrictions.ge("amountOwed", 0.01)).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
@@ -249,9 +261,7 @@ public class MyConnection {
 
 		return list;
 	}
-	
-	
-	
+
 	public static List<Object> get(String sql) {
 		Session session = startSession();
 		// Criteria criteria = dc.getExecutableCriteria(session);

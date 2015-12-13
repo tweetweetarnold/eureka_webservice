@@ -61,7 +61,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Orders</h1>
+					<h1 class="page-header">User Management</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -77,19 +77,13 @@
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs">
 								<li class="active">
-									<a href="#nogroup" data-toggle="tab">No Group</a>
-								</li>
-								<li>
-									<a href="#groupByStall" data-toggle="tab">Group by Stalls</a>
-								</li>
-								<li>
-									<a href="#groupByStallCN" data-toggle="tab">Group by Stalls (CN)</a>
+									<a href="#viewAll" data-toggle="tab">All</a>
 								</li>
 							</ul>
 
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div class="tab-pane fade" id="nogroup">
+								<div class="tab-pane fade" id="viewAll">
 									<div class="dataTable_wrapper">
 										<br>
 										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -103,98 +97,11 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${sessionScope.orderWindowOpenedNogroup}" var="order" varStatus="loop">
+												<c:forEach items="${sessionScope.userMgmtView}" var="employee" varStatus="loop">
 													<tr class="odd gradeX">
-														<td rowspan="${fn:length(order.value) + 1}">${loop.index + 1}</td>
-														<td rowspan="${fn:length(order.value) + 1}">${order.key}</td>
+														<td>${loop.index + 1}</td>
+														<td>1</td>
 
-														<c:forEach items="${order.value}" var="foodOrderItem">
-															<tr>
-																<td>${foodOrderItem.food.name}</td>
-																<td>${foodOrderItem.quantity}</td>
-																<td>$${foodOrderItem.priceString}</td>
-															</tr>
-														</c:forEach>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</div>
-									<!-- /.table-responsive -->
-								</div>
-
-								<div class="tab-pane fade in active" id="groupByStall">
-									<div class="dataTable_wrapper">
-										<br>
-										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-											<thead>
-												<tr>
-													<th>Stall</th>
-													<th>Stall Number</th>
-													<th>Food</th>
-													<th>Add Ons</th>
-													<th>Quantity</th>
-													<th>Price</th>
-													<th>Users</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${sessionScope.orderWindowOpenedStalls}" var="foodDisplayObj" varStatus="loop">
-
-													<tr class="odd gradeX">
-														<td rowspan="${fn:length(foodDisplayObj.foodOrderItem) + 1}">${foodDisplayObj.stallName}</td>
-														<td rowspan="${fn:length(foodDisplayObj.foodOrderItem) + 1}">
-
-															<c:out value="${foodDisplayObj.serialNumber}" />
-															<c:forEach items="${foodDisplayObj.foodOrderItem}" var="item">
-																<tr>
-																	<td>${item.food.name}</td>
-																	<td>
-																		<c:forEach items="${item.modifierChosenList}" var="modifierChosen">
-																			${modifierChosen.name}<br>
-																		</c:forEach>
-																	</td>
-																	<td>${FoodDisplayObject.foodDisplayObj.quantity[item]}</td>
-																	<td>price</td>
-																	<td>${FoodDisplayObject.foodDisplayObj.username[item]}</td>
-																</tr>
-															</c:forEach>
-														</td>
-
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</div>
-									<!-- /.table-responsive -->
-								</div>
-
-
-								<div class="tab-pane fade" id="groupByStallCN">
-									<div class="dataTable_wrapper">
-										<br>
-										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-											<thead>
-												<tr>
-													<th>Stall</th>
-													<th>Stall Number</th>
-													<th>Food</th>
-													<th>Add Ons</th>
-													<th>Quantity</th>
-													<th>Price</th>
-													<th>Users</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${sessionScope.orderWindowOpenedStalls}" var="foodOrderList" varStatus="loop">
-
-													<tr class="odd gradeX">
-														<%-- 												<td rowspan="${fn:length(foodOrderList.foodOrderItemList) + 1}"> --%>
-														<td>${foodOrderList.stallName}</td>
-														<%-- 												<td rowspan="${fn:length(foodOrderList.foodOrderItemList) + 1}"> --%>
-														<td>
-															<c:out value="${foodOrderList.serialNumber}" />
-														</td>
 													</tr>
 												</c:forEach>
 											</tbody>
