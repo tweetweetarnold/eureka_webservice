@@ -140,13 +140,13 @@ public class FoodOrderController {
 		while (iter.hasNext()) {
 			// this (B)LinkedHashMap will store all the users who ordered the particular
 			// FoodOrderItem.
-			LinkedHashMap<String, ArrayList<String>> usernamesForFoodItem = new LinkedHashMap<String, ArrayList<String>>();
+			LinkedHashMap<Integer, ArrayList<String>> usernamesForFoodItem = new LinkedHashMap<Integer, ArrayList<String>>();
 			String stallName = (String) iter.next();
 			// (AA)This holds all the FoodOrderItems for the stall.
 			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash
 					.get(stallName);
 			// this (C)LinkedHashMap will store the quantity of the particular FoodOrderItem.
-			LinkedHashMap<String, Integer> quantityForFoodOrderItem = new LinkedHashMap<String, Integer>();
+			LinkedHashMap<Integer, Integer> quantityForFoodOrderItem = new LinkedHashMap<Integer, Integer>();
 			ArrayList<FoodOrderItem> uniqueFoodOrderItem = new ArrayList<FoodOrderItem>();
 			// this loops Through the foodOrderItems in (AA) in order to take out the unique
 			// FoodOrderItems and stores them in UniqueFoodOrderItem
@@ -172,8 +172,8 @@ public class FoodOrderController {
 						tempquantity++;
 					}
 				}
-				String id = Integer.toString(tempItem.getFoodOrderItemId());
-				quantityForFoodOrderItem.put(id, tempquantity);
+				
+				quantityForFoodOrderItem.put(tempItem.getFoodOrderItemId(), tempquantity);
 			}
 
 			// not too sure if we can use the old uniqueFoodOrderItemList....
@@ -194,8 +194,8 @@ public class FoodOrderController {
 						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
 						usernames.add(tempUsername);
 					}
-					String id = Integer.toString(f.getFoodOrderItemId());
-					usernamesForFoodItem.put(id, new ArrayList<String>(usernames));
+					
+					usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<String>(usernames));
 				}
 			}
 

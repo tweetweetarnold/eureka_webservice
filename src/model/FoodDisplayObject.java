@@ -8,8 +8,8 @@ public class FoodDisplayObject {
 	private int serialNumber;
 	private String stallName;
 	private ArrayList<FoodOrderItem> foodOrderItemList = new ArrayList<FoodOrderItem>();
-	private LinkedHashMap<String, Integer> quantity = new LinkedHashMap<String, Integer>();
-	private LinkedHashMap<String, ArrayList<String>> username = new LinkedHashMap<String, ArrayList<String>>();
+	private LinkedHashMap<Integer, Integer> quantity = new LinkedHashMap<Integer, Integer>();
+	private LinkedHashMap<Integer, ArrayList<String>> username = new LinkedHashMap<Integer, ArrayList<String>>();
 
 	public FoodDisplayObject(int serialNumber) {
 		this.serialNumber = serialNumber;
@@ -39,7 +39,7 @@ public class FoodDisplayObject {
 		this.foodOrderItemList = foodOrderItemList;
 	}
 
-	public void setQuantity(LinkedHashMap<String, Integer> quantityToFoodOrderItem) {
+	public void setQuantity(LinkedHashMap<Integer, Integer> quantityToFoodOrderItem) {
 		this.quantity = quantityToFoodOrderItem;
 		// for(FoodOrderItem f : foodOrderItemList){
 		// FoodOrderItem foodItemd = f;
@@ -56,7 +56,7 @@ public class FoodDisplayObject {
 		// }
 	}
 
-	public HashMap<String, Integer> getQuantityList() {
+	public HashMap<Integer, Integer> getQuantityList() {
 		return quantity;
 	}
 
@@ -64,7 +64,7 @@ public class FoodDisplayObject {
 		return quantity.get(f);
 	}
 
-	public HashMap<String, ArrayList<String>> getUsernameHash() {
+	public HashMap<Integer, ArrayList<String>> getUsernameHash() {
 		return username;
 	}
 
@@ -72,7 +72,7 @@ public class FoodDisplayObject {
 		return username.get(f);
 	}
 
-	public void setUsername(LinkedHashMap<String, ArrayList<String>> username) {
+	public void setUsername(LinkedHashMap<Integer, ArrayList<String>> username) {
 		this.username = username;
 	}
 
