@@ -39,16 +39,27 @@
                         <name>MyJob2</name>
                         <job-class>background.WeeklySuspension</job-class>
                 </job>
+                <job>
+                        <name>MyJob3</name>
+                        <job-class>background.ChasePayment</job-class>
+                </job>
                 <trigger>
                         <cron>
-                                <name>TenSecondIntervals</name>
+                                <name>sunday2359</name>
                                 <job-name>MyJob2</job-name>
                                  <cron-expression>0 59 23 ? * SUN</cron-expression>
                         </cron>
                 </trigger>
                 <trigger>
                         <cron>
-                                <name>TenSecondIntervals</name>
+                                <name>Weekday7am</name>
+                                <job-name>MyJob3</job-name>
+                                 <cron-expression>0 0 7 ? * MON-FRI</cron-expression>
+                        </cron>
+                </trigger>
+                <trigger>
+                        <cron>
+                                <name>Weekday9am</name>
                                 <job-name>MyJob</job-name>
                                  <cron-expression>0 0 9 ? * MON-FRI</cron-expression>
                         </cron>
