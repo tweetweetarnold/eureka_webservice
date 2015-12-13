@@ -20,6 +20,7 @@ import org.joda.time.DateTime;
 
 import dao.EmployeeDAO;
 import dao.FoodOrderDAO;
+import dao.FoodOrderItemDAO;
 
 public class FoodOrderController {
 	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
@@ -138,13 +139,13 @@ public class FoodOrderController {
 		while (iter.hasNext()) {
 			// this (B)LinkedHashMap will store all the users who ordered the particular
 			// FoodOrderItem.
-			LinkedHashMap<FoodOrderItem, ArrayList<String>> usernamesForFoodItem = new LinkedHashMap<FoodOrderItem, ArrayList<String>>();
+			LinkedHashMap<String, ArrayList<String>> usernamesForFoodItem = new LinkedHashMap<String, ArrayList<String>>();
 			String stallName = (String) iter.next();
 			// (AA)This holds all the FoodOrderItems for the stall.
 			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash
 					.get(stallName);
 			// this (C)LinkedHashMap will store the quantity of the particular FoodOrderItem.
-			LinkedHashMap<FoodOrderItem, Integer> quantityForFoodOrderItem = new LinkedHashMap<FoodOrderItem, Integer>();
+			LinkedHashMap<String, Integer> quantityForFoodOrderItem = new LinkedHashMap<String, Integer>();
 			ArrayList<FoodOrderItem> uniqueFoodOrderItem = new ArrayList<FoodOrderItem>();
 			// this loops Through the foodOrderItems in (AA) in order to take out the unique
 			// FoodOrderItems and stores them in UniqueFoodOrderItem
@@ -170,12 +171,20 @@ public class FoodOrderController {
 						tempquantity++;
 					}
 				}
-				quantityForFoodOrderItem.put(tempItem, tempquantity);
+				String id = Integer.toString(tempItem.getFoodOrderItemId());
+				quantityForFoodOrderItem.put(id, tempquantity);
 			}
 
 			// not too sure if we can use the old uniqueFoodOrderItemList....
-			ArrayList<FoodOrderItem> uniqueFoodOrderItems = new ArrayList<FoodOrderItem>(
-					quantityForFoodOrderItem.keySet());
+			ArrayList<FoodOrderItem> uniqueFoodOrderItems = new ArrayList<FoodOrderItem>();
+			Iterator iterFoodItemID = quantityForFoodOrderItem.keySet().iterator();
+			FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
+			while(iterFoodItemID.hasNext()){
+				int id = (Integer)iterFoodItemID.next();
+				FoodOrderItem tempFoodOrderItem = foodOrderItemDAO.getFoodOrderItem(id);
+				uniqueFoodOrderItems.add(tempFoodOrderItem);
+			}
+					
 			// Populating (B) (Users)
 			for (FoodOrderItem f : uniqueFoodOrderItems) {
 				HashSet<String> usernames = new HashSet<String>();
@@ -184,7 +193,8 @@ public class FoodOrderController {
 						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
 						usernames.add(tempUsername);
 					}
-					usernamesForFoodItem.put(f, new ArrayList<String>(usernames));
+					String id = Integer.toString(f.getFoodOrderItemId());
+					usernamesForFoodItem.put(id, new ArrayList<String>(usernames));
 				}
 			}
 
@@ -198,6 +208,16 @@ public class FoodOrderController {
 		}
 		return foodDisplayList;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall(Date earlierDate,
 			Date laterDate) {
