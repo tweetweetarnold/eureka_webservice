@@ -90,6 +90,7 @@ public class FoodOrderController {
 	// this is to get the FoodDisplayObject for displaying food orders for the day filtered by
 	// stores each food display object corresponds to one store
 	public ArrayList<FoodDisplayObject> getFoodOrderForCutOff(Date earlierDate, Date laterDate) {
+		
 		// retrieve the FoodOrders from yesterday 10am to today 10am
 		ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
 				getFoodOrderBetweenCutOff(earlierDate, laterDate));
@@ -190,7 +191,7 @@ public class FoodOrderController {
 				HashSet<String> usernames = new HashSet<String>();
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 					if (f.equals2(i)) {
-						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
+						String tempUsername = i.getFoodOrder().getEmployee().getEmail() +" (" + i.getFoodOrder().getEmployee().getDefaultDeliveryPoint() + ")";
 						usernames.add(tempUsername);
 					}
 

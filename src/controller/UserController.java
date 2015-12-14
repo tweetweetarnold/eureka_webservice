@@ -19,6 +19,11 @@ public class UserController {
 		employee.setDefaultDeliveryPoint(buildingName);
 		employeeDAO.updateEmployee(employee);
 	}
+	
+	public String getDefaultDeliveryPoint(String email){
+		Employee employee = retrieveEmployeeViaEmail(email);
+		return employee.getDefaultDeliveryPoint();
+	}
 
 	public Employee retrieveEmployeeViaEmail(String email) {
 		return employeeDAO.getEmployeeByEmail(email);
