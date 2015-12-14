@@ -45,11 +45,11 @@ public class EmailGenerator {
 		String fromUser = "dabaomealorderapp";// just the id alone without
 												// @gmail.com
 		String fromUserEmailPassword = "{gxuvimr}";
-
+		MimeMessage emailMessage = createEmailMessage(subject, messageBody, toEmails);
 		Transport transport = mailSession.getTransport("smtp");
 
 		transport.connect(emailHost, fromUser, fromUserEmailPassword);
-		MimeMessage emailMessage = createEmailMessage(subject, messageBody, toEmails);
+		
 		transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
 		transport.close();
 		System.out.println("Email sent successfully.");
