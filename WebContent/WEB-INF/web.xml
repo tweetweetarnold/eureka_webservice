@@ -21,6 +21,6 @@
   </context-param>
   <context-param>
     <param-name>returnurl</param-name>
-    <param-value>http://localhost:8080/eureka_webservice/ProcessPaymentServlet</param-value>
+    <param-value>http://eureka-arnono.rhcloud.com/ProcessPaymentServlet</param-value>
   </context-param>
 </web-app>
