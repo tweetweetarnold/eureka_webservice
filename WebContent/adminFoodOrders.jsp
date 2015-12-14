@@ -89,7 +89,7 @@
 
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div class="tab-pane fade" id="nogroup">
+								<div class="tab-pane fade in active" id="nogroup">
 									<div class="dataTable_wrapper">
 										<br>
 										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -123,7 +123,7 @@
 									<!-- /.table-responsive -->
 								</div>
 
-								<div class="tab-pane fade in active" id="groupByStall">
+								<div class="tab-pane fade" id="groupByStall">
 									<div class="dataTable_wrapper">
 										<br>
 										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -142,24 +142,25 @@
 												<c:forEach items="${sessionScope.orderWindowOpenedStalls}" var="foodDisplayObj" varStatus="loop">
 
 													<tr class="odd gradeX">
-														<td rowspan="${fn:length(foodDisplayObj.foodOrderItem) + 1}">${foodDisplayObj.stallName}</td>
-														<td rowspan="${fn:length(foodDisplayObj.foodOrderItem) + 1}">
+														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.stallName}</td>
+														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.serialNumber }</td>
 
-															<c:out value="${foodDisplayObj.serialNumber}" />
-															<c:forEach items="${foodDisplayObj.foodOrderItem}" var="item">
-																<tr>
-																	<td>${item.food.name}</td>
-																	<td>
-																		<c:forEach items="${item.modifierChosenList}" var="modifierChosen">
+														<c:set value="${foodDisplayObj.quantityList }" var="quantityList" />
+														<c:set value="${foodDisplayObj.usernameList }" var="usernameList" />
+
+														<c:forEach items="${foodDisplayObj.foodOrderItemList}" var="item">
+															<tr>
+																<td>${item.food.name}</td>
+																<td>
+																	<c:forEach items="${item.modifierChosenList}" var="modifierChosen">
 																			${modifierChosen.name}<br>
-																		</c:forEach>
-																	</td>
-																	<td>${FoodDisplayObject.foodDisplayObj.quantity[item]}</td>
-																	<td>price</td>
-																	<td>${FoodDisplayObject.foodDisplayObj.username[item]}</td>
-																</tr>
-															</c:forEach>
-														</td>
+																	</c:forEach>
+																</td>
+																<td>${quantityList[item.foodOrderItemId]}</td>
+																<td>price</td>
+																<td>${usernameList[item.foodOrderItemId]}</td>
+															</tr>
+														</c:forEach>
 
 													</tr>
 												</c:forEach>

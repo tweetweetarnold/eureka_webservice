@@ -98,7 +98,7 @@ public class FoodOrderController {
 		ArrayList<FoodDisplayObject> foodDisplayList = new ArrayList<FoodDisplayObject>();
 
 		// (A) LinkedHashMap for all the FoodOrderItems with the store as the key
-		LinkedHashMap<String, ArrayList<FoodOrderItem>> stallToFoodItemLinkedHash = new LinkedHashMap<String, ArrayList<FoodOrderItem>>();
+		HashMap<String, ArrayList<FoodOrderItem>> stallToFoodItemLinkedHash = new HashMap<String, ArrayList<FoodOrderItem>>();
 
 		// retrieving all the FoodOrderItems from a FoodOrder in order to populate the
 		// (A)stallToFoodItemLinkedHash
@@ -140,13 +140,13 @@ public class FoodOrderController {
 		while (iter.hasNext()) {
 			// this (B)LinkedHashMap will store all the users who ordered the particular
 			// FoodOrderItem.
-			LinkedHashMap<Integer, ArrayList<String>> usernamesForFoodItem = new LinkedHashMap<Integer, ArrayList<String>>();
+			HashMap<Integer, ArrayList<String>> usernamesForFoodItem = new HashMap<Integer, ArrayList<String>>();
 			String stallName = (String) iter.next();
 			// (AA)This holds all the FoodOrderItems for the stall.
 			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash
 					.get(stallName);
 			// this (C)LinkedHashMap will store the quantity of the particular FoodOrderItem.
-			LinkedHashMap<Integer, Integer> quantityForFoodOrderItem = new LinkedHashMap<Integer, Integer>();
+			HashMap<Integer, Integer> quantityForFoodOrderItem = new HashMap<Integer, Integer>();
 			ArrayList<FoodOrderItem> uniqueFoodOrderItem = new ArrayList<FoodOrderItem>();
 			// this loops Through the foodOrderItems in (AA) in order to take out the unique
 			// FoodOrderItems and stores them in UniqueFoodOrderItem
@@ -172,7 +172,7 @@ public class FoodOrderController {
 						tempquantity++;
 					}
 				}
-				
+
 				quantityForFoodOrderItem.put(tempItem.getFoodOrderItemId(), tempquantity);
 			}
 
@@ -180,12 +180,12 @@ public class FoodOrderController {
 			ArrayList<FoodOrderItem> uniqueFoodOrderItems = new ArrayList<FoodOrderItem>();
 			Iterator iterFoodItemID = quantityForFoodOrderItem.keySet().iterator();
 			FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
-			while(iterFoodItemID.hasNext()){
-				int id = (Integer)iterFoodItemID.next();
+			while (iterFoodItemID.hasNext()) {
+				int id = (Integer) iterFoodItemID.next();
 				FoodOrderItem tempFoodOrderItem = foodOrderItemDAO.getFoodOrderItem(id);
 				uniqueFoodOrderItems.add(tempFoodOrderItem);
 			}
-					
+
 			// Populating (B) (Users)
 			for (FoodOrderItem f : uniqueFoodOrderItems) {
 				HashSet<String> usernames = new HashSet<String>();
@@ -194,31 +194,22 @@ public class FoodOrderController {
 						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
 						usernames.add(tempUsername);
 					}
-					
-					usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<String>(usernames));
+
+					usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<String>(
+							usernames));
 				}
 			}
 
 			// Each FoodDisplayObject represents one stall
 			FoodDisplayObject tempFoodDisplay = new FoodDisplayObject(count++);
 			tempFoodDisplay.setStallName(stallName);
-			tempFoodDisplay.setFoodOrderItem(uniqueFoodOrderItems);
-			tempFoodDisplay.setUsername(usernamesForFoodItem);
-			tempFoodDisplay.setQuantity(quantityForFoodOrderItem);
+			tempFoodDisplay.setFoodOrderItemList(uniqueFoodOrderItems);
+			tempFoodDisplay.setUsernameList(usernamesForFoodItem);
+			tempFoodDisplay.setQuantityList(quantityForFoodOrderItem);
 			foodDisplayList.add(tempFoodDisplay);
 		}
 		return foodDisplayList;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall(Date earlierDate,
 			Date laterDate) {

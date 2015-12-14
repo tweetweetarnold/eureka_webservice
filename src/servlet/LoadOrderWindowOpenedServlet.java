@@ -2,10 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
 
-import model.FoodDisplayObject;
-import model.FoodOrderItem;
 import value.StringValues;
 import controller.FoodOrderController;
 
@@ -71,8 +67,7 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 			laterDate = new Date();
 			earlierDate = new DateTime().minusDays(1).toDate();
 			// ************************ to remove
-			
-			
+
 			session.setAttribute(StringValues.SESSION_ORDERS_WINDOW_OPENED_NOGROUP,
 					foodOrderController.getFoodOrderToday());
 

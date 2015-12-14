@@ -2,9 +2,9 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import model.FoodDisplayObject;
-import java.util.ResourceBundle;
 
 public class ChineseTranslate {
 
@@ -15,7 +15,7 @@ public class ChineseTranslate {
 		rb = ResourceBundle.getBundle(resourceName, Locale.forLanguageTag("cn"));
 		ArrayList<FoodDisplayObject> tempFDOList = fDO;
 		for (FoodDisplayObject f : tempFDOList) {
-			f.getFoodOrderItem();
+//			f.getFoodOrderItem();
 		}
 
 		return null;
