@@ -130,11 +130,12 @@
 											<thead>
 												<tr>
 													<th>Stall</th>
-													<th>Stall Number</th>
+													<th>Stall No</th>
 													<th>Food</th>
 													<th>Add Ons</th>
-													<th>Quantity</th>
-													<th>Price</th>
+													<th>Qty</th>
+													<th>Subtotal $</th>
+													<th>Total $</th>
 													<th>Users</th>
 												</tr>
 											</thead>
@@ -157,7 +158,8 @@
 																	</c:forEach>
 																</td>
 																<td>${quantityList[item.foodOrderItemId]}</td>
-																<td>price</td>
+																<td>subtotal $</td>
+																<td>total $</td>
 																<td>${usernameList[item.foodOrderItemId]}</td>
 															</tr>
 														</c:forEach>
@@ -178,7 +180,7 @@
 											<thead>
 												<tr>
 													<th>Stall</th>
-													<th>Stall Number</th>
+													<th>Stall No</th>
 													<th>Food</th>
 													<th>Add Ons</th>
 													<th>Quantity</th>
