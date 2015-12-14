@@ -7,7 +7,9 @@ import org.quartz.*;
 import org.slf4j.*;
 
 import connection.MyConnection;
+import controller.CompanyController;
 import controller.UserController;
+import model.Company;
 import model.Employee;
 import services.EmailGenerator;
 
@@ -22,7 +24,9 @@ public class ChasePayment implements Job {
 			
 			
 			UserController employeeController = new UserController();
-			ArrayList<Object> objects = new ArrayList<Object>(MyConnection.getUsersToChasePayment(1));
+			CompanyController companyController = new CompanyController();
+			Company c = companyController.getCompany(1);
+			ArrayList<Object> objects = new ArrayList<Object>(MyConnection.getUsersToChasePayment(c));
 			ArrayList<String> emailList = new ArrayList<String>();
 			for(Object o: objects){
 				Employee tempEmployee = (Employee)o;

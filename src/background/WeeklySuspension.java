@@ -5,10 +5,13 @@ import java.util.List;
 
 import org.quartz.*;
 import org.slf4j.*;
+
+import model.Company;
 import model.Employee;
 
 
 import connection.MyConnection;
+import controller.CompanyController;
 import controller.UserController;
 
 public class WeeklySuspension implements Job {
@@ -17,8 +20,11 @@ public class WeeklySuspension implements Job {
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		try {
 			// Do all my stuff here
+			System.out.println("Doing");
 			UserController employeeController = new UserController();
-			ArrayList<Object> objects = new ArrayList<Object>(MyConnection.getUsersWithOutstandingPaymentFromCompany(1));
+			CompanyController companyController = new CompanyController();
+			Company c = companyController.getCompany(1);
+			ArrayList<Object> objects = new ArrayList<Object>(MyConnection.getUsersWithOutstandingPaymentFromCompany(c));
 			for(Object o: objects){
 				Employee tempEmployee = (Employee)o;
 				tempEmployee.setStatus("Suspended");

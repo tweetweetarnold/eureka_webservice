@@ -37,13 +37,11 @@ public class MyConnection {
 				// Setting SessionFactory
 				if (onOpenshift) {
 					// if application on OpenShift
-					sessionFactory = new Configuration().configure("hibernate.cfg.xml")
-							.buildSessionFactory();
+					sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 					System.out.println("hibernate.cfg.xml is loaded");
 				} else {
 					// if application on localhost
-					sessionFactory = new Configuration().configure("hibernate-local.cfg.xml")
-							.buildSessionFactory();
+					sessionFactory = new Configuration().configure("hibernate-local.cfg.xml").buildSessionFactory();
 					System.out.println("hibernate-local.cfg.xml is loaded");
 				}
 				System.out.println("SessionFactory is set: " + sessionFactory);
@@ -148,8 +146,7 @@ public class MyConnection {
 		System.out.println("MyConnection: getWithCriteria");
 		Session session = startSession();
 
-		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY);
+		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Object> l = criteria.list();
 
 		endSession(session);
@@ -172,8 +169,7 @@ public class MyConnection {
 	public static List<Object> retrieveAll(DetachedCriteria dc) {
 		System.out.println("MyConnection: retrieveAll");
 		Session session = startSession();
-		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY);
+		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Object> list = (List<Object>) criteria.list();
 		session.getTransaction().commit();
 		session.close();
@@ -183,8 +179,7 @@ public class MyConnection {
 	public static List<Object> getFoodOrderList(Employee employee) {
 		Session session = startSession();
 		List<Object> list = new ArrayList<>();
-		Criteria criteria = session.createCriteria(FoodOrder.class).setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY);
+		Criteria criteria = session.createCriteria(FoodOrder.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		String email = employee.getEmail();
 		criteria.add(Restrictions.eq("employee", employee)).list();
 		list = (List<Object>) criteria.list();
@@ -194,8 +189,7 @@ public class MyConnection {
 		return list;
 	}
 
-	public static List<Object> getFoodForDatesAndUser(Date earlierDate, Date laterDate,
-			Employee tempEmployee) {
+	public static List<Object> getFoodForDatesAndUser(Date earlierDate, Date laterDate, Employee tempEmployee) {
 		Session session = startSession();
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(FoodOrder.class);
@@ -243,14 +237,14 @@ public class MyConnection {
 		return list;
 	}
 
-	public static List<Object> getUsersWithOutstandingPaymentFromCompany(int companyID) {
+	public static List<Object> getUsersWithOutstandingPaymentFromCompany(Company company) {
 		Session session = startSession();
-
+		
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(Employee.class);
-
-		criteria.add(Restrictions.eq("companyId", companyID)).list();
-		criteria.add(Restrictions.ge("amountOwed", 0.01)).list();
+		Criterion thirdCondition = Restrictions.conjunction().add(Restrictions.eq("company", company))
+				.add(Restrictions.ge("amountOwed", 0.01));
+		criteria.add(thirdCondition).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
 
@@ -261,16 +255,17 @@ public class MyConnection {
 
 		return list;
 	}
-	
-	public static List<Object> getUsersToChasePayment(int companyID) {
+
+	public static List<Object> getUsersToChasePayment(Company company) {
 		Session session = startSession();
 
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(Employee.class);
-
-		criteria.add(Restrictions.eq("companyId", companyID)).list();
-		criteria.add(Restrictions.eq("status", "Suspended")).list();
-		criteria.add(Restrictions.ge("amountOwed", 0.01)).list();
+		Criterion thirdCondition = Restrictions.conjunction()
+		.add(Restrictions.eq("company", company))
+		.add(Restrictions.eq("status", "Suspended"))
+		.add(Restrictions.ge("amountOwed", 0.01));
+		criteria.add(thirdCondition).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
 
