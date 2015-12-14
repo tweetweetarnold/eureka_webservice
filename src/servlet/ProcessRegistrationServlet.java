@@ -103,7 +103,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 								session.setAttribute("email", email);
 								session.setAttribute("companyCode", companyCode);
 								session.setAttribute("success",
-										"Your account has been created. Username: "
+										"Your account has been created. Email: "
 												+ generatedEmployeeId);
 
 								response.sendRedirect("RetrieveDeliveryPointsServlet");
