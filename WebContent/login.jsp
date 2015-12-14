@@ -32,7 +32,7 @@
 
 			<!-- User input -->
 			<label for="username" class="sr-only">Email</label>
-			<input type="email" name="email" class="form-control" placeholder="Username" value="${sessionScope.email}"
+			<input type="email" name="email" class="form-control" placeholder="Email" value="${sessionScope.email}"
 				required
 			>
 			<label for="password" class="sr-only">Password</label>
