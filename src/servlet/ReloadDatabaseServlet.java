@@ -16,13 +16,13 @@ import test.Test;
  * Servlet implementation class ProcessInsertTestDataServlet
  */
 @WebServlet("/ProcessInsertTestDataServlet")
-public class ProcessInsertTestDataServlet extends HttpServlet {
+public class ReloadDatabaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ProcessInsertTestDataServlet() {
+	public ReloadDatabaseServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
