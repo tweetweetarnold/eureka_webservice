@@ -261,7 +261,7 @@ public class MyConnection {
 
 		return list;
 	}
-	
+
 	public static List<Object> getUsersToChasePayment(int companyID) {
 		Session session = startSession();
 

@@ -18,9 +18,8 @@ public class AccessController {
 	AESAlgorithm aesAlgo = new AESAlgorithm();
 
 	/*
-	 * This method takes in userid and password for authentication. This method
-	 * returns an Employee object upon a successful authentication, otherwise,
-	 * it will return null
+	 * This method takes in userid and password for authentication. This method returns an Employee
+	 * object upon a successful authentication, otherwise, it will return null
 	 */
 	public Employee authenticateUser(String inputEmail, String inputPassword) {
 		Employee emp = employeeDAO.getEmployeeByEmail(inputEmail);
@@ -66,11 +65,9 @@ public class AccessController {
 		try {
 			employeeDAO.saveEmployee(newEmployee);
 		} catch (ConstraintViolationException e) {
-			throw new Exception("Username already exists! Please choose another username.");
+			throw new Exception("Email already exists! Please log in with that email.");
 		}
-		String id = newEmployee.getEmail();
-
-		return id;
+		return newEmployee.getEmail();
 	}
 
 	public String registerAdmin(String username, String password, String name, long contactNo) {
@@ -78,9 +75,8 @@ public class AccessController {
 
 		Admin newAdmin = new Admin(username, encryptPassword, name, contactNo);
 		adminDAO.saveAdmin(newAdmin);
-		String id = newAdmin.getUsername();
 
-		return id;
+		return newAdmin.getUsername();
 	}
 
 }

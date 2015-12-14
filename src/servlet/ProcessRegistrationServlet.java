@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -31,8 +30,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -41,8 +39,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -54,7 +51,6 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		System.out.println("*********** RegistrationServlet ***********");
 
 		HttpSession session = request.getSession();
@@ -74,11 +70,6 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			userInput.put("email", email);
 			userInput.put("contactNo", contactNo);
 			userInput.put("companyCode", companyCode);
-
-			// Check valid email
-			// String dotCom = email.substring(email.length() - 4,
-			// email.length());
-			// boolean validEmail = (dotCom.equalsIgnoreCase(".com"));
 
 			EmailValidator emailValidator = EmailValidator.getInstance();
 			boolean validEmail = emailValidator.isValid(email);
@@ -127,24 +118,6 @@ public class ProcessRegistrationServlet extends HttpServlet {
 				System.out.println("RegistrationServlet: Validation failed.");
 				throw new Exception("Employee name cannot be empty");
 			}
-
-			// if (valid) {
-			// long contactNumber = Long.parseLong(contactNo);
-			//
-			// String generatedEmployeeId =
-			// registrationController.registerUser(username,
-			// password, employeeName, email, contactNumber, companyCode);
-			//
-			// session.setAttribute("success",
-			// "Yay! Your account has been created. Username: "
-			// + generatedEmployeeId);
-			//
-			// response.sendRedirect("login.jsp");
-			//
-			// } else {
-			// System.out.println("RegistrationServlet: Validation failed.");
-			// throw new Exception();
-			// }
 
 		} catch (Exception e) {
 			System.out.println("Exception@RegistrationServlet: " + e.getMessage());

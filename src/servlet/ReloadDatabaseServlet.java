@@ -15,7 +15,7 @@ import test.Test;
 /**
  * Servlet implementation class ProcessInsertTestDataServlet
  */
-@WebServlet("/ProcessInsertTestDataServlet")
+@WebServlet("/ReloadDatabaseServlet")
 public class ReloadDatabaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

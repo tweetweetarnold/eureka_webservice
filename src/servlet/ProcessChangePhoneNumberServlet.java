@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controller.UserController;
+import controller.EmployeeController;
 import model.Employee;
 
 /**
@@ -68,7 +68,7 @@ public class ProcessChangePhoneNumberServlet extends HttpServlet {
 			
 			Employee employee = (Employee) session.getAttribute("user");
 			employee.setContactNo(contactNo);
-			UserController userController = new UserController();
+			EmployeeController userController = new EmployeeController();
 			userController.updateEmployee(employee);
 			
 			System.out.println("new contact no updated");

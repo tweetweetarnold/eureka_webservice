@@ -31,7 +31,7 @@
 			<h1 class="form-signin-heading">DABAO</h1>
 
 			<!-- User input -->
-			<label for="username" class="sr-only">Email</label>
+			<label for="email" class="sr-only">Email</label>
 			<input type="email" name="email" class="form-control" placeholder="Email" value="${sessionScope.email}"
 				required
 			>
@@ -67,7 +67,7 @@
 			<c:remove var="success" scope="session" />
 		</c:if>
 
-		<c:remove var="username" scope="session" />
+		<c:remove var="email" scope="session" />
 
 	</div>
 	<!-- /container -->

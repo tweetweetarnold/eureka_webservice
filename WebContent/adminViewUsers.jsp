@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%@include file="adminProtect.jsp"%>
+<%@include file="protect/adminProtect.jsp"%>
 
 <head>
 

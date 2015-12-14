@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controller.UserController;
+import controller.EmployeeController;
 import model.Employee;
 import services.PasswordService;
 
@@ -66,7 +66,7 @@ public class ProcessChangePasswordServlet extends HttpServlet {
 			if(password.equals(originalPassword)){
 				if(newPassword.equals(newPasswordConfirmation)){
 					employee.setPassword(PasswordService.encryptPassword(newPassword));
-					UserController userController = new UserController();
+					EmployeeController userController = new EmployeeController();
 					userController.updateEmployee(employee);
 					session.setAttribute("success", "Password has been updated!");
 					response.sendRedirect("PLEASECHANGEME.jsp");

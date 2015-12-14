@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import model.Employee;
 import model.FoodOrder;
 import controller.FoodOrderController;
-import controller.UserController;
+import controller.EmployeeController;
 
 /**
  * Servlet implementation class processGetEmployeeServlet
@@ -54,7 +54,7 @@ public class ProcessAdminGetEmployeeServlet extends HttpServlet {
 
 		FoodOrderController foodOrderController = new FoodOrderController();
 		List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSet(email);
-		UserController userController = new UserController();
+		EmployeeController userController = new EmployeeController();
 
 		Employee employee = userController.retrieveEmployeeViaEmail(email);
 

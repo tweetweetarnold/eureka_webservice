@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controller.UserController;
+import controller.EmployeeController;
 import model.Employee;
 
 /**
@@ -59,7 +59,7 @@ public class ProcessSuspendUserServlet extends HttpServlet {
 		
 		try{
 			String userInput = request.getParameter("email");
-			UserController userController = new UserController();
+			EmployeeController userController = new EmployeeController();
 			Employee employee = userController.retrieveEmployeeViaEmail(userInput);
 			employee.setStatus("Suspended");
 			userController.updateEmployee(employee);

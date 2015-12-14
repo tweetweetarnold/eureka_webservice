@@ -1,15 +1,16 @@
 package background;
 
-
 import java.util.ArrayList;
 
-import org.quartz.*;
-import org.slf4j.*;
-
-import connection.MyConnection;
-import controller.UserController;
 import model.Employee;
+
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.slf4j.LoggerFactory;
+
 import services.EmailGenerator;
+import connection.MyConnection;
 
 public class ChasePayment implements Job {
 
@@ -19,13 +20,13 @@ public class ChasePayment implements Job {
 			EmailGenerator emailGen = new EmailGenerator();
 			String subject = "Dabao Weekly Payment Over-Due";
 			String messageBody = "Hey there! \nPlease note that you will not be able to place any new orders until you have cleared your payment!\n\nRegards,\nDabao";
-			
-			
-			UserController employeeController = new UserController();
-			ArrayList<Object> objects = new ArrayList<Object>(MyConnection.getUsersToChasePayment(1));
+
+			// EmployeeController employeeController = new EmployeeController();
+			ArrayList<Object> objects = new ArrayList<Object>(
+					MyConnection.getUsersToChasePayment(1));
 			ArrayList<String> emailList = new ArrayList<String>();
-			for(Object o: objects){
-				Employee tempEmployee = (Employee)o;
+			for (Object o : objects) {
+				Employee tempEmployee = (Employee) o;
 				String tempEmail = tempEmployee.getEmail();
 				emailList.add(tempEmail);
 			}
@@ -33,7 +34,7 @@ public class ChasePayment implements Job {
 			toEmails = emailList.toArray(toEmails);
 			emailGen.sendEmail(subject, messageBody, toEmails);
 		} catch (Exception ex) {
-			LoggerFactory.getLogger(getClass()).error(ex.getMessage()+"HELLO");
+			LoggerFactory.getLogger(getClass()).error(ex.getMessage() + "HELLO");
 		}
 	}
 }

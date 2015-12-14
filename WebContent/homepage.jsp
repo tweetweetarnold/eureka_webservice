@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<%@include file="protect.jsp"%>
+<%@include file="protect/protect.jsp"%>
 <html lang="en">
 <head>
 

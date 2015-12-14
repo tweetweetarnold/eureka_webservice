@@ -1,12 +1,8 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 
-import javax.mail.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,11 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.validator.routines.EmailValidator;
-
-import controller.AccessController;
-import controller.CompanyController;
 import model.Company;
+import controller.CompanyController;
 
 /**
  * Servlet implementation class RetrieveBuildingsServlet
@@ -39,8 +32,7 @@ public class RetrieveDeliveryPointsServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -49,18 +41,22 @@ public class RetrieveDeliveryPointsServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+
 		String companyCode = (String) session.getAttribute("companyCode");
 		System.out.println(companyCode + "SADA");
+
 		Company company = companyController.getCompanyByCompanyCode(companyCode);
 		Set<String> buildingSet = company.getDeliveryPointSet();
 		System.out.println(" Servelytsfas " + buildingSet.size());
+
+		session.removeAttribute("companyCode");
+
 		RequestDispatcher rd = request.getRequestDispatcher("defaultDeliveryPoint.jsp");
 		request.setAttribute("buildingSet", buildingSet);
 		rd.forward(request, response);

@@ -29,37 +29,16 @@ public class SendEmailServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
-		// AdminController adminController = new AdminController();
-		// List<Employee> employeeOweList =
-		// adminController.getListOfOwedPayment("Owe");
-		// String[] emailAddress = new String[employeeOweList.size()];
-		// for (int i = 0; i < employeeOweList.size(); i++) {
-		// Employee e = employeeOweList.get(i);
-		// String employeeEmail = e.getEmail();
-		// emailAddress[i] = employeeEmail;
-		// }
-		//
-		// EmailGenerator javaEmail = new EmailGenerator();
-		// try {
-		// javaEmail.setMailServerProperties();
-		// javaEmail.createEmailMessage(emailAddress);
-		// javaEmail.sendEmail();
-		// response.sendRedirect("adminHomepageTest.jsp");
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -89,7 +68,6 @@ public class SendEmailServlet extends HttpServlet {
 								"Outstanding Payment",
 								"Dear User,</br>You have an outsanding payments. Please log in to the DABAO App to resolve your outstanding payments.</br>You will not be able to place new orders until these outstanding payments have been resolved.</br></br>Regards,</br>Admin</br></br>This is a system-generated email; please DO NOT REPLY to this email.",
 								emailAddress);
-				// javaEmail.sendEmail();
 				response.sendRedirect("adminHomepageTest.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
