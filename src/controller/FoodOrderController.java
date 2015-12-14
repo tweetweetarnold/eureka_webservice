@@ -199,13 +199,33 @@ public class FoodOrderController {
 							usernames));
 				}
 			}
+			// Populating the price for the FoodOrderItem
+			HashMap<Integer, Double> foodOrderItemPrices = new HashMap<Integer, Double>();
+			for (FoodOrderItem f : uniqueFoodOrderItems){
+				double tempPrice = f.getPrice();
+				tempPrice*=quantityForFoodOrderItem.get(quantityForFoodOrderItem.get(f.getFoodOrderItemId()))*tempPrice;
+				foodOrderItemPrices.put(f.getFoodOrderItemId(),tempPrice);
+			}
 
+			// Calculating the total price
+			Iterator totalPriceIterator = foodOrderItemPrices.keySet().iterator();
+			double totalPrice = 0.0;
+			while(totalPriceIterator.hasNext()){
+				totalPrice+=(double)totalPriceIterator.next();
+			}
+			
+			//setting the telephone number
+			Long phone = uniqueFoodOrderItem.get(0).getFood().getStall().getContactNo();
+			
 			// Each FoodDisplayObject represents one stall
 			FoodDisplayObject tempFoodDisplay = new FoodDisplayObject(count++);
 			tempFoodDisplay.setStallName(stallName);
 			tempFoodDisplay.setFoodOrderItemList(uniqueFoodOrderItems);
 			tempFoodDisplay.setUsernameList(usernamesForFoodItem);
 			tempFoodDisplay.setQuantityList(quantityForFoodOrderItem);
+			tempFoodDisplay.setPriceList(foodOrderItemPrices);
+			tempFoodDisplay.setTotalPrice(totalPrice);
+			tempFoodDisplay.setPhoneNumber(phone);
 			foodDisplayList.add(tempFoodDisplay);
 		}
 		return foodDisplayList;

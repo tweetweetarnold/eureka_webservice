@@ -5,13 +5,40 @@ import java.util.HashMap;
 
 public class FoodDisplayObject {
 	public int serialNumber;
+	public long phoneNumber;
 	public String stallName;
 	public ArrayList<FoodOrderItem> foodOrderItemList = new ArrayList<FoodOrderItem>();
 	public HashMap<Integer, Integer> quantityList = new HashMap<Integer, Integer>();
 	public HashMap<Integer, ArrayList<String>> usernameList = new HashMap<Integer, ArrayList<String>>();
+	public HashMap<Integer, Double> priceList = new HashMap<Integer, Double>();
+	public double totalPrice;
 
 	public FoodDisplayObject(int serialNumber) {
 		this.serialNumber = serialNumber;
+	}
+
+	public long getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public HashMap<Integer, Double> getPriceList() {
+		return priceList;
+	}
+
+	public void setPriceList(HashMap<Integer, Double> priceList) {
+		this.priceList = priceList;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public int getSerialNumber() {
