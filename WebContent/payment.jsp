@@ -56,8 +56,17 @@
 	<!--	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"> -->
 			
 			<c:set var="haveOrder" value="false"/>
+			
 			<c:if test="${empty sessionScope.submittedOrders}">
 				<h3a>You haven't ordered anything! Go order something!</h2>
+			</c:if>
+			
+			<c:if test="${not empty sessionScope.paymentSuccess}">
+				<c:remove var="submittedOrders" scope="session" />
+			</c:if>
+			
+			<c:if test="${not empty sessionScope.error}">
+				<c:remove var="submittedOrders" scope="session" />
 			</c:if>
 
 			<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">
@@ -222,6 +231,7 @@
 	
 	<!-- Success message handling -->
 		<c:if test="${not empty sessionScope.paymentSuccess}">
+			
 			<div class="alert alert-success" role="alert">
 				<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
 				<span class="sr-only">Success:</span>
