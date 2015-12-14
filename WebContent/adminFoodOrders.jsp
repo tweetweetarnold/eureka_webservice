@@ -124,6 +124,7 @@
 									<!-- /.table-responsive -->
 								</div>
 
+
 								<div class="tab-pane fade" id="groupByStall">
 									<div class="dataTable_wrapper">
 										<br>
@@ -220,9 +221,7 @@
 														<c:forEach items="${foodDisplayObj.foodOrderItemList}" var="item">
 															<tr>
 																<td>
-																	<fmt:bundle basename="RBExample2">
-																		<fmt:message bundle="${lang}" key="${item.food.name}" />
-																	</fmt:bundle>
+																	<fmt:message bundle="${lang}" key="${item.food.name}" />
 																</td>
 																<td>
 																	<c:forEach items="${item.modifierChosenList}" var="modifierChosen">
