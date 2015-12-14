@@ -11,16 +11,33 @@ import services.PasswordService;
 import dao.AdminDAO;
 import dao.EmployeeDAO;
 
+/**
+ * Process the functions of user access control such as registration 
+ * and logging in for Administrator and normal user
+ * 
+ *
+ */
 public class AccessController {
+	
 	EmployeeDAO employeeDAO = new EmployeeDAO();
 	AdminDAO adminDAO = new AdminDAO();
 	CompanyController companyController = new CompanyController();
 	AESAlgorithm aesAlgo = new AESAlgorithm();
-
-	/*
-	 * This method takes in userid and password for authentication. This method
-	 * returns an Employee object upon a successful authentication, otherwise,
-	 * it will return null
+	
+	/**
+	 * Creates a default constructor for AccessController
+	 */
+	public AccessController() {
+		
+	}
+	
+	/**
+	 * Process the information provided by the user 
+	 * and verifies for a valid user
+	 * 
+	 * @param inputEmail The Email address provided by the user
+	 * @param inputPassword The password provided by the user
+	 * @return An Employee object upon successful verification, otherwise it returns null
 	 */
 	public Employee authenticateUser(String inputEmail, String inputPassword) {
 		Employee emp = employeeDAO.getEmployeeByEmail(inputEmail);
@@ -39,7 +56,16 @@ public class AccessController {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Process the information provided by the user 
+	 * and verifies for a valid Administrator 
+	 * 
+	 * @param inputUsername The username of the Administrator
+	 * @param inputPassword The password of the Administrator
+	 * @return An Admin object upon successful verification, 
+	 * otherwise it returns null
+	 */
 	public Admin authenticateAdmin(String inputUsername, String inputPassword) {
 		Admin admin = adminDAO.getAdminByUsername(inputUsername);
 		if (admin != null) {
@@ -50,7 +76,19 @@ public class AccessController {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Registers a new user to gain access to the application
+	 * 
+	 * @param password The password of the user
+	 * @param name	The name of the user
+	 * @param email The Email Address of the user
+	 * @param contactNo The contact number of the user
+	 * @param companyCode The company code which is assigned to the user
+	 * @return The email address of the user which is needed for verification upon user access
+	 * @throws Exception If it fails to locate the Company object 
+	 * based on the company code or an Email Address already exists
+	 */
 	public String registerUser(String password, String name, String email, long contactNo,
 			String companyCode) throws Exception {
 		String encryptPassword = aesAlgo.encrypt(password);
@@ -72,7 +110,17 @@ public class AccessController {
 
 		return id;
 	}
-
+	
+	/**
+	 * Registers a new Administrator to gain access to classified information
+	 * 
+	 * @param username The username of the Administrator
+	 * @param password The password of the Administrator
+	 * @param name The Name of the Administrator
+	 * @param contactNo The contact number of the Administrator
+	 * @return The username of the Administrator which is needed 
+	 * for verification upon logging in upon a successful registration
+	 */
 	public String registerAdmin(String username, String password, String name, long contactNo) {
 		String encryptPassword = PasswordService.encryptPassword(password);
 
