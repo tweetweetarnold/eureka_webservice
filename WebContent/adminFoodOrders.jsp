@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 
 <%@include file="adminProtect.jsp"%>
@@ -77,20 +78,20 @@
 						<div class="panel-body">
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs">
-								<li>
+								<li class="active">
 									<a href="#nogroup" data-toggle="tab">No Group</a>
 								</li>
 								<li>
 									<a href="#groupByStall" data-toggle="tab">Group by Stalls</a>
 								</li>
-								<li class="active">
+								<li>
 									<a href="#groupByStallCN" data-toggle="tab">Group by Stalls (CN)</a>
 								</li>
 							</ul>
 
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div class="tab-pane fade" id="nogroup">
+								<div class="tab-pane fade in active" id="nogroup">
 									<div class="dataTable_wrapper">
 										<br>
 										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -146,7 +147,7 @@
 
 													<tr class="odd gradeX">
 														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.stallName}</td>
-														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.serialNumber }</td>
+														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.phoneNumber }</td>
 														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">
 															<fmt:formatNumber value="${foodDisplayObj.totalPrice }" var="totalPrice" minFractionDigits="2" />
 															$${totalPrice}
@@ -183,9 +184,10 @@
 								</div>
 
 
-								<div class="tab-pane fade in active" id="groupByStallCN">
-									<fmt:setBundle basename="RBExample2" var="lang" />
+								<div class="tab-pane fade" id="groupByStallCN">
 									<fmt:setLocale value="zh_CN" />
+									<fmt:setBundle basename="RBExample2" var="lang" />
+
 
 									<div class="dataTable_wrapper">
 										<br>
@@ -207,12 +209,11 @@
 
 													<tr class="odd gradeX">
 														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.stallName}</td>
-														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.serialNumber }</td>
+														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.phoneNumber }</td>
 														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">
 															<fmt:formatNumber value="${foodDisplayObj.totalPrice }" var="totalPrice" minFractionDigits="2" />
 															$${totalPrice}
 														</td>
-
 
 														<c:set value="${foodDisplayObj.quantityList }" var="quantityList" />
 														<c:set value="${foodDisplayObj.usernameList }" var="usernameList" />
@@ -221,11 +222,12 @@
 														<c:forEach items="${foodDisplayObj.foodOrderItemList}" var="item">
 															<tr>
 																<td>
-																	<fmt:message bundle="${lang}" key="${item.food.name}" />
+																	<fmt:message bundle="${lang}" key="${fn:replace(item.food.name, ' ', '_')}" />
 																</td>
 																<td>
 																	<c:forEach items="${item.modifierChosenList}" var="modifierChosen">
-																			${modifierChosen.name}<br>
+																		<fmt:message bundle="${lang}" key="${fn:replace(modifierChosen.name, ' ', '_')}" />
+																		<br>
 																	</c:forEach>
 																</td>
 																<td>${quantityList[item.foodOrderItemId]}</td>
