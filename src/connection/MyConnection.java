@@ -243,14 +243,14 @@ public class MyConnection {
 		return list;
 	}
 
-	public static List<Object> getUsersWithOutstandingPaymentFromCompany(int companyID) {
+	public static List<Object> getUsersWithOutstandingPaymentFromCompany(Company company) {
 		Session session = startSession();
 
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(Employee.class);
-
-		criteria.add(Restrictions.eq("companyId", companyID)).list();
-		criteria.add(Restrictions.ge("amountOwed", 0.01)).list();
+		Criterion thirdCondition = Restrictions.conjunction()
+				.add(Restrictions.eq("company", company)).add(Restrictions.ge("amountOwed", 0.01));
+		criteria.add(thirdCondition).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
 
@@ -262,15 +262,16 @@ public class MyConnection {
 		return list;
 	}
 
-	public static List<Object> getUsersToChasePayment(int companyID) {
+	public static List<Object> getUsersToChasePayment(Company company) {
 		Session session = startSession();
 
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(Employee.class);
-
-		criteria.add(Restrictions.eq("companyId", companyID)).list();
-		criteria.add(Restrictions.eq("status", "Suspended")).list();
-		criteria.add(Restrictions.ge("amountOwed", 0.01)).list();
+		Criterion thirdCondition = Restrictions.conjunction()
+				.add(Restrictions.eq("company", company))
+				.add(Restrictions.eq("status", "Suspended"))
+				.add(Restrictions.ge("amountOwed", 0.01));
+		criteria.add(thirdCondition).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
 

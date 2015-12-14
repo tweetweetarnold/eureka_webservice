@@ -2,6 +2,7 @@ package background;
 
 import java.util.ArrayList;
 
+import model.Company;
 import model.Employee;
 
 import org.quartz.Job;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import services.EmailGenerator;
 import connection.MyConnection;
+import controller.CompanyController;
 
 public class ChasePayment implements Job {
 
@@ -22,8 +24,10 @@ public class ChasePayment implements Job {
 			String messageBody = "Hey there! \nPlease note that you will not be able to place any new orders until you have cleared your payment!\n\nRegards,\nDabao";
 
 			// EmployeeController employeeController = new EmployeeController();
+			CompanyController companyController = new CompanyController();
+			Company c = companyController.getCompany(1);
 			ArrayList<Object> objects = new ArrayList<Object>(
-					MyConnection.getUsersToChasePayment(1));
+					MyConnection.getUsersToChasePayment(c));
 			ArrayList<String> emailList = new ArrayList<String>();
 			for (Object o : objects) {
 				Employee tempEmployee = (Employee) o;
