@@ -76,30 +76,30 @@
 						<div class="panel-body">
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs">
-								<li class="active">
+								<li>
 									<a href="#nogroup" data-toggle="tab">No Group</a>
 								</li>
 								<li>
 									<a href="#groupByStall" data-toggle="tab">Group by Stalls</a>
 								</li>
-								<li>
+								<li class="active">
 									<a href="#groupByStallCN" data-toggle="tab">Group by Stalls (CN)</a>
 								</li>
 							</ul>
 
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div class="tab-pane fade in active" id="nogroup">
+								<div class="tab-pane fade" id="nogroup">
 									<div class="dataTable_wrapper">
 										<br>
 										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 											<thead>
 												<tr>
 													<th>S/N</th>
-													<th>User Email</th>
-													<th>Food Item(s)</th>
+													<th>User(s)</th>
+													<th>Food</th>
 													<th>Qty</th>
-													<th>Price ($)</th>
+													<th>Price($)</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -131,12 +131,12 @@
 												<tr>
 													<th>Stall</th>
 													<th>Stall No</th>
+													<th>Total($)</th>
 													<th>Food</th>
-													<th>Add Ons</th>
+													<th>Add On</th>
 													<th>Qty</th>
-													<th>Subtotal $</th>
-													<th>Total $</th>
-													<th>Users</th>
+													<th>Subtotal($)</th>
+													<th>User</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -145,9 +145,15 @@
 													<tr class="odd gradeX">
 														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.stallName}</td>
 														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.serialNumber }</td>
+														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">
+															<fmt:formatNumber value="${foodDisplayObj.totalPrice }" var="totalPrice" minFractionDigits="2" />
+															$${totalPrice}
+														</td>
+
 
 														<c:set value="${foodDisplayObj.quantityList }" var="quantityList" />
 														<c:set value="${foodDisplayObj.usernameList }" var="usernameList" />
+														<c:set value="${foodDisplayObj.priceList }" var="priceList" />
 
 														<c:forEach items="${foodDisplayObj.foodOrderItemList}" var="item">
 															<tr>
@@ -158,8 +164,10 @@
 																	</c:forEach>
 																</td>
 																<td>${quantityList[item.foodOrderItemId]}</td>
-																<td>subtotal $</td>
-																<td>total $</td>
+																<td>
+																	<fmt:formatNumber value="${priceList[item.foodOrderItemId]}" var="subtotal" minFractionDigits="2" />
+																	$${subtotal}
+																</td>
 																<td>${usernameList[item.foodOrderItemId]}</td>
 															</tr>
 														</c:forEach>
@@ -173,7 +181,10 @@
 								</div>
 
 
-								<div class="tab-pane fade" id="groupByStallCN">
+								<div class="tab-pane fade in active" id="groupByStallCN">
+									<fmt:setBundle basename="RBExample2" var="lang" />
+									<fmt:setLocale value="zh_CN" />
+
 									<div class="dataTable_wrapper">
 										<br>
 										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -181,23 +192,49 @@
 												<tr>
 													<th>Stall</th>
 													<th>Stall No</th>
+													<th>Total($)</th>
 													<th>Food</th>
-													<th>Add Ons</th>
-													<th>Quantity</th>
-													<th>Price</th>
-													<th>Users</th>
+													<th>Add On</th>
+													<th>Qty</th>
+													<th>Subtotal($)</th>
+													<th>User</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${sessionScope.orderWindowOpenedStalls}" var="foodOrderList" varStatus="loop">
+												<c:forEach items="${sessionScope.orderWindowOpenedStalls}" var="foodDisplayObj" varStatus="loop">
 
 													<tr class="odd gradeX">
-														<%-- 												<td rowspan="${fn:length(foodOrderList.foodOrderItemList) + 1}"> --%>
-														<td>${foodOrderList.stallName}</td>
-														<%-- 												<td rowspan="${fn:length(foodOrderList.foodOrderItemList) + 1}"> --%>
-														<td>
-															<c:out value="${foodOrderList.serialNumber}" />
+														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.stallName}</td>
+														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.serialNumber }</td>
+														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">
+															<fmt:formatNumber value="${foodDisplayObj.totalPrice }" var="totalPrice" minFractionDigits="2" />
+															$${totalPrice}
 														</td>
+
+
+														<c:set value="${foodDisplayObj.quantityList }" var="quantityList" />
+														<c:set value="${foodDisplayObj.usernameList }" var="usernameList" />
+														<c:set value="${foodDisplayObj.priceList }" var="priceList" />
+
+														<c:forEach items="${foodDisplayObj.foodOrderItemList}" var="item">
+															<tr>
+																<td>
+																	<fmt:message bundle="${lang}" key="${item.food.name}" />
+																</td>
+																<td>
+																	<c:forEach items="${item.modifierChosenList}" var="modifierChosen">
+																			${modifierChosen.name}<br>
+																	</c:forEach>
+																</td>
+																<td>${quantityList[item.foodOrderItemId]}</td>
+																<td>
+																	<fmt:formatNumber value="${priceList[item.foodOrderItemId]}" var="subtotal" minFractionDigits="2" />
+																	$${subtotal}
+																</td>
+																<td>${usernameList[item.foodOrderItemId]}</td>
+															</tr>
+														</c:forEach>
+
 													</tr>
 												</c:forEach>
 											</tbody>

@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import model.Employee;
@@ -201,22 +200,22 @@ public class FoodOrderController {
 			}
 			// Populating the price for the FoodOrderItem
 			HashMap<Integer, Double> foodOrderItemPrices = new HashMap<Integer, Double>();
-			for (FoodOrderItem f : uniqueFoodOrderItems){
+			for (FoodOrderItem f : uniqueFoodOrderItems) {
 				double tempPrice = f.getPrice();
-				tempPrice*=quantityForFoodOrderItem.get(quantityForFoodOrderItem.get(f.getFoodOrderItemId()))*tempPrice;
-				foodOrderItemPrices.put(f.getFoodOrderItemId(),tempPrice);
+				tempPrice = quantityForFoodOrderItem.get(f.getFoodOrderItemId()) * tempPrice;
+				foodOrderItemPrices.put(f.getFoodOrderItemId(), tempPrice);
 			}
 
 			// Calculating the total price
 			Iterator totalPriceIterator = foodOrderItemPrices.keySet().iterator();
 			double totalPrice = 0.0;
-			while(totalPriceIterator.hasNext()){
-				totalPrice+=(double)totalPriceIterator.next();
+			while (totalPriceIterator.hasNext()) {
+				totalPrice += (double) foodOrderItemPrices.get(totalPriceIterator.next());
 			}
-			
-			//setting the telephone number
+
+			// setting the telephone number
 			Long phone = uniqueFoodOrderItem.get(0).getFood().getStall().getContactNo();
-			
+
 			// Each FoodDisplayObject represents one stall
 			FoodDisplayObject tempFoodDisplay = new FoodDisplayObject(count++);
 			tempFoodDisplay.setStallName(stallName);
