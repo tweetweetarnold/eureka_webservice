@@ -11,6 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+
 <title>DABAO</title>
 
 <!-- Bootstrap Core CSS -->
@@ -219,7 +220,9 @@
 														<c:forEach items="${foodDisplayObj.foodOrderItemList}" var="item">
 															<tr>
 																<td>
-																	<fmt:message bundle="${lang}" key="${item.food.name}" />
+																	<fmt:bundle basename="RBExample2">
+																		<fmt:message bundle="${lang}" key="${item.food.name}" />
+																	</fmt:bundle>
 																</td>
 																<td>
 																	<c:forEach items="${item.modifierChosenList}" var="modifierChosen">
