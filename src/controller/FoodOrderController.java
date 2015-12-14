@@ -203,7 +203,7 @@ public class FoodOrderController {
 			HashMap<Integer, Double> foodOrderItemPrices = new HashMap<Integer, Double>();
 			for (FoodOrderItem f : uniqueFoodOrderItems){
 				double tempPrice = f.getPrice();
-				tempPrice*=quantityForFoodOrderItem.get(quantityForFoodOrderItem.get(f.getFoodOrderItemId()))*tempPrice;
+				tempPrice=quantityForFoodOrderItem.get(f.getFoodOrderItemId())*tempPrice;
 				foodOrderItemPrices.put(f.getFoodOrderItemId(),tempPrice);
 			}
 
@@ -211,7 +211,7 @@ public class FoodOrderController {
 			Iterator totalPriceIterator = foodOrderItemPrices.keySet().iterator();
 			double totalPrice = 0.0;
 			while(totalPriceIterator.hasNext()){
-				totalPrice+=(double)totalPriceIterator.next();
+				totalPrice+=(double)foodOrderItemPrices.get(totalPriceIterator.next());
 			}
 			
 			//setting the telephone number
