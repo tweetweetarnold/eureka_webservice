@@ -79,6 +79,41 @@ public class FoodOrderController {
 
 		return returnList;
 	}
+	
+	public List<FoodOrderItem> incrementQuantityFoodOrderItem(List<FoodOrderItem> list){
+		ArrayList<FoodOrderItem> foodOrderItemList = new ArrayList<FoodOrderItem>(list);
+		ArrayList<FoodOrderItem> UniquefoodOrderItemList = new ArrayList<FoodOrderItem>();
+		for(FoodOrderItem tempFoodItem:foodOrderItemList){
+			Iterator iterator = UniquefoodOrderItemList.iterator();
+			int equalCount = 0;
+			while (iterator.hasNext()) {
+				FoodOrderItem tempFoodOrderItem = (FoodOrderItem) iterator.next();
+				if (tempFoodOrderItem.equals2(tempFoodItem)) {
+					equalCount++;
+				}
+			}
+			if (equalCount == 0) {
+				UniquefoodOrderItemList.add(tempFoodItem);
+			}
+		}
+		ArrayList<FoodOrderItem> foodOrderItemsWithQuantity = new ArrayList<FoodOrderItem>();
+		for (FoodOrderItem tempItem : UniquefoodOrderItemList) {
+			int tempquantity = 0;
+			for (FoodOrderItem i : foodOrderItemList) {
+				if (i.equals2(tempItem)) {
+					tempquantity++;
+				}
+			}
+
+			tempItem.setQuantity(tempquantity);
+			foodOrderItemsWithQuantity.add(tempItem);
+			
+		}
+		
+		
+		return foodOrderItemsWithQuantity;
+	}
+	
 
 	// Retrieve FoodOrders between earlierDate and laterDate
 	public List<FoodOrder> getFoodOrderBetweenCutOff(Date earlierDate, Date laterDate) {
@@ -334,6 +369,17 @@ public class FoodOrderController {
 			tempItems.addAll(o.getFoodOrderList());
 			map.put(email, tempItems);
 		}
+		
+		Iterator iter = map.keySet().iterator();
+		while(iter.hasNext()){
+			String key = (String)iter.next();
+			List<FoodOrderItem> foodOrderItemList = map.get(key);
+			ArrayList<FoodOrderItem> foodOrderItemListReturn = new ArrayList<FoodOrderItem>(incrementQuantityFoodOrderItem(foodOrderItemList));
+			map.put(key, foodOrderItemListReturn);
+		}
+		
+		
+		
 		return map;
 	}
 }
