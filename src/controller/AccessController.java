@@ -45,7 +45,7 @@ public class AccessController {
 				String password = emp.getPassword();
 				// checking that the input password is correct as the password
 				// stored in DataBase
-				if (aesAlgo.encrypt(inputPassword).equals(password)) {
+				if (aesAlgo.encrypt(inputEmail+inputPassword).equals(password)) {
 					return emp;
 				}
 			}
@@ -88,7 +88,7 @@ public class AccessController {
 	 */
 	public String registerUser(String password, String name, String email, long contactNo,
 			String companyCode) throws Exception {
-		String encryptPassword = aesAlgo.encrypt(password);
+		String encryptPassword = aesAlgo.encrypt(email+password);
 		Company company = null;
 
 		try {
