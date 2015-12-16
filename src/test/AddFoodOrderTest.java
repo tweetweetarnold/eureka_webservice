@@ -24,13 +24,18 @@ public class AddFoodOrderTest {
 		EmployeeDAO employeeDAO = new EmployeeDAO();
 		// fan choy
 		Food newFood = foodController.getFood(36);
+		Food favFood = foodController.getFood(2);
 		Stall newStall = newFood.getStall();
 		Employee tempEmployee = employeeDAO.getEmployeeByEmail("arnold.lee.2013@sis.smu.edu.sg");
+		tempEmployee.setFavoriteFood(favFood);
+		employeeDAO.updateEmployee(tempEmployee);
+		
+		
 		FoodOrderItem newFoodOrderItem = new FoodOrderItem(null, newFood, 1, null);
 		HashSet<FoodOrderItem> foodOrderItemSet = new HashSet<FoodOrderItem>();
 		foodOrderItemSet.add(newFoodOrderItem);
 		FoodOrder newFoodOrder = new FoodOrder("TEST", tempEmployee, foodOrderItemSet);
-
+		newFoodOrderItem.setFoodOrder(newFoodOrder);
 		// date processing
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -46,5 +51,12 @@ public class AddFoodOrderTest {
 		FoodOrderController foodOrderController = new FoodOrderController();
 		ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>(foodOrderController.getFoodOrderBetweenCutOff(earlierDate, laterDate));
 		System.out.println("Here is the start of the test " + foodOrderList.size());
+		
+		System.out.println("Start: "+ earlierDate +"    End: " + laterDate );
+		foodOrderController.replaceWithFavoriteFood(36, earlierDate, laterDate);
+		
+		System.out.println("Food : " + newFood.getName() + " was replaced by Fav Food: " + favFood.getName());
+		
+		
 	}
 }
