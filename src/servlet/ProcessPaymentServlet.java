@@ -55,6 +55,7 @@ public class ProcessPaymentServlet extends HttpServlet {
 			if (transactionStatus.equals("Completed")) {
 				// retrieve the user to update its amount owed
 				employee.setAmountOwed(0.00);
+				employee.setStatus("OK");
 				employeeDAO.updateEmployee(employee);
 
 				// update the status of the user's orders from "Submitted" to "Paid"
