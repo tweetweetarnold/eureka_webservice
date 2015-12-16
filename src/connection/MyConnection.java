@@ -6,7 +6,9 @@ import java.util.List;
 
 import model.Company;
 import model.Employee;
+import model.Food;
 import model.FoodOrder;
+import model.FoodOrderItem;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -193,7 +195,23 @@ public class MyConnection {
 		session.close();
 		return list;
 	}
+	
+	
+	public static List<Object> getFoodOrderItemList(Food food) {
+		Session session = startSession();
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(FoodOrderItem.class).setResultTransformer(
+				Criteria.DISTINCT_ROOT_ENTITY);
+		criteria.add(Restrictions.eq("food", food)).list();
+		list = (List<Object>) criteria.list();
 
+		session.getTransaction().commit();
+		session.close();
+		return list;
+	}
+	
+	
+	
 	public static List<Object> getFoodForDatesAndUser(Date earlierDate, Date laterDate,
 			Employee tempEmployee) {
 		Session session = startSession();

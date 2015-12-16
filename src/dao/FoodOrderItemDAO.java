@@ -1,6 +1,10 @@
 package dao;
 
+import model.Food;
 import model.FoodOrderItem;
+
+import java.util.List;
+
 import connection.MyConnection;
 
 public class FoodOrderItemDAO {
@@ -24,4 +28,9 @@ public class FoodOrderItemDAO {
 	public void deleteFoodOrderItem(FoodOrderItem f) {
 		MyConnection.delete(f);
 	}
+	
+	public List<Object> getFoodOrderItems(Food food){
+		return MyConnection.getFoodOrderItemList(food);
+	}
+	
 }

@@ -378,8 +378,24 @@ public class FoodOrderController {
 			map.put(key, foodOrderItemListReturn);
 		}
 		
-		
-		
 		return map;
 	}
+	
+	
+	
+	public void replaceWithFavoriteFood(int foodUnavailableID){
+		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
+		FoodController foodController = new FoodController();
+		Food foodUnavailable = foodController.getFood(foodUnavailableID);
+		ArrayList<Object> foodOrderItemUnavailableList = new ArrayList<Object>(foodOrderItemDAO.getFoodOrderItems(foodUnavailable));
+		for(Object o : foodOrderItemUnavailableList){
+			FoodOrderItem f = (FoodOrderItem)o;
+			f.setFood(f.getFoodOrder().getEmployee().getFavoriteFood());
+			foodOrderItemDAO.saveFoodOrderItem(f);
+		}
+	}
+	
+	
+	
+	
 }
