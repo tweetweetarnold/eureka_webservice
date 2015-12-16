@@ -197,12 +197,14 @@ public class MyConnection {
 	}
 	
 	
-	public static List<Object> getFoodOrderItemList(Food food) {
+	public static List<Object> getFoodOrderItemList(Food food, Date earlierDate, Date laterDate) {
 		Session session = startSession();
 		List<Object> list = new ArrayList<>();
-		Criteria criteria = session.createCriteria(FoodOrderItem.class).setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY);
-		criteria.add(Restrictions.eq("food", food)).list();
+		Criteria criteria = session.createCriteria(FoodOrderItem.class);
+		Criterion thirdCondition = Restrictions.conjunction()
+				.add(Restrictions.between("createDate", earlierDate, laterDate)).add(Restrictions.eq("food", food));
+		criteria.add(thirdCondition).list();
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
 
 		session.getTransaction().commit();

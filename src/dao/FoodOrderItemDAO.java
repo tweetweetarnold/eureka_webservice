@@ -3,6 +3,7 @@ package dao;
 import model.Food;
 import model.FoodOrderItem;
 
+import java.util.Date;
 import java.util.List;
 
 import connection.MyConnection;
@@ -29,8 +30,8 @@ public class FoodOrderItemDAO {
 		MyConnection.delete(f);
 	}
 	
-	public List<Object> getFoodOrderItems(Food food){
-		return MyConnection.getFoodOrderItemList(food);
+	public List<Object> getFoodOrderItems(Food food, Date earlierDate, Date laterDate){
+		return MyConnection.getFoodOrderItemList(food, earlierDate, laterDate);
 	}
 	
 }

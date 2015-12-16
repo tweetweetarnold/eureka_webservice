@@ -383,11 +383,11 @@ public class FoodOrderController {
 	
 	
 	
-	public void replaceWithFavoriteFood(int foodUnavailableID){
+	public void replaceWithFavoriteFood(int foodUnavailableID, Date earlierDate, Date laterDate){
 		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
 		FoodController foodController = new FoodController();
 		Food foodUnavailable = foodController.getFood(foodUnavailableID);
-		ArrayList<Object> foodOrderItemUnavailableList = new ArrayList<Object>(foodOrderItemDAO.getFoodOrderItems(foodUnavailable));
+		ArrayList<Object> foodOrderItemUnavailableList = new ArrayList<Object>(foodOrderItemDAO.getFoodOrderItems(foodUnavailable, earlierDate, laterDate));
 		for(Object o : foodOrderItemUnavailableList){
 			FoodOrderItem f = (FoodOrderItem)o;
 			f.setFood(f.getFoodOrder().getEmployee().getFavoriteFood());
