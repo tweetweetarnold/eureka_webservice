@@ -143,6 +143,7 @@
 												</tr>
 											</thead>
 											<tbody>
+												<c:set value="0" var="overallPrice" />
 												<c:forEach items="${sessionScope.orderWindowOpenedStalls}" var="foodDisplayObj" varStatus="loop">
 
 													<tr class="odd gradeX">
@@ -151,6 +152,7 @@
 														<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">
 															<fmt:formatNumber value="${foodDisplayObj.totalPrice }" var="totalPrice" minFractionDigits="2" />
 															$${totalPrice}
+															<c:set value="${overallPrice + foodDisplayObj.totalPrice}" var="overallPrice" />
 														</td>
 
 
@@ -179,6 +181,11 @@
 												</c:forEach>
 											</tbody>
 										</table>
+										<b>Overall Price: </b>
+										$
+										<fmt:formatNumber value="${overallPrice }" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
+
+
 									</div>
 									<!-- /.table-responsive -->
 								</div>
@@ -243,6 +250,10 @@
 												</c:forEach>
 											</tbody>
 										</table>
+										<b>Overall Price: </b>
+										$
+										<fmt:formatNumber value="${overallPrice }" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
+
 									</div>
 									<!-- /.table-responsive -->
 								</div>

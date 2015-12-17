@@ -95,6 +95,16 @@ public class MyConnection {
 		return false;
 	}
 
+	public static void closeSessionFactory() {
+		try {
+			sessionFactory.getCurrentSession().close();
+			sessionFactory.close();
+			System.out.println("SessionFactory is closed.");
+		} catch (Exception e) {
+			System.out.println("SessionFactory is already closed.");
+		}
+	}
+
 	public static void delete(Object o) {
 		System.out.println("MyConnection: delete");
 		Session session = startSession();
@@ -195,14 +205,14 @@ public class MyConnection {
 		session.close();
 		return list;
 	}
-	
-	
+
 	public static List<Object> getFoodOrderItemList(Food food, Date earlierDate, Date laterDate) {
 		Session session = startSession();
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(FoodOrderItem.class);
 		Criterion thirdCondition = Restrictions.conjunction()
-				.add(Restrictions.between("createDate", earlierDate, laterDate)).add(Restrictions.eq("food", food));
+				.add(Restrictions.between("createDate", earlierDate, laterDate))
+				.add(Restrictions.eq("food", food));
 		criteria.add(thirdCondition).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
@@ -211,9 +221,7 @@ public class MyConnection {
 		session.close();
 		return list;
 	}
-	
-	
-	
+
 	public static List<Object> getFoodForDatesAndUser(Date earlierDate, Date laterDate,
 			Employee tempEmployee) {
 		Session session = startSession();
@@ -323,16 +331,6 @@ public class MyConnection {
 		session.getTransaction().commit();
 		// closeAll();
 		return list;
-	}
-
-	public static void closeSessionFactory() {
-		try {
-			sessionFactory.getCurrentSession().close();
-			sessionFactory.close();
-			System.out.println("SessionFactory is closed.");
-		} catch (Exception e) {
-			System.out.println("SessionFactory is already closed.");
-		}
 	}
 
 }
