@@ -107,7 +107,7 @@
 						<td></td>
 						<td>
 							<button class="btn btn-lg btn-primary btn-block" type="submit">
-								<font face="verdana">Register</font>
+								<font face="verdana">Next</font>
 							</button>
 						</td>
 					</tr>
