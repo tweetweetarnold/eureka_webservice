@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.EmployeeController;
+import services.AESAlgorithm;
+import services.SendEmail;
 
 /**
  * Servlet implementation class ProcessSetDefaultBuilding
@@ -43,15 +47,63 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String buildingName = (String) request.getParameter("deliveryPoint");
-		String email = (String) session.getAttribute("email");
+		String unverifiedEmail = (String) session.getAttribute("unverifiedEmail");
 
 		EmployeeController userController = new EmployeeController();
 
-		session.removeAttribute("email");
+		//session.removeAttribute("email");
 
-		userController.updateDefaultDeliveryPoint(email, buildingName);
+		userController.updateDefaultDeliveryPoint(unverifiedEmail, buildingName);
+		
+		
+		String email = (String) session.getAttribute("email");
+		SendEmail javaEmail = new SendEmail();
+		String[] emailArray = {email};
+		//email = email+"&NotVerified";
+		//String generatedEmployeeId = accessController.registerUser(
+		//		password, employeeName, email, contactNumber, companyCode);
+		
+		
+		try {
+		String appUrl = 
+			      "http://" + request.getServerName() + 
+			      ":" + request.getServerPort() + 
+			      request.getContextPath();
+		
+		String token = UUID.randomUUID().toString();
+		
+		String url = constructVerifyEmail(appUrl, unverifiedEmail, request.getLocale(), token);
+		
+		javaEmail.setMailServerProperties();
+		javaEmail
+				.sendEmail(
+						"DABAO Web App - Verify Your Email",
+						"Dear User,<br><br>"
+						+ "Welcome to DABAO App, please click the following link to verify your email address:<br><br> "
+						+ "<a href=" + url + ">" + url + "</a>"
+						+"<br><br>"
+						+ "Regards,<br>"
+						+ "Admin<br><br>"
+						+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
+						emailArray);
+		
+		session.removeAttribute("email");
+		session.removeAttribute("unverifiedEmail");
+		session.setAttribute("success", "An email has been sent to you. Please follow the instructions on verifying your account.");
 		response.sendRedirect("login.jsp");
+		} catch (Exception e) {
+			session.setAttribute("error", e.getMessage());
+			response.sendRedirect("login.jsp");
+		}
 
 	}
+	
+	
+	private String constructVerifyEmail(String contextPath, String email, Locale locale, String token) {
+		AESAlgorithm aes = new AESAlgorithm();
+		String eEncrypt = aes.encrypt(email);
+	    String url = contextPath + "/ProcessVerificationServlet?email="+eEncrypt +"&token=" + token;
+	    return url;
+	}	
 
 }
