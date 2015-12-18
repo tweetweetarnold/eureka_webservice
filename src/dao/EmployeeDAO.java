@@ -41,7 +41,9 @@ public class EmployeeDAO {
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
-
+		if (l.size() == 0) {
+			return null;
+		}
 		return (Employee) l.get(0);
 	}
 

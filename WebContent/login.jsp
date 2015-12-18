@@ -43,6 +43,9 @@
 			<br>
 			<div align="center">
 				<a href="registration.jsp">Register as a New User</a>
+				<br>
+				<br>
+				<a href="resetPassword.jsp">Forgot your password?</a>
 			</div>
 		</form>
 		
