@@ -113,7 +113,12 @@ public class OrderWindow {
 		this.createDate = createDate;
 	}
 
-	// returns true if intervals overlap one another
+	/**
+	 * Check if current OrderWindow overlaps with another Interval
+	 * 
+	 * @param other Interval to be compared with
+	 * @return Returns true if this OrderWindow overlaps with the parameter Interval
+	 */
 	public boolean overlaps(Interval other) {
 		return new Interval(startDate.getMillis(), endDate.getMillis()).overlaps(other);
 	}
