@@ -57,6 +57,22 @@ public class OrderWindow {
 		this.createDate = new Date();
 	}
 
+	public Date getStartDateFormatted() {
+		return startDateFormatted;
+	}
+
+	public void setStartDateFormatted(Date startDateFormatted) {
+		this.startDateFormatted = startDateFormatted;
+	}
+
+	public Date getEndDateFormatted() {
+		return endDateFormatted;
+	}
+
+	public void setEndDateFormatted(Date endDateFormatted) {
+		this.endDateFormatted = endDateFormatted;
+	}
+
 	public OrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen) {
 		this.startDate = startDate;
 		this.endDate = startDate.plus(duration);

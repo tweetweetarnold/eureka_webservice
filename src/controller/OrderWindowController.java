@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,14 +66,28 @@ public class OrderWindowController {
 	 * @param company The Company object to be assessed on
 	 * @return true If there is an active window,otherwise false
 	 */
-	public boolean checkForActiveWindow(Company company) {
-		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
-		dc.add(Restrictions.eq("company", 1));
-		// dc.add(Restrictions.gt("endDate", new Date()));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		return true;
+//	public boolean checkForActiveWindow(Company company) {
+//		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
+//		dc.add(Restrictions.eq("company", 1));
+//		// dc.add(Restrictions.gt("endDate", new Date()));
+//		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+//
+//		List<Object> l = MyConnection.queryWithCriteria(dc);
+//
+//		return true;
+//	}
+	
+	public List<OrderWindow> checkForActiveWindow(Company company) {
+		OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
+		DateTime currentTime = new DateTime(); 
+		System.out.println(currentTime);
+		List<Object> orderWindowList = MyConnection.getWindowIfActive(company,currentTime.toDate());
+		System.out.println(orderWindowList.size()+ "hi");
+		List<OrderWindow> orderList = new ArrayList<OrderWindow>();
+		for(Object o: orderWindowList){
+			OrderWindow tempOrderWindow = (OrderWindow)o;
+			orderList.add(tempOrderWindow);
+		}
+		return orderList;
 	}
 }

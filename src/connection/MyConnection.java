@@ -9,6 +9,7 @@ import model.Employee;
 import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
+import model.OrderWindow;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -20,6 +21,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.joda.time.DateTime;
 
 public class MyConnection {
 	private static SessionFactory sessionFactory;
@@ -206,6 +208,39 @@ public class MyConnection {
 		return list;
 	}
 
+	public static List<Object> getWindowIfActive(Company company, Date currentTime){
+		Session session = startSession();
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(OrderWindow.class);
+		Criterion thirdCondition = Restrictions.conjunction()
+				.add(Restrictions.lt("endDateFormatted", currentTime))
+				.add(Restrictions.gt("startDateFormatted", currentTime))
+				.add(Restrictions.eq("company", company));
+		criteria.add(thirdCondition).list();
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		list = (List<Object>) criteria.list();
+
+		session.getTransaction().commit();
+		session.close();
+		return list;
+	}
+	
+	public static List<Object> getOrderWindow(Company company){
+		Session session = startSession();
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(OrderWindow.class);
+		Criterion thirdCondition = Restrictions.conjunction()
+				.add(Restrictions.eq("company", company));
+		criteria.add(thirdCondition).list();
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		list = (List<Object>) criteria.list();
+
+		session.getTransaction().commit();
+		session.close();
+		return list;
+	}
+	
+	
 	public static List<Object> getFoodOrderItemList(Food food, Date earlierDate, Date laterDate) {
 		Session session = startSession();
 		List<Object> list = new ArrayList<>();
