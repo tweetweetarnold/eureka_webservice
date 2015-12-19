@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Date;
 import java.util.List;
 
 import model.Canteen;
@@ -66,8 +67,8 @@ public class OrderWindowController {
 	 */
 	public boolean checkForActiveWindow(Company company) {
 		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
-		dc.add(Restrictions.eq("companyId", company.getCompanyId()));
-		// dc.add(Restrictions.eq("status", company.getCompanyId()));
+		dc.add(Restrictions.eq("company", 1));
+		// dc.add(Restrictions.gt("endDate", new Date()));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);

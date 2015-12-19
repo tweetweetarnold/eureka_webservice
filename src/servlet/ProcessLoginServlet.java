@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import value.StringValues;
 import model.Canteen;
 import model.Employee;
 import controller.AccessController;
 import controller.CanteenController;
+import controller.OrderWindowController;
 
 /**
  * Servlet implementation class Hello
@@ -32,8 +34,7 @@ public class ProcessLoginServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -42,8 +43,7 @@ public class ProcessLoginServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -56,17 +56,44 @@ public class ProcessLoginServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		// Getting User Input Parameters
-		String email = (String) request.getParameter("email");
-		String inputPwd = (String) request.getParameter("password");
+		AccessController accessController = new AccessController();
+		CanteenController canteenController = new CanteenController();
+		OrderWindowController orderWindowController = new OrderWindowController();
+
+		String email = "";
+		String inputPwd = "";
 
 		try {
-			AccessController accessController = new AccessController();
-			
-			// Verify user credentials. if user does not exist, returns null
+			// Getting User Input Parameters
+			email = (String) request.getParameter("email");
+			inputPwd = (String) request.getParameter("password");
+
+			// (1) VERIFY USER CREDENTIALS. If user does not exist, returns null.
 			Employee emp = accessController.authenticateUser(email, inputPwd);
-			System.out.println("emp: " + emp);
+			if (emp == null) {
+				throw new Exception("Authentication failed. Please check your credentials.");
+			}
 			System.out.println("User is authenticated: " + emp.getName());
+
+			// (2) CHECK USER STATUS. If user status is not ok, do something
+			String empStatus = emp.getStatus();
+			switch (empStatus) {
+			case StringValues.EMPLOYEE_PENDING_VERIFICATION:
+				throw new Exception("Account not verified. Please verify your account first!");
+
+			case StringValues.EMPLOYEE_SUSPENDED:
+				throw new Exception(
+						"Account has been suspended. Please contact your administrator for help.");
+
+			case StringValues.EMPLOYEE_DESTROYED:
+				throw new Exception("Account has been disabled.");
+			}
+
+			// (3) VERIFY AVAILABLE OPENED ORDER WINDOW.
+			boolean availableWindow = orderWindowController.checkForActiveWindow(emp.getCompany());
+			if (!availableWindow) {
+				throw new Exception("There are no available Order Windows Opened for your company.");
+			}
 
 			// *** For Development only ***
 			// creates a tokenID using UUID (Universalised Unique Identifier
@@ -80,46 +107,27 @@ public class ProcessLoginServlet extends HttpServlet {
 			session.setAttribute("tokenID", tokenID);
 			System.out.println("TokenID is set in session");
 
-			// Get all food data from database and save into session for
-			// display
-			CanteenController canteenController = new CanteenController();
-			// List<Food> allFoodList = canteenController.getAllFood();
-			// System.out.println("LoginServlet foodListSize: " +
-			// allFoodList.size());
-
 			// for login2
 			List<Canteen> canteenList = canteenController.getAllCanteens();
 			System.out.println("canteen size: " + canteenList.size());
 			session.setAttribute("canteenList", canteenList);
-			//
-			// session.setAttribute("allFood", allFoodList);
-			// System.out.println(allFoodList);
 
 			response.sendRedirect("homepage.jsp");
 
 		} catch (Exception e) {
-			System.out.println("Exception thrown. Incorrect credentials.");
-			System.out.println("Exception message: " + e.getMessage());
-			e.printStackTrace();
-			session.setAttribute("email", email);
-			// problem test here
-			// String ciphertext = PasswordService.encryptPassword(inputPwd);
-			// String decryptedLoginInput =
-			// PasswordService.decryptPassword(ciphertext);
-			// session.setAttribute("loginCipherText",ciphertext);
-			// UserController userController = new UserController();
-			// Employee tempe =
-			// userController.retrieveEmployeeViaUsername(username);
-			// String actualCiphertext = tempe.getPassword();
-			// String decryptedPassword =
-			// PasswordService.decryptPassword(actualCiphertext);
+			String errorMessage = e.getMessage();
 
-			session.setAttribute("error", "Something went wrong! Please check your credentials.");
-			// session.setAttribute("error",
-			// "Something went wrong! Please check your credentials. password input:<"
-			// + ciphertext + ">Password needed:<"+
-			// actualCiphertext+">"+"Decrypted input:<"+decryptedLoginInput+"> User Actual Decrypted:<"+
-			// decryptedPassword+">");
+			System.out.println("Exception@ProcessLoginServlet");
+			System.out.println("Exception message: " + errorMessage);
+			e.printStackTrace();
+
+			session.setAttribute("email", email);
+
+			if (errorMessage == null) {
+				errorMessage = "Something went wrong! Please contact the administrator for help.";
+			}
+
+			session.setAttribute("error", errorMessage);
 			response.sendRedirect("login.jsp");
 		}
 

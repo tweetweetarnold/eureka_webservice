@@ -44,6 +44,9 @@ public class OrderWindow {
 	private Canteen canteen;
 	private Date createDate;
 
+	public OrderWindow() {
+	}
+
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen) {
 		this.startDate = startDate;
 		this.endDate = endDate;

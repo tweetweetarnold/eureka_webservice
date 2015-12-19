@@ -65,8 +65,8 @@ public class Test {
 		AESAlgorithm aes = new AESAlgorithm();
 
 		company.setDeliveryPointSet(buildingList);
-		Employee arnold = new Employee(aes.encrypt("arnold.lee.2013@sis.smu.edu.sg"+"1234567"), "Arnold Lee",
-				"arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
+		Employee arnold = new Employee(aes.encrypt("arnold.lee.2013@sis.smu.edu.sg" + "1234567"),
+				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
 
 		arnold.setDefaultDeliveryPoint("CONTROL");
 
@@ -792,7 +792,7 @@ public class Test {
 		// ****************************************
 
 		OrderWindow window = new OrderWindow(new DateTime(2015, 12, 2, 16, 36, 0), new DateTime(
-				2015, 12, 5, 16, 36, 0), company, canteen1);
+				2020, 12, 5, 16, 36, 0), company, canteen1);
 		session.save(window); // arnold test data
 
 		session.getTransaction().commit();
@@ -800,7 +800,6 @@ public class Test {
 		session.close();
 
 		System.out.println("Test.java completed");
-	
 
 	}
 

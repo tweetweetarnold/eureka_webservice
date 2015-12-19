@@ -35,7 +35,6 @@ public class EmployeeDAO {
 
 	// Retrieve Employee from DB using Employee username
 	public Employee getEmployeeByEmail(String email) {
-
 		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
 		dc.add(Restrictions.eq("email", email));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
