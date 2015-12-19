@@ -16,8 +16,10 @@ import javax.servlet.http.HttpSession;
 import model.Employee;
 import model.FoodOrder;
 import model.FoodOrderItem;
+import model.OrderWindow;
 import value.StringValues;
 import controller.FoodOrderController;
+import controller.OrderWindowController;
 import dao.EmployeeDAO;
 
 /**
@@ -70,7 +72,11 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 			Employee employee = (Employee) session.getAttribute("user");
 			System.out.println("Employee retrieved");
 
-			FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_SUBMITTED, employee, null);
+			OrderWindowController owController = new OrderWindowController();
+			OrderWindow window = (OrderWindow) session.getAttribute("orderWindow");
+
+			FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_SUBMITTED, employee, null,
+					window);
 			for (FoodOrderItem item : hashMyFoodOrderItems) {
 				item.setFoodOrder(myFoodOrder);
 				out.println("size: " + item.getModifierChosenList().size());

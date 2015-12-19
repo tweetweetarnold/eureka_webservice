@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,9 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import value.StringValues;
 import model.Canteen;
 import model.Employee;
+import model.OrderWindow;
+import value.StringValues;
 import controller.AccessController;
 import controller.CanteenController;
 import controller.OrderWindowController;
@@ -90,10 +92,13 @@ public class ProcessLoginServlet extends HttpServlet {
 			}
 
 			// (3) VERIFY AVAILABLE OPENED ORDER WINDOW.
-			boolean availableWindow = orderWindowController.checkForActiveWindow(emp.getCompany());
-			if (!availableWindow) {
-				throw new Exception("There are no available Order Windows Opened for your company.");
+			ArrayList<OrderWindow> windowList = orderWindowController
+					.getAllOpenedWindowsForCompany(emp.getCompany());
+			if (windowList == null || windowList.size() == 0) {
+				System.out.println("windowList size: " + windowList.size());
+				throw new Exception("There are no available Order Windows opened for your company.");
 			}
+			OrderWindow window = windowList.get(0);
 
 			// *** For Development only ***
 			// creates a tokenID using UUID (Universalised Unique Identifier
@@ -105,7 +110,7 @@ public class ProcessLoginServlet extends HttpServlet {
 			// Setting user and token
 			session.setAttribute("user", emp);
 			session.setAttribute("tokenID", tokenID);
-			// session.setAttribute("orderWindowId", orderWindow);
+			session.setAttribute("orderWindow", window);
 			System.out.println("TokenID is set in session");
 
 			// for login2

@@ -25,19 +25,20 @@ import value.StringValues;
 @WebServlet("/AddFoodOrderTestServlet")
 public class AddFoodOrderTestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddFoodOrderTestServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public AddFoodOrderTestServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -45,24 +46,26 @@ public class AddFoodOrderTestServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 
 		// Added somecode to increase the quantity of the FoodOrderItems-Chris
 		ArrayList<FoodOrderItem> uniqueFoodOrderItems = new ArrayList<FoodOrderItem>();
 		// Retrieve myFoodOrders and User
 
-		List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session.getAttribute("myFoodOrderItems");
+		List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session
+				.getAttribute("myFoodOrderItems");
 		System.out.println("MyFoodOrderItems retrieved");
 		Set<FoodOrderItem> hashMyFoodOrderItems = new HashSet<>(myFoodOrderItems);
 
 		Employee employee = (Employee) session.getAttribute("user");
 		System.out.println("Employee retrieved");
 		HashSet<FoodOrderItem> foodOrderItemsToAdd = new HashSet<FoodOrderItem>();
-		FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null);
+		// FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_CONFIRMED, employee, null);
 		FoodOrderController foodOrderController = new FoodOrderController();
-		foodOrderController.addFoodOrder(myFoodOrder);
-		
+		// foodOrderController.addFoodOrder(myFoodOrder);
+
 	}
 
 }

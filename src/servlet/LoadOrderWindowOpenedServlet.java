@@ -2,8 +2,10 @@ package servlet;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.joda.time.DateTime;
-
+import model.FoodDisplayObject;
+import model.FoodOrderItem;
+import model.OrderWindow;
 import value.StringValues;
 import controller.FoodOrderController;
+import controller.OrderWindowController;
 
 /**
  * Servlet implementation class GetTodayOrdersServlet
@@ -48,31 +52,23 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
 		FoodOrderController foodOrderController = new FoodOrderController();
+		OrderWindowController orderWindowController = new OrderWindowController();
+
 		try {
-			// date processing
-			Calendar cal = Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			Date laterDate = cal.getTime();
+			OrderWindow window = orderWindowController.getOrderWindow(1);
 
-			laterDate.setHours(10);
-			laterDate.setMinutes(0);
-			cal.add(Calendar.DATE, -1);
-			Date earlierDate = cal.getTime();
-			earlierDate.setHours(10);
-			earlierDate.setMinutes(0);
+			HashMap<String, ArrayList<FoodOrderItem>> list1 = foodOrderController
+					.getAllFoodOrderOfOrderWindow(window);
+			System.out.println("listsize 1: " + list1.size());
 
-			// ************************ to remove
-			laterDate = new Date();
-			earlierDate = new DateTime().minusDays(1).toDate();
-			// ************************ to remove
+			session.setAttribute(StringValues.SESSION_ORDERS_WINDOW_OPENED_NOGROUP, list1);
 
-			session.setAttribute(StringValues.SESSION_ORDERS_WINDOW_OPENED_NOGROUP,
-					foodOrderController.getFoodOrderToday());
+			ArrayList<FoodDisplayObject> list2 = foodOrderController
+					.getAllFoodOrderOfOrderWindowGroupedByStall(window);
+			System.out.println("listsize 2: " + list2.size());
 
-			session.setAttribute(StringValues.SESSION_ORDERS_WINDOW_OPENED_STALLS,
-					foodOrderController.getFoodOrderForCutOff(earlierDate, laterDate));
+			session.setAttribute(StringValues.SESSION_ORDERS_WINDOW_OPENED_STALLS, list2);
 
 			response.sendRedirect("adminFoodOrders.jsp");
 

@@ -1,6 +1,10 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,14 +68,22 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 		System.out.println("startDatetime: " + startDatetime);
 		System.out.println("endDatetime: " + endDatetime);
 
-		Company company = companyCtrl.getCompany(Integer.parseInt(companyId));
-		Canteen canteen = canteenCtrl.getCanteen(Integer.parseInt(canteenId));
+		try {
+			// DateFormat formatter = new SimpleDateFormat("dd-mmmm-yyyy hh:mm");
+			// System.out.println("startdate format: " + formatter.parse(startDatetime));
 
-		owCtrl.createNewOrderindow(new DateTime(), new DateTime().plusDays(1), company, canteen);
+			Company company = companyCtrl.getCompany(Integer.parseInt(companyId));
+			Canteen canteen = canteenCtrl.getCanteen(Integer.parseInt(canteenId));
 
-		session.setAttribute("success", "New Order Window created successfully.");
+			owCtrl.createNewOrderindow(new DateTime(), new DateTime().plusDays(2), company, canteen);
 
-		response.sendRedirect("adminHomepage.jsp");
+			session.setAttribute("success", "New Order Window created successfully.");
+
+			response.sendRedirect("adminHomepage.jsp");
+		} catch (Exception e) {
+			PrintWriter out = response.getWriter();
+			out.print("error");
+		}
 
 	}
 }

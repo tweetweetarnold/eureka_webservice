@@ -208,39 +208,6 @@ public class MyConnection {
 		return list;
 	}
 
-	public static List<Object> getWindowIfActive(Company company, Date currentTime){
-		Session session = startSession();
-		List<Object> list = new ArrayList<>();
-		Criteria criteria = session.createCriteria(OrderWindow.class);
-		Criterion thirdCondition = Restrictions.conjunction()
-				.add(Restrictions.ge("endDateFormatted", currentTime))
-				.add(Restrictions.le("startDateFormatted", currentTime))
-				.add(Restrictions.eq("company", company));
-		criteria.add(thirdCondition).list();
-		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		list = (List<Object>) criteria.list();
-
-		session.getTransaction().commit();
-		session.close();
-		return list;
-	}
-	
-	public static List<Object> getOrderWindow(Company company){
-		Session session = startSession();
-		List<Object> list = new ArrayList<>();
-		Criteria criteria = session.createCriteria(OrderWindow.class);
-		Criterion thirdCondition = Restrictions.conjunction()
-				.add(Restrictions.eq("company", company));
-		criteria.add(thirdCondition).list();
-		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		list = (List<Object>) criteria.list();
-
-		session.getTransaction().commit();
-		session.close();
-		return list;
-	}
-	
-	
 	public static List<Object> getFoodOrderItemList(Food food, Date earlierDate, Date laterDate) {
 		Session session = startSession();
 		List<Object> list = new ArrayList<>();
@@ -256,8 +223,6 @@ public class MyConnection {
 		session.close();
 		return list;
 	}
-	
-	
 
 	public static List<Object> getFoodForDatesAndUser(Date earlierDate, Date laterDate,
 			Employee tempEmployee) {
@@ -300,8 +265,6 @@ public class MyConnection {
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
 
-		// Criteria criteria = dc.getExecutableCriteria(session);
-
 		session.getTransaction().commit();
 		session.close();
 
@@ -318,8 +281,6 @@ public class MyConnection {
 		criteria.add(thirdCondition).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
-
-		// Criteria criteria = dc.getExecutableCriteria(session);
 
 		session.getTransaction().commit();
 		session.close();
@@ -340,33 +301,9 @@ public class MyConnection {
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
 
-		// Criteria criteria = dc.getExecutableCriteria(session);
-
 		session.getTransaction().commit();
 		session.close();
 
-		return list;
-	}
-
-	public static List<Object> get(String sql) {
-		Session session = startSession();
-		// Criteria criteria = dc.getExecutableCriteria(session);
-		Query query = session.createSQLQuery(sql).addEntity(FoodOrder.class);
-		List<Object> list = (List<Object>) query.list();
-		session.getTransaction().commit();
-		session.close();
-		return list;
-	}
-
-	public static List<Object> get(String sql, String past, String present) {
-		Session session = startSession();
-		// Criteria criteria = dc.getExecutableCriteria(session);
-		Query query = session.createSQLQuery(sql).addEntity(FoodOrder.class);
-		query.setParameter("date1", past);
-		query.setParameter("date2", present);
-		List<Object> list = (List<Object>) query.list();
-		session.getTransaction().commit();
-		// closeAll();
 		return list;
 	}
 
