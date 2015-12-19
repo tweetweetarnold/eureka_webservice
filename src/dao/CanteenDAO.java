@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.Canteen;
 
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 
 import connection.MyConnection;
@@ -12,11 +13,17 @@ import connection.MyConnection;
 public class CanteenDAO {
 
 	// Retrieve all Canteens from the DB
-	public List<Canteen> getAllCanteens() {
-		List<Canteen> returnList = new ArrayList<>();
-		List<Object> list = MyConnection
-				.queryWithCriteria(DetachedCriteria.forClass(Canteen.class));
-		for (Object o : list) {
+	public ArrayList<Canteen> getAllCanteens() {
+		ArrayList<Canteen> returnList = null;
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		returnList = new ArrayList<Canteen>();
+
+		for (Object o : l) {
 			returnList.add((Canteen) o);
 		}
 		return returnList;

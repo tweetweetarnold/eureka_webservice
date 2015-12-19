@@ -88,7 +88,7 @@ public class ProcessLoginServlet extends HttpServlet {
 			// allFoodList.size());
 
 			// for login2
-			List<Canteen> canteenList = canteenController.retrieveAllCanteens();
+			List<Canteen> canteenList = canteenController.getAllCanteens();
 			System.out.println("canteen size: " + canteenList.size());
 			session.setAttribute("canteenList", canteenList);
 			//

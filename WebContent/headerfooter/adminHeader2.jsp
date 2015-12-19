@@ -275,26 +275,39 @@
 				<li>
 					<a href="#">
 						<i class="fa fa-table fa-fw"></i>
-						Orders
+						Order Windows
 						<span class="fa arrow"></span>
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="#">Window: Queued</a>
+							<a href="#">
+								View Windows
+								<span class="fa arrow"></span>
+							</a>
+							<ul class="nav nav-third-level">
+								<li>
+									<a href="#">Queued (Not in use)</a>
+								</li>
+								<li>
+									<a href="LoadOrderWindowOpenedServlet">Opened</a>
+								</li>
+								<li>
+									<a href="#">Processing (Not in use)</a>
+								</li>
+								<li>
+									<a href="#">Closed (Not in use)</a>
+								</li>
+							</ul>
+							<!-- /.nav-third-level -->
 						</li>
 						<li>
-							<a href="LoadOrderWindowOpenedServlet">Window: Opened</a>
+							<a href="LoadAdminCreateNewWindowServlet">Create New Window</a>
 						</li>
-						<li>
-							<a href="#">Window: Processing</a>
-						</li>
-						<li>
-							<a href="#">Window: Closed</a>
-						</li>
+
 					</ul>
 					<!-- /.nav-second-level -->
 				</li>
-				
+
 				<li>
 					<a href="#">
 						<i class="fa fa-table fa-fw"></i>
@@ -308,7 +321,7 @@
 					</ul>
 					<!-- /.nav-second-level -->
 				</li>
-				
+
 				<li>
 					<a href="#">
 						<i class="fa fa-table fa-fw"></i>
@@ -322,11 +335,11 @@
 					</ul>
 					<!-- /.nav-second-level -->
 				</li>
-				
+
 				<li>
 					<a href="#">
 						<i class="fa fa-table fa-fw"></i>
-						Canteen Mgmt.
+						Canteen
 						<span class="fa arrow"></span>
 					</a>
 					<ul class="nav nav-second-level">
@@ -336,11 +349,11 @@
 					</ul>
 					<!-- /.nav-second-level -->
 				</li>
-				
+
 				<li>
 					<a href="#">
 						<i class="fa fa-table fa-fw"></i>
-						User Mgmt.
+						User
 						<span class="fa arrow"></span>
 					</a>
 					<ul class="nav nav-second-level">

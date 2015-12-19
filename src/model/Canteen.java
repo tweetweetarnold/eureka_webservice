@@ -43,6 +43,10 @@ public class Canteen {
 		this.name = name;
 	}
 
+	public int getCanteenId() {
+		return canteenId;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -53,10 +57,6 @@ public class Canteen {
 
 	public Date getCreateDate() {
 		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
 	}
 
 	public Set<Stall> getStallList() {

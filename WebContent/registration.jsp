@@ -120,12 +120,6 @@
 			</form>
 		</div>
 
-		<!-- 		<form action="login.jsp" class="form-signin"> -->
-		<!-- 			<button class="btn btn-primary btn-block"> -->
-		<!-- 				<font face="verdana"></font> -->
-		<!-- 			</button> -->
-		<!-- 		</form> -->
-
 		<br>
 
 		<!-- Error message handling -->

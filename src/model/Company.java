@@ -32,7 +32,6 @@ public class Company {
 	private Set<String> deliveryPointSet;
 
 	public Company() {
-
 	}
 
 	public Company(String name, Date cutoffTime, Set<Canteen> canteenList, String companyCode) {
@@ -57,10 +56,6 @@ public class Company {
 		return companyId;
 	}
 
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -76,22 +71,17 @@ public class Company {
 	// public void setEmployeeList(Set<Employee> employeeList) {
 	// this.employeeList = employeeList;
 	// }
+
 	public void setDeliveryPointSet(Set<String> deliveryPointSet) {
 		this.deliveryPointSet = deliveryPointSet;
 	}
 
 	public Set<String> getDeliveryPointSet() {
-		System.out.println(" SHHSADdsafafsfdafdsfdsafadfadsfadsf " + this.deliveryPointSet.size());
-
-		return this.deliveryPointSet;
+		return deliveryPointSet;
 	}
 
 	public Date getCreateDate() {
 		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
 	}
 
 	public Date getCutoffTime() {

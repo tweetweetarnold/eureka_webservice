@@ -18,20 +18,21 @@ import dao.OrderWindowDAO;
 /**
  * Process the business logic of the order window for the application
  * 
- *
+ * 
  */
 public class OrderWindowController {
 	OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
-	
+
 	/**
 	 * Creates a default constructor for the OrderWindowController
 	 */
 	public OrderWindowController() {
-		
 	}
-	
+
 	/**
-	 * Creates a new order window period with start date and end date for the specified company and canteen
+	 * Creates a new order window period with start date and end date for the specified company and
+	 * canteen
+	 * 
 	 * @param startDate The start date of the order window
 	 * @param endDate The end date of the order window
 	 * @param company The Company object specified in the order window
@@ -41,9 +42,11 @@ public class OrderWindowController {
 			Canteen canteen) {
 		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen));
 	}
-	
+
 	/**
-	 * Creates a new order window period with start date and duration for the specified company and canteen
+	 * Creates a new order window period with start date and duration for the specified company and
+	 * canteen
+	 * 
 	 * @param startDate The start date of the order window
 	 * @param duration The duration of the order window
 	 * @param company The Company object specified in the order window
@@ -57,6 +60,7 @@ public class OrderWindowController {
 	// Check for any active window under given company
 	/**
 	 * Check for any active window under a given company
+	 * 
 	 * @param company The Company object to be assessed on
 	 * @return true If there is an active window,otherwise false
 	 */

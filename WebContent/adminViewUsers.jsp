@@ -57,7 +57,6 @@
 
 		<%@include file="headerfooter/adminHeader2.jsp"%>
 
-
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
@@ -67,55 +66,35 @@
 			</div>
 			<!-- /.row -->
 
-
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">Data</div>
-						<!-- /.panel-heading -->
-						<div class="panel-body">
-							<!-- Nav tabs -->
-							<ul class="nav nav-tabs">
-								<li class="active">
-									<a href="#viewAll" data-toggle="tab">All</a>
-								</li>
-							</ul>
 
-							<!-- Tab panes -->
-							<div class="tab-content">
-								<div class="tab-pane fade" id="viewAll">
-									<div class="dataTable_wrapper">
-										<br>
-										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-											<thead>
-												<tr>
-													<th>S/N</th>
-													<th>User Email</th>
-													<th>Food Item(s)</th>
-													<th>Qty</th>
-													<th>Price ($)</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${sessionScope.userMgmtView}" var="employee" varStatus="loop">
-													<tr class="odd gradeX">
-														<td>${loop.index + 1}</td>
-														<td>1</td>
-
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</div>
-									<!-- /.table-responsive -->
-								</div>
-							</div>
-						</div>
-						<!-- /.panel-body -->
+					<div class="dataTable_wrapper">
+						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+							<thead>
+								<tr>
+									<th>S/N</th>
+									<th>User Email</th>
+									<th>Food Item(s)</th>
+									<th>Qty</th>
+									<th>Price ($)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>1</td>
+									<td>1</td>
+									<td>1</td>
+									<td>1</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
-					<!-- /.panel -->
+					<!-- /.table-responsive -->
+
 				</div>
-				<!-- /.col-lg-6 -->
+				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
 

@@ -18,25 +18,27 @@ import model.Canteen;
 import org.json.simple.JSONArray;
 
 import controller.CanteenController;
+
 /**
  * Servlet implementation class RetrieveCanteenServlet
  */
 @WebServlet("/RetrieveCanteenServlet")
 public class RetrieveCanteenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RetrieveCanteenServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public RetrieveCanteenServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -44,29 +46,29 @@ public class RetrieveCanteenServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		CanteenController canteenController = new CanteenController();
-		List<Canteen> canteenList = canteenController.retrieveAllCanteens();
+		List<Canteen> canteenList = canteenController.getAllCanteens();
 		JSONArray jsonArray = new JSONArray();
 		Iterator iter = canteenList.iterator();
-		
-		while(iter.hasNext()){
+
+		while (iter.hasNext()) {
 			Canteen tempCanteen = (Canteen) iter.next();
 			jsonArray.add(tempCanteen);
 		}
-		//for test app
+		// for test app
 		RequestDispatcher rd = request.getRequestDispatcher("TestApp.jsp");
 		request.setAttribute("canteenArray", jsonArray);
-		rd.forward(request,response);
-		
+		rd.forward(request, response);
+
 		PrintWriter out = response.getWriter();
-		// Assuming your json object is **jsonObject**, perform the following, it will return your json object  
+		// Assuming your json object is **jsonObject**, perform the following, it will return your
+		// json object
 		out.print(jsonArray);
 		out.flush();
-		
-		
-		 
+
 	}
 
 }
