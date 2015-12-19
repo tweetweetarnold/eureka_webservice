@@ -59,7 +59,6 @@ public class OrderWindowController {
 		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen));
 	}
 
-	// Check for any active window under given company
 	/**
 	 * Check for any active window under a given company
 	 * 

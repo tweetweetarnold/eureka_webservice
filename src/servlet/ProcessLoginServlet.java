@@ -105,6 +105,7 @@ public class ProcessLoginServlet extends HttpServlet {
 			// Setting user and token
 			session.setAttribute("user", emp);
 			session.setAttribute("tokenID", tokenID);
+			// session.setAttribute("orderWindowId", orderWindow);
 			System.out.println("TokenID is set in session");
 
 			// for login2

@@ -34,7 +34,7 @@ public class AddFoodOrderTest {
 		FoodOrderItem newFoodOrderItem = new FoodOrderItem(null, newFood, 1, null);
 		HashSet<FoodOrderItem> foodOrderItemSet = new HashSet<FoodOrderItem>();
 		foodOrderItemSet.add(newFoodOrderItem);
-		FoodOrder newFoodOrder = new FoodOrder("TEST", tempEmployee, foodOrderItemSet);
+		FoodOrder newFoodOrder = new FoodOrder("TEST", tempEmployee, foodOrderItemSet, null);
 		newFoodOrderItem.setFoodOrder(newFoodOrder);
 		// date processing
 		Calendar cal = Calendar.getInstance();

@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,17 +29,30 @@ public class FoodOrder {
 	private Set<FoodOrderItem> foodOrderList;
 	private Date createDate;
 	private String transactionId;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "orderWindowId")
+	private OrderWindow orderWindow;
 
 	public FoodOrder() {
 	}
 
-	public FoodOrder(String status, Employee employee, Set<FoodOrderItem> foodOrderList) {
+	public FoodOrder(String status, Employee employee, Set<FoodOrderItem> foodOrderList,
+			OrderWindow orderWindow) {
 		super();
 		this.status = status;
 		this.employee = employee;
 		this.foodOrderList = foodOrderList;
 		this.createDate = new Date();
 		this.transactionId = null;
+		this.orderWindow = orderWindow;
+	}
+
+	public OrderWindow getOrderWindow() {
+		return orderWindow;
+	}
+
+	public void setOrderWindow(OrderWindow orderWindow) {
+		this.orderWindow = orderWindow;
 	}
 
 	public Set<FoodOrderItem> getFoodOrderList() {
@@ -64,7 +78,7 @@ public class FoodOrder {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	public void setTransactionId(String transactionId) {
 		this.transactionId = transactionId;
 	}
@@ -94,7 +108,7 @@ public class FoodOrder {
 		}
 		return result;
 	}
-	
+
 	public String getTransactionId() {
 		return transactionId;
 	}
