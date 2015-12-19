@@ -213,8 +213,8 @@ public class MyConnection {
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(OrderWindow.class);
 		Criterion thirdCondition = Restrictions.conjunction()
-				.add(Restrictions.lt("endDateFormatted", currentTime))
-				.add(Restrictions.gt("startDateFormatted", currentTime))
+				.add(Restrictions.ge("endDateFormatted", currentTime))
+				.add(Restrictions.le("startDateFormatted", currentTime))
 				.add(Restrictions.eq("company", company));
 		criteria.add(thirdCondition).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
@@ -256,6 +256,8 @@ public class MyConnection {
 		session.close();
 		return list;
 	}
+	
+	
 
 	public static List<Object> getFoodForDatesAndUser(Date earlierDate, Date laterDate,
 			Employee tempEmployee) {
