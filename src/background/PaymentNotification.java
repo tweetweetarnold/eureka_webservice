@@ -10,8 +10,6 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.LoggerFactory;
 
-import services.EmailGenerator;
-import services.SendEmail;
 import connection.MyConnection;
 import controller.CompanyController;
 
@@ -30,6 +28,7 @@ public class PaymentNotification implements Job {
 			ArrayList<Object> objects = new ArrayList<Object>(
 					MyConnection.getUsersWithOutstandingPaymentFromCompany(c));
 			ArrayList<String> emailList = new ArrayList<String>();
+			
 			for (Object o : objects) {
 				Employee tempEmployee = (Employee) o;
 				String tempEmail = tempEmployee.getEmail();
