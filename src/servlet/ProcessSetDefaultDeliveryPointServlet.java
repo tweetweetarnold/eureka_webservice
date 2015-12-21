@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.EmployeeController;
+import dao.EmployeeDAO;
+import model.Employee;
 import services.AESAlgorithm;
 import services.SendEmail;
 
@@ -47,16 +49,23 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String buildingName = (String) request.getParameter("deliveryPoint");
-		String unverifiedEmail = (String) session.getAttribute("unverifiedEmail");
-
+		
+		String email = (String) session.getAttribute("email");
+		String unverifiedEmail = email + "&NotVerified";
 		EmployeeController userController = new EmployeeController();
 
 		//session.removeAttribute("email");
 
-		userController.updateDefaultDeliveryPoint(unverifiedEmail, buildingName);
+		userController.updateDefaultDeliveryPoint(email, buildingName);
+		Employee employee = userController.retrieveEmployeeViaEmail(email);
+		employee.setEmail(unverifiedEmail);
+		EmployeeDAO employeeDAO = new EmployeeDAO();
+		employeeDAO.saveEmployee(employee);
+		Employee oldEmployee = userController.retrieveEmployeeViaEmail(email);
+		employeeDAO.deleteEmployee(oldEmployee);
 		
 		
-		String email = (String) session.getAttribute("email");
+		//String email = (String) session.getAttribute("email");
 		SendEmail javaEmail = new SendEmail();
 		String[] emailArray = {email};
 		//email = email+"&NotVerified";
