@@ -1,10 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -56,19 +53,36 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 		OrderWindowController orderWindowController = new OrderWindowController();
 
 		try {
-			OrderWindow window = orderWindowController.getOrderWindow(1);
+			HashMap<OrderWindow, Object[]> map = new HashMap<OrderWindow, Object[]>();
+			ArrayList<OrderWindow> openedWindowList = orderWindowController.getAllOpenedWindows();
 
-			HashMap<String, ArrayList<FoodOrderItem>> list1 = foodOrderController
-					.getAllFoodOrderOfOrderWindow(window);
-			System.out.println("listsize 1: " + list1.size());
+			for (OrderWindow window : openedWindowList) {
+				Object[] arr = new Object[2];
+				HashMap<String, ArrayList<FoodOrderItem>> noGroup = foodOrderController
+						.getAllFoodOrderOfOrderWindow(window);
+				ArrayList<FoodDisplayObject> groupedByStall = foodOrderController
+						.getAllFoodOrderOfOrderWindowGroupedByStall(window);
 
-			session.setAttribute(StringValues.SESSION_ORDERS_WINDOW_OPENED_NOGROUP, list1);
+				arr[0] = noGroup;
+				arr[1] = groupedByStall;
+				map.put(window, arr);
+			}
 
-			ArrayList<FoodDisplayObject> list2 = foodOrderController
-					.getAllFoodOrderOfOrderWindowGroupedByStall(window);
-			System.out.println("listsize 2: " + list2.size());
+			session.setAttribute("orderWindowMap", map);
 
-			session.setAttribute(StringValues.SESSION_ORDERS_WINDOW_OPENED_STALLS, list2);
+			// OrderWindow window = orderWindowController.getOrderWindow(1); // TODO
+			//
+			// HashMap<String, ArrayList<FoodOrderItem>> list1 = foodOrderController
+			// .getAllFoodOrderOfOrderWindow(window);
+			// System.out.println("listsize 1: " + list1.size());
+			//
+			// session.setAttribute(StringValues.SESSION_ORDERS_WINDOW_OPENED_NOGROUP, list1);
+			//
+			// ArrayList<FoodDisplayObject> list2 = foodOrderController
+			// .getAllFoodOrderOfOrderWindowGroupedByStall(window);
+			// System.out.println("listsize 2: " + list2.size());
+			//
+			// session.setAttribute(StringValues.SESSION_ORDERS_WINDOW_OPENED_STALLS, list2);
 
 			response.sendRedirect("adminFoodOrders.jsp");
 
