@@ -66,25 +66,20 @@ public class ProcessVerificationServlet extends HttpServlet {
 		AESAlgorithm aes = new AESAlgorithm();
 
 		try {
-			/*AccessController accessController = new AccessController();		
-			String password = (String)session.getAttribute("password");
-			String employeeName = (String)session.getAttribute("employeeName");
-			String email = (String)session.getAttribute("email");
-			Long contactNumber = (Long)session.getAttribute("contactNumber");
-			String companyCode = (String)session.getAttribute("companyCode");
-			*/
+			
 			EmployeeDAO employeedao = new EmployeeDAO();
 			String email = (String)request.getParameter("email");
+			String status = (String) request.getParameter("status");
 			String newEmail = email.replaceAll(" ","+");
 			String eDecrypt = aes.decrypt(newEmail);
-			String[] emailString = eDecrypt.split("&");
-			String verifiedEmail = emailString[0];
+			String verifiedStatus = aes.decrypt(status);
+			
 			Employee employee = employeedao.getEmployeeByEmail(eDecrypt);
-			employee.setEmail(verifiedEmail);
-			employeedao.saveEmployee(employee);
-			Employee employeeUnverified = employeedao.getEmployeeByEmail(eDecrypt);
-			employeedao.deleteEmployee(employeeUnverified);
-			session.setAttribute("success","Your email has been verified. You may login now. Email:" + verifiedEmail);
+			
+			employee.setStatus(verifiedStatus);
+			employeedao.updateEmployee(employee);
+			
+			session.setAttribute("success","Your email has been verified. You may login now. Email:" + eDecrypt);
 			response.sendRedirect("login.jsp");
 			
 		} catch (Exception e) {

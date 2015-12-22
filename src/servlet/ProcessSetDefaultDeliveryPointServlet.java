@@ -16,6 +16,7 @@ import dao.EmployeeDAO;
 import model.Employee;
 import services.AESAlgorithm;
 import services.SendEmail;
+import value.StringValues;
 
 /**
  * Servlet implementation class ProcessSetDefaultBuilding
@@ -51,26 +52,16 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 		String buildingName = (String) request.getParameter("deliveryPoint");
 		
 		String email = (String) session.getAttribute("email");
-		String unverifiedEmail = email + "&NotVerified";
+		
 		EmployeeController userController = new EmployeeController();
 
 		//session.removeAttribute("email");
 
 		userController.updateDefaultDeliveryPoint(email, buildingName);
-		Employee employee = userController.retrieveEmployeeViaEmail(email);
-		employee.setEmail(unverifiedEmail);
-		EmployeeDAO employeeDAO = new EmployeeDAO();
-		employeeDAO.saveEmployee(employee);
-		Employee oldEmployee = userController.retrieveEmployeeViaEmail(email);
-		employeeDAO.deleteEmployee(oldEmployee);
 		
 		
-		//String email = (String) session.getAttribute("email");
 		SendEmail javaEmail = new SendEmail();
 		String[] emailArray = {email};
-		//email = email+"&NotVerified";
-		//String generatedEmployeeId = accessController.registerUser(
-		//		password, employeeName, email, contactNumber, companyCode);
 		
 		
 		try {
@@ -81,7 +72,7 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 		
 		String token = UUID.randomUUID().toString();
 		
-		String url = constructVerifyEmail(appUrl, unverifiedEmail, request.getLocale(), token);
+		String url = constructVerifyEmail(appUrl, email, request.getLocale(), token);
 		
 		javaEmail.setMailServerProperties();
 		javaEmail
@@ -97,7 +88,7 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 						emailArray);
 		
 		session.removeAttribute("email");
-		session.removeAttribute("unverifiedEmail");
+		
 		session.setAttribute("success", "An email has been sent to you. Please follow the instructions on verifying your account.");
 		response.sendRedirect("login.jsp");
 		} catch (Exception e) {
@@ -111,7 +102,8 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 	private String constructVerifyEmail(String contextPath, String email, Locale locale, String token) {
 		AESAlgorithm aes = new AESAlgorithm();
 		String eEncrypt = aes.encrypt(email);
-	    String url = contextPath + "/ProcessVerificationServlet?email="+eEncrypt +"&token=" + token;
+		String encryptedStatus = aes.encrypt(StringValues.EMPLOYEE_OK);
+	    String url = contextPath + "/ProcessVerificationServlet?email="+eEncrypt + "&status=" + encryptedStatus + "&token=" + token;
 	    return url;
 	}	
 

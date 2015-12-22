@@ -8,6 +8,7 @@ import org.hibernate.exception.ConstraintViolationException;
 
 import services.AESAlgorithm;
 import services.PasswordService;
+import value.StringValues;
 import dao.AdminDAO;
 import dao.EmployeeDAO;
 
@@ -98,6 +99,7 @@ public class AccessController {
 		}
 
 		Employee newEmployee = new Employee(encryptPassword, name, email, contactNo, company);
+		newEmployee.setStatus(StringValues.EMPLOYEE_PENDING_VERIFICATION);
 		try {
 			employeeDAO.saveEmployee(newEmployee);
 		} catch (ConstraintViolationException e) {
