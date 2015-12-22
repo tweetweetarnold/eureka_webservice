@@ -89,12 +89,12 @@ public class ProcessRegistrationServlet extends HttpServlet {
 					if (validPasswordLength) {
 						if (validPasswordConfirmation) {
 							if (validEmail) {
-								//String unverifiedEmail = email + "&NotVerified";
+								
 								String generatedEmployeeId = accessController.registerUser(
 										password, employeeName, email, contactNumber, companyCode);
 								session.setAttribute("email", email);
 								session.setAttribute("companyCode", companyCode);
-							//	session.setAttribute("unverifiedEmail", unverifiedEmail);
+								
 
 								response.sendRedirect("RetrieveDeliveryPointsServlet");
 							} else {
