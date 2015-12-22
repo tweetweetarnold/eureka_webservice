@@ -77,7 +77,7 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="ProcessAdminAddNewOrderWindowServlet">
+									<form role="form" action="ProcessAdminAddNewOrderWindowServlet" id="submitForm">
 
 										<div class="form-group">
 											<label>Select Company</label>
@@ -119,7 +119,8 @@
 											</div>
 										</div>
 
-										<button type="submit" class="btn btn-primary">Create New Window</button>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Create
+											New Window</button>
 
 									</form>
 								</div>
@@ -142,6 +143,22 @@
 
 	</div>
 	<!-- /#wrapper -->
+
+	<!-- Create confirmation -->
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Confirmation</h4>
+				</div>
+				<div class="modal-body">Are you sure you want to create a new Order Window?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline btn-default">Cancel</button>
+					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- jQuery -->

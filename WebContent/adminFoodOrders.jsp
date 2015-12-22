@@ -44,6 +44,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
 </head>
 
 <body>
@@ -86,13 +87,13 @@
 										<!-- Nav tabs -->
 										<ul class="nav nav-tabs">
 											<li class="active">
-												<a href="#nogroup" data-toggle="tab">No Group</a>
+												<a href="#nogroup${mapLoop.index }" data-toggle="tab">No Group</a>
 											</li>
 											<li>
-												<a href="#groupByStall" data-toggle="tab">Group by Stalls</a>
+												<a href="#groupByStall${mapLoop.index }" data-toggle="tab">Group by Stalls</a>
 											</li>
 											<li>
-												<a href="#groupByStallCN" data-toggle="tab">Group by Stalls (CN)</a>
+												<a href="#groupByStallCN${mapLoop.index }" data-toggle="tab">Group by Stalls (CN)</a>
 											</li>
 										</ul>
 
@@ -101,7 +102,7 @@
 
 										<!-- Tab panes -->
 										<div class="tab-content">
-											<div class="tab-pane fade in active" id="nogroup">
+											<div class="tab-pane fade in active" id="nogroup${mapLoop.index }">
 												<div class="dataTable_wrapper">
 													<br>
 													<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -136,7 +137,7 @@
 											</div>
 
 
-											<div class="tab-pane fade" id="groupByStall">
+											<div class="tab-pane fade" id="groupByStall${mapLoop.index }">
 												<div class="dataTable_wrapper">
 													<br>
 													<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -201,7 +202,7 @@
 											</div>
 
 
-											<div class="tab-pane fade" id="groupByStallCN">
+											<div class="tab-pane fade" id="groupByStallCN${mapLoop.index }">
 												<fmt:setLocale value="zh_CN" />
 												<fmt:setBundle basename="RBExample2" var="lang" />
 
@@ -264,22 +265,16 @@
 													$
 													<fmt:formatNumber value="${overallPrice }" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
 
+													<br>
+													<button type="button" onclick="window.print()">Print This Page</button>
+
+
 												</div>
-												
-												
-													<style type="text/css" media="print">
-														.printbutton {
-														  visibility: hidden;
-														  display: none;
-														}
-													</style>
-													
-													<script>
-														document.write("<input type='button' " +
-														"onClick='window.print()' " +
-														"class='printbutton' " +
-														"value='Print This Page'/>");
-													</script>
+
+
+
+
+
 
 
 												<!-- /.table-responsive -->
