@@ -76,14 +76,18 @@
 									<h4 class="panel-title">
 										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${mapLoop.index }"
 											aria-expanded="true" aria-controls="collapse${mapLoop.index }"
-										> Window ID: ${window.windowId }. Company: ${window.company.name }. Canteen: ${window.canteen.name }. Start:
-											${window.startDateFormatted }. End: ${window.endDateFormatted } </a>
+										> Company: ${window.company.name }. Start: ${window.startDateFormatted }. End: ${window.endDateFormatted } </a>
 									</h4>
 								</div>
 								<div id="collapse${mapLoop.index }" class="panel-collapse collapse" role="tabpanel"
 									aria-labelledby="heading${mapLoop.index }"
 								>
 									<div class="panel-body">
+										<b>ID:</b>
+										${window.windowId }.
+										<b>Canteen:</b>
+										${window.canteen.name }.
+
 										<!-- Nav tabs -->
 										<ul class="nav nav-tabs">
 											<li class="active">

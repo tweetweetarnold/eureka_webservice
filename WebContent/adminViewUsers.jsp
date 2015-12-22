@@ -73,10 +73,10 @@
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
-									<th>S/N</th>
-									<th>User Email</th>
-									<th>Food Item(s)</th>
-									<th>Qty</th>
+									<th>Company</th>
+									<th>Email</th>
+									<th>Date Joined</th>
+									<th>Outstanding Payment ($)</th>
 									<th>Price ($)</th>
 								</tr>
 							</thead>
