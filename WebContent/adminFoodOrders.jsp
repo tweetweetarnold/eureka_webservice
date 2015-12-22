@@ -265,6 +265,23 @@
 													<fmt:formatNumber value="${overallPrice }" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
 
 												</div>
+												
+												
+													<style type="text/css" media="print">
+														.printbutton {
+														  visibility: hidden;
+														  display: none;
+														}
+													</style>
+													
+													<script>
+														document.write("<input type='button' " +
+														"onClick='window.print()' " +
+														"class='printbutton' " +
+														"value='Print This Page'/>");
+													</script>
+
+
 												<!-- /.table-responsive -->
 											</div>
 
