@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Canteen;
+import model.Employee;
 
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 
 import connection.MyConnection;
 
@@ -28,6 +30,19 @@ public class CanteenDAO {
 		}
 		return returnList;
 	}
+	
+	// Retrieve Canteen from DB using canteen's name
+		public Canteen getCanteenByName(String canteenName) {
+			DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
+			dc.add(Restrictions.eq("name", canteenName));
+			dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+			List<Object> l = MyConnection.queryWithCriteria(dc);
+			if (l.size() == 0) {
+				return null;
+			}
+			return (Canteen) l.get(0);
+		}
 
 	// Retrieve Canteen from the DB with canteenID
 	public Canteen getCanteen(int canteenId) {
