@@ -26,7 +26,7 @@ public class FileUploadController {
 		BufferedInputStream bis = new BufferedInputStream(is);
         InputStreamReader isr = new InputStreamReader(bis);
         BufferedReader br = new BufferedReader(isr);
-        Set<Stall> stallList = new HashSet<Stall>();
+        //Set<Stall> stallList = new HashSet<Stall>();
         Canteen canteen = null;
 		try {
 		        CSVReader csvreader = new CSVReader(br);
@@ -43,16 +43,16 @@ public class FileUploadController {
 	                canteen = canteenDAO.getCanteenByName(canteenName);
 	               
 	                Stall newStall = new Stall(stallName, contactNumber, canteen, null, null);
-	                stallList.add(newStall);
-	                
-	                
+	             //   stallList.add(newStall);
+	                canteenDAO.addStallToCanteen(canteen, newStall);
+	                stallDAO.saveStall(newStall);
 	            }
 	            
-	            canteen.setStallList(stallList);
-	            canteenDAO.updateCanteen(canteen);
-	            for (Stall stall : stallList) {
-	            	stallDAO.saveStall(stall);
-	            }
+	          //  canteen.setStallList(stallList);
+	          //  canteenDAO.updateCanteen(canteen);
+	          //  for (Stall stall : stallList) {
+	          //  	stallDAO.saveStall(stall);
+	         //   }
 	            
 			
 	            csvreader.close();
@@ -65,7 +65,7 @@ public class FileUploadController {
 	}
 	
 	public void processCanteenUpload(InputStream is) {
-		System.out.println("PROCESS_FOOD_FILEUPLOAD");
+		System.out.println("PROCESS_CANTEEN_FILEUPLOAD");
 		List<String[]> content = null;
 		BufferedInputStream bis = new BufferedInputStream(is);
         InputStreamReader isr = new InputStreamReader(bis);

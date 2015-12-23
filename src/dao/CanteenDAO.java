@@ -1,10 +1,13 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import model.Canteen;
 import model.Employee;
+import model.Stall;
 
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
@@ -47,6 +50,16 @@ public class CanteenDAO {
 	// Retrieve Canteen from the DB with canteenID
 	public Canteen getCanteen(int canteenId) {
 		return (Canteen) MyConnection.get(Canteen.class, canteenId);
+	}
+	
+	//Add Stall to the current StallList and update existing canteen
+	public void addStallToCanteen(Canteen c, Stall s) {
+		Set<Stall> stallList = c.getStallList();
+		if (stallList == null) {
+			stallList = new HashSet<Stall>();
+		}
+		stallList.add(s);
+		updateCanteen(c);
 	}
 
 	// Save new Canteen into DB

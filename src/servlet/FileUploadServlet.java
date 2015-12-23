@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemIterator;
@@ -48,6 +49,7 @@ public class FileUploadServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         FileUploadController fileUploadController = new FileUploadController();
         //Create a factory for disk-based file items
@@ -80,9 +82,11 @@ public class FileUploadServlet extends HttpServlet {
                 }
             }
 				
-				request.setAttribute("message", "File Uploaded Successfully");
+				session.setAttribute("message", "File Uploaded Successfully");
+				response.sendRedirect("adminFileUpload.jsp");
 		} catch (Exception ex) {
-				request.setAttribute("message", "File Uploaded Failed due to " + ex);
+				session.setAttribute("message", "File Uploaded Failed due to " + ex);
+				response.sendRedirect("adminFileUpload.jsp");
 		}
 		
 		
