@@ -34,6 +34,15 @@ public class Food {
 	private Stall stall;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<Modifier> modifierList;
+	private String weatherConditions;
+	
+	public String getWeatherConditions() {
+		return weatherConditions;
+	}
+
+	public void setWeatherConditions(String weatherConditions) {
+		this.weatherConditions = weatherConditions;
+	}
 
 	public Food() {
 	}
@@ -47,6 +56,7 @@ public class Food {
 		this.imageDirectory = imageDirectory;
 		this.createDate = new Date();
 		this.modifierList = new HashSet<>();
+		this.weatherConditions="default";
 	}
 
 	public String getImageDirectory() {
