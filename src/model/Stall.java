@@ -27,7 +27,7 @@ public class Stall {
 	private Canteen canteen;
 	private String imageDirectory;
 	private Date createDate;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "stall")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "stall")
 	private Set<Food> foodList;
 
 	public Stall() {
@@ -99,5 +99,6 @@ public class Stall {
 	public void setFoodList(Set<Food> foodList) {
 		this.foodList = foodList;
 	}
+	
 
 }

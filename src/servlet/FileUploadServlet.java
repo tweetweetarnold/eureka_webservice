@@ -76,6 +76,10 @@ public class FileUploadServlet extends HttpServlet {
 	                  } else if (itemName.contains("Stall.csv")) {
 	                	 // String canteenName = request.getParameter("canteenName");
 	                	 fileUploadController.processStallUpload(is);
+	                  } else if (itemName.contains("Food.csv")) {
+	                	  fileUploadController.processFoodUpload(is);
+	                  } else if (itemName.contains("Modifier.csv")) {
+	                	  fileUploadController.processModifierUpload(is);
 	                  }
                 
                 
@@ -85,7 +89,7 @@ public class FileUploadServlet extends HttpServlet {
 				session.setAttribute("message", "File Uploaded Successfully");
 				response.sendRedirect("adminFileUpload.jsp");
 		} catch (Exception ex) {
-				session.setAttribute("message", "File Uploaded Failed due to " + ex);
+				session.setAttribute("message", "File Uploaded Failed due to " + ex.getMessage());
 				response.sendRedirect("adminFileUpload.jsp");
 		}
 		

@@ -363,7 +363,20 @@
 					</ul>
 					<!-- /.nav-second-level -->
 				</li>
-
+				
+				<li>
+					<a href="#">
+						<i class="fa fa-table fa-fw"></i>
+						File Upload
+						<span class="fa arrow"></span>
+					</a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="adminFileUpload.jsp">Upload files</a>
+						</li>
+					</ul>
+					<!-- /.nav-second-level -->
+				</li>
 
 
 				<!-- <li>

@@ -61,6 +61,20 @@ public class CanteenDAO {
 		stallList.add(s);
 		updateCanteen(c);
 	}
+	
+	public Stall getStallFromCanteen(String canteenName, String stallName) {
+		Canteen c = getCanteenByName(canteenName);
+		Set<Stall> stallList = c.getStallList();
+		System.out.println(stallList);
+		for (Stall s : stallList) {
+			if (s.getName().equals(stallName)) {
+				return s;
+			}
+		}
+		
+		return null;
+		
+	}
 
 	// Save new Canteen into DB
 	public void saveCanteen(Canteen c) {
