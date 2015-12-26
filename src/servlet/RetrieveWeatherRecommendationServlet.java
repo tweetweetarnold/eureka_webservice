@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import controller.FoodController;
 import model.Food;
+import model.OrderWindow;
 import net.aksingh.owmjapis.AbstractWeather.Weather;
 import services.WeatherService;
 
@@ -53,6 +54,7 @@ public class RetrieveWeatherRecommendationServlet extends HttpServlet {
 		Weather weather;
 		HttpSession session = request.getSession();
 		try{
+			OrderWindow orderWindow = (OrderWindow)session.getAttribute("orderWindow");
 			WeatherService weatherService = new WeatherService();
 			weather = weatherService.getWeather();
 			FoodController foodController = new FoodController();
