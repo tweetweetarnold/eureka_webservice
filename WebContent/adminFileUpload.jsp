@@ -64,47 +64,36 @@
 
 
 	<h3>Select a file to upload</h3>
-	<h5> Upload Canteen.csv</h5>
+	<h5> Upload Canteen.csv or Stall.csv or Food.csv or Modifier.csv</h5>
 	<form action="FileUpload" method="post" enctype="multipart/form-data">
 		<input type="file" name="file" style="width:228px;" required/><input type="submit" value="upload"/>
 	
 	</form>
-	<br>
-	<h5> Upload Stall.csv</h5>
-	<form action="FileUpload" method="post" enctype="multipart/form-data">
-		<input type="file" name="file" style="width:228px;" required/>
-		
-		<input type="submit" value="upload"/>
 	
-	</form>
-	<br>
-	<h5> Upload Food.csv</h5>
-	<form action="FileUpload" method="post" enctype="multipart/form-data">
-		<input type="file" name="file" style="width:228px;" required/>
-		
-		<input type="submit" value="upload"/>
-	
-	</form>
-	
-	<br>
-	<h5> Upload Modifier.csv</h5>
-	<form action="FileUpload" method="post" enctype="multipart/form-data">
-		<input type="file" name="file" style="width:228px;" required/>
-		
-		<input type="submit" value="upload"/>
-	
-	</form>
 	
 	<!-- Success message handling -->
-			<c:if test="${not empty sessionScope.message}">
-				<div class="alert alert-success">
-					<b>Success!</b>
-					<br>
-					<c:out value="${message}" />
-				</div>
-				<c:remove var="message" scope="session" />
-			</c:if>
-			<script src="resources/js/ie10-viewport-bug-workaround.js"></script>
+		<c:if test="${not empty sessionScope.success}">
+			<div class="alert alert-success" role="alert">
+				<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+				<span class="sr-only">Success:</span>
+				<c:out value="${success}" />
+			</div>
+			<c:remove var="success" scope="session" />
+		</c:if>
+	</div>
+			
+			
+			<!-- Error message handling -->
+		<c:if test="${not empty sessionScope.error}">
+			<div class="alert alert-danger" role="alert" style="max-width: 50%">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span>
+				<c:forEach items="${sessionScope.error}" var="errorList" varStatus="errorLoop">
+					<c:out value="${errorList}" /><br>
+				</c:forEach>
+			</div>
+			<c:remove var="error" scope="session" />
+		</c:if>
 </div>
 </div>
 </div>

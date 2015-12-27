@@ -3,6 +3,7 @@ package servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -51,17 +52,17 @@ public class FileUploadServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-        FileUploadController fileUploadController = new FileUploadController();
-        //Create a factory for disk-based file items
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        // Configure a repository (to ensure a secure temp location is used)
-        ServletContext servletContext = this.getServletConfig().getServletContext();
-        File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
-        factory.setRepository(repository);
-        // Create a new file upload handler and set max size
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        upload.setSizeMax(1024 * 1024 * 1000);
-       
+		FileUploadController fileUploadController = new FileUploadController();
+		//Create a factory for disk-based file items
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		// Configure a repository (to ensure a secure temp location is used)
+		ServletContext servletContext = this.getServletConfig().getServletContext();
+		File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+		factory.setRepository(repository);
+		// Create a new file upload handler and set max size
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		upload.setSizeMax(1024 * 1024 * 1000);
+		ArrayList<String> errorList = null;
         try {
             // Parse the request
             FileItemIterator iter = upload.getItemIterator(request);
@@ -70,32 +71,41 @@ public class FileUploadServlet extends HttpServlet {
                 InputStream is = item.openStream();
                 if (!item.isFormField()) {
                     //pass it to controller to read file
-                	 String itemName = item.getName();
-	                  if (itemName.contains("Canteen.csv")) {
-	               	  fileUploadController.processCanteenUpload(is);
-	                  } else if (itemName.contains("Stall.csv")) {
+                	String itemName = item.getName();
+	                if (itemName.contains("Canteen.csv")) {
+	                	errorList= fileUploadController.processCanteenUpload(is);
+		               	  if (errorList.size() > 0) {
+		               		  throw new Exception("There are Errors in the Canteen.csv file");
+		               	  }
+		            } else if (itemName.contains("Stall.csv")) {
 	                	 // String canteenName = request.getParameter("canteenName");
-	                	 fileUploadController.processStallUpload(is);
-	                  } else if (itemName.contains("Food.csv")) {
-	                	  fileUploadController.processFoodUpload(is);
-	                  } else if (itemName.contains("Modifier.csv")) {
-	                	  fileUploadController.processModifierUpload(is);
-	                  }
-                
-                
+		            	errorList = fileUploadController.processStallUpload(is);
+	                	if (errorList.size() > 0) {
+	                		throw new Exception("There are Errors in the Stall.csv file");
+	                	}
+	                } else if (itemName.contains("Food.csv")) {
+	                	errorList = fileUploadController.processFoodUpload(is);
+	                	if (errorList.size() > 0) {
+	                		throw new Exception("There are Errors in the Food.csv file");
+	                	}
+	                } else if (itemName.contains("Modifier.csv")) {
+	                	errorList = fileUploadController.processModifierUpload(is);
+	                	if (errorList.size() > 0) {
+	                		throw new Exception("There are Errors in the Modifier.csv file");
+	                	}
+	                } else {
+	                	throw new Exception("Invalid file name. Please upload a correct file name.");
+	                }
                 }
             }
 				
-				session.setAttribute("message", "File Uploaded Successfully");
-				response.sendRedirect("adminFileUpload.jsp");
-		} catch (Exception ex) {
-				session.setAttribute("message", "File Uploaded Failed due to " + ex.getMessage());
-				response.sendRedirect("adminFileUpload.jsp");
+			session.setAttribute("success", "File Uploaded Successfully");
+			response.sendRedirect("adminFileUpload.jsp");
+		} catch (Exception e) {
+			errorList.add(e.getMessage());
+			session.setAttribute("error", errorList);
+			response.sendRedirect("adminFileUpload.jsp");
 		}
-		
-		
-		
-		
 	}
 	
 

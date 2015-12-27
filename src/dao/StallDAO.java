@@ -1,9 +1,12 @@
 package dao;
 
+import model.Canteen;
 import model.Food;
 import model.Stall;
 
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import connection.MyConnection;
@@ -42,5 +45,23 @@ public class StallDAO {
 		updateStall(s);
 	}
 	
+	public void loadStallData(List<String[]> content) {
+		Canteen canteen = null;
+		Iterator iter = content.iterator();
+        iter.next();
+        while (iter.hasNext()) {
+            String[] row = (String[]) iter.next();
+            String stallName = row[0].trim();
+            String contactNum = row[1].trim();
+            long contactNumber = Long.parseLong(contactNum);
+            String canteenName = row[2].trim();
+            canteen = canteenDAO.getCanteenByName(canteenName);
+           
+            Stall newStall = new Stall(stallName, contactNumber, canteen, null, null);
+         //   stallList.add(newStall);
+            canteenDAO.addStallToCanteen(canteen, newStall);
+            saveStall(newStall);
+        }
+	}
 	
 }

@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -64,11 +65,13 @@ public class CanteenDAO {
 	
 	public Stall getStallFromCanteen(String canteenName, String stallName) {
 		Canteen c = getCanteenByName(canteenName);
-		Set<Stall> stallList = c.getStallList();
-		System.out.println(stallList);
-		for (Stall s : stallList) {
-			if (s.getName().equals(stallName)) {
-				return s;
+		if (c != null) {
+			Set<Stall> stallList = c.getStallList();
+			System.out.println(stallList);
+			for (Stall s : stallList) {
+				if (s.getName().equals(stallName)) {
+					return s;
+				}
 			}
 		}
 		
@@ -89,5 +92,19 @@ public class CanteenDAO {
 	// Delete Canteen from the DB
 	public void deleteCanteen(Canteen c) {
 		MyConnection.delete(c);
+	}
+	
+	
+	public void loadCanteenData(List<String[]> content) {
+		Iterator iter = content.iterator();
+        iter.next();
+        while (iter.hasNext()) {
+            String[] row = (String[]) iter.next();
+            String canteenName = row[0].trim();
+            String address = row[1].trim();
+            
+			Canteen newCanteen = new Canteen(canteenName, address, null);
+			saveCanteen(newCanteen);
+        }
 	}
 }
