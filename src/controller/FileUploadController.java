@@ -264,7 +264,7 @@ public class FileUploadController {
             String price = row[2].trim();
             if (price.isEmpty()) {
             	errorList.add("row " + rowNumber + " has empty price in Modifier.csv");
-            } else if (price.matches("[0-9]|[0-9].[0-9]|[0-9][0-9]|[0-9][0-9].[0-9]|[0-9][0-9].[0-9][0-9]")) {
+            } else if (!price.matches("[0-9]|[0-9].[0-9]|[0-9][0-9]|[0-9][0-9].[0-9]|[0-9][0-9].[0-9][0-9]")) {
             	errorList.add("row " + rowNumber + " has invalid price value in Modifier.csv");
             }
            
