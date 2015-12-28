@@ -13,8 +13,6 @@ import connection.MyConnection;
 
 public class StallDAO {
 
-	CanteenDAO canteenDAO = new CanteenDAO();
-	FoodDAO foodDAO = new FoodDAO();
 	
 	// Retrieve Stall from DB with stallID
 	public Stall getStall(int stallId) {
@@ -46,6 +44,9 @@ public class StallDAO {
 	}
 	
 	public void loadStallData(List<String[]> content) {
+
+		CanteenDAO canteenDAO = new CanteenDAO();
+		FoodDAO foodDAO = new FoodDAO();
 		Canteen canteen = null;
 		Iterator iter = content.iterator();
         iter.next();
