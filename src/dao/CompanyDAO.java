@@ -10,8 +10,24 @@ import org.hibernate.criterion.DetachedCriteria;
 
 import connection.MyConnection;
 
+/**
+ * Performs the function of Data Access Object for the Company model
+ * 
+ *
+ */
 public class CompanyDAO {
-
+	
+	/**
+	 * Creates a default constructor for CompanyDAO
+	 */
+	public CompanyDAO() {
+		
+	}
+	/**
+	 * Retrieves the Company based on the provided ID
+	 * @param companyId The ID used for retrieving the Company
+	 * @return The Company object that has the provided ID
+	 */
 	public Company getCompany(int companyId) {
 		return (Company) MyConnection.get(Company.class, companyId);
 	}

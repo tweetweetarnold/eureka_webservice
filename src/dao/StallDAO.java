@@ -11,29 +11,63 @@ import java.util.Set;
 
 import connection.MyConnection;
 
+/**
+ * Performs the function of Data Access Object for the Stall model
+ * 
+ *
+ */
 public class StallDAO {
 
+	/**
+	 * Creates a default constructor for StallDAO
+	 */
+	public StallDAO() {
+		
+	}
 	
-	// Retrieve Stall from DB with stallID
+	/**
+	 * Retrieves the Stall based on the provided ID
+	 * 
+	 * @param stallId The ID used for retrieving the Stall
+	 * @return The Stall object that has the provided ID
+	 */
 	public Stall getStall(int stallId) {
 		return (Stall) MyConnection.get(Stall.class, stallId);
 	}
 
-	// Save new Stall in DB
+	/**
+	 * Adds a new Stall object to the database
+	 * 
+	 * @param h The Stall object to be added in
+	 */
 	public void saveStall(Stall h) {
 		MyConnection.save(h);
 	}
 
-	// Update existing Stall in DB
+	/**
+	 * Updates the designated Stall object in the database
+	 * 
+	 * @param h The Stall object to be updated
+	 */
 	public void updateStall(Stall h) {
 		MyConnection.update(h);
 	}
 
-	// Delete Stall from DB
+	/**
+	 * Removes the designated Stall object from the database
+	 * 
+	 * @param h The Stall object to be removed
+	 */
 	public void deleteStall(Stall h) {
 		MyConnection.delete(h);
 	}
 	
+	/**
+	 * Add a new Food to the designated Stall
+	 * 
+	 * @param s The designated Stall to add the Food
+	 * @param f The Food to be added
+	 */
 	public void addFoodToStall(Stall s, Food f) {
 		Set<Food> foodList = s.getFoodList();
 		if (foodList == null) {
@@ -43,6 +77,11 @@ public class StallDAO {
 		updateStall(s);
 	}
 	
+	/**
+	 * Load the validated content of the Stall.csv into the database
+	 * 
+	 * @param content The list of Stall data to be loaded into the database
+	 */
 	public void loadStallData(List<String[]> content) {
 
 		CanteenDAO canteenDAO = new CanteenDAO();

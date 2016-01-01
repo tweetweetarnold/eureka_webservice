@@ -13,28 +13,64 @@ import model.FoodOrder;
 import model.OrderWindow;
 import connection.MyConnection;
 
+/**
+ * Performs the function of Data Access Object 
+ * for the FoodOrder model
+ * 
+ *
+ */
 public class FoodOrderDAO {
 
-	// Retrieve FoodOrder from the DB with foodOrderID
+	/**
+	 * Creates a default constructor for FoodOrderDAO
+	 */
+	public FoodOrderDAO() {
+		
+	}
+	
+	/**
+	 * Retrieve the FoodOrder based on the provided ID
+	 * 
+	 * @param foodOrderId The ID used for retrieving the FoodOrder
+	 * @return The FoodOrder object that has the provided ID
+	 */
 	public FoodOrder getFoodOrder(int foodOrderId) {
 		return (FoodOrder) MyConnection.get(FoodOrder.class, foodOrderId);
 	}
 
-	// Save new FoodOrder to DB
+	/**
+	 * Adds a new FoodOrder object to the database
+	 * 
+	 * @param f The FoodOrder object to be added in
+	 */
 	public void saveFoodOrder(FoodOrder f) {
 		MyConnection.save(f);
 	}
 
-	// Update existing FoodOrder in DB
+	/**
+	 * Updates the designated FoodOrder object in the database
+	 * 
+	 * @param f The FoodOrder object to be updated
+	 */
 	public void updateFoodOrder(FoodOrder f) {
 		MyConnection.update(f);
 	}
 
-	// Delete FoodOrder from DB
+	/**
+	 * Removes the designated FoodOrder object from the database
+	 * 
+	 * @param f The FoodOrder object to be removed
+	 */
 	public void deleteFoodOrder(FoodOrder f) {
 		MyConnection.delete(f);
 	}
 
+	/**
+	 * Retrieves the FoodOrder set of an Employee
+	 * 
+	 * @param employee The designated Employee to retrieve the FoodOrder set
+	 * @return The List of FoodOrder set of the designated Employee
+	 */
 	public List<FoodOrder> getFoodOrderSet(Employee employee) {
 		List<FoodOrder> returnList = new ArrayList<>();
 
@@ -49,6 +85,13 @@ public class FoodOrderDAO {
 
 	// Retrive FoodOrders from the DB between two datetimes with format
 	// "yyyy-MM-dd hh:mm:ss"
+	/**
+	 * Retrieve FoodOrders from the database that falls between two provided Dates (in "yyyy-MM-dd hh:mm:ss")
+	 * 
+	 * @param past The starting Date of the range
+	 * @param present The ending Date of the range
+	 * @return The List of FoodOrders that falls between the two provided Dates
+	 */
 	public List<FoodOrder> getFoodOrderByDate(Date past, Date present) {
 		List<FoodOrder> returnList = new ArrayList<>();
 		List<Object> lister = MyConnection.getFoodOrderBetween(past, present);
@@ -59,7 +102,16 @@ public class FoodOrderDAO {
 		}
 		return returnList;
 	}
-
+	
+	/**
+	 * Retrieves the FoodOrder based on the provided Dates and Employee
+	 * 
+	 * @param earlierDate The starting range of the Date
+	 * @param laterDate The ending range of the Date
+	 * @param tempEmployee The designated Employee for retrieving the FoodOrder
+	 * @return An ArrayList of FoodOrder objects that belongs to the Employee 
+	 * and falls within the provided Dates
+	 */
 	public ArrayList<FoodOrder> getFoodOrderByDateUsername(Date earlierDate, Date laterDate,
 			Employee tempEmployee) {
 
@@ -73,7 +125,13 @@ public class FoodOrderDAO {
 		}
 		return returnList;
 	}
-
+	
+	/**
+	 * Retrieve all FoodOrders based on the provided OrderWindow
+	 * 
+	 * @param orderWindow The provided OrderWindow for retrieving all FoodOrders
+	 * @return An ArrayList of FoodOrder that is under the provided OrderWindow
+	 */
 	public ArrayList<FoodOrder> getAllFoodOrderOfOrderWindow(OrderWindow orderWindow) {
 		ArrayList<FoodOrder> returnList = new ArrayList<FoodOrder>();
 
