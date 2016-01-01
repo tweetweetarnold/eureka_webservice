@@ -192,6 +192,11 @@
 									<c:when test="${fn:contains(modifierChosen.name, 'Upsize')}">
 										<c:set var="modifiedFoodName" value="${modifiedFoodName} with Upsize" />
 									</c:when>
+									
+									<c:when test="${fn:contains(modifierChosen.name, 'juice')}">
+										<c:set var="modifiedFoodName" value="${modifiedFoodName} juice" />
+									</c:when>
+									
 									<c:otherwise>
 										<c:set var="modifiedFoodName" value="${modifiedFoodName} with ${modifierChosen.name}" />
 									</c:otherwise>
