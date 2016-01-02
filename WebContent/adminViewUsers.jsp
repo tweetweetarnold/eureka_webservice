@@ -69,25 +69,40 @@
 			<div class="row">
 				<div class="col-lg-12">
 
+					<b>Total users:</b>
+					${fn:length(sessionScope.userMgmtView)}
+					<br>
+					<br>
+
 					<div class="dataTable_wrapper">
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
 									<th>Company</th>
+									<th>Name</th>
 									<th>Email</th>
 									<th>Date Joined</th>
-									<th>Outstanding Payment ($)</th>
-									<th>Price ($)</th>
+									<th>O/S</th>
+									<th>Status</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-								</tr>
+								<c:forEach items="${sessionScope.userMgmtView}" var="user">
+									<tr>
+										<td>${user.company.name}</td>
+										<td>${user.name}</td>
+										<td>${user.email}</td>
+										<td>${user.createDate}</td>
+										<td>
+											$
+											<fmt:formatNumber value="${user.amountOwed}" var="amt" minFractionDigits="2" />${amt}</td>
+										<td>${user.status}</td>
+										<td>
+											<a href="#">View Order History</a>
+										</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -99,25 +114,26 @@
 			<!-- /.row -->
 
 		</div>
-		<!-- /#wrapper -->
+	</div>
+	<!-- /#wrapper -->
 
 
-		<!-- jQuery -->
-		<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- jQuery -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
 
-		<!-- Bootstrap Core JavaScript -->
-		<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-		<!-- Metis Menu Plugin JavaScript -->
-		<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+	<!-- Metis Menu Plugin JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-		<!-- Morris Charts JavaScript -->
-		<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
-		<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
-		<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
+	<!-- Morris Charts JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
+	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
+	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 
-		<!-- Custom Theme JavaScript -->
-		<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+	<!-- Custom Theme JavaScript -->
+	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 </body>
 
 </html>

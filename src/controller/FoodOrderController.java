@@ -287,7 +287,7 @@ public class FoodOrderController {
 					if (f.equals2(i)) {
 						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
 					}
-					for(String s : usernames){
+					for (String s : usernames) {
 						Employee tempEmployee = employeeDAO.getEmployeeByEmail(s);
 						employees.add(tempEmployee);
 					}
@@ -360,6 +360,7 @@ public class FoodOrderController {
 			// key in (A)
 			// else create a new Stall Key in (A)
 			for (FoodOrderItem foodItem : tempFoodOrderItem) {
+
 				FoodOrderItem foodItemd = foodItem;
 				Food tempFood = foodItemd.getFood();
 				Stall tempStall = tempFood.getStall();
@@ -368,6 +369,7 @@ public class FoodOrderController {
 				ArrayList<String> tempUserList = new ArrayList<String>();
 				tempUserList.add(tempFoodOrder.getEmployee().getEmail());
 				String stallName = tempStall.getName();
+
 				if (!stallToFoodItemLinkedHash.containsKey(stallName)) {
 					stallToFoodItemLinkedHash.put(stallName, tempFoodOrderItemList);
 				} else {
@@ -398,8 +400,7 @@ public class FoodOrderController {
 			HashMap<Integer, Integer> quantityForFoodOrderItem = new HashMap<Integer, Integer>();
 			ArrayList<FoodOrderItem> uniqueFoodOrderItem = new ArrayList<FoodOrderItem>();
 			// this loops Through the foodOrderItems in (AA) in order to take
-			// out the unique
-			// FoodOrderItems and stores them in UniqueFoodOrderItem
+			// out the unique FoodOrderItems and stores them in UniqueFoodOrderItem
 			for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 				Iterator iterator = uniqueFoodOrderItem.iterator();
 				int equalCount = 0;
@@ -440,21 +441,21 @@ public class FoodOrderController {
 			for (FoodOrderItem f : uniqueFoodOrderItems) {
 				HashSet<String> usernames = new HashSet<String>();
 				HashSet<Employee> employees = new HashSet<Employee>();
- 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
+				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 					if (f.equals2(i)) {
 						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
 						usernames.add(tempUsername);
 					}
-//					usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<String>(
-//							usernames));
+					// usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<String>(
+					// usernames));
 				}
-				
-				for(String s : usernames){
+
+				for (String s : usernames) {
 					Employee tempEmployee = employeeDAO.getEmployeeByEmail(s);
 					employees.add(tempEmployee);
 				}
-				usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<Employee>(
-						employees));
+				usernamesForFoodItem
+						.put(f.getFoodOrderItemId(), new ArrayList<Employee>(employees));
 			}
 			// Populating the price for the FoodOrderItem
 			HashMap<Integer, Double> foodOrderItemPrices = new HashMap<Integer, Double>();
@@ -583,30 +584,30 @@ public class FoodOrderController {
 		}
 	}
 
-	public HashMap<String, ArrayList<FoodOrderItem>> getAllFoodOrderOfOrderWindow(
+	public HashMap<Employee, ArrayList<FoodOrderItem>> getAllFoodOrderOfOrderWindow(
 			OrderWindow orderWindow) {
 		// get all orders made today
 		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getAllFoodOrderOfOrderWindow(orderWindow);
 		// hashmap for return later
-		HashMap<String, ArrayList<FoodOrderItem>> map = new HashMap<String, ArrayList<FoodOrderItem>>();
+		HashMap<Employee, ArrayList<FoodOrderItem>> map = new HashMap<Employee, ArrayList<FoodOrderItem>>();
 
 		// iterate through each foodorder from tempfoodorderlist and add it into
 		// hashmap. if already have record of existing user, add to that same list
 		for (FoodOrder o : tempFoodOrderList) {
-			String email = o.getEmployee().getEmail();
+			Employee emp = o.getEmployee();
 
 			// check if entry exists. if not, create new arraylist and add into map
-			ArrayList<FoodOrderItem> tempItems = map.get(email);
+			ArrayList<FoodOrderItem> tempItems = map.get(emp.getEmail());
 			if (tempItems == null) {
 				tempItems = new ArrayList<FoodOrderItem>();
 			}
 			tempItems.addAll(o.getFoodOrderList());
-			map.put(email, tempItems);
+			map.put(emp, tempItems);
 		}
 
-		Iterator iter = map.keySet().iterator();
+		Iterator<Employee> iter = map.keySet().iterator();
 		while (iter.hasNext()) {
-			String key = (String) iter.next();
+			Employee key = iter.next();
 			List<FoodOrderItem> foodOrderItemList = map.get(key);
 			ArrayList<FoodOrderItem> foodOrderItemListReturn = new ArrayList<FoodOrderItem>(
 					incrementQuantityFoodOrderItem(foodOrderItemList));

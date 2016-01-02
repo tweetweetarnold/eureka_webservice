@@ -13,19 +13,19 @@ import connection.MyConnection;
 /**
  * Performs the function of Data Access Object for Food model
  * 
- *
+ * 
  */
 public class FoodDAO {
 	CanteenDAO canteenDAO = new CanteenDAO();
 	StallDAO stallDAO = new StallDAO();
-	
+
 	/**
 	 * Creates a default constructor for FoodDAO
 	 */
 	public FoodDAO() {
-		
+
 	}
-	
+
 	/**
 	 * Retrieves the Food based on the provided ID
 	 * 
@@ -44,7 +44,7 @@ public class FoodDAO {
 	public void saveFood(Food f) {
 		MyConnection.save(f);
 	}
-	
+
 	/**
 	 * Updates the designated Food object in the database
 	 * 
@@ -62,16 +62,16 @@ public class FoodDAO {
 	public void deleteFood(Food f) {
 		MyConnection.delete(f);
 	}
-	
+
 	/**
 	 * Retrieves the Food from the FoodList based on the provided Food name
 	 * 
-	 * @param foodList The list of food 
+	 * @param foodList The list of food
 	 * @param foodName The name of the Food
-	 * @return The Food object from the FoodList which has the provided food name,
-	 * otherwise, returns null
+	 * @return The Food object from the FoodList which has the provided food name, otherwise,
+	 *         returns null
 	 */
-	public Food getFoodFromFoodList(Set<Food>foodList, String foodName) {
+	public Food getFoodFromFoodList(Set<Food> foodList, String foodName) {
 		for (Food f : foodList) {
 			if (f.getName().equals(foodName)) {
 				return f;
@@ -79,24 +79,23 @@ public class FoodDAO {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Retrieves the Food from the Stall and Canteen based on the provided food name
 	 * 
 	 * @param foodName The name of the Food
 	 * @param stallName The name of the Stall
 	 * @param canteenName The name of the Canteen
-	 * @return The Food object from the Stall and 
-	 * Canteen that has the provided food name,
-	 * otherwise returns null
+	 * @return The Food object from the Stall and Canteen that has the provided food name, otherwise
+	 *         returns null
 	 */
 	public Food getFoodFromStallAndCanteen(String foodName, String stallName, String canteenName) {
 		Stall s = canteenDAO.getStallFromCanteen(canteenName, stallName);
 		Set<Food> foodList = s.getFoodList();
 		return getFoodFromFoodList(foodList, foodName);
-		
+
 	}
-	
+
 	/**
 	 * Adds new Modifier to the designated Food
 	 * 
@@ -105,12 +104,12 @@ public class FoodDAO {
 	 */
 	public void addModifierToFood(Modifier m, Food f) {
 		Set<Modifier> modifierList = f.getModifierList();
-		
+
 		modifierList.add(m);
 		updateFood(f);
-		
+
 	}
-	
+
 	/**
 	 * Load the validated content of the Food.csv into the database
 	 * 
@@ -118,48 +117,48 @@ public class FoodDAO {
 	 */
 	public void loadFoodData(List<String[]> content) {
 		Iterator iter = content.iterator();
-        iter.next();
-        while (iter.hasNext()) {
-            String[] row = (String[]) iter.next();
-            String foodName = row[0].trim();
-            String price = row[1].trim();
-            double priceValue = Double.parseDouble(price);
-            String description = row[2].trim();
-           
-            String stallName = row[3].trim();
-            String canteenName = row[4].trim();
-            
-            System.out.println(stallName);
-            Stall stall = canteenDAO.getStallFromCanteen(canteenName, stallName);
-            System.out.println(stall);
-            Food newFood = new Food(foodName, description, priceValue, null, stall);
-            
-            //adds Food to the Stall's foodList
-            stallDAO.addFoodToStall(stall, newFood);
-            //adds new Food in DB
-            saveFood(newFood);
+		iter.next();
+		while (iter.hasNext()) {
+			String[] row = (String[]) iter.next();
+			String foodName = row[0].trim();
+			String price = row[1].trim();
+			double priceValue = Double.parseDouble(price);
+			String description = row[2].trim();
 
-        }
+			String stallName = row[3].trim();
+			String canteenName = row[4].trim();
+
+			System.out.println(stallName);
+			Stall stall = canteenDAO.getStallFromCanteen(canteenName, stallName);
+			System.out.println(stall);
+			Food newFood = new Food(foodName, description, priceValue, null, stall);
+
+			// adds Food to the Stall's foodList
+			stallDAO.addFoodToStall(stall, newFood);
+			// adds new Food in DB
+			saveFood(newFood);
+
+		}
 	}
-	
+
 	/**
 	 * Retrieves the Modifier from the Food based on the provided modifier name
 	 * 
 	 * @param modifierName The name of the Modifier
 	 * @param f The designated Food for retrieving the Modifier
-	 * @return The Modifier object from the Food that has the provided modifier name,
-	 * otherwise, returns null
+	 * @return The Modifier object from the Food that has the provided modifier name, otherwise,
+	 *         returns null
 	 */
 	public Modifier getModifierFromFood(String modifierName, Food f) {
 		Set<Modifier> modifierList = f.getModifierList();
-		for(Modifier m : modifierList) {
+		for (Modifier m : modifierList) {
 			if (m.getName().equals(modifierName)) {
 				return m;
 			}
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Load the validated content of the Modifier.csv into the database
 	 * 
@@ -167,22 +166,22 @@ public class FoodDAO {
 	 */
 	public void loadModifierData(List<String[]> content) {
 		Iterator iter = content.iterator();
-        iter.next();
-        while (iter.hasNext()) {
-            String[] row = (String[]) iter.next();
-            String modifierName = row[0].trim();
-            String description = row[1].trim();
-            String price = row[2].trim();
-            double priceValue = Double.parseDouble(price);
-           
-            String foodName = row[3].trim();
-            String stallName = row[4].trim();
-            String canteenName = row[5].trim();
-            
-            Food food = getFoodFromStallAndCanteen(foodName, stallName, canteenName);
-            Modifier newModifier = new Modifier(modifierName, description, priceValue, food);
-            
-            addModifierToFood(newModifier, food);
-        }
+		iter.next();
+		while (iter.hasNext()) {
+			String[] row = (String[]) iter.next();
+			String modifierName = row[0].trim();
+			String description = row[1].trim();
+			String price = row[2].trim();
+			double priceValue = Double.parseDouble(price);
+
+			String foodName = row[3].trim();
+			String stallName = row[4].trim();
+			String canteenName = row[5].trim();
+
+			Food food = getFoodFromStallAndCanteen(foodName, stallName, canteenName);
+			Modifier newModifier = new Modifier(modifierName, description, priceValue, food);
+
+			addModifierToFood(newModifier, food);
+		}
 	}
 }

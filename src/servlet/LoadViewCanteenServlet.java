@@ -1,9 +1,8 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,22 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Company;
-import controller.CompanyController;
+import model.Canteen;
+import controller.CanteenController;
 
 /**
- * Servlet implementation class RetrieveBuildingsServlet
+ * Servlet implementation class LoadViewCanteenServlet
  */
-@WebServlet("/RetrieveDeliveryPointsServlet")
-public class RetrieveDeliveryPointsServlet extends HttpServlet {
+@WebServlet("/LoadViewCanteenServlet")
+public class LoadViewCanteenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	CompanyController companyController = new CompanyController();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public RetrieveDeliveryPointsServlet() {
+	public LoadViewCanteenServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -46,21 +43,14 @@ public class RetrieveDeliveryPointsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
 		HttpSession session = request.getSession();
+		CanteenController canteenController = new CanteenController();
 
-		String companyCode = (String) session.getAttribute("companyCode");
-		System.out.println("Company code: " + companyCode);
+		ArrayList<Canteen> list = canteenController.getAllCanteens();
+		session.setAttribute("canteenList", list);
 
-		Company company = companyController.getCompanyByCompanyCode(companyCode);
-		Set<String> buildingSet = company.getDeliveryPointSet();
-		System.out.println("Building size: " + buildingSet.size());
-
-		session.removeAttribute("companyCode");
-
-		RequestDispatcher rd = request.getRequestDispatcher("defaultDeliveryPoint.jsp");
-		request.setAttribute("buildingSet", buildingSet);
-		rd.forward(request, response);
-
+		response.sendRedirect("adminViewCanteens.jsp");
 	}
 
 }

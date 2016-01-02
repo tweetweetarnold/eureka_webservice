@@ -34,9 +34,9 @@ public class Food {
 	private Stall stall;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<Modifier> modifierList;
-	
+
 	private String weatherConditions;
-	
+
 	public String getWeatherConditions() {
 		return weatherConditions;
 	}
@@ -57,7 +57,7 @@ public class Food {
 		this.imageDirectory = imageDirectory;
 		this.createDate = new Date();
 		this.modifierList = new HashSet<>();
-		this.weatherConditions="default";
+		this.weatherConditions = "default";
 	}
 
 	public String getImageDirectory() {
@@ -136,15 +136,10 @@ public class Food {
 			if (this.stall.getName().equals(otherFood.getStall().getName())) {
 				if (this.name.equals(otherFood.getName())) {
 					return true;
-				} else {
-					return false;
 				}
-			} else {
-				return false;
 			}
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 }

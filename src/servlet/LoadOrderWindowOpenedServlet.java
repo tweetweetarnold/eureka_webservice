@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Employee;
 import model.FoodDisplayObject;
 import model.FoodOrderItem;
 import model.OrderWindow;
-import value.StringValues;
 import controller.FoodOrderController;
 import controller.OrderWindowController;
 
@@ -58,7 +58,7 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 
 			for (OrderWindow window : openedWindowList) {
 				Object[] arr = new Object[2];
-				HashMap<String, ArrayList<FoodOrderItem>> noGroup = foodOrderController
+				HashMap<Employee, ArrayList<FoodOrderItem>> noGroup = foodOrderController
 						.getAllFoodOrderOfOrderWindow(window);
 				ArrayList<FoodDisplayObject> groupedByStall = foodOrderController
 						.getAllFoodOrderOfOrderWindowGroupedByStall(window);
@@ -69,21 +69,6 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 			}
 
 			session.setAttribute("orderWindowMap", map);
-
-			// OrderWindow window = orderWindowController.getOrderWindow(1); // TODO
-			//
-			// HashMap<String, ArrayList<FoodOrderItem>> list1 = foodOrderController
-			// .getAllFoodOrderOfOrderWindow(window);
-			// System.out.println("listsize 1: " + list1.size());
-			//
-			// session.setAttribute(StringValues.SESSION_ORDERS_WINDOW_OPENED_NOGROUP, list1);
-			//
-			// ArrayList<FoodDisplayObject> list2 = foodOrderController
-			// .getAllFoodOrderOfOrderWindowGroupedByStall(window);
-			// System.out.println("listsize 2: " + list2.size());
-			//
-			// session.setAttribute(StringValues.SESSION_ORDERS_WINDOW_OPENED_STALLS, list2);
-
 			response.sendRedirect("adminFoodOrders.jsp");
 
 		} catch (Exception e) {
