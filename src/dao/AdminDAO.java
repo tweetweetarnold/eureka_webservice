@@ -12,13 +12,34 @@ import org.hibernate.criterion.Restrictions;
 
 import connection.MyConnection;
 
+/**
+ * Performs the function of Data Access Object for the Admin model
+ * 
+ *
+ */
 public class AdminDAO {
-
-	// retrieve Admin from the DB with adminId
+	
+	/**
+	 * Creates a default constructor for AdminDAO
+	 */
+	public AdminDAO() {
+		
+	}
+	
+	/**
+	 * Retrieve the Admin based on the provided ID
+	 * @param adminId The ID used for retrieving the Admin
+	 * @return The Admin object that has the provided ID
+	 */
 	public Admin getAdmin(int adminId) {
 		return (Admin) MyConnection.get(Admin.class, adminId);
 	}
-
+	
+	/**
+	 * Retrieve the Admin based on the provided username
+	 * @param username The username of the Admin
+	 * @return The Admin object that has the provided username
+	 */
 	public Admin getAdminByUsername(String username) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Admin.class);
 		dc.add(Restrictions.eq("username", username));
@@ -31,6 +52,11 @@ public class AdminDAO {
 
 	// getting the list of payment that is based on the input parameter (i.e
 	// "owed")
+	/**
+	 * Retrieve the list outstanding payments based on the provided payment status
+	 * @param paymentOwedStatus The payment status
+	 * @return The List of Employee objects whom still have outstanding payments
+	 */
 	public List<Employee> getListOfOwedPayment(String paymentOwedStatus) {
 		List<Employee> returnList = new ArrayList<>();
 
@@ -43,17 +69,29 @@ public class AdminDAO {
 		return returnList;
 	}
 
-	// Save Admin to the DB
+	/**
+	 * Adds a new Admin object to the database
+	 * 
+	 * @param d The Admin object to be added in
+	 */
 	public void saveAdmin(Admin d) {
 		MyConnection.save(d);
 	}
 
-	// Update Admin in the DB
+	/**
+	 * Updates the designated Admin object in the database
+	 * 
+	 * @param d The Admin object to be updated
+	 */
 	public void updateAdmin(Admin d) {
 		MyConnection.update(d);
 	}
 
-	// Delete Admin from the DB
+	/**
+	 * Removes the designated Admin object from the database
+	 * 
+	 * @param d The Admin object to be removed
+	 */
 	public static void deleteAdmin(Admin d) {
 		MyConnection.delete(d);
 	}

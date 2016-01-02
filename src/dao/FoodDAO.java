@@ -10,30 +10,67 @@ import java.util.Set;
 
 import connection.MyConnection;
 
+/**
+ * Performs the function of Data Access Object for Food model
+ * 
+ * 
+ */
 public class FoodDAO {
 	CanteenDAO canteenDAO = new CanteenDAO();
 	StallDAO stallDAO = new StallDAO();
 
-	// Retrieve Food from the DB with foodID
+	/**
+	 * Creates a default constructor for FoodDAO
+	 */
+	public FoodDAO() {
+
+	}
+
+	/**
+	 * Retrieves the Food based on the provided ID
+	 * 
+	 * @param foodId The ID used for retrieving the Food
+	 * @return The Food object that has the provided ID
+	 */
 	public Food getFood(int foodId) {
 		return (Food) MyConnection.get(Food.class, foodId);
 	}
 
-	// Save new Food in the DB
+	/**
+	 * Adds a new Food object to the database
+	 * 
+	 * @param f The Food object to be added in
+	 */
 	public void saveFood(Food f) {
 		MyConnection.save(f);
 	}
 
-	// Update existing Food in the DB
+	/**
+	 * Updates the designated Food object in the database
+	 * 
+	 * @param f The Food object to be updated
+	 */
 	public void updateFood(Food f) {
 		MyConnection.update(f);
 	}
 
-	// Delete Food from the DB
+	/**
+	 * Removes the designated Food object from the database
+	 * 
+	 * @param f The Food object to be removed
+	 */
 	public void deleteFood(Food f) {
 		MyConnection.delete(f);
 	}
 
+	/**
+	 * Retrieves the Food from the FoodList based on the provided Food name
+	 * 
+	 * @param foodList The list of food
+	 * @param foodName The name of the Food
+	 * @return The Food object from the FoodList which has the provided food name, otherwise,
+	 *         returns null
+	 */
 	public Food getFoodFromFoodList(Set<Food> foodList, String foodName) {
 		for (Food f : foodList) {
 			if (f.getName().equals(foodName)) {
@@ -43,6 +80,15 @@ public class FoodDAO {
 		return null;
 	}
 
+	/**
+	 * Retrieves the Food from the Stall and Canteen based on the provided food name
+	 * 
+	 * @param foodName The name of the Food
+	 * @param stallName The name of the Stall
+	 * @param canteenName The name of the Canteen
+	 * @return The Food object from the Stall and Canteen that has the provided food name, otherwise
+	 *         returns null
+	 */
 	public Food getFoodFromStallAndCanteen(String foodName, String stallName, String canteenName) {
 		Stall s = canteenDAO.getStallFromCanteen(canteenName, stallName);
 		Set<Food> foodList = s.getFoodList();
@@ -50,6 +96,12 @@ public class FoodDAO {
 
 	}
 
+	/**
+	 * Adds new Modifier to the designated Food
+	 * 
+	 * @param m The Modifier to be added
+	 * @param f The designated Food to add the Modifier
+	 */
 	public void addModifierToFood(Modifier m, Food f) {
 		Set<Modifier> modifierList = f.getModifierList();
 
@@ -58,6 +110,11 @@ public class FoodDAO {
 
 	}
 
+	/**
+	 * Load the validated content of the Food.csv into the database
+	 * 
+	 * @param content The list of Food data to be loaded into the database
+	 */
 	public void loadFoodData(List<String[]> content) {
 		Iterator iter = content.iterator();
 		iter.next();
@@ -84,6 +141,14 @@ public class FoodDAO {
 		}
 	}
 
+	/**
+	 * Retrieves the Modifier from the Food based on the provided modifier name
+	 * 
+	 * @param modifierName The name of the Modifier
+	 * @param f The designated Food for retrieving the Modifier
+	 * @return The Modifier object from the Food that has the provided modifier name, otherwise,
+	 *         returns null
+	 */
 	public Modifier getModifierFromFood(String modifierName, Food f) {
 		Set<Modifier> modifierList = f.getModifierList();
 		for (Modifier m : modifierList) {
@@ -94,6 +159,11 @@ public class FoodDAO {
 		return null;
 	}
 
+	/**
+	 * Load the validated content of the Modifier.csv into the database
+	 * 
+	 * @param content The list of Modifier data to be loaded into the database
+	 */
 	public void loadModifierData(List<String[]> content) {
 		Iterator iter = content.iterator();
 		iter.next();

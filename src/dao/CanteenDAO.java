@@ -16,9 +16,25 @@ import org.hibernate.criterion.Restrictions;
 
 import connection.MyConnection;
 
+/**
+ * Performs the function of Data Access Object for the Canteen model
+ * 
+ *
+ */
 public class CanteenDAO {
-
-	// Retrieve all Canteens from the DB
+	
+	/**
+	 * Creates a default constructor for CanteenDAO
+	 */
+	public CanteenDAO() {
+		
+	}
+	
+	/**
+	 * Retrieves all the Canteens from the Database
+	 * 
+	 * @return An ArrayList of Canteen objects
+	 */
 	public ArrayList<Canteen> getAllCanteens() {
 		ArrayList<Canteen> returnList = null;
 
@@ -35,25 +51,43 @@ public class CanteenDAO {
 		return returnList;
 	}
 	
-	// Retrieve Canteen from DB using canteen's name
-		public Canteen getCanteenByName(String canteenName) {
-			DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
-			dc.add(Restrictions.eq("name", canteenName));
-			dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+	
+	/**
+	 * Retrieve the Canteen based on the provided canteen name
+	 * 
+	 * @param canteenName The name of the Canteen
+	 * @return The Canteen object that has the provided canteen name
+	 */
+	public Canteen getCanteenByName(String canteenName) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
+		dc.add(Restrictions.eq("name", canteenName));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
-			List<Object> l = MyConnection.queryWithCriteria(dc);
-			if (l.size() == 0) {
-				return null;
-			}
-			return (Canteen) l.get(0);
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+		if (l.size() == 0) {
+			return null;
 		}
+		return (Canteen) l.get(0);
+	}
 
-	// Retrieve Canteen from the DB with canteenID
+	
+	/**
+	 * Retrieve the Canteen based on the provided ID
+	 * 
+	 * @param canteenId The ID used for retrieving the Canteen
+	 * @return The Canteen object that has the provided ID
+	 */
 	public Canteen getCanteen(int canteenId) {
 		return (Canteen) MyConnection.get(Canteen.class, canteenId);
 	}
 	
 	//Add Stall to the current StallList and update existing canteen
+	/**
+	 * Adds a new Stall to the Canteen
+	 * 
+	 * @param c The designated Canteen to add the Stall
+	 * @param s The Stall to be added to the Canteen
+	 */
 	public void addStallToCanteen(Canteen c, Stall s) {
 		Set<Stall> stallList = c.getStallList();
 		if (stallList == null) {
@@ -63,6 +97,14 @@ public class CanteenDAO {
 		updateCanteen(c);
 	}
 	
+	/**
+	 * Retrieve the Stall from the provided Canteen name and Stall name
+	 * 
+	 * @param canteenName The name of the Canteen
+	 * @param stallName The name of the Stall
+	 * @return The Stall object that has the provided Stall name 
+	 * and belongs to the provided Canteen name , otherwise returns null
+	 */
 	public Stall getStallFromCanteen(String canteenName, String stallName) {
 		Canteen c = getCanteenByName(canteenName);
 		if (c != null) {
@@ -78,23 +120,41 @@ public class CanteenDAO {
 		return null;
 		
 	}
-
-	// Save new Canteen into DB
+	
+	
+	/**
+	 * Adds a new Canteen object to the database
+	 * 
+	 * @param c The Canteen object to be added in
+	 */
 	public void saveCanteen(Canteen c) {
 		MyConnection.save(c);
 	}
 
-	// Update existing Canteen in the DB
+	
+	/**
+	 * Updates the designated Canteen object in the database
+	 * 
+	 * @param c The Canteen object to be updated
+	 */
 	public void updateCanteen(Canteen c) {
 		MyConnection.update(c);
 	}
 
-	// Delete Canteen from the DB
+	/**
+	 * Removes the designated Canteen object from the database
+	 * 
+	 * @param c The Canteen object to be removed
+	 */
 	public void deleteCanteen(Canteen c) {
 		MyConnection.delete(c);
 	}
 	
-	
+	/**
+	 * Load the validated content of the Canteen.csv into the database
+	 * 
+	 * @param content The list of Canteen data to be loaded into the database
+	 */
 	public void loadCanteenData(List<String[]> content) {
 		Iterator iter = content.iterator();
         iter.next();

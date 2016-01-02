@@ -14,23 +14,52 @@ import org.hibernate.criterion.Restrictions;
 
 import connection.MyConnection;
 
+/**
+ * Performs the function of Data Access Object for the OrderWindow model
+ * 
+ *
+ */
 public class OrderWindowDAO {
-
+	
+	/**
+	 * Creates a default constructor for OrderWindowDAO
+	 */
+	public OrderWindowDAO() {
+		
+	}
+	
+	/**
+	 * Retrieve the OrderWindow based on the provided ID
+	 * @param orderWindowId The ID used for retrieving the OrderWindow
+	 * @return The OrderWindow object that has the provided ID
+	 */
 	public OrderWindow getOrderWindow(int orderWindowId) {
 		return (OrderWindow) MyConnection.get(OrderWindow.class, orderWindowId);
 	}
 
-	// Save new OrderWindow to the DB
+	/**
+	 * Adds a new OrderWindow object to the database
+	 * 
+	 * @param w The OrderWindow object to be added in
+	 */
 	public void saveOrderWindow(OrderWindow w) {
 		MyConnection.save(w);
 	}
 
-	// Update existing Company in the DB
+	/**
+	 * Updates the designated OrderWindow object in the database
+	 * 
+	 * @param w The OrderWindow object to be updated
+	 */
 	public void updateOrderWindow(OrderWindow w) {
 		MyConnection.update(w);
 	}
 
-	// Delete Company from the DB
+	/**
+	 * Removes the designated OrderWindow object from the database
+	 * 
+	 * @param w The OrderWindow object to be removed
+	 */
 	public void deleteOrderWindow(OrderWindow w) {
 		MyConnection.delete(w);
 	}

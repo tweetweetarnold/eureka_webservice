@@ -9,7 +9,7 @@ public class FoodDisplayObject {
 	public String stallName;
 	public ArrayList<FoodOrderItem> foodOrderItemList = new ArrayList<FoodOrderItem>();
 	public HashMap<Integer, Integer> quantityList = new HashMap<Integer, Integer>();
-	public HashMap<Integer, ArrayList<String>> usernameList = new HashMap<Integer, ArrayList<String>>();
+	public HashMap<Integer, ArrayList<Employee>> usernameList = new HashMap<Integer, ArrayList<Employee>>();
 	public HashMap<Integer, Double> priceList = new HashMap<Integer, Double>();
 	public double totalPrice;
 
@@ -73,11 +73,11 @@ public class FoodDisplayObject {
 		this.quantityList = quantityList;
 	}
 
-	public HashMap<Integer, ArrayList<String>> getUsernameList() {
+	public HashMap<Integer, ArrayList<Employee>> getUsernameList() {
 		return usernameList;
 	}
 
-	public void setUsernameList(HashMap<Integer, ArrayList<String>> usernameList) {
+	public void setUsernameList(HashMap<Integer, ArrayList<Employee>> usernameList) {
 		this.usernameList = usernameList;
 	}
 
