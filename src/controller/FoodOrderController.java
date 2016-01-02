@@ -231,7 +231,7 @@ public class FoodOrderController {
 			// this (B)LinkedHashMap will store all the users who ordered the
 			// particular
 			// FoodOrderItem.
-			HashMap<Integer, ArrayList<String>> usernamesForFoodItem = new HashMap<Integer, ArrayList<String>>();
+			HashMap<Integer, ArrayList<Employee>> usernamesForFoodItem = new HashMap<Integer, ArrayList<Employee>>();
 			String stallName = (String) iter.next();
 			// (AA)This holds all the FoodOrderItems for the stall.
 			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash
@@ -282,15 +282,17 @@ public class FoodOrderController {
 			// Populating (B) (Users)
 			for (FoodOrderItem f : uniqueFoodOrderItems) {
 				HashSet<String> usernames = new HashSet<String>();
+				HashSet<Employee> employees = new HashSet<Employee>();
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 					if (f.equals2(i)) {
-						String tempUsername = i.getFoodOrder().getEmployee().getEmail() + " ("
-								+ i.getFoodOrder().getEmployee().getDefaultDeliveryPoint() + ")";
-						usernames.add(tempUsername);
+						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
 					}
-
-					usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<String>(
-							usernames));
+					for(String s : usernames){
+						Employee tempEmployee = employeeDAO.getEmployeeByEmail(s);
+						employees.add(tempEmployee);
+					}
+					usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<Employee>(
+							employees));
 				}
 			}
 			// Populating the price for the FoodOrderItem
@@ -386,7 +388,7 @@ public class FoodOrderController {
 			// this (B)LinkedHashMap will store all the users who ordered the
 			// particular
 			// FoodOrderItem.
-			HashMap<Integer, ArrayList<String>> usernamesForFoodItem = new HashMap<Integer, ArrayList<String>>();
+			HashMap<Integer, ArrayList<Employee>> usernamesForFoodItem = new HashMap<Integer, ArrayList<Employee>>();
 			String stallName = (String) iter.next();
 			// (AA)This holds all the FoodOrderItems for the stall.
 			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash
@@ -437,16 +439,22 @@ public class FoodOrderController {
 			// Populating (B) (Users)
 			for (FoodOrderItem f : uniqueFoodOrderItems) {
 				HashSet<String> usernames = new HashSet<String>();
-				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
+				HashSet<Employee> employees = new HashSet<Employee>();
+ 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 					if (f.equals2(i)) {
-						String tempUsername = i.getFoodOrder().getEmployee().getEmail() + " ("
-								+ i.getFoodOrder().getEmployee().getDefaultDeliveryPoint() + ")";
+						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
 						usernames.add(tempUsername);
 					}
-
-					usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<String>(
-							usernames));
+//					usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<String>(
+//							usernames));
 				}
+				
+				for(String s : usernames){
+					Employee tempEmployee = employeeDAO.getEmployeeByEmail(s);
+					employees.add(tempEmployee);
+				}
+				usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<Employee>(
+						employees));
 			}
 			// Populating the price for the FoodOrderItem
 			HashMap<Integer, Double> foodOrderItemPrices = new HashMap<Integer, Double>();
