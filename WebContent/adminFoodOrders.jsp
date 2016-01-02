@@ -83,10 +83,10 @@
 									aria-labelledby="heading${mapLoop.index }"
 								>
 									<div class="panel-body">
-										<b>ID:</b>
-										${window.windowId }.
-										<b>Canteen:</b>
-										${window.canteen.name }.
+										<b>Canteen / Window ID:</b>
+										${window.canteen.name } / ${window.windowId}
+										<br>
+										<br>
 
 										<!-- Nav tabs -->
 										<ul class="nav nav-tabs">
@@ -123,7 +123,9 @@
 															<c:forEach items="${noGroupList}" var="order" varStatus="loop">
 																<tr class="odd gradeX">
 																	<td rowspan="${fn:length(order.value) + 1}">${loop.index + 1}</td>
-																	<td rowspan="${fn:length(order.value) + 1}">${order.key}</td>
+																	<td rowspan="${fn:length(order.value) + 1}">
+																		<p title="${order.key.email}">${order.key.name}</p>
+																	</td>
 
 																	<c:forEach items="${order.value}" var="foodOrderItem">
 																		<tr>

@@ -20,9 +20,6 @@ public class Company {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int companyId;
 	private String name;
-	// @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy =
-	// "company")
-	// private Set<Employee> employeeList;
 	private String companyCode;
 	private Date createDate;
 	private Date cutoffTime;
@@ -37,7 +34,6 @@ public class Company {
 	public Company(String name, Date cutoffTime, Set<Canteen> canteenList, String companyCode) {
 		super();
 		this.name = name;
-		// this.employeeList = new HashSet<>();
 		this.createDate = new Date();
 		this.cutoffTime = cutoffTime;
 		this.canteenList = canteenList;
@@ -63,14 +59,6 @@ public class Company {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	// public Set<Employee> getEmployeeList() {
-	// return employeeList;
-	// }
-	//
-	// public void setEmployeeList(Set<Employee> employeeList) {
-	// this.employeeList = employeeList;
-	// }
 
 	public void setDeliveryPointSet(Set<String> deliveryPointSet) {
 		this.deliveryPointSet = deliveryPointSet;

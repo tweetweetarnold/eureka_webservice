@@ -32,14 +32,12 @@
 
 			<!-- User input -->
 			<label for="email" class="sr-only">Email</label>
-			<input type="email" name="email" class="form-control" placeholder="Email" value="${sessionScope.email}"
-				required
-			>
+			<input type="email" name="email" class="form-control" placeholder="Email" value="${sessionScope.email}" required>
 			<label for="password" class="sr-only">Password</label>
 			<input type="password" name="password" class="form-control" placeholder="Password" required>
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			
+
 			<br>
 			<div align="center">
 				<a href="registration.jsp">Register as a New User</a>
@@ -48,7 +46,7 @@
 				<a href="resetPassword.jsp">Forgot your password?</a>
 			</div>
 		</form>
-		
+
 
 		<!-- Error message handling -->
 		<c:if test="${not empty sessionScope.error}">
