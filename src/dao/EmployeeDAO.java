@@ -100,7 +100,14 @@ public class EmployeeDAO {
 		}
 		return returnList;
 	}
-
+	
+	/**
+	 * Retrieves all users with outstanding payment that are above the specified amount(inclusive)
+	 * 
+	 * @param amount The specified amount
+	 * @param inclusive Whether to include the specified amount
+	 * @return An ArrayList of users with outstanding payment that are greater than (or equals) to the specified amount
+	 */
 	public ArrayList<Employee> getAllUsersWithOutstandingPaymentAbove(double amount,
 			boolean inclusive) {
 		ArrayList<Employee> returnList = null;

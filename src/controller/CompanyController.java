@@ -66,7 +66,11 @@ public class CompanyController {
 	public Company getCompanyByCompanyCode(String companyCode) {
 		return companyDAO.getCompanyByCompanyCode(companyCode.toUpperCase());
 	}
-
+	
+	/**
+	 * Retrieve all the Companies from the database
+	 * @return An ArrayList of Company objects stored in the database
+	 */
 	public ArrayList<Company> getAllCompany() {
 		return companyDAO.getAllCompany();
 	}

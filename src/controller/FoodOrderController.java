@@ -22,11 +22,19 @@ import dao.EmployeeDAO;
 import dao.FoodOrderDAO;
 import dao.FoodOrderItemDAO;
 
+/**
+ * Process the business logic of managing the Food orders for the web application
+ * 
+ *
+ */
 public class FoodOrderController {
 	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
 	EmployeeDAO employeeDAO = new EmployeeDAO();
 	DateTime today = new DateTime();
-
+	
+	/**
+	 * Creates a default constructor for FoodOrderController
+	 */
 	public FoodOrderController() {
 	}
 
@@ -59,7 +67,7 @@ public class FoodOrderController {
 		return returnList;
 	}
 	/**
-	 * removes duplicate FoodOrderItems within a list of FoodOrders and increments the quantity parameter of duplicated FoodOrderItems
+	 * Removes duplicate FoodOrderItems within a list of FoodOrders and increments the quantity parameter of duplicated FoodOrderItems
 	 * 
 	 * @param foodOrderList A List of FoodOrder(s)
 	 * @return A cleaned list of FoodOrder(s) 
@@ -104,7 +112,7 @@ public class FoodOrderController {
 	}
 	
 	/**
-	 * removes duplicates within a list of FoodOrderItems and increments the quantity parameter of duplicated FoodOrderItems
+	 * Removes duplicates within a list of FoodOrderItems and increments the quantity parameter of duplicated FoodOrderItems
 	 * 
 	 * @param list a List of FoodOrderItem(s)
 	 * @return A cleaned list of FoodOrderItems with quantity incremented
@@ -143,6 +151,13 @@ public class FoodOrderController {
 	}
 
 	// Retrieve FoodOrders between earlierDate and laterDate
+	/**
+	 * Retrieve the FoodOrder(s) between the cut-off time
+	 * 
+	 * @param earlierDate The start of the cut-off time
+	 * @param laterDate The end of the cut-off time
+	 * @return An ArrayList of FoodOrder that are within the cut-off timing
+	 */
 	public List<FoodOrder> getFoodOrderBetweenCutOff(Date earlierDate, Date laterDate) {
 		return foodOrderDAO.getFoodOrderByDate(earlierDate, laterDate);
 	}

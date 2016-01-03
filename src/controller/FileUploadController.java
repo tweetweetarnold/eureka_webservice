@@ -19,14 +19,33 @@ import dao.CanteenDAO;
 import dao.FoodDAO;
 import dao.StallDAO;
 
+/**
+ * Process the functions of reading and validating csv files and load it into database
+ * 
+ *
+ */
 public class FileUploadController {
 	StallDAO stallDAO = new StallDAO();
 	CanteenDAO canteenDAO = new CanteenDAO();
 	FoodDAO foodDAO = new FoodDAO();
 	List<String[]> content = null;
 	ArrayList<String> errorsList = null;
-
-	public ArrayList<String> processStallUpload(InputStream is) throws Exception {
+	
+	/**
+	 * Creates a default constructor for FileUploadController
+	 */
+	public FileUploadController() {
+		
+	}
+	
+	/**
+	 * Handles the reading of the Stall.csv and load it to the database if there are no errors
+	 * 
+	 * @param is The contents of the Stall.csv to be read and loaded to database
+	 * @return An ArrayList of error(s) if Stall.csv contains errors,
+	 * otherwise returns an empty ArrayList
+	 */
+	public ArrayList<String> processStallUpload(InputStream is) {
 		System.out.println("PROCESS_STALL_FILEUPLOAD");
 
 		BufferedInputStream bis = new BufferedInputStream(is);
@@ -47,7 +66,14 @@ public class FileUploadController {
 		}
 		return errorsList;
 	}
-
+	
+	/**
+	 * Handles the reading of the Canteen.csv and load it to the database if there are no errors
+	 * 
+	 * @param is The contents of the Canteen.csv to be read and loaded to database
+	 * @return An ArrayList of error(s) if Canteen.csv contains errors,
+	 * otherwise returns an empty ArrayList
+	 */
 	public ArrayList<String> processCanteenUpload(InputStream is) {
 		System.out.println("PROCESS_CANTEEN_FILEUPLOAD");
 
@@ -69,8 +95,15 @@ public class FileUploadController {
 		}
 		return errorsList;
 	}
-
-	public ArrayList<String> processFoodUpload(InputStream is) throws Exception {
+	
+	/**
+	 * Handles the reading of the Food.csv and load it to the database if there are no errors
+	 * 
+	 * @param is The contents of the Food.csv to be read and loaded to database
+	 * @return An ArrayList of error(s) if Food.csv contains errors,
+	 * otherwise returns an empty ArrayList
+	 */
+	public ArrayList<String> processFoodUpload(InputStream is) {
 		System.out.println("PROCESS_FOOD_FILEUPLOAD");
 
 		BufferedInputStream bis = new BufferedInputStream(is);
@@ -91,8 +124,15 @@ public class FileUploadController {
 		}
 		return errorsList;
 	}
-
-	public ArrayList<String> processModifierUpload(InputStream is) throws Exception {
+	
+	/**
+	 * Handles the reading of the Modifier.csv and load it to the database if there are no errors
+	 * 
+	 * @param is The contents of the Modifier.csv to be read and loaded to database
+	 * @return An ArrayList of error(s) if Modifier.csv contains errors,
+	 * otherwise returns an empty ArrayList
+	 */
+	public ArrayList<String> processModifierUpload(InputStream is) {
 		System.out.println("PROCESS_MODIFIER_FILEUPLOAD");
 
 		BufferedInputStream bis = new BufferedInputStream(is);
@@ -113,8 +153,15 @@ public class FileUploadController {
 		}
 		return errorsList;
 	}
-
-	public ArrayList<String> validateCanteenData(List<String[]> content) throws Exception {
+	
+	/**
+	 * Validate the contents of Canteen.csv for any errors before loading to database
+	 * 
+	 * @param content The List of contents of Canteen.csv to be validated
+	 * @return An ArrayList of errors found in the Canteen.csv,
+	 * otherwise returns an empty ArrayList
+	 */
+	public ArrayList<String> validateCanteenData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Iterator iter = content.iterator();
 		iter.next();
@@ -144,8 +191,15 @@ public class FileUploadController {
 		return errorList;
 
 	}
-
-	public ArrayList<String> validateStallData(List<String[]> content) throws Exception {
+	
+	/**
+	 * Validate the contents of Stall.csv for any errors before loading to database
+	 * 
+	 * @param content The List of contents of Stall.csv to be validated
+	 * @return An ArrayList of errors found in the Stall.csv,
+	 * otherwise returns an empty ArrayList
+	 */
+	public ArrayList<String> validateStallData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Canteen canteen = null;
 		Iterator iter = content.iterator();
@@ -183,7 +237,14 @@ public class FileUploadController {
 		}
 		return errorList;
 	}
-
+	
+	/**
+	 * Validate the contents of Food.csv for any errors before loading to database
+	 * 
+	 * @param content The List of contents of Food.csv to be validated
+	 * @return An ArrayList of errors found in the Food.csv,
+	 * otherwise returns an empty ArrayList
+	 */
 	public ArrayList<String> validateFoodData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Iterator iter = content.iterator();
@@ -235,7 +296,14 @@ public class FileUploadController {
 		}
 		return errorList;
 	}
-
+	
+	/**
+	 * Validate the contents of Modifier.csv for any errors before loading to database
+	 * 
+	 * @param content The List of contents of Modifier.csv to be validated
+	 * @return An ArrayList of errors found in the Modifier.csv,
+	 * otherwise returns an empty ArrayList
+	 */
 	public ArrayList<String> validateModifierData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Iterator iter = content.iterator();

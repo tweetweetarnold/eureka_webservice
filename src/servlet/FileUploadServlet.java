@@ -70,6 +70,11 @@ public class FileUploadServlet extends HttpServlet {
                 FileItemStream item = iter.next();
                 InputStream is = item.openStream();
                 if (!item.isFormField()) {
+//					***working in-progress***         	
+//                	String fileFormat = item.getContentType();
+//                	if (fileFormat.equals(".csv")) {
+//                		
+//                	}
                     //pass it to controller to read file
                 	String itemName = item.getName();
 	                if (itemName.contains("Canteen.csv")) {
