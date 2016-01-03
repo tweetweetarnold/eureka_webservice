@@ -2,7 +2,9 @@ package servlet;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Set;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Company;
+
 import org.apache.commons.validator.routines.EmailValidator;
 
 import controller.AccessController;
+import controller.CompanyController;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -89,13 +94,25 @@ public class ProcessRegistrationServlet extends HttpServlet {
 					if (validPasswordLength) {
 						if (validPasswordConfirmation) {
 							if (validEmail) {
+								// moved creation of user to next servlet
+								// String generatedEmployeeId = accessController.registerUser(
+								// password, employeeName, email, contactNumber, companyCode);
 
-								String generatedEmployeeId = accessController.registerUser(
-										password, employeeName, email, contactNumber, companyCode);
-								session.setAttribute("email", email);
-								session.setAttribute("companyCode", companyCode);
+								userInput.put("password", password);
+								session.setAttribute("userInput", userInput);
 
-								response.sendRedirect("RetrieveDeliveryPointsServlet");
+								CompanyController companyController = new CompanyController();
+
+								Company company = companyController
+										.getCompanyByCompanyCode(companyCode);
+								Set<String> buildingSet = company.getDeliveryPointSet();
+								System.out.println("Building size: " + buildingSet.size());
+
+								RequestDispatcher rd = request
+										.getRequestDispatcher("defaultDeliveryPoint.jsp");
+								request.setAttribute("buildingSet", buildingSet);
+								rd.forward(request, response);
+
 							} else {
 								System.out.println("RegistrationServlet: Validation failed.");
 								throw new Exception("The Email that you provided is not valid");

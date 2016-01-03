@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -47,8 +48,11 @@ public class RetrieveDeliveryPointsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		@SuppressWarnings("unchecked")
+		HashMap<String, String> userInput = (HashMap<String, String>) session
+				.getAttribute("userInput");
+		String companyCode = userInput.get("companyCode");
 
-		String companyCode = (String) session.getAttribute("companyCode");
 		System.out.println("Company code: " + companyCode);
 
 		Company company = companyController.getCompanyByCompanyCode(companyCode);
