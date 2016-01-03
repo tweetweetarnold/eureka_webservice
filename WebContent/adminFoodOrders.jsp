@@ -76,7 +76,17 @@
 									<h4 class="panel-title">
 										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${mapLoop.index }"
 											aria-expanded="true" aria-controls="collapse${mapLoop.index }"
-										> Company: ${window.company.name }. Start: ${window.startDateFormatted }. End: ${window.endDateFormatted } </a>
+										>
+											${window.company.name}:&nbsp;&nbsp;
+											<b>
+												<fmt:formatDate type="both" value="${window.startDateFormatted}" />
+											</b>
+											&nbsp;&nbsp;to&nbsp;&nbsp;
+											<b>
+												<fmt:formatDate type="both" value="${window.endDateFormatted}" />
+											</b>
+
+										</a>
 									</h4>
 								</div>
 								<div id="collapse${mapLoop.index }" class="panel-collapse collapse" role="tabpanel"
@@ -115,6 +125,7 @@
 																<th>S/N</th>
 																<th>User(s)</th>
 																<th>Food</th>
+																<th>Modifier(s)</th>
 																<th>Qty</th>
 																<th>Price($)</th>
 															</tr>
@@ -130,8 +141,17 @@
 																	<c:forEach items="${order.value}" var="foodOrderItem">
 																		<tr>
 																			<td>${foodOrderItem.food.name}</td>
+																			<td>
+																				<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifier">
+																				${modifier.name}, </c:forEach>
+																			</td>
 																			<td>${foodOrderItem.quantity}</td>
-																			<td>$${foodOrderItem.priceString}</td>
+																			<td>
+																				<fmt:formatNumber value="${foodOrderItem.quantity * foodOrderItem.price}" var="combinedPrice"
+																					minFractionDigits="2"
+																				/>
+																				$${combinedPrice}
+																			</td>
 																		</tr>
 																	</c:forEach>
 																</tr>
@@ -190,7 +210,11 @@
 																				<fmt:formatNumber value="${priceList[item.foodOrderItemId]}" var="subtotal" minFractionDigits="2" />
 																				$${subtotal}
 																			</td>
-																			<td>${usernameList[item.foodOrderItemId]}</td>
+																			<td>
+																				<c:forEach items="${usernameList[item.foodOrderItemId]}" var="user">
+																					<p title="${user.email}">${user.name}</p>
+																				</c:forEach>
+																			</td>
 																		</tr>
 																	</c:forEach>
 
@@ -259,7 +283,11 @@
 																				<fmt:formatNumber value="${priceList[item.foodOrderItemId]}" var="subtotal" minFractionDigits="2" />
 																				$${subtotal}
 																			</td>
-																			<td>${usernameList[item.foodOrderItemId]}</td>
+																			<td>
+																				<c:forEach items="${usernameList[item.foodOrderItemId]}" var="user">
+																					<p title="${user.email}">${user.name}</p>
+																				</c:forEach>
+																			</td>
 																		</tr>
 																	</c:forEach>
 
@@ -274,14 +302,7 @@
 													<br>
 													<button type="button" onclick="window.print()">Print This Page</button>
 
-
 												</div>
-
-
-
-
-
-
 
 												<!-- /.table-responsive -->
 											</div>

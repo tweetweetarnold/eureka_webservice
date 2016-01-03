@@ -60,7 +60,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">User Management</h1>
+					<h1 class="page-header">Order History for User: ${sessionScope.name}</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -69,44 +69,66 @@
 			<div class="row">
 				<div class="col-lg-12">
 
-					<b>Total users:</b>
-					${fn:length(sessionScope.userMgmtView)}
-					<br>
-					<br>
+					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-							<thead>
-								<tr>
-									<th>Company</th>
-									<th>Name</th>
-									<th>Email</th>
-									<th>Date Joined</th>
-									<th>O/S</th>
-									<th>Status</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${sessionScope.userMgmtView}" var="user">
-									<tr>
-										<td>${user.company.name}</td>
-										<td>${user.name}</td>
-										<td>${user.email}</td>
-										<td>${user.createDate}</td>
-										<td>
-											$
-											<fmt:formatNumber value="${user.amountOwed}" var="amt" minFractionDigits="2" />${amt}</td>
-										<td>${user.status}</td>
-										<td>
-											<a href="LoadAdminViewUserOrderHistoryServlet?name=${user.email}">View Order History</a>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+						<c:forEach items="${sessionScope.orderHistoryList}" var="orderHistory" varStatus="loop">
+
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="heading${loop.index }">
+									<h4 class="panel-title">
+										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${loop.index }"
+											aria-expanded="true" aria-controls="collapse${loop.index }"
+										> Canteen: ${orderHistory.canteen.name } - Date: ${orderHistory.createDate } </a>
+									</h4>
+								</div>
+								<div id="collapse${loop.index }" class="panel-collapse collapse" role="tabpanel"
+									aria-labelledby="heading${loop.index }"
+								>
+									<div class="panel-body">
+										<b>Order Window: </b>
+										${orderHistory.orderWindow.windowId }
+										<br>
+										<b>Submitted: </b>
+										${orderHistory.createDate }
+										<br>
+										<br>
+
+										<div class="dataTable_wrapper">
+											<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+												<thead>
+													<tr>
+														<th>Stall</th>
+														<th>Food</th>
+														<th>Modifier</th>
+														<th>Qty</th>
+														<th>Price($)</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${orderHistory.foodOrderList}" var="foodOrderItem">
+														<tr>
+															<td>${foodOrderItem.stall.name}</td>
+															<td>${foodOrderItem.food.name}</td>
+															<td>${foodOrderItem.modifierChosenList}</td>
+															<td>${foodOrderItem.quantity}</td>
+															<td>${foodOrderItem.price}</td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+										<!-- /.table-responsive -->
+
+									</div>
+								</div>
+							</div>
+							<!-- /.panel-default -->
+						</c:forEach>
+
+
+
 					</div>
-					<!-- /.table-responsive -->
+					<!-- /.panel-group -->
 
 				</div>
 				<!-- /.col-lg-12 -->

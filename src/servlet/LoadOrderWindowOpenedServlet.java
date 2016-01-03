@@ -67,6 +67,8 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 				ArrayList<FoodDisplayObject> groupedByStall = foodOrderController
 						.getAllFoodOrderOfOrderWindowGroupedByStall(window);
 
+				System.out.println("nogroup size: " + noGroup.size());
+
 				arr[0] = noGroup;
 				arr[1] = groupedByStall;
 				map.put(window, arr);
