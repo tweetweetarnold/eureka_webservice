@@ -14,19 +14,20 @@ import connection.MyConnection;
 /**
  * Performs the function of Data Access Object for the Employee model
  * 
- *
+ * 
  */
 public class EmployeeDAO {
-	
+
 	/**
 	 * Creates a default constructor for EmployeeDAO
 	 */
 	public EmployeeDAO() {
-		
+
 	}
-	
+
 	/**
 	 * Retrieves the Employee based on the provided ID
+	 * 
 	 * @param employeeId The ID used for retrieving the Employee
 	 * @return The Employee object that has the provided ID
 	 */
@@ -63,9 +64,9 @@ public class EmployeeDAO {
 
 	/**
 	 * Retrieves the Employee based on the provided email address
+	 * 
 	 * @param email The email address of the employee
-	 * @return The Employee object of the email address, 
-	 * otherwise returns null
+	 * @return The Employee object of the email address, otherwise returns null
 	 */
 	public Employee getEmployeeByEmail(String email) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
@@ -78,15 +79,39 @@ public class EmployeeDAO {
 		}
 		return (Employee) l.get(0);
 	}
-	
+
 	/**
 	 * Retrieves all the Employees from the database
+	 * 
 	 * @return An ArrayList of Employee objects
 	 */
 	public ArrayList<Employee> getAllEmployees() {
 		ArrayList<Employee> returnList = null;
 
 		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		returnList = new ArrayList<Employee>();
+
+		for (Object o : l) {
+			returnList.add((Employee) o);
+		}
+		return returnList;
+	}
+
+	public ArrayList<Employee> getAllUsersWithOutstandingPaymentAbove(double amount,
+			boolean inclusive) {
+		ArrayList<Employee> returnList = null;
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
+		if (inclusive) {
+			dc.add(Restrictions.ge("amountOwed", amount));
+		} else {
+			dc.add(Restrictions.gt("amountOwed", amount));
+		}
+
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);

@@ -89,12 +89,11 @@ public class ProcessRegistrationServlet extends HttpServlet {
 					if (validPasswordLength) {
 						if (validPasswordConfirmation) {
 							if (validEmail) {
-								
+
 								String generatedEmployeeId = accessController.registerUser(
 										password, employeeName, email, contactNumber, companyCode);
 								session.setAttribute("email", email);
 								session.setAttribute("companyCode", companyCode);
-								
 
 								response.sendRedirect("RetrieveDeliveryPointsServlet");
 							} else {
@@ -111,7 +110,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 					}
 				} else {
 					System.out.println("RegistrationServlet: Validation failed.");
-					throw new Exception("Contact Number must be 8 digits");
+					throw new Exception("Contact Number is not valid.");
 				}
 			} else {
 				System.out.println("RegistrationServlet: Validation failed.");

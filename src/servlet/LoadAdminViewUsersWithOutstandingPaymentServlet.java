@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.FoodOrder;
-import controller.FoodOrderController;
+import model.Employee;
+import controller.FinanceController;
 
 /**
- * Servlet implementation class LoadAdminViewUserOrderHistoryServlet
+ * Servlet implementation class LoadAdminViewUsersWithOutstandingPaymentServlet
  */
-@WebServlet("/LoadAdminViewUserOrderHistoryServlet")
-public class LoadAdminViewUserOrderHistoryServlet extends HttpServlet {
+@WebServlet("/LoadAdminViewUsersWithOutstandingPaymentServlet")
+public class LoadAdminViewUsersWithOutstandingPaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewUserOrderHistoryServlet() {
+	public LoadAdminViewUsersWithOutstandingPaymentServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -43,20 +43,13 @@ public class LoadAdminViewUserOrderHistoryServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		FoodOrderController foodOrderController = new FoodOrderController();
 		HttpSession session = request.getSession();
+		FinanceController financeController = new FinanceController();
 
-		String email = request.getParameter("email");
-		String name = request.getParameter("name");
+		ArrayList<Employee> list = financeController.getAllUsersWithOutstandingPayment(0, false);
+		session.setAttribute("outstandingList", list);
 
-		List<FoodOrder> list = foodOrderController.getFoodOrderSet(email);
-
-		session.setAttribute("orderHistoryList", list);
-		session.setAttribute("name", name);
-
-		response.sendRedirect("adminViewUserOrderHistory.jsp");
-
+		response.sendRedirect("adminViewOutstandingPayment.jsp");
 	}
 
 }

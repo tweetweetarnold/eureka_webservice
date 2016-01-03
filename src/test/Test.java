@@ -66,7 +66,7 @@ public class Test {
 
 		company.setDeliveryPointSet(buildingList);
 		Employee arnold = new Employee(aes.encrypt("arnold.lee.2013@sis.smu.edu.sg" + "1234567"),
-				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 85698565, company);
+				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 98765432, company);
 
 		arnold.setDefaultDeliveryPoint("CONTROL");
 
@@ -335,7 +335,8 @@ public class Test {
 
 		// oasis
 
-		Canteen canteen1 = new Canteen("Taman Jurong Market and Food Centre", "123", null);
+		Canteen canteen1 = new Canteen("Taman Jurong Market and Food Centre",
+				"3 Yung Sheng Rd, Singapore 618499", null);
 
 		Stall kuehStall = new Stall("Oasis Kueh Stall", 90685620, canteen1, null,
 				"resources/img/stall/img-oasiskuehstall.jpg");

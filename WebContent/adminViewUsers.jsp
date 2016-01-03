@@ -93,13 +93,15 @@
 										<td>${user.company.name}</td>
 										<td>${user.name}</td>
 										<td>${user.email}</td>
-										<td>${user.createDate}</td>
+										<td>
+											<fmt:formatDate type="both" value="${user.createDate}" />
+										</td>
 										<td>
 											$
 											<fmt:formatNumber value="${user.amountOwed}" var="amt" minFractionDigits="2" />${amt}</td>
 										<td>${user.status}</td>
 										<td>
-											<a href="LoadAdminViewUserOrderHistoryServlet?name=${user.email}">View Order History</a>
+											<a href="LoadAdminViewUserOrderHistoryServlet?email=${user.email}&name=${user.name}">View Order History</a>
 										</td>
 									</tr>
 								</c:forEach>

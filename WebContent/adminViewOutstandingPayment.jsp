@@ -60,7 +60,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Canteen Management</h1>
+					<h1 class="page-header">Outstanding Payment</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -69,8 +69,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 
-					<b>Total canteens:</b>
-					${fn:length(sessionScope.canteenList)}
+					<b>Total users:</b>
+					${fn:length(sessionScope.outstandingList)}
 					<br>
 					<br>
 
@@ -78,24 +78,30 @@
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
-									<th>ID</th>
-									<th>Canteen</th>
-									<th>Address</th>
+									<th>Company</th>
+									<th>Name</th>
+									<th>Email</th>
 									<th>Date Joined</th>
+									<th>O/S</th>
+									<th>Status</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.canteenList}" var="canteen">
+								<c:forEach items="${sessionScope.outstandingList}" var="user">
 									<tr>
-										<td>${canteen.canteenId}</td>
-										<td>${canteen.name}</td>
-										<td>${canteen.address}</td>
+										<td>${user.company.name}</td>
+										<td>${user.name}</td>
+										<td>${user.email}</td>
 										<td>
-											<fmt:formatDate type="both" value="${canteen.createDate}" />
+											<fmt:formatDate type="both" value="${user.createDate}" />
 										</td>
 										<td>
-											<a href="#">Edit</a>
+											$
+											<fmt:formatNumber value="${user.amountOwed}" var="amt" minFractionDigits="2" />${amt}</td>
+										<td>${user.status}</td>
+										<td>
+											<a href="#">Link</a>
 										</td>
 									</tr>
 								</c:forEach>

@@ -286,16 +286,7 @@
 							</a>
 							<ul class="nav nav-third-level">
 								<li>
-									<a href="#">Queued (Not in use)</a>
-								</li>
-								<li>
 									<a href="LoadOrderWindowOpenedServlet">Opened</a>
-								</li>
-								<li>
-									<a href="#">Processing (Not in use)</a>
-								</li>
-								<li>
-									<a href="#">Closed (Not in use)</a>
 								</li>
 							</ul>
 							<!-- /.nav-third-level -->
@@ -316,7 +307,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="#">#</a>
+							<a href="LoadAdminViewUsersWithOutstandingPaymentServlet">Outstanding</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->

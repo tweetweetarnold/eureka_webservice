@@ -155,30 +155,4 @@ public class FoodOrderItem {
 		return false;
 	}
 
-	// public boolean equals(FoodOrderItem otherFoodItem) {
-	// if (this.food.equals(otherFoodItem.getFood())) {
-	// ArrayList<Modifier> modifierListOrigin = new
-	// ArrayList<Modifier>(modifierList);
-	// ArrayList<Modifier> modifierListExternal = new ArrayList<Modifier>(
-	// otherFoodItem.getModifierList());
-	// int trueCount = 0;
-	// for (Modifier m : modifierListOrigin) {
-	// for (Modifier e : modifierListOrigin) {
-	// if (m.equals(e)) {
-	// trueCount++;
-	// }
-	// }
-	// }
-	// if (trueCount == modifierListOrigin.size()) {
-	// return true;
-	// } else {
-	// return false;
-	// }
-	//
-	// } else {
-	// return false;
-	// }
-	//
-	// }
-
 }
