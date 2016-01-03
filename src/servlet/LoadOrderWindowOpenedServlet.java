@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +35,8 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -43,7 +45,8 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -60,6 +63,7 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 				Object[] arr = new Object[2];
 				HashMap<Employee, ArrayList<FoodOrderItem>> noGroup = foodOrderController
 						.getAllFoodOrderOfOrderWindow(window);
+				
 				ArrayList<FoodDisplayObject> groupedByStall = foodOrderController
 						.getAllFoodOrderOfOrderWindowGroupedByStall(window);
 

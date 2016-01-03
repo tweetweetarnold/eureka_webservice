@@ -590,14 +590,14 @@ public class FoodOrderController {
 		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getAllFoodOrderOfOrderWindow(orderWindow);
 		// hashmap for return later
 		HashMap<Employee, ArrayList<FoodOrderItem>> map = new HashMap<Employee, ArrayList<FoodOrderItem>>();
-
+		
 		// iterate through each foodorder from tempfoodorderlist and add it into
 		// hashmap. if already have record of existing user, add to that same list
 		for (FoodOrder o : tempFoodOrderList) {
 			Employee emp = o.getEmployee();
 
 			// check if entry exists. if not, create new arraylist and add into map
-			ArrayList<FoodOrderItem> tempItems = map.get(emp.getEmail());
+			ArrayList<FoodOrderItem> tempItems = map.get(emp);
 			if (tempItems == null) {
 				tempItems = new ArrayList<FoodOrderItem>();
 			}
