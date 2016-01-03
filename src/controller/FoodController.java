@@ -47,6 +47,13 @@ public class FoodController {
 		return foodDAO.getFood(id);
 	}
 
+	/**
+	 * Get food recommendation for a given weather condition and order window
+	 * 
+	 * @param orderWindow The current orderWindow 
+	 * @param weather The current weather condition
+	 * @return Food which suits the current weather condition
+	 */
 	public Food getFoodForWeather(Weather weather, OrderWindow orderWindow) {
 		int weatherCode = weather.getWeatherCode();
 		Canteen currentCanteen = orderWindow.getCanteen();
@@ -77,7 +84,13 @@ public class FoodController {
 			return foodList.get(pick);
 		}
 	}
-
+	/**
+	 * Get food recommendations for a given weather condition and order window
+	 * 
+	 * @param foodList A ArrayList of Food Objects to choose a recommendation from
+	 * @param weather A String description of a weather status
+	 * @return Food which suits the current weather condition
+	 */
 	public Food getFoodForWeather(ArrayList<Food> foodList, String weather) {
 		ArrayList<Food> choices = new ArrayList<Food>();
 		for (Food f : foodList) {

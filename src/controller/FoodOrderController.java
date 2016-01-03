@@ -47,13 +47,23 @@ public class FoodOrderController {
 	public void updateFoodOrder(FoodOrder f) {
 		foodOrderDAO.updateFoodOrder(f);
 	}
-
+	/**
+	 * Retrieves all FoodOrder(s) made by a Employee
+	 * 
+	 * @param email Email of the Employee
+	 * @return A list of FoodOrder(s) 
+	 */
 	public List<FoodOrder> getFoodOrderSet(String email) {
 		List<FoodOrder> returnList = incrementQuantity(foodOrderDAO.getFoodOrderSet(employeeDAO
 				.getEmployeeByEmail(email)));
 		return returnList;
 	}
-
+	/**
+	 * removes duplicate FoodOrderItems within a list of FoodOrders and increments the quantity parameter of duplicated FoodOrderItems
+	 * 
+	 * @param foodOrderList A List of FoodOrder(s)
+	 * @return A cleaned list of FoodOrder(s) 
+	 */
 	public List<FoodOrder> incrementQuantity(List<FoodOrder> foodOrderList) {
 		List<FoodOrder> returnList = new ArrayList<FoodOrder>();
 		for (FoodOrder f : foodOrderList) {
@@ -92,7 +102,13 @@ public class FoodOrderController {
 
 		return returnList;
 	}
-
+	
+	/**
+	 * removes duplicates within a list of FoodOrderItems and increments the quantity parameter of duplicated FoodOrderItems
+	 * 
+	 * @param list a List of FoodOrderItem(s)
+	 * @return A cleaned list of FoodOrderItems with quantity incremented
+	 */
 	public List<FoodOrderItem> incrementQuantityFoodOrderItem(List<FoodOrderItem> list) {
 		ArrayList<FoodOrderItem> foodOrderItemList = new ArrayList<FoodOrderItem>(list);
 		ArrayList<FoodOrderItem> UniquefoodOrderItemList = new ArrayList<FoodOrderItem>();
@@ -167,6 +183,17 @@ public class FoodOrderController {
 	// starting sunday for the week of orders you wish to retrieve. (Currently
 	// used by
 	// viewWeeklyConsolidatedPaymentServlet.java)
+	
+	
+	
+	/**
+	 * Retrieves a list of FoodOrders under a specified Employee between the specified date(sundayDate) and seven days after the specified date(sundayDate)
+	 * 
+	 * @param email The email of the Employee
+	 * @param sundayDate the start of the seven day period
+	 * @return A list of FoodOrders within the specified timeframe by the Employee. If no results
+	 *         found, returns empty List.
+	 */
 	public ArrayList<FoodOrder> getFoodOrderForUsernameWeek(String email, Date sundayDate) {
 		ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>();
 		Calendar cal = Calendar.getInstance();
@@ -348,6 +375,14 @@ public class FoodOrderController {
 	// this is to get the FoodDisplayObject for displaying food orders for the
 	// day filtered by
 	// stores each food display object corresponds to one store
+	
+	/**
+	 * Returns a ArrayList of FoodDisplayObjects to be use in the admin food order display (by stalls)
+	 * 
+	 * 
+	 * @param orderWindow OrderWindow of FoodDisplayObject(s) to retrieve
+	 * @return a ArrayList of the FoodDisplayObject(s) within the order window
+	 */
 	public ArrayList<FoodDisplayObject> getAllFoodOrderOfOrderWindowGroupedByStall(
 			OrderWindow orderWindow) {
 
@@ -506,7 +541,15 @@ public class FoodOrderController {
 		}
 		return foodDisplayList;
 	}
-
+	
+	/**
+	 * Returns A HashMap with all FoodOrderItems between two dates
+	 * 
+	 * 
+	 * @param earlierDate The start date
+	 * @param laterDate The end date
+	 * @return a HashMap with StallID as Key and the corresponding FoodOrderItem(s) ordered in a ArrayList
+	 */
 	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall(Date earlierDate,
 			Date laterDate) {
 		// ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
@@ -571,12 +614,12 @@ public class FoodOrderController {
 	 */
 
 	/**
-	 * ???
+	 * Replaces all unavailable Food in the database with the employee's favorite food.(Within the specified time frame)
 	 * 
-	 * @param foodUnavailableID ???
-	 * @param earlierDate ???
-	 * @param laterDate ???
-	 * @return ???
+	 * @param foodUnavailableID The id of the unavailable food
+	 * @param earlierDate The start date of the time frame
+	 * @param laterDate The end date of the time frame
+	 * 
 	 */
 	public void replaceWithFavoriteFood(int foodUnavailableID, Date earlierDate, Date laterDate) {
 		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
