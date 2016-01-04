@@ -79,7 +79,7 @@
 						<c:remove var="success" scope="session" />
 					</c:if>
 
-					<b>Total stalls:</b>
+					<b>Total foods:</b>
 					${fn:length(sessionScope.foodList)}
 					<br>
 					<br>
