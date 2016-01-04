@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,16 +15,16 @@ import controller.FoodController;
 import controller.StallController;
 
 /**
- * Servlet implementation class LoadAdminViewFoodsDetailsServlet
+ * Servlet implementation class ProcessAdminAddNewFoodServlet
  */
-@WebServlet("/LoadAdminViewFoodsDetailsServlet")
-public class LoadAdminViewFoodsDetailsServlet extends HttpServlet {
+@WebServlet("/ProcessAdminAddNewFoodServlet")
+public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewFoodsDetailsServlet() {
+	public ProcessAdminAddNewFoodServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -46,20 +45,38 @@ public class LoadAdminViewFoodsDetailsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		StallController stallController = new StallController();
 		FoodController foodController = new FoodController();
+		StallController stallController = new StallController();
 
+		String name = request.getParameter("name");
+		String description = request.getParameter("description");
+		String priceString = request.getParameter("price");
 		String stallIdString = request.getParameter("stallId");
-		int stallId = Integer.parseInt(stallIdString);
+		System.out.println("String: " + stallIdString);
 
-		Stall stall = stallController.getStall(stallId);
-		ArrayList<Food> list = foodController.getAllFoodsUnderStall(stall);
+		String imageDirectory = request.getParameter("imageDirectory");
+		String weatherConditions = request.getParameter("weatherConditions");
 
-		session.setAttribute("stallId", stallId);
-		session.setAttribute("stallName", stall.getName());
-		session.setAttribute("foodList", list);
+		try {
+			double price = Double.parseDouble(priceString);
+			int stallId = Integer.parseInt(stallIdString);
 
-		response.sendRedirect("adminViewFoods.jsp");
+			Stall stall = stallController.getStall(stallId);
+			Food food = new Food(name, description, price, imageDirectory, stall);
+
+			food.setWeatherConditions(weatherConditions);
+
+			System.out.println("foodname: " + food.getName());
+			System.out.println("saving food...");
+			foodController.saveFood(food);
+
+			session.setAttribute("success", "Food updated successfully.");
+
+			response.sendRedirect("adminViewFoods.jsp");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 
 <%@include file="protect/adminProtect.jsp"%>
@@ -10,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+
 
 <title>DABAO</title>
 
@@ -37,12 +39,9 @@
 	rel="stylesheet" type="text/css"
 >
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<!-- Datetime picker css -->
+<link href="resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
+
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -58,88 +57,100 @@
 		<%@include file="headerfooter/adminHeader2.jsp"%>
 
 		<div id="page-wrapper">
+
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">${sessionScope.stallName}-foods</h1>
+					<h1 class="page-header">Add new food</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-			<!-- /.row -->
 
+			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">Add new food</div>
 
-					<!-- Success message handling -->
-					<c:if test="${not empty sessionScope.success}">
-						<div class="alert alert-success" role="alert">
-							<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-							<span class="sr-only">Success: </span>
-							${success}
+						<div class="panel-body">
+
+							<div class="row">
+
+								<div class="col-lg-12">
+
+									<form role="form" action="ProcessAdminAddNewFoodServlet" id="submitForm">
+
+										<input type="hidden" name="stallId" value="${stallId}">
+
+										<div class="form-group">
+											<label>Food name</label>
+											<input class="form-control" name="name">
+										</div>
+
+										<div class="form-group">
+											<label>Food name (Chinese)</label>
+											<input class="form-control">
+										</div>
+
+										<div class="form-group">
+											<label>Description</label>
+											<input class="form-control" name="description">
+										</div>
+
+										<div class="form-group">
+											<label>Price</label>
+											<input class="form-control" name="price">
+										</div>
+
+										<div class="form-group">
+											<label>Image Directory</label>
+											<input class="form-control" name="imageDirectory">
+										</div>
+
+										<div class="form-group">
+											<label>Weather Conditions</label>
+											<input class="form-control" name="weatherConditions">
+										</div>
+
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
+											new Food</button>
+
+									</form>
+								</div>
+								<!-- /.col-lg-12 -->
+
+							</div>
+							<!-- /.row (nested) -->
 						</div>
-						<c:remove var="success" scope="session" />
-					</c:if>
-
-					<b>Total stalls:</b>
-					${fn:length(sessionScope.foodList)}
-					<br>
-					<br>
-
-					<form action="adminAddNewFood.jsp">
-						<input type="hidden" name="stallId" value="${sessionScope.stallId}">
-						<button type="submit" class="btn btn-primary">Add food</button>
-					</form>
-					<br>
-
-					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Food</th>
-									<th>Price</th>
-									<th>Date Created</th>
-									<th>Image</th>
-									<th>Modifier(s)</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${sessionScope.foodList}" var="food">
-									<tr>
-										<td>${food.foodId}</td>
-										<td>${food.name}</td>
-										<td>
-											$
-											<fmt:formatNumber value="${food.price}" var="amt" minFractionDigits="2" />${amt}
-										</td>
-										<td>
-											<fmt:formatDate type="both" value="${food.createDate}" />
-										</td>
-										<td>
-											<img src="${food.imageDirectory}" />
-										</td>
-										<td>
-											<c:forEach items="${food.modifierList}" var="modifier">- ${modifier.name}<br>
-											</c:forEach>
-										</td>
-										<td>
-											<a href="LoadAdminEditFoodDetailsServlet?foodId=${food.foodId}">Edit food</a>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+						<!-- /.panel-body -->
 					</div>
-					<!-- /.table-responsive -->
-
+					<!-- /.panel -->
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
-
 		</div>
+		<!-- /#page-wrapper -->
+
+
+
 	</div>
 	<!-- /#wrapper -->
+
+	<!-- Create confirmation -->
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Confirmation</h4>
+				</div>
+				<div class="modal-body">Are you sure you want to Add new Food?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline btn-default">Cancel</button>
+					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- jQuery -->
@@ -158,6 +169,11 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+
+	<!-- Datetime picker -->
+	<script src="http://momentjs.com/downloads/moment.js"></script>
+	<script src="resources/js/bootstrap-datetimepicker.min.js"></script>
+
 </body>
 
 </html>

@@ -57,7 +57,7 @@ public class LoadAdminCreateNewWindowServlet extends HttpServlet {
 			session.setAttribute("companyList", companyList);
 			session.setAttribute("canteenList", canteenList);
 
-			response.sendRedirect("adminCreateNewWindow.jsp");
+			response.sendRedirect("adminAddNewWindow.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();
