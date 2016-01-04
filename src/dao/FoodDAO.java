@@ -1,13 +1,18 @@
 package dao;
 
-import model.Food;
-import model.Modifier;
-import model.Stall;
-
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+
+import model.Food;
+import model.FoodOrder;
+import model.Modifier;
+import model.Stall;
 import connection.MyConnection;
 
 /**
@@ -93,7 +98,6 @@ public class FoodDAO {
 		Stall s = canteenDAO.getStallFromCanteen(canteenName, stallName);
 		Set<Food> foodList = s.getFoodList();
 		return getFoodFromFoodList(foodList, foodName);
-
 	}
 
 	/**
@@ -165,7 +169,7 @@ public class FoodDAO {
 	 * @param content The list of Modifier data to be loaded into the database
 	 */
 	public void loadModifierData(List<String[]> content) {
-		Iterator iter = content.iterator();
+		Iterator<String[]> iter = content.iterator();
 		iter.next();
 		while (iter.hasNext()) {
 			String[] row = (String[]) iter.next();
@@ -183,5 +187,20 @@ public class FoodDAO {
 
 			addModifierToFood(newModifier, food);
 		}
+	}
+
+	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
+		ArrayList<Food> returnList = new ArrayList<Food>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Food.class);
+		dc.add(Restrictions.eq("stall", stall));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((Food) o);
+		}
+		return returnList;
 	}
 }

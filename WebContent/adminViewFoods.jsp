@@ -60,7 +60,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Canteen Management</h1>
+					<h1 class="page-header">${sessionScope.stallName}-foods</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -69,8 +69,18 @@
 			<div class="row">
 				<div class="col-lg-12">
 
-					<b>Total canteens:</b>
-					${fn:length(sessionScope.canteenList)}
+					<!-- Success message handling -->
+					<c:if test="${not empty sessionScope.success}">
+						<div class="alert alert-success" role="alert">
+							<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+							<span class="sr-only">Success: </span>
+							${success}
+						</div>
+						<c:remove var="success" scope="session" />
+					</c:if>
+
+					<b>Total stalls:</b>
+					${fn:length(sessionScope.foodList)}
 					<br>
 					<br>
 
@@ -79,24 +89,35 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Canteen</th>
-									<th>Address</th>
-									<th>Date Joined</th>
+									<th>Food</th>
+									<th>Price</th>
+									<th>Date Created</th>
+									<th>Image</th>
+									<th>Modifier(s)</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.canteenList}" var="canteen">
+								<c:forEach items="${sessionScope.foodList}" var="food">
 									<tr>
-										<td>${canteen.canteenId}</td>
-										<td>${canteen.name}</td>
-										<td>${canteen.address}</td>
+										<td>${food.foodId}</td>
+										<td>${food.name}</td>
 										<td>
-											<fmt:formatDate type="both" value="${canteen.createDate}" />
+											$
+											<fmt:formatNumber value="${food.price}" var="amt" minFractionDigits="2" />${amt}
 										</td>
 										<td>
-											<a href="LoadAdminViewStallsDetailsServlet?canteenId=${canteen.canteenId}">View all
-												${fn:length(canteen.stallList)} stalls</a>
+											<fmt:formatDate type="both" value="${food.createDate}" />
+										</td>
+										<td>
+											<img src="${food.imageDirectory}" />
+										</td>
+										<td>
+											<c:forEach items="${food.modifierList}" var="modifier">- ${modifier.name}<br>
+											</c:forEach>
+										</td>
+										<td>
+											<a href="LoadAdminEditFoodDetailsServlet?foodId=${food.foodId}">Edit food</a>
 										</td>
 									</tr>
 								</c:forEach>

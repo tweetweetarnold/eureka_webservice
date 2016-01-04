@@ -47,10 +47,18 @@ public class FoodController {
 		return foodDAO.getFood(id);
 	}
 
+	public void saveFood(Food f) {
+		foodDAO.saveFood(f);
+	}
+
+	public void updateFood(Food f) {
+		foodDAO.updateFood(f);
+	}
+
 	/**
 	 * Get food recommendation for a given weather condition and order window
 	 * 
-	 * @param orderWindow The current orderWindow 
+	 * @param orderWindow The current orderWindow
 	 * @param weather The current weather condition
 	 * @return Food which suits the current weather condition
 	 */
@@ -84,6 +92,7 @@ public class FoodController {
 			return foodList.get(pick);
 		}
 	}
+
 	/**
 	 * Get food recommendations for a given weather condition and order window
 	 * 
@@ -102,6 +111,10 @@ public class FoodController {
 		int pick = rand.nextInt(choices.size());
 
 		return choices.get(pick);
+	}
+
+	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
+		return foodDAO.getAllFoodsUnderStall(stall);
 	}
 
 }

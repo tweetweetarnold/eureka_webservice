@@ -1,20 +1,25 @@
 package dao;
 
-import model.Canteen;
-import model.Food;
-import model.Stall;
-
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+
+import model.Canteen;
+import model.Food;
+import model.FoodOrder;
+import model.Stall;
 import connection.MyConnection;
 
 /**
  * Performs the function of Data Access Object for the Stall model
  * 
- *
+ * 
  */
 public class StallDAO {
 
@@ -22,9 +27,9 @@ public class StallDAO {
 	 * Creates a default constructor for StallDAO
 	 */
 	public StallDAO() {
-		
+
 	}
-	
+
 	/**
 	 * Retrieves the Stall based on the provided ID
 	 * 
@@ -61,7 +66,7 @@ public class StallDAO {
 	public void deleteStall(Stall h) {
 		MyConnection.delete(h);
 	}
-	
+
 	/**
 	 * Add a new Food to the designated Stall
 	 * 
@@ -76,7 +81,7 @@ public class StallDAO {
 		foodList.add(f);
 		updateStall(s);
 	}
-	
+
 	/**
 	 * Load the validated content of the Stall.csv into the database
 	 * 
@@ -85,23 +90,37 @@ public class StallDAO {
 	public void loadStallData(List<String[]> content) {
 
 		CanteenDAO canteenDAO = new CanteenDAO();
-		FoodDAO foodDAO = new FoodDAO();
 		Canteen canteen = null;
-		Iterator iter = content.iterator();
-        iter.next();
-        while (iter.hasNext()) {
-            String[] row = (String[]) iter.next();
-            String stallName = row[0].trim();
-            String contactNum = row[1].trim();
-            long contactNumber = Long.parseLong(contactNum);
-            String canteenName = row[2].trim();
-            canteen = canteenDAO.getCanteenByName(canteenName);
-           
-            Stall newStall = new Stall(stallName, contactNumber, canteen, null, null);
-         //   stallList.add(newStall);
-            canteenDAO.addStallToCanteen(canteen, newStall);
-            saveStall(newStall);
-        }
+		Iterator<String[]> iter = content.iterator();
+		iter.next();
+		while (iter.hasNext()) {
+			String[] row = (String[]) iter.next();
+			String stallName = row[0].trim();
+			String contactNum = row[1].trim();
+			long contactNumber = Long.parseLong(contactNum);
+			String canteenName = row[2].trim();
+			canteen = canteenDAO.getCanteenByName(canteenName);
+
+			Stall newStall = new Stall(stallName, contactNumber, canteen, null, null);
+			// stallList.add(newStall);
+			canteenDAO.addStallToCanteen(canteen, newStall);
+			saveStall(newStall);
+		}
 	}
-	
+
+	public ArrayList<Stall> getAllStallsUnderCanteen(Canteen canteen) {
+		ArrayList<Stall> returnList = new ArrayList<Stall>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Stall.class);
+		dc.add(Restrictions.eq("canteen", canteen));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((Stall) o);
+		}
+		return returnList;
+	}
+
 }

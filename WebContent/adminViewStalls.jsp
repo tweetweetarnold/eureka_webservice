@@ -60,7 +60,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Canteen Management</h1>
+					<h1 class="page-header">${sessionScope.canteenName}-stalls</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -69,8 +69,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 
-					<b>Total canteens:</b>
-					${fn:length(sessionScope.canteenList)}
+					<b>Total stalls:</b>
+					${fn:length(sessionScope.stallList)}
 					<br>
 					<br>
 
@@ -79,24 +79,26 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Canteen</th>
-									<th>Address</th>
+									<th>Stall</th>
 									<th>Date Joined</th>
+									<th>Image</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.canteenList}" var="canteen">
+								<c:forEach items="${sessionScope.stallList}" var="stall">
 									<tr>
-										<td>${canteen.canteenId}</td>
-										<td>${canteen.name}</td>
-										<td>${canteen.address}</td>
+										<td>${stall.stallId}</td>
+										<td>${stall.name}</td>
 										<td>
-											<fmt:formatDate type="both" value="${canteen.createDate}" />
+											<fmt:formatDate type="both" value="${stall.createDate}" />
 										</td>
 										<td>
-											<a href="LoadAdminViewStallsDetailsServlet?canteenId=${canteen.canteenId}">View all
-												${fn:length(canteen.stallList)} stalls</a>
+											<img src="${stall.imageDirectory}" />
+										</td>
+										<td>
+											<a href="LoadAdminViewFoodsDetailsServlet?stallId=${stall.stallId}">View all ${fn:length(stall.foodList)}
+												food</a>
 										</td>
 									</tr>
 								</c:forEach>
