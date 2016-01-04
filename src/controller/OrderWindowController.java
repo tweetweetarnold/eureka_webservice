@@ -52,7 +52,12 @@ public class OrderWindowController {
 			Canteen canteen) {
 		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen));
 	}
-
+	
+	/**
+	 * Retrieves the OrderWindow based on the provided ID
+	 * @param orderWindowId The ID of the OrderWindow
+	 * @return The OrderWindow object that has the provided ID
+	 */
 	public OrderWindow getOrderWindow(Integer orderWindowId) {
 		return orderWindowDAO.getOrderWindow(orderWindowId);
 	}

@@ -188,7 +188,13 @@ public class FoodDAO {
 			addModifierToFood(newModifier, food);
 		}
 	}
-
+	
+	/**
+	 * Retrieves a List of Food in the Stall
+	 * 
+	 * @param stall The designated Stall
+	 * @return An ArrayList of Food objects that are in the designated Stall
+	 */
 	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
 		ArrayList<Food> returnList = new ArrayList<Food>();
 
