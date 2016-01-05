@@ -60,6 +60,7 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 			double price = Double.parseDouble(priceString);
 
 			Food food = foodController.getFood(foodId);
+			int stallId = food.getStall().getStallId();
 
 			food.setName(name);
 			food.setDescription(description);
@@ -73,7 +74,7 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 
 			session.setAttribute("success", "Food updated successfully.");
 
-			response.sendRedirect("adminViewFoods.jsp");
+			response.sendRedirect("LoadAdminViewFoodsDetailsServlet?stallId=" + stallId);
 
 		} catch (Exception e) {
 			e.printStackTrace();

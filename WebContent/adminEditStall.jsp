@@ -60,7 +60,7 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Edit food</h1>
+					<h1 class="page-header">Edit stall</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -69,7 +69,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Edit food</div>
+						<div class="panel-heading">Edit stall</div>
 
 						<div class="panel-body">
 
@@ -77,38 +77,23 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="ProcessAdminEditFoodServlet" id="submitForm">
+									<form role="form" action="ProcessAdminEditStallServlet" id="submitForm">
 
-										<input type="hidden" name="foodId" value="${sessionScope.foodId}">
+										<input type="hidden" name="stallId" value="${stallId}">
 
 										<div class="form-group">
-											<label>Food name</label>
+											<label>Stall name</label>
 											<input class="form-control" name="name" value="${sessionScope.name}" required>
 										</div>
 
 										<div class="form-group">
-											<label>Food name (Chinese)</label>
-											<input class="form-control">
-										</div>
-
-										<div class="form-group">
-											<label>Description</label>
-											<input class="form-control" name="description" value="${sessionScope.description}">
-										</div>
-
-										<div class="form-group">
-											<label>Price</label>
-											<input class="form-control" name="price" value="${sessionScope.price}" required>
+											<label>Contact no</label>
+											<input class="form-control" name="contactNo" value="${sessionScope.contactNo}" required>
 										</div>
 
 										<div class="form-group">
 											<label>Image Directory</label>
 											<input class="form-control" name="imageDirectory" value="${sessionScope.imageDirectory}">
-										</div>
-
-										<div class="form-group">
-											<label>Weather Conditions</label>
-											<input class="form-control" name="weatherConditions" value="${sessionScope.weatherConditions}">
 										</div>
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update
@@ -143,7 +128,7 @@
 				<div class="modal-header">
 					<h4 class="modal-title">Confirmation</h4>
 				</div>
-				<div class="modal-body">Are you sure you want to update Food details?</div>
+				<div class="modal-body">Are you sure you want to update Stall details?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline btn-default">Cancel</button>
 					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>

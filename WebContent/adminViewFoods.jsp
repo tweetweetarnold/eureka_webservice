@@ -123,7 +123,7 @@
 											</c:forEach>
 										</td>
 										<td>
-											<a href="LoadAdminEditFoodDetailsServlet?foodId=${food.foodId}">Edit food</a>
+											<a href="LoadAdminEditFoodServlet?foodId=${food.foodId}">Edit food</a>
 										</td>
 									</tr>
 								</c:forEach>

@@ -19,4 +19,8 @@ public class StallController {
 	public Stall getStall(int stallId) {
 		return stallDAO.getStall(stallId);
 	}
+
+	public void updateStall(Stall s) {
+		stallDAO.updateStall(s);
+	}
 }

@@ -69,6 +69,16 @@
 			<div class="row">
 				<div class="col-lg-12">
 
+					<!-- Success message handling -->
+					<c:if test="${not empty sessionScope.success}">
+						<div class="alert alert-success" role="alert">
+							<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+							<span class="sr-only">Success: </span>
+							${success}
+						</div>
+						<c:remove var="success" scope="session" />
+					</c:if>
+
 					<b>Total stalls:</b>
 					${fn:length(sessionScope.stallList)}
 					<br>
@@ -99,6 +109,8 @@
 										<td>
 											<a href="LoadAdminViewFoodsDetailsServlet?stallId=${stall.stallId}">View all ${fn:length(stall.foodList)}
 												food</a>
+											&nbsp&nbsp
+											<a href="LoadAdminEditStallServlet?stallId=${stall.stallId}">Edit stall</a>
 										</td>
 									</tr>
 								</c:forEach>

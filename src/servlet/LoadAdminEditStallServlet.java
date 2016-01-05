@@ -10,19 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Food;
-import controller.FoodController;
+import model.Stall;
+import controller.StallController;
 
 /**
- * Servlet implementation class LoadAdminEditFoodDetailsServlet
+ * Servlet implementation class LoadAdminEditStallDetailsServlet
  */
-@WebServlet("/LoadAdminEditFoodDetailsServlet")
-public class LoadAdminEditFoodDetailsServlet extends HttpServlet {
+@WebServlet("/LoadAdminEditStallDetailsServlet")
+public class LoadAdminEditStallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminEditFoodDetailsServlet() {
+	public LoadAdminEditStallServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,7 +34,20 @@ public class LoadAdminEditFoodDetailsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+		HttpSession session = request.getSession();
+		StallController stallController = new StallController();
+
+		String stallIdString = request.getParameter("stallId");
+		int stallId = Integer.parseInt(stallIdString);
+
+		Stall stall = stallController.getStall(stallId);
+
+		session.setAttribute("stallId", stallId);
+		session.setAttribute("name", stall.getName());
+		session.setAttribute("contactNo", stall.getContactNo());
+		session.setAttribute("imageDirectory", stall.getImageDirectory());
+
+		response.sendRedirect("adminEditStall.jsp");
 	}
 
 	/**
@@ -42,22 +56,6 @@ public class LoadAdminEditFoodDetailsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		FoodController foodController = new FoodController();
-
-		String foodIdString = request.getParameter("foodId");
-		int foodId = Integer.parseInt(foodIdString);
-
-		Food food = foodController.getFood(foodId);
-
-		session.setAttribute("foodId", foodId);
-		session.setAttribute("name", food.getName());
-		session.setAttribute("description", food.getDescription());
-		session.setAttribute("price", food.getPrice());
-		session.setAttribute("imageDirectory", food.getImageDirectory());
-		session.setAttribute("weatherConditions", food.getWeatherConditions());
-
-		response.sendRedirect("adminEditFood.jsp");
 	}
 
 }
