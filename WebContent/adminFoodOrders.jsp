@@ -72,42 +72,41 @@
 							<c:set value="${map.key}" var="window" />
 
 							<div class="panel panel-default">
-								<div class="panel-heading" role="tab" id="heading${mapLoop.index }">
+								<div class="panel-heading" role="tab" id="heading${mapLoop.index}">
 									<h4 class="panel-title">
-										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${mapLoop.index }"
-											aria-expanded="true" aria-controls="collapse${mapLoop.index }"
+										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${mapLoop.index}"
+											aria-expanded="true" aria-controls="collapse${mapLoop.index}"
 										>
 											${window.company.name}:&nbsp;&nbsp;
 											<b>
-												<fmt:formatDate type="both" value="${window.startDateFormatted}" />
+												<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.startDateFormatted}" />
 											</b>
 											&nbsp;&nbsp;to&nbsp;&nbsp;
 											<b>
-												<fmt:formatDate type="both" value="${window.endDateFormatted}" />
+												<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.endDateFormatted}" />
 											</b>
-
 										</a>
 									</h4>
 								</div>
-								<div id="collapse${mapLoop.index }" class="panel-collapse collapse" role="tabpanel"
-									aria-labelledby="heading${mapLoop.index }"
+								<div id="collapse${mapLoop.index}" class="panel-collapse collapse" role="tabpanel"
+									aria-labelledby="heading${mapLoop.index}"
 								>
 									<div class="panel-body">
 										<b>Canteen / Window ID:</b>
-										${window.canteen.name } / ${window.windowId}
+										${window.canteen.name} / ${window.windowId}
 										<br>
 										<br>
 
 										<!-- Nav tabs -->
 										<ul class="nav nav-tabs">
 											<li class="active">
-												<a href="#nogroup${mapLoop.index }" data-toggle="tab">No Group</a>
+												<a href="#nogroup${mapLoop.index}" data-toggle="tab">No Group</a>
 											</li>
 											<li>
-												<a href="#groupByStall${mapLoop.index }" data-toggle="tab">Group by Stalls</a>
+												<a href="#groupByStall${mapLoop.index}" data-toggle="tab">Group by Stalls</a>
 											</li>
 											<li>
-												<a href="#groupByStallCN${mapLoop.index }" data-toggle="tab">Group by Stalls (CN)</a>
+												<a href="#groupByStallCN${mapLoop.index}" data-toggle="tab">Group by Stalls (CN)</a>
 											</li>
 										</ul>
 

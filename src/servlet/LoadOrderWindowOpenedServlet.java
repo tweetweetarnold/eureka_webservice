@@ -3,7 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,8 +35,7 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -45,8 +44,7 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -56,14 +54,14 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 		OrderWindowController orderWindowController = new OrderWindowController();
 
 		try {
-			HashMap<OrderWindow, Object[]> map = new HashMap<OrderWindow, Object[]>();
+			LinkedHashMap<OrderWindow, Object[]> map = new LinkedHashMap<OrderWindow, Object[]>();
 			ArrayList<OrderWindow> openedWindowList = orderWindowController.getAllOpenedWindows();
 
 			for (OrderWindow window : openedWindowList) {
 				Object[] arr = new Object[2];
 				HashMap<Employee, ArrayList<FoodOrderItem>> noGroup = foodOrderController
 						.getAllFoodOrderOfOrderWindow(window);
-				
+
 				ArrayList<FoodDisplayObject> groupedByStall = foodOrderController
 						.getAllFoodOrderOfOrderWindowGroupedByStall(window);
 

@@ -1,6 +1,5 @@
 package dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +9,7 @@ import model.OrderWindow;
 
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import connection.MyConnection;
@@ -17,19 +17,20 @@ import connection.MyConnection;
 /**
  * Performs the function of Data Access Object for the OrderWindow model
  * 
- *
+ * 
  */
 public class OrderWindowDAO {
-	
+
 	/**
 	 * Creates a default constructor for OrderWindowDAO
 	 */
 	public OrderWindowDAO() {
-		
+
 	}
-	
+
 	/**
 	 * Retrieve the OrderWindow based on the provided ID
+	 * 
 	 * @param orderWindowId The ID used for retrieving the OrderWindow
 	 * @return The OrderWindow object that has the provided ID
 	 */
@@ -100,6 +101,7 @@ public class OrderWindowDAO {
 		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
 		dc.add(Restrictions.ge("endDateFormatted", currentDatetime)).add(
 				Restrictions.le("startDateFormatted", currentDatetime));
+		dc.addOrder(Order.asc("endDateFormatted"));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
