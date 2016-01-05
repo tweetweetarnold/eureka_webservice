@@ -107,7 +107,13 @@ public class StallDAO {
 			saveStall(newStall);
 		}
 	}
-
+	
+	/**
+	 * Retrieves all the Stalls from the Canteen
+	 * 
+	 * @param canteen The designated Canteen to retrieve the Stalls
+	 * @return An ArrayList of Stall objects in the designated Canteen
+	 */
 	public ArrayList<Stall> getAllStallsUnderCanteen(Canteen canteen) {
 		ArrayList<Stall> returnList = new ArrayList<Stall>();
 

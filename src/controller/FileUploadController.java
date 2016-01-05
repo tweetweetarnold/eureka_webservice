@@ -252,7 +252,7 @@ public class FileUploadController {
 			String contactNum = row[1].trim();
 			if (contactNum.isEmpty()) {
 				errorList.add("row " + rowNumber + " has empty contact number in Stall.csv");
-			} else if (!contactNum.matches("[0-9]{8}")) {
+			} else if (!contactNum.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
 				errorList.add("row " + rowNumber + " has invalid contact number in Stall.csv");
 			}
 			String canteenName = row[2].trim();
