@@ -16,7 +16,7 @@ import controller.StallController;
 /**
  * Servlet implementation class LoadAdminEditStallDetailsServlet
  */
-@WebServlet("/LoadAdminEditStallDetailsServlet")
+@WebServlet("/LoadAdminEditStallServlet")
 public class LoadAdminEditStallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

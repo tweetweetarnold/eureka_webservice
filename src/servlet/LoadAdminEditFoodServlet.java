@@ -15,7 +15,7 @@ import controller.FoodController;
 /**
  * Servlet implementation class LoadAdminEditFoodDetailsServlet
  */
-@WebServlet("/LoadAdminEditFoodDetailsServlet")
+@WebServlet("/LoadAdminEditFoodServlet")
 public class LoadAdminEditFoodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
