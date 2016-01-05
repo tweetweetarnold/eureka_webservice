@@ -60,7 +60,8 @@ public class FileUploadServlet extends HttpServlet {
 		// Create a new file upload handler and set max size
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(1024 * 1024 * 1000);
-		ArrayList<String> errorList = null;
+		ArrayList<String> errorList = new ArrayList<String>();
+		String fileName = null;
         try {
             // Parse the request
             FileItemIterator iter = upload.getItemIterator(request);
@@ -68,45 +69,105 @@ public class FileUploadServlet extends HttpServlet {
                 FileItemStream item = iter.next();
                 InputStream is = item.openStream();
                 if (!item.isFormField()) {
-//					***working in-progress***         	
-//                	String fileFormat = item.getContentType();
-//                	if (fileFormat.equals(".csv")) {
+//					***validating for a valid csv file type***         	
+                	String fileFormat = item.getContentType();
+                	System.out.println(fileFormat);
+                	if (fileFormat.equals("application/vnd.ms-excel")) {
+                		//pass it to controller to read file
+                		fileName = new File(item.getName()).getName();
+                		switch (fileName) {
+                		case "Canteen.csv":  
+                			errorList= fileUploadController.processCanteenUpload(is);
+		               	  	if (errorList.size() > 0) {
+		               	  		throw new Exception("There are Errors in the Canteen.csv file");
+		               	  	}
+                			break;
+                		case "Stall.csv":
+                			errorList = fileUploadController.processStallUpload(is);
+    	                	if (errorList.size() > 0) {
+    	                		throw new Exception("There are Errors in the Stall.csv file");
+    	                	}
+                			break;
+                		case "Food.csv":
+                			errorList = fileUploadController.processFoodUpload(is);
+    	                	if (errorList.size() > 0) {
+    	                		throw new Exception("There are Errors in the Food.csv file");
+    	                	}
+                			break;
+                		case "Modifier.csv":
+                			errorList = fileUploadController.processModifierUpload(is);
+    	                	if (errorList.size() > 0) {
+    	                		throw new Exception("There are Errors in the Modifier.csv file");
+    	                	}
+                			break;
+                		default: throw new Exception("Invalid file name. Please upload a correct file name.");
+                		}
+                	} else {
+                		System.out.println("ERROR");
+                		throw new Exception("Invalid file type. Please upload a valid csv file");
+                	}
+                }		
+//                		if (fileName.equals("Canteen.csv")) {
+//    	                	errorList= fileUploadController.processCanteenUpload(is);
+//    		               	  if (errorList.size() > 0) {
+//    		               		  throw new Exception("There are Errors in the Canteen.csv file");
+//    		               	  }
+//    		            } else if (fileName.equals("Stall.csv")) {
+//    	                	 // String canteenName = request.getParameter("canteenName");
+//    		            	errorList = fileUploadController.processStallUpload(is);
+//    	                	if (errorList.size() > 0) {
+//    	                		throw new Exception("There are Errors in the Stall.csv file");
+//    	                	}
+//    	                } else if (fileName.equals("Food.csv")) {
+//    	                	errorList = fileUploadController.processFoodUpload(is);
+//    	                	if (errorList.size() > 0) {
+//    	                		throw new Exception("There are Errors in the Food.csv file");
+//    	                	}
+//    	                } else if (fileName.equals("Modifier.csv")) {
+//    	                	errorList = fileUploadController.processModifierUpload(is);
+//    	                	if (errorList.size() > 0) {
+//    	                		throw new Exception("There are Errors in the Modifier.csv file");
+//    	                	}
+//    	                } else {
+//    	                	throw new Exception("Invalid file name. Please upload a correct file name.");
+//    	                }	
+//                	} else {
 //                		
 //                	}
-                    //pass it to controller to read file
-                	String itemName = item.getName();
-	                if (itemName.contains("Canteen.csv")) {
-	                	errorList= fileUploadController.processCanteenUpload(is);
-		               	  if (errorList.size() > 0) {
-		               		  throw new Exception("There are Errors in the Canteen.csv file");
-		               	  }
-		            } else if (itemName.contains("Stall.csv")) {
-	                	 // String canteenName = request.getParameter("canteenName");
-		            	errorList = fileUploadController.processStallUpload(is);
-	                	if (errorList.size() > 0) {
-	                		throw new Exception("There are Errors in the Stall.csv file");
-	                	}
-	                } else if (itemName.contains("Food.csv")) {
-	                	errorList = fileUploadController.processFoodUpload(is);
-	                	if (errorList.size() > 0) {
-	                		throw new Exception("There are Errors in the Food.csv file");
-	                	}
-	                } else if (itemName.contains("Modifier.csv")) {
-	                	errorList = fileUploadController.processModifierUpload(is);
-	                	if (errorList.size() > 0) {
-	                		throw new Exception("There are Errors in the Modifier.csv file");
-	                	}
-	                } else {
-	                	throw new Exception("Invalid file name. Please upload a correct file name.");
-	                }
+//                   
+//                	String itemName = item.getName();
+//	                if (itemName.contains("Canteen.csv")) {
+//	                	errorList= fileUploadController.processCanteenUpload(is);
+//		               	  if (errorList.size() > 0) {
+//		               		  throw new Exception("There are Errors in the Canteen.csv file");
+//		               	  }
+//		            } else if (itemName.contains("Stall.csv")) {
+//	                	 // String canteenName = request.getParameter("canteenName");
+//		            	errorList = fileUploadController.processStallUpload(is);
+//	                	if (errorList.size() > 0) {
+//	                		throw new Exception("There are Errors in the Stall.csv file");
+//	                	}
+//	                } else if (itemName.contains("Food.csv")) {
+//	                	errorList = fileUploadController.processFoodUpload(is);
+//	                	if (errorList.size() > 0) {
+//	                		throw new Exception("There are Errors in the Food.csv file");
+//	                	}
+//	                } else if (itemName.contains("Modifier.csv")) {
+//	                	errorList = fileUploadController.processModifierUpload(is);
+//	                	if (errorList.size() > 0) {
+//	                		throw new Exception("There are Errors in the Modifier.csv file");
+//	                	}
+//	                } else {
+//	                	throw new Exception("Invalid file name. Please upload a correct file name.");
+//	                }
                 }
-            }
+            
 				
-			session.setAttribute("success", "File Uploaded Successfully");
+			session.setAttribute("success", fileName + " has been uploaded successfully");
 			response.sendRedirect("adminFileUpload.jsp");
 		} catch (Exception e) {
-			errorList.add(e.getMessage());
-			session.setAttribute("error", errorList);
+			session.setAttribute("error", e.getMessage());
+			session.setAttribute("errorList", errorList);
 			response.sendRedirect("adminFileUpload.jsp");
 		}
 	}

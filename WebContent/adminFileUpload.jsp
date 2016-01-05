@@ -70,10 +70,10 @@
 	
 	</form>
 	
-	
 	<!-- Success message handling -->
 		<c:if test="${not empty sessionScope.success}">
-			<div class="alert alert-success" role="alert">
+		<br>
+			<div class="alert alert-success" role="alert" style="max-width: 50%">
 				<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
 				<span class="sr-only">Success:</span>
 				<c:out value="${success}" />
@@ -82,18 +82,27 @@
 		</c:if>
 	</div>
 			
-			
 			<!-- Error message handling -->
 		<c:if test="${not empty sessionScope.error}">
 			<div class="alert alert-danger" role="alert" style="max-width: 50%">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
-				<c:forEach items="${sessionScope.error}" var="errorList" varStatus="errorLoop">
-					<c:out value="${errorList}" /><br>
-				</c:forEach>
+				
+					<c:out value="${error}" /><br>
+					<c:if test="${not empty sessionScope.errorList}">
+						<c:forEach items="${sessionScope.errorList}" var="errorList" varStatus="errorLoop">
+							<c:out value="${errorList}" /><br>
+						</c:forEach>
+						
+					</c:if>
+				
 			</div>
 			<c:remove var="error" scope="session" />
 		</c:if>
+			
+			
+			
+
 </div>
 </div>
 </div>

@@ -164,8 +164,23 @@ public class FileUploadController {
 	public ArrayList<String> validateCanteenData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Iterator iter = content.iterator();
-		iter.next();
 		int rowNumber = 1;
+		//Validate the row header
+		String[] rowHeader = (String[]) iter.next();
+		String canteenNameHeader = rowHeader[0].trim();
+		if (canteenNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Canteen Name in Canteen.csv");
+		} else if (!canteenNameHeader.equals("Canteen Name")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Canteen Name in Canteen.csv");
+		}
+		
+		String addressHeader = rowHeader[1].trim();
+		if (addressHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Address in Canteen.csv");
+		} else if (!addressHeader.equals("Address")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Address in Canteen.csv");
+		}
+		
 		while (iter.hasNext()) {
 			rowNumber++;
 			String[] row = (String[]) iter.next();
@@ -203,8 +218,30 @@ public class FileUploadController {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Canteen canteen = null;
 		Iterator iter = content.iterator();
-		iter.next();
 		int rowNumber = 1;
+		
+		String[] rowHeader = (String[]) iter.next();
+		String stallNameHeader = rowHeader[0].trim();
+		if (stallNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Stall Name in Stall.csv");
+		} else if (!stallNameHeader.equals("Stall Name")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Stall Name in Stall.csv");
+		}
+		
+		String contactNumberHeader = rowHeader[1].trim();
+		if (contactNumberHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Contact Number in Stall.csv");
+		} else if (!contactNumberHeader.equals("Contact Number")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Contact Number in Stall.csv");
+		}
+		
+		String canteenNameHeader = rowHeader[2].trim();
+		if (canteenNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Canteen Name in Stall.csv");
+		} else if (!canteenNameHeader.equals("Canteen Name")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Canteen Name in Stall.csv");
+		}
+		
 		while (iter.hasNext()) {
 			rowNumber++;
 			String[] row = (String[]) iter.next();
@@ -248,8 +285,44 @@ public class FileUploadController {
 	public ArrayList<String> validateFoodData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Iterator iter = content.iterator();
-		iter.next();
 		int rowNumber = 1;
+		
+		String[] rowHeader = (String[]) iter.next();
+		String foodNameHeader = rowHeader[0].trim();
+		if (foodNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Food Name in Food.csv");
+		} else if (!foodNameHeader.equals("Food Name")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Food Name in Food.csv");
+		}
+		
+		String priceHeader = rowHeader[1].trim();
+		if (priceHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Price in Food.csv");
+		} else if (!priceHeader.equals("Price")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Price in Food.csv");
+		}
+		
+		String descriptionHeader = rowHeader[2].trim();
+		if (descriptionHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Description in Food.csv");
+		} else if (!descriptionHeader.equals("Description")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Description in Food.csv");
+		}
+		
+		String stallNameHeader = rowHeader[3].trim();
+		if (stallNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Stall Name in Food.csv");
+		} else if (!stallNameHeader.equals("Stall Name")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Stall Name in Food.csv");
+		}
+		
+		String canteenNameHeader = rowHeader[4].trim();
+		if (canteenNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Canteen Name in Food.csv");
+		} else if (!canteenNameHeader.equals("Canteen Name")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Canteen Name in Food.csv");
+		}
+		
 		while (iter.hasNext()) {
 			rowNumber++;
 			String[] row = (String[]) iter.next();
@@ -307,8 +380,50 @@ public class FileUploadController {
 	public ArrayList<String> validateModifierData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Iterator iter = content.iterator();
-		iter.next();
 		int rowNumber = 1;
+		
+		String[] rowHeader = (String[])iter.next();
+		String modifierNameHeader = rowHeader[0].trim();
+		if (modifierNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Modifier Name in Modifier.csv");
+		} else if (!modifierNameHeader.equals("Modifier Name")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Modifier Name in Modifier.csv");
+		}
+		
+		String descriptionHeader = rowHeader[1].trim();
+		if (descriptionHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Description in Modifier.csv");
+		} else if (!descriptionHeader.equals("Description")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Description in Modifier.csv");
+		}
+		
+		String priceHeader = rowHeader[2].trim();
+		if (priceHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Price in Modifier.csv");
+		} else if (!priceHeader.equals("Price")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Price in Modifier.csv");
+		}
+		String foodNameHeader = rowHeader[3].trim();
+		if (foodNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Food Name in Modifier.csv");
+		} else if (!foodNameHeader.equals("Food Name")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Food Name in Modifier.csv");
+		}
+		
+		String stallNameHeader = rowHeader[4].trim();
+		if (stallNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Stall Name in Modifier.csv");
+		} else if (!stallNameHeader.equals("Stall Name")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Stall Name in Modifier.csv");
+		}
+
+		String canteenNameHeader = rowHeader[5].trim();
+		if (canteenNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber + " has a missing row header for Canteen Name in Modifier.csv");
+		} else if (!canteenNameHeader.equals("Canteen Name")) {
+			errorList.add("row " + rowNumber + " has an invalid row header for Canteen Name in Modifier.csv");
+		}
+		
 		while (iter.hasNext()) {
 			rowNumber++;
 			String[] row = (String[]) iter.next();
