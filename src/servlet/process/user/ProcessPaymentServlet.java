@@ -1,4 +1,4 @@
-package servlet;
+package servlet.process.user;
 
 import java.io.IOException;
 import java.util.List;

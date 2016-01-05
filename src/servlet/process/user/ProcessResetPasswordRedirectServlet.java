@@ -1,4 +1,4 @@
-package servlet;
+package servlet.process.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,13 +22,13 @@ import services.PasswordService;
 /**
  * Servlet implementation class ProcessResetPasswordServlet
  */
-@WebServlet("/ProcessResetPasswordPage")
-public class ProcessResetPasswordPage extends HttpServlet {
+@WebServlet("/ProcessResetPasswordRedirectServlet")
+public class ProcessResetPasswordRedirectServlet extends HttpServlet {
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProcessResetPasswordPage() {
+    public ProcessResetPasswordRedirectServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,21 +51,39 @@ public class ProcessResetPasswordPage extends HttpServlet {
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		AESAlgorithm aes = new AESAlgorithm();
 		// TODO Auto-generated method stub
+
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+
+		System.out.println("");
+		System.out.println("****** ProcessResetPasswordRedirectServlet ******");
+		out.println("ProcessResetPasswordRedirectServlet");
+		HttpSession session = request.getSession();
+		
+		String email = (String) session.getAttribute("email");
+		String newPassword = request.getParameter("newPassword");
+		String newPasswordConfirmation = request.getParameter("confirmPwd");
+		
 		try{
-			String email = (String) request.getParameter("email");
-			//String[] emailString = urlString.split("/");
-			//String email = emailString[0];
-			String newEmail = email.replaceAll(" ","+");
-			String eDecrypt = aes.decrypt(newEmail);
-			session.setAttribute("email", eDecrypt);
-			response.sendRedirect("resetPasswordRedirect.jsp");
+			AESAlgorithm aesAlgo = new AESAlgorithm();
+			EmployeeController userController = new EmployeeController();
+			Employee employee = userController.retrieveEmployeeViaEmail(email);
+				if(newPassword.equals(newPasswordConfirmation)){
+					String encryptedPassword = aesAlgo.encrypt(email + newPassword);
+					employee.setPassword(encryptedPassword);
+					userController.updateEmployee(employee);
+					session.setAttribute("success", "Password has been updated!");
+					response.sendRedirect("login.jsp");
+				}else{
+					throw new Exception("New password does not match");
+				}
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("Error: " + e.getMessage());
-			response.sendRedirect("resetPassword.jsp");
+			session.setAttribute("error",
+					e.getMessage());
+			response.sendRedirect("resetPasswordRedirect.jsp");
 		}
 	}
 }
