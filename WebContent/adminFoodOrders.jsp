@@ -79,6 +79,7 @@
 										>
 											${window.company.name}:&nbsp;&nbsp;
 											<b>
+												<fmt:setLocale value="EN" />
 												<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.startDateFormatted}" />
 											</b>
 											&nbsp;&nbsp;to&nbsp;&nbsp;
