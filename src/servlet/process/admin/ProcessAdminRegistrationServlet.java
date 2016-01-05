@@ -1,7 +1,6 @@
-package servlet;
+package servlet.process.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -19,19 +18,20 @@ import controller.AccessController;
 @WebServlet("/ProcessAdminRegistrationServlet")
 public class ProcessAdminRegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProcessAdminRegistrationServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ProcessAdminRegistrationServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
@@ -39,36 +39,31 @@ public class ProcessAdminRegistrationServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
-	
+
 	public void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		AccessController registrationController = new AccessController();
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		System.out.println("AdminRegistrationServlet");
 
 		HttpSession session = request.getSession();
 		HashMap<String, String> userInput = new HashMap<>();
 
 		try {
-			AccessController registrationController = new AccessController();
-
 			String adminName = (String) request.getParameter("name");
 			String username = (String) request.getParameter("username");
 			String password = (String) request.getParameter("password");
 			String confirmPwd = (String) request.getParameter("confirmPwd");
 			String contactNo = (String) request.getParameter("contactNo");
-			
 
 			userInput.put("name", adminName);
 			userInput.put("username", username);
 			userInput.put("contactNo", contactNo);
-			
-			
 
 			// Check user parameters
 			boolean valid = (contactNo.length() == 8 && password.length() >= 7 && password
@@ -77,8 +72,8 @@ public class ProcessAdminRegistrationServlet extends HttpServlet {
 			if (valid) {
 				long contactNumber = Long.parseLong(contactNo);
 
-				String generatedAdminId = registrationController.registerAdmin(username,
-						password, adminName, contactNumber);
+				String generatedAdminId = registrationController.registerAdmin(username, password,
+						adminName, contactNumber);
 
 				session.setAttribute("success", "Yay! Your account has been created. Username: "
 						+ generatedAdminId);

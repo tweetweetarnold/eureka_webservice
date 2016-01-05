@@ -5,14 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import model.Food;
+import model.Modifier;
+import model.Stall;
+
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
-import model.Food;
-import model.FoodOrder;
-import model.Modifier;
-import model.Stall;
 import connection.MyConnection;
 
 /**
@@ -120,7 +120,7 @@ public class FoodDAO {
 	 * @param content The list of Food data to be loaded into the database
 	 */
 	public void loadFoodData(List<String[]> content) {
-		Iterator iter = content.iterator();
+		Iterator<String[]> iter = content.iterator();
 		iter.next();
 		while (iter.hasNext()) {
 			String[] row = (String[]) iter.next();
@@ -188,7 +188,7 @@ public class FoodDAO {
 			addModifierToFood(newModifier, food);
 		}
 	}
-	
+
 	/**
 	 * Retrieves a List of Food in the Stall
 	 * 

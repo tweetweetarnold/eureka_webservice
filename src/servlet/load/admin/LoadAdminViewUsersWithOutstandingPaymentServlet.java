@@ -1,4 +1,4 @@
-package servlet;
+package servlet.load.admin;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,22 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Food;
-import model.Stall;
-import controller.FoodController;
-import controller.StallController;
+import model.Employee;
+import controller.FinanceController;
 
 /**
- * Servlet implementation class LoadAdminViewFoodsDetailsServlet
+ * Servlet implementation class LoadAdminViewUsersWithOutstandingPaymentServlet
  */
-@WebServlet("/LoadAdminViewFoodsDetailsServlet")
-public class LoadAdminViewFoodsDetailsServlet extends HttpServlet {
+@WebServlet("/LoadAdminViewUsersWithOutstandingPaymentServlet")
+public class LoadAdminViewUsersWithOutstandingPaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewFoodsDetailsServlet() {
+	public LoadAdminViewUsersWithOutstandingPaymentServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -46,20 +44,12 @@ public class LoadAdminViewFoodsDetailsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		StallController stallController = new StallController();
-		FoodController foodController = new FoodController();
+		FinanceController financeController = new FinanceController();
 
-		String stallIdString = request.getParameter("stallId");
-		int stallId = Integer.parseInt(stallIdString);
+		ArrayList<Employee> list = financeController.getAllUsersWithOutstandingPayment(0, false);
+		session.setAttribute("outstandingList", list);
 
-		Stall stall = stallController.getStall(stallId);
-		ArrayList<Food> list = foodController.getAllFoodsUnderStall(stall);
-
-		session.setAttribute("stallId", stallId);
-		session.setAttribute("stallName", stall.getName());
-		session.setAttribute("foodList", list);
-
-		response.sendRedirect("adminViewFoods.jsp");
+		response.sendRedirect("adminViewOutstandingPayment.jsp");
 	}
 
 }

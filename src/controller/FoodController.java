@@ -66,7 +66,7 @@ public class FoodController {
 		int weatherCode = weather.getWeatherCode();
 		Canteen currentCanteen = orderWindow.getCanteen();
 		Set<Stall> stallSet = currentCanteen.getStallList();
-		Iterator iter = stallSet.iterator();
+		Iterator<Stall> iter = stallSet.iterator();
 		ArrayList<Food> foodList = new ArrayList<Food>();
 
 		while (iter.hasNext()) {

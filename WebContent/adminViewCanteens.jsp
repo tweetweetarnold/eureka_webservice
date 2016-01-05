@@ -95,7 +95,7 @@
 											<fmt:formatDate type="both" value="${canteen.createDate}" />
 										</td>
 										<td>
-											<a href="LoadAdminViewStallsDetailsServlet?canteenId=${canteen.canteenId}">View all
+											<a href="LoadAdminViewStallsServlet?canteenId=${canteen.canteenId}">View all
 												${fn:length(canteen.stallList)} stalls</a>
 										</td>
 									</tr>

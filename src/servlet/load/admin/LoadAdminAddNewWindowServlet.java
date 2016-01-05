@@ -1,6 +1,7 @@
-package servlet;
+package servlet.load.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.EmployeeDAO;
+import model.Canteen;
+import model.Company;
+import controller.CanteenController;
+import controller.CompanyController;
 
 /**
- * Servlet implementation class LoadAdminViewUsersDetailsServlet
+ * Servlet implementation class LoadAdminAddNewWindowServlet
  */
-@WebServlet("/LoadAdminViewUsersDetailsServlet")
-public class LoadAdminViewUsersDetailsServlet extends HttpServlet {
+@WebServlet("/LoadAdminAddNewWindowServlet")
+public class LoadAdminAddNewWindowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewUsersDetailsServlet() {
+	public LoadAdminAddNewWindowServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -42,11 +46,23 @@ public class LoadAdminViewUsersDetailsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		HttpSession session = request.getSession();
-		
-		EmployeeDAO eDao = new EmployeeDAO();
-		session.setAttribute("userMgmtView", eDao.getAllEmployees());
-		response.sendRedirect("adminViewUsers.jsp");
-	}
+		try {
+			CompanyController coCtrl = new CompanyController();
+			CanteenController caCtrl = new CanteenController();
+			HttpSession session = request.getSession();
 
+			ArrayList<Company> companyList = coCtrl.getAllCompany();
+			ArrayList<Canteen> canteenList = caCtrl.getAllCanteens();
+
+			session.setAttribute("companyList", companyList);
+			session.setAttribute("canteenList", canteenList);
+
+			response.sendRedirect("adminAddNewWindow.jsp");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("An error has occurred at LoadAdminAddNewWindowServlet: "
+					+ e.getMessage());
+		}
+	}
 }

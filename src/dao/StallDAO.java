@@ -6,14 +6,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import model.Canteen;
+import model.Food;
+import model.Stall;
+
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
-import model.Canteen;
-import model.Food;
-import model.FoodOrder;
-import model.Stall;
 import connection.MyConnection;
 
 /**

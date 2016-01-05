@@ -1,10 +1,9 @@
-package servlet;
+package servlet.process.admin;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import model.Employee;
 import model.FoodOrder;
-import controller.FoodOrderController;
 import controller.EmployeeController;
+import controller.FoodOrderController;
 
 /**
  * Servlet implementation class processGetEmployeeServlet
@@ -33,8 +32,7 @@ public class ProcessAdminGetEmployeeServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -43,8 +41,7 @@ public class ProcessAdminGetEmployeeServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

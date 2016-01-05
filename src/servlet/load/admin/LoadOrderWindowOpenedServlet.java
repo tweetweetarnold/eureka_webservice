@@ -1,4 +1,4 @@
-package servlet;
+package servlet.load.admin;
 
 import java.io.IOException;
 import java.util.ArrayList;

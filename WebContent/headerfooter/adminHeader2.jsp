@@ -292,7 +292,7 @@
 							<!-- /.nav-third-level -->
 						</li>
 						<li>
-							<a href="LoadAdminCreateNewWindowServlet">Create New Window</a>
+							<a href="LoadAdminAddNewWindowServlet">Create New Window</a>
 						</li>
 
 					</ul>
@@ -335,7 +335,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="LoadAdminViewUsersDetailsServlet">View</a>
+							<a href="LoadAdminViewUsersServlet">View</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->

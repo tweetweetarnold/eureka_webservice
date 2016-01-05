@@ -1,4 +1,4 @@
-package servlet;
+package servlet.load.admin;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Canteen;
-import model.Company;
+import model.Stall;
 import controller.CanteenController;
-import controller.CompanyController;
+import controller.StallController;
 
 /**
- * Servlet implementation class LoadAdminCreateNewWindowServlet
+ * Servlet implementation class LoadAdminViewStallsDetailsServlet
  */
-@WebServlet("/LoadAdminCreateNewWindowServlet")
-public class LoadAdminCreateNewWindowServlet extends HttpServlet {
+@WebServlet("/LoadAdminViewStallsServlet")
+public class LoadAdminViewStallsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminCreateNewWindowServlet() {
+	public LoadAdminViewStallsServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -45,24 +45,22 @@ public class LoadAdminCreateNewWindowServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		StallController stallController = new StallController();
+		CanteenController canteenController = new CanteenController();
 
-		try {
-			CompanyController coCtrl = new CompanyController();
-			CanteenController caCtrl = new CanteenController();
-			HttpSession session = request.getSession();
+		String canteenIdString = request.getParameter("canteenId");
+		int canteenId = Integer.parseInt(canteenIdString);
 
-			ArrayList<Company> companyList = coCtrl.getAllCompany();
-			ArrayList<Canteen> canteenList = caCtrl.getAllCanteens();
+		Canteen canteen = canteenController.getCanteen(canteenId);
 
-			session.setAttribute("companyList", companyList);
-			session.setAttribute("canteenList", canteenList);
+		ArrayList<Stall> list = stallController.getAllStallsUnderCanteen(canteen);
 
-			response.sendRedirect("adminAddNewWindow.jsp");
+		session.setAttribute("canteenName", canteen.getName());
+		session.setAttribute("stallList", list);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("An error has occurred at LoadAdminCreateNewWindowServlet: "
-					+ e.getMessage());
-		}
+		response.sendRedirect("adminViewStalls.jsp");
+
 	}
+
 }

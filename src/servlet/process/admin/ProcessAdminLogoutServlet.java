@@ -1,7 +1,6 @@
-package servlet;
+package servlet.process.admin;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.FoodOrder;
-import controller.FoodOrderController;
+import connection.MyConnection;
 
 /**
- * Servlet implementation class LoadAdminViewUserOrderHistoryServlet
+ * Servlet implementation class ProcessAdminLogoutServlet
  */
-@WebServlet("/LoadAdminViewUserOrderHistoryServlet")
-public class LoadAdminViewUserOrderHistoryServlet extends HttpServlet {
+@WebServlet("/ProcessAdminLogoutServlet")
+public class ProcessAdminLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewUserOrderHistoryServlet() {
+	public ProcessAdminLogoutServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,7 +32,7 @@ public class LoadAdminViewUserOrderHistoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+		doProcess(request, response);
 	}
 
 	/**
@@ -43,20 +41,19 @@ public class LoadAdminViewUserOrderHistoryServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doProcess(request, response);
+	}
 
-		FoodOrderController foodOrderController = new FoodOrderController();
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		System.out.println("ProcessAdminLogoutServlet");
+
+		MyConnection.closeSessionFactory();
 		HttpSession session = request.getSession();
-
-		String email = request.getParameter("email");
-		String name = request.getParameter("name");
-
-		List<FoodOrder> list = foodOrderController.getFoodOrderSet(email);
-
-		session.setAttribute("orderHistoryList", list);
-		session.setAttribute("name", name);
-
-		response.sendRedirect("adminViewUserOrderHistory.jsp");
-
+		session.invalidate();
+		response.sendRedirect("adminLogin.jsp");
 	}
 
 }

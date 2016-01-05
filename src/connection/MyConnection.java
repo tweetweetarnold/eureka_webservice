@@ -9,11 +9,9 @@ import model.Employee;
 import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
-import model.OrderWindow;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -21,7 +19,6 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
-import org.joda.time.DateTime;
 
 public class MyConnection {
 	private static SessionFactory sessionFactory;

@@ -1,7 +1,6 @@
-package servlet;
+package servlet.load.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Canteen;
-import controller.CanteenController;
+import dao.EmployeeDAO;
 
 /**
- * Servlet implementation class LoadViewCanteenServlet
+ * Servlet implementation class LoadAdminViewUsersServlet
  */
-@WebServlet("/LoadViewCanteenServlet")
-public class LoadViewCanteenServlet extends HttpServlet {
+@WebServlet("/LoadAdminViewUsersServlet")
+public class LoadAdminViewUsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadViewCanteenServlet() {
+	public LoadAdminViewUsersServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -45,12 +43,10 @@ public class LoadViewCanteenServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		HttpSession session = request.getSession();
-		CanteenController canteenController = new CanteenController();
-
-		ArrayList<Canteen> list = canteenController.getAllCanteens();
-		session.setAttribute("canteenList", list);
-
-		response.sendRedirect("adminViewCanteens.jsp");
+		
+		EmployeeDAO eDao = new EmployeeDAO();
+		session.setAttribute("userMgmtView", eDao.getAllEmployees());
+		response.sendRedirect("adminViewUsers.jsp");
 	}
 
 }

@@ -83,7 +83,7 @@
 
 										<div class="form-group">
 											<label>Food name</label>
-											<input class="form-control" name="name">
+											<input class="form-control" name="name" required>
 										</div>
 
 										<div class="form-group">
@@ -98,7 +98,7 @@
 
 										<div class="form-group">
 											<label>Price</label>
-											<input class="form-control" name="price">
+											<input class="form-control" name="price" required>
 										</div>
 
 										<div class="form-group">

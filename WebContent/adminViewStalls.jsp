@@ -107,8 +107,7 @@
 											<img src="${stall.imageDirectory}" />
 										</td>
 										<td>
-											<a href="LoadAdminViewFoodsDetailsServlet?stallId=${stall.stallId}">View all ${fn:length(stall.foodList)}
-												food</a>
+											<a href="LoadAdminViewFoodsServlet?stallId=${stall.stallId}">View all ${fn:length(stall.foodList)} food</a>
 											&nbsp&nbsp
 											<a href="LoadAdminEditStallServlet?stallId=${stall.stallId}">Edit stall</a>
 										</td>

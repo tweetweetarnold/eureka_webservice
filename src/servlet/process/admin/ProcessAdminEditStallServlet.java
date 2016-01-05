@@ -1,7 +1,6 @@
-package servlet;
+package servlet.process.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,22 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Canteen;
 import model.Stall;
-import controller.CanteenController;
 import controller.StallController;
 
 /**
- * Servlet implementation class LoadAdminViewStallsDetailsServlet
+ * Servlet implementation class ProcessAdminEditStallServlet
  */
-@WebServlet("/LoadAdminViewStallsDetailsServlet")
-public class LoadAdminViewStallsDetailsServlet extends HttpServlet {
+@WebServlet("/ProcessAdminEditStallServlet")
+public class ProcessAdminEditStallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewStallsDetailsServlet() {
+	public ProcessAdminEditStallServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -47,20 +44,29 @@ public class LoadAdminViewStallsDetailsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		StallController stallController = new StallController();
-		CanteenController canteenController = new CanteenController();
 
-		String canteenIdString = request.getParameter("canteenId");
-		int canteenId = Integer.parseInt(canteenIdString);
+		String stallIdString = request.getParameter("stallId");
+		String name = request.getParameter("name");
+		String contactNoString = request.getParameter("contactNo");
+		String imageDirectory = request.getParameter("imageDirectory");
 
-		Canteen canteen = canteenController.getCanteen(canteenId);
+		int stallId = Integer.parseInt(stallIdString);
+		long contactNo = Long.parseLong(contactNoString);
 
-		ArrayList<Stall> list = stallController.getAllStallsUnderCanteen(canteen);
+		Stall stall = stallController.getStall(stallId);
+		int canteenId = stall.getCanteen().getCanteenId();
 
-		session.setAttribute("canteenName", canteen.getName());
-		session.setAttribute("stallList", list);
+		stall.setName(name);
+		stall.setContactNo(contactNo);
+		stall.setImageDirectory(imageDirectory);
 
-		response.sendRedirect("adminViewStalls.jsp");
+		System.out.println("stallname: " + stall.getName());
+		System.out.println("saving stall...");
+		stallController.updateStall(stall);
 
+		session.setAttribute("success", "Stall updated successfully.");
+
+		response.sendRedirect("LoadAdminViewStallsDetailsServlet?canteenId=" + canteenId);
 	}
 
 }

@@ -1,6 +1,7 @@
-package servlet;
+package servlet.load.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,16 +16,16 @@ import controller.FoodController;
 import controller.StallController;
 
 /**
- * Servlet implementation class ProcessAdminAddNewFoodServlet
+ * Servlet implementation class LoadAdminViewFoodsServlet
  */
-@WebServlet("/ProcessAdminAddNewFoodServlet")
-public class ProcessAdminAddNewFoodServlet extends HttpServlet {
+@WebServlet("/LoadAdminViewFoodsServlet")
+public class LoadAdminViewFoodsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ProcessAdminAddNewFoodServlet() {
+	public LoadAdminViewFoodsServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -45,38 +46,20 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		FoodController foodController = new FoodController();
 		StallController stallController = new StallController();
+		FoodController foodController = new FoodController();
 
-		String name = request.getParameter("name");
-		String description = request.getParameter("description");
-		String priceString = request.getParameter("price");
 		String stallIdString = request.getParameter("stallId");
-		System.out.println("String: " + stallIdString);
+		int stallId = Integer.parseInt(stallIdString);
 
-		String imageDirectory = request.getParameter("imageDirectory");
-		String weatherConditions = request.getParameter("weatherConditions");
+		Stall stall = stallController.getStall(stallId);
+		ArrayList<Food> list = foodController.getAllFoodsUnderStall(stall);
 
-		try {
-			double price = Double.parseDouble(priceString);
-			int stallId = Integer.parseInt(stallIdString);
+		session.setAttribute("stallId", stallId);
+		session.setAttribute("stallName", stall.getName());
+		session.setAttribute("foodList", list);
 
-			Stall stall = stallController.getStall(stallId);
-			Food food = new Food(name, description, price, imageDirectory, stall);
-
-			food.setWeatherConditions(weatherConditions);
-
-			System.out.println("foodname: " + food.getName());
-			System.out.println("saving food...");
-			foodController.saveFood(food);
-
-			session.setAttribute("success", "Food updated successfully.");
-
-			response.sendRedirect("adminViewFoods.jsp");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		response.sendRedirect("adminViewFoods.jsp");
 	}
 
 }

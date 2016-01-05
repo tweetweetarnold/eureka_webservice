@@ -1,4 +1,4 @@
-package servlet;
+package servlet.process.admin;
 
 import java.io.IOException;
 
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import model.Food;
 import controller.FoodController;
-import dao.FoodDAO;
 
 /**
  * Servlet implementation class ProcessAdminEditFoodServlet
@@ -74,7 +73,7 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 
 			session.setAttribute("success", "Food updated successfully.");
 
-			response.sendRedirect("LoadAdminViewFoodsDetailsServlet?stallId=" + stallId);
+			response.sendRedirect("LoadAdminViewFoodsServlet?stallId=" + stallId);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,4 +1,4 @@
-package servlet;
+package servlet.load.admin;
 
 import java.io.IOException;
 
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Food;
 import model.Stall;
 import controller.StallController;
 
