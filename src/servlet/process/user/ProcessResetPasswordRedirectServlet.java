@@ -65,11 +65,15 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 		String newPassword = request.getParameter("newPassword");
 		String newPasswordConfirmation = request.getParameter("confirmPwd");
 		
+		boolean validNewPasswordLength = newPassword.length() >= 7 & !newPassword.contains(" ");
+		boolean validNewPasswordConfirmation = newPassword.equals(newPasswordConfirmation) & !newPasswordConfirmation.contains(" ");
+		
 		try{
 			AESAlgorithm aesAlgo = new AESAlgorithm();
 			EmployeeController userController = new EmployeeController();
 			Employee employee = userController.retrieveEmployeeViaEmail(email);
-				if(newPassword.equals(newPasswordConfirmation)){
+			if (validNewPasswordLength) {
+				if(validNewPasswordConfirmation){
 					String encryptedPassword = aesAlgo.encrypt(email + newPassword);
 					employee.setPassword(encryptedPassword);
 					userController.updateEmployee(employee);
@@ -78,6 +82,9 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 				}else{
 					throw new Exception("New password does not match");
 				}
+			} else {
+				throw new Exception("New password must be at least 7 characters long");
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("Error: " + e.getMessage());
