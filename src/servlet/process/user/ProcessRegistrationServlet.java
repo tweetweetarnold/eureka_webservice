@@ -1,7 +1,8 @@
 package servlet.process.user;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +15,11 @@ import javax.servlet.http.HttpSession;
 
 import model.Company;
 
-import org.apache.commons.validator.routines.EmailValidator;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import controller.AccessController;
 import controller.CompanyController;
@@ -40,7 +45,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		process(request, response);
+		doPost(request, response);
 	}
 
 	/**
@@ -49,21 +54,22 @@ public class ProcessRegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		process(request, response);
-	}
 
-	public void process(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		response.setContentType("text/html");
 		System.out.println("*********** RegistrationServlet ***********");
 
 		HttpSession session = request.getSession();
-		HashMap<String, String> userInput = new HashMap<>();
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+
+		AccessController accessController = new AccessController();
+		CompanyController companyController = new CompanyController();
+		JSONObject userInput = new JSONObject();
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		// HashMap<String, String> userInput = new HashMap<>();
+
+		String test = request.getParameter("test");
 
 		try {
-			AccessController accessController = new AccessController();
-
 			String employeeName = (String) request.getParameter("name").trim();
 			String password = (String) request.getParameter("password");
 			String confirmPwd = (String) request.getParameter("confirmPwd");
@@ -76,76 +82,59 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			userInput.put("contactNo", contactNo);
 			userInput.put("companyCode", companyCode);
 
-			EmailValidator emailValidator = EmailValidator.getInstance();
-			boolean validEmail = emailValidator.isValid(email);
+			// Check parameters validity
+			ArrayList<String> errorMessages = accessController.checkUserInputs(email, employeeName,
+					password, confirmPwd, contactNo);
 
-			// Check user parameters
-			boolean validEmployeeName = (!employeeName.equals("")) && employeeName.length() > 0;
-
-			boolean valid = (contactNo.length() == 8 && password.length() >= 7
-					&& password.equals(confirmPwd) && validEmail);
-			boolean validContactNo = contactNo.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]");
-			boolean validPasswordLength = password.length() >= 7 & !password.contains(" ");
-			boolean validPasswordConfirmation = password.equals(confirmPwd) & !confirmPwd.contains(" ");
-
-			if (validEmployeeName) {
-				if (validContactNo) {
-					long contactNumber = Long.parseLong(contactNo);
-					if (validPasswordLength) {
-						if (validPasswordConfirmation) {
-							if (validEmail) {
-								// moved creation of user to next servlet
-								// String generatedEmployeeId = accessController.registerUser(
-								// password, employeeName, email, contactNumber, companyCode);
-
-								userInput.put("password", password);
-								session.setAttribute("userInput", userInput);
-
-								CompanyController companyController = new CompanyController();
-
-								Company company = companyController
-										.getCompanyByCompanyCode(companyCode);
-								Set<String> buildingSet = company.getDeliveryPointSet();
-								System.out.println("Building size: " + buildingSet.size());
-
-								RequestDispatcher rd = request
-										.getRequestDispatcher("defaultDeliveryPoint.jsp");
-								request.setAttribute("buildingSet", buildingSet);
-								rd.forward(request, response);
-
-							} else {
-								System.out.println("RegistrationServlet: Validation failed.");
-								throw new Exception("The Email that you provided is not valid");
-							}
-						} else {
-							System.out.println("RegistrationServlet: Validation failed.");
-							throw new Exception("Passwords do not match");
-						}
-					} else {
-						System.out.println("RegistrationServlet: Validation failed.");
-						throw new Exception("Password must be at least 7 characters long");
-					}
-				} else {
-					System.out.println("RegistrationServlet: Validation failed.");
-					throw new Exception("Contact Number is not valid.");
+			if (errorMessages != null) { // if parameters don't meet requirements
+				String msg = "";
+				for (String s : errorMessages) {
+					msg = s + "<br>";
 				}
+				throw new Exception(msg);
+			}
+
+			userInput.put("password", password);
+			session.setAttribute("userInput", userInput);
+
+			Company company = companyController.getCompanyByCompanyCode(companyCode);
+			Set<String> buildingSet = company.getDeliveryPointSet();
+			System.out.println("Building size: " + buildingSet.size());
+
+			if (test != null && test.equals("true")) {
+				userInput.put("status", "ok");
+				out.print(gson.toJson(userInput));
 			} else {
-				System.out.println("RegistrationServlet: Validation failed.");
-				throw new Exception("Employee name cannot be empty");
+				RequestDispatcher rd = request.getRequestDispatcher("defaultDeliveryPoint.jsp");
+				request.setAttribute("buildingSet", buildingSet);
+				rd.forward(request, response);
 			}
 
 		} catch (Exception e) {
 			System.out.println("Exception@RegistrationServlet: " + e.getMessage());
 			e.printStackTrace();
-			if (!e.getMessage().isEmpty()) {
-				session.setAttribute("error", e.getMessage());
-			} else {
-				session.setAttribute("error",
-						"Oops! Something went wrong! Please check your inputs.");
-			}
-			session.setAttribute("userInput", userInput);
 
-			response.sendRedirect("registration.jsp");
+			if (test != null && test.equals("true")) {
+				try {
+					JSONObject obj = new JSONObject();
+					obj.put("status", "error");
+					obj.put("error", e.getMessage());
+					out.print(gson.toJson(obj));
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			} else {
+				if (!e.getMessage().isEmpty()) {
+					session.setAttribute("error", e.getMessage());
+				} else {
+					session.setAttribute("error",
+							"Oops! Something went wrong! Please check your inputs.");
+				}
+				session.setAttribute("userInput", userInput);
+
+				response.sendRedirect("registration.jsp");
+			}
 		}
 	}
 }

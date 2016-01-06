@@ -1,9 +1,12 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.Admin;
 import model.Company;
 import model.Employee;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.hibernate.exception.ConstraintViolationException;
 
 import services.AESAlgorithm;
@@ -29,7 +32,68 @@ public class AccessController {
 	 * Creates a default constructor for AccessController
 	 */
 	public AccessController() {
+	}
 
+	/**
+	 * Checks the user parameters for registration to see if they meet the requirements.
+	 * 
+	 * @param email The email provided.
+	 * @param name The name provided.
+	 * @param password The password provided.
+	 * @param confirmPwd The confirm password provided.
+	 * @param contactNo The contact number provided.
+	 * @return An ArrayList of error messages (Strings) is returned. If no error messages, returns
+	 *         null.
+	 */
+	public ArrayList<String> checkUserInputs(String email, String name, String password,
+			String confirmPwd, String contactNo) {
+		ArrayList<String> messages = new ArrayList<String>();
+
+		messages.addAll(checkEmailRequirements(email));
+		messages.addAll(checkEmployeeNameRequirements(name));
+		messages.addAll(checkContactNoRequirements(contactNo));
+		messages.addAll(checkPasswordMeetRequirements(password, confirmPwd));
+
+		if (!messages.isEmpty()) {
+			return messages;
+		}
+		return null;
+	}
+
+	public ArrayList<String> checkEmailRequirements(String email) {
+		ArrayList<String> messages = new ArrayList<String>();
+		if (!EmailValidator.getInstance().isValid(email)) {
+			messages.add("Invalid Email. Please try again.");
+		}
+		return messages;
+	}
+
+	public ArrayList<String> checkEmployeeNameRequirements(String name) {
+		ArrayList<String> messages = new ArrayList<String>();
+		if (name.equals("")) {
+			messages.add("Employee name cannot be empty.");
+		}
+		return messages;
+	}
+
+	public ArrayList<String> checkPasswordMeetRequirements(String password, String confirmPwd) {
+		ArrayList<String> messages = new ArrayList<String>();
+		if (!password.equals(confirmPwd)) {
+			messages.add("Passwords do not match.");
+		}
+		if (!(password.length() >= 7) && password.contains(" ")) {
+			messages.add("Password must be at least 7 characters long without spaces.");
+		}
+		return messages;
+	}
+
+	public ArrayList<String> checkContactNoRequirements(String contactNo) {
+		ArrayList<String> messages = new ArrayList<String>();
+		if (contactNo.length() != 8
+				&& !(contactNo.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))) {
+			messages.add("Contact Number is not valid.");
+		}
+		return messages;
 	}
 
 	/**

@@ -1,8 +1,8 @@
 package servlet.process.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -15,7 +15,15 @@ import javax.servlet.http.HttpSession;
 import model.Canteen;
 import model.Employee;
 import model.OrderWindow;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import value.StringValues;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import controller.AccessController;
 import controller.CanteenController;
 import controller.OrderWindowController;
@@ -40,8 +48,7 @@ public class ProcessLoginServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		process(request, response);
+		doPost(request, response);
 	}
 
 	/**
@@ -49,26 +56,25 @@ public class ProcessLoginServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		process(request, response);
-	}
-
-	public void process(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
 
 		AccessController accessController = new AccessController();
 		CanteenController canteenController = new CanteenController();
 		OrderWindowController orderWindowController = new OrderWindowController();
+		JSONObject obj = new JSONObject();
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 		String email = "";
 		String inputPwd = "";
+		String test = null;
 
 		try {
-			// Getting User Input Parameters
+			// Get User Parameters
 			email = (String) request.getParameter("email");
 			inputPwd = (String) request.getParameter("password");
+			test = request.getParameter("test"); // For testing
 
 			// (1) VERIFY USER CREDENTIALS. If user does not exist, returns null.
 			Employee emp = accessController.authenticateUser(email, inputPwd);
@@ -114,11 +120,19 @@ public class ProcessLoginServlet extends HttpServlet {
 			System.out.println("TokenID is set in session");
 
 			// for login2
-			List<Canteen> canteenList = canteenController.getAllCanteens();
+			ArrayList<Canteen> canteenList = canteenController.getAllCanteens();
 			System.out.println("canteen size: " + canteenList.size());
 			session.setAttribute("canteenList", canteenList);
 
-			response.sendRedirect("homepage.jsp");
+			// For testing: print JSON rather than redirect
+			if (test.equals("true")) {
+				obj.put("user", emp.getEmail());
+				obj.put("tokenID", tokenID);
+				obj.put("status", "ok");
+				out.print(gson.toJson(obj));
+			} else {
+				response.sendRedirect("homepage.jsp");
+			}
 
 		} catch (Exception e) {
 			String errorMessage = e.getMessage();
@@ -133,9 +147,20 @@ public class ProcessLoginServlet extends HttpServlet {
 				errorMessage = "Something went wrong! Please contact the administrator for help.";
 			}
 
-			session.setAttribute("error", errorMessage);
-			response.sendRedirect("login.jsp");
+			// For testing: print JSON rather than redirect
+			try {
+				if (test.equals("true")) {
+					obj.put("status", "error");
+					obj.put("error", errorMessage);
+					out.print(gson.toJson(obj));
+				} else {
+					session.setAttribute("error", errorMessage);
+					response.sendRedirect("login.jsp");
+				}
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
-
 	}
 }
