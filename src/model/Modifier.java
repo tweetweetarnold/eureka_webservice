@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 /**
  * Represents the Add-Ons of the Food items model entity in the web application
- * @author Acer
+ * 
  *
  */
 @Entity

@@ -11,3 +11,4 @@ WebContent/testHTML.html
 src/servlet/TestServlet.java
 /doc
 src/test/ArnoldTest.java
+WebContent/test.jsp

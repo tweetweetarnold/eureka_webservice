@@ -85,8 +85,8 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			boolean valid = (contactNo.length() == 8 && password.length() >= 7
 					&& password.equals(confirmPwd) && validEmail);
 			boolean validContactNo = contactNo.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]");
-			boolean validPasswordLength = password.length() >= 7;
-			boolean validPasswordConfirmation = password.equals(confirmPwd);
+			boolean validPasswordLength = password.length() >= 7 & !password.contains(" ");
+			boolean validPasswordConfirmation = password.equals(confirmPwd) & !confirmPwd.contains(" ");
 
 			if (validEmployeeName) {
 				if (validContactNo) {
