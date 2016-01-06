@@ -306,18 +306,18 @@ public class Test {
 		foodListB10.add(food33);
 		stall10.setFoodList(foodListB10);
 
-		// Canteen canteen2 = new Canteen("Feng Shan Market and Food Centre",
-		// "123", null);
-		// stall1.setCanteen(canteen2);
-		// stall2.setCanteen(canteen2);
-		// stall3.setCanteen(canteen2);
-		// stall4.setCanteen(canteen2);
-		// stall5.setCanteen(canteen2);
-		// stall6.setCanteen(canteen2);
-		// stall7.setCanteen(canteen2);
-		// stall8.setCanteen(canteen2);
-		// stall9.setCanteen(canteen2);
-		// stall10.setCanteen(canteen2);
+		Canteen canteen2 = new Canteen("Taman Jurong Market and Food Centre",
+				"3 Yung Sheng Rd, Singapore 618499", null);
+		 stall1.setCanteen(canteen2);
+		 stall2.setCanteen(canteen2);
+		 stall3.setCanteen(canteen2);
+		 stall4.setCanteen(canteen2);
+		 stall5.setCanteen(canteen2);
+		 stall6.setCanteen(canteen2);
+		 stall7.setCanteen(canteen2);
+		 stall8.setCanteen(canteen2);
+		 stall9.setCanteen(canteen2);
+		 stall10.setCanteen(canteen2);
 
 		stallList2.add(stall1);
 		stallList2.add(stall2);
@@ -330,11 +330,11 @@ public class Test {
 		stallList2.add(stall9);
 		stallList2.add(stall10);
 
-		// canteen2.setStallList(stallList2);
+		canteen2.setStallList(stallList2);
 
 		// oasis
 
-		Canteen canteen1 = new Canteen("Taman Jurong Market and Food Centre",
+		Canteen canteen1 = new Canteen("Oasis Food Centre",
 				"3 Yung Sheng Rd, Singapore 618499", null);
 
 		Stall kuehStall = new Stall("Oasis Kueh Stall", 90685620, canteen1, null,
@@ -611,7 +611,7 @@ public class Test {
 		Stall seafoodTzeCharStall = new Stall("Seafood Tze Char Stall", 92262376, canteen1, null,
 				"resources/img/stall/img-seafoodtzecharstall.jpg");
 
-		Food seafood1 = new Food("Horfun", "dry type $4.00", 3.70,
+		Food seafood1 = new Food("Horfun (Dry)", "dry type $4.00", 4.00,
 				"resources/img/food/img-horfun.jpg", seafoodTzeCharStall);
 		Food seafood2 = new Food("Fried Rice", "", 4.00, "resources/img/food/img-friedrice.jpg",
 				seafoodTzeCharStall);
@@ -634,13 +634,13 @@ public class Test {
 		Food seafood11 = new Food("White Chicken Soup", "", 5.50,
 				"resources/img/food/img-meegoreng.jpg", seafoodTzeCharStall);
 		// for seafood1 modifier
-		Modifier modifier18 = new Modifier("Dry type", "", 0.30, seafood1);
-		Modifier modifier19 = new Modifier("Ask for more vegetables", "", 0.00, seafood1);
-
-		Set<Modifier> modifierList8 = new HashSet<Modifier>();
-		modifierList8.add(modifier18);
-		modifierList8.add(modifier19);
-		seafood1.setModifierList(modifierList8);
+//		Modifier modifier18 = new Modifier("Dry type", "", 0.30, seafood1);
+//		Modifier modifier19 = new Modifier("Ask for more vegetables", "", 0.00, seafood1);
+//
+//		Set<Modifier> modifierList8 = new HashSet<Modifier>();
+//		modifierList8.add(modifier18);
+//		modifierList8.add(modifier19);
+//		seafood1.setModifierList(modifierList8);
 
 		Set<Modifier> modifierListS9 = new HashSet<Modifier>();
 		Modifier modifierS91 = new Modifier("Water Crest", "", 0.00, seafood9);
@@ -946,8 +946,8 @@ public class Test {
 		session.save(modifier15);
 		session.save(modifier16);
 		session.save(modifier17);
-		session.save(modifier18);
-		session.save(modifier19);
+//		session.save(modifier18);
+//		session.save(modifier19);
 		session.save(modifier20);
 		session.save(modifier21);
 		session.save(modifier22);
@@ -999,7 +999,7 @@ public class Test {
 		session.save(modifierS111);
 		session.save(modifierS112);
 
-		// session.save(canteen2);
+		session.save(canteen2);
 		session.save(stall1);
 		session.save(stall2);
 		session.save(stall3);
