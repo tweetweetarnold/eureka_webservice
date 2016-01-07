@@ -181,6 +181,21 @@ public class AccessController {
 		return true;
 	}
 
+	public boolean updateEmployeePassword(Employee e, String oldPassword, String newPassword,
+			String confirmNewPassword) throws Exception {
+		if (e.getPassword().equals(encryptPassword(e.getEmail(), oldPassword))) {
+			ArrayList<String> errorMessages = checkPasswordMeetRequirements(newPassword,
+					confirmNewPassword);
+			if (!errorMessages.isEmpty()) {
+				throw new Exception();
+			}
+			e.setPassword(encryptPassword(e.getEmail(), newPassword));
+			employeeController.updateEmployee(e);
+			return true;
+		}
+		return false;
+	}
+
 	private String encryptPassword(String email, String password) {
 		return aesAlgo.encrypt(email + password);
 	}

@@ -106,7 +106,7 @@
 			<c:remove var="error" scope="session" />
 		</c:if>
 
-		Order Window ID: ${sessionScope.orderWindow.windowId }
+		Order Window ID: ${sessionScope.orderWindow.windowId}
 
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
