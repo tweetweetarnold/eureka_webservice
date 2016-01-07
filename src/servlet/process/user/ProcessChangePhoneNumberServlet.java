@@ -2,6 +2,7 @@ package servlet.process.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import controller.AccessController;
 import controller.EmployeeController;
 import model.Employee;
 
@@ -60,20 +62,26 @@ public class ProcessChangePhoneNumberServlet extends HttpServlet {
 		out.println("ProcessChangePhoneNumberServlet");
 		HttpSession session = request.getSession();
 		String userInput = request.getParameter("newNumber");
+		
+		AccessController accessController = new AccessController();
+		
 		try {
-			if(userInput.length()!=8){
-				throw new Exception("UserInput length not = 8");
-			}
-			long contactNo =Long.parseLong(userInput);
-			
 			Employee employee = (Employee) session.getAttribute("user");
-			employee.setContactNo(contactNo);
-			EmployeeController userController = new EmployeeController();
-			userController.updateEmployee(employee);
+			ArrayList<String> checkNewContactNumberError = accessController.checkContactNoRequirements(userInput);
+			if (checkNewContactNumberError.isEmpty()) {
+				if (accessController.updateEmployeeContactNumber(employee, userInput)) {
+					System.out.println("new contact no updated");
+					session.setAttribute("success", "Contact number has been updated!");
+					response.sendRedirect("PLEASECHANGEME.jsp");
+				}
+			} else {
+				String msg = "";
+				for (String s : checkNewContactNumberError) {
+					msg = s + "<br>" + msg;
+				}
+				throw new Exception(msg);
+			}
 			
-			System.out.println("new contact no updated");
-			session.setAttribute("success", "Contact number has been updated!");
-			response.sendRedirect("homepage.jsp");
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("Error: " + e.getMessage());

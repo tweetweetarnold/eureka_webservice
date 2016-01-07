@@ -63,7 +63,12 @@ public class AccessController {
 		return null;
 
 	}
-
+	/**
+	 * Validates the email address provided by the Employee
+	 * 
+	 * @param email The email address entered by the Employee
+	 * @return An ArrayList of error messages in if it is not a valid email address
+	 */
 	public ArrayList<String> checkEmailRequirements(String email) {
 		ArrayList<String> messages = new ArrayList<String>();
 		if (!EmailValidator.getInstance().isValid(email)) {
@@ -71,7 +76,13 @@ public class AccessController {
 		}
 		return messages;
 	}
-
+	
+	/**
+	 * Validates the name of the Employee
+	 * 
+	 * @param name The name provided by the Employee
+	 * @return An ArrayList of error messages if the name is empty
+	 */
 	public ArrayList<String> checkEmployeeNameRequirements(String name) {
 		ArrayList<String> messages = new ArrayList<String>();
 		if (name.equals("")) {
@@ -79,7 +90,19 @@ public class AccessController {
 		}
 		return messages;
 	}
-
+	
+	/**
+	 * Validate the password for any violation of the following requirements:
+	 * <ul>
+	 * <li>Password is less than 7 characters
+	 * <li>Password contains white spaces characters
+	 * <li>Password and Confirm Password inputs does not match
+	 * </ul>
+	 * 
+	 * @param password The password entered by the Employee
+	 * @param confirmPwd The password for confirming
+	 * @return An ArrayList of error messages if fails the requirements
+	 */
 	public ArrayList<String> checkPasswordMeetRequirements(String password, String confirmPwd) {
 		ArrayList<String> messages = new ArrayList<String>();
 		if (!password.equals(confirmPwd)) {
@@ -90,7 +113,17 @@ public class AccessController {
 		}
 		return messages;
 	}
-
+	
+	/**
+	 * Validate the contact number for any violation of the following requirements: 
+	 * <ul>
+	 * <li>Contact number is less than 8 numbers
+	 * <li>Contact number does not adhere to the standard numbering ranges
+	 * </ul>
+	 * 
+	 * @param contactNo The contact number provided by the Employee
+	 * @return An ArrayList of error messages if it fails the requirements
+	 */
 	public ArrayList<String> checkContactNoRequirements(String contactNo) {
 		ArrayList<String> messages = new ArrayList<String>();
 		if (contactNo.length() != 8
@@ -174,15 +207,46 @@ public class AccessController {
 		}
 		return newEmployee.getEmail();
 	}
-
+	
+	/**
+	 * Updates the current password of the Employee in the database
+	 * 
+	 * @param e The designated Employee to be updated
+	 * @param password The new password provided by the Employee
+	 * @return Returns true when the password has been updated
+	 * @throws Exception if the new password of the Employee could not be updated in the database
+	 */
 	public boolean updateEmployeePassword(Employee e, String password) throws Exception {
 		e.setPassword(encryptPassword(e.getEmail(), password));
 		employeeController.updateEmployee(e);
 		return true;
 	}
 
+	/**
+	 * Encrypts the password using AES(Advanced Encryption Standard) encryption
+	 * 
+	 * @param email The email address of the Employee
+	 * @param password The password of the Employee
+	 * @return The Employee's encrypted password
+	 */
 	private String encryptPassword(String email, String password) {
 		return aesAlgo.encrypt(email + password);
+	}
+	
+	/**
+	 * Update the current contact number of the Employee in the database
+	 * 
+	 * @param e The designated Employee to be updated
+	 * @param newContactNumber The new contact number provided by the Employee
+	 * @return Returns true when the contact number has been updated
+	 * @throws Exception if the new contact number of the Employee could not be updated in the database
+	 */
+	public boolean updateEmployeeContactNumber(Employee e, String newContactNumber) throws Exception {
+		long newContactNum = Long.parseLong(newContactNumber);
+		e.setContactNo(newContactNum);
+		employeeController.updateEmployee(e);
+		
+		return true;
 	}
 
 	/**
@@ -203,7 +267,18 @@ public class AccessController {
 
 		return newAdmin.getUsername();
 	}
-
+	
+	/**
+	 * Constructs an email message for Resetting password
+	 * 
+	 * @param serverName The name of the Server
+	 * @param serverPort The Port number of the server
+	 * @param contextPath The root path or URL of the application
+	 * @param email The designated of the Employee's email address
+	 * @param toSendEmail The designated recipients of this email message
+	 * @return Returns true when the email message has constructed and successfully sent
+	 * @throws MessagingException if the email message could not be constructed or sent
+	 */
 	public boolean constructResetPasswordEmail(String serverName, int serverPort,
 			String contextPath, String email, String[] toSendEmail) throws MessagingException {
 		SendEmail javaEmail = new SendEmail();
