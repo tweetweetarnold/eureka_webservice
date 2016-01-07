@@ -13,10 +13,10 @@ import dao.EmployeeDAO;
 import model.Employee;
 
 /**
- * Servlet implementation class RenderProfileServlet
+ * Servlet implementation class LoadUserProfileServlet
  */
-@WebServlet("/RenderProfileServlet")
-public class RenderProfileServlet extends HttpServlet {
+@WebServlet("/LoadUserProfileServlet")
+public class LoadUserProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	EmployeeDAO employeeDAO = new EmployeeDAO();
@@ -24,7 +24,7 @@ public class RenderProfileServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public RenderProfileServlet() {
+	public LoadUserProfileServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

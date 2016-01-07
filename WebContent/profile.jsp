@@ -25,7 +25,7 @@
 
 <!-- CSS imports -->
 <link href="resources/css/dabao/dabao.css" rel="stylesheet">
-<link href="resources/css/bootstap.min.css" rel="stylesheet">
+<!-- <link href="resources/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="resources/css/dabao/starter-template.css" rel="stylesheet">
 
 
@@ -62,32 +62,34 @@
 								<td>
 									<strong>Name:</strong>
 								</td>
-								<td>
-									<c:out value="${user.name}" />
-								</td>
+								<td>${user.name}</td>
 							</tr>
 							<tr>
 								<td>
 									<strong>Company:</strong>
 								</td>
-								<td>
-									<c:out value="${user.company.name}" />
-								</td>
+								<td>${user.company.name}</td>
 							</tr>
 							<tr>
 								<td>
 									<strong>Email:</strong>
 								</td>
+								<td>${user.email}</td>
+							</tr>
+							<tr>
 								<td>
-									<c:out value="${user.email}" />
+									<strong>Password:</strong>
+								</td>
+								<td>
+									<a href="editPassword.jsp">Edit password</a>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<strong>Phone No:</strong>
+									<strong>Contact No:</strong>
 								</td>
-								<td>
-									<c:out value="${user.contactNo}" />
+								<td>${user.contactNo}
+									<a href="editContactNumber.jsp">Edit</a>
 								</td>
 							</tr>
 							<tr>
@@ -96,8 +98,7 @@
 								</td>
 								<td>
 									<fmt:formatNumber value="${user.amountOwed}" var="owedMoney" minFractionDigits="2" />
-									$
-									<c:out value="${owedMoney}" />
+									$${owedMoney}
 								</td>
 							</tr>
 						</table>
@@ -105,8 +106,31 @@
 					</div>
 
 				</div>
+
+				<!-- Success message handling -->
+				<c:if test="${not empty sessionScope.success}">
+					<div class="alert alert-success" role="alert">
+						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+						<span class="sr-only">Success:</span>
+						<c:out value="${success}" />
+					</div>
+					<c:remove var="success" scope="session" />
+				</c:if>
+
+				<!-- Error message handling -->
+				<c:if test="${not empty sessionScope.error}">
+					<div class="alert alert-danger" role="alert">
+						<b>Error!</b>
+						<br>
+						<c:out value="${error}" />
+					</div>
+					<c:remove var="error" scope="session" />
+				</c:if>
 			</div>
 		</div>
 	</div>
+
+
+
 </body>
 </html>

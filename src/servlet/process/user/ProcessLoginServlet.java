@@ -116,8 +116,8 @@ public class ProcessLoginServlet extends HttpServlet {
 			System.out.println("TokenID is set in session");
 
 			// for login2
-			ArrayList<Canteen> canteenList = canteenController.getAllCanteens();
-			System.out.println("canteen size: " + canteenList.size());
+			ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
+			canteenList.add(window.getCanteen());
 			session.setAttribute("canteenList", canteenList);
 
 			// For testing: print JSON rather than redirect
