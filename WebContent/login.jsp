@@ -50,7 +50,7 @@
 
 		<!-- Error message handling -->
 		<c:if test="${not empty sessionScope.error}">
-			<div class="alert alert-danger" role="alert">
+			<div class="alert alert-danger">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span>
 				<c:out value="${error}" />
@@ -60,7 +60,7 @@
 
 		<!-- Success message handling -->
 		<c:if test="${not empty sessionScope.success}">
-			<div class="alert alert-success" role="alert">
+			<div class="alert alert-success">
 				<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
 				<span class="sr-only">Success:</span>
 				<c:out value="${success}" />

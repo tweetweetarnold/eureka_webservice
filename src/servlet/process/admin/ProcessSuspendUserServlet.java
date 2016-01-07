@@ -1,4 +1,4 @@
-package servlet.process.user;
+package servlet.process.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,19 +19,20 @@ import model.Employee;
 @WebServlet("/ProcessSuspendUserServlet")
 public class ProcessSuspendUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProcessSuspendUserServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ProcessSuspendUserServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
@@ -39,12 +40,13 @@ public class ProcessSuspendUserServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
 
-	//Suspend employee with email
+	// Suspend employee with email
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -56,8 +58,8 @@ public class ProcessSuspendUserServlet extends HttpServlet {
 		System.out.println("****** ProcessSuspendUserServlet ******");
 		out.println("ProcessSuspendUserServlet");
 		HttpSession session = request.getSession();
-		
-		try{
+
+		try {
 			String userInput = request.getParameter("email");
 			EmployeeController userController = new EmployeeController();
 			Employee employee = userController.retrieveEmployeeViaEmail(userInput);
@@ -66,11 +68,10 @@ public class ProcessSuspendUserServlet extends HttpServlet {
 			System.out.println(userInput + " suspended.");
 			session.setAttribute("success", userInput + "has been suspended.");
 			response.sendRedirect("adminHomepage.jsp");
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error: " + e.getMessage());
-			session.setAttribute("error",
-					"Oops! Something went wrong! Please check your inputs.");
+			session.setAttribute("error", "Oops! Something went wrong! Please check your inputs.");
 			response.sendRedirect("PLEASECHANGEME.jsp");
 		}
 	}

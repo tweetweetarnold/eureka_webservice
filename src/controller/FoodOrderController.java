@@ -25,13 +25,13 @@ import dao.FoodOrderItemDAO;
 /**
  * Process the business logic of managing the Food orders for the web application
  * 
- *
+ * 
  */
 public class FoodOrderController {
 	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
 	EmployeeDAO employeeDAO = new EmployeeDAO();
 	DateTime today = new DateTime();
-	
+
 	/**
 	 * Creates a default constructor for FoodOrderController
 	 */
@@ -55,22 +55,25 @@ public class FoodOrderController {
 	public void updateFoodOrder(FoodOrder f) {
 		foodOrderDAO.updateFoodOrder(f);
 	}
+
 	/**
 	 * Retrieves all FoodOrder(s) made by a Employee
 	 * 
 	 * @param email Email of the Employee
-	 * @return A list of FoodOrder(s) 
+	 * @return A list of FoodOrder(s)
 	 */
 	public List<FoodOrder> getFoodOrderSet(String email) {
 		List<FoodOrder> returnList = incrementQuantity(foodOrderDAO.getFoodOrderSet(employeeDAO
 				.getEmployeeByEmail(email)));
 		return returnList;
 	}
+
 	/**
-	 * Removes duplicate FoodOrderItems within a list of FoodOrders and increments the quantity parameter of duplicated FoodOrderItems
+	 * Removes duplicate FoodOrderItems within a list of FoodOrders and increments the quantity
+	 * parameter of duplicated FoodOrderItems
 	 * 
 	 * @param foodOrderList A List of FoodOrder(s)
-	 * @return A cleaned list of FoodOrder(s) 
+	 * @return A cleaned list of FoodOrder(s)
 	 */
 	public List<FoodOrder> incrementQuantity(List<FoodOrder> foodOrderList) {
 		List<FoodOrder> returnList = new ArrayList<FoodOrder>();
@@ -110,9 +113,10 @@ public class FoodOrderController {
 
 		return returnList;
 	}
-	
+
 	/**
-	 * Removes duplicates within a list of FoodOrderItems and increments the quantity parameter of duplicated FoodOrderItems
+	 * Removes duplicates within a list of FoodOrderItems and increments the quantity parameter of
+	 * duplicated FoodOrderItems
 	 * 
 	 * @param list a List of FoodOrderItem(s)
 	 * @return A cleaned list of FoodOrderItems with quantity incremented
@@ -198,11 +202,10 @@ public class FoodOrderController {
 	// starting sunday for the week of orders you wish to retrieve. (Currently
 	// used by
 	// viewWeeklyConsolidatedPaymentServlet.java)
-	
-	
-	
+
 	/**
-	 * Retrieves a list of FoodOrders under a specified Employee between the specified date(sundayDate) and seven days after the specified date(sundayDate)
+	 * Retrieves a list of FoodOrders under a specified Employee between the specified
+	 * date(sundayDate) and seven days after the specified date(sundayDate)
 	 * 
 	 * @param email The email of the Employee
 	 * @param sundayDate the start of the seven day period
@@ -345,7 +348,7 @@ public class FoodOrderController {
 				HashSet<Employee> employees = new HashSet<Employee>();
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 					if (f.equals2(i)) {
-						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
+						// String tempUsername = i.getFoodOrder().getEmployee().getEmail();
 					}
 					for (String s : usernames) {
 						Employee tempEmployee = employeeDAO.getEmployeeByEmail(s);
@@ -390,9 +393,10 @@ public class FoodOrderController {
 	// this is to get the FoodDisplayObject for displaying food orders for the
 	// day filtered by
 	// stores each food display object corresponds to one store
-	
+
 	/**
-	 * Returns a ArrayList of FoodDisplayObjects to be use in the admin food order display (by stalls)
+	 * Returns a ArrayList of FoodDisplayObjects to be use in the admin food order display (by
+	 * stalls)
 	 * 
 	 * 
 	 * @param orderWindow OrderWindow of FoodDisplayObject(s) to retrieve
@@ -556,14 +560,15 @@ public class FoodOrderController {
 		}
 		return foodDisplayList;
 	}
-	
+
 	/**
 	 * Returns A HashMap with all FoodOrderItems between two dates
 	 * 
 	 * 
 	 * @param earlierDate The start date
 	 * @param laterDate The end date
-	 * @return a HashMap with StallID as Key and the corresponding FoodOrderItem(s) ordered in a ArrayList
+	 * @return a HashMap with StallID as Key and the corresponding FoodOrderItem(s) ordered in a
+	 *         ArrayList
 	 */
 	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall(Date earlierDate,
 			Date laterDate) {
@@ -629,7 +634,8 @@ public class FoodOrderController {
 	 */
 
 	/**
-	 * Replaces all unavailable Food in the database with the employee's favorite food.(Within the specified time frame)
+	 * Replaces all unavailable Food in the database with the employee's favorite food.(Within the
+	 * specified time frame)
 	 * 
 	 * @param foodUnavailableID The id of the unavailable food
 	 * @param earlierDate The start date of the time frame

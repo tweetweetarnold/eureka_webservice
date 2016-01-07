@@ -21,7 +21,7 @@
 <body>
 
 	<div class="container">
-		
+
 		<div style="max-width: 500px;
 	margin-left: auto;
 	margin-right: auto;">
@@ -35,9 +35,10 @@
 				<table>
 					<tr>
 						<td>Your Email Address</td>
-						<td width ="250">
-							<input type="email" name="email" class="form-control-table" placeholder="Your Email Address" value="${sessionScope.email}"
-						required>
+						<td width="250">
+							<input type="email" name="email" class="form-control-table" placeholder="Your Email Address"
+								value="${sessionScope.email}" required
+							>
 						</td>
 						<td>
 							<button class="btn btn-sm btn-primary" type="submit">
@@ -53,19 +54,20 @@
 				</div>
 			</form>
 		</div>
+	</div>
 
-		<br>
+	<br>
 
-		<!-- Error message handling -->
-		<c:if test="${not empty sessionScope.error}">
-			<div class="alert alert-danger" role="alert">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				<c:out value="${error}" />
-			</div>
-			<c:remove var="error" scope="session" />
-		</c:if>
-		
+	<!-- Error message handling -->
+	<c:if test="${not empty sessionScope.error}">
+		<div class="alert alert-danger">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			<span class="sr-only">Error:</span>
+			<c:out value="${error}" />
+		</div>
+		<c:remove var="error" scope="session" />
+	</c:if>
+
 	<!-- 	Google Analytics -->
 	<script>
 		(function(i, s, o, g, r, a, m) {
@@ -76,7 +78,7 @@
 			a = s.createElement(o), m = s.getElementsByTagName(o)[0];
 			a.async = 1;
 			a.src = g;
-			m.parentNode.insertBefore(a, m)
+			m.parentNode.insertBefore(a, m);
 		})(window, document, 'script',
 				'//www.google-analytics.com/analytics.js', 'ga');
 		ga('create', 'UA-68676403-1', 'auto');

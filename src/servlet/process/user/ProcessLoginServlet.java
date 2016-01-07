@@ -106,10 +106,6 @@ public class ProcessLoginServlet extends HttpServlet {
 			}
 			OrderWindow window = windowList.get(0);
 
-			// *** For Development only ***
-			// creates a tokenID using UUID (Universalised Unique Identifier
-			// Object)
-			// the user's username is tagged at the end of the token
 			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
 					+ "|";
 
@@ -125,7 +121,7 @@ public class ProcessLoginServlet extends HttpServlet {
 			session.setAttribute("canteenList", canteenList);
 
 			// For testing: print JSON rather than redirect
-			if (test.equals("true")) {
+			if (test != null && test.equals("true")) {
 				obj.put("user", emp.getEmail());
 				obj.put("tokenID", tokenID);
 				obj.put("status", "ok");
@@ -149,7 +145,7 @@ public class ProcessLoginServlet extends HttpServlet {
 
 			// For testing: print JSON rather than redirect
 			try {
-				if (test.equals("true")) {
+				if (test != null && test.equals("true")) {
 					obj.put("status", "error");
 					obj.put("error", errorMessage);
 					out.print(gson.toJson(obj));

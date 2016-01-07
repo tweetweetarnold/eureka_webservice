@@ -1,6 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.UUID;
+
+import javax.mail.MessagingException;
 
 import model.Admin;
 import model.Company;
@@ -11,9 +14,9 @@ import org.hibernate.exception.ConstraintViolationException;
 
 import services.AESAlgorithm;
 import services.PasswordService;
+import services.SendEmail;
 import value.StringValues;
 import dao.AdminDAO;
-import dao.EmployeeDAO;
 
 /**
  * Process the functions of user access control such as registration and logging in for
@@ -23,7 +26,7 @@ import dao.EmployeeDAO;
  */
 public class AccessController {
 
-	EmployeeDAO employeeDAO = new EmployeeDAO();
+	EmployeeController employeeController = new EmployeeController();
 	AdminDAO adminDAO = new AdminDAO();
 	CompanyController companyController = new CompanyController();
 	AESAlgorithm aesAlgo = new AESAlgorithm();
@@ -58,6 +61,7 @@ public class AccessController {
 			return messages;
 		}
 		return null;
+
 	}
 
 	public ArrayList<String> checkEmailRequirements(String email) {
@@ -104,12 +108,11 @@ public class AccessController {
 	 * @return An Employee object upon successful verification, otherwise it returns null
 	 */
 	public Employee authenticateUser(String inputEmail, String inputPassword) {
-		Employee emp = employeeDAO.getEmployeeByEmail(inputEmail);
+		Employee emp = employeeController.getEmployeeByEmail(inputEmail);
 		try {
 			if (emp != null) {
 				String password = emp.getPassword();
-				// checking that the input password is correct as the password
-				// stored in DataBase
+				/* checking that the input password is correct as the password stored in DataBase */
 				if (aesAlgo.encrypt(inputEmail + inputPassword).equals(password)) {
 					return emp;
 				}
@@ -153,7 +156,7 @@ public class AccessController {
 	 */
 	public String registerUser(String password, String name, String email, long contactNo,
 			String companyCode) throws Exception {
-		String encryptPassword = aesAlgo.encrypt(email + password);
+		String encryptPassword = encryptPassword(email, password);
 		Company company = null;
 
 		try {
@@ -165,11 +168,21 @@ public class AccessController {
 		Employee newEmployee = new Employee(encryptPassword, name, email, contactNo, company);
 		newEmployee.setStatus(StringValues.EMPLOYEE_PENDING_VERIFICATION);
 		try {
-			employeeDAO.saveEmployee(newEmployee);
+			employeeController.saveEmployee(newEmployee);
 		} catch (ConstraintViolationException e) {
 			throw new Exception("Email already exists! Please log in with that email.");
 		}
 		return newEmployee.getEmail();
+	}
+
+	public boolean updateEmployeePassword(Employee e, String password) throws Exception {
+		e.setPassword(encryptPassword(e.getEmail(), password));
+		employeeController.updateEmployee(e);
+		return true;
+	}
+
+	private String encryptPassword(String email, String password) {
+		return aesAlgo.encrypt(email + password);
 	}
 
 	/**
@@ -189,6 +202,27 @@ public class AccessController {
 		adminDAO.saveAdmin(newAdmin);
 
 		return newAdmin.getUsername();
+	}
+
+	public boolean constructResetPasswordEmail(String serverName, int serverPort,
+			String contextPath, String email, String[] toSendEmail) throws MessagingException {
+		SendEmail javaEmail = new SendEmail();
+		AESAlgorithm aes = new AESAlgorithm();
+
+		String appUrl = "http://" + serverName + ":" + serverPort + contextPath;
+		String token = UUID.randomUUID().toString();
+		String eEncrypt = aes.encrypt(email);
+		String url = appUrl + "/LoadResetPasswordPage?email=" + eEncrypt + "&token=" + token;
+
+		javaEmail.setMailServerProperties();
+		javaEmail.sendEmail("DABAO Web App - Password Reset", "Dear User,<br><br>"
+				+ "To reset your password for DABAO App, please click the following link:<br> "
+				+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
+				+ "Admin<br><br>"
+				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
+				toSendEmail);
+
+		return true;
 	}
 
 }

@@ -1,6 +1,6 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@include file="protectResetPassword.jsp"%>
+<%@include file="protect/protectResetPassword.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -22,7 +22,7 @@
 <body>
 
 	<div class="container">
-		
+
 		<div style="max-width: 500px;
 	margin-left: auto;
 	margin-right: auto;">
@@ -31,22 +31,20 @@
 				<br>
 				<br>
 				<br>
-				
-				
+
+
 				<!-- User input -->
 				<table>
 					<tr>
-						<td>Your Email Address</td>	
-						
-						<td>
-							<c:out value="${email}"/>
-						</td>
+						<td>Your Email Address</td>
+
+						<td>${email}</td>
 					</tr>
 					<tr>
 						<td>New Password</td>
 						<td>
-							<input type="password" name="newPassword" class="form-control-table" placeholder="New Password"
-								(Min length 7 characters)" onfocus="" required
+							<input type="password" name="newPassword" class="form-control-table" placeholder="New Password" (Min
+								length 7 characters)" onfocus="" required
 							>
 						</td>
 					</tr>
@@ -68,19 +66,20 @@
 				<br>
 			</form>
 		</div>
+	</div>
 
-		<br>
+	<br>
 
-		<!-- Error message handling -->
-		<c:if test="${not empty sessionScope.error}">
-			<div class="alert alert-danger" role="alert">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				<c:out value="${error}" />
-			</div>
-			<c:remove var="error" scope="session" />
-		</c:if>
-		
+	<!-- Error message handling -->
+	<c:if test="${not empty sessionScope.error}">
+		<div class="alert alert-danger" role="alert">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			<span class="sr-only">Error:</span>
+			<c:out value="${error}" />
+		</div>
+		<c:remove var="error" scope="session" />
+	</c:if>
+
 	<!-- 	Google Analytics -->
 	<script>
 		(function(i, s, o, g, r, a, m) {
