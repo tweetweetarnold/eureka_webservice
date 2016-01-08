@@ -14,7 +14,8 @@ import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.triggers.SimpleTriggerImpl;
 
-import background.CloseWindow;
+
+import background.HelloJob;
 
 
 public class Quartz {
@@ -39,7 +40,7 @@ public class Quartz {
 	
 	public void addClosingDate(String jobIdentity, String triggerIdentity, Date date, String id) throws SchedulerException, InterruptedException{
 		// TODO Auto-generated method stub
-		JobDetail job = JobBuilder.newJob(CloseWindow.class)
+		JobDetail job = JobBuilder.newJob(HelloJob.class)
 				.withIdentity(jobIdentity, "group1").build();
 		Date after = new Date(date.getTime()+10*300);
 		SimpleTrigger trigger = (SimpleTrigger) TriggerBuilder.newTrigger().withIdentity("rahimtrigger", "group1")
@@ -48,7 +49,7 @@ public class Quartz {
 				
 		System.out.println(date + "Here");
 		Scheduler scheduler = new StdSchedulerFactory().getScheduler();
-		job.getJobDataMap().put(CloseWindow.ID, id);
+//		job.getJobDataMap().put(CloseWindow.ID, id);
 		scheduler.scheduleJob(job, trigger);
 		scheduler.start();
 		try {
