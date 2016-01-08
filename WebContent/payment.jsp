@@ -109,7 +109,7 @@
 									<td>
 										<fmt:formatNumber value="${order.totalPrice}" var="totalPrice" minFractionDigits="2" />
 										$
-										<c:out value="${totalPrice}" />
+										<c:out value="${totalPrice*(1-order.orderWindow.discount)}" />
 									</td>
 								</tr>
 							</table>
@@ -153,7 +153,7 @@
 										<td>
 											<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
 											$
-											<c:out value="${newPrice}" />
+											<c:out value="${newPrice*(1-order.orderWindow.discount)}" />
 										</td>
 									</tr>
 								</c:forEach>
@@ -206,7 +206,7 @@
 							<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${modifiedFoodName}" />">
 							<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${foodItem.quantity}" />">
 							<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
-							<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
+							<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice*(1-order.orderWindow.discount)}" />">
 
 						</c:forEach>
 

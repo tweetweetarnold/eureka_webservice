@@ -47,6 +47,7 @@ public class OrderWindow {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "canteenId")
 	private Canteen canteen;
+	private double discount = 0.0;
 	private Date createDate;
 
 	/**
@@ -117,6 +118,14 @@ public class OrderWindow {
 	 */
 	public Date getEndDateFormatted() {
 		return endDateFormatted;
+	}
+	
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
 	}
 
 	/**

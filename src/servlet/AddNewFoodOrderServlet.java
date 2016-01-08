@@ -83,8 +83,8 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 			}
 			myFoodOrder.setFoodOrderList(hashMyFoodOrderItems);
 			System.out.println("New FoodOrder created");
-
-			employee.setAmountOwed(employee.getAmountOwed() + myFoodOrder.getTotalPrice());
+			double ammountToAdd = myFoodOrder.getTotalPrice()*(1-window.getDiscount());
+			employee.setAmountOwed(employee.getAmountOwed() + ammountToAdd);
 			employeeDAO.updateEmployee(employee);
 			System.out.println("Employee amount owed updated");
 

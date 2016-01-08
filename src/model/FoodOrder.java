@@ -192,6 +192,8 @@ public class FoodOrder {
 		for (FoodOrderItem item : set) {
 			result += (item.getQuantity() * item.getPrice());
 		}
+		
+//		result*=(1-orderWindow.getDiscount());
 		return result;
 	}
 	

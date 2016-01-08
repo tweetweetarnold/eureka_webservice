@@ -37,17 +37,17 @@ public class TestInsertJobServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		QuartzExample quartzExample = new QuartzExample();
-		try {
-			quartzExample.runThis();
-		} catch (SchedulerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		response.sendRedirect("login.jsp");
-		
-	}
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		QuartzExample quartzExample = new QuartzExample();
+//		try {
+////			quartzExample.runThis();
+//		} catch (SchedulerException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		response.sendRedirect("login.jsp");
+//		
+//	}
 
 }
