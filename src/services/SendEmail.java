@@ -48,8 +48,51 @@ public class SendEmail {
 			emailMessage = new MimeMessage(mailSession);
 			
 			for (int i = 0; i < toEmails.length; i++) {
-				emailMessage.addRecipient(Message.RecipientType.BCC, new InternetAddress(
+				emailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(
 						toEmails[i]));
+			}
+			
+			emailMessage.setSubject(emailSubject);
+			emailMessage.setContent(emailBody, "text/html; charset=utf-8");
+			emailMessage.setFrom(new InternetAddress("dabaomealorderapp@gmail.com"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return emailMessage;
+	}
+	
+	public void sendEmailWithCarbonCopy(String subject, String messageBody,String[] toEmails, String[] ccEmails) throws MessagingException {
+		
+		Message emailMessage = createEmailMessageWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
+		Transport.send(emailMessage);
+	}
+	
+	private MimeMessage createEmailMessageWithCarbonCopy(String subject, String messageBody, String[] toEmails, String[] ccEmails) throws MessagingException {
+		String emailSubject = subject;
+		String emailBody = messageBody;
+		
+		mailSession = Session.getInstance(emailProperties, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+		MimeMessage emailMessage = null;
+		
+		try {
+			emailMessage = new MimeMessage(mailSession);
+			
+			for (int i = 0; i < toEmails.length; i++) {
+				emailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(
+						toEmails[i]));
+			}
+			
+			if (ccEmails != null) {
+			
+				for (int i = 0; i < ccEmails.length; i++) {
+					emailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress(
+							ccEmails[i]));
+				}
 			}
 			
 			emailMessage.setSubject(emailSubject);
