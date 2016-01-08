@@ -22,7 +22,7 @@ import value.StringValues;
 /**
  * Represents the Ordering Window entity model in this web application
  * 
- *
+ * 
  */
 @Entity
 @Table(name = "orderwindow")
@@ -48,13 +48,13 @@ public class OrderWindow {
 	@JoinColumn(name = "canteenId")
 	private Canteen canteen;
 	private Date createDate;
-	
+
 	/**
 	 * Creates a default constructor for OrderWindow
 	 */
 	public OrderWindow() {
 	}
-	
+
 	/**
 	 * Creates a new OrderWindow with a starting and ending DateTime, company and the canteen
 	 * 
@@ -72,45 +72,10 @@ public class OrderWindow {
 		this.canteen = canteen;
 		this.createDate = new Date();
 	}
-	
+
 	/**
-	 * Retrieves the formatted starting DateTime of this order window
-	 * 
-	 * @return The current formatted starting DateTime
-	 */
-	public Date getStartDateFormatted() {
-		return startDateFormatted;
-	}
-	
-	/**
-	 * Changes the current formatted starting DateTime of this order window
-	 * 
-	 * @param startDateFormatted The new formatted starting DataTime
-	 */
-	public void setStartDateFormatted(Date startDateFormatted) {
-		this.startDateFormatted = startDateFormatted;
-	}
-	
-	/**
-	 * Retrieves the formatted ending DateTime of this order window
-	 * 
-	 * @return The current formatted ending DateTime
-	 */
-	public Date getEndDateFormatted() {
-		return endDateFormatted;
-	}
-	
-	/**
-	 * Changes the current formatted ending DateTime of this order window
-	 * 
-	 * @param endDateFormatted The new formatted ending DateTime
-	 */
-	public void setEndDateFormatted(Date endDateFormatted) {
-		this.endDateFormatted = endDateFormatted;
-	}
-	
-	/**
-	 * Creates a new OrderWindow with a starting date and time, duration, the Company and the Canteen
+	 * Creates a new OrderWindow with a starting date and time, duration, the Company and the
+	 * Canteen
 	 * 
 	 * @param startDate The starting date and time of this OrderWindow
 	 * @param duration The duration of this OrderWindow
@@ -126,7 +91,43 @@ public class OrderWindow {
 		this.company = company;
 		this.createDate = new Date();
 	}
-	
+
+	/**
+	 * Retrieves the formatted starting DateTime of this order window
+	 * 
+	 * @return The current formatted starting DateTime
+	 */
+	public Date getStartDateFormatted() {
+		return startDateFormatted;
+	}
+
+	/**
+	 * Changes the current formatted starting DateTime of this order window
+	 * 
+	 * @param startDateFormatted The new formatted starting DataTime
+	 */
+	public void setStartDateFormatted(Date startDateFormatted) {
+		this.startDateFormatted = startDateFormatted;
+	}
+
+	/**
+	 * Retrieves the formatted ending DateTime of this order window
+	 * 
+	 * @return The current formatted ending DateTime
+	 */
+	public Date getEndDateFormatted() {
+		return endDateFormatted;
+	}
+
+	/**
+	 * Changes the current formatted ending DateTime of this order window
+	 * 
+	 * @param endDateFormatted The new formatted ending DateTime
+	 */
+	public void setEndDateFormatted(Date endDateFormatted) {
+		this.endDateFormatted = endDateFormatted;
+	}
+
 	/**
 	 * Retrieves the Canteen in this order window
 	 * 
@@ -135,7 +136,7 @@ public class OrderWindow {
 	public Canteen getCanteen() {
 		return canteen;
 	}
-	
+
 	/**
 	 * Changes the current Canteen in this order window
 	 * 
@@ -144,7 +145,7 @@ public class OrderWindow {
 	public void setCanteen(Canteen canteen) {
 		this.canteen = canteen;
 	}
-	
+
 	/**
 	 * Retrieves the date which this OrderWindow is created
 	 * 
@@ -153,12 +154,11 @@ public class OrderWindow {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	
+
 	/**
 	 * Retrieves the current status of this OrderWindow
 	 * 
-	 * @return The status of the order window. 
-	 * It can be indicated as "Queued", "Opened" or "Closed"
+	 * @return The status of the order window. It can be indicated as "Queued", "Opened" or "Closed"
 	 */
 	public String getStatus() {
 		Interval i = new Interval(startDate.getMillis(), endDate.getMillis());
@@ -173,11 +173,11 @@ public class OrderWindow {
 		}
 		return status;
 	}
-	
+
 	/**
 	 * Changes the current date of this OrderWindow being created
 	 * 
-	 * @param createDate The new date created of this OrderWindow 
+	 * @param createDate The new date created of this OrderWindow
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
@@ -192,7 +192,7 @@ public class OrderWindow {
 	public boolean overlaps(Interval other) {
 		return new Interval(startDate.getMillis(), endDate.getMillis()).overlaps(other);
 	}
-	
+
 	/**
 	 * Retrieves the duration of this OrderWindow
 	 * 
@@ -210,7 +210,7 @@ public class OrderWindow {
 	public int getWindowId() {
 		return windowId;
 	}
-	
+
 	/**
 	 * Changes the current OrderWindow ID
 	 * 
@@ -219,7 +219,7 @@ public class OrderWindow {
 	public void setWindowId(int windowId) {
 		this.windowId = windowId;
 	}
-	
+
 	/**
 	 * Retrieves the starting Date and Time of this OrderWindow
 	 * 
@@ -228,7 +228,7 @@ public class OrderWindow {
 	public DateTime getStartDate() {
 		return new DateTime(startDateFormatted);
 	}
-	
+
 	/**
 	 * Changes the current starting Date and Time of this OrderWindow
 	 * 
@@ -238,7 +238,7 @@ public class OrderWindow {
 		this.startDate = startDate;
 		this.startDateFormatted = startDate.toDate();
 	}
-	
+
 	/**
 	 * Retrieves the ending Date and Time of this OrderWindow
 	 * 
@@ -257,7 +257,7 @@ public class OrderWindow {
 		this.endDate = endDate;
 		this.endDateFormatted = endDate.toDate();
 	}
-	
+
 	/**
 	 * Retrieves the Company of this OrderWindow
 	 * 
@@ -266,7 +266,7 @@ public class OrderWindow {
 	public Company getCompany() {
 		return company;
 	}
-	
+
 	/**
 	 * Changes the current Company in this OrderWindow
 	 * 

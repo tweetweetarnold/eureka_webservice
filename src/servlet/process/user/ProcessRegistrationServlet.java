@@ -3,6 +3,7 @@ package servlet.process.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -63,9 +64,9 @@ public class ProcessRegistrationServlet extends HttpServlet {
 
 		AccessController accessController = new AccessController();
 		CompanyController companyController = new CompanyController();
-		JSONObject userInput = new JSONObject();
+		// JSONObject userInput = new JSONObject();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		// HashMap<String, String> userInput = new HashMap<>();
+		HashMap<String, String> userInput = new HashMap<>();
 
 		String test = request.getParameter("test");
 

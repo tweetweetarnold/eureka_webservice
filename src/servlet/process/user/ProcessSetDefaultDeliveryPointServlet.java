@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+
 import services.AESAlgorithm;
 import services.SendEmail;
 import value.StringValues;
@@ -50,18 +52,18 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		AccessController accessController = new AccessController();
+		// JSONObject userInput = new JSONObject();
 
 		String buildingName = (String) request.getParameter("deliveryPoint");
 
-		@SuppressWarnings("unchecked")
 		HashMap<String, String> userInput = (HashMap<String, String>) session
 				.getAttribute("userInput");
 
-		String email = userInput.get("email");
-		String password = userInput.get("password");
-		String employeeName = userInput.get("name");
+		String email = (String) userInput.get("email");
+		String password = (String) userInput.get("password");
+		String employeeName = (String) userInput.get("name");
 		Long contactNumber = Long.parseLong(userInput.get("contactNo"));
-		String companyCode = userInput.get("companyCode");
+		String companyCode = (String) userInput.get("companyCode");
 
 		try {
 			String generatedEmployeeId = accessController.registerUser(password, employeeName,
