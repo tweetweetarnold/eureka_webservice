@@ -818,6 +818,35 @@ public class Test {
 		modifierList25.add(modifier36);
 		mixedFruits.setModifierList(modifierList25);
 		
+		Set<Food> foodList8 = new HashSet<Food>();
+		foodList8.add(apple);
+		foodList8.add(watermelon);
+		foodList8.add(dragonfruit);
+		foodList8.add(pear);
+		foodList8.add(honeydew);
+		foodList8.add(papaya);
+		foodList8.add(pineapple);
+		foodList8.add(banana);
+		foodList8.add(agaragar);
+		foodList8.add(orange);
+		foodList8.add(guava);
+		foodList8.add(sarawakPineapple);
+		foodList8.add(mixedFruits);
+		fruitStall.setFoodList(foodList8);
+
+		// Stall List
+		Set<Stall> newStallList = new HashSet<Stall>();
+		newStallList.add(kuehStall);
+		newStallList.add(malayStall);
+		newStallList.add(indianStall);
+		newStallList.add(chineseMixVegStall);
+		newStallList.add(roastMeatStall);
+		newStallList.add(seafoodTzeCharStall);
+		newStallList.add(fishBeehoonStall);
+		newStallList.add(fruitStall);
+
+		canteen1.setStallList(newStallList);
+		
 		
 		
 		
@@ -1100,34 +1129,7 @@ public class Test {
 		
 		
 
-		Set<Food> foodList8 = new HashSet<Food>();
-		foodList8.add(apple);
-		foodList8.add(watermelon);
-		foodList8.add(dragonfruit);
-		foodList8.add(pear);
-		foodList8.add(honeydew);
-		foodList8.add(papaya);
-		foodList8.add(pineapple);
-		foodList8.add(banana);
-		foodList8.add(agaragar);
-		foodList8.add(orange);
-		foodList8.add(guava);
-		foodList8.add(sarawakPineapple);
-		foodList8.add(mixedFruits);
-		fruitStall.setFoodList(foodList8);
-
-		// Stall List
-		Set<Stall> newStallList = new HashSet<Stall>();
-		newStallList.add(kuehStall);
-		newStallList.add(malayStall);
-		newStallList.add(indianStall);
-		newStallList.add(chineseMixVegStall);
-		newStallList.add(roastMeatStall);
-		newStallList.add(seafoodTzeCharStall);
-		newStallList.add(fishBeehoonStall);
-		newStallList.add(fruitStall);
-
-		canteen1.setStallList(newStallList);
+		
 		session.save(canteen1);
 
 		session.save(kuehStall);
