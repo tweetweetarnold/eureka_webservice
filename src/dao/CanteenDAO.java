@@ -67,6 +67,24 @@ public class CanteenDAO {
 		}
 		return (Canteen) l.get(0);
 	}
+	
+	/**
+	 * Retrieve the Canteen based on the provided address
+	 * 
+	 * @param address The address of the Canteen
+	 * @return The Canteen object that has the provided address
+	 */
+	public Canteen getCanteenByAddress(String address) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
+		dc.add(Restrictions.eq("address", address));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+		if (l.size() == 0) {
+			return null;
+		}
+		return (Canteen) l.get(0);
+	}
 
 	/**
 	 * Retrieve the Canteen based on the provided ID

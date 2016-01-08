@@ -193,18 +193,22 @@ public class FileUploadController {
 				errorList.add("row " + rowNumber + " has empty canteen name in Canteen.csv.");
 			}
 			Canteen c = canteenDAO.getCanteenByName(canteenName);
-
+			if (c != null) {
+				errorList.add("row " + rowNumber + ": This canteen already exists");
+			}
+			
 			String address = row[1].trim();
 			if (address.isEmpty()) {
 				errorList.add("row " + rowNumber + " has empty address in Canteen.csv.");
-			}
-
-			// check duplicated entries if there is an existing canteen with same address
-			if (c != null) {
-				if (address.equals(c.getAddress())) {
-					errorList.add("row " + rowNumber + ": This canteen already exists");
+			} else {
+				Canteen canteen = canteenDAO.getCanteenByAddress(address);
+				if (canteen != null) {
+					errorList.add("row " + rowNumber + ": This address already exists");
 				}
 			}
+
+			// check duplicated entries if there is an existing canteen
+			
 		}
 		return errorList;
 
