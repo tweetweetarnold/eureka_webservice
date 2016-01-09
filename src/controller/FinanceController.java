@@ -8,6 +8,7 @@ import model.Employee;
 /**
  * Performs the business logic of managing the finance for the web application
  * 
+ * @author SMU Team Eureka
  *
  */
 public class FinanceController {

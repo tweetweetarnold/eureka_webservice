@@ -8,6 +8,7 @@ import dao.CompanyDAO;
 /**
  * Process the function of managing the Company's information
  * 
+ * @author SMU Team Eureka
  * 
  */
 public class CompanyController {
@@ -21,7 +22,7 @@ public class CompanyController {
 	}
 
 	/**
-	 * Adds a new Company object into the database
+	 * Adds a new Company object into the Database
 	 * 
 	 * @param c The Company object to be added in
 	 */
@@ -30,7 +31,7 @@ public class CompanyController {
 	}
 
 	/**
-	 * Updates the designated Company object in the database
+	 * Updates the designated Company object in the Database
 	 * 
 	 * @param c The Company object to be updated
 	 */
@@ -39,7 +40,7 @@ public class CompanyController {
 	}
 
 	/**
-	 * Removes the designated Company object from the database
+	 * Removes the designated Company object from the Database
 	 * 
 	 * @param c The Company object to be removed
 	 */
@@ -68,8 +69,8 @@ public class CompanyController {
 	}
 	
 	/**
-	 * Retrieve all the Companies from the database
-	 * @return An ArrayList of Company objects stored in the database
+	 * Retrieve all the Companies from the Database
+	 * @return An ArrayList of Company objects stored in the Database
 	 */
 	public ArrayList<Company> getAllCompany() {
 		return companyDAO.getAllCompany();

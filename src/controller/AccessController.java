@@ -22,7 +22,7 @@ import dao.AdminDAO;
  * Process the functions of user access control such as registration and logging in for
  * Administrator and normal user
  * 
- * 
+ * @author SMU Team Eureka
  */
 public class AccessController {
 
@@ -208,6 +208,7 @@ public class AccessController {
 		return newEmployee.getEmail();
 	}
 	
+	//used in ProcessChangePasswordServlet
 	/**
 	 * Updates the current password of the Employee in the database
 	 * 
@@ -222,7 +223,16 @@ public class AccessController {
 		return true;
 	}
 
-
+	/**
+	 * Updates the current password of the Employee in the database
+	 * 
+	 * @param e The designated Employee to be updated
+	 * @param oldPassword The Employee's current password
+	 * @param newPassword The Employee's new password
+	 * @param confirmNewPassword The Employee's new password for confirmation
+	 * @return Returns true when the password has been updated
+	 * @throws Exception if the new password of the Employee could not be updated in the database
+	 */
 	public boolean updateEmployeePassword(Employee e, String oldPassword, String newPassword,
 			String confirmNewPassword) throws Exception {
 		if (e.getPassword().equals(encryptPassword(e.getEmail(), oldPassword))) {
@@ -238,7 +248,13 @@ public class AccessController {
 		return false;
 	}
 
-
+	/**
+	 * Performs AES(Advanced Encryption Standard) encryption for the Employee's password
+	 * 
+	 * @param email The email address of the Employee
+	 * @param password The password of the Employee in plain text
+	 * @return The encrypted password
+	 */
 	private String encryptPassword(String email, String password) {
 		return aesAlgo.encrypt(email + password);
 	}

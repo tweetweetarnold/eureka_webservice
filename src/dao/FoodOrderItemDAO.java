@@ -11,7 +11,7 @@ import connection.MyConnection;
 /**
  * Performs the function of Data Access Object for FoodOrderItem model
  * 
- *
+ * @author SMU Team Eureka
  */
 public class FoodOrderItemDAO {
 

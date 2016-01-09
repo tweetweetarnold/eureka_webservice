@@ -6,6 +6,7 @@ import dao.EmployeeDAO;
 /**
  * Process the function of managing Employee's information
  * 
+ * @author SMU Team Eureka
  * 
  */
 public class EmployeeController {
@@ -16,17 +17,28 @@ public class EmployeeController {
 	 */
 	public EmployeeController() {
 	}
-
+	
+	/**
+	 * Adds a new Employee object to the Database
+	 * 
+	 * @param e The Employee object to be added in
+	 */
 	public void saveEmployee(Employee e) {
 		employeeDAO.saveEmployee(e);
 	}
-
+	
+	/**
+	 * Retrieves the Employee based on the provided email address
+	 * 
+	 * @param email The email address of the employee
+	 * @return The Employee object of the email address, otherwise returns null
+	 */
 	public Employee getEmployeeByEmail(String email) {
 		return employeeDAO.getEmployeeByEmail(email);
 	}
 
 	/**
-	 * Updates the designated Employee object in the database
+	 * Updates the designated Employee object in the Database
 	 * 
 	 * @param e The Employee object to be updated
 	 */
@@ -35,7 +47,7 @@ public class EmployeeController {
 	}
 
 	/**
-	 * Removes the designated Employee object from the database
+	 * Removes the designated Employee object from the Database
 	 * 
 	 * @param e The Employee object to be removed
 	 */

@@ -12,6 +12,7 @@ import dao.CanteenDAO;
 /**
  * Process the business logic of managing the Canteen for the web application
  * 
+ * @author SMU Team Eureka
  * 
  */
 public class CanteenController {
@@ -25,18 +26,18 @@ public class CanteenController {
 	}
 
 	/**
-	 * Retrieves All the Canteens stored in the database
+	 * Retrieves All the Canteens stored in the Database
 	 * 
-	 * @return A list of all the Canteen objects from the database
+	 * @return A list of all the Canteen objects from the Database
 	 */
 	public ArrayList<Canteen> getAllCanteens() {
 		return canteenDAO.getAllCanteens();
 	}
 
 	/**
-	 * Retrieves All the Food stored in the database
+	 * Retrieves All the Food stored in the Database
 	 * 
-	 * @return A list of all the Food objects from the database
+	 * @return A list of all the Food objects from the Database
 	 */
 	public List<Food> getAllFood() {
 		List<Food> returnList = new ArrayList<Food>();

@@ -19,7 +19,7 @@ import connection.MyConnection;
 /**
  * Performs the function of Data Access Object for the Stall model
  * 
- * 
+ * @author SMU Team Eureka
  */
 public class StallDAO {
 
@@ -41,7 +41,7 @@ public class StallDAO {
 	}
 
 	/**
-	 * Adds a new Stall object to the database
+	 * Adds a new Stall object to the Database
 	 * 
 	 * @param h The Stall object to be added in
 	 */
@@ -50,7 +50,7 @@ public class StallDAO {
 	}
 
 	/**
-	 * Updates the designated Stall object in the database
+	 * Updates the designated Stall object in the Database
 	 * 
 	 * @param h The Stall object to be updated
 	 */
@@ -59,7 +59,7 @@ public class StallDAO {
 	}
 
 	/**
-	 * Removes the designated Stall object from the database
+	 * Removes the designated Stall object from the Database
 	 * 
 	 * @param h The Stall object to be removed
 	 */
@@ -83,9 +83,9 @@ public class StallDAO {
 	}
 
 	/**
-	 * Load the validated content of the Stall.csv into the database
+	 * Load the validated content of the Stall.csv into the Database
 	 * 
-	 * @param content The list of Stall data to be loaded into the database
+	 * @param content The list of Stall data to be loaded into the Database
 	 */
 	public void loadStallData(List<String[]> content) {
 

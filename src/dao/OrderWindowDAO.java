@@ -17,7 +17,7 @@ import connection.MyConnection;
 /**
  * Performs the function of Data Access Object for the OrderWindow model
  * 
- * 
+ * @author SMU Team Eureka
  */
 public class OrderWindowDAO {
 
@@ -39,7 +39,7 @@ public class OrderWindowDAO {
 	}
 
 	/**
-	 * Adds a new OrderWindow object to the database
+	 * Adds a new OrderWindow object to the Database
 	 * 
 	 * @param w The OrderWindow object to be added in
 	 */
@@ -48,7 +48,7 @@ public class OrderWindowDAO {
 	}
 
 	/**
-	 * Updates the designated OrderWindow object in the database
+	 * Updates the designated OrderWindow object in the Database
 	 * 
 	 * @param w The OrderWindow object to be updated
 	 */
@@ -57,7 +57,7 @@ public class OrderWindowDAO {
 	}
 
 	/**
-	 * Removes the designated OrderWindow object from the database
+	 * Removes the designated OrderWindow object from the Database
 	 * 
 	 * @param w The OrderWindow object to be removed
 	 */

@@ -8,6 +8,7 @@ import dao.AdminDAO;
 /**
  * Process the business logic required by an Administrator
  * 
+ * @author SMU Team Eureka
  *
  */
 public class AdminController {
@@ -22,6 +23,7 @@ public class AdminController {
 	
 	/**
 	 * Retrieve a list of Employees whom owes payment
+	 * 
 	 * @param paymentStatus The payment status of the Employees
 	 * @return A list of Employees whom status are indicated as "Owed"
 	 */

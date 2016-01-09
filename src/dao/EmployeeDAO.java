@@ -14,7 +14,7 @@ import connection.MyConnection;
 /**
  * Performs the function of Data Access Object for the Employee model
  * 
- * 
+ * @author SMU Team Eureka
  */
 public class EmployeeDAO {
 
@@ -36,7 +36,7 @@ public class EmployeeDAO {
 	}
 
 	/**
-	 * Adds a new Employee object to the database
+	 * Adds a new Employee object to the Database
 	 * 
 	 * @param e The Employee object to be added in
 	 */
@@ -45,7 +45,7 @@ public class EmployeeDAO {
 	}
 
 	/**
-	 * Updates the designated Employee object in the database
+	 * Updates the designated Employee object in the Database
 	 * 
 	 * @param e The Employee object to be updated
 	 */
@@ -54,7 +54,7 @@ public class EmployeeDAO {
 	}
 
 	/**
-	 * Removes the designated Employee object from the database
+	 * Removes the designated Employee object from the Database
 	 * 
 	 * @param e The Employee object to be removed
 	 */
@@ -81,7 +81,7 @@ public class EmployeeDAO {
 	}
 
 	/**
-	 * Retrieves all the Employees from the database
+	 * Retrieves all the Employees from the Database
 	 * 
 	 * @return An ArrayList of Employee objects
 	 */

@@ -15,6 +15,7 @@ import dao.FoodDAO;
 /**
  * Process the function of managing the Food objects' information
  * 
+ * @author SMU Team Eureka
  * 
  */
 public class FoodController {
@@ -46,11 +47,21 @@ public class FoodController {
 	public Food getFood(int id) {
 		return foodDAO.getFood(id);
 	}
-
+	
+	/**
+	 * Adds a new Food object to the Database
+	 * 
+	 * @param f The Food object to be added in
+	 */
 	public void saveFood(Food f) {
 		foodDAO.saveFood(f);
 	}
-
+	
+	/**
+	 * Updates the designated Food object in the Database
+	 * 
+	 * @param f The Food object to be updated
+	 */
 	public void updateFood(Food f) {
 		foodDAO.updateFood(f);
 	}
@@ -112,7 +123,13 @@ public class FoodController {
 
 		return choices.get(pick);
 	}
-
+	
+	/**
+	 * Retrieves a list of Food in the Stall
+	 * 
+	 * @param stall The designated Stall
+	 * @return An ArrayList of Food objects that are in the designated Stall
+	 */
 	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
 		return foodDAO.getAllFoodsUnderStall(stall);
 	}

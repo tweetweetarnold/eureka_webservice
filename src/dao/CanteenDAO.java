@@ -18,7 +18,7 @@ import connection.MyConnection;
 /**
  * Performs the function of Data Access Object for the Canteen model
  * 
- * 
+ * @author SMU Team Eureka
  */
 public class CanteenDAO {
 
@@ -137,7 +137,7 @@ public class CanteenDAO {
 	}
 
 	/**
-	 * Adds a new Canteen object to the database
+	 * Adds a new Canteen object to the Database
 	 * 
 	 * @param c The Canteen object to be added in
 	 */
@@ -146,7 +146,7 @@ public class CanteenDAO {
 	}
 
 	/**
-	 * Updates the designated Canteen object in the database
+	 * Updates the designated Canteen object in the Database
 	 * 
 	 * @param c The Canteen object to be updated
 	 */
@@ -155,7 +155,7 @@ public class CanteenDAO {
 	}
 
 	/**
-	 * Removes the designated Canteen object from the database
+	 * Removes the designated Canteen object from the Database
 	 * 
 	 * @param c The Canteen object to be removed
 	 */
@@ -164,9 +164,9 @@ public class CanteenDAO {
 	}
 
 	/**
-	 * Load the validated content of the Canteen.csv into the database
+	 * Load the validated content of the Canteen.csv into the Database
 	 * 
-	 * @param content The list of Canteen data to be loaded into the database
+	 * @param content The list of Canteen data to be loaded into the Database
 	 */
 	public void loadCanteenData(List<String[]> content) {
 		Iterator<String[]> iter = content.iterator();

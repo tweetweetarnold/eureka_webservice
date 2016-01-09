@@ -9,6 +9,7 @@ import dao.StallDAO;
 /**
  * Process the functions of managing the Stall's information
  * 
+ * @author SMU Team Eureka
  *
  */
 public class StallController {
@@ -41,7 +42,7 @@ public class StallController {
 	}
 	
 	/**
-	 * Updates the designated Stall object in the database
+	 * Updates the designated Stall object in the Database
 	 * 
 	 * @param s The Stall object to be updated
 	 */

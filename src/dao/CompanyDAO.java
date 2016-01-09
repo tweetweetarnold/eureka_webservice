@@ -13,7 +13,7 @@ import connection.MyConnection;
 /**
  * Performs the function of Data Access Object for the Company model
  * 
- *
+ * @author SMU Team Eureka
  */
 public class CompanyDAO {
 	

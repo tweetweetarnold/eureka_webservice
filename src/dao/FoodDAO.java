@@ -18,7 +18,7 @@ import connection.MyConnection;
 /**
  * Performs the function of Data Access Object for Food model
  * 
- * 
+ * @author SMU Team Eureka
  */
 public class FoodDAO {
 	CanteenDAO canteenDAO = new CanteenDAO();
@@ -42,7 +42,7 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Adds a new Food object to the database
+	 * Adds a new Food object to the Database
 	 * 
 	 * @param f The Food object to be added in
 	 */
@@ -51,7 +51,7 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Updates the designated Food object in the database
+	 * Updates the designated Food object in the Database
 	 * 
 	 * @param f The Food object to be updated
 	 */
@@ -60,7 +60,7 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Removes the designated Food object from the database
+	 * Removes the designated Food object from the Database
 	 * 
 	 * @param f The Food object to be removed
 	 */
@@ -115,9 +115,9 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Load the validated content of the Food.csv into the database
+	 * Load the validated content of the Food.csv into the Database
 	 * 
-	 * @param content The list of Food data to be loaded into the database
+	 * @param content The list of Food data to be loaded into the Database
 	 */
 	public void loadFoodData(List<String[]> content) {
 		Iterator<String[]> iter = content.iterator();
@@ -164,9 +164,9 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Load the validated content of the Modifier.csv into the database
+	 * Load the validated content of the Modifier.csv into the Database
 	 * 
-	 * @param content The list of Modifier data to be loaded into the database
+	 * @param content The list of Modifier data to be loaded into the Database
 	 */
 	public void loadModifierData(List<String[]> content) {
 		Iterator<String[]> iter = content.iterator();
@@ -190,7 +190,7 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Retrieves a List of Food in the Stall
+	 * Retrieves a list of Food in the Stall
 	 * 
 	 * @param stall The designated Stall
 	 * @return An ArrayList of Food objects that are in the designated Stall

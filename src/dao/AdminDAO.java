@@ -15,7 +15,7 @@ import connection.MyConnection;
 /**
  * Performs the function of Data Access Object for the Admin model
  * 
- *
+ * @author SMU Team Eureka
  */
 public class AdminDAO {
 	
@@ -70,7 +70,7 @@ public class AdminDAO {
 	}
 
 	/**
-	 * Adds a new Admin object to the database
+	 * Adds a new Admin object to the Database
 	 * 
 	 * @param d The Admin object to be added in
 	 */
@@ -79,7 +79,7 @@ public class AdminDAO {
 	}
 
 	/**
-	 * Updates the designated Admin object in the database
+	 * Updates the designated Admin object in the Database
 	 * 
 	 * @param d The Admin object to be updated
 	 */
@@ -88,7 +88,7 @@ public class AdminDAO {
 	}
 
 	/**
-	 * Removes the designated Admin object from the database
+	 * Removes the designated Admin object from the Database
 	 * 
 	 * @param d The Admin object to be removed
 	 */

@@ -17,7 +17,7 @@ import connection.MyConnection;
  * Performs the function of Data Access Object 
  * for the FoodOrder model
  * 
- *
+ * @author SMU Team Eureka
  */
 public class FoodOrderDAO {
 
@@ -39,7 +39,7 @@ public class FoodOrderDAO {
 	}
 
 	/**
-	 * Adds a new FoodOrder object to the database
+	 * Adds a new FoodOrder object to the Database
 	 * 
 	 * @param f The FoodOrder object to be added in
 	 */
@@ -48,7 +48,7 @@ public class FoodOrderDAO {
 	}
 
 	/**
-	 * Updates the designated FoodOrder object in the database
+	 * Updates the designated FoodOrder object in the Database
 	 * 
 	 * @param f The FoodOrder object to be updated
 	 */
@@ -57,7 +57,7 @@ public class FoodOrderDAO {
 	}
 
 	/**
-	 * Removes the designated FoodOrder object from the database
+	 * Removes the designated FoodOrder object from the Database
 	 * 
 	 * @param f The FoodOrder object to be removed
 	 */

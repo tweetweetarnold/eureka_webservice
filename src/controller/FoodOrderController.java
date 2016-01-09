@@ -25,6 +25,7 @@ import dao.FoodOrderItemDAO;
 /**
  * Process the business logic of managing the Food orders for the web application
  * 
+ * @author SMU Team Eureka
  * 
  */
 public class FoodOrderController {
@@ -604,11 +605,11 @@ public class FoodOrderController {
 		return mapToReturn;
 	}
 
-	/**
-	 * Returns a HashMap
-	 * 
-	 * @return Returns a HashMap
-	 */
+//	/**
+//	 * Returns a HashMap
+//	 * 
+//	 * @return Returns a HashMap
+//	 */
 	/*
 	 * public HashMap<String, ArrayList<FoodOrderItem>> getFoodOrderToday() { // get all orders made
 	 * today List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(today.minusDays(1)
