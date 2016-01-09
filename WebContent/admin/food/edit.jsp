@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 
-<%@include file="protect/adminProtect.jsp"%>
+<%@include file="/protect/adminProtect.jsp"%>
 
 <head>
 
@@ -15,31 +15,18 @@
 
 <title>DABAO</title>
 
-<!-- Bootstrap Core CSS -->
 <link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 >
-
-<!-- MetisMenu CSS -->
 <link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css"
 	rel="stylesheet"
 >
-
-<!-- Timeline CSS -->
 <link href="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/timeline.css" rel="stylesheet">
-
-<!-- Custom CSS -->
 <link href="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/sb-admin-2.css" rel="stylesheet">
-
-<!-- Morris Charts CSS -->
 <link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.css" rel="stylesheet">
-
-<!-- Custom Fonts -->
 <link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css"
 >
-
-<!-- Datetime picker css -->
 <link href="resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
 
 
@@ -54,7 +41,7 @@
 
 	<div id="wrapper">
 
-		<%@include file="headerfooter/adminHeader2.jsp"%>
+		<%@include file="/headerfooter/adminHeader2.jsp"%>
 
 		<div id="page-wrapper">
 

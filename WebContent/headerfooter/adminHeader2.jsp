@@ -1,3 +1,8 @@
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 	<div class="navbar-header">
 		<!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -6,7 +11,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button> -->
-		<a class="navbar-brand" href="adminHomepage.jsp">DABAO</a>
+		<a class="navbar-brand" href="/eureka_webservice/admin/homepage.jsp">DABAO</a>
 	</div>
 	<!-- /.navbar-header -->
 
@@ -266,7 +271,7 @@
 					<!-- /input-group -->
 				</li>
 				<li>
-					<a href="adminHomepage.jsp">
+					<a href="/eureka_webservice/admin/homepage.jsp">
 						<i class="fa fa-dashboard fa-fw"></i>
 						Homepage
 					</a>
@@ -286,13 +291,13 @@
 							</a>
 							<ul class="nav nav-third-level">
 								<li>
-									<a href="LoadOrderWindowOpenedServlet">Opened</a>
+									<a href="/eureka_webservice/LoadOrderWindowOpenedServlet">Opened</a>
 								</li>
 							</ul>
 							<!-- /.nav-third-level -->
 						</li>
 						<li>
-							<a href="LoadAdminAddNewWindowServlet">Create New Window</a>
+							<a href="/eureka_webservice/LoadAdminAddNewWindowServlet">Create New Window</a>
 						</li>
 
 					</ul>
@@ -307,7 +312,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="LoadAdminViewUsersWithOutstandingPaymentServlet">Outstanding</a>
+							<a href="/eureka_webservice/LoadAdminViewUsersWithOutstandingPaymentServlet">Outstanding</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->
@@ -321,7 +326,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="LoadViewCanteenServlet">View</a>
+							<a href="/eureka_webservice/LoadViewCanteenServlet">View</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->
@@ -335,7 +340,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="LoadAdminViewUsersServlet">View</a>
+							<a href="/eureka_webservice/LoadAdminViewUsersServlet">View</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->

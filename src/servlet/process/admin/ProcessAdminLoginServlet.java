@@ -26,7 +26,6 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 	 */
 	public ProcessAdminLoginServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -34,7 +33,6 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		process(request, response);
 	}
 
@@ -43,7 +41,6 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		process(request, response);
 	}
 
@@ -71,13 +68,14 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 
 			System.out.println("TokenID is set in session");
 
-			response.sendRedirect("adminHomepage.jsp");
+			response.sendRedirect("admin/homepage.jsp");
 
 		} catch (Exception e) {
 			System.out.println("Exception thrown. Incorrect credentials.");
 			session.setAttribute("username", adminUsername);
 			session.setAttribute("error", "Something went wrong! Please check your credentials.");
-			response.sendRedirect("adminLogin.jsp");
+			response.sendRedirect(request.getServerName() + ":" + request.getServerPort()
+					+ "/adminLogin.jsp");
 		}
 	}
 }
