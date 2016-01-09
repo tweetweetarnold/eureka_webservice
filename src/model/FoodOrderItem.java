@@ -18,8 +18,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * Represents the Food order item(s) model entity in the web application
+ * Represents the Food order item(s) entity model in the web application
  * 
+ * @author SMU Team Eureka
  *
  */
 @Entity

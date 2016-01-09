@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 /**
  * Represents a Canteen entity model in the web application
+ * 
+ * @author SMU Team Eureka
  */
 @Entity
 @Table(name = "canteen")

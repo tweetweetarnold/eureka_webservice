@@ -12,9 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Represents the Add-Ons of the Food items model entity in the web application
+ * Represents the Add-Ons of the Food items entity model in the web application
  * 
- *
+ * @author SMU Team Eureka
  */
 @Entity
 @Table(name = "modifier")

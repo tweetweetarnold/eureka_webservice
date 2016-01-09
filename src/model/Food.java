@@ -17,9 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * Represents the Food model entity in the web application
+ * Represents the Food entity model in the web application
  * 
- *
+ * @author SMU Team Eureka
  */
 @Entity
 @Table(name = "food")

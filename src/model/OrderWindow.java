@@ -20,9 +20,9 @@ import org.joda.time.Interval;
 import value.StringValues;
 
 /**
- * Represents the Ordering Window entity model in this web application
+ * Represents the Ordering Window entity model in the web application
  * 
- * 
+ * @author SMU Team Eureka
  */
 @Entity
 @Table(name = "orderwindow")
@@ -123,11 +123,21 @@ public class OrderWindow {
 	public Date getEndDateFormatted() {
 		return endDateFormatted;
 	}
-
+	
+	/**
+	 * Retrieves the discount of this order window
+	 * 
+	 * @return The current discount in this order window
+	 */
 	public double getDiscount() {
 		return discount;
 	}
-
+	
+	/**
+	 * Changes the current discount of this order window
+	 * 
+	 * @param discount The new discount to be updated
+	 */
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}

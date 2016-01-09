@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 /**
  * Represents a Company entity model in the web application
+ * 
+ * @author SMU Team Eureka
  */
 @Entity
 @Table(name = "company")

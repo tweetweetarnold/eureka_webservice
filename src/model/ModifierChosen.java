@@ -11,6 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Represents the chosen Add-ons of the Food items entity model in the web application
+ * 
+ * @author SMU Team Eureka
+ *
+ */
 @Entity
 @Table(name = "modifierchosen")
 public class ModifierChosen {
@@ -25,10 +31,19 @@ public class ModifierChosen {
 	@JoinColumn(name = "foodOrderItemId")
 	private FoodOrderItem foodOrderItem;
 	private Date createDate;
-
+	
+	/**
+	 * Creates a default constructor for ModifierChosen
+	 */
 	public ModifierChosen() {
 	}
-
+	
+	/**
+	 * Creates a new ModifierChosen with the Modifier and FoodOrderItem
+	 * 
+	 * @param m The designated Modifier object
+	 * @param item The designated FoodOrderItem object
+	 */
 	public ModifierChosen(Modifier m, FoodOrderItem item) {
 		this.name = m.getName();
 		this.description = m.getDescription();
@@ -36,56 +51,121 @@ public class ModifierChosen {
 		this.createDate = new Date();
 		this.foodOrderItem = item;
 	}
-
+	
+	/**
+	 * Retrieves the ID of the ModifierChosen
+	 * 
+	 * @return The ModifierChosen's ID
+	 */
 	public int getModifierId() {
 		return modifierChosenId;
 	}
-
+	
+	/**
+	 * Changes the current ID of the ModifierChosen
+	 * 
+	 * @param modifierChosenId The new ID of the ModifierChosen
+	 */
 	public void setModifierId(int modifierChosenId) {
 		this.modifierChosenId = modifierChosenId;
 	}
-
+	
+	/**
+	 * Retrieves the name of the ModifierChosen
+	 * 
+	 * @return The ModifierChosen's name
+	 */
 	public String getName() {
 		return name;
 	}
-
+	
+	/**
+	 * Changes the current name of the ModifierChosen
+	 * 
+	 * @param name The ModifierChosen's new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	/**
+	 * Retrieves the description of the ModifierChosen
+	 * 
+	 * @return The ModifierChosen's description
+	 */
 	public String getDescription() {
 		return description;
 	}
-
+	
+	/**Changes the current description of the ModifierChosen
+	 * 
+	 * @param description The new description of the ModifierChosen
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
+	/**
+	 * Retrieves the price of the ModifierChosen
+	 * 
+	 * @return The price of the ModifierChosen
+	 */
 	public double getPrice() {
 		return price;
 	}
-
+	
+	/**
+	 * Changes the current price of the ModifierChosen
+	 * 
+	 * @param price The new price of the ModifierChosen
+	 */
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
+	
+	/**
+	 * Retrieves the FoodOrderItem of this ModifierChosen
+	 * 
+	 * @return The FoodOrderItem that has this ModifierChosen
+	 */
 	public FoodOrderItem getFood() {
 		return foodOrderItem;
 	}
-
+	
+	/**
+	 * Changes the FoodOrderItem for this ModifierChosen
+	 * 
+	 * @param foodOrderItem The new FoodOrderItem that has this ModifierChosen
+	 */
 	public void setFood(FoodOrderItem foodOrderItem) {
 		this.foodOrderItem = foodOrderItem;
 	}
 
+	/**
+	 * Retrieves the date which this ModifierChosen object is created
+	 * 
+	 * @return The date that this ModifierChosen object is created
+	 */
 	public Date getCreateDate() {
 		return createDate;
 	}
-
+	
+	/**
+	 * Changes the current date of this Modifier object created
+	 * 
+	 * @param createDate The new date of this ModifierChosen object being created
+	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
 	// Check if otherModifier equal current modifier
+	/**
+	 * Checks if this ModifierChosen is the same as the other ModifierChosen
+	 * 
+	 * @param otherModifier The ModifierChosen to be compared with
+	 * @return Returns true if this ModifierChosen and the other ModifierChosen is the same
+	 */
 	public boolean equals(ModifierChosen otherModifier) {
 		if (this.modifierChosenId==otherModifier.getModifierId()) {
 			return true;

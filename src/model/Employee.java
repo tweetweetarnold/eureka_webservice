@@ -14,7 +14,7 @@ import value.StringValues;
 /**
  * Represents a Employee entity model in the web application
  * 
- *
+ * @author SMU Team Eureka
  */
 @Entity
 @Table(name = "employee")
