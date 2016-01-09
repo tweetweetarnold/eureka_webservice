@@ -15,8 +15,6 @@ import javax.persistence.Table;
 
 /**
  * Represents a Company entity model in the web application
- * 
- *
  */
 @Entity
 @Table(name = "company")
@@ -32,16 +30,16 @@ public class Company {
 	private Set<Canteen> canteenList;
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> deliveryPointSet;
-	
+
 	/**
 	 * Creates a default constructor for Company
 	 */
 	public Company() {
 	}
-	
+
 	/**
-	 *Creates a new Company with a given name, 
-	 *cut-off timing, the list of Canteen and a company code
+	 * Creates a new Company with a given name, cut-off timing, the list of Canteen and a company
+	 * code
 	 * 
 	 * @param name The name of the Company
 	 * @param cutoffTime The cut-off timing for ordering food
@@ -56,7 +54,7 @@ public class Company {
 		this.canteenList = canteenList;
 		this.companyCode = companyCode;
 	}
-	
+
 	/**
 	 * Retrieves the current company code of the Company
 	 * 
@@ -65,7 +63,7 @@ public class Company {
 	public String getCompanyCode() {
 		return companyCode;
 	}
-	
+
 	/**
 	 * Changes the company code with a new company code
 	 * 
@@ -74,7 +72,7 @@ public class Company {
 	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
 	}
-	
+
 	/**
 	 * Retrieves the current ID of the Company
 	 * 
@@ -83,7 +81,7 @@ public class Company {
 	public int getCompanyId() {
 		return companyId;
 	}
-	
+
 	/**
 	 * Retrieves the current name of the Company
 	 * 
@@ -92,7 +90,7 @@ public class Company {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Changes the name of the company with the new Company name
 	 * 
@@ -101,7 +99,7 @@ public class Company {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Changes the set of Delivery Point
 	 * 
@@ -110,7 +108,7 @@ public class Company {
 	public void setDeliveryPointSet(Set<String> deliveryPointSet) {
 		this.deliveryPointSet = deliveryPointSet;
 	}
-	
+
 	/**
 	 * Retrieves the current set of Delivery Point for the Company
 	 * 
@@ -119,7 +117,7 @@ public class Company {
 	public Set<String> getDeliveryPointSet() {
 		return deliveryPointSet;
 	}
-	
+
 	/**
 	 * Retrieves the date of the Company's entity model created
 	 * 
@@ -128,7 +126,7 @@ public class Company {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	
+
 	/**
 	 * Retrieves the Company's current cut-off timing for ordering food
 	 * 
@@ -137,7 +135,7 @@ public class Company {
 	public Date getCutoffTime() {
 		return cutoffTime;
 	}
-	
+
 	/**
 	 * Change the Company's cut-off timing with a new cut-off timing
 	 * 
@@ -146,7 +144,7 @@ public class Company {
 	public void setCutoffTime(Date cutoffTime) {
 		this.cutoffTime = cutoffTime;
 	}
-	
+
 	/**
 	 * Retrieves the current list of Canteens
 	 * 
@@ -155,7 +153,7 @@ public class Company {
 	public Set<Canteen> getCanteenList() {
 		return canteenList;
 	}
-	
+
 	/**
 	 * Changes the list of Canteens with a new list of Canteens
 	 * 

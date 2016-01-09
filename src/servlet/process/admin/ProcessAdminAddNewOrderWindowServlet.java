@@ -33,7 +33,6 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 	 */
 	public ProcessAdminAddNewOrderWindowServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -41,7 +40,6 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -50,13 +48,14 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		HttpSession session = request.getSession();
 		OrderWindowController orderWindowController = new OrderWindowController();
 		CompanyController companyController = new CompanyController();
 		CanteenController canteenController = new CanteenController();
 
+		// TODO: orderwindow discount not done
+		String discountString = request.getParameter("discount");
 		String companyId = request.getParameter("company");
 		String canteenId = request.getParameter("canteen");
 		String startDatetimeString = request.getParameter("startDatetime");
@@ -76,7 +75,10 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 			Company company = companyController.getCompany(Integer.parseInt(companyId));
 			Canteen canteen = canteenController.getCanteen(Integer.parseInt(canteenId));
 
-			orderWindowController.createNewOrderindow(startDatetime, endDatetime, company, canteen);
+			double discount = Double.parseDouble(discountString);
+
+			orderWindowController.createNewOrderindow(startDatetime, endDatetime, company, canteen,
+					discount);
 
 			session.setAttribute("success", "New Order Window created successfully.");
 

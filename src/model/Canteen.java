@@ -14,9 +14,6 @@ import javax.persistence.Table;
 
 /**
  * Represents a Canteen entity model in the web application
- * 
- * 
- *
  */
 @Entity
 @Table(name = "canteen")
@@ -29,15 +26,16 @@ public class Canteen {
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "canteen")
 	private Set<Stall> stallList;
-	
+
 	/**
 	 * Creates a default constructor for Canteen
 	 */
 	public Canteen() {
 	}
-	
+
 	/**
 	 * Creates a new Canteen with a name, address and a list of Stalls
+	 * 
 	 * @param name The name of the Canteen
 	 * @param address The address of the Canteen
 	 * @param stallList The list of Stalls available in this Canteen
@@ -49,7 +47,7 @@ public class Canteen {
 		this.createDate = new Date();
 		this.stallList = stallList;
 	}
-	
+
 	/**
 	 * Retrieves the name of the Canteen
 	 * 
@@ -58,15 +56,16 @@ public class Canteen {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Changes the name of the Canteen
+	 * 
 	 * @param name The Canteen's new name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Retrieves the ID of the Canteen
 	 * 
@@ -75,7 +74,7 @@ public class Canteen {
 	public int getCanteenId() {
 		return canteenId;
 	}
-	
+
 	/**
 	 * Retrieves the address of the Canteen
 	 * 
@@ -84,7 +83,7 @@ public class Canteen {
 	public String getAddress() {
 		return address;
 	}
-	
+
 	/**
 	 * Changes the address of the Canteen
 	 * 
@@ -93,7 +92,7 @@ public class Canteen {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	/**
 	 * Retrieves the date of the Canteen's entity model created
 	 * 
@@ -102,7 +101,7 @@ public class Canteen {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	
+
 	/**
 	 * Retrieves the list of current Stalls in the Canteen
 	 * 
@@ -111,7 +110,7 @@ public class Canteen {
 	public Set<Stall> getStallList() {
 		return stallList;
 	}
-	
+
 	/**
 	 * Changes the list of Stalls in the Canteen
 	 * 

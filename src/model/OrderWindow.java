@@ -47,7 +47,7 @@ public class OrderWindow {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "canteenId")
 	private Canteen canteen;
-	private double discount = 0.0;
+	private double discount;
 	private Date createDate;
 
 	/**
@@ -64,13 +64,15 @@ public class OrderWindow {
 	 * @param company The Company indicated in this OrderWindow
 	 * @param canteen The Canteen indicated in this OrderWindow
 	 */
-	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen) {
+	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
+			double discount) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.startDateFormatted = startDate.toDate();
 		this.endDateFormatted = endDate.toDate();
 		this.company = company;
 		this.canteen = canteen;
+		this.discount = discount;
 		this.createDate = new Date();
 	}
 
@@ -83,13 +85,15 @@ public class OrderWindow {
 	 * @param company The Company in this OrderWindow
 	 * @param canteen The Canteen in this OrderWindow
 	 */
-	public OrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen) {
+	public OrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen,
+			double discount) {
 		this.startDate = startDate;
 		this.endDate = startDate.plus(duration);
 		this.startDateFormatted = startDate.toDate();
 		this.endDateFormatted = endDate.toDate();
 		this.canteen = canteen;
 		this.company = company;
+		this.discount = discount;
 		this.createDate = new Date();
 	}
 
@@ -119,7 +123,7 @@ public class OrderWindow {
 	public Date getEndDateFormatted() {
 		return endDateFormatted;
 	}
-	
+
 	public double getDiscount() {
 		return discount;
 	}

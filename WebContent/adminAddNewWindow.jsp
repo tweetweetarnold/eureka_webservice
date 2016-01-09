@@ -119,6 +119,11 @@
 											</div>
 										</div>
 
+										<div class="form-group">
+											<label>Discount (decimal)</label>
+											<input name="discount" class="form-control">
+										</div>
+
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Create
 											New Window</button>
 

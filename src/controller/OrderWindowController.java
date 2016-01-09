@@ -35,8 +35,9 @@ public class OrderWindowController {
 	 * @param canteen The Canteen object specified in the order window
 	 */
 	public void createNewOrderindow(DateTime startDate, DateTime endDate, Company company,
-			Canteen canteen) {
-		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen));
+			Canteen canteen, double discount) {
+		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen,
+				discount));
 	}
 
 	/**
@@ -49,12 +50,14 @@ public class OrderWindowController {
 	 * @param canteen The Canteen object specified in the order window
 	 */
 	public void createNewOrderWindow(DateTime startDate, Duration duration, Company company,
-			Canteen canteen) {
-		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen));
+			Canteen canteen, double discount) {
+		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen,
+				discount));
 	}
-	
+
 	/**
 	 * Retrieves the OrderWindow based on the provided ID
+	 * 
 	 * @param orderWindowId The ID of the OrderWindow
 	 * @return The OrderWindow object that has the provided ID
 	 */

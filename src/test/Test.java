@@ -56,7 +56,7 @@ public class Test {
 		// EVERYTHING IN DATABASE AND POPULATE WITH BELOW
 
 		Company company2 = new Company("Eastman Chemicals", null, null, "ECM901");
-		Company company = new Company("XiaoDingDang Co.", null, null, "XDD123");
+		Company company = new Company("XiaoDingDang Co. (TEST)", null, null, "XDD123");
 		Set<String> buildingList = new HashSet<String>();
 		buildingList.add("SEMBCORP");
 		buildingList.add("PSN");
@@ -1370,7 +1370,7 @@ public class Test {
 		// ****************************************
 
 		OrderWindow window = new OrderWindow(new DateTime(2015, 12, 2, 16, 36, 0), new DateTime(
-				2020, 12, 5, 16, 36, 0), company, canteen1);
+				2020, 12, 5, 16, 36, 0), company, canteen1, 0);
 		session.save(window); // arnold test data
 
 		session.getTransaction().commit();
