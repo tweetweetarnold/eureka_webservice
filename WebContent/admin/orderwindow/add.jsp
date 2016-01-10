@@ -117,6 +117,15 @@
 											<label>Discount (decimal)</label>
 											<input name="discount" class="form-control">
 										</div>
+										<div class="form-group">
+											<label>Number of Weeks</label>
+											<select class="form-control" name="Repeat" required>
+												<option value="">1</option>
+												<c:forEach items="${sessionScope.weekList}" var="week">
+													<option value="${week}">${week}</option>
+												</c:forEach>
+											</select>
+										</div>
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Create
 											New Window</button>

@@ -72,7 +72,9 @@ public class OrderWindowController {
 			endTimeList.add(endDate);
 			for (int i = 1; i < numberOfWeeks; i++) {
 				DateTime tempStartDateTime = startDate.plusWeeks(1);
+				startDate = tempStartDateTime;
 				DateTime tempEndDateTime = endDate.plusWeeks(1);
+				endDate = tempEndDateTime;
 				startTimeList.add(tempStartDateTime);
 				endTimeList.add(tempEndDateTime);
 			}
@@ -94,6 +96,7 @@ public class OrderWindowController {
 			dateTimeList.add(startDate);
 			for (int i = 1; i < numberOfWeeks; i++) {
 				DateTime tempDateTime = startDate.plusWeeks(1);
+				startDate = tempDateTime;
 				dateTimeList.add(tempDateTime);
 			}
 

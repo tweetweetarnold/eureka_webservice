@@ -55,6 +55,7 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 		CanteenController canteenController = new CanteenController();
 
 		// TODO: orderwindow discount not done
+		String weekString = request.getParameter("Repeat");
 		String discountString = request.getParameter("discount");
 		String companyId = request.getParameter("company");
 		String canteenId = request.getParameter("canteen");
@@ -74,11 +75,14 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 
 			Company company = companyController.getCompany(Integer.parseInt(companyId));
 			Canteen canteen = canteenController.getCanteen(Integer.parseInt(canteenId));
-
-			double discount = Double.parseDouble(discountString);
-
+			double discount = 0;
+			int week = Integer.parseInt(weekString);
+			try{
+				discount = Double.parseDouble(discountString);
+			}catch(Exception e){
+			}
 			orderWindowController.createNewOrderindow(startDatetime, endDatetime, company, canteen,
-					discount);
+					discount, week);
 
 			session.setAttribute("success", "New Order Window created successfully.");
 
