@@ -28,43 +28,37 @@ public class OrderWindowController {
 	}
 
 	/**
-	 * Creates a new order window period with start date and end date for the
-	 * specified company and canteen
+	 * Creates a new order window period with start date and end date for the specified company and
+	 * canteen
 	 * 
-	 * @param startDate
-	 *            The start date of the order window
-	 * @param endDate
-	 *            The end date of the order window
-	 * @param company
-	 *            The Company object specified in the order window
-	 * @param canteen
-	 *            The Canteen object specified in the order window
+	 * @param startDate The start date of the order window
+	 * @param endDate The end date of the order window
+	 * @param company The Company object specified in the order window
+	 * @param canteen The Canteen object specified in the order window
 	 */
-	public void createNewOrderindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			double discount) {
-		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen, discount));
+	public void createNewOrderindow(DateTime startDate, DateTime endDate, Company company,
+			Canteen canteen, double discount) {
+		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen,
+				discount));
 	}
 
 	/**
-	 * Creates a new order window period with start date and duration for the
-	 * specified company and canteen
+	 * Creates a new order window period with start date and duration for the specified company and
+	 * canteen
 	 * 
-	 * @param startDate
-	 *            The start date of the order window
-	 * @param duration
-	 *            The duration of the order window
-	 * @param company
-	 *            The Company object specified in the order window
-	 * @param canteen
-	 *            The Canteen object specified in the order window
+	 * @param startDate The start date of the order window
+	 * @param duration The duration of the order window
+	 * @param company The Company object specified in the order window
+	 * @param canteen The Canteen object specified in the order window
 	 */
-	public void createNewOrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen,
-			double discount) {
-		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen, discount));
+	public void createNewOrderWindow(DateTime startDate, Duration duration, Company company,
+			Canteen canteen, double discount) {
+		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen,
+				discount));
 	}
 
-	public void createNewOrderindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			double discount, int numberOfWeeks) {
+	public void createNewOrderindow(DateTime startDate, DateTime endDate, Company company,
+			Canteen canteen, double discount, int numberOfWeeks) {
 		if (numberOfWeeks > 0) {
 			ArrayList<DateTime> startTimeList = new ArrayList<DateTime>();
 			ArrayList<DateTime> endTimeList = new ArrayList<DateTime>();
@@ -80,17 +74,22 @@ public class OrderWindowController {
 			}
 
 			for (int i = 0; i < startTimeList.size(); i++) {
-				orderWindowDAO.saveOrderWindow(
-						new OrderWindow(startTimeList.get(i), endTimeList.get(i), company, canteen, discount));
+				orderWindowDAO.saveOrderWindow(new OrderWindow(startTimeList.get(i), endTimeList
+						.get(i), company, canteen, discount));
 			}
 
 		} else {
-			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen, discount));
+			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen,
+					discount));
 		}
 	}
 
-	public void createNewOrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen,
-			double discount, int numberOfWeeks) {
+	public ArrayList<OrderWindow> getAllOrderWindows() {
+		return orderWindowDAO.getAllOrderWindows();
+	}
+
+	public void createNewOrderWindow(DateTime startDate, Duration duration, Company company,
+			Canteen canteen, double discount, int numberOfWeeks) {
 		if (numberOfWeeks > 0) {
 			ArrayList<DateTime> dateTimeList = new ArrayList<DateTime>();
 			dateTimeList.add(startDate);
@@ -101,19 +100,20 @@ public class OrderWindowController {
 			}
 
 			for (DateTime dateTimeAdd : dateTimeList) {
-				orderWindowDAO.saveOrderWindow(new OrderWindow(dateTimeAdd, duration, company, canteen, discount));
+				orderWindowDAO.saveOrderWindow(new OrderWindow(dateTimeAdd, duration, company,
+						canteen, discount));
 			}
 
 		} else {
-			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen, discount));
+			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen,
+					discount));
 		}
 	}
 
 	/**
 	 * Retrieves the OrderWindow based on the provided ID
 	 * 
-	 * @param orderWindowId
-	 *            The ID of the OrderWindow
+	 * @param orderWindowId The ID of the OrderWindow
 	 * @return The OrderWindow object that has the provided ID
 	 */
 	public OrderWindow getOrderWindow(Integer orderWindowId) {
@@ -123,10 +123,8 @@ public class OrderWindowController {
 	/**
 	 * Get all OrderWindows with status "Opened" for the given Company
 	 * 
-	 * @param company
-	 *            The company whose "Opened" OrderWindows are to be retrieved
-	 * @return Returns an ArrayList of OrderWindows with status "Opened" for the
-	 *         given Company
+	 * @param company The company whose "Opened" OrderWindows are to be retrieved
+	 * @return Returns an ArrayList of OrderWindows with status "Opened" for the given Company
 	 */
 	public ArrayList<OrderWindow> getAllOpenedWindowsForCompany(Company company) {
 		return orderWindowDAO.getAllOpenedWindowsForCompany(company);

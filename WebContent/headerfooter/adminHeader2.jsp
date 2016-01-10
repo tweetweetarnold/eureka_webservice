@@ -65,16 +65,12 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="#">
-								View Windows
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-third-level">
-								<li>
-									<a href="/eureka_webservice/LoadOrderWindowOpenedServlet">Opened</a>
-								</li>
-							</ul>
-							<!-- /.nav-third-level -->
+							<a href="/eureka_webservice/LoadAdminViewOrderWindowsServlet">View: all</a>
+
+						</li>
+						<li>
+							<a href="/eureka_webservice/LoadOrderWindowOpenedServlet">View: Opened</a>
+
 						</li>
 						<li>
 							<a href="/eureka_webservice/LoadAdminAddNewWindowServlet">Create New Window</a>

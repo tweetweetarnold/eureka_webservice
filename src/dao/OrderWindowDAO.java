@@ -66,6 +66,25 @@ public class OrderWindowDAO {
 	}
 
 	/**
+	 * Get all OrderWindows
+	 * 
+	 * @return Returns an ArrayList of all OrderWindows regardless of status
+	 */
+	public ArrayList<OrderWindow> getAllOrderWindows() {
+		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((OrderWindow) o);
+		}
+		return returnList;
+	}
+
+	/**
 	 * Get all OrderWindows with status "Opened" for the given Company
 	 * 
 	 * @param company The company whose "Opened" OrderWindows are to be retrieved
