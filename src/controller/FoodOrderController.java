@@ -237,6 +237,13 @@ public class FoodOrderController {
 	// this is to get the FoodDisplayObject for displaying food orders for the
 	// day filtered by
 	// stores each food display object corresponds to one store
+	/**
+	 * Retrieves an ArrayList of FoodDisplayObject in the designated cut-off time (grouped the FoodDisplayObject by Stalls)
+	 * 
+	 * @param earlierDate The start of the cut-off time
+	 * @param laterDate The end of the cut-off time
+	 * @return An ArrayList of FoodDisplayObject(s) within the designated cut-off time
+	 */
 	public ArrayList<FoodDisplayObject> getFoodOrderForCutOff(Date earlierDate, Date laterDate) {
 
 		// retrieve the FoodOrders from yesterday 10am to today 10am

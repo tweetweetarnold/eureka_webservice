@@ -28,13 +28,14 @@ public class OrderWindowController {
 	}
 
 	/**
-	 * Creates a new order window period with start date and end date for the specified company and
+	 * Creates a new order window period with start and end date and the discount for the specific company and
 	 * canteen
 	 * 
 	 * @param startDate The start date of the order window
 	 * @param endDate The end date of the order window
 	 * @param company The Company object specified in the order window
 	 * @param canteen The Canteen object specified in the order window
+	 * @param discount The designated discount in the order window
 	 */
 	public void createNewOrderindow(DateTime startDate, DateTime endDate, Company company,
 			Canteen canteen, double discount) {
@@ -43,20 +44,33 @@ public class OrderWindowController {
 	}
 
 	/**
-	 * Creates a new order window period with start date and duration for the specified company and
+	 * Creates a new order window period with start date, duration and the discount for the specific company and
 	 * canteen
 	 * 
 	 * @param startDate The start date of the order window
 	 * @param duration The duration of the order window
 	 * @param company The Company object specified in the order window
 	 * @param canteen The Canteen object specified in the order window
+	 * @param discount The designated discount in the order window
 	 */
 	public void createNewOrderWindow(DateTime startDate, Duration duration, Company company,
 			Canteen canteen, double discount) {
 		orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen,
 				discount));
 	}
-
+	
+	/**
+	 * Creates a new order window period indicating the number of weeks, 
+	 * with start and end date and the discount for the specific company and
+	 * canteen 
+	 * 
+	 * @param startDate The start date of the order window
+	 * @param endDate The end date of the order window
+	 * @param company The Company object specified in the order window
+	 * @param canteen The Canteen object specified in the order window
+	 * @param discount The designated discount in the order window
+	 * @param numberOfWeeks The number of weeks that this order window will be running
+	 */
 	public void createNewOrderindow(DateTime startDate, DateTime endDate, Company company,
 			Canteen canteen, double discount, int numberOfWeeks) {
 		if (numberOfWeeks > 0) {
@@ -83,11 +97,28 @@ public class OrderWindowController {
 					discount));
 		}
 	}
-
+	
+	/**
+	 * Retrieve all the OrderWindows
+	 * 
+	 * @return An ArrayList of all OrderWindows regardless of status
+	 */
 	public ArrayList<OrderWindow> getAllOrderWindows() {
 		return orderWindowDAO.getAllOrderWindows();
 	}
-
+	
+	/**
+	 * Creates a new order window period indicating the number of weeks,
+	 * with start date, duration and the discount for the specific company and
+	 * canteen
+	 * 
+	 * @param startDate The start date of the order window
+	 * @param duration The duration of the order window
+	 * @param company The Company object specified in the order window
+	 * @param canteen The Canteen object specified in the order window
+	 * @param discount The designated discount in the order window
+	 * @param numberOfWeeks The number of weeks that this order window will be running
+	 */
 	public void createNewOrderWindow(DateTime startDate, Duration duration, Company company,
 			Canteen canteen, double discount, int numberOfWeeks) {
 		if (numberOfWeeks > 0) {
