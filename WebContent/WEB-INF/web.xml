@@ -21,7 +21,7 @@
   </context-param>
   <context-param>
     <param-name>returnurl</param-name>
-    <param-value>http://lunchtime.sg/phase1/ProcessPaymentServlet</param-value>
+    <param-value>http://lunchtime.sg/training/ProcessPaymentServlet</param-value>
   </context-param>
   <jsp-config>
     <jsp-property-group>
