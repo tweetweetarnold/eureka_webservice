@@ -11,7 +11,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button> -->
-		<a class="navbar-brand" href="/eureka_webservice/admin/homepage.jsp">DABAO</a>
+		<a class="navbar-brand" href="/eureka_webservice/LoadOrderWindowOpenedServlet">DABAO</a>
 	</div>
 	<!-- /.navbar-header -->
 
@@ -271,7 +271,7 @@
 					<!-- /input-group -->
 				</li>
 				<li>
-					<a href="/eureka_webservice/admin/homepage.jsp">
+					<a href="/eureka_webservice/LoadOrderWindowOpenedServlet">
 						<i class="fa fa-dashboard fa-fw"></i>
 						Homepage
 					</a>

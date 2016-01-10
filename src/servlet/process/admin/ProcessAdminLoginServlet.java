@@ -68,7 +68,7 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 
 			System.out.println("TokenID is set in session");
 
-			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
+			response.sendRedirect("/eureka_webservice/LoadOrderWindowOpenedServlet");
 
 		} catch (Exception e) {
 			System.out.println("Exception thrown. Incorrect credentials.");

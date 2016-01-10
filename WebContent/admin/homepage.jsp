@@ -49,8 +49,7 @@
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
-			<div class="row">hello ${pageContext.request.serverName} ${pageContext.request.serverPort}
-				${pageContext.request.localAddr } ${pageContext.request.servletPath} ${pageContext.request.contextPath }</div>
+			<div class="row"></div>
 			<!-- /.row -->
 
 			<!-- Success message handling -->
