@@ -13,7 +13,7 @@
 <meta name="author" content="">
 
 
-<title>DABAO</title>
+<title>LunchTime - Admin</title>
 
 <!-- Bootstrap Core CSS -->
 <link

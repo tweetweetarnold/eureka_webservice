@@ -13,7 +13,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>DABAO</title>
+<title>LunchTime</title>
 
 <!-- JavaScript imports -->
 <script src="resources/js/jquery-1.11.3.js"></script>
