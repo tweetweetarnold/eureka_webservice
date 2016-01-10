@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 
-<%@include file="protect/adminProtect.jsp"%>
+<%@include file="/protect/adminProtect.jsp"%>
 
 <head>
 
@@ -15,32 +15,24 @@
 
 <title>DABAO</title>
 
-<!-- Bootstrap Core CSS -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
+<link
+	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 >
 
-<!-- MetisMenu CSS -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css"
+<link
+	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css"
 	rel="stylesheet"
 >
-
-<!-- Timeline CSS -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/timeline.css" rel="stylesheet">
-
-<!-- Custom CSS -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/sb-admin-2.css" rel="stylesheet">
-
-<!-- Morris Charts CSS -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.css" rel="stylesheet">
-
-<!-- Custom Fonts -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css"
+<link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/timeline.css" rel="stylesheet">
+<link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.css"
+	rel="stylesheet"
+>
+<link
+	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css"
 >
-
-<!-- Datetime picker css -->
-<link href="resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
 
 
 <!-- library import for JSTL -->
@@ -54,13 +46,13 @@
 
 	<div id="wrapper">
 
-		<%@include file="headerfooter/adminHeader2.jsp"%>
+		<%@include file="/headerfooter/adminHeader2.jsp"%>
 
 		<div id="page-wrapper">
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Edit stall</h1>
+					<h1 class="page-header">Edit food</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -69,7 +61,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Edit stall</div>
+						<div class="panel-heading">Edit food</div>
 
 						<div class="panel-body">
 
@@ -77,23 +69,38 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="ProcessAdminEditStallServlet" id="submitForm">
+									<form role="form" action="/eureka_webservice/ProcessAdminEditFoodServlet" id="submitForm">
 
-										<input type="hidden" name="stallId" value="${stallId}">
+										<input type="hidden" name="foodId" value="${sessionScope.foodId}">
 
 										<div class="form-group">
-											<label>Stall name</label>
+											<label>Food name</label>
 											<input class="form-control" name="name" value="${sessionScope.name}" required>
 										</div>
 
 										<div class="form-group">
-											<label>Contact no</label>
-											<input class="form-control" name="contactNo" value="${sessionScope.contactNo}" required>
+											<label>Food name (Chinese)</label>
+											<input class="form-control">
+										</div>
+
+										<div class="form-group">
+											<label>Description</label>
+											<input class="form-control" name="description" value="${sessionScope.description}">
+										</div>
+
+										<div class="form-group">
+											<label>Price</label>
+											<input class="form-control" name="price" value="${sessionScope.price}" required>
 										</div>
 
 										<div class="form-group">
 											<label>Image Directory</label>
 											<input class="form-control" name="imageDirectory" value="${sessionScope.imageDirectory}">
+										</div>
+
+										<div class="form-group">
+											<label>Weather Conditions</label>
+											<input class="form-control" name="weatherConditions" value="${sessionScope.weatherConditions}">
 										</div>
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update
@@ -128,7 +135,7 @@
 				<div class="modal-header">
 					<h4 class="modal-title">Confirmation</h4>
 				</div>
-				<div class="modal-body">Are you sure you want to update Stall details?</div>
+				<div class="modal-body">Are you sure you want to update Food details?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline btn-default">Cancel</button>
 					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
@@ -138,26 +145,19 @@
 	</div>
 
 
-	<!-- jQuery -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-	<!-- Metis Menu Plugin JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-	<!-- Morris Charts JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
+	<script
+		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"
+	></script>
+	<script
+		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"
+	></script>
+	<script
+		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"
+	></script>
+	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
 	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
 	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
-
-	<!-- Custom Theme JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
-
-	<!-- Datetime picker -->
-	<script src="http://momentjs.com/downloads/moment.js"></script>
-	<script src="resources/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 </body>
 

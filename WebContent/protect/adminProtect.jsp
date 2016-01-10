@@ -5,6 +5,6 @@
 	Admin admin = (Admin) session.getAttribute("admin");
 
 	if (admin == null || tokenID == null) {
-		response.sendRedirect("ProcessAdminLogoutServlet");
+		response.sendRedirect("/eureka/ProcessAdminLogoutServlet");
 	}
 %>

@@ -23,7 +23,6 @@ public class ProcessAdminLogoutServlet extends HttpServlet {
 	 */
 	public ProcessAdminLogoutServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -31,7 +30,6 @@ public class ProcessAdminLogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
 
@@ -40,20 +38,18 @@ public class ProcessAdminLogoutServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		System.out.println("ProcessAdminLogoutServlet");
 
 		MyConnection.closeSessionFactory();
 		HttpSession session = request.getSession();
 		session.invalidate();
-		response.sendRedirect("adminLogin.jsp");
+		response.sendRedirect("/eureka_webservice/admin/login.jsp");
 	}
 
 }

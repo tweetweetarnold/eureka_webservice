@@ -31,7 +31,6 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 	 */
 	public LoadOrderWindowOpenedServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -39,7 +38,6 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -73,12 +71,12 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 			}
 
 			session.setAttribute("orderWindowMap", map);
-			response.sendRedirect("adminFoodOrders.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderwindow/opened.jsp");
 
 		} catch (Exception e) {
 			System.out.println("Error occurred at LoadOrderWindowOpenedServlet");
 			e.printStackTrace();
-			response.sendRedirect("adminFoodOrders.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderwindow/opened.jsp");
 		}
 	}
 }

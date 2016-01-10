@@ -23,7 +23,6 @@ public class LoadAdminViewUsersServlet extends HttpServlet {
 	 */
 	public LoadAdminViewUsersServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -31,7 +30,6 @@ public class LoadAdminViewUsersServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -40,13 +38,12 @@ public class LoadAdminViewUsersServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		HttpSession session = request.getSession();
-		
+
 		EmployeeDAO eDao = new EmployeeDAO();
 		session.setAttribute("userMgmtView", eDao.getAllEmployees());
-		response.sendRedirect("adminViewUsers.jsp");
+		response.sendRedirect("/eureka_webservice/admin/user/view.jsp");
 	}
 
 }

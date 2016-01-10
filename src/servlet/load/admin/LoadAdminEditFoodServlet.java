@@ -24,7 +24,6 @@ public class LoadAdminEditFoodServlet extends HttpServlet {
 	 */
 	public LoadAdminEditFoodServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -32,7 +31,6 @@ public class LoadAdminEditFoodServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -41,7 +39,6 @@ public class LoadAdminEditFoodServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		FoodController foodController = new FoodController();
 
@@ -57,7 +54,7 @@ public class LoadAdminEditFoodServlet extends HttpServlet {
 		session.setAttribute("imageDirectory", food.getImageDirectory());
 		session.setAttribute("weatherConditions", food.getWeatherConditions());
 
-		response.sendRedirect("adminEditFood.jsp");
+		response.sendRedirect("/eureka_webservice/admin/food/edit.jsp");
 	}
 
 }

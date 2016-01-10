@@ -25,7 +25,6 @@ public class LoadAdminViewUsersWithOutstandingPaymentServlet extends HttpServlet
 	 */
 	public LoadAdminViewUsersWithOutstandingPaymentServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -33,7 +32,6 @@ public class LoadAdminViewUsersWithOutstandingPaymentServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -42,14 +40,13 @@ public class LoadAdminViewUsersWithOutstandingPaymentServlet extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		FinanceController financeController = new FinanceController();
 
 		ArrayList<Employee> list = financeController.getAllUsersWithOutstandingPayment(0, false);
 		session.setAttribute("outstandingList", list);
 
-		response.sendRedirect("adminViewOutstandingPayment.jsp");
+		response.sendRedirect("/eureka_webservice/admin/outstanding-payment.jsp");
 	}
 
 }
