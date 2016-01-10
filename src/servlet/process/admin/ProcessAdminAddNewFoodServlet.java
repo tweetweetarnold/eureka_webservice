@@ -26,7 +26,6 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 	 */
 	public ProcessAdminAddNewFoodServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -34,7 +33,6 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -43,7 +41,6 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		FoodController foodController = new FoodController();
 		StallController stallController = new StallController();
@@ -72,7 +69,7 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 
 			session.setAttribute("success", "Food added successfully.");
 
-			response.sendRedirect("adminViewFoods.jsp");
+			response.sendRedirect("/eureka_webservice/admin/food/view.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();

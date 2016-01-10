@@ -49,7 +49,7 @@ public class ProcessAdminLogoutServlet extends HttpServlet {
 		MyConnection.closeSessionFactory();
 		HttpSession session = request.getSession();
 		session.invalidate();
-		response.sendRedirect("/eureka_webservice/adminLogin.jsp");
+		response.sendRedirect("/eureka_webservice/admin/login.jsp");
 	}
 
 }

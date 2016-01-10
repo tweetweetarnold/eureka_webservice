@@ -15,20 +15,17 @@
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- Bootstrap core CSS -->
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/eureka_webservice/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/eureka_webservice/resources/css/signin.css" rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="resources/css/signin.css" rel="stylesheet">
-
-<script src="resources/js/ie-emulation-modes-warning.js"></script>
+<script src="/eureka_webservice/resources/js/ie-emulation-modes-warning.js"></script>
 
 </head>
 
 <body>
 	<div class="container">
 
-		<form class="form-signin" method="post" action="ProcessAdminLoginServlet">
+		<form class="form-signin" method="post" action="/eureka_webservice/ProcessAdminLoginServlet">
 			<h2 class="form-signin-heading">Please sign in</h2>
 
 			<!-- User input -->
@@ -68,7 +65,7 @@
 	<!-- /container -->
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="resources/js/ie10-viewport-bug-workaround.js"></script>
+	<script src="/eureka_webservice/resources/js/ie10-viewport-bug-workaround.js"></script>
 
 
 

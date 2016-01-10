@@ -25,7 +25,6 @@ public class LoadAdminViewUserOrderHistoryServlet extends HttpServlet {
 	 */
 	public LoadAdminViewUserOrderHistoryServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -33,7 +32,6 @@ public class LoadAdminViewUserOrderHistoryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -42,7 +40,6 @@ public class LoadAdminViewUserOrderHistoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		FoodOrderController foodOrderController = new FoodOrderController();
 		HttpSession session = request.getSession();
@@ -55,7 +52,7 @@ public class LoadAdminViewUserOrderHistoryServlet extends HttpServlet {
 		session.setAttribute("orderHistoryList", list);
 		session.setAttribute("name", name);
 
-		response.sendRedirect("adminViewUserOrderHistory.jsp");
+		response.sendRedirect("/eureka_webservice/admin/user/order-history.jsp");
 
 	}
 

@@ -32,7 +32,6 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -41,7 +40,6 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		FoodController foodController = new FoodController();
 
@@ -73,7 +71,7 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 
 			session.setAttribute("success", "Food updated successfully.");
 
-			response.sendRedirect("LoadAdminViewFoodsServlet?stallId=" + stallId);
+			response.sendRedirect("/eureka/LoadAdminViewFoodsServlet?stallId=" + stallId);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -27,7 +27,6 @@ public class LoadAdminAddNewWindowServlet extends HttpServlet {
 	 */
 	public LoadAdminAddNewWindowServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -35,7 +34,6 @@ public class LoadAdminAddNewWindowServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -44,7 +42,6 @@ public class LoadAdminAddNewWindowServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		try {
 			CompanyController coCtrl = new CompanyController();
@@ -57,7 +54,7 @@ public class LoadAdminAddNewWindowServlet extends HttpServlet {
 			session.setAttribute("companyList", companyList);
 			session.setAttribute("canteenList", canteenList);
 
-			response.sendRedirect("adminAddNewWindow.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderwindow/add.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();

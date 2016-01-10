@@ -82,7 +82,7 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 
 			session.setAttribute("success", "New Order Window created successfully.");
 
-			response.sendRedirect("adminHomepage.jsp");
+			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
 		} catch (Exception e) {
 			PrintWriter out = response.getWriter();
 			out.print("error: " + e.getMessage());

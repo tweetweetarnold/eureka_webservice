@@ -32,7 +32,6 @@ public class LoadAdminEditStallServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		StallController stallController = new StallController();
 
@@ -46,7 +45,7 @@ public class LoadAdminEditStallServlet extends HttpServlet {
 		session.setAttribute("contactNo", stall.getContactNo());
 		session.setAttribute("imageDirectory", stall.getImageDirectory());
 
-		response.sendRedirect("adminEditStall.jsp");
+		response.sendRedirect("/eureka_webservice/admin/stall/edit.jsp");
 	}
 
 	/**
@@ -54,7 +53,6 @@ public class LoadAdminEditStallServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

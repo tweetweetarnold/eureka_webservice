@@ -27,7 +27,6 @@ public class LoadAdminViewStallsServlet extends HttpServlet {
 	 */
 	public LoadAdminViewStallsServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -35,7 +34,6 @@ public class LoadAdminViewStallsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -44,7 +42,6 @@ public class LoadAdminViewStallsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		StallController stallController = new StallController();
 		CanteenController canteenController = new CanteenController();
@@ -59,7 +56,7 @@ public class LoadAdminViewStallsServlet extends HttpServlet {
 		session.setAttribute("canteenName", canteen.getName());
 		session.setAttribute("stallList", list);
 
-		response.sendRedirect("adminViewStalls.jsp");
+		response.sendRedirect("/eureka_webservice/admin/stall/view.jsp");
 
 	}
 

@@ -43,7 +43,7 @@ public class LoadAdminViewUsersServlet extends HttpServlet {
 
 		EmployeeDAO eDao = new EmployeeDAO();
 		session.setAttribute("userMgmtView", eDao.getAllEmployees());
-		response.sendRedirect(request.getContextPath() + "/admin/user/view.jsp");
+		response.sendRedirect("/eureka_webservice/admin/user/view.jsp");
 	}
 
 }

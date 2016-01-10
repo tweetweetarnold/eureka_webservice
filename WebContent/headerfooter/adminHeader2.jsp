@@ -242,7 +242,7 @@
 				<!-- 				</li> -->
 				<!-- 				<li class="divider"></li> -->
 				<li>
-					<a href="ProcessAdminLogoutServlet">
+					<a href="/eureka_webservice/ProcessAdminLogoutServlet">
 						<i class="fa fa-sign-out fa-fw"></i>
 						Logout
 					</a>
@@ -354,7 +354,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="adminFileUpload.jsp">Upload files</a>
+							<a href="/eureka_webservice/admin/file-upload.jsp">Upload files</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->

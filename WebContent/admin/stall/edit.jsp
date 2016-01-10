@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 
-<%@include file="protect/adminProtect.jsp"%>
+<%@include file="/protect/adminProtect.jsp"%>
 
 <head>
 
@@ -16,31 +16,36 @@
 <title>DABAO</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
+<link
+	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 >
 
 <!-- MetisMenu CSS -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css"
+<link
+	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css"
 	rel="stylesheet"
 >
 
 <!-- Timeline CSS -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/timeline.css" rel="stylesheet">
+<link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/timeline.css" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/sb-admin-2.css" rel="stylesheet">
 
 <!-- Morris Charts CSS -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.css" rel="stylesheet">
+<link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.css"
+	rel="stylesheet"
+>
 
 <!-- Custom Fonts -->
-<link href="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css"
+<link
+	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css"
 >
 
 <!-- Datetime picker css -->
-<link href="resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
+<link href="/eureka_webservice/resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
 
 
 <!-- library import for JSTL -->
@@ -54,7 +59,7 @@
 
 	<div id="wrapper">
 
-		<%@include file="headerfooter/adminHeader2.jsp"%>
+		<%@include file="/headerfooter/adminHeader2.jsp"%>
 
 		<div id="page-wrapper">
 
@@ -77,7 +82,7 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="ProcessAdminEditStallServlet" id="submitForm">
+									<form role="form" action="/eureka_webservice/ProcessAdminEditStallServlet" id="submitForm">
 
 										<input type="hidden" name="stallId" value="${stallId}">
 
@@ -138,22 +143,19 @@
 	</div>
 
 
-	<!-- jQuery -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-	<!-- Metis Menu Plugin JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-	<!-- Morris Charts JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
+	<script
+		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"
+	></script>
+	<script
+		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js"
+	></script>
+	<script
+		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"
+	></script>
+	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
 	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
 	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
-
-	<!-- Custom Theme JavaScript -->
-	<script src="resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 	<!-- Datetime picker -->
 	<script src="http://momentjs.com/downloads/moment.js"></script>

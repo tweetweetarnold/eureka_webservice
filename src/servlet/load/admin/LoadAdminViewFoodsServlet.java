@@ -41,7 +41,6 @@ public class LoadAdminViewFoodsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -50,7 +49,6 @@ public class LoadAdminViewFoodsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 
 		StallController stallController = new StallController();
@@ -66,7 +64,7 @@ public class LoadAdminViewFoodsServlet extends HttpServlet {
 		session.setAttribute("stallName", stall.getName());
 		session.setAttribute("foodList", list);
 
-		response.sendRedirect("adminViewFoods.jsp");
+		response.sendRedirect("/eureka_webservice/admin/food/view.jsp");
 	}
 
 }
