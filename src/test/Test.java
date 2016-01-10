@@ -64,7 +64,7 @@ public class Test {
 		buildingList.add("MAINTENANCE");
 
 		AESAlgorithm aes = new AESAlgorithm();
-
+		company2.setDeliveryPointSet(buildingList);
 		company.setDeliveryPointSet(buildingList);
 		Employee arnold = new Employee(aes.encrypt("arnold.lee.2013@sis.smu.edu.sg" + "1234567"),
 				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 98765432, company);
