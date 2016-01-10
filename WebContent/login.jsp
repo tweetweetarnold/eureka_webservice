@@ -28,7 +28,7 @@
 
 		<form class="form-signin" method="post" action="ProcessLoginServlet">
 			<h2 class="form-signin-heading">Welcome to...</h2>
-			<h1 class="form-signin-heading">DABAO</h1>
+			<h1 class="form-signin-heading">LunchTime</h1>
 
 			<!-- User input -->
 			<label for="email" class="sr-only">Email</label>

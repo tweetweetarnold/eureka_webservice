@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>DABAO</title>
+<title>LunchTime</title>
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -23,8 +23,8 @@
 <body>
 	<%
 		Set<String> buildingSet = (Set<String>) request.getAttribute("buildingSet");
-			System.out.println("JSP ... " + buildingSet.size());
-			Iterator iter = buildingSet.iterator();
+		System.out.println("JSP ... " + buildingSet.size());
+		Iterator iter = buildingSet.iterator();
 	%>
 
 
@@ -51,7 +51,7 @@
 						<select name="deliveryPoint" required>
 							<%
 								while (iter.hasNext()) {
-												String buildingName = (String)iter.next();
+																	String buildingName = (String)iter.next();
 							%>
 							<option value=<%=buildingName%>><%=buildingName%></option>
 							<%
