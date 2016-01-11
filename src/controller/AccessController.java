@@ -74,6 +74,11 @@ public class AccessController {
 		if (!EmailValidator.getInstance().isValid(email)) {
 			messages.add("Invalid Email. Please try again.");
 		}
+		EmployeeController employeeController = new EmployeeController();
+		Employee tempEmployee = employeeController.retrieveEmployeeViaEmail(email);
+		if(tempEmployee!=null){
+			messages.add("Email in use. Please try again. If you forgot your password try resetting your password.");
+		}
 		return messages;
 	}
 	
