@@ -20,7 +20,7 @@ public class PaymentNotification implements Job {
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		try {
 			SendEmail emailGen = new SendEmail();
-			String subject = "Dabao Weekly Payment Due";
+			String subject = "Koh Bus LunchTime Ordering Weekly Payment Due";
 			String messageBody = "Hey there! \nPlease note that your weekly payment for this week is due!\n\nRegards,\nDabao";
 
 			// EmployeeController employeeController = new EmployeeController();

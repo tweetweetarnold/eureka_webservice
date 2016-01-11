@@ -14,7 +14,7 @@ public class SendEmail {
 	
 	private Properties emailProperties;
 	private Session mailSession;
-	private final String username = "dabaomealorderapp@gmail.com";
+	private final String username = "kohbuslunchtime@gmail.com";
 	private final String password = "{gxuvimr}";
 	
 	public void setMailServerProperties() {
@@ -54,7 +54,9 @@ public class SendEmail {
 			
 			emailMessage.setSubject(emailSubject);
 			emailMessage.setContent(emailBody, "text/html; charset=utf-8");
-			emailMessage.setFrom(new InternetAddress("dabaomealorderapp@gmail.com"));
+			emailMessage.setFrom(new InternetAddress("no_reply@lunchtime.com", "Koh Bus LunchTime Ordering App"));
+			emailMessage.setReplyTo(InternetAddress.parse("no_reply@lunchtime.com", false));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -97,7 +99,9 @@ public class SendEmail {
 			
 			emailMessage.setSubject(emailSubject);
 			emailMessage.setContent(emailBody, "text/html; charset=utf-8");
-			emailMessage.setFrom(new InternetAddress("dabaomealorderapp@gmail.com"));
+			emailMessage.setFrom(new InternetAddress("no_reply@lunchtime.com", "Koh Bus LunchTime Ordering App"));
+			emailMessage.setReplyTo(InternetAddress.parse("no_reply@lunchtime.com", false));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -316,8 +316,8 @@ public class AccessController {
 		String url = appUrl + "/LoadResetPasswordPage?email=" + eEncrypt + "&token=" + token;
 
 		javaEmail.setMailServerProperties();
-		javaEmail.sendEmail("DABAO Web App - Password Reset", "Dear User,<br><br>"
-				+ "To reset your password for DABAO App, please click the following link:<br> "
+		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Password Reset", "Dear User,<br><br>"
+				+ "To reset your password for LunchTime Ordering App, please click the following link:<br> "
 				+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
 				+ "Admin<br><br>"
 				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
