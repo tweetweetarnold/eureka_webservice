@@ -91,9 +91,9 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 			javaEmail.setMailServerProperties();
 			javaEmail
 					.sendEmail(
-							"DABAO Web App - Verify Your Email",
+							"Koh Bus LunchTime Ordering App - Verify Your Email",
 							"Dear User,<br><br>"
-									+ "Welcome to DABAO App, please click the following link to verify your email address:<br><br> "
+									+ "Welcome to LunchTime Ordering App, please click the following link to verify your email address:<br><br> "
 									+ "<a href="
 									+ url
 									+ ">"

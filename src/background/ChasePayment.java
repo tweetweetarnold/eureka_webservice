@@ -21,7 +21,7 @@ public class ChasePayment implements Job {
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		try {
 			SendEmail emailGen = new SendEmail();
-			String subject = "Dabao Weekly Payment Over-Due";
+			String subject = "Koh Bus LunchTime Ordering Weekly Payment Over-Due";
 			String messageBody = "Hey there! \nPlease note that you will not be able to place any new orders until you have cleared your payment!\n\nRegards,\nDabao";
 
 			// EmployeeController employeeController = new EmployeeController();

@@ -8,7 +8,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button> -->
-		<a class="navbar-brand" href="/eureka_webservice/LoadOrderWindowOpenedServlet">DABAO</a>
+		<a class="navbar-brand" href="/eureka_webservice/LoadOrderWindowOpenedServlet">LUNCHTIME</a>
 	</div>
 	<!-- /.navbar-header -->
 

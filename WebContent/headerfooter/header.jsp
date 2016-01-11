@@ -42,7 +42,7 @@
 			<!-- <span class="icon-bar"></span> -->
 			<!-- <span class="icon-bar"></span> -->
 			<!-- </button> -->
-			<a class="navbar-brand" href="homepage.jsp"> DABAO </a>
+			<a class="navbar-brand" href="homepage.jsp"> LUNCHTIME </a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->

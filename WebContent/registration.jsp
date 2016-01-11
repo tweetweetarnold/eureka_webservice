@@ -93,7 +93,7 @@
 								<small>
 									I agree to the
 									<a href="#">terms and conditions</a>
-									of using DABAO.
+									of using LUNCHTIME.
 								</small>
 							</div>
 						</td>
