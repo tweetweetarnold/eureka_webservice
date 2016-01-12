@@ -49,13 +49,14 @@ public class AccessController {
 	 *         null.
 	 */
 	public ArrayList<String> checkUserInputs(String email, String name, String password,
-			String confirmPwd, String contactNo) {
+			String confirmPwd, String contactNo, String acknowledged) {
 		ArrayList<String> messages = new ArrayList<String>();
 
 		messages.addAll(checkEmailRequirements(email));
 		messages.addAll(checkEmployeeNameRequirements(name));
 		messages.addAll(checkContactNoRequirements(contactNo));
 		messages.addAll(checkPasswordMeetRequirements(password, confirmPwd));
+		messages.addAll(checkAcknowledgedTermsAndConditions(acknowledged));
 
 		if (!messages.isEmpty()) {
 			return messages;
@@ -97,7 +98,7 @@ public class AccessController {
 	}
 	
 	/**
-	 * Validate the password for any violation of the following requirements:
+	 * Validates the password for any violation of the following requirements:
 	 * <ul>
 	 * <li>Password is less than 7 characters
 	 * <li>Password contains white spaces characters
@@ -131,7 +132,7 @@ public class AccessController {
 	}
 	
 	/**
-	 * Validate the contact number for any violation of the following requirements: 
+	 * Validates the contact number for any violation of the following requirements: 
 	 * <ul>
 	 * <li>Contact number is less than 8 numbers
 	 * <li>Contact number does not adhere to the standard numbering ranges
@@ -144,6 +145,20 @@ public class AccessController {
 		ArrayList<String> messages = new ArrayList<String>();
 		if (!(contactNo.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))) {
 			messages.add("Contact Number is not valid.");
+		}
+		return messages;
+	}
+	
+	/**
+	 * Validates the acknowledgement of the Terms and Conditions
+	 * 
+	 * @param acknowledged The acknowledgement made by the Employee
+	 * @return An ArrayList of error messages if the Terms and Conditions are not acknowledged
+	 */
+	public ArrayList<String> checkAcknowledgedTermsAndConditions(String acknowledged) {
+		ArrayList<String> messages = new ArrayList<String>();
+		if (acknowledged == null) {
+			messages.add("Please acknowledge and agree to the Terms and Conditions.");
 		}
 		return messages;
 	}

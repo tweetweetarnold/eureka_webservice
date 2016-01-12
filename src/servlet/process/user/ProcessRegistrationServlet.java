@@ -77,6 +77,8 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			String contactNo = (String) request.getParameter("contactNo");
 			String email = (String) request.getParameter("email").trim();
 			String companyCode = (String) request.getParameter("companyCode");
+			String acknowledged = (String) request.getParameter("tc");
+			
 
 			userInput.put("name", employeeName);
 			userInput.put("email", email);
@@ -85,13 +87,12 @@ public class ProcessRegistrationServlet extends HttpServlet {
 
 			// Check parameters validity
 			ArrayList<String> errorMessages = accessController.checkUserInputs(email, employeeName,
-					password, confirmPwd, contactNo);
+					password, confirmPwd, contactNo, acknowledged);
 
 			if (errorMessages != null) { // if parameters don't meet requirements
 				String msg = "";
 				for (String s : errorMessages) {
 					msg = s + "\n" + msg;
-					System.out.println(msg);
 				}
 				throw new Exception(msg);
 			}
