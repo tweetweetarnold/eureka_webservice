@@ -90,7 +90,8 @@ public class ProcessRegistrationServlet extends HttpServlet {
 			if (errorMessages != null) { // if parameters don't meet requirements
 				String msg = "";
 				for (String s : errorMessages) {
-					msg = s + "<br>" + msg;
+					msg = s + "\n" + msg;
+					System.out.println(msg);
 				}
 				throw new Exception(msg);
 			}

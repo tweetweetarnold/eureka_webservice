@@ -113,8 +113,19 @@ public class AccessController {
 		if (!password.equals(confirmPwd)) {
 			messages.add("Passwords do not match.");
 		}
-		if (!(password.length() >= 7) && password.contains(" ")) {
-			messages.add("Password must be at least 7 characters long without spaces.");
+		//in the case where password is less than 7
+		if (!(password.length() >= 7)) {
+			messages.add("Password must be at least 7 characters long.");
+			//after validating that it is less than 7, check for empty spaces
+			if (password.contains(" ")) {
+				messages.add("Password should not contain empty spaces.");
+			}
+			
+		} else { 
+			// in the case where password is greater than 7, it will proceed to valid for empty spaces
+			if (password.contains(" ")) {
+				messages.add("Password should not contain empty spaces.");
+			}
 		}
 		return messages;
 	}
@@ -131,8 +142,7 @@ public class AccessController {
 	 */
 	public ArrayList<String> checkContactNoRequirements(String contactNo) {
 		ArrayList<String> messages = new ArrayList<String>();
-		if (contactNo.length() != 8
-				&& !(contactNo.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))) {
+		if (!(contactNo.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))) {
 			messages.add("Contact Number is not valid.");
 		}
 		return messages;
