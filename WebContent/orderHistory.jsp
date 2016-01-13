@@ -51,7 +51,7 @@
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 			<c:if test="${empty sessionScope.orderHistory}">
-				<h3a>You haven't ordered anything before! Go order something!</h2>
+				<h3>You haven't ordered anything before! Go order something!</h3>
 			</c:if>
 
 			<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">
@@ -65,10 +65,8 @@
 								Order ID:
 								<c:out value="${order.foodOrderId}" />
 								-
-								<c:out value="${order.createDate}" />
-								<p style="float: right;">
-									<c:out value="${order.status}" />
-								</p>
+								<fmt:formatDate type="both" value="${order.createDate}" />
+								<p style="float: right;">${order.status}</p>
 							</a>
 						</h4>
 					</div>
@@ -82,11 +80,13 @@
 								<table>
 									<c:if test="${order.status ne 'Submitted'}">
 										<tr>
-										<td style="padding-right: 10px;">
-											<strong>Transaction ID:</strong>
-										</td>
-										<td><c:out value="${order.transactionId}"/></td>
-									</tr>
+											<td style="padding-right: 10px;">
+												<strong>Transaction ID:</strong>
+											</td>
+											<td>
+												<c:out value="${order.transactionId}" />
+											</td>
+										</tr>
 									</c:if>
 									<tr>
 										<td style="padding-right: 10px;">

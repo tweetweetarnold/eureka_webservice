@@ -5,7 +5,7 @@
 	OrderWindow orderWindow = (OrderWindow) session.getAttribute("orderWindow");
 
 	if (emp == null || tokenID == null || orderWindow == null) {
-		response.sendRedirect("/eureka/ProcessLogoutServlet");
+		response.sendRedirect("/eureka_webservice/ProcessLogoutServlet");
 	}
 %>
 

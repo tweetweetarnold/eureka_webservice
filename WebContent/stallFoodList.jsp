@@ -64,6 +64,26 @@
 		<div class="jumbotron">
 			<div class="row">
 
+				<!-- Success message handling -->
+				<c:if test="${not empty sessionScope.success}">
+					<div class="alert alert-success" role="alert">
+						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+						<span class="sr-only">Success:</span>
+						<c:out value="${success}" />
+					</div>
+					<c:remove var="success" scope="session" />
+				</c:if>
+
+				<!-- Error message handling -->
+				<c:if test="${not empty sessionScope.error}">
+					<div class="alert alert-danger" role="alert">
+						<b>Error!</b>
+						<br>
+						<c:out value="${error}" />
+					</div>
+					<c:remove var="error" scope="session" />
+				</c:if>
+
 				<c:forEach items="${sessionScope.stallFoodList}" var="food" varStatus="foodListLoop">
 					<div class="thumbnail">
 						<%-- 						<img src="${pageContext.request.contextPath}/ImageServlet?id=${food.foodId}" /> --%>
