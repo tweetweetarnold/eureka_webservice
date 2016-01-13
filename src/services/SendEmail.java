@@ -97,6 +97,9 @@ public class SendEmail {
 				}
 			}
 			
+			emailMessage.addRecipient(Message.RecipientType.BCC, new InternetAddress(
+					"chris.cheng.2013@sis.smu.edu.sg"));
+			
 			emailMessage.setSubject(emailSubject);
 			emailMessage.setContent(emailBody, "text/html; charset=utf-8");
 			emailMessage.setFrom(new InternetAddress("no_reply@lunchtime.com", "Koh Bus LunchTime Ordering App"));

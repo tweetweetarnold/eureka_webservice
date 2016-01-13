@@ -52,8 +52,8 @@
 		<h2>PayPal</h2>
 		<br>
 		<!-- PayPal -->
-		<!--  	<div class="container" style="margin-top: 100px;">-->
-		<!--	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"> -->
+		<!--  	<div class="container" style="margin-top: 0px;">-->  
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 		<c:set var="haveOrder" value="false" />
 
@@ -68,30 +68,30 @@
 		<c:if test="${not empty sessionScope.error}">
 			<c:remove var="submittedOrders" scope="session" />
 		</c:if>
-
+		
 		<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">
 
 			<c:set var="haveOrder" value="true" />
 			<div class="panel panel-default">
 				<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
 					<h4 class="panel-title">
-						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
+					<!--  	<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
 							aria-expanded="false" aria-controls="collapse${orderLoop.index}"
-						>
+						>-->
 							Order ID:
 							<c:out value="${order.foodOrderId}" />
 							-
-							<c:out value="${order.createDate}" />
+							<fmt:formatDate type="both" value="${order.createDate}" />
 							<p style="float: right;">
 								<c:out value="${order.status}" />
 							</p>
 						</a>
 					</h4>
 				</div>
-
-				<div id="collapse${orderLoop.index}" class="panel-collapse collapse" role="tabpanel"
+			<div>
+			<!--  	<div id="collapse${orderLoop.index}" class="panel-collapse collapse" role="tabpanel"
 					aria-labelledby="heading${orderLoop.index}"
-				>
+				>-->
 					<div class="panel-body">
 						<div style="font-size: 18px;">
 
@@ -166,9 +166,10 @@
 			</div>
 
 		</c:forEach>
+	</div>
+	
 
-
-		<br>
+		
 		<!-- PayPal form -->
 		<c:choose>
 			<c:when test="${haveOrder eq true}">
@@ -212,9 +213,10 @@
 
 					</c:forEach>
 
-					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
-
+					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" style="float: right;">
+					
 				</form>
+				
 			</c:when>
 			<c:otherwise>
 				<p>There are no orders to be processed.</p>
