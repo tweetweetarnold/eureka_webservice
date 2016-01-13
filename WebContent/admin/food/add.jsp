@@ -73,7 +73,7 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="ProcessAdminAddNewFoodServlet" id="submitForm">
+									<form role="form" action="/eureka_webservice/ProcessAdminAddNewFoodServlet" id="submitForm">
 
 										<input type="hidden" name="stallId" value="${stallId}">
 

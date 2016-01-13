@@ -8,7 +8,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button> -->
-		<a class="navbar-brand" href="/eureka_webservice/LoadOrderWindowOpenedServlet">LUNCHTIME</a>
+		<a class="navbar-brand" href="/eureka_webservice/LoadOrderWindowOpenedServlet">LunchTime</a>
 	</div>
 	<!-- /.navbar-header -->
 
@@ -59,13 +59,13 @@
 
 				<li>
 					<a href="#">
-						<i class="fa fa-table fa-fw"></i>
+						<i class="fa fa-windows fa-fw"></i>
 						Order Windows
 						<span class="fa arrow"></span>
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="/eureka_webservice/LoadAdminViewOrderWindowsServlet">View: all</a>
+							<a href="/eureka_webservice/LoadAdminViewOrderWindowsServlet">View: All</a>
 
 						</li>
 						<li>
@@ -73,7 +73,7 @@
 
 						</li>
 						<li>
-							<a href="/eureka_webservice/LoadAdminAddNewWindowServlet">Create New Window</a>
+							<a href="/eureka_webservice/LoadAdminAddNewWindowServlet">Add New Window</a>
 						</li>
 
 					</ul>
@@ -82,7 +82,7 @@
 
 				<li>
 					<a href="#">
-						<i class="fa fa-table fa-fw"></i>
+						<i class="fa fa-money fa-fw"></i>
 						Payment
 						<span class="fa arrow"></span>
 					</a>
@@ -96,13 +96,13 @@
 
 				<li>
 					<a href="#">
-						<i class="fa fa-table fa-fw"></i>
+						<i class="fa fa-building fa-fw"></i>
 						Company
 						<span class="fa arrow"></span>
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="/eureka_webservice/LoadAdminViewCompaniesServlet">View</a>
+							<a href="/eureka_webservice/LoadAdminViewCompaniesServlet">View: All</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->
@@ -110,27 +110,13 @@
 
 				<li>
 					<a href="#">
-						<i class="fa fa-table fa-fw"></i>
-						Canteen
-						<span class="fa arrow"></span>
-					</a>
-					<ul class="nav nav-second-level">
-						<li>
-							<a href="/eureka_webservice/LoadViewCanteenServlet">View</a>
-						</li>
-					</ul>
-					<!-- /.nav-second-level -->
-				</li>
-
-				<li>
-					<a href="#">
-						<i class="fa fa-table fa-fw"></i>
+						<i class="fa fa-user fa-fw"></i>
 						User
 						<span class="fa arrow"></span>
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="/eureka_webservice/LoadAdminViewUsersServlet">View</a>
+							<a href="/eureka_webservice/LoadAdminViewUsersServlet">View: All</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->
@@ -138,7 +124,21 @@
 
 				<li>
 					<a href="#">
-						<i class="fa fa-table fa-fw"></i>
+						<i class="fa fa-cutlery fa-fw"></i>
+						Canteen
+						<span class="fa arrow"></span>
+					</a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="/eureka_webservice/LoadViewCanteenServlet">View: All</a>
+						</li>
+					</ul>
+					<!-- /.nav-second-level -->
+				</li>
+
+				<li>
+					<a href="#">
+						<i class="fa fa-cloud-upload fa-fw"></i>
 						File Upload
 						<span class="fa arrow"></span>
 					</a>

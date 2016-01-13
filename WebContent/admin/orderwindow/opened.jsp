@@ -87,8 +87,12 @@
 									aria-labelledby="heading${mapLoop.index}"
 								>
 									<div class="panel-body">
-										<b>Canteen / Window ID:</b>
-										${window.canteen.name} / ${window.windowId}
+										<b>Window ID: </b>
+										${window.windowId}
+										<br>
+
+										<b>Canteen: </b>
+										${window.canteen.name}
 										<br>
 										<br>
 
@@ -119,7 +123,7 @@
 																<th>S/N</th>
 																<th>User(s)</th>
 																<th>Food</th>
-																<th>Modifier(s)</th>
+																<th>Add-On(s)</th>
 																<th>Qty</th>
 																<th>Price($)</th>
 															</tr>
@@ -167,7 +171,7 @@
 																<th>Stall No</th>
 																<th>Total($)</th>
 																<th>Food</th>
-																<th>Add On</th>
+																<th>Add-On(s)</th>
 																<th>Qty</th>
 																<th>Subtotal($)</th>
 																<th>User</th>
@@ -240,7 +244,7 @@
 																<th>Stall No</th>
 																<th>Total($)</th>
 																<th>Food</th>
-																<th>Add On</th>
+																<th>Add-On(s)</th>
 																<th>Qty</th>
 																<th>Subtotal($)</th>
 																<th>User</th>
@@ -294,7 +298,8 @@
 													<fmt:formatNumber value="${overallPrice }" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
 
 													<br>
-													<button type="button" onclick="window.print()">Print This Page</button>
+													<br>
+													<button class="btn btn-primary" type="button" onclick="window.print()">Print This Page</button>
 
 												</div>
 
