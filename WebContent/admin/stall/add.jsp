@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 
 <%@include file="/protect/adminProtect.jsp"%>
@@ -11,13 +12,13 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+
 <title>LunchTime - Admin</title>
 
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 >
-
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css"
 	rel="stylesheet"
@@ -27,10 +28,15 @@
 <link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.css"
 	rel="stylesheet"
 >
+
+<!-- Custom Fonts -->
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css"
 >
+
+<!-- Datetime picker css -->
+<link href="/eureka_webservice/resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
 
 
 <!-- library import for JSTL -->
@@ -47,82 +53,86 @@
 		<%@include file="/headerfooter/adminHeader2.jsp"%>
 
 		<div id="page-wrapper">
+
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">${sessionScope.canteenName}:&nbsp;Stalls</h1>
+					<h1 class="page-header">Add new stall</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-			<!-- /.row -->
 
+			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">Add new Add new stall</div>
 
-					<!-- Success message handling -->
-					<c:if test="${not empty sessionScope.success}">
-						<div class="alert alert-success" role="alert">
-							<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-							<span class="sr-only">Success: </span>
-							${success}
+						<div class="panel-body">
+
+							<div class="row">
+
+								<div class="col-lg-12">
+
+									<form role="form" action="/eureka_webservice/ProcessAdminAddNewStallServlet" id="submitForm">
+
+										<input type="hidden" name="canteenId" value="${canteenId}">
+
+										<div class="form-group">
+											<label>Stall name</label>
+											<input class="form-control" name="name" required>
+										</div>
+										
+										<div class="form-group">
+											<label>Contact No</label>
+											<input class="form-control" name="contactNo" required>
+										</div>
+
+										<div class="form-group">
+											<label>Image Directory</label>
+											<input class="form-control" name="imageDirectory">
+										</div>
+
+
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
+											new Stall</button>
+
+									</form>
+								</div>
+								<!-- /.col-lg-12 -->
+
+							</div>
+							<!-- /.row (nested) -->
 						</div>
-						<c:remove var="success" scope="session" />
-					</c:if>
-
-					<b>Total stalls:</b>
-					${fn:length(sessionScope.stallList)}
-					<br>
-					<br>
-					<form action="/eureka_webservice/admin/stall/add.jsp">
-						<input type="hidden" name="canteenId" value="${sessionScope.canteenId}">
-						<button type="submit" class="btn btn-primary">Add stall</button>
-					</form>
-					<br>
-
-					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Stall</th>
-									<th>Create Date</th>
-									<th>Image</th>
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${sessionScope.stallList}" var="stall">
-									<tr>
-										<td>${stall.stallId}</td>
-										<td>${stall.name}</td>
-										<td>
-											<fmt:formatDate type="both" value="${stall.createDate}" />
-										</td>
-										<td>
-											<img src="/eureka_webservice/${stall.imageDirectory}" />
-										</td>
-										<td>
-											<a href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId=${stall.stallId}">View all
-												${fn:length(stall.foodList)} food</a>
-										</td>
-										<td>
-											<a href="/eureka_webservice/LoadAdminEditStallServlet?stallId=${stall.stallId}">Edit stall</a>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+						<!-- /.panel-body -->
 					</div>
-					<!-- /.table-responsive -->
-
+					<!-- /.panel -->
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
-
 		</div>
+		<!-- /#page-wrapper -->
+
+
+
 	</div>
 	<!-- /#wrapper -->
+
+	<!-- Create confirmation -->
+	<div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Confirmation</h4>
+				</div>
+				<div class="modal-body">Are you sure you want to Add new Stall?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline btn-default">Cancel</button>
+					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<script
@@ -137,8 +147,12 @@
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
 	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
 	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
-
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+
+	<!-- Datetime picker -->
+	<script src="http://momentjs.com/downloads/moment.js"></script>
+	<script src="/eureka_webservice/resources/js/bootstrap-datetimepicker.min.js"></script>
+
 </body>
 
 </html>
