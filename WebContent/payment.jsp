@@ -52,8 +52,8 @@
 		<h2>PayPal</h2>
 		<br>
 		<!-- PayPal -->
-		<!--  	<div class="container" style="margin-top: 100px;">-->
-		<!--	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"> -->
+		<!--  	<div class="container" style="margin-top: 0px;">-->  
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 		<c:set var="haveOrder" value="false" />
 
@@ -68,30 +68,30 @@
 		<c:if test="${not empty sessionScope.error}">
 			<c:remove var="submittedOrders" scope="session" />
 		</c:if>
-
-		<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">
+		
+		<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
 
 			<c:set var="haveOrder" value="true" />
 			<div class="panel panel-default">
 				<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
 					<h4 class="panel-title">
-						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
+					<!--  	<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
 							aria-expanded="false" aria-controls="collapse${orderLoop.index}"
-						>
+						>-->
 							Order ID:
 							<c:out value="${order.foodOrderId}" />
 							-
-							<c:out value="${order.createDate}" />
+							<fmt:formatDate type="both" value="${order.createDate}" />
 							<p style="float: right;">
 								<c:out value="${order.status}" />
 							</p>
 						</a>
 					</h4>
 				</div>
-
-				<div id="collapse${orderLoop.index}" class="panel-collapse collapse" role="tabpanel"
+			<div>
+			<!--  	<div id="collapse${orderLoop.index}" class="panel-collapse collapse" role="tabpanel"
 					aria-labelledby="heading${orderLoop.index}"
-				>
+				>-->
 					<div class="panel-body">
 						<div style="font-size: 18px;">
 
@@ -107,9 +107,9 @@
 										<strong>Price:</strong>
 									</td>
 									<td>
-										<fmt:formatNumber value="${order.totalPrice}" var="totalPrice" minFractionDigits="2" />
+										<fmt:formatNumber value="${order.totalPriceIncludingDisc}" var="totalPrice" minFractionDigits="2" />
 										$
-										<c:out value="${totalPrice*(1-order.orderWindow.discount)}" />
+										<c:out value="${totalPrice}" />
 									</td>
 								</tr>
 							</table>
@@ -127,7 +127,7 @@
 							</thead>
 
 							<tbody>
-								<c:forEach items="${order.foodOrderList}" var="foodItem">
+								<c:forEach items="${order.foodOrderDiscountList}" var="foodItem">
 									<tr>
 										<td>
 											<c:out value="${foodItem.food.stall.name}" />
@@ -153,7 +153,7 @@
 										<td>
 											<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
 											$
-											<c:out value="${newPrice*(1-order.orderWindow.discount)}" />
+											<c:out value="${newPrice}" />
 										</td>
 									</tr>
 								</c:forEach>
@@ -166,9 +166,10 @@
 			</div>
 
 		</c:forEach>
+	</div>
+	
 
-
-		<br>
+		
 		<!-- PayPal form -->
 		<c:choose>
 			<c:when test="${haveOrder eq true}">
@@ -181,9 +182,9 @@
 
 					<c:set var="count" value="0" />
 
-					<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">
+					<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
 
-						<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
+						<c:forEach items="${order.foodOrderDiscountList}" var="foodItem" varStatus="foodItemLoop">
 							<c:set var="count" value="${count + 1}" />
 							<c:set var="modifiedFoodName" value="${foodItem.food.name}" />
 
@@ -206,15 +207,16 @@
 							<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${modifiedFoodName}" />">
 							<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${foodItem.quantity}" />">
 							<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
-							<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice*(1-order.orderWindow.discount)}" />">
+							<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
 
 						</c:forEach>
 
 					</c:forEach>
 
-					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
-
+					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" style="float: right;">
+					
 				</form>
+				
 			</c:when>
 			<c:otherwise>
 				<p>There are no orders to be processed.</p>

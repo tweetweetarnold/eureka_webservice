@@ -69,7 +69,7 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 
 			session.setAttribute("success", "Food added successfully.");
 
-			response.sendRedirect("/eureka_webservice/admin/food/view.jsp");
+			response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=" + stallId);
 
 		} catch (Exception e) {
 			e.printStackTrace();

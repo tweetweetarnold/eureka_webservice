@@ -34,16 +34,15 @@ public class Stall {
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "stall")
 	private Set<Food> foodList;
-	
+
 	/**
 	 * Creates a default constructor for Stall
 	 */
 	public Stall() {
 	}
-	
+
 	/**
-	 * Creates a new Stall with its name, contact number,
-	 * canteen, list of food, the image directory
+	 * Creates a new Stall with its name, contact number, canteen, list of food, the image directory
 	 * 
 	 * @param name The name of the Stall
 	 * @param contactNo The contact number of the Stall
@@ -61,7 +60,7 @@ public class Stall {
 		this.createDate = new Date();
 		this.foodList = foodList;
 	}
-	
+
 	/**
 	 * Retrieves the directory that stores the Food images
 	 * 
@@ -70,7 +69,7 @@ public class Stall {
 	public String getImageDirectory() {
 		return imageDirectory;
 	}
-	
+
 	/**
 	 * Changes the directory that stores the Food images
 	 * 
@@ -79,7 +78,7 @@ public class Stall {
 	public void setImageDirectory(String imageDirectory) {
 		this.imageDirectory = imageDirectory;
 	}
-	
+
 	/**
 	 * Retrieves the ID of the Stall
 	 * 
@@ -88,7 +87,7 @@ public class Stall {
 	public int getStallId() {
 		return stallId;
 	}
-	
+
 	/**
 	 * Changes the ID of the Stall
 	 * 
@@ -97,7 +96,7 @@ public class Stall {
 	public void setStallId(int stallId) {
 		this.stallId = stallId;
 	}
-	
+
 	/**
 	 * Retrieves the name of the Stall
 	 * 
@@ -106,7 +105,7 @@ public class Stall {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Changes the name of the Stall
 	 * 
@@ -115,7 +114,7 @@ public class Stall {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Retrieves the contact number of the Stall
 	 * 
@@ -124,7 +123,7 @@ public class Stall {
 	public long getContactNo() {
 		return contactNo;
 	}
-	
+
 	/**
 	 * Changes the contact number of the Stall with a new number
 	 * 
@@ -142,7 +141,7 @@ public class Stall {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	
+
 	/**
 	 * Changes the date of the Stall's entity model created
 	 * 
@@ -151,7 +150,7 @@ public class Stall {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	
+
 	/**
 	 * Retrieves the Canteen of this Stall
 	 * 
@@ -160,7 +159,7 @@ public class Stall {
 	public Canteen getCanteen() {
 		return canteen;
 	}
-	
+
 	/**
 	 * Changes the Canteen of this Stall
 	 * 
@@ -169,7 +168,7 @@ public class Stall {
 	public void setCanteen(Canteen canteen) {
 		this.canteen = canteen;
 	}
-	
+
 	/**
 	 * Retrieves the list of Food that the Stall sells
 	 * 
@@ -178,7 +177,7 @@ public class Stall {
 	public Set<Food> getFoodList() {
 		return foodList;
 	}
-	
+
 	/**
 	 * Changes the current list of Food that the Stall sells
 	 * 
@@ -187,6 +186,5 @@ public class Stall {
 	public void setFoodList(Set<Food> foodList) {
 		this.foodList = foodList;
 	}
-	
 
 }

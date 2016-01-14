@@ -49,13 +49,14 @@ public class AccessController {
 	 *         null.
 	 */
 	public ArrayList<String> checkUserInputs(String email, String name, String password,
-			String confirmPwd, String contactNo) {
+			String confirmPwd, String contactNo, String acknowledged) {
 		ArrayList<String> messages = new ArrayList<String>();
 
 		messages.addAll(checkEmailRequirements(email));
 		messages.addAll(checkEmployeeNameRequirements(name));
 		messages.addAll(checkContactNoRequirements(contactNo));
 		messages.addAll(checkPasswordMeetRequirements(password, confirmPwd));
+		messages.addAll(checkAcknowledgedTermsAndConditions(acknowledged));
 
 		if (!messages.isEmpty()) {
 			return messages;
@@ -97,7 +98,7 @@ public class AccessController {
 	}
 	
 	/**
-	 * Validate the password for any violation of the following requirements:
+	 * Validates the password for any violation of the following requirements:
 	 * <ul>
 	 * <li>Password is less than 7 characters
 	 * <li>Password contains white spaces characters
@@ -113,14 +114,25 @@ public class AccessController {
 		if (!password.equals(confirmPwd)) {
 			messages.add("Passwords do not match.");
 		}
-		if (!(password.length() >= 7) && password.contains(" ")) {
-			messages.add("Password must be at least 7 characters long without spaces.");
+		//in the case where password is less than 7
+		if (!(password.length() >= 7)) {
+			messages.add("Password must be at least 7 characters long.");
+			//after validating that it is less than 7, check for empty spaces
+			if (password.contains(" ")) {
+				messages.add("Password should not contain empty spaces.");
+			}
+			
+		} else { 
+			// in the case where password is greater than 7, it will proceed to valid for empty spaces
+			if (password.contains(" ")) {
+				messages.add("Password should not contain empty spaces.");
+			}
 		}
 		return messages;
 	}
 	
 	/**
-	 * Validate the contact number for any violation of the following requirements: 
+	 * Validates the contact number for any violation of the following requirements: 
 	 * <ul>
 	 * <li>Contact number is less than 8 numbers
 	 * <li>Contact number does not adhere to the standard numbering ranges
@@ -131,9 +143,22 @@ public class AccessController {
 	 */
 	public ArrayList<String> checkContactNoRequirements(String contactNo) {
 		ArrayList<String> messages = new ArrayList<String>();
-		if (contactNo.length() != 8
-				&& !(contactNo.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))) {
+		if (!(contactNo.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))) {
 			messages.add("Contact Number is not valid.");
+		}
+		return messages;
+	}
+	
+	/**
+	 * Validates the acknowledgement of the Terms and Conditions
+	 * 
+	 * @param acknowledged The acknowledgement made by the Employee
+	 * @return An ArrayList of error messages if the Terms and Conditions are not acknowledged
+	 */
+	public ArrayList<String> checkAcknowledgedTermsAndConditions(String acknowledged) {
+		ArrayList<String> messages = new ArrayList<String>();
+		if (acknowledged == null) {
+			messages.add("Please acknowledge and agree to the Terms and Conditions.");
 		}
 		return messages;
 	}

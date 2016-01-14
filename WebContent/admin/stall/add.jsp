@@ -56,7 +56,7 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Add new food</h1>
+					<h1 class="page-header">Add new stall</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -65,7 +65,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Add new food</div>
+						<div class="panel-heading">Add new stall</div>
 
 						<div class="panel-body">
 
@@ -73,28 +73,18 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="/eureka_webservice/ProcessAdminAddNewFoodServlet" id="submitForm">
+									<form role="form" action="/eureka_webservice/ProcessAdminAddNewStallServlet" id="submitForm">
 
-										<input type="hidden" name="stallId" value="${stallId}">
+										<input type="hidden" name="canteenId" value="${canteenId}">
 
 										<div class="form-group">
-											<label>Food name</label>
+											<label>Stall name</label>
 											<input class="form-control" name="name" required>
 										</div>
 
 										<div class="form-group">
-											<label>Food name (Chinese)</label>
-											<input class="form-control">
-										</div>
-
-										<div class="form-group">
-											<label>Description</label>
-											<input class="form-control" name="description">
-										</div>
-
-										<div class="form-group">
-											<label>Price</label>
-											<input class="form-control" name="price" required>
+											<label>Contact No</label>
+											<input class="form-control" name="contactNo" required>
 										</div>
 
 										<div class="form-group">
@@ -102,13 +92,9 @@
 											<input class="form-control" name="imageDirectory">
 										</div>
 
-										<div class="form-group">
-											<label>Weather Conditions</label>
-											<input class="form-control" name="weatherConditions">
-										</div>
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
-											new Food</button>
+											new Stall</button>
 
 									</form>
 								</div>
@@ -139,7 +125,7 @@
 				<div class="modal-header">
 					<h4 class="modal-title">Confirmation</h4>
 				</div>
-				<div class="modal-body">Are you sure you want to Add new Food?</div>
+				<div class="modal-body">Are you sure you want to Add new Stall?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline btn-default">Cancel</button>
 					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>

@@ -66,8 +66,8 @@ public class Test {
 		AESAlgorithm aes = new AESAlgorithm();
 		company2.setDeliveryPointSet(buildingList);
 		company.setDeliveryPointSet(buildingList);
-		Employee arnold = new Employee(aes.encrypt("arnold.lee.2013@sis.smu.edu.sg" + "1234567"),
-				"Arnold Lee", "arnold.lee.2013@sis.smu.edu.sg", 98765432, company);
+		Employee arnold = new Employee(aes.encrypt("chris.cheng.2013@sis.smu.edu.sg" + "1234567"),
+				"Chris Cheng", "chris.cheng.2013@sis.smu.edu.sg", 98765432, company);
 
 		arnold.setDefaultDeliveryPoint("CONTROL");
 
@@ -1376,7 +1376,8 @@ public class Test {
 		session.getTransaction().commit();
 		session.flush();
 		session.close();
-
+		QuartzTest quartzTest = new QuartzTest();
+		quartzTest.doProcess();
 		System.out.println("Test.java completed");
 
 	}

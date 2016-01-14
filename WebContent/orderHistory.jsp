@@ -51,10 +51,10 @@
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 			<c:if test="${empty sessionScope.orderHistory}">
-				<h3a>You haven't ordered anything before! Go order something!</h2>
+				<h3>You haven't ordered anything before! Go order something!</h3>
 			</c:if>
 
-			<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">
+			<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
 
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
@@ -65,10 +65,8 @@
 								Order ID:
 								<c:out value="${order.foodOrderId}" />
 								-
-								<c:out value="${order.createDate}" />
-								<p style="float: right;">
-									<c:out value="${order.status}" />
-								</p>
+								<fmt:formatDate type="both" value="${order.createDate}" />
+								<p style="float: right;">${order.status}</p>
 							</a>
 						</h4>
 					</div>
@@ -82,11 +80,13 @@
 								<table>
 									<c:if test="${order.status ne 'Submitted'}">
 										<tr>
-										<td style="padding-right: 10px;">
-											<strong>Transaction ID:</strong>
-										</td>
-										<td><c:out value="${order.transactionId}"/></td>
-									</tr>
+											<td style="padding-right: 10px;">
+												<strong>Transaction ID:</strong>
+											</td>
+											<td>
+												<c:out value="${order.transactionId}" />
+											</td>
+										</tr>
 									</c:if>
 									<tr>
 										<td style="padding-right: 10px;">
@@ -99,9 +99,9 @@
 											<strong>Price:</strong>
 										</td>
 										<td>
-											<fmt:formatNumber value="${order.totalPrice}" var="totalPrice" minFractionDigits="2" />
+											<fmt:formatNumber value="${order.totalPriceIncludingDisc}" var="totalPrice" minFractionDigits="2" />
 											$
-											<c:out value="${totalPrice*(1-order.orderWindow.discount)}" />
+											<c:out value="${totalPrice}" />
 										</td>
 									</tr>
 								</table>
@@ -119,7 +119,7 @@
 								</thead>
 
 								<tbody>
-									<c:forEach items="${order.foodOrderList}" var="foodItem">
+									<c:forEach items="${order.foodOrderDiscountList}" var="foodItem">
 										<tr>
 											<td>
 												<c:out value="${foodItem.food.stall.name}" />
@@ -145,7 +145,7 @@
 											<td>
 												<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
 												$
-												<c:out value="${newPrice*(1-order.orderWindow.discount)}" />
+												<c:out value="${newPrice}" />
 											</td>
 										</tr>
 									</c:forEach>

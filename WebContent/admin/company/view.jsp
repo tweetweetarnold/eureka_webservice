@@ -78,7 +78,9 @@
 									<tr>
 										<td>${company.name}</td>
 										<td>${company.companyCode}</td>
-										<td>${company.createDate}</td>
+										<td>
+											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${company.createDate}" />
+										</td>
 										<td>
 											<c:forEach items="${company.deliveryPointSet}" var="deliveryPoint">
 												${deliveryPoint}, 

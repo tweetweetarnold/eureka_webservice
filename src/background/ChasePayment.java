@@ -42,7 +42,7 @@ public class ChasePayment implements Job {
 			toEmails = emailList.toArray(toEmails);
 			
 			//temporary carbon copy recipients
-			String[] ccEmails = {"chris.cheng.2013@sis.smu.edu.sg"};
+			String[] ccEmails = {"sumonmay@eastman.com", "wchow@eastman.com"};
 			emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
 
 		} catch (Exception ex) {

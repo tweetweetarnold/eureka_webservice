@@ -49,13 +49,37 @@ public class OrderWindow {
 	private Canteen canteen;
 	private double discount;
 	private Date createDate;
-
+	private double discountValue;
 	/**
 	 * Creates a default constructor for OrderWindow
 	 */
 	public OrderWindow() {
 	}
+	
+	
+	public double getDiscountValue() {
+		return discountValue;
+	}
 
+
+	public void setDiscountValue(double discountValue) {
+		this.discountValue = discountValue;
+	}
+
+
+	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
+			double discount, double discountValue) {
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startDateFormatted = startDate.toDate();
+		this.endDateFormatted = endDate.toDate();
+		this.company = company;
+		this.canteen = canteen;
+		this.discount = discount;
+		this.createDate = new Date();
+		this.discountValue = discountValue;
+	}
+	
 	/**
 	 * Creates a new OrderWindow with a starting and ending DateTime, company and the canteen
 	 * 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import controller.FoodDisplayPaymentController;
 import controller.FoodOrderController;
 import model.Employee;
 import model.FoodOrder;
@@ -55,10 +56,12 @@ public class RenderSubmittedOrdersServlet extends HttpServlet {
 			Employee emp = (Employee) session.getAttribute("user");
 
 			FoodOrderController foodOrderController = new FoodOrderController();
+			FoodDisplayPaymentController foodDisplayPaymentController = new FoodDisplayPaymentController();
 			List<FoodOrder> foodOrderListWithSubmittedStatus = foodOrderController.getUserFoodOrdersByStatus(emp.getEmail(),"Submitted");
 			System.out.println(foodOrderListWithSubmittedStatus.size());
 
 			session.setAttribute("submittedOrders", foodOrderListWithSubmittedStatus);
+			session.setAttribute("foodDisplayPaymentList", foodDisplayPaymentController.renderFoodDisplayPaymentList(foodOrderListWithSubmittedStatus));
 			response.sendRedirect("payment.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();

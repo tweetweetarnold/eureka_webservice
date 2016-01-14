@@ -1,8 +1,8 @@
 <%@page import="model.*"%>
 <%
-	String email = (String)session.getAttribute("email");
+	String email = (String) session.getAttribute("email");
 	if (email == null) {
-		response.sendRedirect("ProcessLogoutServlet");
+		response.sendRedirect("/eureka_webservice/ProcessLogoutServlet");
 	}
 %>
 

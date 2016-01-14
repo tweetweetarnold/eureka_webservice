@@ -89,7 +89,7 @@
 						<td>Terms and Conditions</td>
 						<td>
 							<div style="margin: 0px 32px;">
-								<input type="checkbox" name="tc" required />
+								<input type="checkbox" name="tc" value="acknowledged" required />
 								<small>
 									I agree to the
 									<a href="#">terms and conditions</a>

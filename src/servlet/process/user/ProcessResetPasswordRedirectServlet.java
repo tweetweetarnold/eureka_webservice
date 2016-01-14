@@ -74,7 +74,7 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 			if (!errorMessages.isEmpty()) {
 				String msg = "";
 				for (String s : errorMessages) {
-					msg = s + "<br>" + msg;
+					msg = s + "\n" + msg;
 				}
 				throw new Exception(msg);
 
@@ -88,7 +88,7 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("Error: " + e.getMessage());
 			session.setAttribute("error", e.getMessage());
-			response.sendRedirect("resetPasswordRedirect.jsp");
+			response.sendRedirect("setNewPassword.jsp");
 		}
 	}
 }

@@ -19,6 +19,7 @@ public class PaymentNotification implements Job {
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		try {
+			System.out.println("Sending Payment Notification");
 			SendEmail emailGen = new SendEmail();
 			String subject = "Koh Bus LunchTime Ordering Weekly Payment Due";
 			String messageBody = "Hey there! \nPlease note that your weekly payment for this week is due!\n\nRegards,\nDabao";
@@ -37,11 +38,12 @@ public class PaymentNotification implements Job {
 			}
 			String[] toEmails = new String[emailList.size()];
 			toEmails = emailList.toArray(toEmails);
-			
+			System.out.println("-------------------------------EMAILLIST LENGTH: "+ toEmails.length);
 			//temporary carbon copy recipients
-			String[] ccEmails = {"chris.cheng.2013@sis.smu.edu.sg"};
-			emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
-			
+			if(toEmails.length>0){
+				String[] ccEmails = {"sumonasdmay@eastman.com", "wcasdhow@eastman.com"};
+				emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
+			}
 			
 		} catch (Exception ex) {
 			LoggerFactory.getLogger(getClass()).error(ex.getMessage() + "HELLO");
