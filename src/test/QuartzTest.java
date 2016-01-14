@@ -45,15 +45,15 @@ public class QuartzTest {
                 .build();
             
             Trigger trigger2 = newTrigger()
-//            	.withIdentity("trigger2","group1")
-//            	.withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.FRIDAY,9,00))
-//            	.forJob(job2.getKey())
-//            	.build();
-                .startNow()
-                .withSchedule(simpleSchedule()
-                        .withIntervalInSeconds(5)
-                        .repeatForever())            
-                .build();
+            	.withIdentity("trigger2","group1")
+            	.withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.FRIDAY,9,00))
+            	.forJob(job2.getKey())
+            	.build();
+//                .startNow()
+//                .withSchedule(simpleSchedule()
+//                        .withIntervalInSeconds(5)
+//                        .repeatForever())            
+//                .build();
             
             // Tell quartz to schedule the job using our trigger
             scheduler.scheduleJob(job1, trigger1);
