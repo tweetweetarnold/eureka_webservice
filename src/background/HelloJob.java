@@ -1,49 +1,68 @@
+/* 
+ * All content copyright Terracotta, Inc., unless otherwise indicated. All rights reserved. 
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not 
+ * use this file except in compliance with the License. You may obtain a copy 
+ * of the License at 
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0 
+ *   
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT 
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the 
+ * License for the specific language governing permissions and limitations 
+ * under the License.
+ * 
+ */
+ 
 package background;
 
 import java.util.Date;
-import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.JobKey;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
-import org.quartz.impl.StdSchedulerFactory;
-import org.quartz.impl.matchers.GroupMatcher;
 
+/**
+ * <p>
+ * This is just a simple job that says "Hello" to the world.
+ * </p>
+ * 
+ * @author Bill Kratzer
+ */
 public class HelloJob implements Job {
 
-	public void execute(JobExecutionContext context) throws JobExecutionException{
-		System.out.println("Hello Quartz!");
-		
-		Scheduler scheduler;
-		try {
-			scheduler = new StdSchedulerFactory().getScheduler();
-		
-		for (String groupName : scheduler.getJobGroupNames()) {
+    private static Logger _log = LoggerFactory.getLogger(HelloJob.class);
 
-		     for (JobKey jobKey : scheduler.getJobKeys(GroupMatcher.jobGroupEquals(groupName))) {
-						
-			  String jobName = jobKey.getName();
-			  String jobGroup = jobKey.getGroup();
-						
-			  //get job's trigger
-			  List<Trigger> triggers = (List<Trigger>) scheduler.getTriggersOfJob(jobKey);
-			  Date nextFireTime = triggers.get(0).getNextFireTime(); 
+    /**
+     * <p>
+     * Empty constructor for job initilization
+     * </p>
+     * <p>
+     * Quartz requires a public empty constructor so that the
+     * scheduler can instantiate the class whenever it needs.
+     * </p>
+     */
+    public HelloJob() {
+    }
 
-				System.out.println("[jobName] : " + jobName + " [groupName] : "
-					+ jobGroup + " - " + nextFireTime);
+    /**
+     * <p>
+     * Called by the <code>{@link org.quartz.Scheduler}</code> when a
+     * <code>{@link org.quartz.Trigger}</code> fires that is associated with
+     * the <code>Job</code>.
+     * </p>
+     * 
+     * @throws JobExecutionException
+     *             if there is an exception while executing the job.
+     */
+    public void execute(JobExecutionContext context)
+        throws JobExecutionException {
 
-			  }
+        // Say Hello to the World and display the date/time
+        System.out.println("Hello World! - " + new Date());
+    }
 
-		    }
-		} catch (SchedulerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	}
 }
