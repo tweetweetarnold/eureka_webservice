@@ -20,6 +20,9 @@ import org.joda.time.format.DateTimeFormatter;
 import controller.CanteenController;
 import controller.CompanyController;
 import controller.OrderWindowController;
+import dao.OrderWindowDAO;
+import model.OrderWindow;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class ProcessAdminAddNewOrderWindowServlet
@@ -80,16 +83,23 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 				discount = Double.parseDouble(discountString);
 			} catch (Exception e) {
 			}
-			orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
+			
+			ArrayList<OrderWindow> occupiedSlots = orderWindowController.checkOrderWindowAvailability(startDatetime, endDatetime,company);
+			if (occupiedSlots.size() > 0) {
+				 throw new Exception(" Order Window have already been taken");
+			} else {
+				orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
 					canteen, discount, week);
-
+			}
 			session.setAttribute("success", "New Order Window created successfully.");
 
 			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
 		} catch (Exception e) {
-			PrintWriter out = response.getWriter();
-			out.print("error: " + e.getMessage());
+//			PrintWriter out = response.getWriter();
+//			out.print("error: " + e.getMessage());
 			e.printStackTrace();
+			session.setAttribute("error", e.getMessage());
+			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
 		}
 
 	}
