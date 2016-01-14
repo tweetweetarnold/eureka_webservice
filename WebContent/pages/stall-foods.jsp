@@ -11,6 +11,11 @@
 
 <title>LunchTime</title>
 
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!-- Bootstrap Core CSS -->
 <link href="/eureka_webservice/resources/startbootstrap-business/css/bootstrap.css" rel="stylesheet">
 
@@ -39,86 +44,46 @@
 	<!-- Page Content -->
 	<div class="container">
 
-		<!-- Page Heading/Breadcrumbs -->
-		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header">
-					Stall
-					<small>stall_name_here</small>
-				</h1>
-				<ol class="breadcrumb">
-					<li>
-						<a href="/eureka_webservice/pages/hoomepage.jsp">Home</a>
-					</li>
-					<li class="active">stall_name_here</li>
-				</ol>
-			</div>
-		</div>
-		<!-- /.row -->
-
-
 		<!-- Portfolio Section -->
 		<div class="row">
 			<div class="col-lg-12">
-				<h2 class="page-header">Foods</h2>
-			</div>
-			<div class="col-md-3 img-portfolio">
-				<div class="pull-left">Chicken Rice</div>
-				<div class="pull-right">$price</div>
-				<a href="portfolio-item.html">
-					<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-				</a>
+				<h2 class="page-header">
+					Foods
+					<small>${sessionScope.stallName}</small>
+				</h2>
 
+
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li>
+						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
+					</li>
+					<li class="active">${sessionScope.stallName}</li>
+				</ol>
+				<!-- /breadcrumb -->
 			</div>
+
+			<c:forEach items="${sessionScope.foodList}" var="food">
+				<div class="col-md-3 img-portfolio">
+					<div class="pull-left">${food.name}</div>
+					<div class="pull-right">
+						<fmt:formatNumber value="${food.price}" var="amt" minFractionDigits="2" />
+						$${amt}
+					</div>
+					<a href="portfolio-item.html">
+						<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+					</a>
+				</div>
+			</c:forEach>
+
 			<div class="col-md-3 img-portfolio text-center">
-				<div class="pull-left">Chicken Rice</div>
+				<div class="pull-left">Test</div>
 				<div class="pull-right">$price</div>
 				<a href="portfolio-item.html">
 					<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
 				</a>
 			</div>
-			<div class="col-md-3 img-portfolio text-center">
-				<div class="pull-left">Chicken Rice</div>
-				<div class="pull-right">$price</div>
-				<a href="portfolio-item.html">
-					<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-				</a>
-			</div>
-			<div class="col-md-3 img-portfolio text-center">
-				<div class="pull-left">Chicken Rice</div>
-				<div class="pull-right">$price</div>
-				<a href="portfolio-item.html">
-					<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-				</a>
-			</div>
-			<div class="col-md-3 img-portfolio text-center">
-				<div class="pull-left">Chicken Rice</div>
-				<div class="pull-right">$price</div>
-				<a href="portfolio-item.html">
-					<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-				</a>
-			</div>
-			<div class="col-md-3 img-portfolio text-center">
-				<div class="pull-left">Chicken Rice</div>
-				<div class="pull-right">$price</div>
-				<a href="portfolio-item.html">
-					<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-				</a>
-			</div>
-			<div class="col-md-3 img-portfolio text-center">
-				<div class="pull-left">Chicken Rice</div>
-				<div class="pull-right">$price</div>
-				<a href="portfolio-item.html">
-					<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-				</a>
-			</div>
-			<div class="col-md-3 img-portfolio text-center">
-				<div class="pull-left">Chicken Rice</div>
-				<div class="pull-right">$price</div>
-				<a href="portfolio-item.html">
-					<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-				</a>
-			</div>
+
 		</div>
 		<!-- /.row -->
 

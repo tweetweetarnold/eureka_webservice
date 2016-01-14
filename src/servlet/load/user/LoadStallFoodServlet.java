@@ -1,7 +1,6 @@
 package servlet.load.user;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -11,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Food;
+import model.Stall;
+
 import org.hibernate.Session;
 
 import connection.MyConnection;
-import model.Food;
-import model.Stall;
 import dao.StallDAO;
 
 /**
@@ -36,8 +36,7 @@ public class LoadStallFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -45,8 +44,7 @@ public class LoadStallFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -57,7 +55,7 @@ public class LoadStallFoodServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+		// PrintWriter out = response.getWriter();
 
 		// try {
 		String stallId = request.getParameter("stallId");
@@ -75,7 +73,7 @@ public class LoadStallFoodServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		session.setAttribute("stallName", s.getName());
-		session.setAttribute("stallFoodList", foodList);
+		session.setAttribute("foodList", foodList);
 
 		response.sendRedirect("/eureka_webservice/pages/stall-foods.jsp");
 		// } catch (Exception e) {

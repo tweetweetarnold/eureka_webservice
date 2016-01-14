@@ -34,6 +34,6 @@
 	</jsp-config>
 	<error-page>
 		<error-code>404</error-code>
-		<location>/eureka_webservice/pages/404.html</location>
+		<location>/eureka_webservice/pages/404</location>
 	</error-page>
 </web-app>

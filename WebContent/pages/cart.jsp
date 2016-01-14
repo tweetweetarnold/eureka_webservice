@@ -11,6 +11,11 @@
 
 <title>LunchTime</title>
 
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!-- Bootstrap Core CSS -->
 <link href="/eureka_webservice/resources/startbootstrap-business/css/bootstrap.css" rel="stylesheet">
 
@@ -47,7 +52,7 @@
 				</h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="/eureka_webservice/pages/hoomepage.jsp">Home</a>
+						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
 					</li>
 					<li class="active">Cart</li>
 				</ol>
@@ -55,7 +60,7 @@
 		</div>
 		<!-- /.row -->
 
-
+		<c:set var="overallPrice" value="0" />
 		<div class="row">
 			<div class="col-md-12">
 				<div class="dataTable_wrapper">
@@ -69,10 +74,19 @@
 							</tr>
 						</thead>
 						<tbody>
+							<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodOrderItem" varStatus="loop"></c:forEach>
 							<tr>
-								<td>Food_name_here</td>
-								<td>add_ons_here</td>
-								<td>price_here</td>
+								<td>${foodOrderItem.food.name}</td>
+								<td>
+									<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifierChosen">
+									${modiferChosen.name}, 
+									</c:forEach>
+								</td>
+								<td>
+									<c:set value="${overallPrice + foodOrderItem.price}" var="overallPrice" />
+									<fmt:formatNumber value="${foodOrderItem.price}" var="amt" minFractionDigits="2" />
+									$${amt}
+								</td>
 								<td>
 									<a href="#">
 										<i class="fa fa-trash-o"></i>
@@ -92,8 +106,11 @@
 
 		<div class="row">
 			<div class="col-md-6 pull-right">
-				<h2>Total Price: $price</h2>
-
+				<h2>
+					Total Price:
+					<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />
+					$${overallPrice2}
+				</h2>
 			</div>
 		</div>
 
