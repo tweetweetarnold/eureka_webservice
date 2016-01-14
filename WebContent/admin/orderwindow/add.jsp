@@ -117,14 +117,14 @@
 											<label>Discount (decimal)</label>
 											<input name="discount" class="form-control">
 										</div>
+
 										<div class="form-group">
 											<label>Discount Value (decimal)</label>
 											<input name="discountValue" class="form-control">
 										</div>
 										<div class="form-group">
 											<label>Number of Weeks</label>
-											<select class="form-control" name="Repeat" required>
-												<option value="">-- Select --</option>
+											<select class="form-control" name="repeat" required>
 												<c:forEach items="${sessionScope.weekList}" var="week">
 													<option value="${week}">${week}</option>
 												</c:forEach>
