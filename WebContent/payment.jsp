@@ -69,7 +69,7 @@
 			<c:remove var="submittedOrders" scope="session" />
 		</c:if>
 		
-		<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">
+		<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
 
 			<c:set var="haveOrder" value="true" />
 			<div class="panel panel-default">
@@ -107,9 +107,9 @@
 										<strong>Price:</strong>
 									</td>
 									<td>
-										<fmt:formatNumber value="${order.totalPrice}" var="totalPrice" minFractionDigits="2" />
+										<fmt:formatNumber value="${order.totalPriceIncludingDisc}" var="totalPrice" minFractionDigits="2" />
 										$
-										<c:out value="${totalPrice*(1-order.orderWindow.discount)}" />
+										<c:out value="${totalPrice}" />
 									</td>
 								</tr>
 							</table>
@@ -127,7 +127,7 @@
 							</thead>
 
 							<tbody>
-								<c:forEach items="${order.foodOrderList}" var="foodItem">
+								<c:forEach items="${order.foodOrderDiscountList}" var="foodItem">
 									<tr>
 										<td>
 											<c:out value="${foodItem.food.stall.name}" />
@@ -153,7 +153,7 @@
 										<td>
 											<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
 											$
-											<c:out value="${newPrice*(1-order.orderWindow.discount)}" />
+											<c:out value="${newPrice}" />
 										</td>
 									</tr>
 								</c:forEach>
@@ -182,9 +182,9 @@
 
 					<c:set var="count" value="0" />
 
-					<c:forEach items="${sessionScope.submittedOrders}" var="order" varStatus="orderLoop">
+					<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
 
-						<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
+						<c:forEach items="${order.foodOrderDiscountList}" var="foodItem" varStatus="foodItemLoop">
 							<c:set var="count" value="${count + 1}" />
 							<c:set var="modifiedFoodName" value="${foodItem.food.name}" />
 
@@ -207,7 +207,7 @@
 							<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${modifiedFoodName}" />">
 							<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${foodItem.quantity}" />">
 							<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
-							<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice*(1-order.orderWindow.discount)}" />">
+							<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
 
 						</c:forEach>
 

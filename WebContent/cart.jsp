@@ -112,9 +112,6 @@
 												</c:forEach>
 											</ul>
 
-											<!-- 									<h4> -->
-											<!-- 										<small>everyone loves chris</small> -->
-											<!-- 									</h4> -->
 										</div>
 										<div class="col-xs-6">
 											<div class="col-xs-6 text-right">
@@ -155,12 +152,17 @@
 						<div class="panel-footer">
 							<div class="row text-center">
 								<div class="col-xs-9">
+									<c:set var="discountValue">${sessionScope.orderWindow.discountValue}</c:set>
+									
 									<fmt:formatNumber value="${totalPrice}" var="totalPrice2" minFractionDigits="2" />
+									<c:set var="zero"> 0.00</c:set>
 									<h4 class="text-right">
 										Total Payable:
 										<strong>
-											$
+										$
+											
 											<c:out value="${totalPrice2}" />
+											
 										</strong>
 									</h4>
 								</div>

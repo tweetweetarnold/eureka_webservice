@@ -54,7 +54,7 @@
 				<h3>You haven't ordered anything before! Go order something!</h3>
 			</c:if>
 
-			<c:forEach items="${sessionScope.orderHistory}" var="order" varStatus="orderLoop">
+			<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
 
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
@@ -99,9 +99,9 @@
 											<strong>Price:</strong>
 										</td>
 										<td>
-											<fmt:formatNumber value="${order.totalPrice}" var="totalPrice" minFractionDigits="2" />
+											<fmt:formatNumber value="${order.totalPriceIncludingDisc}" var="totalPrice" minFractionDigits="2" />
 											$
-											<c:out value="${totalPrice*(1-order.orderWindow.discount)}" />
+											<c:out value="${totalPrice}" />
 										</td>
 									</tr>
 								</table>
@@ -119,7 +119,7 @@
 								</thead>
 
 								<tbody>
-									<c:forEach items="${order.foodOrderList}" var="foodItem">
+									<c:forEach items="${order.foodOrderDiscountList}" var="foodItem">
 										<tr>
 											<td>
 												<c:out value="${foodItem.food.stall.name}" />
@@ -145,7 +145,7 @@
 											<td>
 												<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
 												$
-												<c:out value="${newPrice*(1-order.orderWindow.discount)}" />
+												<c:out value="${newPrice}" />
 											</td>
 										</tr>
 									</c:forEach>

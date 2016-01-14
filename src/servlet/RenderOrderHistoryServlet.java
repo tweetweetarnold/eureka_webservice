@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Employee;
 import model.FoodOrder;
+import controller.FoodDisplayPaymentController;
 import controller.FoodOrderController;
 
 /**
@@ -57,9 +58,11 @@ public class RenderOrderHistoryServlet extends HttpServlet {
 			Employee emp = (Employee) session.getAttribute("user");
 
 			FoodOrderController foodOrderController = new FoodOrderController();
+			FoodDisplayPaymentController foodDisplayPaymentController = new FoodDisplayPaymentController();
 			List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSet(emp.getEmail());
+			
 			System.out.println(foodOrderList.size());
-
+			session.setAttribute("foodDisplayPaymentList", foodDisplayPaymentController.renderFoodDisplayPaymentList(foodOrderList));
 			session.setAttribute("orderHistory", foodOrderList);
 			response.sendRedirect("orderHistory.jsp");
 		} catch (Exception e) {
