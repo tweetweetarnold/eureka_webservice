@@ -54,6 +54,7 @@ public class LoadAdminViewStallsServlet extends HttpServlet {
 		ArrayList<Stall> list = stallController.getAllStallsUnderCanteen(canteen);
 
 		session.setAttribute("canteenName", canteen.getName());
+		session.setAttribute("canteenId", canteenId);
 		session.setAttribute("stallList", list);
 
 		response.sendRedirect("/eureka_webservice/admin/stall/view.jsp");

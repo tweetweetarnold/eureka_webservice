@@ -68,7 +68,7 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 
 			session.setAttribute("success", "Stall added successfully.");
 
-			response.sendRedirect("/eureka_webservice/LoadAdminViewStallsServlet?stallId="
+			response.sendRedirect("/eureka_webservice/LoadAdminViewStallsServlet?canteenId="
 					+ canteenId);
 
 		} catch (Exception e) {

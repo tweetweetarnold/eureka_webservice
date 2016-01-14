@@ -65,7 +65,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Add new Add new stall</div>
+						<div class="panel-heading">Add new stall</div>
 
 						<div class="panel-body">
 
@@ -81,7 +81,7 @@
 											<label>Stall name</label>
 											<input class="form-control" name="name" required>
 										</div>
-										
+
 										<div class="form-group">
 											<label>Contact No</label>
 											<input class="form-control" name="contactNo" required>
