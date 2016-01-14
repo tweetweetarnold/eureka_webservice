@@ -10,7 +10,7 @@ import dao.StallDAO;
  * Process the functions of managing the Stall's information
  * 
  * @author SMU Team Eureka
- *
+ * 
  */
 public class StallController {
 	StallDAO stallDAO = new StallDAO();
@@ -20,7 +20,7 @@ public class StallController {
 	 */
 	public StallController() {
 	}
-	
+
 	/**
 	 * Retrieves all the Stalls from the Canteen
 	 * 
@@ -30,7 +30,7 @@ public class StallController {
 	public ArrayList<Stall> getAllStallsUnderCanteen(Canteen canteen) {
 		return stallDAO.getAllStallsUnderCanteen(canteen);
 	}
-	
+
 	/**
 	 * Retrieves the Stall based on the provided ID
 	 * 
@@ -40,7 +40,11 @@ public class StallController {
 	public Stall getStall(int stallId) {
 		return stallDAO.getStall(stallId);
 	}
-	
+
+	public void saveStall(Stall s) {
+		stallDAO.saveStall(s);
+	}
+
 	/**
 	 * Updates the designated Stall object in the Database
 	 * 

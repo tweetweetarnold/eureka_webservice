@@ -1,7 +1,6 @@
-package servlet.load.admin;
+package servlet.process.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,20 +11,22 @@ import javax.servlet.http.HttpSession;
 
 import model.Canteen;
 import model.Stall;
+
 import controller.CanteenController;
+import controller.FoodController;
 import controller.StallController;
 
 /**
- * Servlet implementation class LoadAdminViewStallsDetailsServlet
+ * Servlet implementation class ProcessAdminAddNewStallServlet
  */
-@WebServlet("/LoadAdminViewStallsServlet")
-public class LoadAdminViewStallsServlet extends HttpServlet {
+@WebServlet("/ProcessAdminAddNewStallServlet")
+public class ProcessAdminAddNewStallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewStallsServlet() {
+	public ProcessAdminAddNewStallServlet() {
 		super();
 	}
 
@@ -43,22 +44,36 @@ public class LoadAdminViewStallsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		FoodController foodController = new FoodController();
 		StallController stallController = new StallController();
 		CanteenController canteenController = new CanteenController();
 
+		String name = request.getParameter("name");
+		String contactNoString = request.getParameter("contactNo");
 		String canteenIdString = request.getParameter("canteenId");
-		int canteenId = Integer.parseInt(canteenIdString);
+		System.out.println("String: " + canteenIdString);
 
-		Canteen canteen = canteenController.getCanteen(canteenId);
+		String imageDirectory = request.getParameter("imageDirectory");
 
-		ArrayList<Stall> list = stallController.getAllStallsUnderCanteen(canteen);
+		try {
+			int canteenId = Integer.parseInt(canteenIdString);
+			long contactNo = Long.parseLong(contactNoString);
 
-		session.setAttribute("canteenName", canteen.getName());
-		session.setAttribute("canteenId", canteenId);
-		session.setAttribute("stallList", list);
+			Canteen c = canteenController.getCanteen(canteenId);
+			Stall s = new Stall(name, contactNo, c, null, imageDirectory);
 
-		response.sendRedirect("/eureka_webservice/admin/stall/view.jsp");
+			System.out.println("stallname: " + s.getName());
+			System.out.println("saving food...");
+			stallController.saveStall(s);
+
+			session.setAttribute("success", "Stall added successfully.");
+
+			response.sendRedirect("/eureka_webservice/LoadAdminViewStallsServlet?canteenId="
+					+ canteenId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
-
 }

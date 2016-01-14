@@ -18,11 +18,13 @@ public class OrderWindowTest {
 				"3 Yung Sheng Rd, Singapore 618499", null);
 		MyConnection.save(canteen2);
 		MyConnection.save(company2);
-		long durationl = 3600000*4;
+		long durationl = 3600000 * 4;
 		Duration duration = new Duration(durationl);
-		//OrderWindow window2 = new OrderWindow(new DateTime(2015, 12, 2, 16, 36, 0), duration, company2, canteen2, 0.0);
+		// OrderWindow window2 = new OrderWindow(new DateTime(2015, 12, 2, 16, 36, 0), duration,
+		// company2, canteen2, 0.0);
 		OrderWindowController orderWindowController = new OrderWindowController();
-		orderWindowController.createNewOrderindow(new DateTime(2015, 12, 2, 16, 36, 0), new DateTime(2015, 12, 2, 17, 36, 0), company2, canteen2, 0.0,4);
+		orderWindowController.createNewOrderWindow(new DateTime(2015, 12, 2, 16, 36, 0),
+				new DateTime(2015, 12, 2, 17, 36, 0), company2, canteen2, 0.0, 4);
 	}
 
 }

@@ -62,7 +62,7 @@
 									<form action="homepage.jsp">
 										<button type="submit" class="btn btn-primary btn-sm btn-block">
 											<span class="glyphicon glyphicon-share-alt"></span>
-											<u>Continue</u>
+											<u style="font-size: large;">Continue</u>
 										</button>
 									</form>
 

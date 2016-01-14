@@ -81,9 +81,10 @@
 								>
 									<div class="panel-body">
 										<b>Order Window: </b>
-										${orderHistory.orderWindow.windowId }
+										${orderHistory.orderWindow.windowId}
 										<br>
 										<b>Canteen: </b>
+										${orderHistory.orderWindow.canteen.name}
 										<br>
 										<br>
 

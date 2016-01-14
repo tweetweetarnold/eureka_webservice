@@ -56,32 +56,33 @@
 	<div class="container">
 
 		<!-- Carousel Holder -->
-		<div class="row carousel-holder">
-			<div class="col-md-12">
-				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-					<ol class="carousel-indicators">
-						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-					</ol>
-					<div class="carousel-inner">
-						<div class="item active">
-							<img class="slide-image" src="resources/img/home-carousel/1.jpg" alt="">
-						</div>
-						<div class="item">
-							<img class="slide-image" src="resources/img/home-carousel/2.jpg" alt="">
-						</div>
-					</div>
-					<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-						<span class="glyphicon glyphicon-chevron-left"></span>
-					</a>
-					<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-						<span class="glyphicon glyphicon-chevron-right"></span>
-					</a>
-				</div>
-			</div>
-		</div>
+		<!-- 		<div class="row carousel-holder"> -->
+		<!-- 			<div class="col-md-12"> -->
+		<!-- 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel"> -->
+		<!-- 					<ol class="carousel-indicators"> -->
+		<!-- 						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li> -->
+		<!-- 						<li data-target="#carousel-example-generic" data-slide-to="1"></li> -->
+		<!-- 					</ol> -->
+		<!-- 					<div class="carousel-inner"> -->
+		<!-- 						<div class="item active"> -->
+		<!-- 							<img class="slide-image" src="resources/img/home-carousel/1.jpg" alt=""> -->
+		<!-- 						</div> -->
+		<!-- 						<div class="item"> -->
+		<!-- 							<img class="slide-image" src="resources/img/home-carousel/2.jpg" alt=""> -->
+		<!-- 						</div> -->
+		<!-- 					</div> -->
+		<!-- 					<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> -->
+		<!-- 						<span class="glyphicon glyphicon-chevron-left"></span> -->
+		<!-- 					</a> -->
+		<!-- 					<a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> -->
+		<!-- 						<span class="glyphicon glyphicon-chevron-right"></span> -->
+		<!-- 					</a> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
 		<!-- End Carousel Holder -->
-
+		<br>
+		<br>
 
 		<!-- JSTL get variables -->
 		<c:set value="${sessionScope.canteenList}" var="canteenList" />
@@ -117,9 +118,7 @@
 						<h4 class="panel-title">
 							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${canteenLoop.index}"
 								aria-expanded="true" aria-controls="collapse"
-							>
-								<c:out value="${canteen.name}" />
-							</a>
+							> ${canteen.name} </a>
 						</h4>
 					</div>
 					<div id="collapse${canteenLoop.index}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby=""heading"">
@@ -131,9 +130,7 @@
 										<img src="${stall.imageDirectory}" onerror="onImageError(${stallLoop.index})" id="image${stallLoop.index}">
 										<div class="caption">
 											<form method="post" action="RenderStallFoodListServlet?stallId=${stall.stallId}">
-												<button class="button" style="white-space: normal;">
-													<c:out value="${stall.name}" />
-												</button>
+												<button class="button" style="white-space: normal;">${stall.name}</button>
 											</form>
 										</div>
 									</div>

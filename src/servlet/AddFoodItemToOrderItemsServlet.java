@@ -25,7 +25,6 @@ import dao.FoodDAO;
 @WebServlet(description = "This servlet adds a food item to be stored in session", urlPatterns = { "/AddFoodItemToOrderItemsServlet" })
 public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	FoodDAO foodDAO = new FoodDAO();
 
 	/**
@@ -33,12 +32,10 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 	 */
 	public AddFoodItemToOrderItemsServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -47,8 +44,7 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -129,7 +125,7 @@ public class AddFoodItemToOrderItemsServlet extends HttpServlet {
 			System.out.println("new FoodOrderItem added to myFoodOrderItems successfully");
 			session.setAttribute("success", "Item has been added to cart!");
 
-			response.sendRedirect("homepage.jsp");
+			response.sendRedirect("stallFoodList.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();

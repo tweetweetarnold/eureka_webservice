@@ -54,7 +54,7 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Create New Window</h1>
+					<h1 class="page-header">Add New Window</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -157,7 +157,7 @@
 	<!-- /#wrapper -->
 
 	<!-- Create confirmation -->
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">

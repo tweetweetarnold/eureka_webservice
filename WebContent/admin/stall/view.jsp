@@ -49,7 +49,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">${sessionScope.canteenName}-stalls</h1>
+					<h1 class="page-header">${sessionScope.canteenName}:&nbsp;Stalls</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -72,6 +72,11 @@
 					${fn:length(sessionScope.stallList)}
 					<br>
 					<br>
+					<form action="/eureka_webservice/admin/stall/add.jsp">
+						<input type="hidden" name="canteenId" value="${sessionScope.canteenId}">
+						<button type="submit" class="btn btn-primary">Add stall</button>
+					</form>
+					<br>
 
 					<div class="dataTable_wrapper">
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -79,8 +84,9 @@
 								<tr>
 									<th>ID</th>
 									<th>Stall</th>
-									<th>Date Joined</th>
+									<th>Create Date</th>
 									<th>Image</th>
+									<th></th>
 									<th></th>
 								</tr>
 							</thead>
@@ -98,7 +104,8 @@
 										<td>
 											<a href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId=${stall.stallId}">View all
 												${fn:length(stall.foodList)} food</a>
-											&nbsp&nbsp
+										</td>
+										<td>
 											<a href="/eureka_webservice/LoadAdminEditStallServlet?stallId=${stall.stallId}">Edit stall</a>
 										</td>
 									</tr>

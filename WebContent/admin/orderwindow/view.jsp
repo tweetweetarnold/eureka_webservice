@@ -57,7 +57,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 
-					<b>Total companies:</b>
+					<b>Total order windows:</b>
 					${fn:length(sessionScope.orderWindowList)}
 					<br>
 					<br>
@@ -82,9 +82,15 @@
 										<td>${window.company.name}</td>
 										<td>${window.canteen.name}</td>
 										<td>${window.discount}</td>
-										<td>${window.createDate}</td>
-										<td>${window.startDateFormatted}</td>
-										<td>${window.endDateFormatted}</td>
+										<td>
+											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.createDate}" />
+										</td>
+										<td>
+											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.startDateFormatted}" />
+										</td>
+										<td>
+											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.endDateFormatted}" />
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>

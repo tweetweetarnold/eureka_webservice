@@ -61,7 +61,8 @@
 						<h5>Upload Canteen.csv or Stall.csv or Food.csv or Modifier.csv</h5>
 						<form action="FileUpload" method="post" enctype="multipart/form-data">
 							<input type="file" name="file" style="width: 228px;" required />
-							<input type="submit" value="upload" />
+							<br>
+							<input type="submit" class="btn btn-primary" value="Upload" />
 
 						</form>
 

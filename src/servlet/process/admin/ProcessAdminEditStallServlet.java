@@ -24,7 +24,6 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 	 */
 	public ProcessAdminEditStallServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -32,7 +31,6 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -41,7 +39,6 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		StallController stallController = new StallController();
 
@@ -66,7 +63,7 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 
 		session.setAttribute("success", "Stall updated successfully.");
 
-		response.sendRedirect("/eureka_webservice/LoadAdminViewStallsDetailsServlet?canteenId="
+		response.sendRedirect("/eureka_webservice/LoadAdminViewStallsServlet?canteenId="
 				+ canteenId);
 	}
 
