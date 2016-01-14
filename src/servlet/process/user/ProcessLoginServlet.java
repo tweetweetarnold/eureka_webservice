@@ -40,7 +40,6 @@ public class ProcessLoginServlet extends HttpServlet {
 	 */
 	public ProcessLoginServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -127,7 +126,7 @@ public class ProcessLoginServlet extends HttpServlet {
 				obj.put("status", "ok");
 				out.print(gson.toJson(obj));
 			} else {
-				response.sendRedirect("homepage.jsp");
+				response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 			}
 
 		} catch (Exception e) {
@@ -151,7 +150,7 @@ public class ProcessLoginServlet extends HttpServlet {
 					out.print(gson.toJson(obj));
 				} else {
 					session.setAttribute("error", errorMessage);
-					response.sendRedirect("login.jsp");
+					response.sendRedirect("/eureka_webservice/pages/login.jsp");
 				}
 			} catch (JSONException e1) {
 				// TODO Auto-generated catch block

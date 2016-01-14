@@ -1,4 +1,4 @@
-package servlet;
+package servlet.load.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +21,8 @@ import dao.StallDAO;
 /**
  * Servlet implementation class LoadStallFoodServlet
  */
-@WebServlet("/RenderStallFoodListServlet")
-public class RenderStallFoodListServlet extends HttpServlet {
+@WebServlet("/LoadStallFoodServlet")
+public class LoadStallFoodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	StallDAO stallDAO = new StallDAO();
@@ -30,7 +30,7 @@ public class RenderStallFoodListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public RenderStallFoodListServlet() {
+	public LoadStallFoodServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -77,7 +77,7 @@ public class RenderStallFoodListServlet extends HttpServlet {
 		session.setAttribute("stallName", s.getName());
 		session.setAttribute("stallFoodList", foodList);
 
-		response.sendRedirect("stallFoodList.jsp");
+		response.sendRedirect("/eureka_webservice/pages/stall-foods.jsp");
 		// } catch (Exception e) {
 		// out.println(e.getMessage());
 		// }
