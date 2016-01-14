@@ -98,6 +98,34 @@ public class OrderWindowController {
 		}
 	}
 	
+	public void createNewOrderindow(DateTime startDate, DateTime endDate, Company company,
+			Canteen canteen, double discount, double discountValue, int numberOfWeeks) {
+		if (numberOfWeeks > 0) {
+			ArrayList<DateTime> startTimeList = new ArrayList<DateTime>();
+			ArrayList<DateTime> endTimeList = new ArrayList<DateTime>();
+			startTimeList.add(startDate);
+			endTimeList.add(endDate);
+			for (int i = 1; i < numberOfWeeks; i++) {
+				DateTime tempStartDateTime = startDate.plusWeeks(1);
+				startDate = tempStartDateTime;
+				DateTime tempEndDateTime = endDate.plusWeeks(1);
+				endDate = tempEndDateTime;
+				startTimeList.add(tempStartDateTime);
+				endTimeList.add(tempEndDateTime);
+			}
+
+			for (int i = 0; i < startTimeList.size(); i++) {
+				orderWindowDAO.saveOrderWindow(new OrderWindow(startTimeList.get(i), endTimeList
+						.get(i), company, canteen, discount, discountValue));
+			}
+
+		} else {
+			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen,
+					discount, discountValue));
+		}
+	}
+	
+	
 	/**
 	 * Retrieve all the OrderWindows
 	 * 

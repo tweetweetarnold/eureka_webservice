@@ -118,6 +118,10 @@
 											<input name="discount" class="form-control">
 										</div>
 										<div class="form-group">
+											<label>Discount Value (decimal)</label>
+											<input name="discountValue" class="form-control">
+										</div>
+										<div class="form-group">
 											<label>Number of Weeks</label>
 											<select class="form-control" name="Repeat" required>
 												<option value="">-- Select --</option>
