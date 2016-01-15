@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>eureka_webservice</display-name>
 	<welcome-file-list>
-		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>pages/login.jsp</welcome-file>
 	</welcome-file-list>
 	<listener>
 		<listener-class>org.quartz.ee.servlet.QuartzInitializerListener</listener-class>

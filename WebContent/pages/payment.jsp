@@ -63,31 +63,7 @@
 		</div>
 		<!-- /.row -->
 
-		<div class="row">
-			<div class="col-md-12">
-				<!-- Success message handling -->
-				<c:if test="${not empty sessionScope.success}">
-					<div class="alert alert-success" role="alert">
-						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-						<span class="sr-only">Success:</span>
-						<c:out value="${success}" />
-					</div>
-					<c:remove var="success" scope="session" />
-				</c:if>
-
-				<!-- Error message handling -->
-				<c:if test="${not empty sessionScope.error}">
-					<div class="alert alert-danger" role="alert">
-						<b>Error!</b>
-						<br>
-						<c:out value="${error}" />
-					</div>
-					<c:remove var="error" scope="session" />
-				</c:if>
-			</div>
-			<!-- /col-md-12 -->
-
-
+		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 			<c:set var="haveOrder" value="false" />
 
@@ -200,12 +176,64 @@
 				</div>
 
 			</c:forEach>
-
-
-
-
 		</div>
-		<!-- /row -->
+
+
+
+		<!-- PayPal form -->
+		<c:choose>
+			<c:when test="${haveOrder eq true}">
+				<form action="${initParam['posturl']}" method="post">
+					<input type="hidden" name="upload" value="1" />
+					<input type="hidden" name="return" value="${initParam['returnurl']}" />
+					<input type="hidden" name="cmd" value="_cart" />
+					<input type="hidden" name="business" value="${initParam['business']}" />
+					<input type="hidden" name="currency_code" value="SGD">
+
+					<c:set var="count" value="0" />
+
+					<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
+
+						<c:forEach items="${order.foodOrderDiscountList}" var="foodItem" varStatus="foodItemLoop">
+							<c:set var="count" value="${count + 1}" />
+							<c:set var="modifiedFoodName" value="${foodItem.food.name}" />
+
+							<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen" varStatus="modifierChosenLoop">
+								<c:choose>
+									<c:when test="${fn:contains(modifierChosen.name, 'Upsize')}">
+										<c:set var="modifiedFoodName" value="${modifiedFoodName} with Upsize" />
+									</c:when>
+
+									<c:when test="${fn:contains(modifierChosen.name, 'juice')}">
+										<c:set var="modifiedFoodName" value="${modifiedFoodName} juice" />
+									</c:when>
+
+									<c:otherwise>
+										<c:set var="modifiedFoodName" value="${modifiedFoodName} with ${modifierChosen.name}" />
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+							<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${modifiedFoodName}" />">
+							<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${foodItem.quantity}" />">
+							<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
+							<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
+
+						</c:forEach>
+
+					</c:forEach>
+
+					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" style="float: right;">
+
+				</form>
+
+			</c:when>
+			<c:otherwise>
+				<p>There are no orders to be processed.</p>
+				<br>
+			</c:otherwise>
+		</c:choose>
+		<!-- End of PayPal -->
 
 
 		<jsp:include page="footer.jsp" />

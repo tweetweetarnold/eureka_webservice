@@ -42,12 +42,8 @@
 	<jsp:include page="header.jsp" />
 
 
-
-
 	<!-- Page Content -->
 	<div class="container">
-
-
 
 		<!-- Arnold's row -->
 		<div class="row">
@@ -154,13 +150,6 @@
 					</div>
 				</c:forEach>
 			</c:forEach>
-
-			<div class="col-md-4 col-sm-6 text-center">
-				<a href="/eureka_webservice/pages/stall-foods.jsp">
-					<i>Test Stall</i>
-					<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-				</a>
-			</div>
 
 		</div>
 		<!-- /.row -->

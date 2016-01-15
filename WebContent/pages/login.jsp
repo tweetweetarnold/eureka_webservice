@@ -88,7 +88,7 @@
 					<!-- Logo -->
 					<figure class="text-center">
 						<a href="./index.html">
-							<img class="img-logo" src="resources/guri-one/templates/images/logo.png" alt="">
+							<img class="img-logo" src="/eureka_webservice/resources/guri-one/templates/images/logo.png" alt="">
 						</a>
 					</figure>
 					<!-- /.text-center -->
@@ -203,7 +203,7 @@
 
 					<!-- Icons -->
 					<figure>
-						<img class="img-services" src="resources/guri-one/templates/images/icons/flag.png" alt="">
+						<img class="img-services" src="/eureka_webservice/resources/guri-one/templates/images/icons/flag.png" alt="">
 					</figure>
 
 					<!-- Title -->
@@ -219,7 +219,7 @@
 
 					<!-- Icons -->
 					<figure>
-						<img class="img-services" src="resources/guri-one/templates/images/icons/search.png" alt="">
+						<img class="img-services" src="/eureka_webservice/resources/guri-one/templates/images/icons/search.png" alt="">
 					</figure>
 
 					<!-- Title -->
@@ -235,7 +235,7 @@
 
 					<!-- Icons -->
 					<figure>
-						<img class="img-services img-margin" src="resources/guri-one/templates/images/icons/world-map.png" alt="">
+						<img class="img-services img-margin" src="/eureka_webservice/resources/guri-one/templates/images/icons/world-map.png" alt="">
 					</figure>
 
 					<!-- Title -->
@@ -270,7 +270,7 @@
 
 					<!-- Images showcase -->
 					<figure>
-						<img class="img-iPhone" src="resources/guri-one/templates/images/iphone/1.png" alt="">
+						<img class="img-iPhone" src="/eureka_webservice/resources/guri-one/templates/images/iphone/1.png" alt="">
 					</figure>
 
 				</div>
@@ -322,7 +322,7 @@
 
 					<!-- Images showcase -->
 					<figure>
-						<img class="img-iPhone margin-top margin-screen-800" src="resources/guri-one/templates/images/iphone/4.png" alt="">
+						<img class="img-iPhone margin-top margin-screen-800" src="/eureka_webservice/resources/guri-one/templates/images/iphone/4.png" alt="">
 					</figure>
 
 				</div>
@@ -340,7 +340,7 @@
 
 					<!-- Images showcase -->
 					<figure>
-						<img class="img-iPhone margin-top margin-top-1" src="resources/guri-one/templates/images/iphone/3.png" alt="">
+						<img class="img-iPhone margin-top margin-top-1" src="/eureka_webservice/resources/guri-one/templates/images/iphone/3.png" alt="">
 					</figure>
 
 				</div>
@@ -358,7 +358,7 @@
 					<!-- Button -->
 					<p class="btn-app-store">
 						<a class="btn btn-danger btn-lg" href="#fakelinks">
-							<img src="resources/guri-one/templates/images/btn-app-store.png" alt="">
+							<img src="/eureka_webservice/resources/guri-one/templates/images/btn-app-store.png" alt="">
 						</a>
 					</p>
 					<!-- /.btn-app-store -->
