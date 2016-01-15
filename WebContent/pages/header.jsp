@@ -24,7 +24,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="LoadUserOrderHistoryServlet">
+					<a href="/eureka_webservice/LoadUserOrderHistoryServlet">
 						History
 						<i class="fa fa-bars fa-lg"></i>
 					</a>

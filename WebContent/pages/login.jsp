@@ -17,7 +17,7 @@
 <meta name="googlebot" content="index,follow">
 
 <!-- Title -->
-<title>LunchTime &mdash; Bootstrap 3 iPhone App Templates</title>
+<title>LunchTime &mdash Login</title>
 
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

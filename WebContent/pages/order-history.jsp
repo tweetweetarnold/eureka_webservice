@@ -47,23 +47,82 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					Cart
-					<small>your orders</small>
+					Order History
+					<small>your previous orders</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li>
 						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
 					</li>
-					<li class="active">Cart</li>
+					<li class="active">Order History</li>
 				</ol>
 			</div>
 		</div>
 		<!-- /.row -->
 
-		<div class="row"></div>
-		<!-- /row -->
 
-		<div class="row"></div>
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+					<c:forEach items="${sessionScope.orderHistory}" var="foodOrder" varStatus="loop">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingOne">
+								<h4 class="panel-title">
+									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${loop.index}"
+										aria-expanded="true" aria-controls="collapse${loop.index}"
+									>
+										Order ID: ${foodOrder.foodOrderId}
+										<i class="pull-right">${foodOrder.status}</i>
+									</a>
+								</h4>
+							</div>
+							<div id="collapse${loop.index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+								<div class="panel-body">
+									Canteen: canteen_here
+									<br>
+									Price:
+									<fmt:formatNumber value="${foodOrder.totalPrice}" var="amt" minFractionDigits="2" />
+									$${amt}
+									<br>
+									<br>
+
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<td>Stall</td>
+												<td>Food</td>
+												<td>Quantity</td>
+												<td>Price</td>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${foodOrder.foodOrderList}" var="foodOrderItem">
+												<tr>
+													<td>${foodOrderItem.food.stall.name}</td>
+													<td>${foodOrderItem.food.name}</td>
+													<td>${foodOrderItem.quantity}</td>
+													<td>
+														<fmt:formatNumber value="${foodOrderItem.price}" var="amt2" minFractionDigits="2" />
+														$${amt2}
+													</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<!-- /panel -->
+
+					</c:forEach>
+				</div>
+
+
+			</div>
+			<!-- /col-lg-12 -->
+		</div>
 		<!-- /row -->
 
 
@@ -115,3 +174,4 @@
 </body>
 
 </html>
+
