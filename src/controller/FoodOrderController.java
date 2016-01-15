@@ -703,4 +703,14 @@ public class FoodOrderController {
 		}
 		return map;
 	}
+	
+	public boolean checkForExistingOrder(Employee employee, OrderWindow orderWindow){
+		FoodOrderDAO foodOrderDao = new FoodOrderDAO();
+		if(foodOrderDao.getAllFoodOrderOfOrderWindowForUser(employee,orderWindow).isEmpty()){
+			return false;
+		}
+		return true;
+	}
+	
+	
 }

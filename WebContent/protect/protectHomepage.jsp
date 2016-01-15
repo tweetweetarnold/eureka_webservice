@@ -3,11 +3,18 @@
 	Employee emp = (Employee) session.getAttribute("user");
 	String tokenID = (String) session.getAttribute("tokenID");
 	OrderWindow orderWindow = (OrderWindow) session.getAttribute("orderWindow");
-	
+
 	if (emp == null || tokenID == null || orderWindow == null) {
 		response.sendRedirect("/eureka_webservice/ProcessLogoutServlet");
 	}
-	
-	
+	if (session.getAttribute("suspended") != null) {
+		boolean suspended = Boolean.parseBoolean((String)session.getAttribute("suspended"));
+		if (suspended) {
+			if (!response.isCommitted()) {
+				response.sendRedirect("payment.jsp");
+
+			}
+		}
+	}
 %>
 

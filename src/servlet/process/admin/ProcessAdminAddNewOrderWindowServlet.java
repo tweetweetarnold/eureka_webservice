@@ -84,9 +84,9 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 			} catch (Exception e) {
 			}
 			
-			ArrayList<OrderWindow> occupiedSlots = orderWindowController.checkOrderWindowAvailability(startDatetime, endDatetime,company);
-			if (occupiedSlots.size() > 0) {
-				 throw new Exception(" Order Window have already been taken");
+			boolean available = orderWindowController.checkForOrderWindowAvailability(startDatetime, endDatetime,company,week);
+			if (!available) {
+				 throw new Exception("Order Window have already been taken");
 			} else {
 				orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
 					canteen, discount, week);
