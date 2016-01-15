@@ -11,6 +11,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.joda.time.DateTime;
 
 import connection.MyConnection;
 
@@ -130,4 +131,21 @@ public class OrderWindowDAO {
 		}
 		return returnList;
 	}
+	
+	public ArrayList<OrderWindow> getAllOrderWindowsUnderCompany(Company company) {
+		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
+		int companyId = company.getCompanyId();
+		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
+		dc.add(Restrictions.eq("company", company));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((OrderWindow) o);
+		}
+		return returnList;
+	}
+	
+	
 }

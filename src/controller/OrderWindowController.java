@@ -168,5 +168,47 @@ public class OrderWindowController {
 	public ArrayList<OrderWindow> getAllOpenedWindows() {
 		return orderWindowDAO.getAllOpenedWindows();
 	}
+	
+	public ArrayList<OrderWindow> checkOrderWindowAvailability(DateTime startTime, DateTime endTime, Company coy) throws Exception {
+		ArrayList<OrderWindow> allOrderWindows = orderWindowDAO.getAllOrderWindowsUnderCompany(coy);
+		ArrayList<OrderWindow> occupiedSlots = new ArrayList<OrderWindow>();
+		System.out.println("startDate: " + startTime);
+		System.out.println("endTime: " + endTime);
+
+		if (startTime.isBefore(endTime)) {
+			for (OrderWindow w : allOrderWindows) {
+				DateTime wStart = w.getStartDate();
+				DateTime wEnd = w.getEndDate();
+				
+					if ((startTime.isAfter(wStart))) {
+						System.out.println("***Alog 1*****");
+						System.out.println((startTime.isBefore(endTime)));
+						if (startTime.isBefore(wEnd)) {
+							if (endTime.isBefore(wEnd)) {
+								occupiedSlots.add(w);
+							} else if (endTime.isAfter(wEnd)) {
+								occupiedSlots.add(w);
+							}
+						}
+					}
+			
+					if ((startTime.isBefore(wStart))) {
+						System.out.println("***Alog 2*****");
+						
+						if (endTime.isAfter(wStart)) {
+							if (endTime.isBefore(wEnd)) {
+								occupiedSlots.add(w);
+							} else if (endTime.isAfter(wEnd)) {
+								occupiedSlots.add(w);
+							}
+						}
+					}
+			}
+		} else {
+			throw new Exception("Invalid start time and end time");
+		}
+		
+		return occupiedSlots;
+	}
 
 }
