@@ -19,10 +19,22 @@ public class PaymentNotification implements Job {
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		try {
+			String url = "PLEASE ENTER";
 			System.out.println("Sending Payment Notification");
 			SendEmail emailGen = new SendEmail();
-			String subject = "Koh Bus LunchTime Ordering Weekly Payment Due";
-			String messageBody = "Hey there! \nPlease note that your weekly payment for this week is due!\n\nRegards,\nDabao";
+			emailGen.setMailServerProperties();
+			String subject = "Koh Bus LunchTime Ordering App - Payment Due";
+			String messageBody = "Dear User,<br><br>"
+					+ "Please note that your weekly payment is due!<br><br>"
+					+"<a href="
+					+ url
+					+ ">"
+					+ url
+					+ "</a>"
+					+ "<br><br>"
+					+ "Regards,<br>"
+					+ "Admin<br><br>"
+					+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
 
 			// EmployeeController employeeController = new EmployeeController();
 			CompanyController companyController = new CompanyController();
@@ -41,7 +53,7 @@ public class PaymentNotification implements Job {
 			System.out.println("-------------------------------EMAILLIST LENGTH: "+ toEmails.length);
 			//temporary carbon copy recipients
 			if(toEmails.length>0){
-				String[] ccEmails = {"sumonasdmay@eastman.com", "wcasdhow@eastman.com"};
+				String[] ccEmails = {"sumonmay@eastman.com", "wchow@eastman.com"};
 				emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
 			}
 			
