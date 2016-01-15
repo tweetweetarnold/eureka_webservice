@@ -734,87 +734,122 @@ public class Test {
 
 		Stall fruitStall = new Stall("Fruit Stall", 91151608, canteen1, null,
 				"resources/img/stall/img-fruitstall.jpg");
-		Food apple = new Food("Apple", "change to juice $2.50", 0.60,
+		
+		Food apple = new Food("Apple", "", 0.60,
 				"resources/img/food/img-apple.jpg", fruitStall);
-		Food watermelon = new Food("Watermelon", "change to juice $2.50", 0.60,
+		
+		Food appleJuice = new Food("Apple Juice", "", 2.50, null, fruitStall);
+		
+		Food watermelon = new Food("Watermelon", "", 0.60,
 				"resources/img/food/img-watermelon.jpg", fruitStall);
-		Food dragonfruit = new Food("Dragonfruit", "change to juice $2.50", 0.60,
+		
+		Food watermelonJuice = new Food("Watermelon Juice", "", 2.50, null, fruitStall);
+		
+		Food dragonfruit = new Food("Dragonfruit", "", 0.60,
 				"resources/img/food/img-dragonfruit.jpg", fruitStall);
-		Food pear = new Food("Pear", "change to juice $2.50", 0.60,
+		
+		Food dragonfruitJuice = new Food("Dragonfruit Juice", "", 2.50, null, fruitStall);
+		
+		Food pear = new Food("Pear", "", 0.60,
 				"resources/img/food/img-pear.jpg", fruitStall);
-		Food honeydew = new Food("Honeydew", "change to juice $2.50", 0.70,
+		
+		Food pearJuice = new Food("Pear Juice", "", 2.50, null, fruitStall);
+		
+		Food honeydew = new Food("Honeydew", "", 0.70,
 				"resources/img/food/img-honeydew.jpg", fruitStall);
-		Food papaya = new Food("Papaya", "change to juice $2.50", 0.70,
+		
+		Food honeydewJuice = new Food("Honeydew Juice", "", 2.50, null, fruitStall);
+		
+		Food papaya = new Food("Papaya", "", 0.70,
 				"resources/img/food/img-papaya.jpg", fruitStall);
-		Food pineapple = new Food("Pineapple", "change to juice $2.50", 0.60,
+		
+		Food papayaJuice = new Food("Papaya Juice", "", 2.60, null, fruitStall);
+		
+		Food pineapple = new Food("Pineapple", "", 0.60,
 				"resources/img/food/img-pineapple.jpg", fruitStall);
-		Food banana = new Food("Banana", "change to juice $2.50", 0.70,
+		
+		Food pineappleJuice = new Food("Pineapple Juice", "", 2.50, null, fruitStall);
+		
+		Food banana = new Food("Banana", "", 0.70,
 				"resources/img/food/img-banana.jpg", fruitStall);
+		
+		Food bananaJuice = new Food("Banana Juice", "", 2.60, null, fruitStall);
+		
 		Food agaragar = new Food("Agar Agar", "", 0.60, "resources/img/food/img-agaragar.jpg",
 				fruitStall);
-		Food orange = new Food("Orange", "change to juice $2.50", 0.60,
+		
+		Food orange = new Food("Orange", "", 0.60,
 				"resources/img/food/img-orange.jpg", fruitStall);
-		Food guava = new Food("Guava", "change to juice $2.50", 0.70,
+		
+		Food orangeJuice = new Food("Orange Juice", "", 2.50, null, fruitStall);
+		
+		Food guava = new Food("Guava", "", 0.70,
 				"resources/img/food/img-guava.jpg", fruitStall);
-		Food sarawakPineapple = new Food("Sarawak Pineapple", "change to juice $2.50", 1.20,
+		
+		Food guavaJuice = new Food("Guava Juice", "", 2.50, null, fruitStall);
+		
+		Food sarawakPineapple = new Food("Sarawak Pineapple", "", 1.20,
 				"resources/img/food/img-sarawakpineapple.jpg", fruitStall);
+		
+		Food sarawakPineappleJuice = new Food("Sarawak Pineapple Juice", "", 3.10, null, fruitStall);
+		
 		Food mixedFruits = new Food("Mixed Fruits", "upsize $3.50", 3.00,
 				"resources/img/food/img-mixedfruits.jpg", fruitStall);
 
-		Modifier modifier25 = new Modifier("Change to juice", "", 1.90, apple);
-		Set<Modifier> modifierList14 = new HashSet<Modifier>();
-		modifierList14.add(modifier25);
-		apple.setModifierList(modifierList14);
+//		Modifier modifier25 = new Modifier("Change to juice", "", 1.90, apple);
+//		Set<Modifier> modifierList14 = new HashSet<Modifier>();
+//		modifierList14.add(modifier25);
+//		apple.setModifierList(modifierList14);
 
-		Modifier modifier26 = new Modifier("Change to juice", "", 1.90, watermelon);
-		Set<Modifier> modifierList15 = new HashSet<Modifier>();
-		modifierList15.add(modifier26);
-		watermelon.setModifierList(modifierList14);
+//		Modifier modifier26 = new Modifier("Change to juice", "", 1.90, watermelon);
+//		Set<Modifier> modifierList15 = new HashSet<Modifier>();
+//		modifierList15.add(modifier26);
+//		watermelon.setModifierList(modifierList14);
 
-		Modifier modifier27 = new Modifier("Change to juice", "", 1.90, dragonfruit);
-		Set<Modifier> modifierList16 = new HashSet<Modifier>();
-		modifierList16.add(modifier27);
-		dragonfruit.setModifierList(modifierList16);
+//		Modifier modifier27 = new Modifier("Change to juice", "", 1.90, dragonfruit);
+//		Set<Modifier> modifierList16 = new HashSet<Modifier>();
+//		modifierList16.add(modifier27);
+//		dragonfruit.setModifierList(modifierList16);
 
-		Modifier modifier28 = new Modifier("Change to juice", "", 1.90, pear);
-		Set<Modifier> modifierList17 = new HashSet<Modifier>();
-		modifierList17.add(modifier28);
-		pear.setModifierList(modifierList17);
+//		Modifier modifier28 = new Modifier("Change to juice", "", 1.90, pear);
+//		Set<Modifier> modifierList17 = new HashSet<Modifier>();
+//		modifierList17.add(modifier28);
+//		pear.setModifierList(modifierList17);
 
-		Modifier modifier29 = new Modifier("Change to juice", "", 1.80, honeydew);
-		Set<Modifier> modifierList18 = new HashSet<Modifier>();
-		modifierList18.add(modifier29);
-		honeydew.setModifierList(modifierList18);
+//		Modifier modifier29 = new Modifier("Change to juice", "", 1.80, honeydew);
+//		Set<Modifier> modifierList18 = new HashSet<Modifier>();
+//		modifierList18.add(modifier29);
+//		honeydew.setModifierList(modifierList18);
 
-		Modifier modifier30 = new Modifier("Change to juice", "", 1.90, papaya);
-		Set<Modifier> modifierList19 = new HashSet<Modifier>();
-		modifierList19.add(modifier30);
-		papaya.setModifierList(modifierList19);
+//		Modifier modifier30 = new Modifier("Change to juice", "", 1.90, papaya);
+//		Set<Modifier> modifierList19 = new HashSet<Modifier>();
+//		modifierList19.add(modifier30);
+//		papaya.setModifierList(modifierList19);
 
-		Modifier modifier31 = new Modifier("Change to juice", "", 1.90, pineapple);
-		Set<Modifier> modifierList20 = new HashSet<Modifier>();
-		modifierList20.add(modifier31);
-		pineapple.setModifierList(modifierList20);
+//		Modifier modifier31 = new Modifier("Change to juice", "", 1.90, pineapple);
+//		Set<Modifier> modifierList20 = new HashSet<Modifier>();
+//		modifierList20.add(modifier31);
+//		pineapple.setModifierList(modifierList20);
 
-		Modifier modifier32 = new Modifier("Change to juice", "", 1.90, banana);
-		Set<Modifier> modifierList21 = new HashSet<Modifier>();
-		modifierList21.add(modifier32);
-		banana.setModifierList(modifierList21);
-
-		Modifier modifier33 = new Modifier("Change to juice", "", 1.90, orange);
-		Set<Modifier> modifierList22 = new HashSet<Modifier>();
-		modifierList22.add(modifier33);
-		orange.setModifierList(modifierList22);
-
-		Modifier modifier34 = new Modifier("Change to juice", "", 1.80, guava);
-		Set<Modifier> modifierList23 = new HashSet<Modifier>();
-		modifierList23.add(modifier34);
-		guava.setModifierList(modifierList23);
-
-		Modifier modifier35 = new Modifier("Change to juice", "", 1.90, sarawakPineapple);
-		Set<Modifier> modifierList24 = new HashSet<Modifier>();
-		modifierList24.add(modifier35);
-		sarawakPineapple.setModifierList(modifierList24);
+//		Modifier modifier32 = new Modifier("Change to juice", "", 1.90, banana);
+//		Set<Modifier> modifierList21 = new HashSet<Modifier>();
+//		modifierList21.add(modifier32);
+//		banana.setModifierList(modifierList21);
+//
+//		Modifier modifier33 = new Modifier("Change to juice", "", 1.90, orange);
+//		Set<Modifier> modifierList22 = new HashSet<Modifier>();
+//		modifierList22.add(modifier33);
+//		orange.setModifierList(modifierList22);
+//
+//		Modifier modifier34 = new Modifier("Change to juice", "", 1.80, guava);
+//		Set<Modifier> modifierList23 = new HashSet<Modifier>();
+//		modifierList23.add(modifier34);
+//		guava.setModifierList(modifierList23);
+//
+//		Modifier modifier35 = new Modifier("Change to juice", "", 1.90, sarawakPineapple);
+//		Set<Modifier> modifierList24 = new HashSet<Modifier>();
+//		modifierList24.add(modifier35);
+//		sarawakPineapple.setModifierList(modifierList24);
 
 		Modifier modifier36 = new Modifier("Mixed fruits upsize", "", 0.50, mixedFruits);
 		Set<Modifier> modifierList25 = new HashSet<Modifier>();
@@ -835,6 +870,20 @@ public class Test {
 		foodList8.add(guava);
 		foodList8.add(sarawakPineapple);
 		foodList8.add(mixedFruits);
+		
+		foodList8.add(appleJuice);
+		foodList8.add(watermelonJuice);
+		foodList8.add(dragonfruitJuice);
+		foodList8.add(pearJuice);
+		foodList8.add(honeydewJuice);
+		foodList8.add(papayaJuice);
+		foodList8.add(pineappleJuice);
+		foodList8.add(bananaJuice);
+		
+		foodList8.add(orangeJuice);
+		foodList8.add(guavaJuice);
+		foodList8.add(sarawakPineappleJuice);
+		
 		fruitStall.setFoodList(foodList8);
 
 		// Stall List
@@ -1174,6 +1223,21 @@ public class Test {
 		session.save(guava);
 		session.save(sarawakPineapple);
 		session.save(mixedFruits);
+		
+		//saving of fruitJuices
+		session.save(appleJuice);
+		session.save(watermelonJuice);
+		session.save(dragonfruitJuice);
+		session.save(pearJuice);
+		session.save(honeydewJuice);
+		session.save(papayaJuice);
+		session.save(pineappleJuice);
+		session.save(bananaJuice);
+		
+		session.save(orangeJuice);
+		session.save(guavaJuice);
+		session.save(sarawakPineappleJuice);
+		
 
 		// saving of the modifiers into database
 		session.save(modifier1);
@@ -1207,17 +1271,17 @@ public class Test {
 		session.save(modifier22);
 		session.save(modifier23);
 		session.save(modifier24);
-		session.save(modifier25);
-		session.save(modifier26);
-		session.save(modifier27);
-		session.save(modifier28);
-		session.save(modifier29);
-		session.save(modifier30);
-		session.save(modifier31);
-		session.save(modifier32);
-		session.save(modifier33);
-		session.save(modifier34);
-		session.save(modifier35);
+//		session.save(modifier25);
+//		session.save(modifier26);
+//		session.save(modifier27);
+//		session.save(modifier28);
+//		session.save(modifier29);
+//		session.save(modifier30);
+//		session.save(modifier31);
+//		session.save(modifier32);
+//		session.save(modifier33);
+//		session.save(modifier34);
+//		session.save(modifier35);
 		session.save(modifier36);
 
 		session.save(modifierA3);
