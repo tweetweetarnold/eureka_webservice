@@ -24,7 +24,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="LoadUserOrderHistoryServlet">
 						History
 						<i class="fa fa-bars fa-lg"></i>
 					</a>
@@ -41,7 +41,7 @@
 						<i class="fa fa-user fa-lg"></i>
 					</a>
 					<ul class="dropdown-menu">
-					<li>
+						<li>
 							<a href="/eureka_webservice/pages/profile.jsp">
 								<i class="fa fa-user fa-fw"></i>
 								Profile
