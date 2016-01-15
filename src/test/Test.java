@@ -96,16 +96,57 @@ public class Test {
 		Set<Food> foodListB8 = new HashSet<>();
 		Set<Food> foodListB9 = new HashSet<>();
 		Set<Food> foodListB10 = new HashSet<>();
+		Set<Food> foodListB11 = new HashSet<>();
 
 		Stall stall1 = new Stall("Sliced Fish Bee Hoon Stall", 91379160, null, null,
 				"resources/img/stall/img-tjslicefishbeehoon.jpg");
-		Food food1 = new Food("Fish Slice Bee Hoon", "", 3.70,
+		Food food1 = new Food("Fish Slice Bee Hoon", "add veg $0.50", 3.70,
 				"resources/img/food/img-fishslicebeehoon.jpg", stall1);
-		Food food2 = new Food("Fish Soup and Rice", "", 4.70,
+		Food food2 = new Food("Fish Soup and Rice", "add veg $0.50", 4.70,
 				"resources/img/food/img-fishsoupwithrice.jpg", stall1);
-
+		
+		Food nfood1 = new Food("Fish Head Soup and Bee Hoon", "add veg $0.50", 4.20, null, stall1);
+		Food nfood2 = new Food("Fish Soup", "add veg $0.50", 4.20, null, stall1);
+		Food nfood3 = new Food("Fried Fish Soup and Bee Hoon", "add veg $0.50", 3.70, null, stall1);
+		Food nfood4 = new Food("Fish Soup and Bee Hoon", "add veg $0.50", 3.70, null, stall1);
+		
+		Modifier modifierNew1 = new Modifier("Add Veg", "", 0.50, food1);
+		Set<Modifier> modifierListNew1 = new HashSet<Modifier>();
+		modifierListNew1.add(modifierNew1);
+		food1.setModifierList(modifierListNew1);
+		
+		Modifier modifierNew2 = new Modifier("Add Veg", "", 0.50, food2);
+		Set<Modifier> modifierListNew2 = new HashSet<Modifier>();
+		modifierListNew2.add(modifierNew2);
+		food2.setModifierList(modifierListNew2);
+		
+		Modifier modifierNew3 = new Modifier("Add Veg", "", 0.50, nfood1);
+		Set<Modifier> modifierListNew3 = new HashSet<Modifier>();
+		modifierListNew3.add(modifierNew3);
+		nfood1.setModifierList(modifierListNew3);
+		
+		Modifier modifierNew4 = new Modifier("Add Veg", "", 0.50, nfood2);
+		Set<Modifier> modifierListNew4 = new HashSet<Modifier>();
+		modifierListNew4.add(modifierNew4);
+		nfood2.setModifierList(modifierListNew4);
+		
+		Modifier modifierNew5 = new Modifier("Add Veg", "", 0.50, nfood3);
+		Set<Modifier> modifierListNew5 = new HashSet<Modifier>();
+		modifierListNew5.add(modifierNew5);
+		nfood3.setModifierList(modifierListNew5);
+		
+		Modifier modifierNew6 = new Modifier("Add Veg", "", 0.50, nfood4);
+		Set<Modifier> modifierListNew6 = new HashSet<Modifier>();
+		modifierListNew6.add(modifierNew6);
+		nfood4.setModifierList(modifierListNew6);
+		
 		foodListB1.add(food1);
 		foodListB1.add(food2);
+		foodListB1.add(nfood1);
+		foodListB1.add(nfood2);
+		foodListB1.add(nfood3);
+		foodListB1.add(nfood4);
+		
 		stall1.setFoodList(foodListB1);
 
 		Stall stall2 = new Stall("Malay food Stall", 81145966, null, null,
@@ -118,8 +159,8 @@ public class Test {
 				"resources/img/food/img-malaycurryfish.jpg", stall2);
 		Food foodMalay1 = new Food("Fried Fish + Veg", "upsize to $3.50", 3.00,
 				"resources/img/food/img-malayfriedfish.jpg", stall2);
-		Food foodMalay2 = new Food("Mutton + Veg", "upsize to $3.50", 3.00,
-				"resources/img/food/img-malaymutton.jpg", stall2);
+//		Food foodMalay2 = new Food("Mutton + Veg", "upsize to $3.50", 3.00,
+//				"resources/img/food/img-malaymutton.jpg", stall2);
 
 		Modifier modifierA3 = new Modifier("Add Veg", "", 0.50, food3);
 		Set<Modifier> modifierListA1 = new HashSet<Modifier>();
@@ -141,16 +182,16 @@ public class Test {
 		modifierListAMalay1.add(modifierAMalay1);
 		foodMalay1.setModifierList(modifierListAMalay1);
 
-		Modifier modifierAMalay2 = new Modifier("Add Veg", "", 0.50, foodMalay2);
-		Set<Modifier> modifierListAMalay2 = new HashSet<Modifier>();
-		modifierListAMalay1.add(modifierAMalay2);
-		foodMalay2.setModifierList(modifierListAMalay1);
+//		Modifier modifierAMalay2 = new Modifier("Add Veg", "", 0.50, foodMalay2);
+//		Set<Modifier> modifierListAMalay2 = new HashSet<Modifier>();
+//		modifierListAMalay1.add(modifierAMalay2);
+//		foodMalay2.setModifierList(modifierListAMalay1);
 
 		foodListB2.add(food3);
 		foodListB2.add(food4);
 		foodListB2.add(food5);
 		foodListB2.add(foodMalay1);
-		foodListB2.add(foodMalay2);
+//		foodListB2.add(foodMalay2);
 		stall2.setFoodList(foodListB2);
 
 		Stall stall3 = new Stall("Mixed Rice Stall", 93482772, null, null,
@@ -175,10 +216,13 @@ public class Test {
 
 		Stall stall4 = new Stall("Wanton Mee Stall", 0, null, foodListB4,
 				"resources/img/stall/img-tjwantonmee.jpg");
-		Food food8 = new Food("Wanton Mee", "", 3.00, "resources/img/food/img-wantonmee.jpg",
+		Food food8 = new Food("Wanton Mee(Dry)", "", 3.00, "resources/img/food/img-wantonmee.jpg",
 				stall4);
+		
+		Food nfood5 = new Food("Wanton Mee(Soup)", "", 3.00, null, stall4);
 
 		foodListB4.add(food8);
+		foodListB4.add(nfood5);
 		stall4.setFoodList(foodListB4);
 
 		Stall stall5 = new Stall("Indian Food Stall", 93841009, null, null,
@@ -187,15 +231,18 @@ public class Test {
 				"resources/img/food/img-currychickenbriyani.jpg", stall5);
 		Food food10 = new Food("Fish Briyani", "", 3.50, "resources/img/food/img-fishbiryani.jpg",
 				stall5);
-		Food food11 = new Food("Vegetable Briyani", "", 4.00,
+		Food food11 = new Food("Vegetarian Briyani", "", 4.00,
 				"resources/img/food/img-vegetablebriyani.jpg", stall5);
 		Food food12 = new Food("Fried Chicken Briyani", "", 4.00,
 				"resources/img/food/img-friedchickenbiryani.jpg", stall5);
+		
+		Food nfood6 = new Food("Mutton Briyani", "", 4.00, null, stall5);
 
 		foodListB5.add(food9);
 		foodListB5.add(food10);
 		foodListB5.add(food11);
 		foodListB5.add(food12);
+		foodListB5.add(nfood6);
 		stall5.setFoodList(foodListB5);
 
 		Stall stall6 = new Stall("Roast Duck & Chicken Rice Stall", 98427347, null, null,
@@ -208,6 +255,8 @@ public class Test {
 				"resources/img/food/img-roastmeatrice.jpg", stall6);
 		Food foodC16 = new Food("CharSiew + Roast Meat Rice", "", 3.00,
 				"resources/img/food/img-charsiewrice.jpg", stall6);
+		
+		
 
 		foodListB6.add(foodC16);
 		foodListB6.add(food13);
@@ -263,44 +312,90 @@ public class Test {
 
 		Stall stall8 = new Stall("Vegetarian Stall", 91182963, null, null,
 				"resources/img/stall/img-tj.jpg");
-		Food food24 = new Food("Vegetarian Rice", "", 2.50, "resources/img/food/img-vegrice.jpg",
+		Food food24 = new Food("Vegetarian Rice", "add veg $0.50", 2.50, "resources/img/food/img-vegrice.jpg",
 				stall8);
-		Food food25 = new Food("Vegetarian Beehoon", "", 2.50,
+		Food food25 = new Food("Vegetarian Beehoon", "add veg $0.50", 2.50,
 				"resources/img/food/img-vegetarianbeehoon.jpg", stall8);
-		Food food26 = new Food("Vegetarian Mee", "", 2.50,
+		Food food26 = new Food("Vegetarian Mee", "add veg $0.50", 2.50,
 				"resources/img/food/img-vergetarianmee.jpg", stall8);
-
+		
+		Food nfood7 = new Food("Vegetarian Kway Tiao", "add veg $0.50", 2.50, null, stall8);
+		Food nfood8 = new Food("Vegetarian Beehoon Kway Tiao", "add veg $0.50", 2.50, null, stall8);
+		
+		Modifier modifierNew7 = new Modifier("Add Veg", "", 0.50, food24);
+		Set<Modifier> modifierListNew7 = new HashSet<Modifier>();
+		modifierListNew7.add(modifierNew7);
+		food24.setModifierList(modifierListNew7);
+		
+		Modifier modifierNew8 = new Modifier("Add Veg", "", 0.50, food25);
+		Set<Modifier> modifierListNew8 = new HashSet<Modifier>();
+		modifierListNew8.add(modifierNew8);
+		food25.setModifierList(modifierListNew8);
+		
+		Modifier modifierNew9 = new Modifier("Add Veg", "", 0.50, food26);
+		Set<Modifier> modifierListNew9 = new HashSet<Modifier>();
+		modifierListNew9.add(modifierNew9);
+		food26.setModifierList(modifierListNew9);
+		
+		Modifier modifierNew10 = new Modifier("Add Veg", "", 0.50, nfood7);
+		Set<Modifier> modifierListNew10 = new HashSet<Modifier>();
+		modifierListNew10.add(modifierNew10);
+		nfood7.setModifierList(modifierListNew10);
+		
+		Modifier modifierNew11 = new Modifier("Add Veg", "", 0.50, nfood8);
+		Set<Modifier> modifierListNew11 = new HashSet<Modifier>();
+		modifierListNew11.add(modifierNew11);
+		nfood8.setModifierList(modifierListNew11);
+		
 		foodListB8.add(food24);
 		foodListB8.add(food25);
 		foodListB8.add(food26);
+		foodListB8.add(nfood7);
+		foodListB8.add(nfood8);
 		stall8.setFoodList(foodListB8);
 
 		Stall stall9 = new Stall("Minced Meat Noodles Stall(Closed On Tuesday)", 93686070, null,
 				null, "resources/img/stall/img-tj.jpg");
-		Food food27 = new Food("Minced Meat Noodles", "upsize to $3.20", 2.70,
+		Food food27 = new Food("Minced Meat Noodles(Mee Kia)", "upsize to $3.20", 2.70,
 				"resources/img/food/img-mincedmeatnoodles.jpg", stall9);
+		
+		Food nfood9 = new Food("Minced Meat Noodles(Mee Pok)", "upsize to $3.20", 2.70, null, stall9);
+		Food nfood10 = new Food("Minced Meat Noodles(Mee Tai Mak)", "upsize to $3.20", 2.70, null, stall9);
 
 		Modifier modifierA27 = new Modifier("Upsize to $3.20", "", 0.50, food27);
 		Set<Modifier> modifierListA27 = new HashSet<Modifier>();
-		modifierListA16.add(modifierA27);
-		food5.setModifierList(modifierListA27);
+		modifierListA27.add(modifierA27);
+		food27.setModifierList(modifierListA27);
+		
+		Modifier modifierNew12 = new Modifier("Upsize to $3.20", "", 0.50, nfood9);
+		Set<Modifier> modifierListNew12 = new HashSet<Modifier>();
+		modifierListNew12.add(modifierNew12);
+		nfood9.setModifierList(modifierListNew12);
+		
+		Modifier modifierNew13 = new Modifier("Upsize to $3.20", "", 0.50, nfood10);
+		Set<Modifier> modifierListNew13 = new HashSet<Modifier>();
+		modifierListNew13.add(modifierNew13);
+		nfood10.setModifierList(modifierListNew13);
 
 		foodListB9.add(food27);
+		foodListB9.add(nfood9);
+		foodListB9.add(nfood10);
+		
 		stall9.setFoodList(foodListB9);
 
 		Stall stall10 = new Stall("Noodle Stall", 96946576, null, null,
 				"resources/img/stall/img-tj.jpg");
-		Food food28 = new Food("Lor Mee", "", 3.00, "resources/img/food/img-lormee.jpg", stall10);
+		Food food28 = new Food("Lor Mee(Thin Beehoon)", "", 3.00, "resources/img/food/img-lormee.jpg", stall10);
 		Food food29 = new Food("Prawn Mee", "", 3.00, "resources/img/food/img-prawnnoodle.jpg",
 				stall10);
-		Food food30 = new Food("Fishball Noodles", "", 3.00,
+		Food food30 = new Food("Fishball Noodles(Thin Beehoon)", "", 3.00,
 				"resources/img/food/img-fishballnoodle.jpg", stall10);
 		Food food31 = new Food("Laksa", "", 3.00, "resources/img/food/img-laksa.jpg", stall10);
 		Food food32 = new Food("Hokkien Mee", "", 3.00,
 				"resources/img/food/img-hokkiennoodles.jpg", stall10);
 		Food food33 = new Food("Dumpling Noodles", "", 3.00,
 				"resources/img/food/img-dumplingnoodle.jpg", stall10);
-
+		
 		foodListB10.add(food28);
 		foodListB10.add(food29);
 		foodListB10.add(food30);
@@ -308,7 +403,105 @@ public class Test {
 		foodListB10.add(food32);
 		foodListB10.add(food33);
 		stall10.setFoodList(foodListB10);
+		
+		Stall stall11 = new Stall("Fruits Stall", 91151608, null, null, null);
+		
+		Food food34 = new Food("Apple", "", 0.60,
+				"resources/img/food/img-apple.jpg", stall11);
+		
+		Food food35 = new Food("Apple Juice", "", 2.50, null, stall11);
+		
+		Food food36 = new Food("Watermelon", "", 0.60,
+				"resources/img/food/img-watermelon.jpg", stall11);
+		
+		Food food37 = new Food("Watermelon Juice", "", 2.50, null, stall11);
+		
+		Food food38 = new Food("Dragonfruit", "", 0.60,
+				"resources/img/food/img-dragonfruit.jpg", stall11);
+		
+		Food food39 = new Food("Dragonfruit Juice", "", 2.50, null, stall11);
+		
+		Food food40 = new Food("Pear", "", 0.60,
+				"resources/img/food/img-pear.jpg", stall11);
+		
+		Food food41 = new Food("Pear Juice", "", 2.50, null, stall11);
+		
+		Food food42 = new Food("Honeydew", "", 0.70,
+				"resources/img/food/img-honeydew.jpg", stall11);
+		
+		Food food43 = new Food("Honeydew Juice", "", 2.50, null, stall11);
+		
+		Food food44 = new Food("Papaya", "", 0.70,
+				"resources/img/food/img-papaya.jpg", stall11);
+		
+		Food food45 = new Food("Papaya Juice", "", 2.60, null, stall11);
+		
+		Food food46 = new Food("Pineapple", "", 0.60,
+				"resources/img/food/img-pineapple.jpg", stall11);
+		
+		Food food47 = new Food("Pineapple Juice", "", 2.50, null, stall11);
+		
+		Food food48 = new Food("Banana", "", 0.70,
+				"resources/img/food/img-banana.jpg", stall11);
+		
+		Food food49 = new Food("Banana Juice", "", 2.60, null, stall11);
+		
+		Food food50 = new Food("Agar Agar", "", 0.60, "resources/img/food/img-agaragar.jpg",
+				stall11);
+		
+		Food food51 = new Food("Orange", "", 0.60,
+				"resources/img/food/img-orange.jpg", stall11);
+		
+		Food food52 = new Food("Orange Juice", "", 2.50, null, stall11);
+		
+		Food food53 = new Food("Guava", "", 0.70,
+				"resources/img/food/img-guava.jpg", stall11);
+		
+		Food food54 = new Food("Guava Juice", "", 2.50, null, stall11);
+		
+		Food food55 = new Food("Sarawak Pineapple", "", 1.20,
+				"resources/img/food/img-sarawakpineapple.jpg", stall11);
+		
+		Food food56 = new Food("Sarawak Pineapple Juice", "", 3.10, null, stall11);
+		
+		Food food57 = new Food("Mixed Fruits", "upsize $3.50", 3.00,
+				"resources/img/food/img-mixedfruits.jpg", stall11);
+		
+		Modifier modifierA28 = new Modifier("Mixed fruits upsize", "", 0.50, food57);
+		Set<Modifier> modifierListA17 = new HashSet<Modifier>();
+		modifierListA17.add(modifierA28);
+		food57.setModifierList(modifierListA17);
 
+		
+		foodListB11.add(food34);
+		foodListB11.add(food35);
+		foodListB11.add(food36);
+		foodListB11.add(food37);
+		foodListB11.add(food38);
+		foodListB11.add(food39);
+		foodListB11.add(food40);
+		foodListB11.add(food41);
+		foodListB11.add(food42);
+		foodListB11.add(food43);
+		foodListB11.add(food44);
+		foodListB11.add(food45);
+		foodListB11.add(food46);
+		
+		foodListB11.add(food47);
+		foodListB11.add(food48);
+		foodListB11.add(food49);
+		foodListB11.add(food50);
+		foodListB11.add(food51);
+		foodListB11.add(food52);
+		foodListB11.add(food53);
+		foodListB11.add(food54);
+		
+		foodListB11.add(food55);
+		foodListB11.add(food56);
+		foodListB11.add(food57);
+		
+		stall11.setFoodList(foodListB11);
+		
 		Canteen canteen2 = new Canteen("Taman Jurong Market and Food Centre",
 				"3 Yung Sheng Rd, Singapore 618499", null);
 		stall1.setCanteen(canteen2);
@@ -321,6 +514,7 @@ public class Test {
 		stall8.setCanteen(canteen2);
 		stall9.setCanteen(canteen2);
 		stall10.setCanteen(canteen2);
+		stall11.setCanteen(canteen2);
 
 		stallList2.add(stall1);
 		stallList2.add(stall2);
@@ -332,6 +526,7 @@ public class Test {
 		stallList2.add(stall8);
 		stallList2.add(stall9);
 		stallList2.add(stall10);
+		stallList2.add(stall11);
 
 		canteen2.setStallList(stallList2);
 
@@ -373,10 +568,10 @@ public class Test {
 				"resources/img/food/img-mixedvegricemalay.jpg", malayStall);
 		Food mfood2 = new Food("Asam Fish + Veg", "ask for more vegs, less fried meat", 3.70,
 				"resources/img/food/img-malayasamfish.jpg", malayStall);
-		Food mfood3 = new Food("Mutton + Veg", "ask for more vegs, less fried meat", 3.70,
-				"resources/img/food/img-malaymutton.jpg", malayStall);
-		Food mfood4 = new Food("Beef + Veg", "ask for more vegs, less fried meat", 3.70,
-				"resources/img/food/img-malaybeef.jpg", malayStall);
+		Food mfood3 = new Food("Curry Fish + Veg", "ask for more vegs, less fried meat", 3.70,
+				null, malayStall);
+//		Food mfood4 = new Food("Beef + Veg", "ask for more vegs, less fried meat", 3.70,
+//				"resources/img/food/img-malaybeef.jpg", malayStall);
 		Food mfood5 = new Food("Fried Chicken + Veg", "ask for more vegs, less fried meat", 3.70,
 				"resources/img/food/img-malayfriedchicken.jpg", malayStall);
 		Food mfood6 = new Food("Fried Fish + Veg", "ask for more vegs, less fried meat", 3.70,
@@ -407,14 +602,14 @@ public class Test {
 		modifierList3.add(modifierM31);
 		modifierList3.add(modifierM32);
 		mfood3.setModifierList(modifierList3);
-
-		// for mfood4 modifiers
-		Modifier modifierM41 = new Modifier("Ask for more vegetables", "", 0.00, mfood4);
-		Modifier modifierM42 = new Modifier("No egg", "", 0.00, mfood4);
-		Set<Modifier> modifierListm4 = new HashSet<Modifier>();
-		modifierListm4.add(modifierM41);
-		modifierListm4.add(modifierM42);
-		mfood4.setModifierList(modifierListm4);
+//
+//		// for mfood4 modifiers
+//		Modifier modifierM41 = new Modifier("Ask for more vegetables", "", 0.00, mfood4);
+//		Modifier modifierM42 = new Modifier("No egg", "", 0.00, mfood4);
+//		Set<Modifier> modifierListm4 = new HashSet<Modifier>();
+//		modifierListm4.add(modifierM41);
+//		modifierListm4.add(modifierM42);
+//		mfood4.setModifierList(modifierListm4);
 
 		Modifier modifierM51 = new Modifier("Ask for more vegetables", "", 0.00, mfood5);
 		Modifier modifierM52 = new Modifier("No egg", "", 0.00, mfood5);
@@ -441,7 +636,7 @@ public class Test {
 		foodList2.add(mfood1);
 		foodList2.add(mfood2);
 		foodList2.add(mfood3);
-		foodList2.add(mfood4);
+//		foodList2.add(mfood4);
 		foodList2.add(mfood5);
 		foodList2.add(mfood6);
 		foodList2.add(mfood7);
@@ -541,8 +736,10 @@ public class Test {
 				"resources/img/food/img-mixvegricechinese.jpg", chineseMixVegStall);
 		Food mixVegRice3 = new Food("Porridge", "", 3.20,
 				"resources/img/food/img-fishporridge.jpg", chineseMixVegStall);
-		Food mixVegRice4 = new Food("Fish + Veg", "", 3.70,
-				"resources/img/food/img-mixvegricechinese.jpg", chineseMixVegStall);
+		Food mixVegRice4 = new Food("Porridge(Fish + Veg)", "", 3.70,
+				null, chineseMixVegStall);
+		
+		Food mixVegRice5 = new Food("Porridge(All Veg)", "", 3.20, null, chineseMixVegStall);
 
 		// for mixVegRice1 modifiers
 		Modifier modifier9 = new Modifier("Ask for more vegetables", "", 0.00, mixVegRice1);
@@ -564,19 +761,23 @@ public class Test {
 		foodList4.add(mixVegRice2);
 		foodList4.add(mixVegRice3);
 		foodList4.add(mixVegRice4);
+		foodList4.add(mixVegRice5);
 		chineseMixVegStall.setFoodList(foodList4);
 
 		Stall roastMeatStall = new Stall("Roast Meat Stall", 123, canteen1, null,
 				"resources/img/stall/img-roastmeatstall.jpg");
 		Food roastfood1 = new Food("Roast Chicken Rice", "2 meat choices $4", 3.00,
 				"resources/img/food/img-roastchickenrice.jpg", roastMeatStall);
-		Food roastfood2 = new Food("Wanton Mee", "", 3.20, "resources/img/food/img-wantonmee.jpg",
+		Food roastfood2 = new Food("Wanton Mee(Dry)", "", 3.20, "resources/img/food/img-wantonmee.jpg",
 				roastMeatStall);
 		Food roastfood3 = new Food("CharSiew Rice", "2 meat choices $4", 3.00,
 				"resources/img/food/img-charsiewrice.jpg", roastMeatStall);
 		Food roastfood4 = new Food("Roast Meat Rice", "2 meat choices $4", 3.00,
 				"resources/img/food/img-roastmeatrice.jpg", roastMeatStall);
-
+		
+		Food roastfood5 = new Food("Wanton Mee(Soup)", "", 3.20, null,
+				roastMeatStall);
+		
 		// for roastfood1 modifiers
 		Modifier modifier12 = new Modifier("Add charsiew", "", 1.00, roastfood1);
 		Modifier modifier13 = new Modifier("Add roast meat", "", 1.00, roastfood1);
@@ -609,6 +810,7 @@ public class Test {
 		foodList5.add(roastfood2);
 		foodList5.add(roastfood3);
 		foodList5.add(roastfood4);
+		foodList5.add(roastfood5);
 		roastMeatStall.setFoodList(foodList5);
 
 		Stall seafoodTzeCharStall = new Stall("Seafood Tze Char Stall", 92262376, canteen1, null,
@@ -618,10 +820,10 @@ public class Test {
 				"resources/img/food/img-horfun.jpg", seafoodTzeCharStall);
 		Food seafood2 = new Food("Fried Rice", "", 4.00, "resources/img/food/img-friedrice.jpg",
 				seafoodTzeCharStall);
-		Food seafood3 = new Food("Soup With Rice And Egg", "", 4.80,
-				"resources/img/food/img-fishsoupwithrice.jpg", seafoodTzeCharStall);
+		Food seafood3 = new Food("Horfun (Wet)", "", 3.70,
+				null, seafoodTzeCharStall);
 		Food seafood4 = new Food("Hokkien Noodle", "", 4.20,
-				"resources/img/food/img-hokkiennoodle.jpg", seafoodTzeCharStall);
+				null, seafoodTzeCharStall);
 		Food seafood5 = new Food("Mee Goreng", "", 4.20, "resources/img/food/img-meegoreng.jpg",
 				seafoodTzeCharStall);
 		Food seafood6 = new Food("Ginger & Onion Fish", "", 4.50,
@@ -636,6 +838,13 @@ public class Test {
 				"resources/img/food/img-blackchickensoup.jpg", seafoodTzeCharStall);
 		Food seafood11 = new Food("White Chicken Soup", "", 5.50,
 				"resources/img/food/img-whitechickensoup.jpg", seafoodTzeCharStall);
+		
+		Food seafood12 = new Food("Horfun (With Gravy)", "", 3.70, null, seafoodTzeCharStall);
+		
+		Food seafood13 = new Food("Chicken Horfun", "", 3.00, null, seafoodTzeCharStall);
+		Food seafood14 = new Food("Chicken Horfun(With Gravy)", "", 3.00, null, seafoodTzeCharStall);
+		Food seafood15 = new Food("Chicken Beehoon", "", 3.00, null, seafoodTzeCharStall);
+		Food seafood16 = new Food("Chicken Beehoon(With Gravy)", "", 3.00, null, seafoodTzeCharStall);
 		// for seafood1 modifier
 		// Modifier modifier18 = new Modifier("Dry type", "", 0.30, seafood1);
 		// Modifier modifier19 = new Modifier("Ask for more vegetables", "", 0.00, seafood1);
@@ -694,6 +903,18 @@ public class Test {
 		foodList6.add(seafood3);
 		foodList6.add(seafood4);
 		foodList6.add(seafood5);
+		foodList6.add(seafood6);
+		foodList6.add(seafood7);
+		foodList6.add(seafood8);
+		foodList6.add(seafood9);
+		foodList6.add(seafood10);
+		foodList6.add(seafood11);
+		foodList6.add(seafood12);
+		foodList6.add(seafood13);
+		foodList6.add(seafood14);
+		foodList6.add(seafood15);
+		foodList6.add(seafood16);
+		
 		seafoodTzeCharStall.setFoodList(foodList6);
 
 		Stall fishBeehoonStall = new Stall("Fish Beehoon Stall", 98367790, canteen1, null,
@@ -704,7 +925,9 @@ public class Test {
 				"resources/img/food/img-fishsoupwithrice.jpg", fishBeehoonStall);
 		Food fishBeehoonfood3 = new Food("Fried Fish Soup With Bee Hoon", "add bittergourd: $0.50",
 				5.00, "resources/img/food/img-friedfishsoupwithbeehoon.jpg", fishBeehoonStall);
-
+		
+		Food fishBeehoonfood4 = new Food("Fish Soup", "add bittergourd: $0.50", 3.50, null, fishBeehoonStall);
+		Food fishBeehoonfood5 = new Food("Fish Soup With Mee Sua", "add bittergourd: $0.50", 3.50, null, fishBeehoonStall);
 		// save image into database
 
 		// for fishBeehoonfood1 modifier
@@ -724,11 +947,25 @@ public class Test {
 		Set<Modifier> modifierList13 = new HashSet<Modifier>();
 		modifierList13.add(modifier24);
 		fishBeehoonfood3.setModifierList(modifierList13);
+		
+		
+		Modifier modifierNew25 = new Modifier("Add bittergourd", "", 0.50, fishBeehoonfood4);
+		Set<Modifier> modifierListNew14 = new HashSet<Modifier>();
+		modifierListNew14.add(modifierNew25);
+		fishBeehoonfood4.setModifierList(modifierListNew14);
+		
+		
+		Modifier modifierNew26 = new Modifier("Add bittergourd", "", 0.50, fishBeehoonfood5);
+		Set<Modifier> modifierListNew15 = new HashSet<Modifier>();
+		modifierListNew15.add(modifierNew26);
+		fishBeehoonfood5.setModifierList(modifierListNew15);
 
 		Set<Food> foodList7 = new HashSet<Food>();
 		foodList7.add(fishBeehoonfood1);
 		foodList7.add(fishBeehoonfood2);
 		foodList7.add(fishBeehoonfood3);
+		foodList7.add(fishBeehoonfood4);
+		foodList7.add(fishBeehoonfood5);
 
 		fishBeehoonStall.setFoodList(foodList7);
 
@@ -1106,7 +1343,7 @@ public class Test {
 				"resources/img/stall/img-tj.jpg");
 		Food ffood28 = new Food("Lor Mee", "", 0, "resources/img/food/img-lormee.jpg", fstall10);
 		Food ffood29 = new Food("Prawn Mee", "", 0, "resources/img/food/img-prawnnoodle.jpg",
-				stall10);
+				fstall10);
 		Food ffood30 = new Food("Fishball Noodles", "", 0,
 				"resources/img/food/img-fishballnoodle.jpg", fstall10);
 		Food ffood31 = new Food("Laksa", "", 0, "resources/img/food/img-laksa.jpg", fstall10);
@@ -1170,7 +1407,7 @@ public class Test {
 		session.save(mfood1);
 		session.save(mfood2);
 		session.save(mfood3);
-		session.save(mfood4);
+//		session.save(mfood4);
 		session.save(mfood5);
 		session.save(mfood6);
 		session.save(mfood7);
@@ -1188,11 +1425,13 @@ public class Test {
 		session.save(mixVegRice2);
 		session.save(mixVegRice3);
 		session.save(mixVegRice4);
+		session.save(mixVegRice5);
 
 		session.save(roastfood1);
 		session.save(roastfood2);
 		session.save(roastfood3);
 		session.save(roastfood4);
+		session.save(roastfood5);
 
 		session.save(seafood1);
 		session.save(seafood2);
@@ -1205,10 +1444,15 @@ public class Test {
 		session.save(seafood9);
 		session.save(seafood10);
 		session.save(seafood11);
+		session.save(seafood12);
+		session.save(seafood13);
+		session.save(seafood14);
 
 		session.save(fishBeehoonfood1);
 		session.save(fishBeehoonfood2);
 		session.save(fishBeehoonfood3);
+		session.save(fishBeehoonfood4);
+		session.save(fishBeehoonfood5);
 
 		session.save(apple);
 		session.save(watermelon);
@@ -1246,8 +1490,8 @@ public class Test {
 		session.save(modifierM22);
 		session.save(modifierM31);
 		session.save(modifierM32);
-		session.save(modifierM41);
-		session.save(modifierM42);
+//		session.save(modifierM41);
+//		session.save(modifierM42);
 		session.save(modifierM51);
 		session.save(modifierM52);
 		session.save(modifierM61);
@@ -1271,6 +1515,8 @@ public class Test {
 		session.save(modifier22);
 		session.save(modifier23);
 		session.save(modifier24);
+		session.save(modifierNew25);
+		session.save(modifierNew26);
 //		session.save(modifier25);
 //		session.save(modifier26);
 //		session.save(modifier27);
@@ -1288,7 +1534,7 @@ public class Test {
 		session.save(modifierA4);
 		session.save(modifierA5);
 		session.save(modifierAMalay1);
-		session.save(modifierAMalay2);
+//		session.save(modifierAMalay2);
 		session.save(modifierMixed1);
 		session.save(modifierMixed2);
 		session.save(modifierA16);
@@ -1328,6 +1574,7 @@ public class Test {
 		session.save(stall8);
 		session.save(stall9);
 		session.save(stall10);
+		session.save(stall11);
 		session.save(food1);
 		session.save(food2);
 		session.save(food3);
@@ -1361,11 +1608,39 @@ public class Test {
 		session.save(food31);
 		session.save(food32);
 		session.save(food33);
+		
+		session.save(food34);
+		session.save(food35);
+		session.save(food36);
+		session.save(food37);
+		session.save(food38);
+		session.save(food39);
+		session.save(food40);
+		session.save(food41);
+		session.save(food42);
+		session.save(food42);
+		session.save(food43);
+		session.save(food44);
+		session.save(food45);
+		session.save(food46);
+		session.save(food47);
+		session.save(food48);
+		session.save(food49);
+		session.save(food50);
+		session.save(food51);
+		session.save(food52);
+		session.save(food53);
+		session.save(food54);
+		session.save(food55);
+		session.save(food56);
+		session.save(food57);
+		
+		
 		session.save(foodA24);
 		session.save(foodA25);
 		session.save(foodC16);
 		session.save(foodMalay1);
-		session.save(foodMalay2);
+//		session.save(foodMalay2);
 
 		// //Save friday
 		// session.save(canteen3);
