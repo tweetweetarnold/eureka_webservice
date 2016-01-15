@@ -146,5 +146,19 @@ public class FoodOrderDAO {
 		}
 		return returnList;
 	}
+	public ArrayList<FoodOrder> getAllFoodOrderOfOrderWindowForUser(Employee employee,OrderWindow orderWindow){
+		ArrayList<FoodOrder> returnList = new ArrayList<FoodOrder>();
 
+		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
+		dc.add(Restrictions.eq("orderWindow", orderWindow));
+		dc.add(Restrictions.eq("employee", employee));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((FoodOrder) o);
+		}
+		return returnList;
+	}
 }

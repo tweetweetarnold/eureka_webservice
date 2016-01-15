@@ -74,7 +74,8 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 
 			OrderWindowController owController = new OrderWindowController();
 			OrderWindow window = (OrderWindow) session.getAttribute("orderWindow");
-
+			FoodOrderController foodOrderController = new FoodOrderController();
+			if(!foodOrderController.checkForExistingOrder(employee,window)){
 			FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_SUBMITTED, employee, null,
 					window);
 			for (FoodOrderItem item : hashMyFoodOrderItems) {
@@ -91,8 +92,8 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 			System.out.println("Employee amount owed updated");
 
 			// Process new FoodOrder
-			FoodOrderController controller = new FoodOrderController();
-			controller.addFoodOrder(myFoodOrder);
+			
+			foodOrderController.addFoodOrder(myFoodOrder);
 			System.out.println("New FoodOrder added to database");
 
 			session.removeAttribute("myFoodOrderItems");
@@ -100,15 +101,17 @@ public class AddNewFoodOrderServlet extends HttpServlet {
 
 			session.setAttribute("success", "Your order has been submitted!");
 			response.sendRedirect("cart.jsp");
-
+			}else{
+				throw new Exception("You've already made an order today!");
+			}
 		} catch (NullPointerException e) {
 			session.setAttribute("error", "Add an item to cart to checkout");
 			response.sendRedirect("cart.jsp");
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 			e.printStackTrace();
-			session.setAttribute("error", "Soemthing went wrong");
-			response.sendRedirect("homepage,jsp");
+			session.setAttribute("error", e.getMessage());
+			response.sendRedirect("homepage.jsp");
 		}
 
 	}

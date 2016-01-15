@@ -44,18 +44,18 @@ public class ProcessLoginServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
@@ -76,7 +76,8 @@ public class ProcessLoginServlet extends HttpServlet {
 			inputPwd = (String) request.getParameter("password");
 			test = request.getParameter("test"); // For testing
 
-			// (1) VERIFY USER CREDENTIALS. If user does not exist, returns null.
+			// (1) VERIFY USER CREDENTIALS. If user does not exist, returns
+			// null.
 			Employee emp = accessController.authenticateUser(email, inputPwd);
 			if (emp == null) {
 				throw new Exception("Authentication failed. Please check your credentials.");
@@ -88,26 +89,23 @@ public class ProcessLoginServlet extends HttpServlet {
 			switch (empStatus) {
 			case StringValues.EMPLOYEE_PENDING_VERIFICATION:
 				throw new Exception("Account not verified. Please verify your account first!");
-
 			case StringValues.EMPLOYEE_SUSPENDED:
-				throw new Exception(
-						"Account has been suspended. Please contact your administrator for help.");
-
+				 session.setAttribute("suspended", "true");
+				 response.sendRedirect("payment.jsp");
+				 break;
 			case StringValues.EMPLOYEE_DESTROYED:
 				throw new Exception("Account has been disabled.");
 			}
 
 			// (3) VERIFY AVAILABLE OPENED ORDER WINDOW.
-			ArrayList<OrderWindow> windowList = orderWindowController
-					.getAllOpenedWindowsForCompany(emp.getCompany());
+			ArrayList<OrderWindow> windowList = orderWindowController.getAllOpenedWindowsForCompany(emp.getCompany());
 			if (windowList == null || windowList.size() == 0) {
 				System.out.println("windowList size: " + windowList.size());
 				throw new Exception("There are no available Order Windows opened for your company.");
 			}
 			OrderWindow window = windowList.get(0);
 
-			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
-					+ "|";
+			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail() + "|";
 
 			// Setting user and token
 			session.setAttribute("user", emp);
@@ -127,7 +125,9 @@ public class ProcessLoginServlet extends HttpServlet {
 				obj.put("status", "ok");
 				out.print(gson.toJson(obj));
 			} else {
-				response.sendRedirect("homepage.jsp");
+				if (!response.isCommitted()) {
+					response.sendRedirect("homepage.jsp");
+				}
 			}
 
 		} catch (Exception e) {
@@ -151,7 +151,9 @@ public class ProcessLoginServlet extends HttpServlet {
 					out.print(gson.toJson(obj));
 				} else {
 					session.setAttribute("error", errorMessage);
-					response.sendRedirect("login.jsp");
+					if (!response.isCommitted()) {
+						response.sendRedirect("login.jsp");
+					}
 				}
 			} catch (JSONException e1) {
 				// TODO Auto-generated catch block
