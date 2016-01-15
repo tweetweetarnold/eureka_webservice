@@ -30,24 +30,24 @@ public class Test {
 		// ************* WARNING, THIS HIBERNATE CONFIG FILE WILL CLEAR
 		// EVERYTHING IN DATABASE AND POPULATE WITH BELOW
 		// ************************************************************************************************************
-		boolean onOpenshift = false;
-		if (System.getenv("OPENSHIFT_MYSQL_DB_HOST") != null) {
-			onOpenshift = true;
-		}
-
+//		boolean onOpenshift = false;
+//		if (System.getenv("OPENSHIFT_MYSQL_DB_HOST") != null) {
+//			onOpenshift = true;
+//		}
+//
 		SessionFactory sessionFactory = null;
-
-		if (onOpenshift) {
-			// if application on OpenShift
-			sessionFactory = new Configuration().configure("hibernate-create.cfg.xml")
-					.buildSessionFactory();
-			System.out.println("hibernate.cfg.xml is loaded");
-		} else {
+//
+//		if (onOpenshift) {
+//			// if application on OpenShift
+//			sessionFactory = new Configuration().configure("hibernate-create.cfg.xml")
+//					.buildSessionFactory();
+//			System.out.println("hibernate.cfg.xml is loaded");
+//		} else {
 			// if application on localhost
 			sessionFactory = new Configuration().configure("hibernate-local-create.cfg.xml")
 					.buildSessionFactory();
 			System.out.println("hibernate-local.cfg.xml is loaded");
-		}
+//		}
 
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();

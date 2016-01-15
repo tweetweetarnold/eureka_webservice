@@ -131,8 +131,25 @@
 											</select>
 										</div>
 
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Create
-											New Window</button>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm">Create New
+											Window</button>
+
+										<!-- Modal confirmation -->
+										<div class="modal" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" id="myModalLabel">Confirmation</h4>
+													</div>
+													<div class="modal-body">Are you sure you want to create a new Order Window?</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+														<button type="submit" class="btn btn-primary" form="submitForm">Confirm</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /modal confirmation -->
 
 									</form>
 								</div>
@@ -156,21 +173,8 @@
 	</div>
 	<!-- /#wrapper -->
 
-	<!-- Create confirmation -->
-	<div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Confirmation</h4>
-				</div>
-				<div class="modal-body">Are you sure you want to create a new Order Window?</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline btn-default">Cancel</button>
-					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
-				</div>
-			</div>
-		</div>
-	</div>
+
+
 
 
 	<script

@@ -20,9 +20,22 @@ public class ChasePayment implements Job {
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		try {
+			String url = "PLEASE ENTER";
 			SendEmail emailGen = new SendEmail();
-			String subject = "Koh Bus LunchTime Ordering Weekly Payment Over-Due";
-			String messageBody = "Hey there! \nPlease note that you will not be able to place any new orders until you have cleared your payment!\n\nRegards,\nDabao";
+			emailGen.setMailServerProperties();
+			String subject = "Koh Bus LunchTime Ordering App - Payment Overdue";
+			String messageBody = "Dear User,<br><br>"
+					+ "Please note that you will not be able to place any new orders until you have cleared your payment!<br><br>"
+					+"<a href="
+					+ url
+					+ ">"
+					+ url
+					+ "</a>"
+					+ "<br><br>"
+					+ "Regards,<br>"
+					+ "Admin<br><br>"
+					+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
+					
 
 			// EmployeeController employeeController = new EmployeeController();
 			CompanyController companyController = new CompanyController();
