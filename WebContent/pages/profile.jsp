@@ -49,14 +49,14 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					Cart
-					<small>your orders</small>
+					Profile
+					<small>all about you</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li>
 						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
 					</li>
-					<li class="active">Cart</li>
+					<li class="active">Profile</li>
 				</ol>
 			</div>
 		</div>
@@ -94,44 +94,61 @@
 			</div>
 		</div>
 
-		<c:set var="overallPrice" value="0" />
+
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6">
 				<div class="dataTable_wrapper">
 					<table class="table table-striped table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>Food</th>
-								<th>Add-On(s)</th>
-								<th>Price</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodOrderItem" varStatus="loop">
-								<tr>
-									<td>${foodOrderItem.food.name}</td>
-									<td>
-										<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifierChosen">
-									${modifierChosen.name}, 
-									</c:forEach>
-									</td>
-									<td>
-										<c:set value="${overallPrice + foodOrderItem.price}" var="overallPrice" />
-										<fmt:formatNumber value="${foodOrderItem.price}" var="amt" minFractionDigits="2" />
-										$${amt}
-									</td>
-									<td>
-										<form action="/eureka_webservice/ProcessDeleteFoodItemFromOrderItemsServlet">
-											<input type="hidden" name="foodPosition" value="${loop.index}">
-											<button type="submit" class="btn btn-link btn-xs">
-												<i class="fa fa-trash-o fa-2x"></i>
-											</button>
-										</form>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
+						<tr>
+							<td>
+								<strong>Name:</strong>
+							</td>
+							<td>${user.name}</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>Company:</strong>
+							</td>
+							<td>${user.company.name}</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>Email:</strong>
+							</td>
+							<td>${user.email}</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>Password:</strong>
+							</td>
+							<td>
+								**********
+								<a href="#" data-toggle="modal" data-target="#modalEditPassword">Edit</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>Contact No:</strong>
+							</td>
+							<td>${user.contactNo}
+								<a href="#" data-toggle="modal" data-target="#modalEditContact">Edit</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>Current spending:</strong>
+							</td>
+							<td>
+								<fmt:formatNumber value="${user.amountOwed}" var="owedMoney" minFractionDigits="2" />
+								$${owedMoney}
+
+								<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Your Spending"
+									data-content="This is how much you have spent so far! You will need to pay this at the end of the week!"
+								>
+									<i class="fa fa-question-circle"></i>
+								</a>
+							</td>
+						</tr>
 					</table>
 				</div>
 				<!-- /dataTable_wrapper -->
@@ -142,48 +159,56 @@
 		</div>
 		<!-- /row -->
 
-		<div class="row">
-			<div class="col-md-4 pull-right">
-				<h2>
-					Total Payable:
-					<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />
-					$${overallPrice2}
-				</h2>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 pull-right">
-				<form action="/eureka_webservice/ProcessAddNewFoodOrderServlet">
-					<button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#modalCheckout">Checkout</button>
-				</form>
-			</div>
-
-		</div>
 
 		<jsp:include page="footer.jsp" />
 
 	</div>
 	<!-- /.container -->
 
-	<!-- Modal -->
-	<div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<!-- edit password Modal -->
+	<div class="modal fade" id="modalEditPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
-			<form action="/eureka_webservice/ProcessAddNewFoodOrderServlet">
+			<form action="/eureka_webservice/ProcessSetUserPasswordServlet">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
+						<h4 class="modal-title text-center" id="myModalLabel">Update Password</h4>
 					</div>
 					<!-- / modal header -->
-					<div class="modal-body">You are going to submit your order. Are you sure you want to continue?</div>
+					<div class="modal-body">
+						<table>
+							<tr>
+								<td>Old Password:</td>
+								<td>
+									<input type="password" name="oldPassword" required>
+								</td>
+							</tr>
+							<tr>
+								<td>New Password:</td>
+								<td>
+									<input type="password" name="newPassword" required>
+									<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Password Requirements"
+										data-content="Min of 7 alphanumeric characters without spacing."
+									>
+										<i class="fa fa-question-circle"></i>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Confirm New Password:</td>
+								<td>
+									<input type="password" name="confirmNewPassword" required>
+								</td>
+							</tr>
+						</table>
+					</div>
 					<!-- / modal body -->
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-danger">Confirm Checkout</button>
+						<button type="submit" class="btn btn-danger">Update Password</button>
 					</div>
 					<!-- / modal footer -->
 				</div>
@@ -191,7 +216,42 @@
 			</form>
 		</div>
 	</div>
-	<!-- / Modal -->
+	<!-- / edit password modal -->
+
+	<!-- edit contact Modal -->
+	<div class="modal fade" id="modalEditContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<form action="/eureka_webservice/ProcessSetUserContactNumberServlet">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title text-center" id="myModalLabel">Edit Contact Number</h4>
+					</div>
+					<!-- / modal header -->
+					<div class="modal-body text-center">
+						<strong>Update your phone number: &nbsp;</strong>
+						<input type="text" name="contactNo" value="${user.contactNo}" required>
+						<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Contact Number Requirements"
+							data-content="8 digits starting with either 6, 8, 9."
+						>
+							<i class="fa fa-question-circle"></i>
+						</a>
+					</div>
+					<!-- / modal body -->
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-danger">Update Contact Number</button>
+					</div>
+					<!-- / modal footer -->
+				</div>
+				<!-- / modal content -->
+			</form>
+		</div>
+	</div>
+	<!-- / edit contact Modal -->
 
 	<!-- jQuery -->
 	<script src="/eureka_webservice/resources/startbootstrap-business/js/jquery.js"></script>
@@ -205,6 +265,8 @@
 			$('[data-toggle="popover"]').popover();
 		});
 	</script>
+
+
 
 </body>
 

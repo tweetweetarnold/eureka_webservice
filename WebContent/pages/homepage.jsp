@@ -3,6 +3,8 @@
 
 <head>
 
+<%@include file="/protect/protect.jsp"%>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,24 +53,38 @@
 				<h1 class="page-header">Homepage</h1>
 				<table class="table table-striped table-bordered table-hover">
 					<tr>
-						<td>Company:</td>
-						<td>ABC123</td>
+						<td>
+							<strong>Company:</strong>
+						</td>
+						<td>${sessionScope.user.company.name}</td>
 					</tr>
 					<tr>
-						<td>Canteen:</td>
-						<td>ABC123</td>
+						<td>
+							<strong>Canteen:</strong>
+						</td>
+						<td>${sessionScope.orderWindow.canteen.name}</td>
 					</tr>
 					<tr>
-						<td>Start:</td>
-						<td>123456</td>
+						<td>
+							<strong>Start:</strong>
+						</td>
+						<td>
+							<fmt:formatDate type="both" value="${sessionScope.orderWindow.startDateFormatted}" />
+						</td>
 					</tr>
 					<tr>
-						<td>End:</td>
-						<td>678908</td>
+						<td>
+							<strong>End:</strong>
+						</td>
+						<td>
+							<fmt:formatDate type="both" value="${sessionScope.orderWindow.endDateFormatted}" />
+						</td>
 					</tr>
 					<tr>
-						<td>Remarks:</td>
-						<td>Please do not over order.</td>
+						<td>
+							<strong>Remarks:</strong>
+						</td>
+						<td></td>
 					</tr>
 				</table>
 				<p>Start ordering your food below!</p>
@@ -136,7 +152,7 @@
 			<div class="col-lg-12">
 				<h2 class="page-header">
 					Stalls
-					<small>canteen_name</small>
+					<small>${orderWindow.canteen.name}</small>
 				</h2>
 			</div>
 

@@ -57,7 +57,7 @@
 							<hr>
 						</li>
 						<li>
-							<a href="/eureka_webservice/ProcessLogoutServlet">
+							<a href="#" data-toggle="modal" data-target="#modalLogout">
 								<i class="fa fa-sign-out fa-fw"></i>
 								Logout
 							</a>
@@ -70,3 +70,31 @@
 	</div>
 	<!-- /.container -->
 </nav>
+
+
+<!-- logout Modal -->
+<div class="modal fade" id="modalLogout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<form action="/eureka_webservice/ProcessLogoutServlet">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title text-center" id="myModalLabel">Logout Confirmation</h4>
+				</div>
+				<!-- / modal header -->
+				<div class="modal-body text-center">Are you sure you want to logout?</div>
+				<!-- / modal body -->
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">No, I want to stay!</button>
+					<button type="submit" class="btn btn-success">Yes, get me out of here!</button>
+				</div>
+				<!-- / modal footer -->
+			</div>
+			<!-- / modal content -->
+		</form>
+	</div>
+</div>
+<!-- / logout Modal -->

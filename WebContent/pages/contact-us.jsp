@@ -49,88 +49,86 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					Order History
-					<small>your previous orders</small>
+					Contact Us
+					<small>talk to us</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li>
 						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
 					</li>
-					<li class="active">Order History</li>
+					<li class="active">Contact Us</li>
 				</ol>
 			</div>
 		</div>
 		<!-- /.row -->
 
-
 		<div class="row">
 			<div class="col-lg-12">
+				<!-- Success message handling -->
+				<c:if test="${not empty sessionScope.success}">
+					<div class="alert alert-success alert-dismissible fade in" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+						<span class="sr-only">Success:</span>
+						${sessionScope.success}
+					</div>
+					<c:remove var="success" scope="session" />
+				</c:if>
+				<!-- / success message handling -->
 
-				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+				<!-- Error message handling -->
+				<c:if test="${not empty sessionScope.error}">
+					<div class="alert alert-danger alert-dismissible fade in" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error:</span>
+						${sessionScope.error}
+					</div>
+					<c:remove var="error" scope="session" />
+				</c:if>
+				<!-- / error message handling -->
+			</div>
+		</div>
 
-					<c:forEach items="${sessionScope.orderHistory}" var="foodOrder" varStatus="loop">
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingOne">
-								<h4 class="panel-title">
-									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${loop.index}"
-										aria-expanded="true" aria-controls="collapse${loop.index}"
-									>
-										Order ID: ${foodOrder.foodOrderId} &mdash;
-										<fmt:formatDate type="both" value="${foodOrder.createDate}" />
-										<i class="pull-right">${foodOrder.status}</i>
-									</a>
-								</h4>
-							</div>
-							<div id="collapse${loop.index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-								<div class="panel-body">
-									Canteen: canteen_here
-									<br>
-									Price:
-									<fmt:formatNumber value="${foodOrder.totalPrice}" var="amt" minFractionDigits="2" />
-									$${amt}
-									<br>
-									<br>
+		<div class="row">
+			<div class="col-md-8">
+				<p>This platform is for users like yourself to provide feedback to us (the administrator) about how you think
+					things can be improved! Thank you for your feedback!</p>
+				<br>
 
-									<table class="table table-striped">
-										<thead>
-											<tr>
-												<td>Stall</td>
-												<td>Food</td>
-												<td>Add-On(s)</td>
-												<td class="text-center">Quantity</td>
-												<td class="text-center">Price</td>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach items="${foodOrder.foodOrderList}" var="foodOrderItem">
-												<tr>
-													<td>${foodOrderItem.food.stall.name}</td>
-													<td>${foodOrderItem.food.name}</td>
-													<td>
-														<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifierChosen">
-															${modifierChosen.name}, 
-														</c:forEach>
-													</td>
-													<td class="text-center">${foodOrderItem.quantity}</td>
-													<td class="text-center">
-														<fmt:formatNumber value="${foodOrderItem.price}" var="amt2" minFractionDigits="2" />
-														$${amt2}
-													</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<!-- /panel -->
-
-					</c:forEach>
+				<div class="dataTable_wrapper">
+					<table class="table table-striped table-bordered table-hover">
+						<tr>
+							<td>Your name:</td>
+							<td>${user.name}</td>
+						</tr>
+						<tr>
+							<td>Your email:</td>
+							<td>${user.email}</td>
+						</tr>
+						<tr>
+							<td>Your message:</td>
+							<td>
+								<textarea rows="10" cols="80"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<button class="btn btn-danger" type="submit">Send Message!</button>
+							</td>
+						</tr>
+					</table>
 				</div>
+				<!-- /dataTable_wrapper -->
 
 
 			</div>
-			<!-- /col-lg-12 -->
+			<!-- /col-md-12 -->
 		</div>
 		<!-- /row -->
 
@@ -183,4 +181,3 @@
 </body>
 
 </html>
-
