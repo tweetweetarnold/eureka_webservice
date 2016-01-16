@@ -18,7 +18,7 @@
   </context-param>
   <context-param>
     <param-name>returnurl</param-name>
-    <param-value>http://lunchtime.sg/training/ProcessPaymentServlet</param-value>
+    <param-value>http://eureka-arnono.rhcloud.com/eureka_webservice/ProcessPaymentServlet</param-value>
   </context-param>
   <jsp-config>
     <jsp-property-group>
