@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -80,6 +82,12 @@ public class FoodOrderDAO {
 				returnList.add((FoodOrder) o);
 			}
 		}
+		Collections.sort(returnList, new Comparator<FoodOrder>() {
+		    public int compare(FoodOrder f1, FoodOrder f2) {
+		        return f2.getCreateDate().compareTo(f1.getCreateDate());
+		    }
+		});
+		
 		return returnList;
 	}
 
