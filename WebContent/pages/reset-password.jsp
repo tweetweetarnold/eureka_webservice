@@ -157,29 +157,6 @@
 	</section>
 	<!-- /.sign-in-up-section -->
 
-	<!-- edit contact Modal -->
-	<div class="modal fade" id="modalTC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title text-center" id="myModalLabel">LunchTime's Terms & Conditions</h4>
-				</div>
-				<!-- / modal header -->
-				<div class="modal-body text-center">... ALOT OF WORDS HERE ...</div>
-				<!-- / modal body -->
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-				<!-- / modal footer -->
-			</div>
-			<!-- / modal content -->
-		</div>
-	</div>
-	<!-- / edit contact Modal -->
 
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="/eureka_webservice/resources/guri-one/templates/javascript/vendor/jquery-2.1.0.min.js"></script>
