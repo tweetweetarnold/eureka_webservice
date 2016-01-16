@@ -57,16 +57,16 @@
 
 			<c:set var="haveOrder" value="false" />
 
-			<c:if test="${empty sessionScope.submittedOrders}">
-				You haven't ordered anything! Go order something!
-			</c:if>
+			<c:if test="${empty sessionScope.foodDisplayPaymentList}">
+			You haven't ordered anything! Go order something!
+		</c:if>
 
 			<c:if test="${not empty sessionScope.paymentSuccess}">
-				<c:remove var="submittedOrders" scope="session" />
+				<c:remove var="foodDisplayPaymentList" scope="session" />
 			</c:if>
 
 			<c:if test="${not empty sessionScope.error}">
-				<c:remove var="submittedOrders" scope="session" />
+				<c:remove var="foodDisplayPaymentList" scope="session" />
 			</c:if>
 
 			<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
@@ -175,7 +175,9 @@
 			<c:when test="${haveOrder eq true}">
 				<form action="${initParam['posturl']}" method="post">
 					<input type="hidden" name="upload" value="1" />
-					<input type="hidden" name="return" value="${initParam['returnurl']}" />
+					<input type="hidden" name="return"
+						value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/ProcessPaymentServlet"
+					/>
 					<input type="hidden" name="cmd" value="_cart" />
 					<input type="hidden" name="business" value="${initParam['business']}" />
 					<input type="hidden" name="currency_code" value="SGD">
