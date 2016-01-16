@@ -49,8 +49,8 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					Cart
-					<small>your orders</small>
+					Payment
+					<small>it's all about the money</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li>
@@ -63,126 +63,9 @@
 		</div>
 		<!-- /.row -->
 
-		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-			<c:set var="haveOrder" value="false" />
-
-			<c:if test="${empty sessionScope.submittedOrders}">
-				You haven't ordered anything! Go order something!
-			</c:if>
-
-			<c:if test="${not empty sessionScope.paymentSuccess}">
-				<c:remove var="submittedOrders" scope="session" />
-			</c:if>
-
-			<c:if test="${not empty sessionScope.error}">
-				<c:remove var="submittedOrders" scope="session" />
-			</c:if>
-
-			<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
-
-				<c:set var="haveOrder" value="true" />
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
-						<h4 class="panel-title">
-							<!--  	<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
-							aria-expanded="false" aria-controls="collapse${orderLoop.index}"
-						>-->
-							Order ID:
-							<c:out value="${order.foodOrderId}" />
-							-
-							<fmt:formatDate type="both" value="${order.createDate}" />
-							<p style="float: right;">
-								<c:out value="${order.status}" />
-							</p>
-							</a>
-						</h4>
-					</div>
-					<div>
-						<!--  	<div id="collapse${orderLoop.index}" class="panel-collapse collapse" role="tabpanel"
-					aria-labelledby="heading${orderLoop.index}"
-				>-->
-						<div class="panel-body">
-							<div style="font-size: 18px;">
-
-								<table>
-									<tr>
-										<td style="padding-right: 10px;">
-											<strong>Canteen:</strong>
-										</td>
-										<td>Taman Jurong Market and Food Centre</td>
-									</tr>
-									<tr>
-										<td style="padding-right: 10px;">
-											<strong>Price:</strong>
-										</td>
-										<td>
-											<fmt:formatNumber value="${order.totalPriceIncludingDisc}" var="totalPrice" minFractionDigits="2" />
-											$
-											<c:out value="${totalPrice}" />
-										</td>
-									</tr>
-								</table>
-							</div>
-							<br>
-
-							<table class="table table-striped" border="1">
-								<thead>
-									<tr>
-										<th>Stall</th>
-										<th>Food</th>
-										<th>Quantity</th>
-										<th>Price</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<c:forEach items="${order.foodOrderDiscountList}" var="foodItem">
-										<tr>
-											<td>
-												<c:out value="${foodItem.food.stall.name}" />
-											</td>
-											<td>
-												<c:out value="${foodItem.food.name}" />
-												<ul>
-													<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen">
-														<li>
-															<small>
-																<c:out value="${modifierChosen.name}" />
-																<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />
-																+ $
-																<c:out value="${newModifierPrice}" />
-															</small>
-														</li>
-													</c:forEach>
-												</ul>
-											</td>
-											<td>
-												<c:out value="${foodItem.quantity}" />
-											</td>
-											<td>
-												<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
-												$
-												<c:out value="${newPrice}" />
-											</td>
-										</tr>
-									</c:forEach>
-
-								</tbody>
-							</table>
-
-						</div>
-					</div>
-				</div>
-
-			</c:forEach>
-		</div>
-
-
-
-		<!-- PayPal form -->
-		<c:choose>
-			<c:when test="${haveOrder eq true}">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- PayPal form -->
 				<form action="${initParam['posturl']}" method="post">
 					<input type="hidden" name="upload" value="1" />
 					<input type="hidden" name="return" value="${initParam['returnurl']}" />
@@ -223,17 +106,85 @@
 
 					</c:forEach>
 
-					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" style="float: right;">
+					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
 
 				</form>
+				<!-- End of PayPal -->
+			</div>
+			<!-- /col-md-12 -->
+		</div>
+		<!-- /row -->
 
-			</c:when>
-			<c:otherwise>
-				<p>There are no orders to be processed.</p>
-				<br>
-			</c:otherwise>
-		</c:choose>
-		<!-- End of PayPal -->
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="page-header">
+					Charges
+					<small>what you are paying for</small>
+				</h2>
+
+				<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="paymentDisplay" varStatus="loop">
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="headingOne">
+							<h4 class="panel-title">
+								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${loop.index}"
+									aria-expanded="true" aria-controls="collapse${loop.index}"
+								>
+									Order ID: ${paymentDisplay.foodOrderId} &mdash;
+									<fmt:formatDate type="both" value="${paymentDisplay.createDate}" />
+									<i class="pull-right">${paymentDisplay.status}</i>
+								</a>
+							</h4>
+						</div>
+						<div id="collapse${loop.index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+							<div class="panel-body">
+								Canteen: ${paymentDisplay.orderWindow.canteen.name}
+								<br>
+								Price:
+								<fmt:formatNumber value="${paymentDisplay.totalPriceIncludingDisc}" var="amt" minFractionDigits="2" />
+								$${amt}
+								<br>
+								<br>
+
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Stall</th>
+											<th>Food</th>
+											<th>Add-On(s)</th>
+											<th class="text-center">Quantity</th>
+											<th class="text-center">Price</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${paymentDisplay.foodOrderList}" var="foodOrderItem">
+											<tr>
+												<td>${foodOrderItem.food.stall.name}</td>
+												<td>${foodOrderItem.food.name}</td>
+												<td>
+													<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifierChosen">
+															${modifierChosen.name}, 
+														</c:forEach>
+												</td>
+												<td class="text-center">${foodOrderItem.quantity}</td>
+												<td class="text-center">
+													<fmt:formatNumber value="${foodOrderItem.price}" var="amt2" minFractionDigits="2" />
+													$${amt2}
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- /panel -->
+
+				</c:forEach>
+
+			</div>
+			<!-- /col-md-12 -->
+		</div>
+		<!-- /row -->
 
 
 		<jsp:include page="footer.jsp" />

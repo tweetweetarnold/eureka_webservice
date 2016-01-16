@@ -83,7 +83,7 @@
 							</div>
 							<div id="collapse${loop.index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 								<div class="panel-body">
-									Canteen: canteen_here
+									Canteen: ${foodOrder.orderWindow.canteen.name}
 									<br>
 									Price:
 									<fmt:formatNumber value="${foodOrder.totalPrice}" var="amt" minFractionDigits="2" />
@@ -94,11 +94,11 @@
 									<table class="table table-striped">
 										<thead>
 											<tr>
-												<td>Stall</td>
-												<td>Food</td>
-												<td>Add-On(s)</td>
-												<td class="text-center">Quantity</td>
-												<td class="text-center">Price</td>
+												<th>Stall</th>
+												<th>Food</th>
+												<th>Add-On(s)</th>
+												<th class="text-center">Quantity</th>
+												<th class="text-center">Price</th>
 											</tr>
 										</thead>
 										<tbody>

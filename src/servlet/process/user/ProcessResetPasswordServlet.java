@@ -1,8 +1,6 @@
 package servlet.process.user;
 
 import java.io.IOException;
-import java.util.Locale;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Employee;
-import services.AESAlgorithm;
-import services.SendEmail;
 import controller.AccessController;
 import controller.EmployeeController;
 
@@ -29,7 +25,6 @@ public class ProcessResetPasswordServlet extends HttpServlet {
 	 */
 	public ProcessResetPasswordServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -37,7 +32,6 @@ public class ProcessResetPasswordServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
 
@@ -46,13 +40,11 @@ public class ProcessResetPasswordServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		HttpSession session = request.getSession();
 
@@ -75,12 +67,12 @@ public class ProcessResetPasswordServlet extends HttpServlet {
 
 			session.setAttribute("success", "An email has been sent to you. "
 					+ "Please check your email for instructions on resetting your password.");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("/eureka_webservice/pages/login.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("error", e.getMessage());
-			response.sendRedirect("resetPassword.jsp");
+			response.sendRedirect("/eureka_webservice/pages/reset-password.jsp");
 		}
 	}
 }

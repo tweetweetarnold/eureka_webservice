@@ -137,7 +137,7 @@
 							<!-- Sign In/Sign Up links -->
 							<section class="sign-in-up-links text-center" style="margin-top: 15px;">
 								<p style="margin: 0px;">
-									<a href="#">Forgot password</a>
+									<a href="/eureka_webservice/pages/reset-password.jsp">Forgot password</a>
 									<span class="sep">&ndash;</span>
 									<a href="/eureka_webservice/pages/register.jsp">Register</a>
 								</p>

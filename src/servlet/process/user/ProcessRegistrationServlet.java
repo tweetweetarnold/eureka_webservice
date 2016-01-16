@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -104,9 +103,8 @@ public class ProcessRegistrationServlet extends HttpServlet {
 				userInput.put("status", "ok");
 				out.print(gson.toJson(userInput));
 			} else {
-				RequestDispatcher rd = request.getRequestDispatcher("/eureka_webservice/defaultDeliveryPoint.jsp");
-				request.setAttribute("buildingSet", buildingSet);
-				rd.forward(request, response);
+				session.setAttribute("buildingSet", buildingSet);
+				response.sendRedirect("/eureka_webservice/pages/set-delivery-point.jsp");
 			}
 
 		} catch (Exception e) {

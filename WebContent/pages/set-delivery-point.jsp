@@ -65,7 +65,7 @@
 
 					<div class="col-md-12">
 
-						<h4 class="text-center">Create an account</h4>
+						<h4 class="text-center">Select your delivery point</h4>
 
 						<!-- Success message handling -->
 						<c:if test="${not empty sessionScope.success}">
@@ -95,72 +95,26 @@
 						</c:if>
 						<!-- / error message handling -->
 
-						<form class="sign-in-up-form" action="/eureka_webservice/ProcessRegistrationServlet" role="form">
+						<form class="sign-in-up-form" action="/eureka_webservice/ProcessSetDefaultDeliveryPointServlet" role="form">
 
-							<div class="form-group">
-								<input class="form-control" name="name" type="text" placeholder="Your name" required>
-							</div>
+							<select class="form-control" required>
+								<option>Select</option>
+								<c:forEach items="${sessionScope.buildingSet}" var="building">
+									<option value="${building}">${building}</option>
+								</c:forEach>
+							</select>
 
-							<div class="form-group">
-								<input class="form-control" name="email" type="email" placeholder="Enter email address" required>
-							</div>
-
-							<div class="form-group">
-								<input class="form-control" type="password" name="password" placeholder="Password" required>
-							</div>
-
-							<div class="form-group">
-								<input class="form-control" type="password" name="confirmPassword" placeholder="Type your password again"
-									required
-								>
-								<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Password Requirements"
-									data-content="Min of 7 alphanumeric characters without spacing."
-								>
-									<i class="fa fa-question-circle"></i>
-								</a>
-							</div>
-
-							<div class="form-group">
-								<input class="form-control" type="tel" name="contactNo" placeholder="Contact Number" required>
-								<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Contact Number Requirements"
-									data-content="8 digits starting with either 6, 8, 9."
-								>
-									<i class="fa fa-question-circle"></i>
-								</a>
-							</div>
-
-							<div class="form-group">
-								<input class="form-control" type="text" name="companyCode" placeholder="Company Code" required>
-								<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Company Code"
-									data-content="You need a company code to register your account under your company! If you are unsure, please check with your HR Department."
-								>
-									<i class="fa fa-question-circle"></i>
-								</a>
-							</div>
-
-							<!-- Button -->
-							<button class="btn btn-success btn-block" type="submit">Register</button>
-
-							<!-- Checkbox -->
-							<section class="text-center">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" name="tc" value="acknowledged" required>
-										I agree to the
-										<a href="#" data-toggle="modal" data-target="#modalTC">Terms & Conditions</a>
-										.
-									</label>
-								</div>
-								<!-- /.checkbox -->
-							</section>
-							<!-- /.text-center -->
 							<br>
 
+							<!-- Button -->
+							<button class="btn btn-success btn-block" type="submit">Continue</button>
+
+							<br>
+							<br>
 							<!-- Sign In/Sign Up links -->
 							<section class="sign-in-up-links text-center">
 								<p>
-									Already have an account?
-									<a href="/eureka_webservice/pages/login.jsp">Sign In here</a>
+									<a href="/eureka_webservice/pages/login.jsp">Cancel & Return to Home</a>
 								</p>
 							</section>
 							<!-- /.sign-in-up-links -->
@@ -218,9 +172,7 @@
 					<h4 class="modal-title text-center" id="myModalLabel">LunchTime's Terms & Conditions</h4>
 				</div>
 				<!-- / modal header -->
-				<div class="modal-body text-center">
-					<iframe src="/eureka_webservice/resources/terms.txt"></iframe>
-				</div>
+				<div class="modal-body text-center">... ALOT OF WORDS HERE ...</div>
 				<!-- / modal body -->
 
 				<div class="modal-footer">

@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONObject;
-
 import services.AESAlgorithm;
 import services.SendEmail;
 import value.StringValues;
@@ -42,6 +40,7 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -69,7 +68,6 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 			String generatedEmployeeId = accessController.registerUser(password, employeeName,
 					email, contactNumber, companyCode);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -109,10 +107,10 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 
 			session.setAttribute("success",
 					"An email has been sent to you. Please follow the instructions on verifying your account.");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("/eureka_webservice/pages/login.jsp");
 		} catch (Exception e) {
 			session.setAttribute("error", e.getMessage());
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("/eureka_webservice/pages/login.jsp");
 		}
 
 	}
@@ -122,8 +120,8 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 		AESAlgorithm aes = new AESAlgorithm();
 		String eEncrypt = aes.encrypt(email);
 		String encryptedStatus = aes.encrypt(StringValues.EMPLOYEE_OK);
-		String url = contextPath + "/ProcessVerificationServlet?email=" + eEncrypt + "&status="
-				+ encryptedStatus + "&token=" + token;
+		String url = contextPath + "/eureka_webservice/ProcessVerificationServlet?email="
+				+ eEncrypt + "&status=" + encryptedStatus + "&token=" + token;
 		return url;
 	}
 

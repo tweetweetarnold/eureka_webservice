@@ -14,8 +14,7 @@ import model.OrderWindow;
 import connection.MyConnection;
 
 /**
- * Performs the function of Data Access Object 
- * for the FoodOrder model
+ * Performs the function of Data Access Object for the FoodOrder model
  * 
  * @author SMU Team Eureka
  */
@@ -25,9 +24,9 @@ public class FoodOrderDAO {
 	 * Creates a default constructor for FoodOrderDAO
 	 */
 	public FoodOrderDAO() {
-		
+
 	}
-	
+
 	/**
 	 * Retrieve the FoodOrder based on the provided ID
 	 * 
@@ -83,10 +82,9 @@ public class FoodOrderDAO {
 		return returnList;
 	}
 
-	// Retrive FoodOrders from the DB between two datetimes with format
-	// "yyyy-MM-dd hh:mm:ss"
 	/**
-	 * Retrieve FoodOrders from the database that falls between two provided Dates (in "yyyy-MM-dd hh:mm:ss")
+	 * Retrieve FoodOrders from the database that falls between two provided Dates (in
+	 * "yyyy-MM-dd hh:mm:ss")
 	 * 
 	 * @param past The starting Date of the range
 	 * @param present The ending Date of the range
@@ -102,15 +100,15 @@ public class FoodOrderDAO {
 		}
 		return returnList;
 	}
-	
+
 	/**
 	 * Retrieves the FoodOrder based on the provided Dates and Employee
 	 * 
 	 * @param earlierDate The starting range of the Date
 	 * @param laterDate The ending range of the Date
 	 * @param tempEmployee The designated Employee for retrieving the FoodOrder
-	 * @return An ArrayList of FoodOrder objects that belongs to the Employee 
-	 * and falls within the provided Dates
+	 * @return An ArrayList of FoodOrder objects that belongs to the Employee and falls within the
+	 *         provided Dates
 	 */
 	public ArrayList<FoodOrder> getFoodOrderByDateUsername(Date earlierDate, Date laterDate,
 			Employee tempEmployee) {
@@ -125,7 +123,7 @@ public class FoodOrderDAO {
 		}
 		return returnList;
 	}
-	
+
 	/**
 	 * Retrieve all FoodOrders based on the provided OrderWindow
 	 * 
@@ -146,7 +144,9 @@ public class FoodOrderDAO {
 		}
 		return returnList;
 	}
-	public ArrayList<FoodOrder> getAllFoodOrderOfOrderWindowForUser(Employee employee,OrderWindow orderWindow){
+
+	public ArrayList<FoodOrder> getAllFoodOrderOfOrderWindowForUser(Employee employee,
+			OrderWindow orderWindow) {
 		ArrayList<FoodOrder> returnList = new ArrayList<FoodOrder>();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);

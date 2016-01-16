@@ -12,19 +12,20 @@ import javax.servlet.http.HttpSession;
 
 import model.Employee;
 import model.FoodOrder;
+import controller.FoodDisplayPaymentController;
 import controller.FoodOrderController;
 
 /**
- * Servlet implementation class GetEmployeeOrderHistoryServlet
+ * Servlet implementation class LoadUserPaymentServlet
  */
-@WebServlet("/LoadUserOrderHistoryServlet")
-public class LoadUserOrderHistoryServlet extends HttpServlet {
+@WebServlet("/LoadUserPaymentServlet")
+public class LoadUserPaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadUserOrderHistoryServlet() {
+	public LoadUserPaymentServlet() {
 		super();
 	}
 
@@ -33,18 +34,13 @@ public class LoadUserOrderHistoryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		process(request, response);
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		process(request, response);
-	}
-
-	protected void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
@@ -54,16 +50,14 @@ public class LoadUserOrderHistoryServlet extends HttpServlet {
 			Employee emp = (Employee) session.getAttribute("user");
 
 			FoodOrderController foodOrderController = new FoodOrderController();
-			// FoodDisplayPaymentController foodDisplayPaymentController = new
-			// FoodDisplayPaymentController();
+			FoodDisplayPaymentController foodDisplayPaymentController = new FoodDisplayPaymentController();
 			List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSet(emp.getEmail());
 
 			System.out.println(foodOrderList.size());
-			// session.setAttribute("foodDisplayPaymentList",
-			// foodDisplayPaymentController.renderFoodDisplayPaymentList(foodOrderList));
+			session.setAttribute("foodDisplayPaymentList",
+					foodDisplayPaymentController.renderFoodDisplayPaymentList(foodOrderList));
 
-			session.setAttribute("orderHistory", foodOrderList);
-			response.sendRedirect("/eureka_webservice/pages/order-history.jsp");
+			response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,5 +67,4 @@ public class LoadUserOrderHistoryServlet extends HttpServlet {
 		}
 
 	}
-
 }
