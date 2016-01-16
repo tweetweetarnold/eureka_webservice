@@ -175,7 +175,7 @@
 			<c:when test="${haveOrder eq true}">
 				<form action="${initParam['posturl']}" method="post">
 					<input type="hidden" name="upload" value="1" />
-					<input type="hidden" name="return" value="${initParam['returnurl']}" />
+					<input type="hidden" name="return" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/ProcessPaymentServlet" />
 					<input type="hidden" name="cmd" value="_cart" />
 					<input type="hidden" name="business" value="${initParam['business']}" />
 					<input type="hidden" name="currency_code" value="SGD">
