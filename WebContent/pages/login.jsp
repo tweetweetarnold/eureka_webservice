@@ -413,7 +413,8 @@
 							<!-- 								/.form-group -->
 
 							<!-- Button -->
-							<button class="btn btn-success" type="submit" style="margin: 25px;">Register!</button>
+							<!-- 							<button class="btn btn-success" type="submit" style="margin: 25px;">Register!</button> -->
+							<a href="/eureka_webservice/pages/register.jsp" class="btn btn-success" style="margin: 25px;">Register!</a>
 
 							<!-- 							</form> -->
 							<!-- /.subscribe-form -->
