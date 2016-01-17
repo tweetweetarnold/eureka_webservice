@@ -51,7 +51,7 @@ public class LoadUserPaymentServlet extends HttpServlet {
 
 			FoodOrderController foodOrderController = new FoodOrderController();
 			FoodDisplayPaymentController foodDisplayPaymentController = new FoodDisplayPaymentController();
-			List<FoodOrder> foodOrderList = foodOrderController.getFoodOrderSet(emp.getEmail());
+			List<FoodOrder> foodOrderList = foodOrderController.getUserFoodOrdersByStatus(emp.getEmail(),"Submitted");
 
 			System.out.println(foodOrderList.size());
 			session.setAttribute("foodDisplayPaymentList",

@@ -62,10 +62,52 @@
 
 		</div>
 		<!-- /.row -->
+		<c:if test="${empty sessionScope.foodDisplayPaymentList}">
+			You haven't ordered anything! Go order something!
+		</c:if>
+
+		<c:if test="${not empty sessionScope.paymentSuccess}">
+			<c:remove var="foodDisplayPaymentList" scope="session" />
+		</c:if>
+
+		<c:if test="${not empty sessionScope.error}">
+			<c:remove var="foodDisplayPaymentList" scope="session" />
+		</c:if>
+		
+		<!-- Success message handling -->
+		<c:if test="${not empty sessionScope.paymentSuccess}">
+			<div class="alert alert-success alert-dismissible fade in"
+				role="alert">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+				<span class="sr-only">Success:</span>
+				<c:out value="${paymentSuccess}" />
+			</div>
+			<c:remove var="paymentSuccess" scope="session" />
+		</c:if>
+
+		<!-- Error message handling -->
+		<c:if test="${not empty sessionScope.error}">
+			<div class="alert alert-danger alert-dismissible fade in"
+				role="alert">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<span class="glyphicon glyphicon-exclamation-sign"
+					aria-hidden="true"></span> <span class="sr-only">Error:</span>
+				<c:out value="${error}" />
+			</div>
+			<c:remove var="error" scope="session" />
+		</c:if>
 
 		<div class="row">
 			<div class="col-md-12">
 				<!-- PayPal form -->
+				<c:if test="${not empty sessionScope.foodDisplayPaymentList}">
 				<form action="${initParam['posturl']}" method="post">
 					<input type="hidden" name="upload" value="1" />
 					<input type="hidden" name="return"
@@ -111,6 +153,7 @@
 					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
 
 				</form>
+				</c:if>
 				<!-- End of PayPal -->
 			</div>
 			<!-- /col-md-12 -->
@@ -137,7 +180,7 @@
 								</a>
 							</h4>
 						</div>
-						<div id="collapse${loop.index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+						<div id="collapse${loop.index}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
 								Canteen: ${paymentDisplay.orderWindow.canteen.name}
 								<br>
@@ -158,7 +201,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${paymentDisplay.foodOrderList}" var="foodOrderItem">
+										<c:forEach items="${paymentDisplay.foodOrderDiscountList}" var="foodOrderItem">
 											<tr>
 												<td>${foodOrderItem.food.stall.name}</td>
 												<td>${foodOrderItem.food.name}</td>
