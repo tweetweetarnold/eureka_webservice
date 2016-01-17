@@ -45,13 +45,13 @@ public class QuartzTest {
             // Trigger the job to run now, and then repeat every 40 seconds
             Trigger trigger1 = newTrigger()
                 .withIdentity("trigger1", "group1")
-                .withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.SUNDAY, 11, 50))
+                .withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.SUNDAY, 13, 20))
                 .forJob(job1.getKey())
                 .build();
              
             Trigger trigger2 = newTrigger()
             	.withIdentity("trigger2","group1")
-            	.withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.SUNDAY, 11,45))
+            	.withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.SUNDAY, 13,10))
             	.forJob(job2.getKey())
             	.build();
 //                .startNow()
