@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +36,6 @@ public class ProcessRegistrationServlet extends HttpServlet {
 	 */
 	public ProcessRegistrationServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -45,7 +43,6 @@ public class ProcessRegistrationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -54,7 +51,6 @@ public class ProcessRegistrationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		System.out.println("*********** RegistrationServlet ***********");
 
@@ -73,12 +69,11 @@ public class ProcessRegistrationServlet extends HttpServlet {
 		try {
 			String employeeName = (String) request.getParameter("name").trim();
 			String password = (String) request.getParameter("password");
-			String confirmPwd = (String) request.getParameter("confirmPwd");
+			String confirmPwd = (String) request.getParameter("confirmPassword");
 			String contactNo = (String) request.getParameter("contactNo");
 			String email = (String) request.getParameter("email").trim();
 			String companyCode = (String) request.getParameter("companyCode");
 			String acknowledged = (String) request.getParameter("tc");
-			
 
 			userInput.put("name", employeeName);
 			userInput.put("email", email);
@@ -108,9 +103,8 @@ public class ProcessRegistrationServlet extends HttpServlet {
 				userInput.put("status", "ok");
 				out.print(gson.toJson(userInput));
 			} else {
-				RequestDispatcher rd = request.getRequestDispatcher("defaultDeliveryPoint.jsp");
-				request.setAttribute("buildingSet", buildingSet);
-				rd.forward(request, response);
+				session.setAttribute("buildingSet", buildingSet);
+				response.sendRedirect("/eureka_webservice/pages/set-delivery-point.jsp");
 			}
 
 		} catch (Exception e) {
@@ -136,7 +130,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 				}
 				session.setAttribute("userInput", userInput);
 
-				response.sendRedirect("registration.jsp");
+				response.sendRedirect("/eureka_webservice/pages/register.jsp");
 			}
 		}
 	}

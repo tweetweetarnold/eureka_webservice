@@ -19,7 +19,7 @@ import model.Stall;
 import dao.StallDAO;
 
 /**
- * Servlet implementation class RenderStallFoodListServlet
+ * Servlet implementation class LoadStallFoodServlet
  */
 @WebServlet("/RenderStallFoodListServlet")
 public class RenderStallFoodListServlet extends HttpServlet {

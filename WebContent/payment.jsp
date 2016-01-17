@@ -52,30 +52,30 @@
 		<h2>PayPal</h2>
 		<br>
 		<!-- PayPal -->
-		<!--  	<div class="container" style="margin-top: 0px;">-->  
-			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		<!--  	<div class="container" style="margin-top: 0px;">-->
+		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-		<c:set var="haveOrder" value="false" />
+			<c:set var="haveOrder" value="false" />
 
-		<c:if test="${empty sessionScope.foodDisplayPaymentList}">
+			<c:if test="${empty sessionScope.foodDisplayPaymentList}">
 			You haven't ordered anything! Go order something!
 		</c:if>
 
-		<c:if test="${not empty sessionScope.paymentSuccess}">
-			<c:remove var="foodDisplayPaymentList" scope="session" />
-		</c:if>
+			<c:if test="${not empty sessionScope.paymentSuccess}">
+				<c:remove var="foodDisplayPaymentList" scope="session" />
+			</c:if>
 
-		<c:if test="${not empty sessionScope.error}">
-			<c:remove var="foodDisplayPaymentList" scope="session" />
-		</c:if>
-		
-		<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
+			<c:if test="${not empty sessionScope.error}">
+				<c:remove var="foodDisplayPaymentList" scope="session" />
+			</c:if>
 
-			<c:set var="haveOrder" value="true" />
-			<div class="panel panel-default">
-				<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
-					<h4 class="panel-title">
-					<!--  	<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
+			<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
+
+				<c:set var="haveOrder" value="true" />
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="heading${orderLoop.index}">
+						<h4 class="panel-title">
+							<!--  	<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${orderLoop.index}"
 							aria-expanded="false" aria-controls="collapse${orderLoop.index}"
 						>-->
 							Order ID:
@@ -85,97 +85,99 @@
 							<p style="float: right;">
 								<c:out value="${order.status}" />
 							</p>
-						</a>
-					</h4>
-				</div>
-			<div>
-			<!--  	<div id="collapse${orderLoop.index}" class="panel-collapse collapse" role="tabpanel"
+							</a>
+						</h4>
+					</div>
+					<div>
+						<!--  	<div id="collapse${orderLoop.index}" class="panel-collapse collapse" role="tabpanel"
 					aria-labelledby="heading${orderLoop.index}"
 				>-->
-					<div class="panel-body">
-						<div style="font-size: 18px;">
+						<div class="panel-body">
+							<div style="font-size: 18px;">
 
-							<table>
-								<tr>
-									<td style="padding-right: 10px;">
-										<strong>Canteen:</strong>
-									</td>
-									<td>Taman Jurong Market and Food Centre</td>
-								</tr>
-								<tr>
-									<td style="padding-right: 10px;">
-										<strong>Price:</strong>
-									</td>
-									<td>
-										<fmt:formatNumber value="${order.totalPriceIncludingDisc}" var="totalPrice" minFractionDigits="2" />
-										$
-										<c:out value="${totalPrice}" />
-									</td>
-								</tr>
-							</table>
-						</div>
-						<br>
-
-						<table class="table table-striped" border="1">
-							<thead>
-								<tr>
-									<th>Stall</th>
-									<th>Food</th>
-									<th>Quantity</th>
-									<th>Price</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								<c:forEach items="${order.foodOrderDiscountList}" var="foodItem">
+								<table>
 									<tr>
-										<td>
-											<c:out value="${foodItem.food.stall.name}" />
+										<td style="padding-right: 10px;">
+											<strong>Canteen:</strong>
+										</td>
+										<td>Taman Jurong Market and Food Centre</td>
+									</tr>
+									<tr>
+										<td style="padding-right: 10px;">
+											<strong>Price:</strong>
 										</td>
 										<td>
-											<c:out value="${foodItem.food.name}" />
-											<ul>
-												<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen">
-													<li>
-														<small>
-															<c:out value="${modifierChosen.name}" />
-															<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />
-															+ $
-															<c:out value="${newModifierPrice}" />
-														</small>
-													</li>
-												</c:forEach>
-											</ul>
-										</td>
-										<td>
-											<c:out value="${foodItem.quantity}" />
-										</td>
-										<td>
-											<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
+											<fmt:formatNumber value="${order.totalPriceIncludingDisc}" var="totalPrice" minFractionDigits="2" />
 											$
-											<c:out value="${newPrice}" />
+											<c:out value="${totalPrice}" />
 										</td>
 									</tr>
-								</c:forEach>
+								</table>
+							</div>
+							<br>
 
-							</tbody>
-						</table>
+							<table class="table table-striped" border="1">
+								<thead>
+									<tr>
+										<th>Stall</th>
+										<th>Food</th>
+										<th>Quantity</th>
+										<th>Price</th>
+									</tr>
+								</thead>
 
+								<tbody>
+									<c:forEach items="${order.foodOrderDiscountList}" var="foodItem">
+										<tr>
+											<td>
+												<c:out value="${foodItem.food.stall.name}" />
+											</td>
+											<td>
+												<c:out value="${foodItem.food.name}" />
+												<ul>
+													<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen">
+														<li>
+															<small>
+																<c:out value="${modifierChosen.name}" />
+																<fmt:formatNumber value="${modifierChosen.price}" var="newModifierPrice" minFractionDigits="2" />
+																+ $
+																<c:out value="${newModifierPrice}" />
+															</small>
+														</li>
+													</c:forEach>
+												</ul>
+											</td>
+											<td>
+												<c:out value="${foodItem.quantity}" />
+											</td>
+											<td>
+												<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
+												$
+												<c:out value="${newPrice}" />
+											</td>
+										</tr>
+									</c:forEach>
+
+								</tbody>
+							</table>
+
+						</div>
 					</div>
 				</div>
-			</div>
 
-		</c:forEach>
-	</div>
-	
+			</c:forEach>
+		</div>
 
-		
+
+
 		<!-- PayPal form -->
 		<c:choose>
 			<c:when test="${haveOrder eq true}">
 				<form action="${initParam['posturl']}" method="post">
 					<input type="hidden" name="upload" value="1" />
-					<input type="hidden" name="return" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/ProcessPaymentServlet" />
+					<input type="hidden" name="return"
+						value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/ProcessPaymentServlet"
+					/>
 					<input type="hidden" name="cmd" value="_cart" />
 					<input type="hidden" name="business" value="${initParam['business']}" />
 					<input type="hidden" name="currency_code" value="SGD">
@@ -193,11 +195,11 @@
 									<c:when test="${fn:contains(modifierChosen.name, 'Upsize')}">
 										<c:set var="modifiedFoodName" value="${modifiedFoodName} with Upsize" />
 									</c:when>
-									
+
 									<c:when test="${fn:contains(modifierChosen.name, 'juice')}">
 										<c:set var="modifiedFoodName" value="${modifiedFoodName} juice" />
 									</c:when>
-									
+
 									<c:otherwise>
 										<c:set var="modifiedFoodName" value="${modifiedFoodName} with ${modifierChosen.name}" />
 									</c:otherwise>
@@ -214,9 +216,9 @@
 					</c:forEach>
 
 					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" style="float: right;">
-					
+
 				</form>
-				
+
 			</c:when>
 			<c:otherwise>
 				<p>There are no orders to be processed.</p>

@@ -25,7 +25,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import controller.AccessController;
-import controller.CanteenController;
 import controller.OrderWindowController;
 
 /**
@@ -40,28 +39,26 @@ public class ProcessLoginServlet extends HttpServlet {
 	 */
 	public ProcessLoginServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 
 		AccessController accessController = new AccessController();
-		CanteenController canteenController = new CanteenController();
 		OrderWindowController orderWindowController = new OrderWindowController();
 		JSONObject obj = new JSONObject();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -91,48 +88,54 @@ public class ProcessLoginServlet extends HttpServlet {
 				throw new Exception("Account not verified. Please verify your account first!");
 			case StringValues.EMPLOYEE_SUSPENDED:
 				session.setAttribute("suspended", "true");
-				response.sendRedirect("payment.jsp");
+				response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 				break;
-			case StringValues.EMPLOYEE_DESTROYED: 
+			case StringValues.EMPLOYEE_DESTROYED:
 				throw new Exception("Account has been disabled.");
 			}
 
 			// (3) VERIFY AVAILABLE OPENED ORDER WINDOW.
-			ArrayList<OrderWindow> windowList = orderWindowController.getAllOpenedWindowsForCompany(emp.getCompany());
+			ArrayList<OrderWindow> windowList = orderWindowController
+					.getAllOpenedWindowsForCompany(emp.getCompany());
 			if (windowList == null || windowList.size() == 0) {
 				System.out.println("windowList size: " + windowList.size());
-				if (!response.isCommitted()) {
-					System.out.println("FGHJKL:DFGHJKL:DFGHJKLDFGHJKL:DFGHJKLDFGHJKLDFGHJKLDFGBHNJLDFGHJKL");
-					session.setAttribute("suspended", "true");
-					response.sendRedirect("orderHistory.jsp");
-				}
+				// response.sendRedirect("orderHistory.jsp"); //TODO: for login without order
+				// window open
+
 			}
-			// Setting user and token
-			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail() + "|";
-			session.setAttribute("user", emp);
-			session.setAttribute("tokenID", tokenID);
+
 			OrderWindow window = null;
+			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
+					+ "|";
+
 			if (!windowList.isEmpty()) {
 				window = windowList.get(0);
+			} else {
+				session.setAttribute("user", emp);
+				session.setAttribute("tokenID", tokenID);
+				response.sendRedirect("/eureka_webservice/pages/payment2.jsp");
+			}
 
-				session.setAttribute("orderWindow", window);
-				System.out.println("TokenID is set in session");
+			// Setting user and token
+			session.setAttribute("user", emp);
+			session.setAttribute("tokenID", tokenID);
+			session.setAttribute("orderWindow", window);
+			System.out.println("TokenID is set in session");
 
-				// for login2
-				ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
-				canteenList.add(window.getCanteen());
-				session.setAttribute("canteenList", canteenList);
+			// for login2
+			ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
+			canteenList.add(window.getCanteen());
+			session.setAttribute("canteenList", canteenList);
 
-				// For testing: print JSON rather than redirect
-				if (test != null && test.equals("true")) {
-					obj.put("user", emp.getEmail());
-					obj.put("tokenID", tokenID);
-					obj.put("status", "ok");
-					out.print(gson.toJson(obj));
-				} else {
-					if (!response.isCommitted()) {
-						response.sendRedirect("homepage.jsp");
-					}
+			// For testing: print JSON rather than redirect
+			if (test != null && test.equals("true")) {
+				obj.put("user", emp.getEmail());
+				obj.put("tokenID", tokenID);
+				obj.put("status", "ok");
+				out.print(gson.toJson(obj));
+			} else {
+				if (!response.isCommitted()) {
+					response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 				}
 			}
 
@@ -158,7 +161,7 @@ public class ProcessLoginServlet extends HttpServlet {
 				} else {
 					session.setAttribute("error", errorMessage);
 					if (!response.isCommitted()) {
-						response.sendRedirect("login.jsp");
+						response.sendRedirect("/eureka_webservice/pages/login.jsp");
 					}
 				}
 			} catch (JSONException e1) {
@@ -167,4 +170,5 @@ public class ProcessLoginServlet extends HttpServlet {
 			}
 		}
 	}
+
 }

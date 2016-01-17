@@ -80,12 +80,12 @@ public class ProcessVerificationServlet extends HttpServlet {
 			employeedao.updateEmployee(employee);
 			
 			session.setAttribute("success","Your email has been verified. You may login now. Email:" + eDecrypt);
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("/eureka_webservice/pages/login.jsp");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("error", e.getMessage());
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("/eureka_webservice/pages/login.jsp");
 		}
 	}
 }

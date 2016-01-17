@@ -102,12 +102,12 @@ public class ProcessPaymentServlet extends HttpServlet {
 				throw new Exception(
 						"This payment is being held. The payment may be under review by Paypal.");
 			}
-			response.sendRedirect("payment.jsp");
+			response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 			e.printStackTrace();
 			session.setAttribute("error", e.getMessage());
-			response.sendRedirect("payment.jsp");
+			response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 		}
 	}
 
