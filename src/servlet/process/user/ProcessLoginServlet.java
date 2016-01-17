@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Canteen;
 import model.Employee;
 import model.OrderWindow;
 
@@ -87,7 +88,7 @@ public class ProcessLoginServlet extends HttpServlet {
 				throw new Exception("Account not verified. Please verify your account first!");
 			case StringValues.EMPLOYEE_SUSPENDED:
 				session.setAttribute("suspended", "true");
-				response.sendRedirect("payment.jsp");
+				response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 				break;
 			case StringValues.EMPLOYEE_DESTROYED:
 				throw new Exception("Account has been disabled.");
@@ -98,38 +99,39 @@ public class ProcessLoginServlet extends HttpServlet {
 					.getAllOpenedWindowsForCompany(emp.getCompany());
 			if (windowList == null || windowList.size() == 0) {
 				System.out.println("windowList size: " + windowList.size());
-				if (!response.isCommitted()) {
-					session.setAttribute("suspended", "true");
-					// response.sendRedirect("orderHistory.jsp"); //TODO: for login without order
-					// window open
-					response.sendRedirect("/eureka_webservice/pages/payment.jsp");
-				}
+				// response.sendRedirect("orderHistory.jsp"); //TODO: for login without order
+				// window open
+
 			}
-			// Setting user and token
+
+			OrderWindow window = windowList.get(0);
+
 			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
 					+ "|";
+
+			// Setting user and token
 			session.setAttribute("user", emp);
 			session.setAttribute("tokenID", tokenID);
-			OrderWindow window = null;
-			if (!windowList.isEmpty()) {
-				window = windowList.get(0);
+			session.setAttribute("orderWindow", window);
+			System.out.println("TokenID is set in session");
 
-				session.setAttribute("orderWindow", window);
-				System.out.println("TokenID is set in session");
+			// for login2
+			ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
+			canteenList.add(window.getCanteen());
+			session.setAttribute("canteenList", canteenList);
 
-				// For testing: print JSON rather than redirect
-				if (test != null && test.equals("true")) {
-					obj.put("user", emp.getEmail());
-					obj.put("tokenID", tokenID);
-					obj.put("status", "ok");
-					out.print(gson.toJson(obj));
-				} else {
-					if (!response.isCommitted()) {
-						response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
-					}
+			// For testing: print JSON rather than redirect
+			if (test != null && test.equals("true")) {
+				obj.put("user", emp.getEmail());
+				obj.put("tokenID", tokenID);
+				obj.put("status", "ok");
+				out.print(gson.toJson(obj));
+			} else {
+				if (!response.isCommitted()) {
+					response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 				}
-
 			}
+
 		} catch (Exception e) {
 			String errorMessage = e.getMessage();
 

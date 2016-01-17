@@ -50,7 +50,7 @@ public class ReloadDatabaseServlet extends HttpServlet {
 		Test.main(null);
 
 		session.setAttribute("success", "Database is overridden with data from Test.java.");
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("/eureka_webservice/pages/login.jsp");
 	}
 
 }
