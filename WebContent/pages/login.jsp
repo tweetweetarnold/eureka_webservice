@@ -87,7 +87,7 @@
 
 					<!-- Logo -->
 					<figure class="text-center">
-						<a href="./index.html">
+						<a href=#">
 							<img class="img-logo" src="/eureka_webservice/resources/guri-one/templates/images/logo.png" alt="">
 						</a>
 					</figure>

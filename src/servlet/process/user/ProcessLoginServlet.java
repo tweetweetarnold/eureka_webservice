@@ -104,10 +104,17 @@ public class ProcessLoginServlet extends HttpServlet {
 
 			}
 
-			OrderWindow window = windowList.get(0);
-
+			OrderWindow window = null;
 			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
 					+ "|";
+
+			if (!windowList.isEmpty()) {
+				window = windowList.get(0);
+			} else {
+				session.setAttribute("user", emp);
+				session.setAttribute("tokenID", tokenID);
+				response.sendRedirect("eureka_webservice/pages/payment2.jsp");
+			}
 
 			// Setting user and token
 			session.setAttribute("user", emp);

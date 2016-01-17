@@ -7,11 +7,15 @@
 	if (emp == null || tokenID == null) {
 		response.sendRedirect("/eureka_webservice/ProcessLogoutServlet");
 	}
+	if (orderWindow == null) {
+		response.sendRedirect("/eureka_webservice/pages/payment2.jsp");
+	}
 	if (session.getAttribute("suspended") != null) {
-		boolean suspended = Boolean.parseBoolean((String)session.getAttribute("suspended"));
+		boolean suspended = Boolean
+				.parseBoolean((String) session.getAttribute("suspended"));
 		if (suspended) {
 			if (!response.isCommitted()) {
-				response.sendRedirect("/eureka_webservice/pages/payment.jsp");
+				response.sendRedirect("/eureka_webservice/pages/payment2.jsp");
 
 			}
 		}
