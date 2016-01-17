@@ -47,12 +47,12 @@
 								Profile
 							</a>
 						</li>
-						<li>
-							<a href="/eureka_webservice/pages/contact-us.jsp">
-								<i class="fa fa-envelope fa-fw"></i>
-								Contact Us
-							</a>
-						</li>
+						<!-- 						<li> -->
+						<!-- 							<a href="/eureka_webservice/pages/contact-us.jsp"> -->
+						<!-- 								<i class="fa fa-envelope fa-fw"></i> -->
+						<!-- 								Contact Us -->
+						<!-- 							</a> -->
+						<!-- 						</li> -->
 						<li>
 							<hr>
 						</li>
