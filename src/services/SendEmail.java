@@ -15,7 +15,7 @@ public class SendEmail {
 	private Properties emailProperties;
 	private Session mailSession;
 	private final String username = "kohbuslunchtime@gmail.com";
-	private final String password = "{gxuvimr}";
+	private final String password = "{ryusoken}";
 	
 	public void setMailServerProperties() {
 		
