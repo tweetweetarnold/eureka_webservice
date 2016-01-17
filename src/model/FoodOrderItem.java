@@ -1,10 +1,12 @@
 package model;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TimeZone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -62,7 +64,8 @@ public class FoodOrderItem {
 		this.food = food;
 		this.quantity = quantity;
 		this.remarks = remarks;
-		this.createDate = new Date();
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
+		this.createDate = cal.getTime();
 		modifierChosenList = new HashSet<>();
 	}
 	
