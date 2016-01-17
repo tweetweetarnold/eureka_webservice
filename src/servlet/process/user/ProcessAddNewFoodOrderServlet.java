@@ -38,7 +38,8 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -46,7 +47,8 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -64,52 +66,53 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 
 		try {
 			// Retrieve myFoodOrders and User
-			List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session
-					.getAttribute("myFoodOrderItems");
-			System.out.println("MyFoodOrderItems retrieved");
-			Set<FoodOrderItem> hashMyFoodOrderItems = new HashSet<>(myFoodOrderItems);
-
+			OrderWindowController owController = new OrderWindowController();
+			FoodOrderController controller = new FoodOrderController();
+			OrderWindow window = (OrderWindow) session.getAttribute("orderWindow");
 			Employee employee = (Employee) session.getAttribute("user");
 			System.out.println("Employee retrieved");
+			if (!controller.checkForExistingOrder(employee, window)) {
 
-			OrderWindowController owController = new OrderWindowController();
-			OrderWindow window = (OrderWindow) session.getAttribute("orderWindow");
+				List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session.getAttribute("myFoodOrderItems");
+				System.out.println("MyFoodOrderItems retrieved");
+				Set<FoodOrderItem> hashMyFoodOrderItems = new HashSet<>(myFoodOrderItems);
 
-			FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_SUBMITTED, employee, null,
-					window);
-			for (FoodOrderItem item : hashMyFoodOrderItems) {
-				item.setFoodOrder(myFoodOrder);
-				out.println("size: " + item.getModifierChosenList().size());
+				FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_SUBMITTED, employee, null, window);
+				for (FoodOrderItem item : hashMyFoodOrderItems) {
+					item.setFoodOrder(myFoodOrder);
+					out.println("size: " + item.getModifierChosenList().size());
+				}
+				myFoodOrder.setFoodOrderList(hashMyFoodOrderItems);
+				System.out.println("New FoodOrder created");
+				double ammountToAdd = myFoodOrder.getTotalPrice() - myFoodOrder.getOrderWindow().getDiscountValue();
+				if (ammountToAdd > 0) {
+					employee.setAmountOwed(employee.getAmountOwed() + ammountToAdd);
+				}
+				employeeDAO.updateEmployee(employee);
+				System.out.println("Employee amount owed updated");
+
+				// Process new FoodOrder
+
+				controller.addFoodOrder(myFoodOrder);
+				System.out.println("New FoodOrder added to database");
+
+				session.removeAttribute("myFoodOrderItems");
+				System.out.println("myFoodOrderItems cleared");
+
+				session.setAttribute("success", "Your order has been submitted!");
+				response.sendRedirect("/eureka_webservice/pages/cart.jsp");
+			}else{
+				session.removeAttribute("myFoodOrderItems");
+				throw new Exception("You have already submitted your order for today!");
 			}
-			myFoodOrder.setFoodOrderList(hashMyFoodOrderItems);
-			System.out.println("New FoodOrder created");
-			double ammountToAdd = myFoodOrder.getTotalPrice()
-					- myFoodOrder.getOrderWindow().getDiscountValue();
-			if (ammountToAdd > 0) {
-				employee.setAmountOwed(employee.getAmountOwed() + ammountToAdd);
-			}
-			employeeDAO.updateEmployee(employee);
-			System.out.println("Employee amount owed updated");
-
-			// Process new FoodOrder
-			FoodOrderController controller = new FoodOrderController();
-			controller.addFoodOrder(myFoodOrder);
-			System.out.println("New FoodOrder added to database");
-
-			session.removeAttribute("myFoodOrderItems");
-			System.out.println("myFoodOrderItems cleared");
-
-			session.setAttribute("success", "Your order has been submitted!");
-			response.sendRedirect("/eureka_webservice/pages/cart.jsp");
-
 		} catch (NullPointerException e) {
 			session.setAttribute("error", "Add an item to cart to checkout");
 			response.sendRedirect("/eureka_webservice/pages/cart.jsp");
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 			e.printStackTrace();
-			session.setAttribute("error", "Soemthing went wrong");
-			response.sendRedirect("/eureka_webservice/pages/homepage,jsp");
+			session.setAttribute("error", e.getMessage());
+			response.sendRedirect("/eureka_webservice/pages/cart.jsp");
 		}
 
 	}
