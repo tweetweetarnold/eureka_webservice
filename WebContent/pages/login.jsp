@@ -87,7 +87,7 @@
 
 					<!-- Logo -->
 					<figure class="text-center">
-						<a href=#">
+						<a href="#">
 							<img class="img-logo" src="/eureka_webservice/resources/guri-one/templates/images/logo.png" alt="">
 						</a>
 					</figure>
@@ -312,9 +312,9 @@
 						maxime veritatis laudantium aut odio ullam laboriosam autem!</p>
 
 					<p>
-						<a class="btn btn-danger" href="./sign-in.html">Sign In</a>
+						<a class="btn btn-danger" href="#">Sign In</a>
 						&nbsp;
-						<a class="btn btn-danger-border" href="./sign-up.html">Sign Up</a>
+						<a class="btn btn-danger-border" href="#">Sign Up</a>
 					</p>
 
 				</div>
