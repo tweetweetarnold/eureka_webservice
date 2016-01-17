@@ -23,7 +23,7 @@ public class WeeklySuspension implements Job {
 			System.out.println("Doing");
 			EmployeeController employeeController = new EmployeeController();
 			CompanyController companyController = new CompanyController();
-			Company c = companyController.getCompany(1);
+			Company c = companyController.getCompany(2);
 			ArrayList<Object> objects = new ArrayList<Object>(
 					MyConnection.getUsersWithOutstandingPaymentFromCompany(c));
 			for (Object o : objects) {

@@ -39,7 +39,7 @@ public class ChasePayment implements Job {
 
 			// EmployeeController employeeController = new EmployeeController();
 			CompanyController companyController = new CompanyController();
-			Company c = companyController.getCompany(1);
+			Company c = companyController.getCompany(2);
 			
 			ArrayList<Object> objects = new ArrayList<Object>(
 					MyConnection.getUsersToChasePayment(c));
@@ -49,6 +49,7 @@ public class ChasePayment implements Job {
 				Employee tempEmployee = (Employee) o;
 				String tempEmail = tempEmployee.getEmail();
 				emailList.add(tempEmail);
+				
 			}
 
 			String[] toEmails = new String[emailList.size()];

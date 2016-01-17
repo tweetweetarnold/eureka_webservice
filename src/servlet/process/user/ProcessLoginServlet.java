@@ -90,9 +90,9 @@ public class ProcessLoginServlet extends HttpServlet {
 			case StringValues.EMPLOYEE_PENDING_VERIFICATION:
 				throw new Exception("Account not verified. Please verify your account first!");
 			case StringValues.EMPLOYEE_SUSPENDED:
-				 session.setAttribute("suspended", "true");
-				 response.sendRedirect("payment.jsp");
-				 break;
+				session.setAttribute("suspended", "true");
+				response.sendRedirect("payment.jsp");
+				break;
 			case StringValues.EMPLOYEE_DESTROYED:
 				throw new Exception("Account has been disabled.");
 			}
@@ -101,7 +101,9 @@ public class ProcessLoginServlet extends HttpServlet {
 			ArrayList<OrderWindow> windowList = orderWindowController.getAllOpenedWindowsForCompany(emp.getCompany());
 			if (windowList == null || windowList.size() == 0) {
 				System.out.println("windowList size: " + windowList.size());
-				throw new Exception("There are no available Order Windows opened for your company.");
+				if (!response.isCommitted()) {
+					throw new Exception("There are no available Order Windows opened for your company.");
+				}
 			}
 			OrderWindow window = windowList.get(0);
 
