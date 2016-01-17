@@ -99,9 +99,17 @@ public class ProcessLoginServlet extends HttpServlet {
 					.getAllOpenedWindowsForCompany(emp.getCompany());
 			if (windowList == null || windowList.size() == 0) {
 				System.out.println("windowList size: " + windowList.size());
+				// <<<<<<< HEAD
 				// response.sendRedirect("orderHistory.jsp"); //TODO: for login without order
 				// window open
 
+				// =======
+				// if (!response.isCommitted()) {
+				// System.out.println("FGHJKL:DFGHJKL:DFGHJKLDFGHJKL:DFGHJKLDFGHJKLDFGHJKLDFGBHNJLDFGHJKL");
+				// session.setAttribute("suspended", "true");
+				// response.sendRedirect("/eureka_webservice/pages/orderHistory.jsp");
+				// }
+				// >>>>>>> origin/master
 			}
 
 			OrderWindow window = null;
@@ -136,6 +144,17 @@ public class ProcessLoginServlet extends HttpServlet {
 			} else {
 				if (!response.isCommitted()) {
 					response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
+					// For testing: print JSON rather than redirect
+					// if (test != null && test.equals("true")) {
+					// obj.put("user", emp.getEmail());
+					// obj.put("tokenID", tokenID);
+					// obj.put("status", "ok");
+					// out.print(gson.toJson(obj));
+					// } else {
+					// if (!response.isCommitted()) {
+					// response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
+					// }
+					// >>>>>>> origin/master
 				}
 			}
 
@@ -170,5 +189,4 @@ public class ProcessLoginServlet extends HttpServlet {
 			}
 		}
 	}
-
 }

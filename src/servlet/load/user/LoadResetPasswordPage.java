@@ -55,11 +55,11 @@ public class LoadResetPasswordPage extends HttpServlet {
 			String eDecrypt = aes.decrypt(newEmail);
 
 			session.setAttribute("email", eDecrypt);
-			response.sendRedirect("setNewPassword.jsp");
+			response.sendRedirect("/eureka_webservice/pages/setNewPassword.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error: " + e.getMessage());
-			response.sendRedirect("resetPassword.jsp");
+			response.sendRedirect("/eureka_webservice/pages/resetPassword.jsp");
 		}
 	}
 }

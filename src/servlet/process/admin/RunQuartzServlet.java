@@ -31,7 +31,7 @@ public class RunQuartzServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		QuartzTest quartzTest = new QuartzTest();
 		quartzTest.doProcess();
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("/eureka_webservice/pages/login.jsp");
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class RunQuartzServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		QuartzTest quartzTest = new QuartzTest();
 		quartzTest.doProcess();
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("/eureka_webservice/pages/login.jsp");
 	}
 
 }

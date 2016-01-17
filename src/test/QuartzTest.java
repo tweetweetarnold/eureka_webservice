@@ -6,18 +6,21 @@ import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 import static org.quartz.JobBuilder.*;
 import static org.quartz.TriggerBuilder.*;
+
+import java.util.TimeZone;
+
 import static org.quartz.CronScheduleBuilder.*;
 
 import org.quartz.DateBuilder;
 
-import background.HelloJob;
+
 import background.PaymentNotification;
 import background.WeeklySuspension;
 import background.ChasePayment;
 
 import org.quartz.JobDetail;
 
-import static org.quartz.SimpleScheduleBuilder.*;
+
 
 
 public class QuartzTest {
@@ -45,13 +48,13 @@ public class QuartzTest {
             // Trigger the job to run now, and then repeat every 40 seconds
             Trigger trigger1 = newTrigger()
                 .withIdentity("trigger1", "group1")
-                .withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.SUNDAY, 13, 20))
+                .withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.SUNDAY, 23, 59).inTimeZone(TimeZone.getTimeZone("GMT+8:00")))
                 .forJob(job1.getKey())
                 .build();
              
             Trigger trigger2 = newTrigger()
             	.withIdentity("trigger2","group1")
-            	.withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.SUNDAY, 13,10))
+            	.withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.FRIDAY, 9,00).inTimeZone(TimeZone.getTimeZone("GMT+8:00")))
             	.forJob(job2.getKey())
             	.build();
 //                .startNow()
@@ -61,15 +64,15 @@ public class QuartzTest {
 //                .build();
             
             Trigger trigger3 = newTrigger()
-//                	.withIdentity("trigger3","group1")
-//                	.withSchedule(dailyAtHourAndMinute(7,00))
-//                	.forJob(job3.getKey())
-//                	.build();
-            		.startNow()
-	                  .withSchedule(simpleSchedule()
-	                  .withIntervalInSeconds(300)
-	                  .repeatForever())            
-	                  .build();
+                	.withIdentity("trigger3","group1")
+                	.withSchedule(dailyAtHourAndMinute(7,00).inTimeZone(TimeZone.getTimeZone("GMT+8:00")))
+                	.forJob(job3.getKey())
+                	.build();
+//            		.startNow()
+//	                  .withSchedule(simpleSchedule()
+//	                  .withIntervalInSeconds(300)
+//	                  .repeatForever())            
+//	                  .build();
             
             // Tell quartz to schedule the job using our trigger
             scheduler.scheduleJob(job1, trigger1);
