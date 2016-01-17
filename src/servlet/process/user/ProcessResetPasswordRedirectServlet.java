@@ -80,14 +80,14 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 			} else {
 				accessController.updateEmployeePassword(employee, newPassword);
 				session.setAttribute("success", "Password has been updated!");
-				response.sendRedirect("login.jsp");
+				response.sendRedirect("/eureka_webservice/pages/login.jsp");
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error: " + e.getMessage());
 			session.setAttribute("error", e.getMessage());
-			response.sendRedirect("setNewPassword.jsp");
+			response.sendRedirect("/eureka_webservice/pages/login.jsp");
 		}
 	}
 }

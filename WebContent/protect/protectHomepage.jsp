@@ -11,7 +11,7 @@
 		boolean suspended = Boolean.parseBoolean((String)session.getAttribute("suspended"));
 		if (suspended) {
 			if (!response.isCommitted()) {
-				response.sendRedirect("payment.jsp");
+				response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 
 			}
 		}

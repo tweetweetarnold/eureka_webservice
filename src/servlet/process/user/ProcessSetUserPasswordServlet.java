@@ -54,13 +54,13 @@ public class ProcessSetUserPasswordServlet extends HttpServlet {
 					confirmNewPassword);
 			if (ans) {
 				session.setAttribute("success", "Password updated successfully.");
-				response.sendRedirect("profile.jsp");
+				response.sendRedirect("/eureka_webservice/pages/profile.jsp");
 			}
 
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			session.setAttribute("error", e1.getMessage());
-			response.sendRedirect("profile.jsp");
+			response.sendRedirect("/eureka_webservice/pages/profile.jsp");
 		}
 	}
 }

@@ -99,10 +99,10 @@ public class ProcessLoginServlet extends HttpServlet {
 			if (windowList == null || windowList.size() == 0) {
 				System.out.println("windowList size: " + windowList.size());
 				if (!response.isCommitted()) {
-					System.out
-							.println("FGHJKL:DFGHJKL:DFGHJKLDFGHJKL:DFGHJKLDFGHJKLDFGHJKLDFGBHNJLDFGHJKL");
 					session.setAttribute("suspended", "true");
-					response.sendRedirect("orderHistory.jsp");
+					// response.sendRedirect("orderHistory.jsp"); //TODO: for login without order
+					// window open
+					response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 				}
 			}
 			// Setting user and token
