@@ -37,7 +37,7 @@ public class FoodDisplayPayment {
 
 	public Set<FoodOrderItem> generateFoodOrderDiscountList(Set<FoodOrderItem> foodOrderList, double tempDisc){
 		Set<FoodOrderItem> foodOrderDiscountList = new HashSet<FoodOrderItem>();
-		Iterator iter = foodOrderList.iterator();
+		Iterator<FoodOrderItem> iter = foodOrderList.iterator();
 		while(iter.hasNext()){
 			FoodOrderItem foodOrderItem = (FoodOrderItem)iter.next();
 			

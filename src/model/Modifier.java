@@ -1,8 +1,6 @@
 package model;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -31,13 +29,13 @@ public class Modifier {
 	@JoinColumn(name = "foodId")
 	private Food food;
 	private Date createDate;
-	
+
 	/**
 	 * Creates a default constructor for Modifier
 	 */
 	public Modifier() {
 	}
-	
+
 	/**
 	 * Creates a new Modifier object with a name, description, price and the Food
 	 * 
@@ -52,10 +50,9 @@ public class Modifier {
 		this.description = description;
 		this.price = price;
 		this.food = food;
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
-		this.createDate = cal.getTime();
+		this.createDate = new Date();
 	}
-	
+
 	/**
 	 * Retrieves the ID of the Modifier
 	 * 
@@ -64,7 +61,7 @@ public class Modifier {
 	public int getModifierId() {
 		return modifierId;
 	}
-	
+
 	/**
 	 * Changes the current ID of the Modifier
 	 * 
@@ -73,7 +70,7 @@ public class Modifier {
 	public void setModifierId(int modifierId) {
 		this.modifierId = modifierId;
 	}
-	
+
 	/**
 	 * Retrieves the name of the Modifier
 	 * 
@@ -82,7 +79,7 @@ public class Modifier {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Changes the name of the Modifier
 	 * 
@@ -91,7 +88,7 @@ public class Modifier {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Retrieves the description of the Modifier
 	 * 
@@ -100,7 +97,7 @@ public class Modifier {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	/**
 	 * Changes the current description of the Modifier
 	 * 
@@ -109,7 +106,7 @@ public class Modifier {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	/**
 	 * Retrieves the price of the Modifier
 	 * 
@@ -118,7 +115,7 @@ public class Modifier {
 	public double getPrice() {
 		return price;
 	}
-	
+
 	/**
 	 * Changes the current price of the Modifier
 	 * 
@@ -127,7 +124,7 @@ public class Modifier {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
+
 	/**
 	 * Retrieves the Food of this Modifier
 	 * 
@@ -136,7 +133,7 @@ public class Modifier {
 	public Food getFood() {
 		return food;
 	}
-	
+
 	/**
 	 * Changes the Food for this Modifier
 	 * 
@@ -145,7 +142,7 @@ public class Modifier {
 	public void setFood(Food food) {
 		this.food = food;
 	}
-	
+
 	/**
 	 * Retrieves the date which this Modifier object is created
 	 * 
@@ -154,7 +151,7 @@ public class Modifier {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	
+
 	/**
 	 * Changes the current date of this Modifier object created
 	 * 

@@ -1,8 +1,6 @@
 package model;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,7 +15,7 @@ import javax.persistence.Table;
  * Represents the chosen Add-ons of the Food items entity model in the web application
  * 
  * @author SMU Team Eureka
- *
+ * 
  */
 @Entity
 @Table(name = "modifierchosen")
@@ -33,13 +31,13 @@ public class ModifierChosen {
 	@JoinColumn(name = "foodOrderItemId")
 	private FoodOrderItem foodOrderItem;
 	private Date createDate;
-	
+
 	/**
 	 * Creates a default constructor for ModifierChosen
 	 */
 	public ModifierChosen() {
 	}
-	
+
 	/**
 	 * Creates a new ModifierChosen with the Modifier and FoodOrderItem
 	 * 
@@ -50,11 +48,10 @@ public class ModifierChosen {
 		this.name = m.getName();
 		this.description = m.getDescription();
 		this.price = m.getPrice();
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
-		this.createDate = cal.getTime();
+		this.createDate = new Date();
 		this.foodOrderItem = item;
 	}
-	
+
 	/**
 	 * Retrieves the ID of the ModifierChosen
 	 * 
@@ -63,7 +60,7 @@ public class ModifierChosen {
 	public int getModifierId() {
 		return modifierChosenId;
 	}
-	
+
 	/**
 	 * Changes the current ID of the ModifierChosen
 	 * 
@@ -72,7 +69,7 @@ public class ModifierChosen {
 	public void setModifierId(int modifierChosenId) {
 		this.modifierChosenId = modifierChosenId;
 	}
-	
+
 	/**
 	 * Retrieves the name of the ModifierChosen
 	 * 
@@ -81,7 +78,7 @@ public class ModifierChosen {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Changes the current name of the ModifierChosen
 	 * 
@@ -90,7 +87,7 @@ public class ModifierChosen {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Retrieves the description of the ModifierChosen
 	 * 
@@ -99,15 +96,16 @@ public class ModifierChosen {
 	public String getDescription() {
 		return description;
 	}
-	
-	/**Changes the current description of the ModifierChosen
+
+	/**
+	 * Changes the current description of the ModifierChosen
 	 * 
 	 * @param description The new description of the ModifierChosen
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	/**
 	 * Retrieves the price of the ModifierChosen
 	 * 
@@ -116,7 +114,7 @@ public class ModifierChosen {
 	public double getPrice() {
 		return price;
 	}
-	
+
 	/**
 	 * Changes the current price of the ModifierChosen
 	 * 
@@ -125,7 +123,7 @@ public class ModifierChosen {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
+
 	/**
 	 * Retrieves the FoodOrderItem of this ModifierChosen
 	 * 
@@ -134,7 +132,7 @@ public class ModifierChosen {
 	public FoodOrderItem getFood() {
 		return foodOrderItem;
 	}
-	
+
 	/**
 	 * Changes the FoodOrderItem for this ModifierChosen
 	 * 
@@ -152,7 +150,7 @@ public class ModifierChosen {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	
+
 	/**
 	 * Changes the current date of this Modifier object created
 	 * 
@@ -170,7 +168,7 @@ public class ModifierChosen {
 	 * @return Returns true if this ModifierChosen and the other ModifierChosen is the same
 	 */
 	public boolean equals(ModifierChosen otherModifier) {
-		if (this.modifierChosenId==otherModifier.getModifierId()) {
+		if (this.modifierChosenId == otherModifier.getModifierId()) {
 			return true;
 		} else {
 			return false;

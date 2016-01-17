@@ -1,8 +1,6 @@
 package model;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -52,22 +50,20 @@ public class OrderWindow {
 	private double discount;
 	private Date createDate;
 	private double discountValue;
+
 	/**
 	 * Creates a default constructor for OrderWindow
 	 */
 	public OrderWindow() {
 	}
-	
-	
+
 	public double getDiscountValue() {
 		return discountValue;
 	}
 
-
 	public void setDiscountValue(double discountValue) {
 		this.discountValue = discountValue;
 	}
-
 
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
 			double discount, double discountValue) {
@@ -78,11 +74,10 @@ public class OrderWindow {
 		this.company = company;
 		this.canteen = canteen;
 		this.discount = discount;
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
-		this.createDate = cal.getTime();
+		this.createDate = new Date();
 		this.discountValue = discountValue;
 	}
-	
+
 	/**
 	 * Creates a new OrderWindow with a starting and ending DateTime, company and the canteen
 	 * 
@@ -150,7 +145,7 @@ public class OrderWindow {
 	public Date getEndDateFormatted() {
 		return endDateFormatted;
 	}
-	
+
 	/**
 	 * Retrieves the discount of this order window
 	 * 
@@ -159,7 +154,7 @@ public class OrderWindow {
 	public double getDiscount() {
 		return discount;
 	}
-	
+
 	/**
 	 * Changes the current discount of this order window
 	 * 
