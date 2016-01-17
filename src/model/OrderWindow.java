@@ -1,6 +1,8 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -76,7 +78,8 @@ public class OrderWindow {
 		this.company = company;
 		this.canteen = canteen;
 		this.discount = discount;
-		this.createDate = new Date();
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
+		this.createDate = cal.getTime();
 		this.discountValue = discountValue;
 	}
 	

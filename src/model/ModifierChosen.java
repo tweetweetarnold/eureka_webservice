@@ -1,6 +1,8 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -48,7 +50,8 @@ public class ModifierChosen {
 		this.name = m.getName();
 		this.description = m.getDescription();
 		this.price = m.getPrice();
-		this.createDate = new Date();
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
+		this.createDate = cal.getTime();
 		this.foodOrderItem = item;
 	}
 	

@@ -1,7 +1,9 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
+import java.util.TimeZone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -57,7 +59,8 @@ public class Stall {
 		this.contactNo = contactNo;
 		this.imageDirectory = imageDirectory;
 		this.canteen = canteen;
-		this.createDate = new Date();
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
+		this.createDate = cal.getTime();
 		this.foodList = foodList;
 	}
 

@@ -1,7 +1,9 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
+import java.util.TimeZone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
@@ -51,7 +53,8 @@ public class Company {
 	public Company(String name, Date cutoffTime, Set<Canteen> canteenList, String companyCode) {
 		super();
 		this.name = name;
-		this.createDate = new Date();
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
+		this.createDate = cal.getTime();
 		this.cutoffTime = cutoffTime;
 		this.canteenList = canteenList;
 		this.companyCode = companyCode;
