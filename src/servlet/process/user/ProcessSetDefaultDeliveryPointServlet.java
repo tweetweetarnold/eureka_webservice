@@ -79,8 +79,8 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 		String[] emailArray = { email };
 
 		try {
-			String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
-					+ request.getContextPath();
+			String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort();
+//					+ request.getContextPath();
 
 			String token = UUID.randomUUID().toString();
 
