@@ -53,7 +53,7 @@ public class ProcessLogoutServlet extends HttpServlet {
 		MyConnection.closeSessionFactory();
 		HttpSession session = request.getSession();
 		session.invalidate();
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("/eureka_webservice/pages/login.jsp");
 	}
 
 }

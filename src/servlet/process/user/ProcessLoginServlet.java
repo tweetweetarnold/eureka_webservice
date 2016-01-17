@@ -91,7 +91,7 @@ public class ProcessLoginServlet extends HttpServlet {
 				throw new Exception("Account not verified. Please verify your account first!");
 			case StringValues.EMPLOYEE_SUSPENDED:
 				session.setAttribute("suspended", "true");
-				response.sendRedirect("payment.jsp");
+				response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 				break;
 			case StringValues.EMPLOYEE_DESTROYED: 
 				throw new Exception("Account has been disabled.");
@@ -104,7 +104,7 @@ public class ProcessLoginServlet extends HttpServlet {
 				if (!response.isCommitted()) {
 					System.out.println("FGHJKL:DFGHJKL:DFGHJKLDFGHJKL:DFGHJKLDFGHJKLDFGHJKLDFGBHNJLDFGHJKL");
 					session.setAttribute("suspended", "true");
-					response.sendRedirect("orderHistory.jsp");
+					response.sendRedirect("/eureka_webservice/pages/orderHistory.jsp");
 				}
 			}
 			// Setting user and token
@@ -131,7 +131,7 @@ public class ProcessLoginServlet extends HttpServlet {
 					out.print(gson.toJson(obj));
 				} else {
 					if (!response.isCommitted()) {
-						response.sendRedirect("homepage.jsp");
+						response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 					}
 				}
 			}
@@ -158,7 +158,7 @@ public class ProcessLoginServlet extends HttpServlet {
 				} else {
 					session.setAttribute("error", errorMessage);
 					if (!response.isCommitted()) {
-						response.sendRedirect("login.jsp");
+						response.sendRedirect("/eureka_webservice/pages/login.jsp");
 					}
 				}
 			} catch (JSONException e1) {

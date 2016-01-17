@@ -136,7 +136,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 				}
 				session.setAttribute("userInput", userInput);
 
-				response.sendRedirect("registration.jsp");
+				response.sendRedirect("/eureka_webservice/pages/registration.jsp");
 			}
 		}
 	}
