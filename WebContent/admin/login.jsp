@@ -23,6 +23,8 @@
 </head>
 
 <body>
+<fmt:setTimeZone value="GMT+8" />
+
 	<div class="container">
 
 		<form class="form-signin" method="post" action="/eureka_webservice/ProcessAdminLoginServlet">

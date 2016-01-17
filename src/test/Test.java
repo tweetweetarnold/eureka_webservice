@@ -1842,8 +1842,8 @@ public class Test {
 		session.getTransaction().commit();
 		session.flush();
 		session.close();
-		QuartzTest quartzTest = new QuartzTest();
-		quartzTest.doProcess();
+//		QuartzTest quartzTest = new QuartzTest();
+//		quartzTest.doProcess();
 		System.out.println("Test.java completed");
 
 	}
