@@ -1,7 +1,5 @@
 .settings
 /build
-.classpath
-.project
 /bin/
 target
 .settings/*
