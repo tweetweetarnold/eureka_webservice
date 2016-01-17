@@ -111,49 +111,53 @@
 
 							<div class="form-group">
 								<input class="form-control" type="password" name="confirmPassword" placeholder="Type your password again"
-									required
+									style="width: 95%;" required
 								>
 								<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Password Requirements"
-									data-content="Min of 7 alphanumeric characters without spacing."
+									data-content="Min of 7 alphanumeric characters without spacing." data-placement="left"
 								>
 									<i class="fa fa-question-circle"></i>
 								</a>
 							</div>
 
 							<div class="form-group">
-								<input class="form-control" type="tel" name="contactNo" placeholder="Contact Number" required>
+								<input class="form-control" type="tel" name="contactNo" placeholder="Contact Number" data-placement="left"
+									style="width: 95%;" required
+								>
 								<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Contact Number Requirements"
-									data-content="8 digits starting with either 6, 8, 9."
+									data-content="8 digits starting with either 6, 8, 9." data-placement="left"
 								>
 									<i class="fa fa-question-circle"></i>
 								</a>
 							</div>
 
 							<div class="form-group">
-								<input class="form-control" type="text" name="companyCode" placeholder="Company Code" required>
+								<input class="form-control" type="text" name="companyCode" placeholder="Company Code" data-placement="left"
+									style="width: 95%;" required
+								>
 								<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Company Code"
+									data-placement="left"
 									data-content="You need a company code to register your account under your company! If you are unsure, please check with your HR Department."
 								>
 									<i class="fa fa-question-circle"></i>
 								</a>
 							</div>
 
+							<!-- Checkbox -->
+							<div class="checkbox text-center form-group">
+								<label>
+									<input type="checkbox" name="tc" value="acknowledged" required>
+									I agree to the
+									<a href="#" data-toggle="modal" data-target="#modalTC">Terms & Conditions</a>
+									.
+								</label>
+							</div>
+							<!-- /.text-center -->
+
 							<!-- Button -->
 							<button class="btn btn-success btn-block" type="submit">Register</button>
 
-							<!-- Checkbox -->
-							<section class="text-center">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" name="tc" value="acknowledged" required>
-										I agree to the
-										<a href="#" data-toggle="modal" data-target="#modalTC">Terms & Conditions</a>
-										.
-									</label>
-								</div>
-								<!-- /.checkbox -->
-							</section>
-							<!-- /.text-center -->
+							<br>
 							<br>
 
 							<!-- Sign In/Sign Up links -->
@@ -178,29 +182,6 @@
 			<!-- /.sign-in-up-content -->
 
 
-
-
-			<div class="row">
-
-				<div class="col-md-12">
-
-					<section class="footer-copyright text-center">
-
-						<p>
-							Made with
-							<i class="fa fa-heart"></i>
-							by Aryandhani.
-						</p>
-
-					</section>
-					<!-- /.footer-section -->
-
-				</div>
-				<!-- /.col-md-12 -->
-
-			</div>
-			<!-- /.row -->
-
 		</div>
 		<!-- /.container -->
 
@@ -219,7 +200,7 @@
 				</div>
 				<!-- / modal header -->
 				<div class="modal-body text-center">
-					<iframe src="/eureka_webservice/resources/terms.txt"></iframe>
+					<iframe style="width: 100%;" src="/eureka_webservice/resources/terms.txt"></iframe>
 				</div>
 				<!-- / modal body -->
 

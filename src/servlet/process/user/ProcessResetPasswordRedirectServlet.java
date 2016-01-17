@@ -27,7 +27,6 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 	 */
 	public ProcessResetPasswordRedirectServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -35,7 +34,6 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
 
@@ -44,7 +42,6 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
 
@@ -55,7 +52,6 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 		System.out.println("****** ProcessResetPasswordRedirectServlet ******");
 		HttpSession session = request.getSession();
 		response.setContentType("application/json");
-		// PrintWriter out = response.getWriter();
 
 		AESAlgorithm aesAlgo = new AESAlgorithm();
 		EmployeeController userController = new EmployeeController();

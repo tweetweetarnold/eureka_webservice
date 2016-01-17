@@ -103,6 +103,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 				userInput.put("status", "ok");
 				out.print(gson.toJson(userInput));
 			} else {
+				session.setAttribute("companyName", company.getName());
 				session.setAttribute("buildingSet", buildingSet);
 				response.sendRedirect("/eureka_webservice/pages/set-delivery-point.jsp");
 			}

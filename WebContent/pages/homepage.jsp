@@ -69,7 +69,9 @@
 							<strong>Start:</strong>
 						</td>
 						<td>
-							<fmt:formatDate type="both" value="${sessionScope.orderWindow.startDateFormatted}" />
+							<fmt:formatDate pattern="E, dd-MMM-yyyy HH:mm:ss" type="both"
+								value="${sessionScope.orderWindow.startDateFormatted}"
+							/>
 						</td>
 					</tr>
 					<tr>
@@ -77,7 +79,9 @@
 							<strong>End:</strong>
 						</td>
 						<td>
-							<fmt:formatDate type="both" value="${sessionScope.orderWindow.endDateFormatted}" />
+							<fmt:formatDate pattern="E, dd-MMM-yyyy HH:mm:ss" type="both"
+								value="${sessionScope.orderWindow.endDateFormatted}"
+							/>
 						</td>
 					</tr>
 					<tr>
@@ -87,7 +91,6 @@
 						<td></td>
 					</tr>
 				</table>
-				<p>Start ordering your food below!</p>
 			</div>
 			<!-- col-lg-12 -->
 		</div>

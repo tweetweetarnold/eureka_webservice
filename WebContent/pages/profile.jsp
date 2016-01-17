@@ -180,13 +180,17 @@
 					<div class="modal-body">
 						<table>
 							<tr>
-								<td>Old Password:</td>
+								<td>
+									<strong>Old Password:</strong>
+								</td>
 								<td>
 									<input type="password" name="oldPassword" required>
 								</td>
 							</tr>
 							<tr>
-								<td>New Password:</td>
+								<td>
+									<strong>New Password:</strong>
+								</td>
 								<td>
 									<input type="password" name="newPassword" required>
 									<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Password Requirements"
@@ -197,7 +201,9 @@
 								</td>
 							</tr>
 							<tr>
-								<td>Confirm New Password:</td>
+								<td>
+									<strong>Confirm New Password:</strong>
+								</td>
 								<td>
 									<input type="password" name="confirmNewPassword" required>
 								</td>

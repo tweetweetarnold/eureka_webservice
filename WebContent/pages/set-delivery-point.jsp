@@ -95,6 +95,12 @@
 						</c:if>
 						<!-- / error message handling -->
 
+						<br>
+						<p>
+							<strong>Your Company: </strong>
+							${sessionScope.companyName}
+						</p>
+
 						<form class="sign-in-up-form" action="/eureka_webservice/ProcessSetDefaultDeliveryPointServlet" role="form">
 
 							<select class="form-control" required>
@@ -104,6 +110,7 @@
 								</c:forEach>
 							</select>
 
+							<br>
 							<br>
 
 							<!-- Button -->

@@ -50,7 +50,6 @@ public class ProcessAddFoodItemToOrderItemsServlet extends HttpServlet {
 		doProcess(request, response);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -109,7 +108,7 @@ public class ProcessAddFoodItemToOrderItemsServlet extends HttpServlet {
 
 			// Redirect back to homepage
 			System.out.println("new FoodOrderItem added to myFoodOrderItems successfully");
-			session.setAttribute("success", "Item has been added to cart!");
+			session.setAttribute("success", food.getName() + " has been added to cart!");
 
 			response.sendRedirect("/eureka_webservice/pages/stall-foods.jsp");
 

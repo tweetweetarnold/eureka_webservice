@@ -30,7 +30,6 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 	 */
 	public ProcessSetDefaultDeliveryPointServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -38,7 +37,6 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 	}
@@ -80,7 +78,7 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 
 		try {
 			String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort();
-//					+ request.getContextPath();
+			// + request.getContextPath();
 
 			String token = UUID.randomUUID().toString();
 
