@@ -11,6 +11,10 @@ import model.Employee;
 
 import org.apache.commons.validator.routines.EmailValidator;
 import org.hibernate.exception.ConstraintViolationException;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import services.AESAlgorithm;
 import services.PasswordService;
@@ -341,7 +345,12 @@ public class AccessController {
 		AESAlgorithm aes = new AESAlgorithm();
 
 		String appUrl = "http://" + serverName + ":" + serverPort + contextPath;
-		String token = UUID.randomUUID().toString();
+		
+		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm");
+		DateTime currentTime = new DateTime(DateTimeZone.forID("Asia/Singapore"));
+		System.out.println("NOW: " + currentTime);
+		String time = aes.encrypt(formatter.print(currentTime));
+		String token = time;
 		String eEncrypt = aes.encrypt(email);
 		String url = appUrl + "/LoadResetPasswordPage?email=" + eEncrypt + "&token=" + token;
 

@@ -53,7 +53,8 @@ public class LoadResetPasswordPage extends HttpServlet {
 			String email = (String) request.getParameter("email");
 			String newEmail = email.replaceAll(" ", "+");
 			String eDecrypt = aes.decrypt(newEmail);
-
+			String token = (String)request.getParameter("token");
+			session.setAttribute("token",token);
 			session.setAttribute("email", eDecrypt);
 			response.sendRedirect("/eureka_webservice/pages/setNewPassword.jsp");
 		} catch (Exception e) {

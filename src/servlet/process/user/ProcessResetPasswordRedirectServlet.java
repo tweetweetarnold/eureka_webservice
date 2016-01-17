@@ -59,7 +59,7 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 
 		String email = (String) session.getAttribute("email");
 		String newPassword = request.getParameter("newPassword");
-		String newPasswordConfirmation = request.getParameter("confirmPwd");
+		String newPasswordConfirmation = request.getParameter("confirmPassword");
 
 		try {
 			Employee employee = userController.retrieveEmployeeViaEmail(email);
@@ -83,7 +83,7 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("Error: " + e.getMessage());
 			session.setAttribute("error", e.getMessage());
-			response.sendRedirect("/eureka_webservice/pages/login.jsp");
+			response.sendRedirect("/eureka_webservice/pages/setNewPassword.jsp");
 		}
 	}
 }
