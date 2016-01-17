@@ -1,12 +1,10 @@
 package model;
 
 import java.text.DecimalFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.TimeZone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -23,7 +21,7 @@ import javax.persistence.Table;
  * Represents the Food order item(s) entity model in the web application
  * 
  * @author SMU Team Eureka
- *
+ * 
  */
 @Entity
 @Table(name = "foodorderitem")
@@ -43,13 +41,13 @@ public class FoodOrderItem {
 	private Date createDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrderItem")
 	private Set<ModifierChosen> modifierChosenList;
-	
+
 	/**
 	 * Creates a default constructor for FoodOrderItem
 	 */
 	public FoodOrderItem() {
 	}
-	
+
 	/**
 	 * Creates a new FoodOrderItem with the foodOrder, food, quantity and its remarks
 	 * 
@@ -64,11 +62,10 @@ public class FoodOrderItem {
 		this.food = food;
 		this.quantity = quantity;
 		this.remarks = remarks;
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
-		this.createDate = cal.getTime();
+		this.createDate = new Date();
 		modifierChosenList = new HashSet<>();
 	}
-	
+
 	/**
 	 * Retrieves the Set of selected Modifiers in the FoodOrderItem
 	 * 
@@ -77,7 +74,7 @@ public class FoodOrderItem {
 	public Set<ModifierChosen> getModifierChosenList() {
 		return modifierChosenList;
 	}
-	
+
 	/**
 	 * Changes the Set of selected Modifiers in the FoodOrderItem
 	 * 
@@ -86,7 +83,7 @@ public class FoodOrderItem {
 	public void setModifierChosenList(Set<ModifierChosen> modifierChosenList) {
 		this.modifierChosenList = modifierChosenList;
 	}
-	
+
 	/**
 	 * Retrieves the ID of the FoodOrderItem
 	 * 
@@ -95,7 +92,7 @@ public class FoodOrderItem {
 	public int getFoodOrderItemId() {
 		return foodOrderItemId;
 	}
-	
+
 	/**
 	 * Changes the current ID of the FoodOrderItem ID
 	 * 
@@ -104,7 +101,7 @@ public class FoodOrderItem {
 	public void setFoodOrderItemId(int foodOrderItemId) {
 		this.foodOrderItemId = foodOrderItemId;
 	}
-	
+
 	/**
 	 * Retrieves the Food order of this FoodOrderItem
 	 * 
@@ -113,7 +110,7 @@ public class FoodOrderItem {
 	public FoodOrder getFoodOrder() {
 		return foodOrder;
 	}
-	
+
 	/**
 	 * Changes the FoodOrder of this FoodOrderItem
 	 * 
@@ -122,7 +119,7 @@ public class FoodOrderItem {
 	public void setFoodOrder(FoodOrder foodOrder) {
 		this.foodOrder = foodOrder;
 	}
-	
+
 	/**
 	 * Retrieves the Food in the FoodOrderItem
 	 * 
@@ -131,7 +128,7 @@ public class FoodOrderItem {
 	public Food getFood() {
 		return food;
 	}
-	
+
 	/**
 	 * Changes the Food in the FoodOrderItem
 	 * 
@@ -140,7 +137,7 @@ public class FoodOrderItem {
 	public void setFood(Food food) {
 		this.food = food;
 	}
-	
+
 	/**
 	 * Retrieves the quantity of the FoodOrderItem
 	 * 
@@ -149,7 +146,7 @@ public class FoodOrderItem {
 	public int getQuantity() {
 		return quantity;
 	}
-	
+
 	/**
 	 * Changes the quantity of the FoodOrderItem
 	 * 
@@ -158,9 +155,9 @@ public class FoodOrderItem {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
+
 	/**
-	 * Retrieves the price of the FoodOrderItem 
+	 * Retrieves the price of the FoodOrderItem
 	 * 
 	 * @return The current price of this FoodOrderItem (with the price of the Modifier(s))
 	 */
@@ -177,7 +174,7 @@ public class FoodOrderItem {
 		}
 		return price;
 	}
-	
+
 	/**
 	 * Formats the price value into 2 decimal place
 	 * 
@@ -187,7 +184,7 @@ public class FoodOrderItem {
 		DecimalFormat df = new DecimalFormat("0.00");
 		return df.format(getPrice());
 	}
-	
+
 	/**
 	 * Retrieves the remarks of the FoodOrderItem
 	 * 
@@ -196,7 +193,7 @@ public class FoodOrderItem {
 	public String getRemarks() {
 		return remarks;
 	}
-	
+
 	/**
 	 * Changes the remarks of the FoodOrderItem
 	 * 
@@ -205,7 +202,7 @@ public class FoodOrderItem {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	
+
 	/**
 	 * Retrieves the date which this FoodOrderItem object is created
 	 * 
@@ -214,7 +211,7 @@ public class FoodOrderItem {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	
+
 	/**
 	 * Changes the current date of this FoodOrderItem object being created
 	 * 
@@ -223,7 +220,7 @@ public class FoodOrderItem {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	
+
 	/**
 	 * Checks if this FoodOrderItem is the same as the other FoodOrderItem
 	 * 

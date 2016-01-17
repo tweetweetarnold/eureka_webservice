@@ -34,6 +34,7 @@
 </head>
 
 <body>
+<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 

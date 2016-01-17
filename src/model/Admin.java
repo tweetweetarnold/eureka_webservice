@@ -1,16 +1,12 @@
 package model;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.joda.time.DateTimeUtils;
 
 /**
  * Represents an Administrator entity model in the web application
@@ -42,16 +38,13 @@ public class Admin {
 	 * @param contactNo The Admin's contact number
 	 */
 	public Admin(String username, String password, String name, long contactNo) {
-		
+
 		super();
 		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.contactNo = contactNo;
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore"));
-		this.createDate = cal.getTime();
-		
-		
+		this.createDate = new Date();
 	}
 
 	/**

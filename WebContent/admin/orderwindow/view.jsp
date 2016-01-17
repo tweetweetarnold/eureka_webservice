@@ -40,10 +40,12 @@
 </head>
 
 <body>
+	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 
 		<%@include file="/headerfooter/adminHeader2.jsp"%>
+
 
 		<div id="page-wrapper">
 			<div class="row">

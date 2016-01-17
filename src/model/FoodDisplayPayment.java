@@ -39,9 +39,15 @@ public class FoodDisplayPayment {
 			double tempDisc) {
 		Set<FoodOrderItem> foodOrderDiscountList = new HashSet<FoodOrderItem>();
 		Iterator<FoodOrderItem> iter = foodOrderList.iterator();
+<<<<<<< HEAD
 		while (iter.hasNext()) {
 			FoodOrderItem foodOrderItem = (FoodOrderItem) iter.next();
 
+=======
+		while(iter.hasNext()){
+			FoodOrderItem foodOrderItem = (FoodOrderItem)iter.next();
+			
+>>>>>>> refs/remotes/origin/master
 			FoodOrderItem tempfoodOrderItem = foodOrderItem;
 			Food oldFood = tempfoodOrderItem.getFood();
 			Food newFood = new Food(oldFood.getName(), oldFood.getDescription(),

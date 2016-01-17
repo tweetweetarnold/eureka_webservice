@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Canteen;
 import model.Employee;
 import model.OrderWindow;
 
@@ -99,36 +98,38 @@ public class ProcessLoginServlet extends HttpServlet {
 					.getAllOpenedWindowsForCompany(emp.getCompany());
 			if (windowList == null || windowList.size() == 0) {
 				System.out.println("windowList size: " + windowList.size());
-				throw new Exception("There are no available Order Windows opened for your company.");
-			}
-			OrderWindow window = windowList.get(0);
-
-			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
-					+ "|";
-
-			// Setting user and token
-			session.setAttribute("user", emp);
-			session.setAttribute("tokenID", tokenID);
-			session.setAttribute("orderWindow", window);
-			System.out.println("TokenID is set in session");
-
-			// for login2
-			ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
-			canteenList.add(window.getCanteen());
-			session.setAttribute("canteenList", canteenList);
-
-			// For testing: print JSON rather than redirect
-			if (test != null && test.equals("true")) {
-				obj.put("user", emp.getEmail());
-				obj.put("tokenID", tokenID);
-				obj.put("status", "ok");
-				out.print(gson.toJson(obj));
-			} else {
 				if (!response.isCommitted()) {
-					response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
+					System.out
+							.println("FGHJKL:DFGHJKL:DFGHJKLDFGHJKL:DFGHJKLDFGHJKLDFGHJKLDFGBHNJLDFGHJKL");
+					session.setAttribute("suspended", "true");
+					response.sendRedirect("orderHistory.jsp");
 				}
 			}
+			// Setting user and token
+			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
+					+ "|";
+			session.setAttribute("user", emp);
+			session.setAttribute("tokenID", tokenID);
+			OrderWindow window = null;
+			if (!windowList.isEmpty()) {
+				window = windowList.get(0);
 
+				session.setAttribute("orderWindow", window);
+				System.out.println("TokenID is set in session");
+
+				// For testing: print JSON rather than redirect
+				if (test != null && test.equals("true")) {
+					obj.put("user", emp.getEmail());
+					obj.put("tokenID", tokenID);
+					obj.put("status", "ok");
+					out.print(gson.toJson(obj));
+				} else {
+					if (!response.isCommitted()) {
+						response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
+					}
+				}
+
+			}
 		} catch (Exception e) {
 			String errorMessage = e.getMessage();
 
@@ -160,4 +161,5 @@ public class ProcessLoginServlet extends HttpServlet {
 			}
 		}
 	}
+
 }

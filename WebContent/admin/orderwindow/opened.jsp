@@ -42,6 +42,7 @@
 </head>
 
 <body>
+<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 
@@ -121,7 +122,7 @@
 														<thead>
 															<tr>
 																<th>S/N</th>
-																<th>User(s)</th>
+																<th>User</th>
 																<th>Food</th>
 																<th>Add-On(s)</th>
 																<th>Qty</th>
@@ -191,9 +192,9 @@
 																	</td>
 
 
-																	<c:set value="${foodDisplayObj.quantityList }" var="quantityList" />
-																	<c:set value="${foodDisplayObj.usernameList }" var="usernameList" />
-																	<c:set value="${foodDisplayObj.priceList }" var="priceList" />
+																	<c:set value="${foodDisplayObj.quantityList}" var="quantityList" />
+																	<c:set value="${foodDisplayObj.usernameList}" var="usernameList" />
+																	<c:set value="${foodDisplayObj.priceList}" var="priceList" />
 
 																	<c:forEach items="${foodDisplayObj.foodOrderItemList}" var="item">
 																		<tr>
