@@ -4,7 +4,7 @@
 	String tokenID = (String) session.getAttribute("tokenID");
 	OrderWindow orderWindow = (OrderWindow) session.getAttribute("orderWindow");
 
-	if (emp == null || tokenID == null || orderWindow == null) {
+	if (emp == null || tokenID == null) {
 		response.sendRedirect("/eureka_webservice/ProcessLogoutServlet");
 	}
 	if (session.getAttribute("suspended") != null) {

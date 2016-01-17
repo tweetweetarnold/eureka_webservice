@@ -93,7 +93,7 @@ public class ProcessLoginServlet extends HttpServlet {
 				session.setAttribute("suspended", "true");
 				response.sendRedirect("payment.jsp");
 				break;
-			case StringValues.EMPLOYEE_DESTROYED:
+			case StringValues.EMPLOYEE_DESTROYED: 
 				throw new Exception("Account has been disabled.");
 			}
 
@@ -102,33 +102,37 @@ public class ProcessLoginServlet extends HttpServlet {
 			if (windowList == null || windowList.size() == 0) {
 				System.out.println("windowList size: " + windowList.size());
 				if (!response.isCommitted()) {
-					throw new Exception("There are no available Order Windows opened for your company.");
+					System.out.println("FGHJKL:DFGHJKL:DFGHJKLDFGHJKL:DFGHJKLDFGHJKLDFGHJKLDFGBHNJLDFGHJKL");
+					session.setAttribute("suspended", "true");
+					response.sendRedirect("orderHistory.jsp");
 				}
 			}
-			OrderWindow window = windowList.get(0);
-
-			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail() + "|";
-
 			// Setting user and token
+			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail() + "|";
 			session.setAttribute("user", emp);
 			session.setAttribute("tokenID", tokenID);
-			session.setAttribute("orderWindow", window);
-			System.out.println("TokenID is set in session");
+			OrderWindow window = null;
+			if (!windowList.isEmpty()) {
+				window = windowList.get(0);
 
-			// for login2
-			ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
-			canteenList.add(window.getCanteen());
-			session.setAttribute("canteenList", canteenList);
+				session.setAttribute("orderWindow", window);
+				System.out.println("TokenID is set in session");
 
-			// For testing: print JSON rather than redirect
-			if (test != null && test.equals("true")) {
-				obj.put("user", emp.getEmail());
-				obj.put("tokenID", tokenID);
-				obj.put("status", "ok");
-				out.print(gson.toJson(obj));
-			} else {
-				if (!response.isCommitted()) {
-					response.sendRedirect("homepage.jsp");
+				// for login2
+				ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
+				canteenList.add(window.getCanteen());
+				session.setAttribute("canteenList", canteenList);
+
+				// For testing: print JSON rather than redirect
+				if (test != null && test.equals("true")) {
+					obj.put("user", emp.getEmail());
+					obj.put("tokenID", tokenID);
+					obj.put("status", "ok");
+					out.print(gson.toJson(obj));
+				} else {
+					if (!response.isCommitted()) {
+						response.sendRedirect("homepage.jsp");
+					}
 				}
 			}
 
