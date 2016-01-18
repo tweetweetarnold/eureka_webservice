@@ -145,9 +145,14 @@
 		<div class="row">
 			<div class="col-md-4 pull-right">
 				<h2>
-					Total Payable:
+					Order Price:
 					<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />
 					$${overallPrice2}
+					<br>
+					<c:set value="${sessionScope.orderWindow.discountValue}" var="discountValue" />
+					Discount:
+					<fmt:formatNumber value="${discountValue}" var="discountValue2" minFractionDigits="2"/>
+					$${discountValue2}
 				</h2>
 			</div>
 		</div>
