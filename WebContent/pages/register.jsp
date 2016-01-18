@@ -188,7 +188,7 @@
 	</section>
 	<!-- /.sign-in-up-section -->
 
-	<!-- edit contact Modal -->
+	<!-- Terms & Condition Modal -->
 	<div class="modal fade" id="modalTC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -212,7 +212,7 @@
 			<!-- / modal content -->
 		</div>
 	</div>
-	<!-- / edit contact Modal -->
+	<!-- / Terms & Condition Modal -->
 
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="/eureka_webservice/resources/guri-one/templates/javascript/vendor/jquery-2.1.0.min.js"></script>

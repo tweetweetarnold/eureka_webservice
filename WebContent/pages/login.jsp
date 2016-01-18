@@ -95,7 +95,10 @@
 					<br>
 					<br>
 					<!-- Title -->
-					<h1>Order with LunchTime</h1>
+					<h1>
+						Order with
+						<b style="color: #e74c3c;">LunchTime</b>
+					</h1>
 
 					<!-- Sub title -->
 					<p>Ordering food from Jurong Island is no longer a hassle!</p>
@@ -282,14 +285,14 @@
 				<div class="col-md-7 col-features features-content">
 
 					<!-- Title -->
-					<h3 id="title-1">First title features</h3>
+					<h3 id="title-1">Register an account</h3>
 
 					<!-- Description -->
-					<p>Omnis, esse quo natus soluta minima facilis ratione dignissimos necessitatibus quod dolorem labore molestiae
-						maxime veritatis laudantium aut odio ullam laboriosam autem!</p>
+					<p>Register an account by clicking on "Register" button. You will need your company's code in order to
+						register. Please contact your HR Department to find out more.</p>
 
 					<p>
-						<a class="btn btn-danger" href="#title-2">Learn more</a>
+						<a class="btn btn-danger" href="/eureka_webservice/pages/register.jsp">Register</a>
 					</p>
 
 				</div>
@@ -306,17 +309,10 @@
 				<div class="col-md-7 col-features features-content">
 
 					<!-- Title -->
-					<h3 id="title-2">Second title features</h3>
+					<h3 id="title-2">Order your food order</h3>
 
 					<!-- Description -->
-					<p>Omnis, esse quo natus soluta minima facilis ratione dignissimos necessitatibus quod dolorem labore molestiae
-						maxime veritatis laudantium aut odio ullam laboriosam autem!</p>
-
-					<p>
-						<a class="btn btn-danger" href="#">Sign In</a>
-						&nbsp;
-						<a class="btn btn-danger-border" href="#">Sign Up</a>
-					</p>
+					<p>Browse through the canteen selected for today! Make your order and submit into cart.</p>
 
 				</div>
 				<!-- /.col-md-7 -->
@@ -356,19 +352,11 @@
 				<div class="col-md-7 col-features features-content">
 
 					<!-- Title -->
-					<h3 id="title-3">Third title features</h3>
+					<h3 id="title-3">Pay only at the end of the week</h3>
 
 					<!-- Description -->
-					<p>Omnis, esse quo natus soluta minima facilis ratione dignissimos necessitatibus quod dolorem labore molestiae
-						maxime veritatis laudantium aut odio ullam laboriosam autem!</p>
-
-					<!-- Button -->
-					<p class="btn-app-store">
-						<a class="btn btn-danger btn-lg" href="#fakelinks">
-							<img src="/eureka_webservice/resources/guri-one/templates/images/btn-app-store.png" alt="">
-						</a>
-					</p>
-					<!-- /.btn-app-store -->
+					<p>We know that you may not always carry your wallet around with you. So, pay only at the end of the week! You
+						can make payment through Paypal. All you need is a Paypal account or your credit card number.</p>
 
 				</div>
 				<!-- /.col-md-7 -->
@@ -461,24 +449,12 @@
 					<!-- Footer 1 -->
 					<section>
 						<p>
-							Made with
+							Theme is made with
 							<i class="fa fa-heart"></i>
 							by Aryandhani.
 						</p>
 					</section>
 
-					<!-- AddThis Button -->
-					<ul class="addthis_toolbox addthis_default_style">
-
-						<li>
-							<a class="addthis_button_facebook_like"></a>
-						</li>
-						<li>
-							<a class="addthis_button_tweet"></a>
-						</li>
-
-					</ul>
-					<!-- /.addthis_toolbox -->
 					<script>
 						var addthis_config = {
 							"data_track_addressbar" : true
@@ -495,9 +471,7 @@
 					<section class="text-center">
 						<p>
 							Be sure to read
-							<a href="#fakelinks">Terms</a>
-							and
-							<a href="#fakelinks">Privacy Policy</a>
+							<a href="#" data-toggle="modal" data-target="#modalTC">Terms & Conditions</a>
 							.
 						</p>
 					</section>
@@ -526,11 +500,11 @@
 					<!-- Footer 1 -->
 					<section>
 						<p>
-							<strong>Koh Bus Services</strong>
+							<strong>Koh Bus Transport Services</strong>
 							<br>
-							Hunger Street
+							### Hunger Street
 							<br>
-							Singapore 123456
+							### Singapore 123456
 						</p>
 					</section>
 
@@ -545,6 +519,32 @@
 
 	</footer>
 	<!-- /.footer-section -->
+
+	<!-- Terms & Condition Modal -->
+	<div class="modal fade" id="modalTC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title text-center" id="myModalLabel">LunchTime's Terms & Conditions</h4>
+				</div>
+				<!-- / modal header -->
+				<div class="modal-body text-center">
+					<iframe style="width: 100%;" src="/eureka_webservice/resources/terms.txt"></iframe>
+				</div>
+				<!-- / modal body -->
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+				<!-- / modal footer -->
+			</div>
+			<!-- / modal content -->
+		</div>
+	</div>
+	<!-- / Terms & Condition Modal -->
 
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="/eureka_webservice/resources/guri-one/templates/javascript/vendor/jquery-2.1.0.min.js"></script>

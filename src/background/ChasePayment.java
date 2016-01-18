@@ -10,7 +10,6 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.LoggerFactory;
 
-import services.EmailGenerator;
 import services.SendEmail;
 import connection.MyConnection;
 import controller.CompanyController;

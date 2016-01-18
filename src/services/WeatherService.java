@@ -1,10 +1,9 @@
 package services;
 
-import java.io.IOException;
-
 import net.aksingh.owmjapis.AbstractWeather.Weather;
 import net.aksingh.owmjapis.CurrentWeather;
 import net.aksingh.owmjapis.OpenWeatherMap;
+
 import org.json.JSONException;
 
 public class WeatherService {
