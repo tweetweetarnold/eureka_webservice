@@ -522,8 +522,8 @@
 
 	<!-- Terms & Condition Modal -->
 	<div class="modal fade" id="modalTC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
+		<div class="modal-dialog" role="document" style="height: 100%;">
+			<div class="modal-content" style="height: 80%;">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -531,8 +531,9 @@
 					<h4 class="modal-title text-center" id="myModalLabel">LunchTime's Terms & Conditions</h4>
 				</div>
 				<!-- / modal header -->
-				<div class="modal-body text-center">
-					<iframe style="width: 100%;" src="/eureka_webservice/resources/terms.txt"></iframe>
+				<div class="modal-body text-center" style="height: 75%;">
+					<iframe style="width: 100%;
+	height: 100%;" src="/eureka_webservice/resources/terms.txt"></iframe>
 				</div>
 				<!-- / modal body -->
 
