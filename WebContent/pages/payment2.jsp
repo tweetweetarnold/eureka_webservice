@@ -41,6 +41,7 @@
 <body>
 
 	<jsp:include page="header.jsp" />
+	<fmt:setTimeZone value="GMT+8" />
 
 	<!-- Page Content -->
 	<div class="container">
@@ -166,7 +167,6 @@
 					Charges
 					<small>what you are paying for</small>
 				</h2>
-				<fmt:setTimeZone value="GMT+8" />
 				<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="paymentDisplay" varStatus="loop">
 					<div class="panel panel-default">
 						<div class="panel-heading" role="tab" id="headingOne">

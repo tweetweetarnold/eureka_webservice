@@ -57,14 +57,6 @@ public class OrderWindow {
 	public OrderWindow() {
 	}
 
-	public double getDiscountValue() {
-		return discountValue;
-	}
-
-	public void setDiscountValue(double discountValue) {
-		this.discountValue = discountValue;
-	}
-
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
 			double discount, double discountValue) {
 		this.startDate = startDate;
@@ -126,6 +118,14 @@ public class OrderWindow {
 	 */
 	public Date getStartDateFormatted() {
 		return startDateFormatted;
+	}
+
+	public double getDiscountValue() {
+		return discountValue;
+	}
+
+	public void setDiscountValue(double discountValue) {
+		this.discountValue = discountValue;
 	}
 
 	/**

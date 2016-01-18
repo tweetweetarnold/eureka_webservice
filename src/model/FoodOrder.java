@@ -37,15 +37,16 @@ public class FoodOrder {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderWindowId")
 	private OrderWindow orderWindow;
-	
+
 	/**
 	 * Creates a default constructor for FoodOrder
 	 */
 	public FoodOrder() {
 	}
-	
+
 	/**
-	 * Creates a new FoodOrder with a status, employee, list of food order items and the order window
+	 * Creates a new FoodOrder with a status, employee, list of food order items and the order
+	 * window
 	 * 
 	 * @param status The status of the Food order
 	 * @param employee The Employee who created this Food order
@@ -62,7 +63,7 @@ public class FoodOrder {
 		this.transactionId = null;
 		this.orderWindow = orderWindow;
 	}
-	
+
 	/**
 	 * Retrieves the current order window
 	 * 
@@ -71,7 +72,7 @@ public class FoodOrder {
 	public OrderWindow getOrderWindow() {
 		return orderWindow;
 	}
-	
+
 	/**
 	 * Changes the current order window with a new order window
 	 * 
@@ -80,7 +81,7 @@ public class FoodOrder {
 	public void setOrderWindow(OrderWindow orderWindow) {
 		this.orderWindow = orderWindow;
 	}
-	
+
 	/**
 	 * Retrieves the list of Food order items in the Food order
 	 * 
@@ -89,7 +90,7 @@ public class FoodOrder {
 	public Set<FoodOrderItem> getFoodOrderList() {
 		return foodOrderList;
 	}
-	
+
 	/**
 	 * Changes the current list of Food order items
 	 * 
@@ -98,7 +99,7 @@ public class FoodOrder {
 	public void setFoodOrderList(Set<FoodOrderItem> foodOrderList) {
 		this.foodOrderList = foodOrderList;
 	}
-	
+
 	/**
 	 * Retrieves the ID of the Food order
 	 * 
@@ -107,7 +108,7 @@ public class FoodOrder {
 	public int getFoodOrderId() {
 		return foodOrderId;
 	}
-	
+
 	/**
 	 * Changes the Food order ID
 	 * 
@@ -116,7 +117,7 @@ public class FoodOrder {
 	public void setFoodOrderId(int foodOrderId) {
 		this.foodOrderId = foodOrderId;
 	}
-	
+
 	/**
 	 * Retrieve the current status of the Food order
 	 * 
@@ -125,7 +126,7 @@ public class FoodOrder {
 	public String getStatus() {
 		return status;
 	}
-	
+
 	/**
 	 * Changes the current status of the Food order
 	 * 
@@ -134,7 +135,7 @@ public class FoodOrder {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	/**
 	 * Changes the current transaction ID of the Food order
 	 * 
@@ -143,7 +144,7 @@ public class FoodOrder {
 	public void setTransactionId(String transactionId) {
 		this.transactionId = transactionId;
 	}
-	
+
 	/**
 	 * Retrieves the Employee of this food order
 	 * 
@@ -152,7 +153,7 @@ public class FoodOrder {
 	public Employee getEmployee() {
 		return employee;
 	}
-	
+
 	/**
 	 * Changes the Employee of this food order
 	 * 
@@ -161,7 +162,7 @@ public class FoodOrder {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	
+
 	/**
 	 * Retrieves the date of this food order being created
 	 * 
@@ -170,7 +171,7 @@ public class FoodOrder {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	
+
 	/**
 	 * Changes the current date of the food order being created
 	 * 
@@ -192,11 +193,11 @@ public class FoodOrder {
 		for (FoodOrderItem item : set) {
 			result += (item.getQuantity() * item.getPrice());
 		}
-		
-//		result*=(1-orderWindow.getDiscount());
+
+		// result*=(1-orderWindow.getDiscount());
 		return result;
 	}
-	
+
 	/**
 	 * Retrieves the transaction ID for this food order
 	 * 

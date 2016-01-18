@@ -41,6 +41,7 @@
 <body>
 
 	<jsp:include page="header.jsp" />
+	<fmt:setTimeZone value="GMT+8" />
 
 	<!-- Page Content -->
 	<div class="container">
@@ -67,7 +68,6 @@
 			<div class="col-lg-12">
 
 				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-				<fmt:setTimeZone value="GMT+8" />
 					<c:forEach items="${sessionScope.orderHistory}" var="foodOrder" varStatus="loop">
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingOne">

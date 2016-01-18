@@ -42,11 +42,15 @@
 
 	<!-- header -->
 	<jsp:include page="header.jsp" />
+	<fmt:setTimeZone value="GMT+8" />
+
 
 
 	<!-- Page Content -->
 	<div class="container">
-	<fmt:setTimeZone value="GMT+8" />
+
+
+
 		<!-- Arnold's row -->
 		<div class="row">
 			<div class="col-lg-12">

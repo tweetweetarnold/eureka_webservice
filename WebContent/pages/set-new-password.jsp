@@ -62,7 +62,6 @@
 			<section class="sign-in-up-content">
 
 				<div class="row">
-					<fmt:setTimeZone value="GMT+8" />
 					<div class="col-md-12">
 
 						<h4 class="text-center">Enter Your New Password</h4>
