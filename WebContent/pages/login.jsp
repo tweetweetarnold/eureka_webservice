@@ -87,12 +87,13 @@
 
 					<!-- Logo -->
 					<figure class="text-center">
-						<a href="#">
-							<img class="img-logo" src="/eureka_webservice/resources/guri-one/templates/images/logo.png" alt="">
-						</a>
+						<!-- 						<img class="img-logo" src="/eureka_webservice/resources/guri-one/templates/images/logo.png" alt=""> -->
 					</figure>
 					<!-- /.text-center -->
-
+					<br>
+					<br>
+					<br>
+					<br>
 					<!-- Title -->
 					<h1>Order with LunchTime</h1>
 
