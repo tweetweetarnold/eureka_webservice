@@ -1,7 +1,6 @@
 package servlet.process.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,15 +13,13 @@ import model.Canteen;
 import model.Company;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import controller.CanteenController;
 import controller.CompanyController;
 import controller.OrderWindowController;
-import dao.OrderWindowDAO;
-import model.OrderWindow;
-import java.util.ArrayList;
 
 /**
  * Servlet implementation class ProcessAdminAddNewOrderWindowServlet
@@ -64,11 +61,15 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 		String startDatetimeString = request.getParameter("startDatetime");
 		String endDatetimeString = request.getParameter("endDatetime");
 
+		System.out.println("startDate string: " + startDatetimeString);
+		System.out.println("endDate string: " + endDatetimeString);
+
 		System.out.println("companyId: " + companyId);
 		System.out.println("canteenId: " + canteenId);
 
 		try {
-			DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm");
+			DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm").withZone(
+					DateTimeZone.forID("Asia/Singapore"));
 			DateTime startDatetime = formatter.parseDateTime(startDatetimeString);
 			DateTime endDatetime = formatter.parseDateTime(endDatetimeString);
 
@@ -83,20 +84,21 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 				discount = Double.parseDouble(discountString);
 			} catch (Exception e) {
 			}
-			
-			boolean available = orderWindowController.checkForOrderWindowAvailability(startDatetime, endDatetime,company,week);
+
+			boolean available = orderWindowController.checkForOrderWindowAvailability(
+					startDatetime, endDatetime, company, week);
 			if (!available) {
-				 throw new Exception("Order Window have already been taken");
+				throw new Exception("Order Window have already been taken");
 			} else {
 				orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
-					canteen, discount, week);
+						canteen, discount, week);
 			}
 			session.setAttribute("success", "New Order Window created successfully.");
 
 			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
 		} catch (Exception e) {
-//			PrintWriter out = response.getWriter();
-//			out.print("error: " + e.getMessage());
+			// PrintWriter out = response.getWriter();
+			// out.print("error: " + e.getMessage());
 			e.printStackTrace();
 			session.setAttribute("error", e.getMessage());
 			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
