@@ -21,6 +21,8 @@
 	System.out.println(currentTime);
 
 	long difference = currentTime.getMillis() - startDatetime.getMillis();
+	System.out.println("M1 "+ currentTime.getMillis());
+	System.out.println("M2 "+ startDatetime.getMillis());
 	System.out.println(difference);
 	if (difference > 300000) {
 		session.setAttribute("error", "Session Timeout. Please send the request again!");

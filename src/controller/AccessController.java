@@ -52,7 +52,7 @@ public class AccessController {
 	 *         null.
 	 */
 	public ArrayList<String> checkUserInputs(String email, String name, String password,
-			String confirmPwd, String contactNo, String acknowledged) {
+			String confirmPwd, String contactNo, String acknowledged, String companyCode) {
 		ArrayList<String> messages = new ArrayList<String>();
 
 		messages.addAll(checkEmailRequirements(email));
@@ -60,6 +60,7 @@ public class AccessController {
 		messages.addAll(checkContactNoRequirements(contactNo));
 		messages.addAll(checkPasswordMeetRequirements(password, confirmPwd));
 		messages.addAll(checkAcknowledgedTermsAndConditions(acknowledged));
+		messages.addAll(checkCompanyCode(companyCode));
 
 		if (!messages.isEmpty()) {
 			return messages;
@@ -96,6 +97,19 @@ public class AccessController {
 		ArrayList<String> messages = new ArrayList<String>();
 		if (name.equals("")) {
 			messages.add("Employee name cannot be empty.");
+		}
+		return messages;
+	}
+	
+	public ArrayList<String> checkCompanyCode(String companyCode) {
+		ArrayList<String> messages = new ArrayList<String>();
+		if (companyCode.equals("")) {
+			messages.add("Company code cannot be empty.");
+		} else {
+			Company company = companyController.getCompanyByCompanyCode(companyCode);
+			if (company == null) {
+				messages.add("Failed to find company");
+			}
 		}
 		return messages;
 	}
@@ -227,6 +241,7 @@ public class AccessController {
 
 		try {
 			company = companyController.getCompanyByCompanyCode(companyCode);
+			
 		} catch (Exception exception) {
 			throw new Exception("Failed to find company");
 		}

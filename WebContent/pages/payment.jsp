@@ -177,7 +177,7 @@
 				<h2 class="page-header">
 					Charges <small>what you are paying for</small>
 				</h2>
-
+				<fmt:setTimeZone value="GMT+8" />
 				<c:forEach items="${sessionScope.foodDisplayPaymentList}"
 					var="paymentDisplay" varStatus="loop">
 					<div class="panel panel-default">
@@ -220,8 +220,9 @@
 												<td>${foodOrderItem.food.name}</td>
 												<td><c:forEach
 														items="${foodOrderItem.modifierChosenList}"
-														var="modifierChosen">
-															${modifierChosen.name}, 
+														var="modifierChosen" varStatus="innerLoop">
+																${modifierChosen.name} 
+																<c:if test="${!innerLoop.last}">, </c:if>
 														</c:forEach></td>
 												<td class="text-center">${foodOrderItem.quantity}</td>
 												<td class="text-center"><fmt:formatNumber

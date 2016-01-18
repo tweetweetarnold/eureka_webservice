@@ -82,7 +82,7 @@ public class ProcessRegistrationServlet extends HttpServlet {
 
 			// Check parameters validity
 			ArrayList<String> errorMessages = accessController.checkUserInputs(email, employeeName,
-					password, confirmPwd, contactNo, acknowledged);
+					password, confirmPwd, contactNo, acknowledged, companyCode);
 
 			if (errorMessages != null) { // if parameters don't meet requirements
 				String msg = "";
