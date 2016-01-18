@@ -235,7 +235,7 @@ public class AccessController {
 	 *             Email Address already exists
 	 */
 	public String registerUser(String password, String name, String email, long contactNo,
-			String companyCode) throws Exception {
+			String companyCode, String deliveryPoint) throws Exception {
 		String encryptPassword = encryptPassword(email, password);
 		Company company = null;
 
@@ -247,6 +247,7 @@ public class AccessController {
 		}
 
 		Employee newEmployee = new Employee(encryptPassword, name, email, contactNo, company);
+		newEmployee.setDefaultDeliveryPoint(deliveryPoint);
 		newEmployee.setStatus(StringValues.EMPLOYEE_PENDING_VERIFICATION);
 		try {
 			employeeController.saveEmployee(newEmployee);

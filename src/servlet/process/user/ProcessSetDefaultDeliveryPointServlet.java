@@ -64,7 +64,7 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 
 		try {
 			String generatedEmployeeId = accessController.registerUser(password, employeeName,
-					email, contactNumber, companyCode);
+					email, contactNumber, companyCode, buildingName);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
