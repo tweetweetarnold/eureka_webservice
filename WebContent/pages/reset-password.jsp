@@ -65,7 +65,7 @@
 
 					<div class="col-md-12">
 
-						<h4 class="text-center">Create an account</h4>
+						<h4 class="text-center">Enter Your Email Address</h4>
 
 						<!-- Success message handling -->
 						<c:if test="${not empty sessionScope.success}">
@@ -83,7 +83,7 @@
 
 						<!-- Error message handling -->
 						<c:if test="${not empty sessionScope.error}">
-							<div class="alert alert-danger alert-dismissible fade in" role="alert">
+							<div class="alert alert-danger alert-dismissible fade in" role="alert" >
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>

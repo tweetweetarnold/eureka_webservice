@@ -360,9 +360,12 @@ public class AccessController {
 
 		String appUrl = "http://" + serverName + ":" + serverPort + contextPath;
 		
+		DateTimeZone.setDefault(DateTimeZone.forID("Asia/Singapore"));
+		System.out.println("Controller TIME ZONE: " + DateTimeZone.getDefault().toString());
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm");
 		DateTime currentTime = new DateTime(DateTimeZone.forID("Asia/Singapore"));
 		System.out.println("NOW: " + currentTime);
+		
 		String time = aes.encrypt(formatter.print(currentTime));
 		String token = time;
 		String eEncrypt = aes.encrypt(email);

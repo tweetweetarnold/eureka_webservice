@@ -13,20 +13,22 @@
 		param = param.replaceAll(" ", "+");
 	}
 	String token = aes.decrypt(param);
-
+	DateTimeZone.setDefault(DateTimeZone.forID("Asia/Singapore"));
+	System.out.println("PROTECT TIME ZONE: " + DateTimeZone.getDefault().toString());
 	DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm");
 	DateTime startDatetime = formatter.parseDateTime(token);
 
 	DateTime currentTime = new DateTime(DateTimeZone.forID("Asia/Singapore"));
-	System.out.println(currentTime);
+	
+	System.out.println("Current time "+currentTime);
 
 	long difference = currentTime.getMillis() - startDatetime.getMillis();
-	System.out.println("M1 "+ currentTime.getMillis());
-	System.out.println("M2 "+ startDatetime.getMillis());
+	System.out.println("Current time in Millis"+ currentTime.getMillis());
+	System.out.println("Time from token in Millis "+ startDatetime.getMillis());
 	System.out.println(difference);
 	if (difference > 300000) {
 		session.setAttribute("error", "Session Timeout. Please send the request again!");
-		response.sendRedirect("eureka_webservice/reset-password.jsp");
+		response.sendRedirect("/eureka_webservice/pages/reset-password.jsp");
 	} else {
 
 		String email = (String) session.getAttribute("email");
