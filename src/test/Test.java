@@ -290,7 +290,7 @@ public class Test {
 
 		Stall stall7 = new Stall("REX(Halal)", 62684806, null, null,
 				"resources/img/stall/img-tj.jpg");
-		Food food16 = new Food("Chicken Rice", "", 3.00,
+		Food food16 = new Food("Chicken Rice(Chicken Wing)", "", 3.00,
 				"resources/img/food/img-friedchickenbiryani.jpg", stall7);
 		Food food17 = new Food("Chicken Fried Rice", "", 3.00,
 				"resources/img/food/img-chickenfriedrice.jpg", stall7);
@@ -329,17 +329,25 @@ public class Test {
 		Food nfood25 = new Food("Beef Horfun(Fried)", "", 4.00, null, stall7);
 		Food nfood26 = new Food("Beef Beehoon(Fried)", "", 4.00, null, stall7);
 		
+		Food nfood27 = new Food("Chicken Rice(Chicken Breast)", "", 3.00,
+				null, stall7);
+		
+		Food nfood28 = new Food("Chicken Rice(Chicken Thigh)", "", 3.00,
+				null, stall7);
+		
+		Food nfood29 = new Food("Chicken Rice(Drumstick)", "", 3.50,
+				null, stall7);
 
-		Modifier modifierA16 = new Modifier("Change to drumstick", "", 0.50, food16);
-		Modifier modifierA17 = new Modifier("Chicken Wing", "", 0.0, food16);
-		Modifier modifierA18 = new Modifier("Chicken Breast", "", 0.0, food16);
-		Modifier modifierA19 = new Modifier("Chicken Thigh", "", 0.0, food16);
-		Set<Modifier> modifierListA16 = new HashSet<Modifier>();
-		modifierListA16.add(modifierA16);
-		modifierListA16.add(modifierA17);
-		modifierListA16.add(modifierA18);
-		modifierListA16.add(modifierA19);
-		food16.setModifierList(modifierListA16);
+//		Modifier modifierA16 = new Modifier("Change to drumstick", "", 0.50, food16);
+//		Modifier modifierA17 = new Modifier("Chicken Wing", "", 0.0, food16);
+//		Modifier modifierA18 = new Modifier("Chicken Breast", "", 0.0, food16);
+//		Modifier modifierA19 = new Modifier("Chicken Thigh", "", 0.0, food16);
+//		Set<Modifier> modifierListA16 = new HashSet<Modifier>();
+//		modifierListA16.add(modifierA16);
+//		modifierListA16.add(modifierA17);
+//		modifierListA16.add(modifierA18);
+//		modifierListA16.add(modifierA19);
+//		food16.setModifierList(modifierListA16);
 
 		foodListB7.add(food16);
 		foodListB7.add(food17);
@@ -364,6 +372,9 @@ public class Test {
 		foodListB7.add(nfood24);
 		foodListB7.add(nfood25);
 		foodListB7.add(nfood26);
+		foodListB7.add(nfood27);
+		foodListB7.add(nfood28);
+		foodListB7.add(nfood29);
 		stall7.setFoodList(foodListB7);
 
 		Stall stall8 = new Stall("Vegetarian Stall", 91182963, null, null,
@@ -1611,10 +1622,10 @@ public class Test {
 //		session.save(modifierAMalay2);
 		session.save(modifierMixed1);
 		session.save(modifierMixed2);
-		session.save(modifierA16);
-		session.save(modifierA17);
-		session.save(modifierA18);
-		session.save(modifierA19);
+//		session.save(modifierA16);
+//		session.save(modifierA17);
+//		session.save(modifierA18);
+//		session.save(modifierA19);
 
 		session.save(modifierA27);
 		session.save(modifierI1);
@@ -1742,6 +1753,9 @@ public class Test {
 		session.save(nfood24);
 		session.save(nfood25);
 		session.save(nfood26);
+		session.save(nfood27);
+		session.save(nfood28);
+		session.save(nfood29);
 		
 		session.save(modifierNew1);
 		session.save(modifierNew2);
