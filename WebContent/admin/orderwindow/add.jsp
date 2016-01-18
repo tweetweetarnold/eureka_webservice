@@ -119,12 +119,6 @@
 											</div>
 										</div>
 
-
-										<div class="form-group">
-											<label>Discount (decimal)</label>
-											<input name="discount" class="form-control">
-										</div>
-
 										<div class="form-group">
 											<label>Discount Value (decimal)</label>
 											<input name="discountValue" class="form-control">

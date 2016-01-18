@@ -42,18 +42,18 @@ public class ProcessLoginServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
@@ -95,26 +95,13 @@ public class ProcessLoginServlet extends HttpServlet {
 			}
 
 			// (3) VERIFY AVAILABLE OPENED ORDER WINDOW.
-			ArrayList<OrderWindow> windowList = orderWindowController
-					.getAllOpenedWindowsForCompany(emp.getCompany());
+			ArrayList<OrderWindow> windowList = orderWindowController.getAllOpenedWindowsForCompany(emp.getCompany());
 			if (windowList == null || windowList.size() == 0) {
 				System.out.println("windowList size: " + windowList.size());
-				// <<<<<<< HEAD
-				// response.sendRedirect("orderHistory.jsp"); //TODO: for login without order
-				// window open
-
-				// =======
-				// if (!response.isCommitted()) {
-				// System.out.println("FGHJKL:DFGHJKL:DFGHJKLDFGHJKL:DFGHJKLDFGHJKLDFGHJKLDFGBHNJLDFGHJKL");
-				// session.setAttribute("suspended", "true");
-				// response.sendRedirect("/eureka_webservice/pages/orderHistory.jsp");
-				// }
-				// >>>>>>> origin/master
 			}
 
 			OrderWindow window = null;
-			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
-					+ "|";
+			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail() + "|";
 
 			if (!windowList.isEmpty()) {
 				window = windowList.get(0);
@@ -131,10 +118,11 @@ public class ProcessLoginServlet extends HttpServlet {
 			System.out.println("TokenID is set in session");
 
 			// for login2
-			ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
-			canteenList.add(window.getCanteen());
-			session.setAttribute("canteenList", canteenList);
-
+			if (window != null) {
+				ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
+				canteenList.add(window.getCanteen());
+				session.setAttribute("canteenList", canteenList);
+			}
 			// For testing: print JSON rather than redirect
 			if (test != null && test.equals("true")) {
 				obj.put("user", emp.getEmail());

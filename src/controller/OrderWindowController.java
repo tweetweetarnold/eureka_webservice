@@ -67,7 +67,7 @@ public class OrderWindowController {
 		}
 	}
 
-	public void createNewOrderindow(DateTime startDate, DateTime endDate, Company company,
+	public void createNewOrderWindow(DateTime startDate, DateTime endDate, Company company,
 			Canteen canteen, double discount, double discountValue, int numberOfWeeks) {
 		if (numberOfWeeks > 0) {
 			ArrayList<DateTime> startTimeList = new ArrayList<DateTime>();

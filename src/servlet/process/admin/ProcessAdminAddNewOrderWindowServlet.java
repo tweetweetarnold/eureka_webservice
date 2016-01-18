@@ -55,12 +55,12 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 		CanteenController canteenController = new CanteenController();
 
 		String weekString = request.getParameter("repeat");
-		String discountString = request.getParameter("discount");
+		String discountString = request.getParameter("discountValue");
 		String companyId = request.getParameter("company");
 		String canteenId = request.getParameter("canteen");
 		String startDatetimeString = request.getParameter("startDatetime");
 		String endDatetimeString = request.getParameter("endDatetime");
-
+		
 		System.out.println("startDate string: " + startDatetimeString);
 		System.out.println("endDate string: " + endDatetimeString);
 
@@ -83,6 +83,7 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 			try {
 				discount = Double.parseDouble(discountString);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
 			boolean available = orderWindowController.checkForOrderWindowAvailability(
@@ -91,7 +92,7 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 				throw new Exception("Order Window have already been taken");
 			} else {
 				orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
-						canteen, discount, week);
+						canteen, 0.0,discount, week);
 			}
 			session.setAttribute("success", "New Order Window created successfully.");
 
