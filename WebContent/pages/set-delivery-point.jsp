@@ -103,8 +103,8 @@
 
 						<form class="sign-in-up-form" action="/eureka_webservice/ProcessSetDefaultDeliveryPointServlet" role="form">
 
-							<select class="form-control" required>
-								<option>Select</option>
+							<select class="form-control" name="deliveryPoint" required>
+								
 								<c:forEach items="${sessionScope.buildingSet}" var="building">
 									<option value="${building}">${building}</option>
 								</c:forEach>

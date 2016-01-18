@@ -67,7 +67,7 @@
 			<div class="col-lg-12">
 
 				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
+				<fmt:setTimeZone value="GMT+8" />
 					<c:forEach items="${sessionScope.orderHistory}" var="foodOrder" varStatus="loop">
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingOne">
@@ -83,6 +83,10 @@
 							</div>
 							<div id="collapse${loop.index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 								<div class="panel-body">
+									<c:if test="${foodOrder.status ne 'Submitted'}">
+									Transaction ID: ${foodOrder.transactionId}
+									<br>
+									</c:if>
 									Canteen: ${foodOrder.orderWindow.canteen.name}
 									<br>
 									Price:
@@ -107,8 +111,9 @@
 													<td>${foodOrderItem.food.stall.name}</td>
 													<td>${foodOrderItem.food.name}</td>
 													<td>
-														<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifierChosen">
-															${modifierChosen.name}, 
+														<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifierChosen" varStatus="innerLoop">
+															${modifierChosen.name}
+															<c:if test="${!innerLoop.last}">, </c:if>
 														</c:forEach>
 													</td>
 													<td class="text-center">${foodOrderItem.quantity}</td>

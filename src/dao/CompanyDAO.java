@@ -40,7 +40,13 @@ public class CompanyDAO {
 	 */
 	public Company getCompanyByCompanyCode(String companyCode) {
 		System.out.println(companyCode);
-		return (Company) MyConnection.getCompanyByCompanyCode(companyCode);
+		Company company = (Company) MyConnection.getCompanyByCompanyCode(companyCode);
+		if (company != null) {
+			return (Company) MyConnection.getCompanyByCompanyCode(companyCode);
+		} else {
+			return null;
+		}
+		
 
 	}
 

@@ -94,7 +94,7 @@
 							<c:remove var="error" scope="session" />
 						</c:if>
 						<!-- / error message handling -->
-
+						<fmt:setTimeZone value="GMT+8" />
 						<form class="sign-in-up-form" action="/eureka_webservice/ProcessResetPasswordServlet" role="form">
 
 							<div class="form-group">

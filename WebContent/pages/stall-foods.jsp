@@ -157,7 +157,7 @@
 												</c:when>
 												<c:otherwise>
 													<tr>
-														<td colspan="4" style="text-align: center;">No modifiers available</td>
+														<td colspan="4" style="text-align: center;">No add-ons available</td>
 													</tr>
 												</c:otherwise>
 											</c:choose>

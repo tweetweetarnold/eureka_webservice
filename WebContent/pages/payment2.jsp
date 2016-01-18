@@ -166,7 +166,7 @@
 					Charges
 					<small>what you are paying for</small>
 				</h2>
-
+				<fmt:setTimeZone value="GMT+8" />
 				<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="paymentDisplay" varStatus="loop">
 					<div class="panel panel-default">
 						<div class="panel-heading" role="tab" id="headingOne">
@@ -206,8 +206,9 @@
 												<td>${foodOrderItem.food.stall.name}</td>
 												<td>${foodOrderItem.food.name}</td>
 												<td>
-													<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifierChosen">
-															${modifierChosen.name}, 
+													<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifierChosen" varStatus="innerLoop">
+															${modifierChosen.name}
+															<c:if test="${!innerLoop.last}">, </c:if>
 														</c:forEach>
 												</td>
 												<td class="text-center">${foodOrderItem.quantity}</td>
