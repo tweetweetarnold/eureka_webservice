@@ -45,7 +45,7 @@
 </head>
 
 <body>
-<fmt:setTimeZone value="GMT+8" />
+	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 
@@ -70,7 +70,7 @@
 
 							<div class="row">
 
-								<div class="col-lg-12">
+								<div class="col-md-6 col-lg-6">
 
 									<form role="form" action="/eureka_webservice/ProcessAdminAddNewOrderWindowServlet" id="submitForm">
 
@@ -94,25 +94,31 @@
 											</select>
 										</div>
 
-										<div class="form-group">
-											<label>Start Datetime</label>
-											<div class='input-group date' id='startDatetime'>
-												<input type='text' class="form-control" name="startDatetime" required />
-												<span class="input-group-addon">
-													<span class="glyphicon glyphicon-calendar"></span>
-												</span>
+										<div class="container">
+											<div class='col-md-3'>
+												<div class="form-group">
+													<label>Start Datetime</label>
+													<div class='input-group date' id='datetimepicker6'>
+														<input type='text' class="form-control" name="startDatetime" required />
+														<span class="input-group-addon">
+															<span class="glyphicon glyphicon-calendar"></span>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class='col-md-3'>
+												<div class="form-group">
+													<label>End Datetime</label>
+													<div class='input-group date' id='datetimepicker7'>
+														<input type='text' class="form-control" name="endDatetime" required />
+														<span class="input-group-addon">
+															<span class="glyphicon glyphicon-calendar"></span>
+														</span>
+													</div>
+												</div>
 											</div>
 										</div>
 
-										<div class="form-group">
-											<label>End Datetime</label>
-											<div class='input-group date' id='endDatetime'>
-												<input type='text' class="form-control" name="endDatetime" required />
-												<span class="input-group-addon">
-													<span class="glyphicon glyphicon-calendar"></span>
-												</span>
-											</div>
-										</div>
 
 										<div class="form-group">
 											<label>Discount (decimal)</label>
@@ -195,28 +201,48 @@
 	<script src="http://momentjs.com/downloads/moment.js"></script>
 	<script src="/eureka_webservice/resources/js/bootstrap-datetimepicker.min.js"></script>
 
-	<!-- Datepicker -->
+	<!-- new datepicker -->
 	<script type="text/javascript">
 		$(function() {
-			$('#startDatetime').datetimepicker({
-				inline : true,
-				sideBySide : true,
-				format : 'DD-MMMM-YYYY hh:mm'
+			$('#datetimepicker6').datetimepicker({
+				format : 'DD-MMMM-YYYY HH:mm'
 			});
-			$('#endDatetime').datetimepicker({
+			$('#datetimepicker7').datetimepicker({
 				useCurrent : false,
-				inline : true,
-				sideBySide : true,
-				format : 'DD-MMMM-YYYY hh:mm'
-			// Important! See issue #1075
+				format : 'DD-MMMM-YYYY HH:mm'
+			//Important! See issue #1075
 			});
-			$("#startDatetime").on("dp.change", function(e) {
-				$('#endDatetime').data("DateTimePicker").minDate(e.date);
+			$("#datetimepicker6").on("dp.change", function(e) {
+				$('#datetimepicker7').data("DateTimePicker").minDate(e.date);
 			});
-			$("#endDatetime").on("dp.change", function(e) {
-				$('#startDatetime').data("DateTimePicker").maxDate(e.date);
+			$("#datetimepicker7").on("dp.change", function(e) {
+				$('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
 			});
 		});
+	</script>
+
+	<!-- Datepicker -->
+	<script type="text/javascript">
+		// 		$(function() {
+		// 			$('#startDatetime').datetimepicker({
+		// 				inline : true,
+		// 				sideBySide : true,
+		// 				format : 'DD-MMMM-YYYY hh:mm'
+		// 			});
+		// 			$('#endDatetime').datetimepicker({
+		// 				useCurrent : false,
+		// 				inline : true,
+		// 				sideBySide : true,
+		// 				format : 'DD-MMMM-YYYY hh:mm'
+		// 			// Important! See issue #1075
+		// 			});
+		// 			$("#startDatetime").on("dp.change", function(e) {
+		// 				$('#endDatetime').data("DateTimePicker").minDate(e.date);
+		// 			});
+		// 			$("#endDatetime").on("dp.change", function(e) {
+		// 				$('#startDatetime').data("DateTimePicker").maxDate(e.date);
+		// 			});
+		// 		});
 	</script>
 
 </body>
