@@ -56,11 +56,11 @@ public class LoadResetPasswordPage extends HttpServlet {
 			String token = (String)request.getParameter("token");
 			session.setAttribute("token",token);
 			session.setAttribute("email", eDecrypt);
-			response.sendRedirect("/eureka_webservice/pages/setNewPassword.jsp");
+			response.sendRedirect("/eureka_webservice/pages/set-new-password.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error: " + e.getMessage());
-			response.sendRedirect("/eureka_webservice/pages/resetPassword.jsp");
+			response.sendRedirect("/eureka_webservice/pages/reset-password.jsp");
 		}
 	}
 }

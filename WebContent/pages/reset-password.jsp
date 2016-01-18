@@ -130,26 +130,6 @@
 
 
 
-			<div class="row">
-
-				<div class="col-md-12">
-
-					<section class="footer-copyright text-center">
-
-						<p>
-							Made with
-							<i class="fa fa-heart"></i>
-							by Aryandhani.
-						</p>
-
-					</section>
-					<!-- /.footer-section -->
-
-				</div>
-				<!-- /.col-md-12 -->
-
-			</div>
-			<!-- /.row -->
 
 		</div>
 		<!-- /.container -->

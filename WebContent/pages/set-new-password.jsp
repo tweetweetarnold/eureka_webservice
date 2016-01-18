@@ -97,14 +97,13 @@
 
 						<form class="sign-in-up-form" action="/eureka_webservice/ProcessResetPasswordRedirectServlet" role="form">
 
+
 							<div class="form-group">
-								
+								<input class="form-control" type="password" name="newPassword" placeholder="Password" style="width: 95%;"
+									required
+								>
 							</div>
-							
-							<div class="form-group">
-								<input class="form-control" type="password" name="newPassword" placeholder="Password" style="width: 95%;" required>
-							</div>
-							
+
 
 							<div class="form-group">
 								<input class="form-control" type="password" name="confirmPassword" placeholder="Type your password again"
@@ -144,28 +143,6 @@
 			<!-- /.sign-in-up-content -->
 
 
-
-
-			<div class="row">
-
-				<div class="col-md-12">
-
-					<section class="footer-copyright text-center">
-
-						<p>
-							Made with
-							<i class="fa fa-heart"></i>
-							by Aryandhani.
-						</p>
-
-					</section>
-					<!-- /.footer-section -->
-
-				</div>
-				<!-- /.col-md-12 -->
-
-			</div>
-			<!-- /.row -->
 
 		</div>
 		<!-- /.container -->
