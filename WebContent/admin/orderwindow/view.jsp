@@ -83,7 +83,7 @@
 										<td>${window.windowId}</td>
 										<td>${window.company.name}</td>
 										<td>${window.canteen.name}</td>
-										<td>${window.discount}</td>
+										<td>$${window.discountValue}</td>
 										<td>
 											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.createDate}" />
 										</td>
