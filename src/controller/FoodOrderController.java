@@ -195,6 +195,7 @@ public class FoodOrderController {
 				returnList.add(f);
 			}
 		}
+		returnList = incrementQuantity(returnList);
 		return returnList;
 	}
 

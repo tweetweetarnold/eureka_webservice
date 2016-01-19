@@ -168,6 +168,9 @@
 					</form>
 				</c:if>
 				<!-- End of PayPal -->
+				<div class="row">
+			
+		</div>
 			</div>
 			<!-- /col-md-12 -->
 		</div>
@@ -177,7 +180,12 @@
 			<div class="col-md-12">
 				<h2 class="page-header">
 					Charges <small>what you are paying for</small>
+					<i class="pull-right"><fmt:formatNumber value="${sessionScope.user.amountOwed}" var="owedPrice" minFractionDigits="2" />
+						Amount Owed: $
+						<c:out value="${owedPrice}" />
+					</i>
 				</h2>
+				
 				<c:forEach items="${sessionScope.foodDisplayPaymentList}"
 					var="paymentDisplay" varStatus="loop">
 					<div class="panel panel-default">
