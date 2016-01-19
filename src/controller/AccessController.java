@@ -148,6 +148,26 @@ public class AccessController {
 		return messages;
 	}
 	
+	public ArrayList<String> checkChangePasswordRequirements(Employee e, String oldPassword, String newPassword,
+			String confirmNewPassword) {
+		ArrayList<String> messages = new ArrayList<String>();
+		boolean isNotCorrect = false;
+		if (!e.getPassword().equals(encryptPassword(e.getEmail(), oldPassword))) {
+			messages.add("Old password is invalid.");
+			isNotCorrect = true;
+		}
+		ArrayList<String> errorMessages = checkPasswordMeetRequirements(newPassword,
+				confirmNewPassword);
+		
+		if (!errorMessages.isEmpty()) {
+			if (isNotCorrect) {
+				errorMessages.add("Old password is invalid.");
+			}
+			return errorMessages;
+		}
+		return messages;
+	}
+	
 	/**
 	 * Validates the contact number for any violation of the following requirements: 
 	 * <ul>
@@ -284,17 +304,23 @@ public class AccessController {
 	 */
 	public boolean updateEmployeePassword(Employee e, String oldPassword, String newPassword,
 			String confirmNewPassword) throws Exception {
-		if (e.getPassword().equals(encryptPassword(e.getEmail(), oldPassword))) {
-			ArrayList<String> errorMessages = checkPasswordMeetRequirements(newPassword,
+
+			ArrayList<String> errorMessages = checkChangePasswordRequirements(e, oldPassword, newPassword,
 					confirmNewPassword);
 			if (!errorMessages.isEmpty()) {
-				throw new Exception();
+				String msg = "";
+				for (String s : errorMessages) {
+					msg = s + "\n" + msg;
+				}
+				throw new Exception(msg);
+
+				
 			}
 			e.setPassword(encryptPassword(e.getEmail(), newPassword));
 			employeeController.updateEmployee(e);
 			return true;
-		}
-		return false;
+		
+		
 	}
 
 	/**

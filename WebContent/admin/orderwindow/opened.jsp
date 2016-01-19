@@ -141,8 +141,10 @@
 																		<tr>
 																			<td>${foodOrderItem.food.name}</td>
 																			<td>
-																				<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifier">
-																				${modifier.name}, </c:forEach>
+																				<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifier" varStatus="innerLoop">
+																					${modifier.name}
+																					<c:if test="${!innerLoop.last}">, </c:if> 
+																				</c:forEach>
 																			</td>
 																			<td>${foodOrderItem.quantity}</td>
 																			<td>

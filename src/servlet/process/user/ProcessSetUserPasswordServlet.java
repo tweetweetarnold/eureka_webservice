@@ -1,6 +1,7 @@
 package servlet.process.user;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,12 +51,13 @@ public class ProcessSetUserPasswordServlet extends HttpServlet {
 		String confirmNewPassword = request.getParameter("confirmNewPassword");
 
 		try {
+			
 			boolean ans = accessController.updateEmployeePassword(e, oldPassword, newPassword,
 					confirmNewPassword);
 			if (ans) {
 				session.setAttribute("success", "Password updated successfully.");
 				response.sendRedirect("/eureka_webservice/pages/profile.jsp");
-			}
+			} 
 
 		} catch (Exception e1) {
 			e1.printStackTrace();
