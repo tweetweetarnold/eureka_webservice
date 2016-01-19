@@ -42,18 +42,18 @@ public class ProcessLoginServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
@@ -69,19 +69,24 @@ public class ProcessLoginServlet extends HttpServlet {
 
 		try {
 			// Get User Parameters
-			email = (String) request.getParameter("email");
-			inputPwd = (String) request.getParameter("password");
-			test = request.getParameter("test"); // For testing
+			email = request.getParameter("email");
+			inputPwd = request.getParameter("password");
+			test = request.getParameter("test"); // To know if it is for testing so that will print
+													// in JSON instead
 
-			// (1) VERIFY USER CREDENTIALS. If user does not exist, returns
-			// null.
+			/*
+			 * (1) VERIFY USER CREDENTIALS. If user does not exist, returns null
+			 */
 			Employee emp = accessController.authenticateUser(email, inputPwd);
 			if (emp == null) {
+				// Throw Exception to return user back to login page
 				throw new Exception("Authentication failed. Please check your credentials.");
 			}
 			System.out.println("User is authenticated: " + emp.getName());
 
-			// (2) CHECK USER STATUS. If user status is not ok, do something
+			/*
+			 * (2) CHECK USER STATUS. If user status is not ok, do something
+			 */
 			String empStatus = emp.getStatus();
 			switch (empStatus) {
 			case StringValues.EMPLOYEE_PENDING_VERIFICATION:
@@ -94,14 +99,22 @@ public class ProcessLoginServlet extends HttpServlet {
 				throw new Exception("Account has been disabled.");
 			}
 
-			// (3) VERIFY AVAILABLE OPENED ORDER WINDOW.
-			ArrayList<OrderWindow> windowList = orderWindowController.getAllOpenedWindowsForCompany(emp.getCompany());
+			/*
+			 * (3) VERIFY AVAILABLE OPENED ORDER WINDOW.
+			 */
+			ArrayList<OrderWindow> windowList = orderWindowController
+					.getAllOpenedWindowsForCompany(emp.getCompany());
 			if (windowList == null || windowList.size() == 0) {
 				System.out.println("windowList size: " + windowList.size());
 			}
 
+			/*
+			 * ************* End of validation ********************
+			 */
+
 			OrderWindow window = null;
-			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail() + "|";
+			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
+					+ "|";
 
 			if (!windowList.isEmpty()) {
 				window = windowList.get(0);
@@ -132,17 +145,6 @@ public class ProcessLoginServlet extends HttpServlet {
 			} else {
 				if (!response.isCommitted()) {
 					response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
-					// For testing: print JSON rather than redirect
-					// if (test != null && test.equals("true")) {
-					// obj.put("user", emp.getEmail());
-					// obj.put("tokenID", tokenID);
-					// obj.put("status", "ok");
-					// out.print(gson.toJson(obj));
-					// } else {
-					// if (!response.isCommitted()) {
-					// response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
-					// }
-					// >>>>>>> origin/master
 				}
 			}
 
@@ -172,7 +174,6 @@ public class ProcessLoginServlet extends HttpServlet {
 					}
 				}
 			} catch (JSONException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}

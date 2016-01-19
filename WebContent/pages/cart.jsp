@@ -115,7 +115,7 @@
 										<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifierChosen" varStatus="innerLoop">
 											${modifierChosen.name}
 											<c:if test="${!innerLoop.last}">, </c:if>
-									</c:forEach>
+										</c:forEach>
 									</td>
 									<td>
 										<c:set value="${overallPrice + foodOrderItem.price}" var="overallPrice" />
@@ -145,16 +145,31 @@
 
 		<div class="row">
 			<div class="col-md-4 pull-right">
-				<h2>
-					Order Price:
-					<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />
-					$${overallPrice2}
-					<br>
-					<c:set value="${sessionScope.orderWindow.discountValue}" var="discountValue" />
-					Discount:
-					<fmt:formatNumber value="${discountValue}" var="discountValue2" minFractionDigits="2"/>
-					$${discountValue2}
-				</h2>
+
+				<table class="table">
+					<tr>
+						<td>
+							<h2>Order Price:</h2>
+						</td>
+						<td>
+							<h2>
+								<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />
+								$${overallPrice2}
+							</h2>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h2>Discount:</h2>
+						</td>
+						<td>
+							<h2>
+								<fmt:formatNumber value="${sessionScope.orderWindow.discountValue}" var="discountValue2" minFractionDigits="2" />
+								$${discountValue2}
+							</h2>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 
