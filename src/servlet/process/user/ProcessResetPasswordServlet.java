@@ -66,7 +66,7 @@ public class ProcessResetPasswordServlet extends HttpServlet {
 					request.getServerPort(), request.getContextPath(), emailAddress, toSendEmail);
 
 			session.setAttribute("success", "An email has been sent to you. "
-					+ "Please check your email for instructions on resetting your password.");
+					+ "Please check your email within 5 minutes for instructions on resetting your password");
 			response.sendRedirect("/eureka_webservice/pages/login.jsp");
 
 		} catch (Exception e) {

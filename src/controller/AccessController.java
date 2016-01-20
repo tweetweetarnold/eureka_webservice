@@ -400,7 +400,7 @@ public class AccessController {
 
 		javaEmail.setMailServerProperties();
 		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Password Reset", "Dear User,<br><br>"
-				+ "To reset your password for LunchTime Ordering App, please click the following link:<br> "
+				+ "To reset your password for LunchTime Ordering App, please on click the following link <b>within 5 minutes</b>:<br> "
 				+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
 				+ "Admin<br><br>"
 				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
