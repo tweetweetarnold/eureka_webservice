@@ -20,12 +20,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "canteen")
 public class Canteen {
+	private String address;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int canteenId;
-	private String name;
-	private String address;
 	private Date createDate;
+	private String name;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "canteen")
 	private Set<Stall> stallList;
 
@@ -51,21 +51,12 @@ public class Canteen {
 	}
 
 	/**
-	 * Retrieves the name of the Canteen
+	 * Retrieves the address of the Canteen
 	 * 
-	 * @return The Canteen's name
+	 * @return The Canteen's address
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Changes the name of the Canteen
-	 * 
-	 * @param name The Canteen's new name
-	 */
-	public void setName(String name) {
-		this.name = name;
+	public String getAddress() {
+		return address;
 	}
 
 	/**
@@ -78,12 +69,30 @@ public class Canteen {
 	}
 
 	/**
-	 * Retrieves the address of the Canteen
+	 * Retrieves the date of the Canteen's entity model created
 	 * 
-	 * @return The Canteen's address
+	 * @return The date which the Canteen entity was created
 	 */
-	public String getAddress() {
-		return address;
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	/**
+	 * Retrieves the name of the Canteen
+	 * 
+	 * @return The Canteen's name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Retrieves the list of current Stalls in the Canteen
+	 * 
+	 * @return The list of Stalls in the Canteen
+	 */
+	public Set<Stall> getStallList() {
+		return stallList;
 	}
 
 	/**
@@ -96,21 +105,12 @@ public class Canteen {
 	}
 
 	/**
-	 * Retrieves the date of the Canteen's entity model created
+	 * Changes the name of the Canteen
 	 * 
-	 * @return The date which the Canteen entity was created
+	 * @param name The Canteen's new name
 	 */
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	/**
-	 * Retrieves the list of current Stalls in the Canteen
-	 * 
-	 * @return The list of Stalls in the Canteen
-	 */
-	public Set<Stall> getStallList() {
-		return stallList;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**

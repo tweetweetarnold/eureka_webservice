@@ -23,20 +23,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "foodorder")
 public class FoodOrder {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int foodOrderId;
-	private String status;
+	private Date createDate;
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "email")
 	private Employee employee;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int foodOrderId;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")
 	private Set<FoodOrderItem> foodOrderList;
-	private Date createDate;
-	private String transactionId;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderWindowId")
 	private OrderWindow orderWindow;
+	private String status;
+	private String transactionId;
 
 	/**
 	 * Creates a default constructor for FoodOrder
@@ -65,84 +65,12 @@ public class FoodOrder {
 	}
 
 	/**
-	 * Retrieves the current order window
+	 * Retrieves the date of this food order being created
 	 * 
-	 * @return The window period for ordering food
+	 * @return The date of the food order created
 	 */
-	public OrderWindow getOrderWindow() {
-		return orderWindow;
-	}
-
-	/**
-	 * Changes the current order window with a new order window
-	 * 
-	 * @param orderWindow The new order window for ordering food
-	 */
-	public void setOrderWindow(OrderWindow orderWindow) {
-		this.orderWindow = orderWindow;
-	}
-
-	/**
-	 * Retrieves the list of Food order items in the Food order
-	 * 
-	 * @return The list of food order items
-	 */
-	public Set<FoodOrderItem> getFoodOrderList() {
-		return foodOrderList;
-	}
-
-	/**
-	 * Changes the current list of Food order items
-	 * 
-	 * @param foodOrderList The new list of Food order items
-	 */
-	public void setFoodOrderList(Set<FoodOrderItem> foodOrderList) {
-		this.foodOrderList = foodOrderList;
-	}
-
-	/**
-	 * Retrieves the ID of the Food order
-	 * 
-	 * @return The Food order's ID
-	 */
-	public int getFoodOrderId() {
-		return foodOrderId;
-	}
-
-	/**
-	 * Changes the Food order ID
-	 * 
-	 * @param foodOrderId The new Food order ID
-	 */
-	public void setFoodOrderId(int foodOrderId) {
-		this.foodOrderId = foodOrderId;
-	}
-
-	/**
-	 * Retrieve the current status of the Food order
-	 * 
-	 * @return the status of the Food order
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * Changes the current status of the Food order
-	 * 
-	 * @param status The new status of the Food order
-	 */
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	/**
-	 * Changes the current transaction ID of the Food order
-	 * 
-	 * @param transactionId The payment transaction ID
-	 */
-	public void setTransactionId(String transactionId) {
-		this.transactionId = transactionId;
+	public Date getCreateDate() {
+		return createDate;
 	}
 
 	/**
@@ -155,30 +83,39 @@ public class FoodOrder {
 	}
 
 	/**
-	 * Changes the Employee of this food order
+	 * Retrieves the ID of the Food order
 	 * 
-	 * @param employee The new Employee of this food order
+	 * @return The Food order's ID
 	 */
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public int getFoodOrderId() {
+		return foodOrderId;
 	}
 
 	/**
-	 * Retrieves the date of this food order being created
+	 * Retrieves the list of Food order items in the Food order
 	 * 
-	 * @return The date of the food order created
+	 * @return The list of food order items
 	 */
-	public Date getCreateDate() {
-		return createDate;
+	public Set<FoodOrderItem> getFoodOrderList() {
+		return foodOrderList;
 	}
 
 	/**
-	 * Changes the current date of the food order being created
+	 * Retrieves the current order window
 	 * 
-	 * @param createDate The new date of the food order
+	 * @return The window period for ordering food
 	 */
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public OrderWindow getOrderWindow() {
+		return orderWindow;
+	}
+
+	/**
+	 * Retrieve the current status of the Food order
+	 * 
+	 * @return the status of the Food order
+	 */
+	public String getStatus() {
+		return status;
 	}
 
 	// retrieve the total price for the particular food order
@@ -205,6 +142,69 @@ public class FoodOrder {
 	 */
 	public String getTransactionId() {
 		return transactionId;
+	}
+
+	/**
+	 * Changes the current date of the food order being created
+	 * 
+	 * @param createDate The new date of the food order
+	 */
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	/**
+	 * Changes the Employee of this food order
+	 * 
+	 * @param employee The new Employee of this food order
+	 */
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	/**
+	 * Changes the Food order ID
+	 * 
+	 * @param foodOrderId The new Food order ID
+	 */
+	public void setFoodOrderId(int foodOrderId) {
+		this.foodOrderId = foodOrderId;
+	}
+
+	/**
+	 * Changes the current list of Food order items
+	 * 
+	 * @param foodOrderList The new list of Food order items
+	 */
+	public void setFoodOrderList(Set<FoodOrderItem> foodOrderList) {
+		this.foodOrderList = foodOrderList;
+	}
+
+	/**
+	 * Changes the current order window with a new order window
+	 * 
+	 * @param orderWindow The new order window for ordering food
+	 */
+	public void setOrderWindow(OrderWindow orderWindow) {
+		this.orderWindow = orderWindow;
+	}
+
+	/**
+	 * Changes the current status of the Food order
+	 * 
+	 * @param status The new status of the Food order
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	/**
+	 * Changes the current transaction ID of the Food order
+	 * 
+	 * @param transactionId The payment transaction ID
+	 */
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
 	}
 
 }

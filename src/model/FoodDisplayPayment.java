@@ -7,15 +7,15 @@ import java.util.Set;
 
 public class FoodDisplayPayment {
 
-	private int foodOrderId;
-	private String status;
-	private Employee employee;
-	private Set<FoodOrderItem> foodOrderList;
-	private Set<FoodOrderItem> foodOrderDiscountList;
 	private Date createDate;
-	private String transactionId;
+	private Employee employee;
+	private Set<FoodOrderItem> foodOrderDiscountList;
+	private int foodOrderId;
+	private Set<FoodOrderItem> foodOrderList;
 	private OrderWindow orderWindow;
+	private String status;
 	private double totalPriceIncludingDisc;
+	private String transactionId;
 
 	public FoodDisplayPayment(FoodOrder order) {
 		this.foodOrderId = order.getFoodOrderId();
@@ -102,12 +102,76 @@ public class FoodDisplayPayment {
 		return foodOrderDiscountList;
 	}
 
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
 	public Set<FoodOrderItem> getFoodOrderDiscountList() {
 		return foodOrderDiscountList;
 	}
 
+	public int getFoodOrderId() {
+		return foodOrderId;
+	}
+
+	public Set<FoodOrderItem> getFoodOrderList() {
+		return foodOrderList;
+	}
+
+	public OrderWindow getOrderWindow() {
+		return orderWindow;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public double getTotalPriceIncludingDisc() {
+		return totalPriceIncludingDisc;
+	}
+
+	public String getTransactionId() {
+		return transactionId;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	public void setFoodOrderDiscountList(Set<FoodOrderItem> foodOrderDiscountList) {
 		this.foodOrderDiscountList = foodOrderDiscountList;
+	}
+
+	public void setFoodOrderId(int foodOrderId) {
+		this.foodOrderId = foodOrderId;
+	}
+
+	public void setFoodOrderList(Set<FoodOrderItem> foodOrderList) {
+		this.foodOrderList = foodOrderList;
+	}
+
+	public void setOrderWindow(OrderWindow orderWindow) {
+		this.orderWindow = orderWindow;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public void setTotalPriceIncludingDisc(double totalPriceIncludingDisc) {
+		this.totalPriceIncludingDisc = totalPriceIncludingDisc;
+	}
+
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
 	}
 
 	@Override
@@ -117,70 +181,6 @@ public class FoodDisplayPayment {
 				+ ", foodOrderDiscountList=" + foodOrderDiscountList + ", createDate=" + createDate
 				+ ", transactionId=" + transactionId + ", orderWindow=" + orderWindow
 				+ ", totalPriceIncludingDisc=" + totalPriceIncludingDisc + "]";
-	}
-
-	public double getTotalPriceIncludingDisc() {
-		return totalPriceIncludingDisc;
-	}
-
-	public void setTotalPriceIncludingDisc(double totalPriceIncludingDisc) {
-		this.totalPriceIncludingDisc = totalPriceIncludingDisc;
-	}
-
-	public int getFoodOrderId() {
-		return foodOrderId;
-	}
-
-	public void setFoodOrderId(int foodOrderId) {
-		this.foodOrderId = foodOrderId;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
-	public Set<FoodOrderItem> getFoodOrderList() {
-		return foodOrderList;
-	}
-
-	public void setFoodOrderList(Set<FoodOrderItem> foodOrderList) {
-		this.foodOrderList = foodOrderList;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public String getTransactionId() {
-		return transactionId;
-	}
-
-	public void setTransactionId(String transactionId) {
-		this.transactionId = transactionId;
-	}
-
-	public OrderWindow getOrderWindow() {
-		return orderWindow;
-	}
-
-	public void setOrderWindow(OrderWindow orderWindow) {
-		this.orderWindow = orderWindow;
 	}
 
 }

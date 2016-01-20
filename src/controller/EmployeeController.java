@@ -17,7 +17,7 @@ public class EmployeeController {
 	 */
 	public EmployeeController() {
 	}
-	
+
 	/**
 	 * Adds a new Employee object to the Database
 	 * 
@@ -26,7 +26,7 @@ public class EmployeeController {
 	public void saveEmployee(Employee e) {
 		employeeDAO.saveEmployee(e);
 	}
-	
+
 	/**
 	 * Retrieves the Employee based on the provided email address
 	 * 
@@ -63,7 +63,7 @@ public class EmployeeController {
 	 */
 	public void updateDefaultDeliveryPoint(String email, String buildingName) {
 		Employee employee = retrieveEmployeeViaEmail(email);
-		employee.setDefaultDeliveryPoint(buildingName);
+		employee.setDeliveryPoint(buildingName);
 		employeeDAO.updateEmployee(employee);
 	}
 
@@ -75,7 +75,7 @@ public class EmployeeController {
 	 */
 	public String getDefaultDeliveryPoint(String email) {
 		Employee employee = retrieveEmployeeViaEmail(email);
-		return employee.getDefaultDeliveryPoint();
+		return employee.getDeliveryPoint();
 	}
 
 	/**

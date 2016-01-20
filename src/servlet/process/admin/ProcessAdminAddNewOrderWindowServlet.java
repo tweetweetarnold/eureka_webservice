@@ -60,7 +60,8 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 		String canteenId = request.getParameter("canteen");
 		String startDatetimeString = request.getParameter("startDatetime");
 		String endDatetimeString = request.getParameter("endDatetime");
-		
+		String remarks = request.getParameter("remarks");
+
 		System.out.println("startDate string: " + startDatetimeString);
 		System.out.println("endDate string: " + endDatetimeString);
 
@@ -92,14 +93,12 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 				throw new Exception("Order Window have already been taken");
 			} else {
 				orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
-						canteen, 0.0,discount, week);
+						canteen, 0.0, discount, week, remarks);
 			}
 			session.setAttribute("success", "New Order Window created successfully.");
 
 			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
 		} catch (Exception e) {
-			// PrintWriter out = response.getWriter();
-			// out.print("error: " + e.getMessage());
 			e.printStackTrace();
 			session.setAttribute("error", e.getMessage());
 			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");

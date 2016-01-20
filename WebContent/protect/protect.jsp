@@ -1,7 +1,7 @@
 <%@page import="model.*"%>
 <%
-	Employee emp = (Employee) session.getAttribute("user");
 	String tokenID = (String) session.getAttribute("tokenID");
+	Employee emp = (Employee) session.getAttribute("user");
 	OrderWindow orderWindow = (OrderWindow) session.getAttribute("orderWindow");
 
 	if (emp == null || tokenID == null) {

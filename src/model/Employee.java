@@ -20,41 +20,23 @@ import value.StringValues;
 @Table(name = "employee")
 public class Employee {
 
-	@Id
-	// @Column(unique = true)
-	private String email;
-	private String password, name;
 	private double amountOwed;
-	private long contactNo;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "companyId")
 	private Company company;
-	// @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	// private Set<Food> favouriteList;
-	private String status;
+	private long contactNo;
 	private Date createDate;
 	private String deliveryPoint;
+	@Id
+	// @Column(unique = true)
+	private String email;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "foodId")
 	private Food favoriteFood;
-	
-	/**
-	 * Returns the favorite food of the Employee
-	 * 
-	 * @return The food which Employee indicates as their favorite
-	 */
-	public Food getFavoriteFood() {
-		return favoriteFood;
-	}
-	
-	/**
-	 * Changes the favorite food of the Employee
-	 * 
-	 * @param favoriteFood The Employee's new favorite Food
-	 */
-	public void setFavoriteFood(Food favoriteFood) {
-		this.favoriteFood = favoriteFood;
-	}
+	private String password, name;
+	// @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	// private Set<Food> favouriteList;
+	private String status;
 	
 	/**
 	 * Creates a new default constructor for Employee
@@ -88,111 +70,12 @@ public class Employee {
 	}
 	
 	/**
-	 * Retrieves the email address of the Employee
-	 * 
-	 * @return The Employee's email address
-	 */
-	public String getEmail() {
-		return email;
-	}
-	
-	/**
-	 * Changes the email address of Employee with a new email address
-	 * 
-	 * @param email The Employee's new email address
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	/**
 	 * Retrieves the current amount owed by the Employee
 	 * 
 	 * @return The amount owed by the Employee
 	 */
 	public double getAmountOwed() {
 		return amountOwed;
-	}
-	
-	/**
-	 * Retrieves the current status of the Employee
-	 * 
-	 * @return The status of the Employee
-	 */
-	public String getStatus() {
-		return status;
-	}
-	
-	/**
-	 * Changes the status of the Employee
-	 * 
-	 * @param status The new status can be "Ok", "Suspended" or "Pending verification"
-	 */
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-	/**
-	 * Changes the amount owed with a new amount
-	 * 
-	 * @param amountOwed The updated amount owed by the Employee
-	 */
-	public void setAmountOwed(double amountOwed) {
-		this.amountOwed = amountOwed;
-	}
-	
-	/**
-	 * Retrieves the password of the Employee
-	 * 
-	 * @return The Employee's password
-	 */
-	public String getPassword() {
-		return password;
-	}
-	
-	/**
-	 * Changes the current password with a new password
-	 * 
-	 * @param password The Employee's new password
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	/**
-	 * Retrieves the name of the Employee
-	 * 
-	 * @return The Employee's name
-	 */
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * Changes the current name of the Employee
-	 * 
-	 * @param name The new Employee's name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	/**
-	 * Retrieves the contact number of the Employee
-	 * 
-	 * @return The Employee's contact number
-	 */
-	public long getContactNo() {
-		return contactNo;
-	}
-	
-	/**
-	 * Changes the contact number of the Employee with a new number
-	 * 
-	 * @param contactNo The Employee's new contact number
-	 */
-	public void setContactNo(long contactNo) {
-		this.contactNo = contactNo;
 	}
 	
 	/**
@@ -205,39 +88,13 @@ public class Employee {
 	}
 	
 	/**
-	 * Changes the company of the Employee
+	 * Retrieves the contact number of the Employee
 	 * 
-	 * @param company The Employee's new company
+	 * @return The Employee's contact number
 	 */
-	public void setCompany(Company company) {
-		this.company = company;
+	public long getContactNo() {
+		return contactNo;
 	}
-	
-	/**
-	 * Retrieves the Employee's default delivery point
-	 * 
-	 * @return The Employee's current default delivery point
-	 */
-	public String getDefaultDeliveryPoint() {
-		return deliveryPoint;
-	}
-	
-	/**
-	 * Changes the Employee's default delivery point
-	 * 
-	 * @param deliveryPoint The Employee's new default delivery point
-	 */
-	public void setDefaultDeliveryPoint(String deliveryPoint) {
-		this.deliveryPoint = deliveryPoint;
-	}
-
-	// public Set<Food> getFavouriteList() {
-	// return favouriteList;
-	// }
-	//
-	// public void setFavouriteList(Set<Food> favouriteList) {
-	// this.favouriteList = favouriteList;
-	// }
 	
 	/**
 	 * Retrieves the date of the Employee's entity model created
@@ -249,12 +106,155 @@ public class Employee {
 	}
 	
 	/**
+	 * Retrieves the Employee's default delivery point
+	 * 
+	 * @return The Employee's current default delivery point
+	 */
+	public String getDeliveryPoint() {
+		return deliveryPoint;
+	}
+	
+	/**
+	 * Retrieves the email address of the Employee
+	 * 
+	 * @return The Employee's email address
+	 */
+	public String getEmail() {
+		return email;
+	}
+	
+	/**
+	 * Returns the favorite food of the Employee
+	 * 
+	 * @return The food which Employee indicates as their favorite
+	 */
+	public Food getFavoriteFood() {
+		return favoriteFood;
+	}
+	
+	/**
+	 * Retrieves the name of the Employee
+	 * 
+	 * @return The Employee's name
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * Retrieves the password of the Employee
+	 * 
+	 * @return The Employee's password
+	 */
+	public String getPassword() {
+		return password;
+	}
+	
+	/**
+	 * Retrieves the current status of the Employee
+	 * 
+	 * @return The status of the Employee
+	 */
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * Changes the amount owed with a new amount
+	 * 
+	 * @param amountOwed The updated amount owed by the Employee
+	 */
+	public void setAmountOwed(double amountOwed) {
+		this.amountOwed = amountOwed;
+	}
+	
+	/**
+	 * Changes the company of the Employee
+	 * 
+	 * @param company The Employee's new company
+	 */
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+	
+	/**
+	 * Changes the contact number of the Employee with a new number
+	 * 
+	 * @param contactNo The Employee's new contact number
+	 */
+	public void setContactNo(long contactNo) {
+		this.contactNo = contactNo;
+	}
+	
+	/**
 	 * Changes the date of the Employee's entity model created
 	 * 
 	 * @param createDate The new date of the Employee's entity model being created
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	
+	/**
+	 * Changes the Employee's default delivery point
+	 * 
+	 * @param deliveryPoint The Employee's new default delivery point
+	 */
+	public void setDeliveryPoint(String deliveryPoint) {
+		this.deliveryPoint = deliveryPoint;
+	}
+	
+	/**
+	 * Changes the email address of Employee with a new email address
+	 * 
+	 * @param email The Employee's new email address
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	/**
+	 * Changes the favorite food of the Employee
+	 * 
+	 * @param favoriteFood The Employee's new favorite Food
+	 */
+	public void setFavoriteFood(Food favoriteFood) {
+		this.favoriteFood = favoriteFood;
+	}
+	
+	/**
+	 * Changes the current name of the Employee
+	 * 
+	 * @param name The new Employee's name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	// public Set<Food> getFavouriteList() {
+	// return favouriteList;
+	// }
+	//
+	// public void setFavouriteList(Set<Food> favouriteList) {
+	// this.favouriteList = favouriteList;
+	// }
+	
+	/**
+	 * Changes the current password with a new password
+	 * 
+	 * @param password The Employee's new password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	/**
+	 * Changes the status of the Employee
+	 * 
+	 * @param status The new status can be "Ok", "Suspended" or "Pending verification"
+	 */
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

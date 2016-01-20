@@ -19,9 +19,9 @@ public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int adminId;
-	private String username, password, name;
 	private long contactNo;
 	private Date createDate;
+	private String username, password, name;
 
 	/**
 	 * Creates a default constructor for Admin
@@ -57,84 +57,12 @@ public class Admin {
 	}
 
 	/**
-	 * Changes the ID of the Admin
-	 * 
-	 * @param adminId The Admin's new ID
-	 */
-	public void setAdminId(int adminId) {
-		this.adminId = adminId;
-	}
-
-	/**
-	 * Retrieves the username of the Admin
-	 * 
-	 * @return The Admin's username
-	 */
-	public String getUsername() {
-		return username;
-	}
-
-	/**
-	 * Changes the username of the Admin
-	 * 
-	 * @param username The Admin's new username
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	/**
-	 * Retrieves the password of the Admin
-	 * 
-	 * @return The Admin's password
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * Changes the current password with a new password
-	 * 
-	 * @param password The Admin's new password
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * Retrieves the name of the Admin
-	 * 
-	 * @return The Admin's name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Changes the name of the Admin
-	 * 
-	 * @param name The Admin's new name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
 	 * Retrieves the contact number of the Admin
 	 * 
 	 * @return The Admin's contact number
 	 */
 	public long getContactNo() {
 		return contactNo;
-	}
-
-	/**
-	 * Changes the contact number of the Admin with a new number
-	 * 
-	 * @param contactNo The Admin's new contact number
-	 */
-	public void setContactNo(long contactNo) {
-		this.contactNo = contactNo;
 	}
 
 	/**
@@ -147,12 +75,84 @@ public class Admin {
 	}
 
 	/**
+	 * Retrieves the name of the Admin
+	 * 
+	 * @return The Admin's name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Retrieves the password of the Admin
+	 * 
+	 * @return The Admin's password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * Retrieves the username of the Admin
+	 * 
+	 * @return The Admin's username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * Changes the ID of the Admin
+	 * 
+	 * @param adminId The Admin's new ID
+	 */
+	public void setAdminId(int adminId) {
+		this.adminId = adminId;
+	}
+
+	/**
+	 * Changes the contact number of the Admin with a new number
+	 * 
+	 * @param contactNo The Admin's new contact number
+	 */
+	public void setContactNo(long contactNo) {
+		this.contactNo = contactNo;
+	}
+
+	/**
 	 * Changes the date of the Admin's entity model created
 	 * 
 	 * @param createDate The new date of the Admin entity model being created
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	/**
+	 * Changes the name of the Admin
+	 * 
+	 * @param name The Admin's new name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Changes the current password with a new password
+	 * 
+	 * @param password The Admin's new password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * Changes the username of the Admin
+	 * 
+	 * @param username The Admin's new username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

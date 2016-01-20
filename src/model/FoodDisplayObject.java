@@ -10,14 +10,14 @@ import java.util.HashMap;
  *
  */
 public class FoodDisplayObject {
-	public int serialNumber;
-	public long phoneNumber;
-	public String stallName;
 	public ArrayList<FoodOrderItem> foodOrderItemList = new ArrayList<FoodOrderItem>();
-	public HashMap<Integer, Integer> quantityList = new HashMap<Integer, Integer>();
-	public HashMap<Integer, ArrayList<Employee>> usernameList = new HashMap<Integer, ArrayList<Employee>>();
+	public long phoneNumber;
 	public HashMap<Integer, Double> priceList = new HashMap<Integer, Double>();
+	public HashMap<Integer, Integer> quantityList = new HashMap<Integer, Integer>();
+	public int serialNumber;
+	public String stallName;
 	public double totalPrice;
+	public HashMap<Integer, ArrayList<Employee>> usernameList = new HashMap<Integer, ArrayList<Employee>>();
 	
 	/**
 	 * Creates a default constructor for FoodDisplayObject
@@ -36,21 +36,21 @@ public class FoodDisplayObject {
 	}
 	
 	/**
+	 * Retrieves the list of FoodOrderItems in the FoodDisplayObject
+	 * 
+	 * @return An ArrayList of FoodOrderItem objects in the FoodDisplayObject
+	 */
+	public ArrayList<FoodOrderItem> getFoodOrderItemList() {
+		return foodOrderItemList;
+	}
+	
+	/**
 	 * Retrieves the contact number of the Stall in the FoodDisplayObject
 	 * 
 	 * @return The Stall's contact number
 	 */
 	public long getPhoneNumber() {
 		return phoneNumber;
-	}
-	
-	/**
-	 * Updates the current contact number of the Stall in the FoodDisplayObject
-	 * 
-	 * @param phoneNumber The  new contact number of Stall
-	 */
-	public void setPhoneNumber(long phoneNumber) {
-		this.phoneNumber = phoneNumber;
 	}
 	
 	//FoodOrderItems to prices
@@ -64,30 +64,12 @@ public class FoodDisplayObject {
 	}
 	
 	/**
-	 * Changes the current HashMap of the FoodOrderItems and its prices
+	 * Retrieves a HashMap of the FoodOrderItems and its quantity
 	 * 
-	 * @param priceList A HashMap of the updated or new FoodOrderItems and its prices
+	 * @return A HashMap featuring FoodOrderItem ID as the key and quantity as the corresponding value
 	 */
-	public void setPriceList(HashMap<Integer, Double> priceList) {
-		this.priceList = priceList;
-	}
-	
-	/**
-	 * Retrieves the total price of the FoodOrderItem prices in the FoodDisplayObject
-	 * 
-	 * @return The total price of the FoodOrderItem prices in the FoodDisplayObject
-	 */
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-	
-	/**
-	 * Changes the current total price of the FoodOrderItem prices in the FoodDisplayObject
-	 * 
-	 * @param totalPrice The new total price of the FoodOrderItem prices in the FoodDisplayObject
-	 */
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
+	public HashMap<Integer, Integer> getQuantityList() {
+		return quantityList;
 	}
 	
 	/**
@@ -100,15 +82,6 @@ public class FoodDisplayObject {
 	}
 	
 	/**
-	 * Changes the current serial number of the FoodDisplayObject
-	 * 
-	 * @param serialNumber The new serial number of the FoodDisplayObject
-	 */
-	public void setSerialNumber(int serialNumber) {
-		this.serialNumber = serialNumber;
-	}
-	
-	/**
 	 * Retrieves the Stall name in the FoodDisplayObject
 	 * 
 	 * @return The name of the Stall in the FoodDisplayObject
@@ -118,21 +91,23 @@ public class FoodDisplayObject {
 	}
 	
 	/**
-	 * Changes the current Stall name in the FoodDisplayObject
+	 * Retrieves the total price of the FoodOrderItem prices in the FoodDisplayObject
 	 * 
-	 * @param stallName The new name of the Stall in the FoodDisplayObject
+	 * @return The total price of the FoodOrderItem prices in the FoodDisplayObject
 	 */
-	public void setStallName(String stallName) {
-		this.stallName = stallName;
+	public double getTotalPrice() {
+		return totalPrice;
 	}
 	
+	//FoodOrderItem to arrayList of Users who ordered it
 	/**
-	 * Retrieves the list of FoodOrderItems in the FoodDisplayObject
+	 * Retrieves a HashMap of FoodOrderItems and the list of Employees whom ordered the FoodOrderItems
 	 * 
-	 * @return An ArrayList of FoodOrderItem objects in the FoodDisplayObject
+	 * @return A HashMap with the FoodOrderItem ID as the key and an ArrayList of Employee objects 
+	 * as the corresponding value
 	 */
-	public ArrayList<FoodOrderItem> getFoodOrderItemList() {
-		return foodOrderItemList;
+	public HashMap<Integer, ArrayList<Employee>> getUsernameList() {
+		return usernameList;
 	}
 	
 	/**
@@ -145,12 +120,21 @@ public class FoodDisplayObject {
 	}
 	
 	/**
-	 * Retrieves a HashMap of the FoodOrderItems and its quantity
+	 * Updates the current contact number of the Stall in the FoodDisplayObject
 	 * 
-	 * @return A HashMap featuring FoodOrderItem ID as the key and quantity as the corresponding value
+	 * @param phoneNumber The  new contact number of Stall
 	 */
-	public HashMap<Integer, Integer> getQuantityList() {
-		return quantityList;
+	public void setPhoneNumber(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	
+	/**
+	 * Changes the current HashMap of the FoodOrderItems and its prices
+	 * 
+	 * @param priceList A HashMap of the updated or new FoodOrderItems and its prices
+	 */
+	public void setPriceList(HashMap<Integer, Double> priceList) {
+		this.priceList = priceList;
 	}
 	
 	//foodOrderItem to Qty
@@ -163,15 +147,31 @@ public class FoodDisplayObject {
 		this.quantityList = quantityList;
 	}
 	
-	//FoodOrderItem to arrayList of Users who ordered it
 	/**
-	 * Retrieves a HashMap of FoodOrderItems and the list of Employees whom ordered the FoodOrderItems
+	 * Changes the current serial number of the FoodDisplayObject
 	 * 
-	 * @return A HashMap with the FoodOrderItem ID as the key and an ArrayList of Employee objects 
-	 * as the corresponding value
+	 * @param serialNumber The new serial number of the FoodDisplayObject
 	 */
-	public HashMap<Integer, ArrayList<Employee>> getUsernameList() {
-		return usernameList;
+	public void setSerialNumber(int serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+	
+	/**
+	 * Changes the current Stall name in the FoodDisplayObject
+	 * 
+	 * @param stallName The new name of the Stall in the FoodDisplayObject
+	 */
+	public void setStallName(String stallName) {
+		this.stallName = stallName;
+	}
+	
+	/**
+	 * Changes the current total price of the FoodOrderItem prices in the FoodDisplayObject
+	 * 
+	 * @param totalPrice The new total price of the FoodOrderItem prices in the FoodDisplayObject
+	 */
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 	
 	/**

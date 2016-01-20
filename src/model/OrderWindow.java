@@ -28,28 +28,29 @@ import value.StringValues;
 @Table(name = "orderwindow")
 public class OrderWindow {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int windowId;
-	@Transient
-	private DateTime startDate;
-	@Transient
-	private DateTime endDate;
-	@Column(name = "startDate")
-	private Date startDateFormatted;
-	@Column(name = "endDate")
-	private Date endDateFormatted;
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "companyId")
-	private Company company;
-	@Transient
-	private String status;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "canteenId")
 	private Canteen canteen;
-	private double discount;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "companyId")
+	private Company company;
 	private Date createDate;
+	private double discount;
 	private double discountValue;
+	@Transient
+	private DateTime endDate;
+	@Column(name = "endDate")
+	private Date endDateFormatted;
+	private String remarks;
+	@Transient
+	private DateTime startDate;
+	@Column(name = "startDate")
+	private Date startDateFormatted;
+	@Transient
+	private String status;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int windowId;
 
 	/**
 	 * Creates a default constructor for OrderWindow
@@ -58,7 +59,7 @@ public class OrderWindow {
 	}
 
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			double discount, double discountValue) {
+			double discount, double discountValue, String remarks) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.startDateFormatted = startDate.toDate();
@@ -68,6 +69,7 @@ public class OrderWindow {
 		this.discount = discount;
 		this.createDate = new Date();
 		this.discountValue = discountValue;
+		this.remarks = remarks;
 	}
 
 	/**
@@ -79,7 +81,7 @@ public class OrderWindow {
 	 * @param canteen The Canteen indicated in this OrderWindow
 	 */
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			double discount) {
+			double discount, String remarks) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.startDateFormatted = startDate.toDate();
@@ -88,6 +90,7 @@ public class OrderWindow {
 		this.canteen = canteen;
 		this.discount = discount;
 		this.createDate = new Date();
+		this.remarks = remarks;
 	}
 
 	/**
@@ -100,7 +103,7 @@ public class OrderWindow {
 	 * @param canteen The Canteen in this OrderWindow
 	 */
 	public OrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen,
-			double discount) {
+			double discount, String remarks) {
 		this.startDate = startDate;
 		this.endDate = startDate.plus(duration);
 		this.startDateFormatted = startDate.toDate();
@@ -109,68 +112,6 @@ public class OrderWindow {
 		this.company = company;
 		this.discount = discount;
 		this.createDate = new Date();
-	}
-
-	/**
-	 * Retrieves the formatted starting DateTime of this order window
-	 * 
-	 * @return The current formatted starting DateTime
-	 */
-	public Date getStartDateFormatted() {
-		return startDateFormatted;
-	}
-
-	public double getDiscountValue() {
-		return discountValue;
-	}
-
-	public void setDiscountValue(double discountValue) {
-		this.discountValue = discountValue;
-	}
-
-	/**
-	 * Changes the current formatted starting DateTime of this order window
-	 * 
-	 * @param startDateFormatted The new formatted starting DataTime
-	 */
-	public void setStartDateFormatted(Date startDateFormatted) {
-		this.startDateFormatted = startDateFormatted;
-	}
-
-	/**
-	 * Retrieves the formatted ending DateTime of this order window
-	 * 
-	 * @return The current formatted ending DateTime
-	 */
-	public Date getEndDateFormatted() {
-		return endDateFormatted;
-	}
-
-	/**
-	 * Retrieves the discount of this order window
-	 * 
-	 * @return The current discount in this order window
-	 */
-	public double getDiscount() {
-		return discount;
-	}
-
-	/**
-	 * Changes the current discount of this order window
-	 * 
-	 * @param discount The new discount to be updated
-	 */
-	public void setDiscount(double discount) {
-		this.discount = discount;
-	}
-
-	/**
-	 * Changes the current formatted ending DateTime of this order window
-	 * 
-	 * @param endDateFormatted The new formatted ending DateTime
-	 */
-	public void setEndDateFormatted(Date endDateFormatted) {
-		this.endDateFormatted = endDateFormatted;
 	}
 
 	/**
@@ -183,12 +124,12 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Changes the current Canteen in this order window
+	 * Retrieves the Company of this OrderWindow
 	 * 
-	 * @param canteen The new Canteen object
+	 * @return The Company object in this OrderWindow
 	 */
-	public void setCanteen(Canteen canteen) {
-		this.canteen = canteen;
+	public Company getCompany() {
+		return company;
 	}
 
 	/**
@@ -198,6 +139,68 @@ public class OrderWindow {
 	 */
 	public Date getCreateDate() {
 		return createDate;
+	}
+
+	/**
+	 * Retrieves the discount of this order window
+	 * 
+	 * @return The current discount in this order window
+	 */
+	public double getDiscount() {
+		return discount;
+	}
+
+	public double getDiscountValue() {
+		return discountValue;
+	}
+
+	/**
+	 * Retrieves the duration of this OrderWindow
+	 * 
+	 * @return The duration of the OrderWindow
+	 */
+	public Duration getDuration() {
+		return new Duration(endDate.getMillis() - startDate.getMillis());
+	}
+
+	/**
+	 * Retrieves the ending Date and Time of this OrderWindow
+	 * 
+	 * @return The current ending Date and Time in Joda-Time
+	 */
+	public DateTime getEndDate() {
+		return new DateTime(endDateFormatted);
+	}
+
+	/**
+	 * Retrieves the formatted ending DateTime of this order window
+	 * 
+	 * @return The current formatted ending DateTime
+	 */
+	public Date getEndDateFormatted() {
+		return endDateFormatted;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	/**
+	 * Retrieves the starting Date and Time of this OrderWindow
+	 * 
+	 * @return The starting Date and Time in Joda-Time
+	 */
+	public DateTime getStartDate() {
+		return new DateTime(startDateFormatted);
+	}
+
+	/**
+	 * Retrieves the formatted starting DateTime of this order window
+	 * 
+	 * @return The current formatted starting DateTime
+	 */
+	public Date getStartDateFormatted() {
+		return startDateFormatted;
 	}
 
 	/**
@@ -220,12 +223,12 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Changes the current date of this OrderWindow being created
+	 * Retrieves the ID of the OrderWindow
 	 * 
-	 * @param createDate The new date created of this OrderWindow
+	 * @return The OrderWindow ID
 	 */
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public int getWindowId() {
+		return windowId;
 	}
 
 	/**
@@ -239,58 +242,43 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Retrieves the duration of this OrderWindow
+	 * Changes the current Canteen in this order window
 	 * 
-	 * @return The duration of the OrderWindow
+	 * @param canteen The new Canteen object
 	 */
-	public Duration getDuration() {
-		return new Duration(endDate.getMillis() - startDate.getMillis());
+	public void setCanteen(Canteen canteen) {
+		this.canteen = canteen;
 	}
 
 	/**
-	 * Retrieves the ID of the OrderWindow
+	 * Changes the current Company in this OrderWindow
 	 * 
-	 * @return The OrderWindow ID
+	 * @param company The Company object to be set in this OrderWindow
 	 */
-	public int getWindowId() {
-		return windowId;
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	/**
-	 * Changes the current OrderWindow ID
+	 * Changes the current date of this OrderWindow being created
 	 * 
-	 * @param windowId The OrderWindow's new ID
+	 * @param createDate The new date created of this OrderWindow
 	 */
-	public void setWindowId(int windowId) {
-		this.windowId = windowId;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 	/**
-	 * Retrieves the starting Date and Time of this OrderWindow
+	 * Changes the current discount of this order window
 	 * 
-	 * @return The starting Date and Time in Joda-Time
+	 * @param discount The new discount to be updated
 	 */
-	public DateTime getStartDate() {
-		return new DateTime(startDateFormatted);
+	public void setDiscount(double discount) {
+		this.discount = discount;
 	}
 
-	/**
-	 * Changes the current starting Date and Time of this OrderWindow
-	 * 
-	 * @param startDate The new starting Date and Time in java DateTime
-	 */
-	public void setStartDate(DateTime startDate) {
-		this.startDate = startDate;
-		this.startDateFormatted = startDate.toDate();
-	}
-
-	/**
-	 * Retrieves the ending Date and Time of this OrderWindow
-	 * 
-	 * @return The current ending Date and Time in Joda-Time
-	 */
-	public DateTime getEndDate() {
-		return new DateTime(endDateFormatted);
+	public void setDiscountValue(double discountValue) {
+		this.discountValue = discountValue;
 	}
 
 	/**
@@ -304,21 +292,48 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Retrieves the Company of this OrderWindow
+	 * Changes the current formatted ending DateTime of this order window
 	 * 
-	 * @return The Company object in this OrderWindow
+	 * @param endDateFormatted The new formatted ending DateTime
 	 */
-	public Company getCompany() {
-		return company;
+	public void setEndDateFormatted(Date endDateFormatted) {
+		this.endDateFormatted = endDateFormatted;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 	/**
-	 * Changes the current Company in this OrderWindow
+	 * Changes the current starting Date and Time of this OrderWindow
 	 * 
-	 * @param company The Company object to be set in this OrderWindow
+	 * @param startDate The new starting Date and Time in java DateTime
 	 */
-	public void setCompany(Company company) {
-		this.company = company;
+	public void setStartDate(DateTime startDate) {
+		this.startDate = startDate;
+		this.startDateFormatted = startDate.toDate();
+	}
+
+	/**
+	 * Changes the current formatted starting DateTime of this order window
+	 * 
+	 * @param startDateFormatted The new formatted starting DataTime
+	 */
+	public void setStartDateFormatted(Date startDateFormatted) {
+		this.startDateFormatted = startDateFormatted;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	/**
+	 * Changes the current OrderWindow ID
+	 * 
+	 * @param windowId The OrderWindow's new ID
+	 */
+	public void setWindowId(int windowId) {
+		this.windowId = windowId;
 	}
 
 }

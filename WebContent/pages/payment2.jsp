@@ -3,7 +3,7 @@
 
 <head>
 
-<%@include file="/protect/protect2.jsp"%>
+<%@include file="/protect/protect.jsp"%>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

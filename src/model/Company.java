@@ -21,17 +21,17 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "company")
 public class Company {
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	private Set<Canteen> canteenList;
+	private String companyCode;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int companyId;
-	private String name;
-	private String companyCode;
 	private Date createDate;
 	private Date cutoffTime;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	private Set<Canteen> canteenList;
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> deliveryPointSet;
+	private String name;
 
 	/**
 	 * Creates a default constructor for Company
@@ -58,6 +58,15 @@ public class Company {
 	}
 
 	/**
+	 * Retrieves the current list of Canteens
+	 * 
+	 * @return The list of Canteens
+	 */
+	public Set<Canteen> getCanteenList() {
+		return canteenList;
+	}
+
+	/**
 	 * Retrieves the current company code of the Company
 	 * 
 	 * @return The company code
@@ -67,57 +76,12 @@ public class Company {
 	}
 
 	/**
-	 * Changes the company code with a new company code
-	 * 
-	 * @param companyCode The new company code
-	 */
-	public void setCompanyCode(String companyCode) {
-		this.companyCode = companyCode;
-	}
-
-	/**
 	 * Retrieves the current ID of the Company
 	 * 
 	 * @return The company ID
 	 */
 	public int getCompanyId() {
 		return companyId;
-	}
-
-	/**
-	 * Retrieves the current name of the Company
-	 * 
-	 * @return The name of the Company
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Changes the name of the company with the new Company name
-	 * 
-	 * @param name The new Company name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * Changes the set of Delivery Point
-	 * 
-	 * @param deliveryPointSet The new set of Delivery Point
-	 */
-	public void setDeliveryPointSet(Set<String> deliveryPointSet) {
-		this.deliveryPointSet = deliveryPointSet;
-	}
-
-	/**
-	 * Retrieves the current set of Delivery Point for the Company
-	 * 
-	 * @return The set of Delivery Point
-	 */
-	public Set<String> getDeliveryPointSet() {
-		return deliveryPointSet;
 	}
 
 	/**
@@ -139,21 +103,21 @@ public class Company {
 	}
 
 	/**
-	 * Change the Company's cut-off timing with a new cut-off timing
+	 * Retrieves the current set of Delivery Point for the Company
 	 * 
-	 * @param cutoffTime The new cut-off timing
+	 * @return The set of Delivery Point
 	 */
-	public void setCutoffTime(Date cutoffTime) {
-		this.cutoffTime = cutoffTime;
+	public Set<String> getDeliveryPointSet() {
+		return deliveryPointSet;
 	}
 
 	/**
-	 * Retrieves the current list of Canteens
+	 * Retrieves the current name of the Company
 	 * 
-	 * @return The list of Canteens
+	 * @return The name of the Company
 	 */
-	public Set<Canteen> getCanteenList() {
-		return canteenList;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -163,6 +127,42 @@ public class Company {
 	 */
 	public void setCanteenList(Set<Canteen> canteenList) {
 		this.canteenList = canteenList;
+	}
+
+	/**
+	 * Changes the company code with a new company code
+	 * 
+	 * @param companyCode The new company code
+	 */
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
+	}
+
+	/**
+	 * Change the Company's cut-off timing with a new cut-off timing
+	 * 
+	 * @param cutoffTime The new cut-off timing
+	 */
+	public void setCutoffTime(Date cutoffTime) {
+		this.cutoffTime = cutoffTime;
+	}
+
+	/**
+	 * Changes the set of Delivery Point
+	 * 
+	 * @param deliveryPointSet The new set of Delivery Point
+	 */
+	public void setDeliveryPointSet(Set<String> deliveryPointSet) {
+		this.deliveryPointSet = deliveryPointSet;
+	}
+
+	/**
+	 * Changes the name of the company with the new Company name
+	 * 
+	 * @param name The new Company name
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

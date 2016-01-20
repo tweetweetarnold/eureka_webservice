@@ -214,32 +214,33 @@ public class FoodOrderController {
 	 * @return A list of FoodOrders within the specified timeframe by the Employee. If no results
 	 *         found, returns empty List.
 	 */
-	public ArrayList<FoodOrder> getFoodOrderForUsernameWeek(String email, Date sundayDate) {
-		ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>();
-		Calendar cal = Calendar.getInstance();
-		// this is to set the time of the sundayDate to 10AM
-		sundayDate.setHours(10);
-		sundayDate.setMinutes(0);
-		cal.setTime(sundayDate);
-
-		// this advances the calendar by 7 days. We need this in order to get
-		// the laterDate
-		cal.add(Calendar.DATE, 7);
-		Date laterDate = cal.getTime();
-		System.out.println("Start date: " + sundayDate + " End date: " + laterDate);
-		// retrieving the employee whose food order history we want to examine
-		Employee tempEmployee = employeeDAO.getEmployeeByEmail(email);
-		foodOrderList = foodOrderDAO
-				.getFoodOrderByDateUsername(sundayDate, laterDate, tempEmployee);
-
-		return foodOrderList;
-	}
+	// public ArrayList<FoodOrder> getFoodOrderForUsernameWeek(String email, Date sundayDate) {
+	// ArrayList<FoodOrder> foodOrderList = new ArrayList<FoodOrder>();
+	// Calendar cal = Calendar.getInstance();
+	// // this is to set the time of the sundayDate to 10AM
+	// sundayDate.setHours(10);
+	// sundayDate.setMinutes(0);
+	// cal.setTime(sundayDate);
+	//
+	// // this advances the calendar by 7 days. We need this in order to get
+	// // the laterDate
+	// cal.add(Calendar.DATE, 7);
+	// Date laterDate = cal.getTime();
+	// System.out.println("Start date: " + sundayDate + " End date: " + laterDate);
+	// // retrieving the employee whose food order history we want to examine
+	// Employee tempEmployee = employeeDAO.getEmployeeByEmail(email);
+	// foodOrderList = foodOrderDAO
+	// .getFoodOrderByDateUsername(sundayDate, laterDate, tempEmployee);
+	//
+	// return foodOrderList;
+	// }
 
 	// this is to get the FoodDisplayObject for displaying food orders for the
 	// day filtered by
 	// stores each food display object corresponds to one store
 	/**
-	 * Retrieves an ArrayList of FoodDisplayObject in the designated cut-off time (grouped the FoodDisplayObject by Stalls)
+	 * Retrieves an ArrayList of FoodDisplayObject in the designated cut-off time (grouped the
+	 * FoodDisplayObject by Stalls)
 	 * 
 	 * @param earlierDate The start of the cut-off time
 	 * @param laterDate The end of the cut-off time
@@ -613,11 +614,11 @@ public class FoodOrderController {
 		return mapToReturn;
 	}
 
-//	/**
-//	 * Returns a HashMap
-//	 * 
-//	 * @return Returns a HashMap
-//	 */
+	// /**
+	// * Returns a HashMap
+	// *
+	// * @return Returns a HashMap
+	// */
 	/*
 	 * public HashMap<String, ArrayList<FoodOrderItem>> getFoodOrderToday() { // get all orders made
 	 * today List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(today.minusDays(1)
@@ -704,14 +705,13 @@ public class FoodOrderController {
 		}
 		return map;
 	}
-	
-	public boolean checkForExistingOrder(Employee employee, OrderWindow orderWindow){
+
+	public boolean checkForExistingOrder(Employee employee, OrderWindow orderWindow) {
 		FoodOrderDAO foodOrderDao = new FoodOrderDAO();
-		if(foodOrderDao.getAllFoodOrderOfOrderWindowForUser(employee,orderWindow).isEmpty()){
+		if (foodOrderDao.getAllFoodOrderOfOrderWindowForUser(employee, orderWindow).isEmpty()) {
 			return false;
 		}
 		return true;
 	}
-	
-	
+
 }

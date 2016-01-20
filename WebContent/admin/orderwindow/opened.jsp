@@ -42,7 +42,7 @@
 </head>
 
 <body>
-<fmt:setTimeZone value="GMT+8" />
+	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 
@@ -113,8 +113,12 @@
 										<c:set value="${map.value[0]}" var="noGroupList" />
 										<c:set value="${map.value[1]}" var="groupByStallList" />
 
+
 										<!-- Tab panes -->
 										<div class="tab-content">
+											<c:set value="0" var="overallPrice" />
+
+											<!-- 1st tab - group by users -->
 											<div class="tab-pane fade in active" id="nogroup${mapLoop.index }">
 												<div class="dataTable_wrapper">
 													<br>
@@ -134,7 +138,7 @@
 																<tr class="odd gradeX">
 																	<td rowspan="${fn:length(order.value) + 1}">${loop.index + 1}</td>
 																	<td rowspan="${fn:length(order.value) + 1}">
-																		<p title="${order.key.email}">${order.key.name}</p>
+																		<p title="${order.key.email}">${order.key.name}&nbsp;(${order.key.deliveryPoint})</p>
 																	</td>
 
 																	<c:forEach items="${order.value}" var="foodOrderItem">
@@ -143,7 +147,7 @@
 																			<td>
 																				<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifier" varStatus="innerLoop">
 																					${modifier.name}
-																					<c:if test="${!innerLoop.last}">, </c:if> 
+																					<c:if test="${!innerLoop.last}">, </c:if>
 																				</c:forEach>
 																			</td>
 																			<td>${foodOrderItem.quantity}</td>
@@ -152,6 +156,7 @@
 																					minFractionDigits="2"
 																				/>
 																				$${combinedPrice}
+																				<c:set value="${overallPrice + combinedPrice}" var="overallPrice" />
 																			</td>
 																		</tr>
 																	</c:forEach>
@@ -159,11 +164,15 @@
 															</c:forEach>
 														</tbody>
 													</table>
+													<b>Overall Price: </b>
+													$
+													<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
 												</div>
 												<!-- /.table-responsive -->
 											</div>
 
 
+											<!-- 2nd tab - group by stall -->
 											<div class="tab-pane fade" id="groupByStall${mapLoop.index }">
 												<div class="dataTable_wrapper">
 													<br>
@@ -188,7 +197,7 @@
 																	<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.stallName}</td>
 																	<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">${foodDisplayObj.phoneNumber }</td>
 																	<td rowspan="${fn:length(foodDisplayObj.foodOrderItemList) + 1}">
-																		<fmt:formatNumber value="${foodDisplayObj.totalPrice }" var="totalPrice" minFractionDigits="2" />
+																		<fmt:formatNumber value="${foodDisplayObj.totalPrice}" var="totalPrice" minFractionDigits="2" />
 																		$${totalPrice}
 																		<c:set value="${overallPrice + foodDisplayObj.totalPrice}" var="overallPrice" />
 																	</td>
@@ -213,7 +222,7 @@
 																			</td>
 																			<td>
 																				<c:forEach items="${usernameList[item.foodOrderItemId]}" var="user">
-																					<p title="${user.email}">${user.name}</p>
+																					<p title="${user.email}">${user.name}&nbsp;(${user.deliveryPoint})</p>
 																				</c:forEach>
 																			</td>
 																		</tr>
@@ -225,7 +234,7 @@
 													</table>
 													<b>Overall Price: </b>
 													$
-													<fmt:formatNumber value="${overallPrice }" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
+													<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
 
 
 												</div>
@@ -233,6 +242,7 @@
 											</div>
 
 
+											<!-- 3rd tab - group by stall CHINESE -->
 											<div class="tab-pane fade" id="groupByStallCN${mapLoop.index }">
 												<fmt:setLocale value="zh_CN" />
 												<fmt:setBundle basename="RBExample2" var="lang" />
@@ -286,7 +296,7 @@
 																			</td>
 																			<td>
 																				<c:forEach items="${usernameList[item.foodOrderItemId]}" var="user">
-																					<p title="${user.email}">${user.name}</p>
+																					<p title="${user.email}">${user.name}&nbsp;(${user.deliveryPoint})</p>
 																				</c:forEach>
 																			</td>
 																		</tr>
@@ -298,7 +308,7 @@
 													</table>
 													<b>Overall Price: </b>
 													$
-													<fmt:formatNumber value="${overallPrice }" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
+													<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
 
 													<br>
 													<br>

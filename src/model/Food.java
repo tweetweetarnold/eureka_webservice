@@ -24,41 +24,23 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "food")
 public class Food {
+	private Date createDate;
+	private String description;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int foodId;
-	private String name;
-	private String description;
-	private double price;
 	// @Column(columnDefinition="longblob")
 	// private byte[] image;
 	private String imageDirectory;
-	private Date createDate;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
+	private Set<Modifier> modifierList;
+	private String name;
+	private double price;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "stallId")
 	private Stall stall;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
-	private Set<Modifier> modifierList;
 
 	private String weatherConditions;
-	
-	/**
-	 * Retrieves the weather condition indicated in this Food
-	 * 
-	 * @return The current weather condition
-	 */
-	public String getWeatherConditions() {
-		return weatherConditions;
-	}
-	
-	/**
-	 * Changes the current weather condition indicated in this Food
-	 * 
-	 * @param weatherConditions The new weather condition
-	 */
-	public void setWeatherConditions(String weatherConditions) {
-		this.weatherConditions = weatherConditions;
-	}
 	
 	/**
 	 * Creates a default constructor for Food
@@ -87,58 +69,33 @@ public class Food {
 		this.weatherConditions = "default";
 	}
 	
+	// check if canteen, stall and food name are the same and returns true if
+	// they are all the same
 	/**
-	 * Retrieves the directory of storing the Food image
+	 * Checks if this Food's name and its Canteen 
+	 * and Stall's name are the same as the other Food
 	 * 
-	 * @return The directory of storing the Food image
+	 * @param otherFood The Food to be compared with
+	 * @return Returns true if this Food's name and its Canteen and Stall's name are the same
 	 */
-	public String getImageDirectory() {
-		return imageDirectory;
+	public boolean equals(Food otherFood) {
+		if (this.stall.getCanteen().getName().equals(otherFood.getStall().getCanteen().getName())) {
+			if (this.stall.getName().equals(otherFood.getStall().getName())) {
+				if (this.name.equals(otherFood.getName())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	/**
-	 * Changes the current directory of storing the Food image
+	 * Retrieves the date which this Food object is created
 	 * 
-	 * @param imageDirectory The new directory where the Food image is stored
+	 * @return The date that this Food object is created
 	 */
-	public void setImageDirectory(String imageDirectory) {
-		this.imageDirectory = imageDirectory;
-	}
-	
-	/**
-	 * Retrieves the ID of the Food
-	 * 
-	 * @return The Food's ID
-	 */
-	public int getFoodId() {
-		return foodId;
-	}
-	
-	/**
-	 * Changes the current Food ID
-	 * 
-	 * @param foodId The Food's new ID
-	 */
-	public void setFoodId(int foodId) {
-		this.foodId = foodId;
-	}
-	
-	/**
-	 * Retrieves the name of this Food
-	 * 
-	 * @return The name of the Food
-	 */
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * Changes the current name of this Food
-	 * 
-	 * @param name The new name of the Food
-	 */
-	public void setName(String name) {
-		this.name = name;
+	public Date getCreateDate() {
+		return createDate;
 	}
 	
 	/**
@@ -151,12 +108,39 @@ public class Food {
 	}
 	
 	/**
-	 * Changes the current description of the Food
+	 * Retrieves the ID of the Food
 	 * 
-	 * @param description The new description of the Food
+	 * @return The Food's ID
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public int getFoodId() {
+		return foodId;
+	}
+	
+	/**
+	 * Retrieves the directory of storing the Food image
+	 * 
+	 * @return The directory of storing the Food image
+	 */
+	public String getImageDirectory() {
+		return imageDirectory;
+	}
+	
+	/**
+	 * Retrieves the list of Modifiers available in this Food
+	 * 
+	 * @return The list of Modifiers in this Food
+	 */
+	public Set<Modifier> getModifierList() {
+		return modifierList;
+	}
+	
+	/**
+	 * Retrieves the name of this Food
+	 * 
+	 * @return The name of the Food
+	 */
+	public String getName() {
+		return name;
 	}
 	
 	/**
@@ -179,15 +163,6 @@ public class Food {
 	}
 	
 	/**
-	 * Changes the current price of the Food
-	 * 
-	 * @param price The new price of the Food
-	 */
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	
-	/**
 	 * Retrieves the Stall of this Food
 	 * 
 	 * @return The Stall which sells this Food
@@ -197,21 +172,12 @@ public class Food {
 	}
 	
 	/**
-	 * Changes the current Stall of this Food
+	 * Retrieves the weather condition indicated in this Food
 	 * 
-	 * @param stall The new Stall of this Food
+	 * @return The current weather condition
 	 */
-	public void setStall(Stall stall) {
-		this.stall = stall;
-	}
-	
-	/**
-	 * Retrieves the date which this Food object is created
-	 * 
-	 * @return The date that this Food object is created
-	 */
-	public Date getCreateDate() {
-		return createDate;
+	public String getWeatherConditions() {
+		return weatherConditions;
 	}
 	
 	/**
@@ -224,12 +190,30 @@ public class Food {
 	}
 	
 	/**
-	 * Retrieves the list of Modifiers available in this Food
+	 * Changes the current description of the Food
 	 * 
-	 * @return The list of Modifiers in this Food
+	 * @param description The new description of the Food
 	 */
-	public Set<Modifier> getModifierList() {
-		return modifierList;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	/**
+	 * Changes the current Food ID
+	 * 
+	 * @param foodId The Food's new ID
+	 */
+	public void setFoodId(int foodId) {
+		this.foodId = foodId;
+	}
+	
+	/**
+	 * Changes the current directory of storing the Food image
+	 * 
+	 * @param imageDirectory The new directory where the Food image is stored
+	 */
+	public void setImageDirectory(String imageDirectory) {
+		this.imageDirectory = imageDirectory;
 	}
 	
 	/**
@@ -240,25 +224,41 @@ public class Food {
 	public void setModifierList(Set<Modifier> modifierList) {
 		this.modifierList = modifierList;
 	}
-
-	// check if canteen, stall and food name are the same and returns true if
-	// they are all the same
+	
 	/**
-	 * Checks if this Food's name and its Canteen 
-	 * and Stall's name are the same as the other Food
+	 * Changes the current name of this Food
 	 * 
-	 * @param otherFood The Food to be compared with
-	 * @return Returns true if this Food's name and its Canteen and Stall's name are the same
+	 * @param name The new name of the Food
 	 */
-	public boolean equals(Food otherFood) {
-		if (this.stall.getCanteen().getName().equals(otherFood.getStall().getCanteen().getName())) {
-			if (this.stall.getName().equals(otherFood.getStall().getName())) {
-				if (this.name.equals(otherFood.getName())) {
-					return true;
-				}
-			}
-		}
-		return false;
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * Changes the current price of the Food
+	 * 
+	 * @param price The new price of the Food
+	 */
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	/**
+	 * Changes the current Stall of this Food
+	 * 
+	 * @param stall The new Stall of this Food
+	 */
+	public void setStall(Stall stall) {
+		this.stall = stall;
+	}
+
+	/**
+	 * Changes the current weather condition indicated in this Food
+	 * 
+	 * @param weatherConditions The new weather condition
+	 */
+	public void setWeatherConditions(String weatherConditions) {
+		this.weatherConditions = weatherConditions;
 	}
 
 }

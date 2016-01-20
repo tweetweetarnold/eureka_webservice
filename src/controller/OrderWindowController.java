@@ -38,7 +38,7 @@ public class OrderWindowController {
 	 * @param numberOfWeeks The number of weeks that this order window will be running
 	 */
 	public void createNewOrderWindow(DateTime startDate, DateTime endDate, Company company,
-			Canteen canteen, double discount, int numberOfWeeks) {
+			Canteen canteen, double discount, int numberOfWeeks, String remarks) {
 
 		if (numberOfWeeks > 0) {
 			ArrayList<DateTime> startTimeList = new ArrayList<DateTime>();
@@ -58,17 +58,18 @@ public class OrderWindowController {
 
 			for (int i = 0; i < startTimeList.size(); i++) {
 				orderWindowDAO.saveOrderWindow(new OrderWindow(startTimeList.get(i), endTimeList
-						.get(i), company, canteen, discount));
+						.get(i), company, canteen, discount, remarks));
 			}
 
 		} else {
 			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen,
-					discount));
+					discount, remarks));
 		}
 	}
 
 	public void createNewOrderWindow(DateTime startDate, DateTime endDate, Company company,
-			Canteen canteen, double discount, double discountValue, int numberOfWeeks) {
+			Canteen canteen, double discount, double discountValue, int numberOfWeeks,
+			String remarks) {
 		if (numberOfWeeks > 0) {
 			ArrayList<DateTime> startTimeList = new ArrayList<DateTime>();
 			ArrayList<DateTime> endTimeList = new ArrayList<DateTime>();
@@ -85,12 +86,12 @@ public class OrderWindowController {
 
 			for (int i = 0; i < startTimeList.size(); i++) {
 				orderWindowDAO.saveOrderWindow(new OrderWindow(startTimeList.get(i), endTimeList
-						.get(i), company, canteen, discount, discountValue));
+						.get(i), company, canteen, discount, discountValue, remarks));
 			}
 
 		} else {
 			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen,
-					discount, discountValue));
+					discount, discountValue, remarks));
 		}
 	}
 
@@ -115,7 +116,7 @@ public class OrderWindowController {
 	 * @param numberOfWeeks The number of weeks that this order window will be running
 	 */
 	public void createNewOrderWindow(DateTime startDate, Duration duration, Company company,
-			Canteen canteen, double discount, int numberOfWeeks) {
+			Canteen canteen, double discount, int numberOfWeeks, String remarks) {
 
 		if (numberOfWeeks > 0) {
 			ArrayList<DateTime> dateTimeList = new ArrayList<DateTime>();
@@ -128,12 +129,12 @@ public class OrderWindowController {
 
 			for (DateTime dateTimeAdd : dateTimeList) {
 				orderWindowDAO.saveOrderWindow(new OrderWindow(dateTimeAdd, duration, company,
-						canteen, discount));
+						canteen, discount, remarks));
 			}
 
 		} else {
 			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen,
-					discount));
+					discount, remarks));
 		}
 	}
 

@@ -11,9 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Canteen;
 import model.Stall;
-
 import controller.CanteenController;
-import controller.FoodController;
 import controller.StallController;
 
 /**
@@ -44,7 +42,6 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		FoodController foodController = new FoodController();
 		StallController stallController = new StallController();
 		CanteenController canteenController = new CanteenController();
 

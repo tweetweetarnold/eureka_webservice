@@ -267,7 +267,7 @@ public class AccessController {
 		}
 
 		Employee newEmployee = new Employee(encryptPassword, name, email, contactNo, company);
-		newEmployee.setDefaultDeliveryPoint(deliveryPoint);
+		newEmployee.setDeliveryPoint(deliveryPoint);
 		newEmployee.setStatus(StringValues.EMPLOYEE_PENDING_VERIFICATION);
 		try {
 			employeeController.saveEmployee(newEmployee);

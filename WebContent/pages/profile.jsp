@@ -113,6 +113,12 @@
 						</tr>
 						<tr>
 							<td>
+								<strong>Delivery Point:</strong>
+							</td>
+							<td>${user.deliveryPoint}</td>
+						</tr>
+						<tr>
+							<td>
 								<strong>Email:</strong>
 							</td>
 							<td>${user.email}</td>

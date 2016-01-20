@@ -53,6 +53,7 @@ public class FileUploadServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		FileUploadController fileUploadController = new FileUploadController();
+
 		// Create a factory for disk-based file items
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		// Configure a repository (to ensure a secure temp location is used)

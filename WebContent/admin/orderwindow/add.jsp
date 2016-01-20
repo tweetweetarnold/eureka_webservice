@@ -99,18 +99,19 @@
 												<div class="form-group">
 													<label>Start Datetime</label>
 													<div class='input-group date' id='datetimepicker6'>
-														<input type='text' class="form-control" name="startDatetime" required />
+														<input type='text' class="form-control" name="startDatetime" placeholder="Start Date" required />
 														<span class="input-group-addon">
 															<span class="glyphicon glyphicon-calendar"></span>
 														</span>
 													</div>
 												</div>
 											</div>
+
 											<div class='col-md-3'>
 												<div class="form-group">
 													<label>End Datetime</label>
 													<div class='input-group date' id='datetimepicker7'>
-														<input type='text' class="form-control" name="endDatetime" required />
+														<input type='text' class="form-control" name="endDatetime" placeholder="End Date" required />
 														<span class="input-group-addon">
 															<span class="glyphicon glyphicon-calendar"></span>
 														</span>
@@ -120,9 +121,16 @@
 										</div>
 
 										<div class="form-group">
-											<label>Discount Value (decimal)</label>
-											<input name="discountValue" class="form-control">
+											<label>Discount Value</label>
+											<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
+												data-content="Put in a value (eg 3.00) to give the users here a $3.00 for their orders!"
+												data-placement="right"
+											>
+												<i class="fa fa-question-circle"></i>
+											</a>
+											<input name="discountValue" class="form-control" placeholder="Eg. 2.00">
 										</div>
+
 										<div class="form-group">
 											<label>Number of Weeks</label>
 											<select class="form-control" name="repeat" required>
@@ -131,6 +139,14 @@
 												</c:forEach>
 											</select>
 										</div>
+
+										<div class="form-group">
+											<label>Comments to Users (Optional)</label>
+											<textarea rows="3" name="remarks" class="form-control"
+												placeholder="What do you want to let your users know about this order window?"
+											></textarea>
+										</div>
+
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm">Create New
 											Window</button>
@@ -215,29 +231,13 @@
 		});
 	</script>
 
-	<!-- Datepicker -->
-	<script type="text/javascript">
-		// 		$(function() {
-		// 			$('#startDatetime').datetimepicker({
-		// 				inline : true,
-		// 				sideBySide : true,
-		// 				format : 'DD-MMMM-YYYY hh:mm'
-		// 			});
-		// 			$('#endDatetime').datetimepicker({
-		// 				useCurrent : false,
-		// 				inline : true,
-		// 				sideBySide : true,
-		// 				format : 'DD-MMMM-YYYY hh:mm'
-		// 			// Important! See issue #1075
-		// 			});
-		// 			$("#startDatetime").on("dp.change", function(e) {
-		// 				$('#endDatetime').data("DateTimePicker").minDate(e.date);
-		// 			});
-		// 			$("#endDatetime").on("dp.change", function(e) {
-		// 				$('#startDatetime').data("DateTimePicker").maxDate(e.date);
-		// 			});
-		// 		});
+	<!-- popover -->
+	<script>
+		$(function() {
+			$('[data-toggle="popover"]').popover();
+		});
 	</script>
+
 
 </body>
 
