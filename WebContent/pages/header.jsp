@@ -18,9 +18,9 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a href="/eureka_webservice/LoadUserPaymentServlet">
-						Payment
-						<i class="fa fa-credit-card fa-lg"></i>
+					<a href="/eureka_webservice/pages/cart.jsp">
+						Cart
+						<i class="fa fa-shopping-cart fa-lg"></i>
 					</a>
 				</li>
 				<li>
@@ -29,10 +29,11 @@
 						<i class="fa fa-bars fa-lg"></i>
 					</a>
 				</li>
+
 				<li>
-					<a href="/eureka_webservice/pages/cart.jsp">
-						Cart
-						<i class="fa fa-shopping-cart fa-lg"></i>
+					<a href="/eureka_webservice/LoadUserPaymentServlet">
+						Payment
+						<i class="fa fa-credit-card fa-lg"></i>
 					</a>
 				</li>
 				<li class="dropdown">

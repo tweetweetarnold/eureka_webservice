@@ -50,7 +50,7 @@
 			<div class="col-lg-12">
 				<h1 class="page-header">
 					Cart
-					<small>your orders</small>
+					<small>what you ordered</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li>
@@ -123,12 +123,39 @@
 										$${amt}
 									</td>
 									<td>
-										<form action="/eureka_webservice/ProcessDeleteFoodItemFromOrderItemsServlet">
-											<input type="hidden" name="foodPosition" value="${loop.index}">
-											<button type="submit" class="btn btn-link btn-xs">
-												<i class="fa fa-trash-o fa-2x"></i>
-											</button>
-										</form>
+										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
+											<i class="fa fa-trash-o fa-2x"></i>
+										</button>
+
+										<!-- Modal delete -->
+										<div class="modal fade" id="modalDelete${loop.index}" tabindex="-1" role="dialog"
+											aria-labelledby="myModalLabel"
+										>
+											<div class="modal-dialog" role="document">
+												<form action="/eureka_webservice/ProcessDeleteFoodItemFromOrderItemsServlet">
+													<input type="hidden" name="foodPosition" value="${loop.index}">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+															<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
+														</div>
+														<!-- / modal header -->
+														<div class="modal-body">You are removing a food item from cart. Are you sure you want to continue?</div>
+														<!-- / modal body -->
+
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default" data-dismiss="modal">No, keep my food</button>
+															<button type="submit" class="btn btn-danger">Yes, remove the food</button>
+														</div>
+														<!-- / modal footer -->
+													</div>
+													<!-- / modal content -->
+												</form>
+											</div>
+										</div>
+										<!-- / Modal delete -->
 									</td>
 								</tr>
 							</c:forEach>
@@ -149,27 +176,32 @@
 				<table class="table">
 					<tr>
 						<td>
-							<h2>Order Price:</h2>
+							<h2>
+								<i>Order Price:</i>
+							</h2>
 						</td>
 						<td>
 							<h2>
 								<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />
-								$${overallPrice2}
+								<i>$${overallPrice2}</i>
 							</h2>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<h2>Discount:</h2>
+							<h2>
+								<i>Discount:</i>
+							</h2>
 						</td>
 						<td>
 							<h2>
 								<fmt:formatNumber value="${sessionScope.orderWindow.discountValue}" var="discountValue2" minFractionDigits="2" />
-								$${discountValue2}
+								<i>$${discountValue2}</i>
 							</h2>
 						</td>
 					</tr>
 				</table>
+
 			</div>
 		</div>
 
@@ -187,7 +219,7 @@
 	</div>
 	<!-- /.container -->
 
-	<!-- Modal -->
+	<!-- Modal checkout -->
 	<div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<form action="/eureka_webservice/ProcessAddNewFoodOrderServlet">
@@ -212,7 +244,12 @@
 			</form>
 		</div>
 	</div>
-	<!-- / Modal -->
+	<!-- / Modal checkout -->
+
+
+
+
+
 
 	<!-- jQuery -->
 	<script src="/eureka_webservice/resources/startbootstrap-business/js/jquery.js"></script>

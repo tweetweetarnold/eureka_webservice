@@ -104,8 +104,8 @@
 		<div class="row">
 			<c:forEach items="${sessionScope.foodList}" var="food">
 				<div class="col-md-3 img-portfolio">
-					<div class="pull-left">${food.name}</div>
-					<div class="pull-right">
+					<div class="pull-left" style="font-size: large;">${food.name}</div>
+					<div class="pull-right" style="font-size: large;">
 						<fmt:formatNumber value="${food.price}" var="amt" minFractionDigits="2" />
 						$${amt}
 					</div>

@@ -53,7 +53,7 @@
 
 		<!-- Arnold's row -->
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-8">
 				<h1 class="page-header">Homepage</h1>
 				<table class="table table-striped table-bordered table-hover">
 					<tr>
@@ -90,9 +90,9 @@
 					</tr>
 					<tr>
 						<td>
-							<strong>Remarks:</strong>
+							<strong>Comments from Administrator:</strong>
 						</td>
-						<td></td>
+						<td>${sessionScope.orderWindow.remarks}</td>
 					</tr>
 				</table>
 			</div>
@@ -167,7 +167,7 @@
 				<c:forEach items="${canteen.stallList}" var="stall">
 					<div class="col-md-4 col-sm-6 text-center">
 						<a href="/eureka_webservice/LoadStallFoodServlet?stallId=${stall.stallId}">
-							<i>${stall.name}</i>
+							<i style="font-size: large;">${stall.name}</i>
 							<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
 						</a>
 					</div>
