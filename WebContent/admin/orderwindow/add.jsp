@@ -55,7 +55,7 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Add New Window</h1>
+					<h1 class="page-header">Add New Order Window</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -64,7 +64,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Create new order window</div>
+						<div class="panel-heading">Add new Order window</div>
 
 						<div class="panel-body">
 
@@ -143,13 +143,13 @@
 										<div class="form-group">
 											<label>Comments to Users (Optional)</label>
 											<textarea rows="3" name="remarks" class="form-control"
-												placeholder="What do you want to let your users know about this order window?"
+												placeholder="What do you want to let your users know about this Order Window?"
 											></textarea>
 										</div>
 
 
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm">Create New
-											Window</button>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm">Add New
+											Order Window</button>
 
 										<!-- Modal confirmation -->
 										<div class="modal" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -158,7 +158,7 @@
 													<div class="modal-header">
 														<h4 class="modal-title" id="myModalLabel">Confirmation</h4>
 													</div>
-													<div class="modal-body">Are you sure you want to create a new Order Window?</div>
+													<div class="modal-body">Are you sure you want to add a new Order Window?</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 														<button type="submit" class="btn btn-primary" form="submitForm">Confirm</button>
