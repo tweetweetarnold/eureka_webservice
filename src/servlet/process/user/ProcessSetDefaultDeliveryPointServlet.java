@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import services.AESAlgorithm;
 import services.SendEmail;
 import value.StringValues;
@@ -73,38 +78,16 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 
 		userController.updateDefaultDeliveryPoint(email, buildingName);
 
-		SendEmail javaEmail = new SendEmail();
+		
 		String[] emailArray = { email };
-
+		
 		try {
-			String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort();
-			// + request.getContextPath();
-
-			String token = UUID.randomUUID().toString();
-
-			String url = constructVerifyEmail(appUrl, email, request.getLocale(), token);
-
-			javaEmail.setMailServerProperties();
-			javaEmail
-					.sendEmail(
-							"Koh Bus LunchTime Ordering App - Verify Your Email",
-							"Dear User,<br><br>"
-									+ "Welcome to LunchTime Ordering App, please click the following link to verify your email address:<br><br> "
-									+ "<a href="
-									+ url
-									+ ">"
-									+ url
-									+ "</a>"
-									+ "<br><br>"
-									+ "Regards,<br>"
-									+ "Admin<br><br>"
-									+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
-							emailArray);
+			accessController.constructVerifyEmail(request.getServerName(), request.getServerPort(), request.getContextPath(), email, emailArray);
 
 			session.removeAttribute("email");
 
 			session.setAttribute("success",
-					"An email has been sent to you. Please follow the instructions on verifying your account.");
+					"An email has been sent to you. Please check your email within 5 minutes and follow the instructions on verifying your account.");
 			response.sendRedirect("/eureka_webservice/pages/login.jsp");
 		} catch (Exception e) {
 			session.setAttribute("error", e.getMessage());
@@ -113,14 +96,14 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 
 	}
 
-	private String constructVerifyEmail(String contextPath, String email, Locale locale,
-			String token) {
-		AESAlgorithm aes = new AESAlgorithm();
-		String eEncrypt = aes.encrypt(email);
-		String encryptedStatus = aes.encrypt(StringValues.EMPLOYEE_OK);
-		String url = contextPath + "/eureka_webservice/ProcessVerificationServlet?email="
-				+ eEncrypt + "&status=" + encryptedStatus + "&token=" + token;
-		return url;
-	}
+//	private String constructVerifyEmail(String contextPath, String email, Locale locale,
+//			String token) {
+//		AESAlgorithm aes = new AESAlgorithm();
+//		String eEncrypt = aes.encrypt(email);
+//		String encryptedStatus = aes.encrypt(StringValues.EMPLOYEE_OK);
+//		String url = contextPath + "/eureka_webservice/ProcessVerificationServlet?email="
+//				+ eEncrypt + "&status=" + encryptedStatus + "&token=" + token;
+//		return url;
+//	}
 
 }

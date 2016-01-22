@@ -13,12 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.validator.routines.EmailValidator;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import controller.AccessController;
 import dao.EmployeeDAO;
 import model.Employee;
 import services.AESAlgorithm;
 import services.EmailGenerator;
+import value.StringValues;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -70,17 +75,50 @@ public class ProcessVerificationServlet extends HttpServlet {
 			EmployeeDAO employeedao = new EmployeeDAO();
 			String email = (String)request.getParameter("email");
 			String status = (String) request.getParameter("status");
+			String param = (String) request.getParameter("token");
 			String newEmail = email.replaceAll(" ","+");
 			String eDecrypt = aes.decrypt(newEmail);
 			String verifiedStatus = aes.decrypt(status);
 			
 			Employee employee = employeedao.getEmployeeByEmail(eDecrypt);
 			
-			employee.setStatus(verifiedStatus);
-			employeedao.updateEmployee(employee);
+			if (param.contains(" ")) {
+				param = param.replaceAll(" ", "+");
+			}
+			String token = aes.decrypt(param);
+			DateTimeZone.setDefault(DateTimeZone.forID("Asia/Singapore"));
+			System.out.println("Servlet TIME ZONE: " + DateTimeZone.getDefault().toString());
+			DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm");
+			DateTime startDatetime = formatter.parseDateTime(token);
+
+			DateTime currentTime = new DateTime(DateTimeZone.forID("Asia/Singapore"));
 			
-			session.setAttribute("success","Your email has been verified. You may login now. Email:" + eDecrypt);
-			response.sendRedirect("/eureka_webservice/pages/login.jsp");
+			System.out.println("Current time "+currentTime);
+
+			long difference = currentTime.getMillis() - startDatetime.getMillis();
+			System.out.println("Current time in Millis"+ currentTime.getMillis());
+			System.out.println("Time from token in Millis "+ startDatetime.getMillis());
+			System.out.println(difference);
+			if (difference > 300000) {
+				session.setAttribute("error", "Session Timeout for verification");
+				session.setAttribute("email", eDecrypt);
+				response.sendRedirect("/eureka_webservice/pages/request-verification.jsp");
+			} else {
+			
+				String currentStatus = employee.getStatus();
+				switch (currentStatus) {
+				case StringValues.EMPLOYEE_OK:
+					throw new Exception("Your account is already verified");
+				case StringValues.EMPLOYEE_SUSPENDED:
+					throw new Exception("Your account is suspended");
+				case StringValues.EMPLOYEE_PENDING_VERIFICATION:
+					employee.setStatus(verifiedStatus);
+					employeedao.updateEmployee(employee);
+					
+					session.setAttribute("success","Your email has been verified. You may login now. Email:" + eDecrypt);
+					response.sendRedirect("/eureka_webservice/pages/login.jsp");
+				}
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
