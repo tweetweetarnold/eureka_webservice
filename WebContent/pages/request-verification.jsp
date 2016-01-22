@@ -7,7 +7,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-<%@include file="/protect/protect.jsp"%>
+<%@include file="/protect/protectRequestVerification.jsp"%>
 <!-- Meta -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
