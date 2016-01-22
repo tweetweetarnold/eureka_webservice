@@ -1,6 +1,5 @@
 package model;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;

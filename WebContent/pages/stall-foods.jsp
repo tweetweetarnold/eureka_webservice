@@ -105,8 +105,8 @@
 			<c:forEach items="${sessionScope.foodList}" var="food">
 				<div class="col-md-3 img-portfolio">
 					<a href="portfolio-item.html" data-toggle="modal" data-target="#myModal${food.foodId}">
-						<b class="pull-left" style="font-size: large;">${food.name}</b>
-						<b class="pull-right" style="font-size: large;">
+						<b class="pull-left">${food.name}</b>
+						<b class="pull-right">
 							<fmt:formatNumber value="${food.price}" var="amt" minFractionDigits="2" />
 							$${amt}
 						</b>

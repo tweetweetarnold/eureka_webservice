@@ -103,6 +103,7 @@
 							<tr>
 								<th>Food</th>
 								<th>Add-On(s)</th>
+								<th>Qty</th>
 								<th>Price</th>
 								<th></th>
 							</tr>
@@ -117,6 +118,7 @@
 											<c:if test="${!innerLoop.last}">, </c:if>
 										</c:forEach>
 									</td>
+									<td>${foodOrderItem.quantity}</td>
 									<td>
 										<c:set value="${overallPrice + foodOrderItem.price}" var="overallPrice" />
 										<fmt:formatNumber value="${foodOrderItem.price}" var="amt" minFractionDigits="2" />
