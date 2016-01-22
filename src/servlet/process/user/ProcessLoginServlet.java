@@ -90,7 +90,8 @@ public class ProcessLoginServlet extends HttpServlet {
 			String empStatus = emp.getStatus();
 			switch (empStatus) {
 			case StringValues.EMPLOYEE_PENDING_VERIFICATION:
-				throw new Exception("Account not verified. Please verify your account first!");
+				throw new Exception(
+						"It seems you have not verified your account. Please verify your account from your email first!");
 			case StringValues.EMPLOYEE_SUSPENDED:
 				session.setAttribute("suspended", "true");
 				response.sendRedirect("/eureka_webservice/pages/payment.jsp");

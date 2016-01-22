@@ -51,7 +51,7 @@
 			<div class="col-lg-12">
 				<h1 class="page-header">
 					Payment
-					<small>something you can't escape from</small>
+					<small></small>
 				</h1>
 				<ol class="breadcrumb">
 					<li>
@@ -163,7 +163,7 @@
 			<div class="col-md-12">
 				<h2 class="page-header">
 					Charges
-					<small>what you are paying for</small>
+					<small>here's the list of items you are paying for</small>
 					<i class="pull-right">
 						<fmt:formatNumber value="${sessionScope.user.amountOwed}" var="owedPrice" minFractionDigits="2" />
 						Amount Owed: $${owedPrice}

@@ -638,22 +638,22 @@ public class Test {
 
 		Stall malayStall = new Stall("Oasis Malay Stall", 93848341, canteen1, null,
 				"resources/img/stall/img-oasismalaystall.jpg");
-		Food mfood1 = new Food("Curry Chicken + Veg", "ask for more vegs, less fried meat", 3.70,
+		Food mfood1 = new Food("Curry Chicken + Veg", "more vegs, less fried meat", 3.70,
 				"resources/img/food/img-mixedvegricemalay.jpg", malayStall);
-		Food mfood2 = new Food("Asam Fish + Veg", "ask for more vegs, less fried meat", 3.70,
+		Food mfood2 = new Food("Asam Fish + Veg", "more vegs, less fried meat", 3.70,
 				"resources/img/food/img-malayasamfish.jpg", malayStall);
-		Food mfood3 = new Food("Curry Fish + Veg", "ask for more vegs, less fried meat", 3.70,
+		Food mfood3 = new Food("Curry Fish + Veg", "more vegs, less fried meat", 3.70,
 				null, malayStall);
-		// Food mfood4 = new Food("Beef + Veg", "ask for more vegs, less fried meat", 3.70,
+		// Food mfood4 = new Food("Beef + Veg", "more vegs, less fried meat", 3.70,
 		// "resources/img/food/img-malaybeef.jpg", malayStall);
-		Food mfood5 = new Food("Fried Chicken + Veg", "ask for more vegs, less fried meat", 3.70,
+		Food mfood5 = new Food("Fried Chicken + Veg", "more vegs, less fried meat", 3.70,
 				"resources/img/food/img-malayfriedchicken.jpg", malayStall);
-		Food mfood6 = new Food("Fried Fish + Veg", "ask for more vegs, less fried meat", 3.70,
+		Food mfood6 = new Food("Fried Fish + Veg", "more vegs, less fried meat", 3.70,
 				"resources/img/food/img-malayfriedfish.jpg", malayStall);
-		Food mfood7 = new Food("Stingray + Veg", "ask for more vegs, less fried meat", 3.70,
+		Food mfood7 = new Food("Stingray + Veg", "more vegs, less fried meat", 3.70,
 				"resources/img/food/img-malaystingray.jpg", malayStall);
 		// for mfood1 modifiers
-		Modifier modifier1 = new Modifier("Ask for more vegetables", "", 0.00, mfood1);
+		Modifier modifier1 = new Modifier("more vegetables", "", 0.00, mfood1);
 		Modifier modifier2 = new Modifier("No egg", "", 0.00, mfood1);
 		Set<Modifier> modifierList1 = new HashSet<Modifier>();
 		modifierList1.add(modifier1);
@@ -662,7 +662,7 @@ public class Test {
 		mfood1.setModifierList(modifierList1);
 
 		// for mfood2 modifiers
-		Modifier modifierM21 = new Modifier("Ask for more vegetables", "", 0.00, mfood2);
+		Modifier modifierM21 = new Modifier("more vegetables", "", 0.00, mfood2);
 		Modifier modifierM22 = new Modifier("No egg", "", 0.00, mfood2);
 		Set<Modifier> modifierList2 = new HashSet<Modifier>();
 		modifierList2.add(modifierM21);
@@ -670,7 +670,7 @@ public class Test {
 		mfood2.setModifierList(modifierList2);
 
 		// for mfood3 modifiers
-		Modifier modifierM31 = new Modifier("Ask for more vegetables", "", 0.00, mfood3);
+		Modifier modifierM31 = new Modifier("more vegetables", "", 0.00, mfood3);
 		Modifier modifierM32 = new Modifier("No egg", "", 0.00, mfood3);
 		Set<Modifier> modifierList3 = new HashSet<Modifier>();
 		modifierList3.add(modifierM31);
@@ -678,28 +678,28 @@ public class Test {
 		mfood3.setModifierList(modifierList3);
 		//
 		// // for mfood4 modifiers
-		// Modifier modifierM41 = new Modifier("Ask for more vegetables", "", 0.00, mfood4);
+		// Modifier modifierM41 = new Modifier("more vegetables", "", 0.00, mfood4);
 		// Modifier modifierM42 = new Modifier("No egg", "", 0.00, mfood4);
 		// Set<Modifier> modifierListm4 = new HashSet<Modifier>();
 		// modifierListm4.add(modifierM41);
 		// modifierListm4.add(modifierM42);
 		// mfood4.setModifierList(modifierListm4);
 
-		Modifier modifierM51 = new Modifier("Ask for more vegetables", "", 0.00, mfood5);
+		Modifier modifierM51 = new Modifier("more vegetables", "", 0.00, mfood5);
 		Modifier modifierM52 = new Modifier("No egg", "", 0.00, mfood5);
 		Set<Modifier> modifierListm5 = new HashSet<Modifier>();
 		modifierListm5.add(modifierM51);
 		modifierListm5.add(modifierM52);
 		mfood5.setModifierList(modifierListm5);
 
-		Modifier modifierM61 = new Modifier("Ask for more vegetables", "", 0.00, mfood6);
+		Modifier modifierM61 = new Modifier("more vegetables", "", 0.00, mfood6);
 		Modifier modifierM62 = new Modifier("No egg", "", 0.00, mfood6);
 		Set<Modifier> modifierListm6 = new HashSet<Modifier>();
 		modifierListm6.add(modifierM61);
 		modifierListm6.add(modifierM62);
 		mfood6.setModifierList(modifierListm6);
 
-		Modifier modifierM71 = new Modifier("Ask for more vegetables", "", 0.00, mfood7);
+		Modifier modifierM71 = new Modifier("more vegetables", "", 0.00, mfood7);
 		Modifier modifierM72 = new Modifier("No egg", "", 0.00, mfood7);
 		Set<Modifier> modifierListm7 = new HashSet<Modifier>();
 		modifierListm7.add(modifierM71);
@@ -804,7 +804,7 @@ public class Test {
 		Stall chineseMixVegStall = new Stall("Chinese Mix Veg Stall", 93848341, canteen1, null,
 				"resources/img/stall/img-oasischinesemixvegstall.jpg");
 		Food mixVegRice1 = new Food("1 Meat 2 Veg",
-				"ask for more meat, less fried meat, or upsize to $3.50", 3.00,
+				"more meat, less fried meat, or upsize to $3.50", 3.00,
 				"resources/img/food/img-mixvegricechinese.jpg", chineseMixVegStall);
 		Food mixVegRice2 = new Food("All Veg", "", 3.00,
 				"resources/img/food/img-mixvegricechinese.jpg", chineseMixVegStall);
@@ -815,8 +815,8 @@ public class Test {
 		Food mixVegRice5 = new Food("Porridge(All Veg)", "", 3.20, null, chineseMixVegStall);
 
 		// for mixVegRice1 modifiers
-		Modifier modifier9 = new Modifier("Ask for more vegetables", "", 0.00, mixVegRice1);
-		Modifier modifier10 = new Modifier("Ask for no fried meat", "", 0.00, mixVegRice1);
+		Modifier modifier9 = new Modifier("more vegetables", "", 0.00, mixVegRice1);
+		Modifier modifier10 = new Modifier("no fried meat", "", 0.00, mixVegRice1);
 		Modifier modifier11 = new Modifier("Upsize to $3.20", "", 0.20, mixVegRice1);
 		Set<Modifier> modifierList4 = new HashSet<Modifier>();
 		modifierList4.add(modifier9);
@@ -829,8 +829,8 @@ public class Test {
 		modifierListMV2.add(modifierMV2);
 		mixVegRice2.setModifierList(modifierListMV2);
 
-		Modifier modifierNew21 = new Modifier("Ask for more vegetables", "", 0.00, mixVegRice4);
-		Modifier modifierNew22 = new Modifier("Ask for no fried meat", "", 0.00, mixVegRice4);
+		Modifier modifierNew21 = new Modifier("more vegetables", "", 0.00, mixVegRice4);
+		Modifier modifierNew22 = new Modifier("no fried meat", "", 0.00, mixVegRice4);
 		Set<Modifier> modifierListNew20 = new HashSet<Modifier>();
 		modifierListNew20.add(modifierNew21);
 		modifierListNew20.add(modifierNew22);
@@ -928,7 +928,7 @@ public class Test {
 		// ****NOTE********
 		// for seafood1 modifier
 		// Modifier modifier18 = new Modifier("Dry type", "", 0.30, seafood1);
-		// Modifier modifier19 = new Modifier("Ask for more vegetables", "", 0.00, seafood1);
+		// Modifier modifier19 = new Modifier("more vegetables", "", 0.00, seafood1);
 		//
 		// Set<Modifier> modifierList8 = new HashSet<Modifier>();
 		// modifierList8.add(modifier18);
@@ -965,14 +965,14 @@ public class Test {
 		seafood11.setModifierList(modifierListS11);
 
 		// for seafood4 modifier
-		Modifier modifier20 = new Modifier("Ask for more vegetables", "", 0.00, seafood4);
+		Modifier modifier20 = new Modifier("more vegetables", "", 0.00, seafood4);
 
 		Set<Modifier> modifierList9 = new HashSet<Modifier>();
 		modifierList9.add(modifier20);
 		seafood4.setModifierList(modifierList9);
 
 		// for seafood5 modifier
-		Modifier modifier21 = new Modifier("Ask for more vegetables", "", 0.00, seafood5);
+		Modifier modifier21 = new Modifier("more vegetables", "", 0.00, seafood5);
 
 		Set<Modifier> modifierList10 = new HashSet<Modifier>();
 		modifierList10.add(modifier21);

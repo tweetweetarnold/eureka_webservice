@@ -172,10 +172,10 @@ public class FoodOrderItem {
 	 * 
 	 * @return The price value in 2 decimal places
 	 */
-	public String getPriceString() {
-		DecimalFormat df = new DecimalFormat("0.00");
-		return df.format(getPrice());
-	}
+//	public String getPriceString() {
+//		DecimalFormat df = new DecimalFormat("0.00");
+//		return df.format(getPrice());
+//	}
 
 	/**
 	 * Retrieves the quantity of the FoodOrderItem
