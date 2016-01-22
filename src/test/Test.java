@@ -541,6 +541,11 @@ public class Test {
 		Set<Modifier> modifierListA17 = new HashSet<Modifier>();
 		modifierListA17.add(modifierA28);
 		food57.setModifierList(modifierListA17);
+		
+		Modifier modifierNew23 = new Modifier("Add powder", "", 0.00, food53);
+		Set<Modifier> modifierListNew21 = new HashSet<Modifier>();
+		modifierListNew21.add(modifierNew23);
+		food53.setModifierList(modifierListNew21);
 
 		foodListB11.add(food34);
 		foodListB11.add(food35);
@@ -803,8 +808,8 @@ public class Test {
 				"resources/img/food/img-mixvegricechinese.jpg", chineseMixVegStall);
 		Food mixVegRice2 = new Food("All Veg", "", 3.00,
 				"resources/img/food/img-mixvegricechinese.jpg", chineseMixVegStall);
-		Food mixVegRice3 = new Food("Porridge", "", 3.20,
-				"resources/img/food/img-fishporridge.jpg", chineseMixVegStall);
+//		Food mixVegRice3 = new Food("Porridge", "", 3.20,
+//				"resources/img/food/img-fishporridge.jpg", chineseMixVegStall);
 		Food mixVegRice4 = new Food("Porridge(1 Meat + 2 Veg)", "", 3.70, null, chineseMixVegStall);
 
 		Food mixVegRice5 = new Food("Porridge(All Veg)", "", 3.20, null, chineseMixVegStall);
@@ -835,7 +840,7 @@ public class Test {
 		Set<Food> foodList4 = new HashSet<Food>();
 		foodList4.add(mixVegRice1);
 		foodList4.add(mixVegRice2);
-		foodList4.add(mixVegRice3);
+//		foodList4.add(mixVegRice3);
 		foodList4.add(mixVegRice4);
 		foodList4.add(mixVegRice5);
 		chineseMixVegStall.setFoodList(foodList4);
@@ -912,7 +917,7 @@ public class Test {
 		Food seafood11 = new Food("White Chicken Soup", "", 5.50,
 				"resources/img/food/img-whitechickensoup.jpg", seafoodTzeCharStall);
 
-		Food seafood12 = new Food("Horfun(Gravy)", "", 3.70, null, seafoodTzeCharStall);
+//		Food seafood12 = new Food("Horfun(Gravy)", "", 3.70, null, seafoodTzeCharStall);
 		// *****NOTE******
 		// Food seafood13 = new Food("Chicken Horfun", "", 3.00, null, seafoodTzeCharStall);
 		// Food seafood14 = new Food("Chicken Horfun(With Gravy)", "", 3.00, null,
@@ -985,7 +990,7 @@ public class Test {
 		foodList6.add(seafood9);
 		foodList6.add(seafood10);
 		foodList6.add(seafood11);
-		foodList6.add(seafood12);
+//		foodList6.add(seafood12);
 		// foodList6.add(seafood13);
 		// foodList6.add(seafood14);
 		// foodList6.add(seafood15);
@@ -1162,6 +1167,10 @@ public class Test {
 		Set<Modifier> modifierList25 = new HashSet<Modifier>();
 		modifierList25.add(modifier36);
 		mixedFruits.setModifierList(modifierList25);
+		
+		Modifier modifierNew24 = new Modifier("Add powder", "", 0.00, guava);
+		Set<Modifier> modifierListNew22 = new HashSet<Modifier>();
+		guava.setModifierList(modifierListNew22);
 
 		Set<Food> foodList8 = new HashSet<Food>();
 		foodList8.add(apple);
@@ -1493,7 +1502,7 @@ public class Test {
 
 		session.save(mixVegRice1);
 		session.save(mixVegRice2);
-		session.save(mixVegRice3);
+//		session.save(mixVegRice3);
 		session.save(mixVegRice4);
 		session.save(mixVegRice5);
 
@@ -1514,7 +1523,7 @@ public class Test {
 		session.save(seafood9);
 		session.save(seafood10);
 		session.save(seafood11);
-		session.save(seafood12);
+//		session.save(seafood12);
 		// session.save(seafood13);
 		// session.save(seafood14);
 
@@ -1762,6 +1771,8 @@ public class Test {
 		// session.save(modifierNew20);
 		session.save(modifierNew21);
 		session.save(modifierNew22);
+		session.save(modifierNew23);
+		session.save(modifierNew24);
 		session.save(modifierNew25);
 		session.save(modifierNew26);
 
