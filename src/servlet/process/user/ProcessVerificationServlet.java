@@ -99,14 +99,25 @@ public class ProcessVerificationServlet extends HttpServlet {
 			System.out.println("Current time in Millis"+ currentTime.getMillis());
 			System.out.println("Time from token in Millis "+ startDatetime.getMillis());
 			System.out.println(difference);
-			if (difference > 300000) {
-				session.setAttribute("error", "Session Timeout for verification");
-				session.setAttribute("email", eDecrypt);
-				response.sendRedirect("/eureka_webservice/pages/request-verification.jsp");
-			} else {
+			String currentStatus = employee.getStatus();
 			
-				String currentStatus = employee.getStatus();
+			if (difference > 300000) {
 				switch (currentStatus) {
+				case StringValues.EMPLOYEE_DESTROYED:
+					throw new Exception("This account is no longer in use");
+				case StringValues.EMPLOYEE_OK:
+					throw new Exception("Your account is already verified");
+				case StringValues.EMPLOYEE_SUSPENDED:
+					throw new Exception("Your account is suspended");
+				case StringValues.EMPLOYEE_PENDING_VERIFICATION:
+					session.setAttribute("error", "Session Timeout for verification");
+					session.setAttribute("email", eDecrypt);
+					response.sendRedirect("/eureka_webservice/pages/request-verification.jsp");
+				}
+			} else {
+				switch (currentStatus) {
+				case StringValues.EMPLOYEE_DESTROYED:
+					throw new Exception("This account is no longer in use");
 				case StringValues.EMPLOYEE_OK:
 					throw new Exception("Your account is already verified");
 				case StringValues.EMPLOYEE_SUSPENDED:
