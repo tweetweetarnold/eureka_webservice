@@ -1,6 +1,7 @@
 package servlet.load.user;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Food;
 import model.Stall;
+import value.StringValues;
 
 import org.hibernate.Session;
 
@@ -70,14 +72,21 @@ public class LoadStallFoodServlet extends HttpServlet {
 		System.out.println("stall s: " + s.toString());
 		System.out.println("size: " + s.getFoodList().size());
 		Set<Food> foodList = s.getFoodList();
-		
-		foodList.removeIf(f -> f.getDescription().equals("ARCHIVED"));
+		Set<Food> displayFoodList = new HashSet<Food>();
+		Iterator iter = foodList.iterator();
+		while(iter.hasNext()){
+			Food food = (Food)iter.next();
+			String description = food.getDescription();
+			if(!description.equals(StringValues.ARCHIVED)){
+				displayFoodList.add(food);
+			}
+		}
 		
 		session2.close();
 
 		HttpSession session = request.getSession();
 		session.setAttribute("stallName", s.getName());
-		session.setAttribute("foodList", foodList);
+		session.setAttribute("foodList", displayFoodList);
 
 		response.sendRedirect("/eureka_webservice/pages/stall-foods.jsp");
 		// } catch (Exception e) {
