@@ -65,7 +65,9 @@ public class FoodDAO {
 	 * @param f The Food object to be removed
 	 */
 	public void deleteFood(Food f) {
-		MyConnection.delete(f);
+		f.setDescription("ARCHIVED");
+//		f.setStall(null);
+		updateFood(f);
 	}
 
 	/**

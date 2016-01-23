@@ -1,6 +1,7 @@
 package servlet.load.user;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -69,6 +70,9 @@ public class LoadStallFoodServlet extends HttpServlet {
 		System.out.println("stall s: " + s.toString());
 		System.out.println("size: " + s.getFoodList().size());
 		Set<Food> foodList = s.getFoodList();
+		
+		foodList.removeIf(f -> f.getDescription().equals("ARCHIVED"));
+		
 		session2.close();
 
 		HttpSession session = request.getSession();
