@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -35,19 +36,17 @@ public class OrderWindow {
 	@JoinColumn(name = "companyId")
 	private Company company;
 	private Date createDate;
-	private double discount;
-	private double discountValue;
+	private double discount, discountValue;
 	@Transient
 	private DateTime endDate;
 	@Column(name = "endDate")
 	private Date endDateFormatted;
-	private String remarks;
+	private ArrayList<PriceModifier> priceModifierList;
+	private String remarks, status;
 	@Transient
 	private DateTime startDate;
 	@Column(name = "startDate")
 	private Date startDateFormatted;
-	@Transient
-	private String status;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int windowId;
@@ -59,7 +58,8 @@ public class OrderWindow {
 	}
 
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			double discount, double discountValue, String remarks) {
+			double discount, double discountValue, String remarks,
+			ArrayList<PriceModifier> priceModifierList) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.startDateFormatted = startDate.toDate();
@@ -70,6 +70,8 @@ public class OrderWindow {
 		this.createDate = new Date();
 		this.discountValue = discountValue;
 		this.remarks = remarks;
+		this.status = StringValues.ACTIVE;
+		this.priceModifierList = priceModifierList;
 	}
 
 	/**
@@ -81,7 +83,7 @@ public class OrderWindow {
 	 * @param canteen The Canteen indicated in this OrderWindow
 	 */
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			double discount, String remarks) {
+			double discount, String remarks, ArrayList<PriceModifier> priceModifierList) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.startDateFormatted = startDate.toDate();
@@ -91,6 +93,8 @@ public class OrderWindow {
 		this.discount = discount;
 		this.createDate = new Date();
 		this.remarks = remarks;
+		this.status = StringValues.ACTIVE;
+		this.priceModifierList = priceModifierList;
 	}
 
 	/**
@@ -103,7 +107,7 @@ public class OrderWindow {
 	 * @param canteen The Canteen in this OrderWindow
 	 */
 	public OrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen,
-			double discount, String remarks) {
+			double discount, String remarks, ArrayList<PriceModifier> priceModifierList) {
 		this.startDate = startDate;
 		this.endDate = startDate.plus(duration);
 		this.startDateFormatted = startDate.toDate();
@@ -112,6 +116,8 @@ public class OrderWindow {
 		this.company = company;
 		this.discount = discount;
 		this.createDate = new Date();
+		this.status = StringValues.ACTIVE;
+		this.priceModifierList = priceModifierList;
 	}
 
 	/**
@@ -181,6 +187,10 @@ public class OrderWindow {
 		return endDateFormatted;
 	}
 
+	public ArrayList<PriceModifier> getPriceModifierList() {
+		return priceModifierList;
+	}
+
 	public String getRemarks() {
 		return remarks;
 	}
@@ -209,17 +219,18 @@ public class OrderWindow {
 	 * @return The status of the order window. It can be indicated as "Queued", "Opened" or "Closed"
 	 */
 	public String getStatus() {
-		Interval i = new Interval(startDate.getMillis(), endDate.getMillis());
-		String status = "Error";
-
-		if (i.containsNow()) {
-			status = StringValues.ORDERWINDOW_OPENED;
-		} else if (i.isBeforeNow()) {
-			status = StringValues.ORDERWINDOW_QUEUED;
-		} else if (i.isAfterNow()) {
-			status = StringValues.ORDERWINDOW_CLOSED;
-		}
-		return status;
+		return this.status;
+		// Interval i = new Interval(startDate.getMillis(), endDate.getMillis());
+		// String status = "Error";
+		//
+		// if (i.containsNow()) {
+		// status = StringValues.ORDERWINDOW_OPENED;
+		// } else if (i.isBeforeNow()) {
+		// status = StringValues.ORDERWINDOW_QUEUED;
+		// } else if (i.isAfterNow()) {
+		// status = StringValues.ORDERWINDOW_CLOSED;
+		// }
+		// return status;
 	}
 
 	/**
@@ -298,6 +309,10 @@ public class OrderWindow {
 	 */
 	public void setEndDateFormatted(Date endDateFormatted) {
 		this.endDateFormatted = endDateFormatted;
+	}
+
+	public void setPriceModifierList(ArrayList<PriceModifier> priceModifierList) {
+		this.priceModifierList = priceModifierList;
 	}
 
 	public void setRemarks(String remarks) {

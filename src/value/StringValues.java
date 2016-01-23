@@ -2,6 +2,10 @@ package value;
 
 public final class StringValues {
 
+	// General status
+	public static final String ARCHIVED = "Archived";
+	public static final String ACTIVE = "Active";
+
 	// For FoodOrder status
 	public static final String ORDER_SUBMITTED = "Submitted";
 	public static final String ORDER_CONFIRMED = "Confirmed";
@@ -19,9 +23,6 @@ public final class StringValues {
 	public static final String ORDERWINDOW_PROCESSING = "Processing";
 	public static final String ORDERWINDOW_CLOSED = "Closed";
 
-	
-	
-	
 	// *********************************************************************************
 	// For Session attributes
 	public static final String SESSION_ERROR = "error";

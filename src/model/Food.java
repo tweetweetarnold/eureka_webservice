@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import value.StringValues;
+
 /**
  * Represents the Food entity model in the web application
  * 
@@ -34,22 +36,23 @@ public class Food {
 	private String imageDirectory;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<Modifier> modifierList;
-	private String name;
+	private String name, status;
 	private double price;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "stallId")
 	private Stall stall;
 
 	private String weatherConditions;
-	
+
 	/**
 	 * Creates a default constructor for Food
 	 */
 	public Food() {
 	}
-	
+
 	/**
-	 * Creates a new Food object with a name, food description, price, the image directory and the Stall
+	 * Creates a new Food object with a name, food description, price, the image directory and the
+	 * Stall
 	 * 
 	 * @param name The name of the Food
 	 * @param description The description of the Food
@@ -66,14 +69,14 @@ public class Food {
 		this.imageDirectory = imageDirectory;
 		this.createDate = new Date();
 		this.modifierList = new HashSet<>();
+		this.status = StringValues.ACTIVE;
 		this.weatherConditions = "default";
 	}
-	
+
 	// check if canteen, stall and food name are the same and returns true if
 	// they are all the same
 	/**
-	 * Checks if this Food's name and its Canteen 
-	 * and Stall's name are the same as the other Food
+	 * Checks if this Food's name and its Canteen and Stall's name are the same as the other Food
 	 * 
 	 * @param otherFood The Food to be compared with
 	 * @return Returns true if this Food's name and its Canteen and Stall's name are the same
@@ -88,7 +91,7 @@ public class Food {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Retrieves the date which this Food object is created
 	 * 
@@ -97,7 +100,7 @@ public class Food {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	
+
 	/**
 	 * Retrieves the description of the Food
 	 * 
@@ -106,7 +109,7 @@ public class Food {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	/**
 	 * Retrieves the ID of the Food
 	 * 
@@ -115,7 +118,7 @@ public class Food {
 	public int getFoodId() {
 		return foodId;
 	}
-	
+
 	/**
 	 * Retrieves the directory of storing the Food image
 	 * 
@@ -124,7 +127,7 @@ public class Food {
 	public String getImageDirectory() {
 		return imageDirectory;
 	}
-	
+
 	/**
 	 * Retrieves the list of Modifiers available in this Food
 	 * 
@@ -133,7 +136,7 @@ public class Food {
 	public Set<Modifier> getModifierList() {
 		return modifierList;
 	}
-	
+
 	/**
 	 * Retrieves the name of this Food
 	 * 
@@ -142,7 +145,7 @@ public class Food {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Retrieves the price of the Food
 	 * 
@@ -151,7 +154,7 @@ public class Food {
 	public double getPrice() {
 		return price;
 	}
-	
+
 	/**
 	 * Formats the price value into 2 decimal place
 	 * 
@@ -161,7 +164,7 @@ public class Food {
 		DecimalFormat df = new DecimalFormat("0.00");
 		return df.format(getPrice());
 	}
-	
+
 	/**
 	 * Retrieves the Stall of this Food
 	 * 
@@ -170,7 +173,11 @@ public class Food {
 	public Stall getStall() {
 		return stall;
 	}
-	
+
+	public String getStatus() {
+		return status;
+	}
+
 	/**
 	 * Retrieves the weather condition indicated in this Food
 	 * 
@@ -179,7 +186,7 @@ public class Food {
 	public String getWeatherConditions() {
 		return weatherConditions;
 	}
-	
+
 	/**
 	 * Changes the current date of this Food object being created
 	 * 
@@ -188,7 +195,7 @@ public class Food {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	
+
 	/**
 	 * Changes the current description of the Food
 	 * 
@@ -197,7 +204,7 @@ public class Food {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	/**
 	 * Changes the current Food ID
 	 * 
@@ -206,7 +213,7 @@ public class Food {
 	public void setFoodId(int foodId) {
 		this.foodId = foodId;
 	}
-	
+
 	/**
 	 * Changes the current directory of storing the Food image
 	 * 
@@ -215,7 +222,7 @@ public class Food {
 	public void setImageDirectory(String imageDirectory) {
 		this.imageDirectory = imageDirectory;
 	}
-	
+
 	/**
 	 * Changes the current list of Modifiers in this Food
 	 * 
@@ -224,7 +231,7 @@ public class Food {
 	public void setModifierList(Set<Modifier> modifierList) {
 		this.modifierList = modifierList;
 	}
-	
+
 	/**
 	 * Changes the current name of this Food
 	 * 
@@ -233,7 +240,7 @@ public class Food {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Changes the current price of the Food
 	 * 
@@ -242,7 +249,7 @@ public class Food {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
+
 	/**
 	 * Changes the current Stall of this Food
 	 * 
@@ -250,6 +257,10 @@ public class Food {
 	 */
 	public void setStall(Stall stall) {
 		this.stall = stall;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	/**
