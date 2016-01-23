@@ -108,12 +108,15 @@
 		<div class="row">
 			<c:forEach items="${sessionScope.foodList}" var="food">
 				<div class="col-md-3 img-portfolio">
-					<a href="portfolio-item.html" data-toggle="modal"
-						data-target="#myModal${food.foodId}"> <b class="pull-left">${food.name}</b>
-						<b class="pull-right"> <fmt:formatNumber value="${food.price}"
-								var="amt" minFractionDigits="2" /> $${amt}
-					</b> <img class="img-responsive img-portfolio img-hover"
-						src="http://placehold.it/700x450" alt="">
+
+					<a href="portfolio-item.html" data-toggle="modal" data-target="#myModal${food.foodId}">
+						<b class="pull-left">${food.name}</b>
+						<b class="pull-right">
+							<fmt:formatNumber value="${food.price}" var="amt" minFractionDigits="2" />
+							$${amt}
+						</b>
+						<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+
 					</a>
 
 				</div>

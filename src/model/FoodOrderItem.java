@@ -1,9 +1,7 @@
 package model;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -152,29 +150,26 @@ public class FoodOrderItem {
 	 * Retrieves the price of the FoodOrderItem
 	 * 
 	 * @return The current price of this FoodOrderItem (with the price of the Modifier(s))
+	 *         multiplied by the quantity
 	 */
 	public double getPrice() {
 		double price = food.getPrice();
 
 		if (!modifierChosenList.isEmpty()) {
-			Iterator<ModifierChosen> iter = modifierChosenList.iterator();
-
-			while (iter.hasNext()) {
-				ModifierChosen tempMod = (ModifierChosen) iter.next();
-				price += tempMod.getPrice();
+			for (ModifierChosen c : modifierChosenList) {
+				price += c.getPrice();
 			}
 		}
-		return price;
-	}
 
-	/**
-	 * Formats the price value into 2 decimal place
-	 * 
-	 * @return The price value in 2 decimal places
-	 */
-	public String getPriceString() {
-		DecimalFormat df = new DecimalFormat("0.00");
-		return df.format(getPrice());
+		// if (!modifierChosenList.isEmpty()) {
+		// Iterator<ModifierChosen> iter = modifierChosenList.iterator();
+		//
+		// while (iter.hasNext()) {
+		// ModifierChosen tempMod = (ModifierChosen) iter.next();
+		// price += tempMod.getPrice();
+		// }
+		// }
+		return price;
 	}
 
 	/**
@@ -187,12 +182,26 @@ public class FoodOrderItem {
 	}
 
 	/**
+	 * Formats the price value into 2 decimal place
+	 * 
+	 * @return The price value in 2 decimal places
+	 */
+	// public String getPriceString() {
+	// DecimalFormat df = new DecimalFormat("0.00");
+	// return df.format(getPrice());
+	// }
+
+	/**
 	 * Retrieves the remarks of the FoodOrderItem
 	 * 
 	 * @return The remarks of this FoodOrderItem
 	 */
 	public String getRemarks() {
 		return remarks;
+	}
+
+	public double getTotalPrice() {
+		return getPrice() * getQuantity();
 	}
 
 	/**

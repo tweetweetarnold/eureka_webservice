@@ -403,7 +403,7 @@
 
 							<!-- Button -->
 							<!-- 							<button class="btn btn-success" type="submit" style="margin: 25px;">Register!</button> -->
-							<a href="/eureka_webservice/pages/register.jsp" class="btn btn-success" style="margin: 25px;">Register!</a>
+							<a class="btn btn-success" href="#to-top" style="margin: 25px;">Go to top!</a>
 
 							<!-- 							</form> -->
 							<!-- /.subscribe-form -->
@@ -470,26 +470,26 @@
 					<!-- Footer 1 -->
 					<section class="text-center">
 						<p>
-							Be sure to read
+							Be sure to read our
 							<a href="#" data-toggle="modal" data-target="#modalTC">Terms & Conditions</a>
 							.
 						</p>
 					</section>
 
 					<!-- Social media links -->
-					<ul class="social-media-links">
+					<!-- 					<ul class="social-media-links"> -->
 
-						<li>
-							<a class="fa fa-twitter tw" href="#fakelinks"></a>
-						</li>
-						<li>
-							<a class="fa fa-facebook fb" href="#fakelinks"></a>
-						</li>
-						<li>
-							<a class="fa fa-pinterest pn" href="#fakelinks"></a>
-						</li>
+					<!-- 						<li> -->
+					<!-- 							<a class="fa fa-twitter tw" href="#fakelinks"></a> -->
+					<!-- 						</li> -->
+					<!-- 						<li> -->
+					<!-- 							<a class="fa fa-facebook fb" href="#fakelinks"></a> -->
+					<!-- 						</li> -->
+					<!-- 						<li> -->
+					<!-- 							<a class="fa fa-pinterest pn" href="#fakelinks"></a> -->
+					<!-- 						</li> -->
 
-					</ul>
+					<!-- 					</ul> -->
 					<!-- /.social-media-links -->
 
 				</div>
@@ -502,9 +502,9 @@
 						<p>
 							<strong>Koh Bus Transport Services</strong>
 							<br>
-							### Hunger Street
+							10 Bukit Batok Cres
 							<br>
-							### Singapore 123456
+							Singapore 658079
 						</p>
 					</section>
 

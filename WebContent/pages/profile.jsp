@@ -49,8 +49,8 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					Profile
-					<small>all about you</small>
+					Your Profile
+					<small></small>
 				</h1>
 				<ol class="breadcrumb">
 					<li>

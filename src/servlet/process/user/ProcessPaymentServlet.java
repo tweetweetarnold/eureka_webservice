@@ -14,6 +14,7 @@ import controller.FoodOrderController;
 import dao.EmployeeDAO;
 import model.Employee;
 import model.FoodOrder;
+import value.StringValues;
 
 /**
  * Servlet implementation class ProcessPaymentServlet
@@ -53,7 +54,7 @@ public class ProcessPaymentServlet extends HttpServlet {
 			if (transactionStatus.equals("Completed")) {
 				// retrieve the user to update its amount owed
 				employee.setAmountOwed(0.00);
-				employee.setStatus("OK");
+				employee.setStatus(StringValues.EMPLOYEE_OK);
 				session.setAttribute("suspended", "false");
 				employeeDAO.updateEmployee(employee);
 

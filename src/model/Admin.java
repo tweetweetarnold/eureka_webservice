@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import value.StringValues;
+
 /**
  * Represents an Administrator entity model in the web application
  * 
@@ -21,7 +23,7 @@ public class Admin {
 	private int adminId;
 	private long contactNo;
 	private Date createDate;
-	private String username, password, name;
+	private String username, password, name, status;
 
 	/**
 	 * Creates a default constructor for Admin
@@ -45,6 +47,7 @@ public class Admin {
 		this.name = name;
 		this.contactNo = contactNo;
 		this.createDate = new Date();
+		this.status = StringValues.ACTIVE;
 	}
 
 	/**
@@ -90,6 +93,10 @@ public class Admin {
 	 */
 	public String getPassword() {
 		return password;
+	}
+
+	public String getStatus() {
+		return status;
 	}
 
 	/**
@@ -144,6 +151,10 @@ public class Admin {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	/**

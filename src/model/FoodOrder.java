@@ -122,17 +122,14 @@ public class FoodOrder {
 	/**
 	 * Retrieves the total price for the food order
 	 * 
-	 * @return The food order's total price
+	 * @return The food order's total price (FoodOrderItem * FoodOrderItem Quantity)
 	 */
 	public double getTotalPrice() {
-		double result = 0;
-		Set<FoodOrderItem> set = getFoodOrderList();
-		for (FoodOrderItem item : set) {
-			result += (item.getQuantity() * item.getPrice());
+		double price = 0;
+		for (FoodOrderItem item : getFoodOrderList()) {
+			price += item.getTotalPrice();
 		}
-
-		// result*=(1-orderWindow.getDiscount());
-		return result;
+		return price;
 	}
 
 	/**

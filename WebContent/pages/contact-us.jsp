@@ -96,33 +96,48 @@
 
 		<div class="row">
 			<div class="col-md-8">
-				<p>This platform is for users like yourself to provide feedback to us (the administrator) about how you think
+				<p>This platform is for users, like yourself, to provide feedback to us (the administrator) about how you think
 					things can be improved! Thank you for your feedback!</p>
 				<br>
 
 				<div class="dataTable_wrapper">
-					<table class="table table-striped table-bordered table-hover">
-						<tr>
-							<td>Your name:</td>
-							<td>${user.name}</td>
-						</tr>
-						<tr>
-							<td>Your email:</td>
-							<td>${user.email}</td>
-						</tr>
-						<tr>
-							<td>Your message:</td>
-							<td>
-								<textarea rows="10" cols="80"></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>
-								<button class="btn btn-danger" type="submit">Send Message!</button>
-							</td>
-						</tr>
-					</table>
+					<form method="post" action="/eureka_webservice/ProcessSendFeedbackServlet">
+						<table class="table table-striped table-bordered table-hover">
+							<tr>
+								<td>
+									<strong>Recipient:</strong>
+								</td>
+								<td>Administrator (SMU Development Team)</td>
+							</tr>
+							<tr>
+								<td>
+									<strong>Your name:</strong>
+								</td>
+								<td>${user.name}</td>
+							</tr>
+							<tr>
+								<td>
+									<strong>Your email:</strong>
+								</td>
+								<td>${user.email}</td>
+							</tr>
+							<tr>
+								<td>
+									<strong>Your message:</strong>
+								</td>
+								<td>
+									<textarea name="message" rows="10" cols="80"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<button class="btn btn-danger btn-lg" type="submit">Send Message!</button>
+								</td>
+							</tr>
+						</table>
+					</form>
+
 				</div>
 				<!-- /dataTable_wrapper -->
 

@@ -408,5 +408,47 @@ public class AccessController {
 
 		return true;
 	}
+	
+	public boolean constructVerifyEmail(String serverName, int serverPort,
+			String contextPath, String email, String[] toSendEmail) throws MessagingException {
+		SendEmail javaEmail = new SendEmail();
+		
+		String appUrl = "http://" + serverName + ":" + serverPort + contextPath;
+		
+		DateTimeZone.setDefault(DateTimeZone.forID("Asia/Singapore"));
+		System.out.println("Controller TIME ZONE: " + DateTimeZone.getDefault().toString());
+		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm");
+		DateTime currentTime = new DateTime(DateTimeZone.forID("Asia/Singapore"));
+		System.out.println("NOW: " + currentTime);
+		
+		String time = aesAlgo.encrypt(formatter.print(currentTime));
+		String token = time;
+		String eEncrypt = aesAlgo.encrypt(email);
+		String encryptedStatus = aesAlgo.encrypt(StringValues.EMPLOYEE_OK);
+		
+		
+		String url = appUrl + "/ProcessVerificationServlet?email="
+				+ eEncrypt + "&status=" + encryptedStatus + "&token=" + token;
+		
+		javaEmail.setMailServerProperties();
+		javaEmail
+		.sendEmail(
+				"Koh Bus LunchTime Ordering App - Verify Your Email",
+				"Dear User,<br><br>"
+						+ "Welcome to LunchTime Ordering App, please click the following link <b>within 5 minutes</b> to verify your email address:<br><br> "
+						+ "<a href="
+						+ url
+						+ ">"
+						+ url
+						+ "</a>"
+						+ "<br><br>"
+						+ "Regards,<br>"
+						+ "Admin<br><br>"
+						+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
+				toSendEmail);
+		
+		return true;
+		
+	}
 
 }
