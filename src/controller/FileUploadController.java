@@ -26,46 +26,17 @@ import dao.StallDAO;
  * 
  */
 public class FileUploadController {
-	StallDAO stallDAO = new StallDAO();
 	CanteenDAO canteenDAO = new CanteenDAO();
-	FoodDAO foodDAO = new FoodDAO();
 	List<String[]> content = null;
 	ArrayList<String> errorsList = null;
+	FoodDAO foodDAO = new FoodDAO();
+	StallDAO stallDAO = new StallDAO();
 
 	/**
 	 * Creates a default constructor for FileUploadController
 	 */
 	public FileUploadController() {
 
-	}
-
-	/**
-	 * Handles the reading of the Stall.csv and load it to the database if there are no errors
-	 * 
-	 * @param is The contents of the Stall.csv to be read and loaded to database
-	 * @return An ArrayList of error(s) if Stall.csv contains errors, otherwise returns an empty
-	 *         ArrayList
-	 */
-	public ArrayList<String> processStallUpload(InputStream is) {
-		System.out.println("PROCESS_STALL_FILEUPLOAD");
-
-		BufferedInputStream bis = new BufferedInputStream(is);
-		InputStreamReader isr = new InputStreamReader(bis);
-		BufferedReader br = new BufferedReader(isr);
-		try {
-			CSVReader csvreader = new CSVReader(br);
-			content = csvreader.readAll();
-			csvreader.close();
-			errorsList = validateStallData(content);
-			if (errorsList.size() == 0) {
-				stallDAO.loadStallData(content);
-			} else {
-				return errorsList;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return errorsList;
 	}
 
 	/**
@@ -156,6 +127,35 @@ public class FileUploadController {
 	}
 
 	/**
+	 * Handles the reading of the Stall.csv and load it to the database if there are no errors
+	 * 
+	 * @param is The contents of the Stall.csv to be read and loaded to database
+	 * @return An ArrayList of error(s) if Stall.csv contains errors, otherwise returns an empty
+	 *         ArrayList
+	 */
+	public ArrayList<String> processStallUpload(InputStream is) {
+		System.out.println("PROCESS_STALL_FILEUPLOAD");
+
+		BufferedInputStream bis = new BufferedInputStream(is);
+		InputStreamReader isr = new InputStreamReader(bis);
+		BufferedReader br = new BufferedReader(isr);
+		try {
+			CSVReader csvreader = new CSVReader(br);
+			content = csvreader.readAll();
+			csvreader.close();
+			errorsList = validateStallData(content);
+			if (errorsList.size() == 0) {
+				stallDAO.loadStallData(content);
+			} else {
+				return errorsList;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return errorsList;
+	}
+
+	/**
 	 * Validate the contents of Canteen.csv for any errors before loading to database
 	 * 
 	 * @param content The List of contents of Canteen.csv to be validated
@@ -213,79 +213,6 @@ public class FileUploadController {
 		}
 		return errorList;
 
-	}
-
-	/**
-	 * Validate the contents of Stall.csv for any errors before loading to database
-	 * 
-	 * @param content The List of contents of Stall.csv to be validated
-	 * @return An ArrayList of errors found in the Stall.csv, otherwise returns an empty ArrayList
-	 */
-	public ArrayList<String> validateStallData(List<String[]> content) {
-		ArrayList<String> errorList = new ArrayList<String>();
-		Canteen canteen = null;
-		Iterator<String[]> iter = content.iterator();
-		int rowNumber = 1;
-
-		String[] rowHeader = (String[]) iter.next();
-		String stallNameHeader = rowHeader[0].trim();
-		if (stallNameHeader.isEmpty()) {
-			errorList.add("row " + rowNumber
-					+ " has a missing row header for Stall Name in Stall.csv");
-		} else if (!stallNameHeader.equals("Stall Name")) {
-			errorList.add("row " + rowNumber
-					+ " has an invalid row header for Stall Name in Stall.csv");
-		}
-
-		String contactNumberHeader = rowHeader[1].trim();
-		if (contactNumberHeader.isEmpty()) {
-			errorList.add("row " + rowNumber
-					+ " has a missing row header for Contact Number in Stall.csv");
-		} else if (!contactNumberHeader.equals("Contact Number")) {
-			errorList.add("row " + rowNumber
-					+ " has an invalid row header for Contact Number in Stall.csv");
-		}
-
-		String canteenNameHeader = rowHeader[2].trim();
-		if (canteenNameHeader.isEmpty()) {
-			errorList.add("row " + rowNumber
-					+ " has a missing row header for Canteen Name in Stall.csv");
-		} else if (!canteenNameHeader.equals("Canteen Name")) {
-			errorList.add("row " + rowNumber
-					+ " has an invalid row header for Canteen Name in Stall.csv");
-		}
-
-		while (iter.hasNext()) {
-			rowNumber++;
-			String[] row = (String[]) iter.next();
-			String stallName = row[0].trim();
-			if (stallName.isEmpty()) {
-				errorList.add("row " + rowNumber + " has empty stall name in Stall.csv");
-			}
-			String contactNum = row[1].trim();
-			if (contactNum.isEmpty()) {
-				errorList.add("row " + rowNumber + " has empty contact number in Stall.csv");
-			} else if (!contactNum.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
-				errorList.add("row " + rowNumber + " has invalid contact number in Stall.csv");
-			}
-			String canteenName = row[2].trim();
-			if (canteenName.isEmpty()) {
-				errorList.add("row " + rowNumber + " has empty canteen name in Stall.csv");
-			} else {
-				canteen = canteenDAO.getCanteenByName(canteenName);
-				if (canteen == null) {
-					errorList.add("row " + rowNumber + ": Canteen does not exist");
-				} else if (!stallName.isEmpty()) {
-					Stall s = canteenDAO.getStallFromCanteen(canteenName, stallName);
-					if (s != null) {
-						errorList.add("row " + rowNumber + ":  Stall has already existed");
-					}
-				}
-
-			}
-
-		}
-		return errorList;
 	}
 
 	/**
@@ -508,6 +435,79 @@ public class FileUploadController {
 					}
 				}
 			}
+		}
+		return errorList;
+	}
+
+	/**
+	 * Validate the contents of Stall.csv for any errors before loading to database
+	 * 
+	 * @param content The List of contents of Stall.csv to be validated
+	 * @return An ArrayList of errors found in the Stall.csv, otherwise returns an empty ArrayList
+	 */
+	public ArrayList<String> validateStallData(List<String[]> content) {
+		ArrayList<String> errorList = new ArrayList<String>();
+		Canteen canteen = null;
+		Iterator<String[]> iter = content.iterator();
+		int rowNumber = 1;
+
+		String[] rowHeader = (String[]) iter.next();
+		String stallNameHeader = rowHeader[0].trim();
+		if (stallNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber
+					+ " has a missing row header for Stall Name in Stall.csv");
+		} else if (!stallNameHeader.equals("Stall Name")) {
+			errorList.add("row " + rowNumber
+					+ " has an invalid row header for Stall Name in Stall.csv");
+		}
+
+		String contactNumberHeader = rowHeader[1].trim();
+		if (contactNumberHeader.isEmpty()) {
+			errorList.add("row " + rowNumber
+					+ " has a missing row header for Contact Number in Stall.csv");
+		} else if (!contactNumberHeader.equals("Contact Number")) {
+			errorList.add("row " + rowNumber
+					+ " has an invalid row header for Contact Number in Stall.csv");
+		}
+
+		String canteenNameHeader = rowHeader[2].trim();
+		if (canteenNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber
+					+ " has a missing row header for Canteen Name in Stall.csv");
+		} else if (!canteenNameHeader.equals("Canteen Name")) {
+			errorList.add("row " + rowNumber
+					+ " has an invalid row header for Canteen Name in Stall.csv");
+		}
+
+		while (iter.hasNext()) {
+			rowNumber++;
+			String[] row = (String[]) iter.next();
+			String stallName = row[0].trim();
+			if (stallName.isEmpty()) {
+				errorList.add("row " + rowNumber + " has empty stall name in Stall.csv");
+			}
+			String contactNum = row[1].trim();
+			if (contactNum.isEmpty()) {
+				errorList.add("row " + rowNumber + " has empty contact number in Stall.csv");
+			} else if (!contactNum.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+				errorList.add("row " + rowNumber + " has invalid contact number in Stall.csv");
+			}
+			String canteenName = row[2].trim();
+			if (canteenName.isEmpty()) {
+				errorList.add("row " + rowNumber + " has empty canteen name in Stall.csv");
+			} else {
+				canteen = canteenDAO.getCanteenByName(canteenName);
+				if (canteen == null) {
+					errorList.add("row " + rowNumber + ": Canteen does not exist");
+				} else if (!stallName.isEmpty()) {
+					Stall s = canteenDAO.getStallFromCanteen(canteenName, stallName);
+					if (s != null) {
+						errorList.add("row " + rowNumber + ":  Stall has already existed");
+					}
+				}
+
+			}
+
 		}
 		return errorList;
 	}

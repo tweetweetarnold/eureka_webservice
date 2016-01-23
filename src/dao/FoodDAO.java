@@ -13,6 +13,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
+import value.StringValues;
 import connection.MyConnection;
 
 /**
@@ -65,8 +66,8 @@ public class FoodDAO {
 	 * @param f The Food object to be removed
 	 */
 	public void deleteFood(Food f) {
-		f.setDescription("ARCHIVED");
-//		f.setStall(null);
+		f.setDescription(StringValues.ARCHIVED);
+		// f.setStall(null);
 		updateFood(f);
 	}
 

@@ -29,13 +29,13 @@ public class FoodController {
 	}
 
 	/**
-	 * Retrieving the image directory of the Food object based on the specified ID
+	 * Retrieves a list of Food in the Stall
 	 * 
-	 * @param id The ID used for retrieving the Food
-	 * @return The image directory of the Food object
+	 * @param stall The designated Stall
+	 * @return An ArrayList of Food objects that are in the designated Stall
 	 */
-	public String getFoodImageDirectory(int id) {
-		return foodDAO.getFood(id).getImageDirectory();
+	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
+		return foodDAO.getAllFoodsUnderStall(stall);
 	}
 
 	/**
@@ -49,23 +49,25 @@ public class FoodController {
 	}
 	
 	/**
-	 * Adds a new Food object to the Database
+	 * Get food recommendations for a given weather condition and order window
 	 * 
-	 * @param f The Food object to be added in
+	 * @param foodList A ArrayList of Food Objects to choose a recommendation from
+	 * @param weather A String description of a weather status
+	 * @return Food which suits the current weather condition
 	 */
-	public void saveFood(Food f) {
-		foodDAO.saveFood(f);
+	public Food getFoodForWeather(ArrayList<Food> foodList, String weather) {
+		ArrayList<Food> choices = new ArrayList<Food>();
+		for (Food f : foodList) {
+			if (f.getWeatherConditions().equals(weather)) {
+				choices.add(f);
+			}
+		}
+		Random rand = new Random();
+		int pick = rand.nextInt(choices.size());
+
+		return choices.get(pick);
 	}
 	
-	/**
-	 * Updates the designated Food object in the Database
-	 * 
-	 * @param f The Food object to be updated
-	 */
-	public void updateFood(Food f) {
-		foodDAO.updateFood(f);
-	}
-
 	/**
 	 * Get food recommendation for a given weather condition and order window
 	 * 
@@ -105,33 +107,31 @@ public class FoodController {
 	}
 
 	/**
-	 * Get food recommendations for a given weather condition and order window
+	 * Retrieving the image directory of the Food object based on the specified ID
 	 * 
-	 * @param foodList A ArrayList of Food Objects to choose a recommendation from
-	 * @param weather A String description of a weather status
-	 * @return Food which suits the current weather condition
+	 * @param id The ID used for retrieving the Food
+	 * @return The image directory of the Food object
 	 */
-	public Food getFoodForWeather(ArrayList<Food> foodList, String weather) {
-		ArrayList<Food> choices = new ArrayList<Food>();
-		for (Food f : foodList) {
-			if (f.getWeatherConditions().equals(weather)) {
-				choices.add(f);
-			}
-		}
-		Random rand = new Random();
-		int pick = rand.nextInt(choices.size());
+	public String getFoodImageDirectory(int id) {
+		return foodDAO.getFood(id).getImageDirectory();
+	}
 
-		return choices.get(pick);
+	/**
+	 * Adds a new Food object to the Database
+	 * 
+	 * @param f The Food object to be added in
+	 */
+	public void saveFood(Food f) {
+		foodDAO.saveFood(f);
 	}
 	
 	/**
-	 * Retrieves a list of Food in the Stall
+	 * Updates the designated Food object in the Database
 	 * 
-	 * @param stall The designated Stall
-	 * @return An ArrayList of Food objects that are in the designated Stall
+	 * @param f The Food object to be updated
 	 */
-	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
-		return foodDAO.getAllFoodsUnderStall(stall);
+	public void updateFood(Food f) {
+		foodDAO.updateFood(f);
 	}
 
 }

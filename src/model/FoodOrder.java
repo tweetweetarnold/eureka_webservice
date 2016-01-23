@@ -132,6 +132,12 @@ public class FoodOrder {
 		return price;
 	}
 
+	public double getFinalPrice() {
+		double result = 0;
+		double totalPrice = getTotalPrice();
+		return result;
+	}
+
 	/**
 	 * Retrieves the transaction ID for this food order
 	 * 

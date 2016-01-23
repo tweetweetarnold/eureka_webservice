@@ -16,6 +16,7 @@ import model.Stall;
 
 import org.hibernate.Session;
 
+import value.StringValues;
 import connection.MyConnection;
 import dao.StallDAO;
 
@@ -71,7 +72,7 @@ public class LoadStallFoodServlet extends HttpServlet {
 		System.out.println("size: " + s.getFoodList().size());
 		Set<Food> foodList = s.getFoodList();
 		
-		foodList.removeIf(f -> f.getDescription().equals("ARCHIVED"));
+		foodList.removeIf(f -> f.getDescription().equals(StringValues.ARCHIVED));
 		
 		session2.close();
 
@@ -85,5 +86,4 @@ public class LoadStallFoodServlet extends HttpServlet {
 		// }
 
 	}
-
 }
