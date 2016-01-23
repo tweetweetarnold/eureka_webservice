@@ -69,6 +69,7 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 		System.out.println("canteenId: " + canteenId);
 
 		try {
+			// **Important: to format the time to SG timezone
 			DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm").withZone(
 					DateTimeZone.forID("Asia/Singapore"));
 			DateTime startDatetime = formatter.parseDateTime(startDatetimeString);
@@ -81,6 +82,7 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 			Canteen canteen = canteenController.getCanteen(Integer.parseInt(canteenId));
 			double discount = 0;
 			int week = Integer.parseInt(weekString);
+
 			try {
 				discount = Double.parseDouble(discountString);
 			} catch (Exception e) {

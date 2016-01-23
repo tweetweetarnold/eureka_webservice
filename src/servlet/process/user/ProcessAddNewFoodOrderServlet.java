@@ -84,7 +84,7 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 				}
 				myFoodOrder.setFoodOrderList(hashMyFoodOrderItems);
 				System.out.println("New FoodOrder created");
-				double ammountToAdd = myFoodOrder.getTotalPrice() - myFoodOrder.getOrderWindow().getDiscountValue();
+				double ammountToAdd = myFoodOrder.getTotalPriceBeforePriceModifiers() - myFoodOrder.getOrderWindow().getDiscountValue();
 				if (ammountToAdd > 0) {
 					employee.setAmountOwed(employee.getAmountOwed() + ammountToAdd);
 				}

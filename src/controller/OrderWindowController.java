@@ -228,11 +228,11 @@ public class OrderWindowController {
 
 			for (int i = 0; i < startTimeList.size(); i++) {
 				orderWindowDAO.saveOrderWindow(new OrderWindow(startTimeList.get(i), endTimeList
-						.get(i), company, canteen, discount, remarks, null));
+						.get(i), company, canteen, 0, discount, remarks, null));
 			}
 
 		} else {
-			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen,
+			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen, 0,
 					discount, remarks, null));
 		}
 	}
@@ -248,28 +248,28 @@ public class OrderWindowController {
 	 * @param discount The designated discount in the order window
 	 * @param numberOfWeeks The number of weeks that this order window will be running
 	 */
-	public void createNewOrderWindow(DateTime startDate, Duration duration, Company company,
-			Canteen canteen, double discount, int numberOfWeeks, String remarks) {
-
-		if (numberOfWeeks > 0) {
-			ArrayList<DateTime> dateTimeList = new ArrayList<DateTime>();
-			dateTimeList.add(startDate);
-			for (int i = 1; i < numberOfWeeks; i++) {
-				DateTime tempDateTime = startDate.plusWeeks(1);
-				startDate = tempDateTime;
-				dateTimeList.add(tempDateTime);
-			}
-
-			for (DateTime dateTimeAdd : dateTimeList) {
-				orderWindowDAO.saveOrderWindow(new OrderWindow(dateTimeAdd, duration, company,
-						canteen, discount, remarks, null));
-			}
-
-		} else {
-			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen,
-					discount, remarks, null));
-		}
-	}
+	// public void createNewOrderWindow(DateTime startDate, Duration duration, Company company,
+	// Canteen canteen, double discount, int numberOfWeeks, String remarks) {
+	//
+	// if (numberOfWeeks > 0) {
+	// ArrayList<DateTime> dateTimeList = new ArrayList<DateTime>();
+	// dateTimeList.add(startDate);
+	// for (int i = 1; i < numberOfWeeks; i++) {
+	// DateTime tempDateTime = startDate.plusWeeks(1);
+	// startDate = tempDateTime;
+	// dateTimeList.add(tempDateTime);
+	// }
+	//
+	// for (DateTime dateTimeAdd : dateTimeList) {
+	// orderWindowDAO.saveOrderWindow(new OrderWindow(dateTimeAdd, duration, company,
+	// canteen, discount, remarks, null));
+	// }
+	//
+	// } else {
+	// orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen,
+	// discount, remarks, null));
+	// }
+	// }
 
 	/**
 	 * Get all OrderWindows with status "Opened"

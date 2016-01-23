@@ -1,13 +1,24 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "pricemodifier")
 public class PriceModifier {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int priceModifierId;
 	private String name;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "orderWindowId")
 	private OrderWindow orderWindow;
 	private String type;
 	private double value;
