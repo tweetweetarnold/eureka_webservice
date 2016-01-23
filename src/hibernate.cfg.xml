@@ -33,6 +33,7 @@
 		<mapping class="model.ModifierChosen" />
 		<mapping class="model.OrderWindow" />
 		<mapping class="model.Stall" />
+		<mapping class="model.ModifierSection" />
 		<!-- end of hibernate configuration settings -->
 	</session-factory>
 </hibernate-configuration>

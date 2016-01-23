@@ -1,6 +1,7 @@
 package model;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,7 +40,8 @@ public class Food {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "stallId")
 	private Stall stall;
-
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
+	private Set<ModifierSection> modifierSectionList;
 	private String weatherConditions;
 	
 	/**
@@ -259,6 +261,14 @@ public class Food {
 	 */
 	public void setWeatherConditions(String weatherConditions) {
 		this.weatherConditions = weatherConditions;
+	}
+
+	public Set<ModifierSection> getModifierSectionList() {
+		return modifierSectionList;
+	}
+
+	public void setModifierSectionList(Set<ModifierSection> modifierSectionList) {
+		this.modifierSectionList = modifierSectionList;
 	}
 
 }
