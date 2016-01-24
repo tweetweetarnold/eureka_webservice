@@ -87,7 +87,7 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 			session.removeAttribute("email");
 
 			session.setAttribute("success",
-					"An email has been sent to you. Please check your email within 5 minutes and follow the instructions on verifying your account.");
+					"An email has been sent to you. Please check your email within 5 minutes and follow the instructions to verify your account.");
 			response.sendRedirect("/eureka_webservice/pages/login.jsp");
 		} catch (Exception e) {
 			session.setAttribute("error", e.getMessage());

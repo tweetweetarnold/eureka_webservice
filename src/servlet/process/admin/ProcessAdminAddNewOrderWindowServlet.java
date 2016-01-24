@@ -85,7 +85,7 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 			Canteen canteen = canteenController.getCanteen(Integer.parseInt(canteenId));
 			double discountAbsolute = 0;
 			int numberOfWeeks = Integer.parseInt(numberOfWeeksString);
-			
+
 			ArrayList<PriceModifier> priceModifierList = new ArrayList<PriceModifier>();
 
 			try {
@@ -93,8 +93,7 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 
 				PriceModifier discountAbsoluteModifier = new PriceModifier("Discount",
 						StringValues.PRICEMODIFIER_ABSOLUTE, discountAbsolute, null);
-				
-				
+
 				priceModifierList.add(discountAbsoluteModifier);
 
 			} catch (Exception e) {
@@ -107,10 +106,10 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 			if (!available) {
 				throw new Exception("Order Window have already been taken");
 			} else {
-				// orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
-				// canteen, week, remarks, 0.0, discountAbsolute);
-				orderWindowController.createNewOrderWindow2(startDatetime, endDatetime, company,
-						canteen, numberOfWeeks, remarks, priceModifierList);
+				orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
+						canteen, numberOfWeeks, remarks, 0.0, discountAbsolute);
+				// orderWindowController.createNewOrderWindow2(startDatetime, endDatetime, company,
+				// canteen, numberOfWeeks, remarks, priceModifierList);
 			}
 			session.setAttribute("success", "New Order Window created successfully.");
 

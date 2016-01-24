@@ -178,27 +178,55 @@
 				<table class="table">
 					<tr>
 						<td>
-							<h2>
+							<h4>
 								<i>Order Price:</i>
-							</h2>
+							</h4>
 						</td>
 						<td>
-							<h2>
+							<h4>
 								<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />
 								<i>$${overallPrice2}</i>
-							</h2>
+							</h4>
 						</td>
 					</tr>
+
+					<tr>
+						<td>
+							<h4>
+								<i>Discount:</i>
+							</h4>
+						</td>
+						<td>
+							<h4>
+								<fmt:formatNumber value="${sessionScope.orderWindow.discountAbsolute}" var="discountAbsolute2"
+									minFractionDigits="2"
+								/>
+								<i>$${discountAbsolute2}</i>
+							</h4>
+						</td>
+					</tr>
+
 					<tr>
 						<td>
 							<h2>
-								<i>Discount:</i>
+								<i>Amount Payable:</i>
 							</h2>
 						</td>
 						<td>
 							<h2>
-								<fmt:formatNumber value="${sessionScope.orderWindow.discountAbsolute}" var="discountAbsolute2" minFractionDigits="2" />
-								<i>$${discountAbsolute2}</i>
+								<i>
+									<fmt:formatNumber value="${overallPrice -  sessionScope.orderWindow.discountAbsolute}" var="amountPayable"
+										minFractionDigits="2"
+									/>
+									<c:choose>
+										<c:when test="${overallPrice -  sessionScope.orderWindow.discountAbsolute > 0}">
+									$${amountPayable}
+									</c:when>
+										<c:otherwise>
+									$0.00
+									</c:otherwise>
+									</c:choose>
+								</i>
 							</h2>
 						</td>
 					</tr>
@@ -233,7 +261,12 @@
 						<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
 					</div>
 					<!-- / modal header -->
-					<div class="modal-body">You are going to submit your order. Are you sure you want to continue?</div>
+					<div class="modal-body">
+						<p>You are going to submit your order. Are you sure you want to continue?</p>
+						<p>
+							<strong>WARNING: YOU CAN ONLY SUBMIT 1 ORDER PER SESSION.</strong>
+						</p>
+					</div>
 					<!-- / modal body -->
 
 					<div class="modal-footer">
