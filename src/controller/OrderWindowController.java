@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import model.Canteen;
 import model.Company;
 import model.OrderWindow;
+import model.PriceModifier;
 
 import org.joda.time.DateTime;
-import org.joda.time.Duration;
 
 import dao.OrderWindowDAO;
 
@@ -168,9 +168,20 @@ public class OrderWindowController {
 		return occupiedSlots;
 	}
 
+	public void createNewOrderWindow2(DateTime startDate, DateTime endDate, Company company,
+			Canteen canteen, int numberOfWeeks, String remarks,
+			ArrayList<PriceModifier> priceModifierList) {
+
+		for (int i = 0; i < numberOfWeeks; i++) {
+			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate.plusWeeks(i), endDate
+					.plusWeeks(i), company, canteen, remarks, priceModifierList));
+		}
+
+	}
+
 	public void createNewOrderWindow(DateTime startDate, DateTime endDate, Company company,
-			Canteen canteen, double discount, double discountValue, int numberOfWeeks,
-			String remarks) {
+			Canteen canteen, int numberOfWeeks, String remarks, double discountPercentage,
+			double discountAbsolute) {
 		if (numberOfWeeks > 0) {
 			ArrayList<DateTime> startTimeList = new ArrayList<DateTime>();
 			ArrayList<DateTime> endTimeList = new ArrayList<DateTime>();
@@ -187,12 +198,13 @@ public class OrderWindowController {
 
 			for (int i = 0; i < startTimeList.size(); i++) {
 				orderWindowDAO.saveOrderWindow(new OrderWindow(startTimeList.get(i), endTimeList
-						.get(i), company, canteen, discount, discountValue, remarks, null));
+						.get(i), company, canteen, discountPercentage, discountAbsolute, remarks,
+						null));
 			}
 
 		} else {
 			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen,
-					discount, discountValue, remarks, null));
+					discountPercentage, discountAbsolute, remarks, null));
 		}
 	}
 
@@ -207,35 +219,35 @@ public class OrderWindowController {
 	 * @param discount The designated discount in the order window
 	 * @param numberOfWeeks The number of weeks that this order window will be running
 	 */
-	public void createNewOrderWindow(DateTime startDate, DateTime endDate, Company company,
-			Canteen canteen, double discount, int numberOfWeeks, String remarks) {
-
-		if (numberOfWeeks > 0) {
-			ArrayList<DateTime> startTimeList = new ArrayList<DateTime>();
-			ArrayList<DateTime> endTimeList = new ArrayList<DateTime>();
-
-			startTimeList.add(startDate);
-			endTimeList.add(endDate);
-
-			for (int i = 1; i < numberOfWeeks; i++) {
-				DateTime tempStartDateTime = startDate.plusWeeks(1);
-				startDate = tempStartDateTime;
-				DateTime tempEndDateTime = endDate.plusWeeks(1);
-				endDate = tempEndDateTime;
-				startTimeList.add(tempStartDateTime);
-				endTimeList.add(tempEndDateTime);
-			}
-
-			for (int i = 0; i < startTimeList.size(); i++) {
-				orderWindowDAO.saveOrderWindow(new OrderWindow(startTimeList.get(i), endTimeList
-						.get(i), company, canteen, 0, discount, remarks, null));
-			}
-
-		} else {
-			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen, 0,
-					discount, remarks, null));
-		}
-	}
+	// public void createNewOrderWindow(DateTime startDate, DateTime endDate, Company company,
+	// Canteen canteen, double discount, int numberOfWeeks, String remarks) {
+	//
+	// if (numberOfWeeks > 0) {
+	// ArrayList<DateTime> startTimeList = new ArrayList<DateTime>();
+	// ArrayList<DateTime> endTimeList = new ArrayList<DateTime>();
+	//
+	// startTimeList.add(startDate);
+	// endTimeList.add(endDate);
+	//
+	// for (int i = 1; i < numberOfWeeks; i++) {
+	// DateTime tempStartDateTime = startDate.plusWeeks(1);
+	// startDate = tempStartDateTime;
+	// DateTime tempEndDateTime = endDate.plusWeeks(1);
+	// endDate = tempEndDateTime;
+	// startTimeList.add(tempStartDateTime);
+	// endTimeList.add(tempEndDateTime);
+	// }
+	//
+	// for (int i = 0; i < startTimeList.size(); i++) {
+	// orderWindowDAO.saveOrderWindow(new OrderWindow(startTimeList.get(i), endTimeList
+	// .get(i), company, canteen, 0, discount, remarks, null));
+	// }
+	//
+	// } else {
+	// orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen, 0,
+	// discount, remarks, null));
+	// }
+	// }
 
 	/**
 	 * Creates a new order window period indicating the number of weeks, with start date, duration

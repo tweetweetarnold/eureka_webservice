@@ -1,6 +1,7 @@
 package servlet.process.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,12 +12,14 @@ import javax.servlet.http.HttpSession;
 
 import model.Canteen;
 import model.Company;
+import model.PriceModifier;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import value.StringValues;
 import controller.CanteenController;
 import controller.CompanyController;
 import controller.OrderWindowController;
@@ -54,8 +57,8 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 		CompanyController companyController = new CompanyController();
 		CanteenController canteenController = new CanteenController();
 
-		String weekString = request.getParameter("repeat");
-		String discountString = request.getParameter("discountValue");
+		String numberOfWeeksString = request.getParameter("repeat");
+		String discountAbsoluteString = request.getParameter("discountAbsolute");
 		String companyId = request.getParameter("company");
 		String canteenId = request.getParameter("canteen");
 		String startDatetimeString = request.getParameter("startDatetime");
@@ -80,22 +83,34 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 
 			Company company = companyController.getCompany(Integer.parseInt(companyId));
 			Canteen canteen = canteenController.getCanteen(Integer.parseInt(canteenId));
-			double discount = 0;
-			int week = Integer.parseInt(weekString);
+			double discountAbsolute = 0;
+			int numberOfWeeks = Integer.parseInt(numberOfWeeksString);
+			
+			ArrayList<PriceModifier> priceModifierList = new ArrayList<PriceModifier>();
 
 			try {
-				discount = Double.parseDouble(discountString);
+				discountAbsolute = Double.parseDouble(discountAbsoluteString);
+
+				PriceModifier discountAbsoluteModifier = new PriceModifier("Discount",
+						StringValues.PRICEMODIFIER_ABSOLUTE, discountAbsolute, null);
+				
+				
+				priceModifierList.add(discountAbsoluteModifier);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 			boolean available = orderWindowController.checkForOrderWindowAvailability(
-					startDatetime, endDatetime, company, week);
+					startDatetime, endDatetime, company, numberOfWeeks);
+
 			if (!available) {
 				throw new Exception("Order Window have already been taken");
 			} else {
-				orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
-						canteen, 0.0, discount, week, remarks);
+				// orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
+				// canteen, week, remarks, 0.0, discountAbsolute);
+				orderWindowController.createNewOrderWindow2(startDatetime, endDatetime, company,
+						canteen, numberOfWeeks, remarks, priceModifierList);
 			}
 			session.setAttribute("success", "New Order Window created successfully.");
 

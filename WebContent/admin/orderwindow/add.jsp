@@ -172,7 +172,7 @@
 											>
 												<i class="fa fa-question-circle"></i>
 											</a>
-											<input name="discountValue" class="form-control" placeholder="Eg. 2.00">
+											<input name="discountAbsolute" class="form-control" placeholder="Eg. 2.00">
 										</div>
 
 										<div class="form-group">

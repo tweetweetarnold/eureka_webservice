@@ -197,8 +197,8 @@
 						</td>
 						<td>
 							<h2>
-								<fmt:formatNumber value="${sessionScope.orderWindow.discountValue}" var="discountValue2" minFractionDigits="2" />
-								<i>$${discountValue2}</i>
+								<fmt:formatNumber value="${sessionScope.orderWindow.discountAbsolute}" var="discountAbsolute2" minFractionDigits="2" />
+								<i>$${discountAbsolute2}</i>
 							</h2>
 						</td>
 					</tr>

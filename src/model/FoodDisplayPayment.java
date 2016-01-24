@@ -25,7 +25,7 @@ public class FoodDisplayPayment {
 		this.createDate = order.getCreateDate();
 		this.transactionId = order.getTransactionId();
 		this.orderWindow = order.getOrderWindow();
-		double tempDisc = orderWindow.getDiscountValue();
+		double tempDisc = orderWindow.getDiscountAbsolute();
 		this.totalPriceIncludingDisc = order.getTotalPriceBeforePriceModifiers() - tempDisc;
 		// prevent negative values
 		if (totalPriceIncludingDisc < 0) {

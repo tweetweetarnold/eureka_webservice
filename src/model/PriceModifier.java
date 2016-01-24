@@ -23,6 +23,9 @@ public class PriceModifier {
 	private String type;
 	private double value;
 
+	public PriceModifier() {
+	}
+
 	public PriceModifier(String name, String type, double value, OrderWindow orderWindow) {
 		super();
 		this.name = name;

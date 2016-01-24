@@ -39,7 +39,7 @@ public class OrderWindow {
 	@JoinColumn(name = "companyId")
 	private Company company;
 	private Date createDate;
-	private double discount, discountValue;
+	private double discount, discountAbsolute;
 	@Transient
 	private DateTime endDate;
 	@Column(name = "endDate")
@@ -62,7 +62,24 @@ public class OrderWindow {
 	}
 
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			double discount, double discountValue, String remarks,
+			String remarks, ArrayList<PriceModifier> priceModifierList) {
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startDateFormatted = startDate.toDate();
+		this.endDateFormatted = endDate.toDate();
+		this.company = company;
+		this.canteen = canteen;
+		this.createDate = new Date();
+		this.remarks = remarks;
+		this.status = StringValues.ACTIVE;
+		this.priceModifierList = priceModifierList;
+		for (PriceModifier m : this.priceModifierList) {
+			m.setOrderWindow(this);
+		}
+	}
+
+	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
+			double discount, double discountAbsolute, String remarks,
 			ArrayList<PriceModifier> priceModifierList) {
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -72,7 +89,7 @@ public class OrderWindow {
 		this.canteen = canteen;
 		this.discount = discount;
 		this.createDate = new Date();
-		this.discountValue = discountValue;
+		this.discountAbsolute = discountAbsolute;
 		this.remarks = remarks;
 		this.status = StringValues.ACTIVE;
 		this.priceModifierList = priceModifierList;
@@ -160,8 +177,8 @@ public class OrderWindow {
 		return discount;
 	}
 
-	public double getDiscountValue() {
-		return discountValue;
+	public double getDiscountAbsolute() {
+		return discountAbsolute;
 	}
 
 	/**
@@ -292,8 +309,8 @@ public class OrderWindow {
 		this.discount = discount;
 	}
 
-	public void setDiscountValue(double discountValue) {
-		this.discountValue = discountValue;
+	public void setDiscountAbsolute(double discountAbsolute) {
+		this.discountAbsolute = discountAbsolute;
 	}
 
 	/**
