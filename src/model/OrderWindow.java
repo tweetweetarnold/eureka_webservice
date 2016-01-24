@@ -2,15 +2,18 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -36,12 +39,13 @@ public class OrderWindow {
 	@JoinColumn(name = "companyId")
 	private Company company;
 	private Date createDate;
-	private double discount, discountValue;
+	private double discount, discountAbsolute;
 	@Transient
 	private DateTime endDate;
 	@Column(name = "endDate")
 	private Date endDateFormatted;
-	private ArrayList<PriceModifier> priceModifierList;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "orderWindow")
+	private List<PriceModifier> priceModifierList;
 	private String remarks, status;
 	@Transient
 	private DateTime startDate;
@@ -58,7 +62,24 @@ public class OrderWindow {
 	}
 
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			double discount, double discountValue, String remarks,
+			String remarks, ArrayList<PriceModifier> priceModifierList) {
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startDateFormatted = startDate.toDate();
+		this.endDateFormatted = endDate.toDate();
+		this.company = company;
+		this.canteen = canteen;
+		this.createDate = new Date();
+		this.remarks = remarks;
+		this.status = StringValues.ACTIVE;
+		this.priceModifierList = priceModifierList;
+		for (PriceModifier m : this.priceModifierList) {
+			m.setOrderWindow(this);
+		}
+	}
+
+	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
+			double discount, double discountAbsolute, String remarks,
 			ArrayList<PriceModifier> priceModifierList) {
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -68,7 +89,7 @@ public class OrderWindow {
 		this.canteen = canteen;
 		this.discount = discount;
 		this.createDate = new Date();
-		this.discountValue = discountValue;
+		this.discountAbsolute = discountAbsolute;
 		this.remarks = remarks;
 		this.status = StringValues.ACTIVE;
 		this.priceModifierList = priceModifierList;
@@ -82,20 +103,20 @@ public class OrderWindow {
 	 * @param company The Company indicated in this OrderWindow
 	 * @param canteen The Canteen indicated in this OrderWindow
 	 */
-	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			double discount, String remarks, ArrayList<PriceModifier> priceModifierList) {
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.startDateFormatted = startDate.toDate();
-		this.endDateFormatted = endDate.toDate();
-		this.company = company;
-		this.canteen = canteen;
-		this.discount = discount;
-		this.createDate = new Date();
-		this.remarks = remarks;
-		this.status = StringValues.ACTIVE;
-		this.priceModifierList = priceModifierList;
-	}
+	// public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
+	// double discount, String remarks, ArrayList<PriceModifier> priceModifierList) {
+	// this.startDate = startDate;
+	// this.endDate = endDate;
+	// this.startDateFormatted = startDate.toDate();
+	// this.endDateFormatted = endDate.toDate();
+	// this.company = company;
+	// this.canteen = canteen;
+	// this.discount = discount;
+	// this.createDate = new Date();
+	// this.remarks = remarks;
+	// this.status = StringValues.ACTIVE;
+	// this.priceModifierList = priceModifierList;
+	// }
 
 	/**
 	 * Creates a new OrderWindow with a starting date and time, duration, the Company and the
@@ -106,19 +127,19 @@ public class OrderWindow {
 	 * @param company The Company in this OrderWindow
 	 * @param canteen The Canteen in this OrderWindow
 	 */
-	public OrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen,
-			double discount, String remarks, ArrayList<PriceModifier> priceModifierList) {
-		this.startDate = startDate;
-		this.endDate = startDate.plus(duration);
-		this.startDateFormatted = startDate.toDate();
-		this.endDateFormatted = endDate.toDate();
-		this.canteen = canteen;
-		this.company = company;
-		this.discount = discount;
-		this.createDate = new Date();
-		this.status = StringValues.ACTIVE;
-		this.priceModifierList = priceModifierList;
-	}
+	// public OrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen,
+	// double discount, String remarks, ArrayList<PriceModifier> priceModifierList) {
+	// this.startDate = startDate;
+	// this.endDate = startDate.plus(duration);
+	// this.startDateFormatted = startDate.toDate();
+	// this.endDateFormatted = endDate.toDate();
+	// this.canteen = canteen;
+	// this.company = company;
+	// this.discount = discount;
+	// this.createDate = new Date();
+	// this.status = StringValues.ACTIVE;
+	// this.priceModifierList = priceModifierList;
+	// }
 
 	/**
 	 * Retrieves the Canteen in this order window
@@ -156,8 +177,8 @@ public class OrderWindow {
 		return discount;
 	}
 
-	public double getDiscountValue() {
-		return discountValue;
+	public double getDiscountAbsolute() {
+		return discountAbsolute;
 	}
 
 	/**
@@ -187,7 +208,7 @@ public class OrderWindow {
 		return endDateFormatted;
 	}
 
-	public ArrayList<PriceModifier> getPriceModifierList() {
+	public List<PriceModifier> getPriceModifierList() {
 		return priceModifierList;
 	}
 
@@ -288,8 +309,8 @@ public class OrderWindow {
 		this.discount = discount;
 	}
 
-	public void setDiscountValue(double discountValue) {
-		this.discountValue = discountValue;
+	public void setDiscountAbsolute(double discountAbsolute) {
+		this.discountAbsolute = discountAbsolute;
 	}
 
 	/**

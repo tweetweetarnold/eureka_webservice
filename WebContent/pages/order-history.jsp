@@ -90,11 +90,11 @@
 									Canteen: ${foodOrder.orderWindow.canteen.name}
 									<br>
 									Price:
-									<fmt:formatNumber value="${foodOrder.totalPrice}" var="amt" minFractionDigits="2" />
+									<fmt:formatNumber value="${foodOrder.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
 									$${amt}
 									<br>
 									Discount:
-									<fmt:formatNumber value="${foodOrder.orderWindow.discountValue}" var="discamt" minFractionDigits="2" />
+									<fmt:formatNumber value="${foodOrder.orderWindow.discountAbsolute}" var="discamt" minFractionDigits="2" />
 									$${discamt}
 									<br>
 									<br>

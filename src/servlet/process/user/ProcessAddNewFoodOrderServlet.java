@@ -38,8 +38,7 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -47,8 +46,7 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -73,18 +71,21 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 			System.out.println("Employee retrieved");
 			if (!controller.checkForExistingOrder(employee, window)) {
 
-				List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session.getAttribute("myFoodOrderItems");
+				List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session
+						.getAttribute("myFoodOrderItems");
 				System.out.println("MyFoodOrderItems retrieved");
 				Set<FoodOrderItem> hashMyFoodOrderItems = new HashSet<>(myFoodOrderItems);
 
-				FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_SUBMITTED, employee, null, window);
+				FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_SUBMITTED, employee, null,
+						window);
 				for (FoodOrderItem item : hashMyFoodOrderItems) {
 					item.setFoodOrder(myFoodOrder);
 					out.println("size: " + item.getModifierChosenList().size());
 				}
 				myFoodOrder.setFoodOrderList(hashMyFoodOrderItems);
 				System.out.println("New FoodOrder created");
-				double ammountToAdd = myFoodOrder.getTotalPrice() - myFoodOrder.getOrderWindow().getDiscountValue();
+				double ammountToAdd = myFoodOrder.getTotalPriceBeforePriceModifiers()
+						- myFoodOrder.getOrderWindow().getDiscountAbsolute();
 				if (ammountToAdd > 0) {
 					employee.setAmountOwed(employee.getAmountOwed() + ammountToAdd);
 				}
@@ -101,7 +102,7 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 
 				session.setAttribute("success", "Your order has been submitted!");
 				response.sendRedirect("/eureka_webservice/pages/cart.jsp");
-			}else{
+			} else {
 				session.removeAttribute("myFoodOrderItems");
 				throw new Exception("You have already submitted your order for today!");
 			}

@@ -6,6 +6,10 @@ public final class StringValues {
 	public static final String ARCHIVED = "Archived";
 	public static final String ACTIVE = "Active";
 
+	// For PriceModifier Types
+	public static final String PRICEMODIFIER_PERCENTAGE = "Percentage";
+	public static final String PRICEMODIFIER_ABSOLUTE = "Absolute";
+
 	// For FoodOrder status
 	public static final String ORDER_SUBMITTED = "Submitted";
 	public static final String ORDER_CONFIRMED = "Confirmed";

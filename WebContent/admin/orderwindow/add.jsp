@@ -70,9 +70,13 @@
 
 							<div class="row">
 
-								<div class="col-md-6 col-lg-6">
 
-									<form role="form" action="/eureka_webservice/ProcessAdminAddNewOrderWindowServlet" id="submitForm">
+
+								<form role="form" action="/eureka_webservice/ProcessAdminAddNewOrderWindowServlet" id="submitForm">
+
+									<div class="col-md-6 col-lg-6">
+
+										<h2 class="page-header">Required</h2>
 
 										<div class="form-group">
 											<label>Select Company</label>
@@ -120,16 +124,6 @@
 											</div>
 										</div>
 
-										<div class="form-group">
-											<label>Discount Value</label>
-											<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
-												data-content="Put in a value (eg 3.00) to give the users here a $3.00 for their orders!"
-												data-placement="right"
-											>
-												<i class="fa fa-question-circle"></i>
-											</a>
-											<input name="discountValue" class="form-control" placeholder="Eg. 2.00">
-										</div>
 
 										<div class="form-group">
 											<label>Number of Weeks</label>
@@ -138,13 +132,6 @@
 													<option value="${week}">${week}</option>
 												</c:forEach>
 											</select>
-										</div>
-
-										<div class="form-group">
-											<label>Comments to Users (Optional)</label>
-											<textarea rows="3" name="remarks" class="form-control"
-												placeholder="What do you want to let your users know about this Order Window?"
-											></textarea>
 										</div>
 
 
@@ -168,9 +155,39 @@
 										</div>
 										<!-- /modal confirmation -->
 
-									</form>
-								</div>
-								<!-- /.col-lg-12 -->
+									</div>
+									<!-- /.col-md-6 col-lg-6 -->
+
+
+
+									<div class="col-md-6 col-lg-6">
+
+										<h2 class="page-header">Optional</h2>
+
+										<div class="form-group">
+											<label>Discount Value (Optional)</label>
+											<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
+												data-content="Put in a value (eg 3.00) to give the users here a $3.00 discount for their orders!"
+												data-placement="right"
+											>
+												<i class="fa fa-question-circle"></i>
+											</a>
+											<input name="discountAbsolute" class="form-control" placeholder="Eg. 2.00">
+										</div>
+
+										<div class="form-group">
+											<label>Comments to Users (Optional)</label>
+											<textarea rows="3" name="remarks" class="form-control"
+												placeholder="What do you want to let your users know about this Order Window?"
+											></textarea>
+										</div>
+
+									</div>
+									<!-- /.col-md-6 col-lg-6 -->
+
+								</form>
+
+
 
 							</div>
 							<!-- /.row (nested) -->

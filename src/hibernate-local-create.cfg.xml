@@ -32,6 +32,7 @@
 		<mapping class="model.Modifier" />
 		<mapping class="model.ModifierChosen" />
 		<mapping class="model.OrderWindow" />
+		<mapping class="model.PriceModifier" />
 		<mapping class="model.Stall" />
 		<mapping class="model.ModifierSection" />
 		<!-- end of hibernate configuration settings -->

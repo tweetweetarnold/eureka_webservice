@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import value.StringValues;
 
 /**
  * Represents the Food Order entity model in the web application
@@ -124,12 +127,33 @@ public class FoodOrder {
 	 * 
 	 * @return The food order's total price (FoodOrderItem * FoodOrderItem Quantity)
 	 */
-	public double getTotalPrice() {
+	public double getTotalPriceBeforePriceModifiers() {
 		double price = 0;
 		for (FoodOrderItem item : getFoodOrderList()) {
 			price += item.getTotalPrice();
 		}
 		return price;
+	}
+
+	public double getFinalPrice() {
+		double result = getTotalPriceBeforePriceModifiers();
+
+		// order matters for which price modifier to affect the total price first
+		List<PriceModifier> priceModifierList = orderWindow.getPriceModifierList();
+		for (PriceModifier m : priceModifierList) {
+			String type = m.getType();
+			double value = m.getValue();
+			System.out.println("PriceModifier: Name=" + m.getName() + ", Type=" + type + ", Value="
+					+ value);
+
+			if (type.equals(StringValues.PRICEMODIFIER_ABSOLUTE)) {
+				result += value;
+			} else if (type.equals(StringValues.PRICEMODIFIER_PERCENTAGE)) {
+				result *= value;
+			}
+		}
+
+		return result;
 	}
 
 	/**

@@ -1,6 +1,8 @@
 package servlet.load.user;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -15,6 +17,7 @@ import model.Stall;
 
 import org.hibernate.Session;
 
+import value.StringValues;
 import connection.MyConnection;
 import dao.StallDAO;
 
@@ -55,9 +58,7 @@ public class LoadStallFoodServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		// PrintWriter out = response.getWriter();
 
-		// try {
 		String stallId = request.getParameter("stallId");
 		System.out.println("StallID: " + stallId);
 
@@ -68,18 +69,25 @@ public class LoadStallFoodServlet extends HttpServlet {
 		System.out.println("stall after update: " + s.toString());
 		System.out.println("stall s: " + s.toString());
 		System.out.println("size: " + s.getFoodList().size());
+
 		Set<Food> foodList = s.getFoodList();
+		Set<Food> displayFoodList = new HashSet<Food>();
+		Iterator<Food> iter = foodList.iterator();
+		while (iter.hasNext()) {
+			Food food = (Food) iter.next();
+			String description = food.getDescription();
+			if (!description.equals(StringValues.ARCHIVED)) {
+				displayFoodList.add(food);
+			}
+		}
+
 		session2.close();
 
 		HttpSession session = request.getSession();
 		session.setAttribute("stallName", s.getName());
-		session.setAttribute("foodList", foodList);
+		session.setAttribute("foodList", displayFoodList);
 
 		response.sendRedirect("/eureka_webservice/pages/stall-foods.jsp");
-		// } catch (Exception e) {
-		// out.println(e.getMessage());
-		// }
 
 	}
-
 }
