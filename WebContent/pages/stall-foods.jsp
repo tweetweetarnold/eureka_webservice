@@ -180,7 +180,7 @@
 																		name="modifierDropdown" required>
 																			<c:forEach items="${modifierSection.modifierList}"
 																				var="modifier">
-																				<option value="${modifier}">${modifier.name}${modifier.price}</option>
+																				<option value="${modifier}" name="${modifier.name}">${modifier.name}add $ ${modifier.price}</option>
 																			</c:forEach>
 																	</select></td>
 																</tr>
