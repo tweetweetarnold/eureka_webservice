@@ -24,6 +24,34 @@ public class CompanyDAO {
 		
 	}
 	/**
+	 * Delete company from Database
+	 */
+	public void deleteCompany(Company c) {
+		MyConnection.delete(c);
+	}
+
+	/**
+	 * Retrieve all companies
+	 * 
+	 * @return An ArrayList of companies
+	 */
+	public ArrayList<Company> getAllCompany() {
+		ArrayList<Company> returnList = null;
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Company.class);
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		returnList = new ArrayList<Company>();
+
+		for (Object o : l) {
+			returnList.add((Company) o);
+		}
+		return returnList;
+	}
+
+	/**
 	 * Retrieves the Company based on the provided ID
 	 * @param companyId The ID used for retrieving the Company
 	 * @return The Company object that has the provided ID
@@ -66,33 +94,5 @@ public class CompanyDAO {
 	 */
 	public void updateCompany(Company c) {
 		MyConnection.update(c);
-	}
-
-	/**
-	 * Delete company from Database
-	 */
-	public void deleteCompany(Company c) {
-		MyConnection.delete(c);
-	}
-
-	/**
-	 * Retrieve all companies
-	 * 
-	 * @return An ArrayList of companies
-	 */
-	public ArrayList<Company> getAllCompany() {
-		ArrayList<Company> returnList = null;
-
-		DetachedCriteria dc = DetachedCriteria.forClass(Company.class);
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		returnList = new ArrayList<Company>();
-
-		for (Object o : l) {
-			returnList.add((Company) o);
-		}
-		return returnList;
 	}
 }

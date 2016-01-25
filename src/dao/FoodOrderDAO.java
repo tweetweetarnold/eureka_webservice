@@ -30,34 +30,6 @@ public class FoodOrderDAO {
 	}
 
 	/**
-	 * Retrieve the FoodOrder based on the provided ID
-	 * 
-	 * @param foodOrderId The ID used for retrieving the FoodOrder
-	 * @return The FoodOrder object that has the provided ID
-	 */
-	public FoodOrder getFoodOrder(int foodOrderId) {
-		return (FoodOrder) MyConnection.get(FoodOrder.class, foodOrderId);
-	}
-
-	/**
-	 * Adds a new FoodOrder object to the Database
-	 * 
-	 * @param f The FoodOrder object to be added in
-	 */
-	public void saveFoodOrder(FoodOrder f) {
-		MyConnection.save(f);
-	}
-
-	/**
-	 * Updates the designated FoodOrder object in the Database
-	 * 
-	 * @param f The FoodOrder object to be updated
-	 */
-	public void updateFoodOrder(FoodOrder f) {
-		MyConnection.update(f);
-	}
-
-	/**
 	 * Removes the designated FoodOrder object from the Database
 	 * 
 	 * @param f The FoodOrder object to be removed
@@ -67,27 +39,51 @@ public class FoodOrderDAO {
 	}
 
 	/**
-	 * Retrieves the FoodOrder set of an Employee
+	 * Retrieve all FoodOrders based on the provided OrderWindow
 	 * 
-	 * @param employee The designated Employee to retrieve the FoodOrder set
-	 * @return The List of FoodOrder set of the designated Employee
+	 * @param orderWindow The provided OrderWindow for retrieving all FoodOrders
+	 * @return An ArrayList of FoodOrder that is under the provided OrderWindow
 	 */
-	public List<FoodOrder> getFoodOrderSet(Employee employee) {
-		List<FoodOrder> returnList = new ArrayList<>();
+	public ArrayList<FoodOrder> getAllFoodOrderOfOrderWindow(OrderWindow orderWindow) {
+		ArrayList<FoodOrder> returnList = new ArrayList<FoodOrder>();
 
-		List<Object> hiberList = MyConnection.getFoodOrderList(employee);
-		if (hiberList.size() != 0) {
-			for (Object o : hiberList) {
-				returnList.add((FoodOrder) o);
-			}
+		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
+		dc.add(Restrictions.eq("orderWindow", orderWindow));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((FoodOrder) o);
 		}
-		Collections.sort(returnList, new Comparator<FoodOrder>() {
-		    public int compare(FoodOrder f1, FoodOrder f2) {
-		        return f2.getCreateDate().compareTo(f1.getCreateDate());
-		    }
-		});
-		
 		return returnList;
+	}
+
+	public ArrayList<FoodOrder> getAllFoodOrderOfOrderWindowForUser(Employee employee,
+			OrderWindow orderWindow) {
+		ArrayList<FoodOrder> returnList = new ArrayList<FoodOrder>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
+		dc.add(Restrictions.eq("orderWindow", orderWindow));
+		dc.add(Restrictions.eq("employee", employee));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((FoodOrder) o);
+		}
+		return returnList;
+	}
+
+	/**
+	 * Retrieve the FoodOrder based on the provided ID
+	 * 
+	 * @param foodOrderId The ID used for retrieving the FoodOrder
+	 * @return The FoodOrder object that has the provided ID
+	 */
+	public FoodOrder getFoodOrder(int foodOrderId) {
+		return (FoodOrder) MyConnection.get(FoodOrder.class, foodOrderId);
 	}
 
 	/**
@@ -133,40 +129,44 @@ public class FoodOrderDAO {
 	}
 
 	/**
-	 * Retrieve all FoodOrders based on the provided OrderWindow
+	 * Retrieves the FoodOrder set of an Employee
 	 * 
-	 * @param orderWindow The provided OrderWindow for retrieving all FoodOrders
-	 * @return An ArrayList of FoodOrder that is under the provided OrderWindow
+	 * @param employee The designated Employee to retrieve the FoodOrder set
+	 * @return The List of FoodOrder set of the designated Employee
 	 */
-	public ArrayList<FoodOrder> getAllFoodOrderOfOrderWindow(OrderWindow orderWindow) {
-		ArrayList<FoodOrder> returnList = new ArrayList<FoodOrder>();
+	public List<FoodOrder> getFoodOrderSet(Employee employee) {
+		List<FoodOrder> returnList = new ArrayList<>();
 
-		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
-		dc.add(Restrictions.eq("orderWindow", orderWindow));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		for (Object o : l) {
-			returnList.add((FoodOrder) o);
+		List<Object> hiberList = MyConnection.getFoodOrderList(employee);
+		if (hiberList.size() != 0) {
+			for (Object o : hiberList) {
+				returnList.add((FoodOrder) o);
+			}
 		}
+		Collections.sort(returnList, new Comparator<FoodOrder>() {
+		    public int compare(FoodOrder f1, FoodOrder f2) {
+		        return f2.getCreateDate().compareTo(f1.getCreateDate());
+		    }
+		});
+		
 		return returnList;
 	}
 
-	public ArrayList<FoodOrder> getAllFoodOrderOfOrderWindowForUser(Employee employee,
-			OrderWindow orderWindow) {
-		ArrayList<FoodOrder> returnList = new ArrayList<FoodOrder>();
+	/**
+	 * Adds a new FoodOrder object to the Database
+	 * 
+	 * @param f The FoodOrder object to be added in
+	 */
+	public void saveFoodOrder(FoodOrder f) {
+		MyConnection.save(f);
+	}
 
-		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
-		dc.add(Restrictions.eq("orderWindow", orderWindow));
-		dc.add(Restrictions.eq("employee", employee));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		for (Object o : l) {
-			returnList.add((FoodOrder) o);
-		}
-		return returnList;
+	/**
+	 * Updates the designated FoodOrder object in the Database
+	 * 
+	 * @param f The FoodOrder object to be updated
+	 */
+	public void updateFoodOrder(FoodOrder f) {
+		MyConnection.update(f);
 	}
 }

@@ -1843,7 +1843,7 @@ public class Test {
 		// ****************************************
 
 		OrderWindow window = new OrderWindow(new DateTime(2015, 12, 2, 16, 36, 0), new DateTime(
-				2016, 12, 5, 16, 36, 0), company, canteen1, 0, 0,
+				2015, 12, 31, 16, 36, 0), company, canteen1, 0, 0,
 				"This is a testing order window.", null);
 		session.save(window); // arnold test data
 

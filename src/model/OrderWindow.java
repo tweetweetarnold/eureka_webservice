@@ -73,9 +73,6 @@ public class OrderWindow {
 		this.remarks = remarks;
 		this.status = StringValues.ACTIVE;
 		this.priceModifierList = priceModifierList;
-		for (PriceModifier m : this.priceModifierList) {
-			m.setOrderWindow(this);
-		}
 	}
 
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,

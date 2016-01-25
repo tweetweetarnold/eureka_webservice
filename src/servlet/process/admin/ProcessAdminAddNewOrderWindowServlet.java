@@ -1,7 +1,6 @@
 package servlet.process.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,14 +11,12 @@ import javax.servlet.http.HttpSession;
 
 import model.Canteen;
 import model.Company;
-import model.PriceModifier;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import value.StringValues;
 import controller.CanteenController;
 import controller.CompanyController;
 import controller.OrderWindowController;
@@ -86,15 +83,8 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 			double discountAbsolute = 0;
 			int numberOfWeeks = Integer.parseInt(numberOfWeeksString);
 
-			ArrayList<PriceModifier> priceModifierList = new ArrayList<PriceModifier>();
-
 			try {
 				discountAbsolute = Double.parseDouble(discountAbsoluteString);
-
-				PriceModifier discountAbsoluteModifier = new PriceModifier("Discount",
-						StringValues.PRICEMODIFIER_ABSOLUTE, discountAbsolute, null);
-
-				priceModifierList.add(discountAbsoluteModifier);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -106,10 +96,10 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 			if (!available) {
 				throw new Exception("Order Window have already been taken");
 			} else {
-				orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
-						canteen, numberOfWeeks, remarks, 0.0, discountAbsolute);
-				// orderWindowController.createNewOrderWindow2(startDatetime, endDatetime, company,
-				// canteen, numberOfWeeks, remarks, priceModifierList);
+				// orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
+				// canteen, numberOfWeeks, remarks, 0.0, discountAbsolute);
+				orderWindowController.createNewOrderWindow2(startDatetime, endDatetime, company,
+						canteen, numberOfWeeks, remarks, discountAbsolute);
 			}
 			session.setAttribute("success", "New Order Window created successfully.");
 

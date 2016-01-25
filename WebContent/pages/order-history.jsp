@@ -94,8 +94,10 @@
 									$${amt}
 									<br>
 									Discount:
-									<fmt:formatNumber value="${foodOrder.orderWindow.discountAbsolute}" var="discamt" minFractionDigits="2" />
-									$${discamt}
+									<fmt:formatNumber value="${foodOrder.orderWindow.priceModifierList[0].value * -1}" var="discamt"
+										minFractionDigits="2"
+									/>
+									-$${discamt}
 									<br>
 									<br>
 									<table class="table table-striped">

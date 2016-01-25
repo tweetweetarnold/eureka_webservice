@@ -29,34 +29,6 @@ public class OrderWindowDAO {
 	}
 
 	/**
-	 * Retrieve the OrderWindow based on the provided ID
-	 * 
-	 * @param orderWindowId The ID used for retrieving the OrderWindow
-	 * @return The OrderWindow object that has the provided ID
-	 */
-	public OrderWindow getOrderWindow(int orderWindowId) {
-		return (OrderWindow) MyConnection.get(OrderWindow.class, orderWindowId);
-	}
-
-	/**
-	 * Adds a new OrderWindow object to the Database
-	 * 
-	 * @param w The OrderWindow object to be added in
-	 */
-	public void saveOrderWindow(OrderWindow w) {
-		MyConnection.save(w);
-	}
-
-	/**
-	 * Updates the designated OrderWindow object in the Database
-	 * 
-	 * @param w The OrderWindow object to be updated
-	 */
-	public void updateOrderWindow(OrderWindow w) {
-		MyConnection.update(w);
-	}
-
-	/**
 	 * Removes the designated OrderWindow object from the Database
 	 * 
 	 * @param w The OrderWindow object to be removed
@@ -66,14 +38,18 @@ public class OrderWindowDAO {
 	}
 
 	/**
-	 * Get all OrderWindows
+	 * Get all OrderWindows with status "Opened"
 	 * 
-	 * @return Returns an ArrayList of all OrderWindows regardless of status
+	 * @return Returns an ArrayList of OrderWindows with status "Opened"
 	 */
-	public ArrayList<OrderWindow> getAllOrderWindows() {
+	public ArrayList<OrderWindow> getAllOpenedWindows() {
 		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
+		Date currentDatetime = new Date();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
+		dc.add(Restrictions.ge("endDateFormatted", currentDatetime)).add(
+				Restrictions.le("startDateFormatted", currentDatetime));
+		dc.addOrder(Order.asc("endDateFormatted"));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -109,18 +85,14 @@ public class OrderWindowDAO {
 	}
 
 	/**
-	 * Get all OrderWindows with status "Opened"
+	 * Get all OrderWindows
 	 * 
-	 * @return Returns an ArrayList of OrderWindows with status "Opened"
+	 * @return Returns an ArrayList of all OrderWindows regardless of status
 	 */
-	public ArrayList<OrderWindow> getAllOpenedWindows() {
+	public ArrayList<OrderWindow> getAllOrderWindows() {
 		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
-		Date currentDatetime = new Date();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
-		dc.add(Restrictions.ge("endDateFormatted", currentDatetime)).add(
-				Restrictions.le("startDateFormatted", currentDatetime));
-		dc.addOrder(Order.asc("endDateFormatted"));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -143,6 +115,34 @@ public class OrderWindowDAO {
 			returnList.add((OrderWindow) o);
 		}
 		return returnList;
+	}
+
+	/**
+	 * Retrieve the OrderWindow based on the provided ID
+	 * 
+	 * @param orderWindowId The ID used for retrieving the OrderWindow
+	 * @return The OrderWindow object that has the provided ID
+	 */
+	public OrderWindow getOrderWindow(int orderWindowId) {
+		return (OrderWindow) MyConnection.get(OrderWindow.class, orderWindowId);
+	}
+
+	/**
+	 * Adds a new OrderWindow object to the Database
+	 * 
+	 * @param w The OrderWindow object to be added in
+	 */
+	public void saveOrderWindow(OrderWindow w) {
+		MyConnection.save(w);
+	}
+
+	/**
+	 * Updates the designated OrderWindow object in the Database
+	 * 
+	 * @param w The OrderWindow object to be updated
+	 */
+	public void updateOrderWindow(OrderWindow w) {
+		MyConnection.update(w);
 	}
 
 }

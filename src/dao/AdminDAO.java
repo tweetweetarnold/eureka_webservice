@@ -20,6 +20,15 @@ import connection.MyConnection;
 public class AdminDAO {
 	
 	/**
+	 * Removes the designated Admin object from the Database
+	 * 
+	 * @param d The Admin object to be removed
+	 */
+	public static void deleteAdmin(Admin d) {
+		MyConnection.delete(d);
+	}
+	
+	/**
 	 * Creates a default constructor for AdminDAO
 	 */
 	public AdminDAO() {
@@ -34,7 +43,7 @@ public class AdminDAO {
 	public Admin getAdmin(int adminId) {
 		return (Admin) MyConnection.get(Admin.class, adminId);
 	}
-	
+
 	/**
 	 * Retrieve the Admin based on the provided username
 	 * @param username The username of the Admin
@@ -85,14 +94,5 @@ public class AdminDAO {
 	 */
 	public void updateAdmin(Admin d) {
 		MyConnection.update(d);
-	}
-
-	/**
-	 * Removes the designated Admin object from the Database
-	 * 
-	 * @param d The Admin object to be removed
-	 */
-	public static void deleteAdmin(Admin d) {
-		MyConnection.delete(d);
 	}
 }
