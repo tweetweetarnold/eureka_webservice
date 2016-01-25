@@ -47,7 +47,7 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Removes the designated Food object from the Database
+	 * Archives the designated Food object from the Database
 	 * 
 	 * @param f The Food object to be removed
 	 */

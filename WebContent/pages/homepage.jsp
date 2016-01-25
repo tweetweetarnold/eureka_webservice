@@ -165,12 +165,14 @@
 
 			<c:forEach items="${sessionScope.canteenList}" var="canteen">
 				<c:forEach items="${canteen.stallList}" var="stall">
-					<div class="col-md-4 col-sm-6">
-						<a href="/eureka_webservice/LoadStallFoodServlet?stallId=${stall.stallId}">
-							<b style="font-size: large;">${stall.name}</b>
-							<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-						</a>
-					</div>
+					<c:if test="${stall.status == 'Ok'}">
+						<div class="col-md-4 col-sm-6">
+							<a href="/eureka_webservice/LoadStallFoodServlet?stallId=${stall.stallId}">
+								<b style="font-size: large;">${stall.name}</b>
+								<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+							</a>
+						</div>
+					</c:if>
 				</c:forEach>
 			</c:forEach>
 

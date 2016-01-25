@@ -9,6 +9,7 @@ import java.util.Set;
 import model.Canteen;
 import model.Food;
 import model.Stall;
+import value.StringValues;
 
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
@@ -46,12 +47,13 @@ public class StallDAO {
 	}
 
 	/**
-	 * Removes the designated Stall object from the Database
+	 * Archives the designated Stall object from the Database
 	 * 
 	 * @param h The Stall object to be removed
 	 */
 	public void deleteStall(Stall h) {
-		MyConnection.delete(h);
+		h.setStatus(StringValues.ARCHIVED);
+		updateStall(h);
 	}
 
 	/**
