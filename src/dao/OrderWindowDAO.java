@@ -60,6 +60,23 @@ public class OrderWindowDAO {
 		return returnList;
 	}
 
+	public ArrayList<OrderWindow> getAllClosedWindows() {
+		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
+		Date currentDatetime = new Date();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
+		dc.add(Restrictions.le("endDateFormatted", currentDatetime));
+		dc.addOrder(Order.asc("endDateFormatted"));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((OrderWindow) o);
+		}
+		return returnList;
+	}
+
 	/**
 	 * Get all OrderWindows with status "Opened" for the given Company
 	 * 

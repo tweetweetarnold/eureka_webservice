@@ -1,9 +1,7 @@
 package servlet.load.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.Canteen;
 import dao.CanteenDAO;
@@ -49,12 +46,7 @@ public class LoadCanteensForAddingStallsServlet extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
-
 		System.out.println("****** LoadCanteensForAddingStallsServlet ******");
-		HttpSession session = request.getSession();
-		HashMap<String, String> userInput = new HashMap<>();
 		ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
 		try {
 			CanteenDAO canteenDAO = new CanteenDAO();
