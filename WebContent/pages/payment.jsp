@@ -63,16 +63,17 @@
 
 		</div>
 		<!-- /.row -->
-		<c:if test="${empty sessionScope.foodDisplayPaymentList}">
+
+		<c:if test="${empty sessionScope.paymentFoodOrderList}">
 			You haven't ordered anything! Go order something!
 		</c:if>
 
 		<c:if test="${not empty sessionScope.paymentSuccess}">
-			<c:remove var="foodDisplayPaymentList" scope="session" />
+			<c:remove var="paymentFoodOrderList" scope="session" />
 		</c:if>
 
 		<c:if test="${not empty sessionScope.error}">
-			<c:remove var="foodDisplayPaymentList" scope="session" />
+			<c:remove var="paymentFoodOrderList" scope="session" />
 		</c:if>
 
 		<!-- Success message handling -->
@@ -105,7 +106,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<!-- PayPal form -->
-				<c:if test="${not empty sessionScope.foodDisplayPaymentList}">
+				<c:if test="${not empty sessionScope.paymentFoodOrderList}">
 					<form action="${initParam['posturl']}" method="post">
 						<input type="hidden" name="upload" value="1" />
 						<input type="hidden" name="return"
@@ -117,9 +118,9 @@
 
 						<c:set var="count" value="0" />
 
-						<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="order" varStatus="orderLoop">
+						<c:forEach items="${sessionScope.paymentFoodOrderList}" var="order" varStatus="orderLoop">
 
-							<c:forEach items="${order.foodOrderDiscountList}" var="foodItem" varStatus="foodItemLoop">
+							<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
 								<c:set var="count" value="${count + 1}" />
 								<c:set var="modifiedFoodName" value="${foodItem.food.name}" />
 
@@ -159,6 +160,9 @@
 		</div>
 		<!-- /row -->
 
+
+
+
 		<div class="row">
 			<div class="col-md-12">
 				<h2 class="page-header">
@@ -170,26 +174,35 @@
 					</i>
 				</h2>
 
-				<c:forEach items="${sessionScope.foodDisplayPaymentList}" var="paymentDisplay" varStatus="loop">
+				<c:forEach items="${sessionScope.paymentFoodOrderList}" var="foodOrder" varStatus="loop">
+
 					<div class="panel panel-default">
+
 						<div class="panel-heading" role="tab" id="headingOne">
 							<h4 class="panel-title">
 								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${loop.index}"
 									aria-expanded="true" aria-controls="collapse${loop.index}"
 								>
-									Order ID: ${paymentDisplay.foodOrderId} &mdash;
-									<fmt:formatDate type="both" value="${paymentDisplay.createDate}" />
-									<i class="pull-right">${paymentDisplay.status}</i>
+									Order ID: ${foodOrder.foodOrderId} &mdash;
+									<fmt:formatDate type="both" value="${foodOrder.createDate}" />
+									<i class="pull-right">${foodOrder.status}</i>
 								</a>
 							</h4>
 						</div>
+
 						<div id="collapse${loop.index}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
-								Canteen: ${paymentDisplay.orderWindow.canteen.name}
+								Canteen: ${foodOrder.orderWindow.canteen.name}
 								<br>
 								Price:
-								<fmt:formatNumber value="${paymentDisplay.totalPriceIncludingDisc}" var="amt" minFractionDigits="2" />
+								<fmt:formatNumber value="${foodOrder.finalPrice}" var="amt" minFractionDigits="2" />
 								$${amt}
+								<br>
+								Discount:
+								<fmt:formatNumber value="${foodOrder.totalPriceBeforePriceModifiers - foodOrder.finalPrice}" var="discount"
+									minFractionDigits="2"
+								/>
+								$${discount}
 								<br>
 								<br>
 
@@ -204,7 +217,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${paymentDisplay.foodOrderDiscountList}" var="foodOrderItem">
+										<c:forEach items="${foodOrder.foodOrderList}" var="foodOrderItem">
 											<tr>
 												<td>${foodOrderItem.food.stall.name}</td>
 												<td>${foodOrderItem.food.name}</td>

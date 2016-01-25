@@ -33,31 +33,17 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Retrieves the Food based on the provided ID
+	 * Adds new Modifier to the designated Food
 	 * 
-	 * @param foodId The ID used for retrieving the Food
-	 * @return The Food object that has the provided ID
+	 * @param m The Modifier to be added
+	 * @param f The designated Food to add the Modifier
 	 */
-	public Food getFood(int foodId) {
-		return (Food) MyConnection.get(Food.class, foodId);
-	}
+	public void addModifierToFood(Modifier m, Food f) {
+		Set<Modifier> modifierList = f.getModifierList();
 
-	/**
-	 * Adds a new Food object to the Database
-	 * 
-	 * @param f The Food object to be added in
-	 */
-	public void saveFood(Food f) {
-		MyConnection.save(f);
-	}
+		modifierList.add(m);
+		updateFood(f);
 
-	/**
-	 * Updates the designated Food object in the Database
-	 * 
-	 * @param f The Food object to be updated
-	 */
-	public void updateFood(Food f) {
-		MyConnection.update(f);
 	}
 
 	/**
@@ -69,6 +55,37 @@ public class FoodDAO {
 		f.setDescription(StringValues.ARCHIVED);
 		// f.setStall(null);
 		updateFood(f);
+	}
+
+	/**
+	 * Retrieves a list of Food in the Stall
+	 * 
+	 * @param stall The designated Stall
+	 * @return An ArrayList of Food objects that are in the designated Stall
+	 */
+	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
+		ArrayList<Food> returnList = new ArrayList<Food>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Food.class);
+		dc.add(Restrictions.eq("stall", stall));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((Food) o);
+		}
+		return returnList;
+	}
+
+	/**
+	 * Retrieves the Food based on the provided ID
+	 * 
+	 * @param foodId The ID used for retrieving the Food
+	 * @return The Food object that has the provided ID
+	 */
+	public Food getFood(int foodId) {
+		return (Food) MyConnection.get(Food.class, foodId);
 	}
 
 	/**
@@ -104,17 +121,21 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Adds new Modifier to the designated Food
+	 * Retrieves the Modifier from the Food based on the provided modifier name
 	 * 
-	 * @param m The Modifier to be added
-	 * @param f The designated Food to add the Modifier
+	 * @param modifierName The name of the Modifier
+	 * @param f The designated Food for retrieving the Modifier
+	 * @return The Modifier object from the Food that has the provided modifier name, otherwise,
+	 *         returns null
 	 */
-	public void addModifierToFood(Modifier m, Food f) {
+	public Modifier getModifierFromFood(String modifierName, Food f) {
 		Set<Modifier> modifierList = f.getModifierList();
-
-		modifierList.add(m);
-		updateFood(f);
-
+		for (Modifier m : modifierList) {
+			if (m.getName().equals(modifierName)) {
+				return m;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -149,24 +170,6 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Retrieves the Modifier from the Food based on the provided modifier name
-	 * 
-	 * @param modifierName The name of the Modifier
-	 * @param f The designated Food for retrieving the Modifier
-	 * @return The Modifier object from the Food that has the provided modifier name, otherwise,
-	 *         returns null
-	 */
-	public Modifier getModifierFromFood(String modifierName, Food f) {
-		Set<Modifier> modifierList = f.getModifierList();
-		for (Modifier m : modifierList) {
-			if (m.getName().equals(modifierName)) {
-				return m;
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Load the validated content of the Modifier.csv into the Database
 	 * 
 	 * @param content The list of Modifier data to be loaded into the Database
@@ -193,23 +196,20 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Retrieves a list of Food in the Stall
+	 * Adds a new Food object to the Database
 	 * 
-	 * @param stall The designated Stall
-	 * @return An ArrayList of Food objects that are in the designated Stall
+	 * @param f The Food object to be added in
 	 */
-	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
-		ArrayList<Food> returnList = new ArrayList<Food>();
+	public void saveFood(Food f) {
+		MyConnection.save(f);
+	}
 
-		DetachedCriteria dc = DetachedCriteria.forClass(Food.class);
-		dc.add(Restrictions.eq("stall", stall));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		for (Object o : l) {
-			returnList.add((Food) o);
-		}
-		return returnList;
+	/**
+	 * Updates the designated Food object in the Database
+	 * 
+	 * @param f The Food object to be updated
+	 */
+	public void updateFood(Food f) {
+		MyConnection.update(f);
 	}
 }

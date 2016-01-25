@@ -126,7 +126,7 @@
 
 
 										<div class="form-group">
-											<label>Number of Weeks</label>
+											<label>Repeat Number of Weeks</label>
 											<select class="form-control" name="repeat" required>
 												<c:forEach items="${sessionScope.weekList}" var="week">
 													<option value="${week}">${week}</option>

@@ -23,6 +23,15 @@ public class FoodOrderItemDAO {
 	}
 	
 	/**
+	 * Removes the designated FoodOrderItem object from the database
+	 * 
+	 * @param f The FoodOrderItem object to be removed
+	 */
+	public void deleteFoodOrderItem(FoodOrderItem f) {
+		MyConnection.delete(f);
+	}
+
+	/**
 	 * Retrieves the FoodOrderItem based on the provided ID
 	 * 
 	 * @param foodOrderItemId  The ID used for retrieving the FoodOrderItem
@@ -33,33 +42,6 @@ public class FoodOrderItemDAO {
 	}
 
 	/**
-	 * Adds a new FoodOrderItem to the database
-	 * 
-	 * @param f The FoodOrderItem object to be added in
-	 */
-	public void saveFoodOrderItem(FoodOrderItem f) {
-		MyConnection.save(f);
-	}
-
-	/**
-	 * Updates the designated FoodOrderItem object in the database
-	 * 
-	 * @param f The FoodOrderItem object to be updated
-	 */
-	public void updateFoodOrderItem(FoodOrderItem f) {
-		MyConnection.update(f);
-	}
-
-	/**
-	 * Removes the designated FoodOrderItem object from the database
-	 * 
-	 * @param f The FoodOrderItem object to be removed
-	 */
-	public void deleteFoodOrderItem(FoodOrderItem f) {
-		MyConnection.delete(f);
-	}
-	
-	/**
 	 * Retrieve the FoodOrderItems that falls within range of the provided dates
 	 * 
 	 * @param food The Food object
@@ -69,6 +51,24 @@ public class FoodOrderItemDAO {
 	 */
 	public List<Object> getFoodOrderItems(Food food, Date earlierDate, Date laterDate){
 		return MyConnection.getFoodOrderItemList(food, earlierDate, laterDate);
+	}
+
+	/**
+	 * Adds a new FoodOrderItem to the database
+	 * 
+	 * @param f The FoodOrderItem object to be added in
+	 */
+	public void saveFoodOrderItem(FoodOrderItem f) {
+		MyConnection.save(f);
+	}
+	
+	/**
+	 * Updates the designated FoodOrderItem object in the database
+	 * 
+	 * @param f The FoodOrderItem object to be updated
+	 */
+	public void updateFoodOrderItem(FoodOrderItem f) {
+		MyConnection.update(f);
 	}
 	
 }

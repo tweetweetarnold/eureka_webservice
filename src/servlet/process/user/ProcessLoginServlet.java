@@ -123,7 +123,7 @@ public class ProcessLoginServlet extends HttpServlet {
 				session.setAttribute("user", emp);
 				session.setAttribute("tokenID", tokenID);
 				if (!response.isCommitted()) {
-					response.sendRedirect("/eureka_webservice/pages/payment2.jsp");
+					response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 				}
 			}
 

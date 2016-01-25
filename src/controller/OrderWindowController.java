@@ -9,6 +9,7 @@ import model.PriceModifier;
 
 import org.joda.time.DateTime;
 
+import value.StringValues;
 import dao.OrderWindowDAO;
 
 /**
@@ -169,12 +170,18 @@ public class OrderWindowController {
 	}
 
 	public void createNewOrderWindow2(DateTime startDate, DateTime endDate, Company company,
-			Canteen canteen, int numberOfWeeks, String remarks,
-			ArrayList<PriceModifier> priceModifierList) {
+			Canteen canteen, int numberOfWeeks, String remarks, double discountAbsolute) {
 
 		for (int i = 0; i < numberOfWeeks; i++) {
-			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate.plusWeeks(i), endDate
-					.plusWeeks(i), company, canteen, remarks, priceModifierList));
+			OrderWindow window = new OrderWindow(startDate.plusWeeks(i), endDate.plusWeeks(i),
+					company, canteen, remarks, null);
+
+			ArrayList<PriceModifier> list = new ArrayList<PriceModifier>();
+			PriceModifier discountAbsoluteModifier = new PriceModifier("Discount",
+					StringValues.PRICEMODIFIER_ABSOLUTE, discountAbsolute * -1, window);
+			list.add(discountAbsoluteModifier);
+			window.setPriceModifierList(list);
+			orderWindowDAO.saveOrderWindow(window);
 		}
 
 	}
@@ -207,81 +214,6 @@ public class OrderWindowController {
 					discountPercentage, discountAbsolute, remarks, null));
 		}
 	}
-
-	/**
-	 * Creates a new order window period indicating the number of weeks, with start and end date and
-	 * the discount for the specific company and canteen
-	 * 
-	 * @param startDate The start date of the order window
-	 * @param endDate The end date of the order window
-	 * @param company The Company object specified in the order window
-	 * @param canteen The Canteen object specified in the order window
-	 * @param discount The designated discount in the order window
-	 * @param numberOfWeeks The number of weeks that this order window will be running
-	 */
-	// public void createNewOrderWindow(DateTime startDate, DateTime endDate, Company company,
-	// Canteen canteen, double discount, int numberOfWeeks, String remarks) {
-	//
-	// if (numberOfWeeks > 0) {
-	// ArrayList<DateTime> startTimeList = new ArrayList<DateTime>();
-	// ArrayList<DateTime> endTimeList = new ArrayList<DateTime>();
-	//
-	// startTimeList.add(startDate);
-	// endTimeList.add(endDate);
-	//
-	// for (int i = 1; i < numberOfWeeks; i++) {
-	// DateTime tempStartDateTime = startDate.plusWeeks(1);
-	// startDate = tempStartDateTime;
-	// DateTime tempEndDateTime = endDate.plusWeeks(1);
-	// endDate = tempEndDateTime;
-	// startTimeList.add(tempStartDateTime);
-	// endTimeList.add(tempEndDateTime);
-	// }
-	//
-	// for (int i = 0; i < startTimeList.size(); i++) {
-	// orderWindowDAO.saveOrderWindow(new OrderWindow(startTimeList.get(i), endTimeList
-	// .get(i), company, canteen, 0, discount, remarks, null));
-	// }
-	//
-	// } else {
-	// orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen, 0,
-	// discount, remarks, null));
-	// }
-	// }
-
-	/**
-	 * Creates a new order window period indicating the number of weeks, with start date, duration
-	 * and the discount for the specific company and canteen
-	 * 
-	 * @param startDate The start date of the order window
-	 * @param duration The duration of the order window
-	 * @param company The Company object specified in the order window
-	 * @param canteen The Canteen object specified in the order window
-	 * @param discount The designated discount in the order window
-	 * @param numberOfWeeks The number of weeks that this order window will be running
-	 */
-	// public void createNewOrderWindow(DateTime startDate, Duration duration, Company company,
-	// Canteen canteen, double discount, int numberOfWeeks, String remarks) {
-	//
-	// if (numberOfWeeks > 0) {
-	// ArrayList<DateTime> dateTimeList = new ArrayList<DateTime>();
-	// dateTimeList.add(startDate);
-	// for (int i = 1; i < numberOfWeeks; i++) {
-	// DateTime tempDateTime = startDate.plusWeeks(1);
-	// startDate = tempDateTime;
-	// dateTimeList.add(tempDateTime);
-	// }
-	//
-	// for (DateTime dateTimeAdd : dateTimeList) {
-	// orderWindowDAO.saveOrderWindow(new OrderWindow(dateTimeAdd, duration, company,
-	// canteen, discount, remarks, null));
-	// }
-	//
-	// } else {
-	// orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, duration, company, canteen,
-	// discount, remarks, null));
-	// }
-	// }
 
 	/**
 	 * Get all OrderWindows with status "Opened"
