@@ -178,9 +178,9 @@
 																<tr>
 																	<td><select class="form-control"
 																		name="modifierDropdown" required>
-																			<c:forEach items="${modifierSection.modifierList}"
+																			<c:forEach varStatus="loop" items="${modifierSection.modifierList}"
 																				var="modifier">
-																				<option value="${modifier}" name="${modifier.name}">${modifier.name}add $ ${modifier.price}</option>
+																				<option value="${modifier.name}" name="${modifier.name}">${modifier.name} + $ ${modifier.price}</option>
 																			</c:forEach>
 																	</select></td>
 																</tr>
