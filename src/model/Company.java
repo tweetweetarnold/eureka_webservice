@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import value.StringValues;
+
 /**
  * Represents a Company entity model in the web application
  * 
@@ -23,15 +25,13 @@ import javax.persistence.Table;
 public class Company {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Set<Canteen> canteenList;
-	private String companyCode;
+	private String companyCode, name, status;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int companyId;
-	private Date createDate;
-	private Date cutoffTime;
+	private Date createDate, cutoffTime;
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> deliveryPointSet;
-	private String name;
 
 	/**
 	 * Creates a default constructor for Company
@@ -55,6 +55,7 @@ public class Company {
 		this.cutoffTime = cutoffTime;
 		this.canteenList = canteenList;
 		this.companyCode = companyCode;
+		this.status = StringValues.ACTIVE;
 	}
 
 	/**
@@ -120,6 +121,10 @@ public class Company {
 		return name;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
 	/**
 	 * Changes the list of Canteens with a new list of Canteens
 	 * 
@@ -136,6 +141,14 @@ public class Company {
 	 */
 	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
+	}
+
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 	/**
@@ -163,6 +176,10 @@ public class Company {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

@@ -9,6 +9,7 @@ import java.util.Set;
 import model.Canteen;
 import model.Food;
 import model.Stall;
+import value.StringValues;
 
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
@@ -31,43 +32,6 @@ public class StallDAO {
 	}
 
 	/**
-	 * Retrieves the Stall based on the provided ID
-	 * 
-	 * @param stallId The ID used for retrieving the Stall
-	 * @return The Stall object that has the provided ID
-	 */
-	public Stall getStall(int stallId) {
-		return (Stall) MyConnection.get(Stall.class, stallId);
-	}
-
-	/**
-	 * Adds a new Stall object to the Database
-	 * 
-	 * @param h The Stall object to be added in
-	 */
-	public void saveStall(Stall h) {
-		MyConnection.save(h);
-	}
-
-	/**
-	 * Updates the designated Stall object in the Database
-	 * 
-	 * @param h The Stall object to be updated
-	 */
-	public void updateStall(Stall h) {
-		MyConnection.update(h);
-	}
-
-	/**
-	 * Removes the designated Stall object from the Database
-	 * 
-	 * @param h The Stall object to be removed
-	 */
-	public void deleteStall(Stall h) {
-		MyConnection.delete(h);
-	}
-
-	/**
 	 * Add a new Food to the designated Stall
 	 * 
 	 * @param s The designated Stall to add the Food
@@ -80,6 +44,47 @@ public class StallDAO {
 		}
 		foodList.add(f);
 		updateStall(s);
+	}
+
+	/**
+	 * Archives the designated Stall object from the Database
+	 * 
+	 * @param h The Stall object to be removed
+	 */
+	public void deleteStall(Stall h) {
+		h.setStatus(StringValues.ARCHIVED);
+		updateStall(h);
+	}
+
+	/**
+	 * Retrieves all the Stalls from the Canteen
+	 * 
+	 * @param canteen The designated Canteen to retrieve the Stalls
+	 * @return An ArrayList of Stall objects in the designated Canteen
+	 */
+	public ArrayList<Stall> getAllStallsUnderCanteen(Canteen canteen) {
+		ArrayList<Stall> returnList = new ArrayList<Stall>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Stall.class);
+		dc.add(Restrictions.eq("canteen", canteen));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((Stall) o);
+		}
+		return returnList;
+	}
+
+	/**
+	 * Retrieves the Stall based on the provided ID
+	 * 
+	 * @param stallId The ID used for retrieving the Stall
+	 * @return The Stall object that has the provided ID
+	 */
+	public Stall getStall(int stallId) {
+		return (Stall) MyConnection.get(Stall.class, stallId);
 	}
 
 	/**
@@ -107,26 +112,23 @@ public class StallDAO {
 			saveStall(newStall);
 		}
 	}
+
+	/**
+	 * Adds a new Stall object to the Database
+	 * 
+	 * @param h The Stall object to be added in
+	 */
+	public void saveStall(Stall h) {
+		MyConnection.save(h);
+	}
 	
 	/**
-	 * Retrieves all the Stalls from the Canteen
+	 * Updates the designated Stall object in the Database
 	 * 
-	 * @param canteen The designated Canteen to retrieve the Stalls
-	 * @return An ArrayList of Stall objects in the designated Canteen
+	 * @param h The Stall object to be updated
 	 */
-	public ArrayList<Stall> getAllStallsUnderCanteen(Canteen canteen) {
-		ArrayList<Stall> returnList = new ArrayList<Stall>();
-
-		DetachedCriteria dc = DetachedCriteria.forClass(Stall.class);
-		dc.add(Restrictions.eq("canteen", canteen));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		for (Object o : l) {
-			returnList.add((Stall) o);
-		}
-		return returnList;
+	public void updateStall(Stall h) {
+		MyConnection.update(h);
 	}
 
 }

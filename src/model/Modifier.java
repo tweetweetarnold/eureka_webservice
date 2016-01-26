@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import value.StringValues;
+
 /**
  * Represents the Add-Ons of the Food items entity model in the web application
  * 
@@ -27,8 +29,11 @@ public class Modifier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int modifierId;
-	private String name;
+	private String name, status;
 	private double price;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "modifierSectionId")
+	private ModifierSection modifierSection;
 
 	/**
 	 * Creates a default constructor for Modifier
@@ -51,8 +56,18 @@ public class Modifier {
 		this.price = price;
 		this.food = food;
 		this.createDate = new Date();
+		this.status = StringValues.ACTIVE;
 	}
-
+	
+	public Modifier(String name, String description, double price, Food food, ModifierSection modifierSection) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.food = food;
+		this.createDate = new Date();
+		this.modifierSection = modifierSection;
+	}
 	// Check if otherModifier equal current modifier
 	/**
 	 * Checks if this Modifier is the same as the other Modifier
@@ -127,6 +142,10 @@ public class Modifier {
 		return price;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
 	/**
 	 * Changes the current date of this Modifier object created
 	 * 
@@ -180,5 +199,20 @@ public class Modifier {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+
+	public ModifierSection getModifierSection() {
+		return modifierSection;
+	}
+
+	public void setModifierSection(ModifierSection modifierSection) {
+		this.modifierSection = modifierSection;
+	}
+	
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 }

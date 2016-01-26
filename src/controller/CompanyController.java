@@ -31,21 +31,11 @@ public class CompanyController {
 	}
 
 	/**
-	 * Updates the designated Company object in the Database
-	 * 
-	 * @param c The Company object to be updated
+	 * Retrieve all the Companies from the Database
+	 * @return An ArrayList of Company objects stored in the Database
 	 */
-	public void updateCompany(Company c) {
-		companyDAO.updateCompany(c);
-	}
-
-	/**
-	 * Removes the designated Company object from the Database
-	 * 
-	 * @param c The Company object to be removed
-	 */
-	public void removeCompany(Company c) {
-		companyDAO.deleteCompany(c);
+	public ArrayList<Company> getAllCompany() {
+		return companyDAO.getAllCompany();
 	}
 
 	/**
@@ -67,12 +57,22 @@ public class CompanyController {
 	public Company getCompanyByCompanyCode(String companyCode) {
 		return companyDAO.getCompanyByCompanyCode(companyCode.toUpperCase());
 	}
+
+	/**
+	 * Removes the designated Company object from the Database
+	 * 
+	 * @param c The Company object to be removed
+	 */
+	public void removeCompany(Company c) {
+		companyDAO.deleteCompany(c);
+	}
 	
 	/**
-	 * Retrieve all the Companies from the Database
-	 * @return An ArrayList of Company objects stored in the Database
+	 * Updates the designated Company object in the Database
+	 * 
+	 * @param c The Company object to be updated
 	 */
-	public ArrayList<Company> getAllCompany() {
-		return companyDAO.getAllCompany();
+	public void updateCompany(Company c) {
+		companyDAO.updateCompany(c);
 	}
 }

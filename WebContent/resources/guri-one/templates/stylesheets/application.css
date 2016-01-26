@@ -1162,7 +1162,7 @@ input,button,select,textarea {
 }
 
 a {
-	color: #00b6ad;
+	color: #A12C36;
 	text-decoration: none;
 	-webkit-transition: 0.5s ease;
 	-o-transition: 0.5s ease;
@@ -1170,7 +1170,7 @@ a {
 }
 
 a:hover,a:focus {
-	color: #006a64;
+	color: #7F232A;
 	text-decoration: underline;
 	-webkit-transition: 0.5s ease;
 	-o-transition: 0.5s ease;
@@ -2939,15 +2939,15 @@ textarea.input-lg,.input-group-lg>textarea.form-control,.input-group-lg>textarea
 
 .btn-success {
 	color: white;
-	background-color: #00b6ad;
-	border-color: #009d95;
+	background-color: #e73f4d;
+	border-color: #7F232A;
 }
 
 .btn-success:hover,.btn-success:focus,.btn-success:active,.btn-success.active,.open>.btn-success.dropdown-toggle
 	{
 	color: white;
-	background-color: #00837d;
-	border-color: #005f5b;
+	background-color: #A12C36;
+	border-color: #7F232A;
 }
 
 .btn-success:active,.btn-success.active,.open>.btn-success.dropdown-toggle

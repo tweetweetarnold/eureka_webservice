@@ -9,14 +9,14 @@
 	}
 	if (orderWindow == null) {
 		if (!response.isCommitted()) {
-			response.sendRedirect("/eureka_webservice/pages/payment2.jsp");
+			response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 		}
 	}
 	if (session.getAttribute("suspended") != null) {
 		boolean suspended = Boolean.parseBoolean((String) session.getAttribute("suspended"));
 		if (suspended) {
 			if (!response.isCommitted()) {
-				response.sendRedirect("/eureka_webservice/pages/payment2.jsp");
+				response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 
 			}
 		}

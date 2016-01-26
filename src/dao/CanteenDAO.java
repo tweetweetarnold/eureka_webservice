@@ -29,6 +29,31 @@ public class CanteenDAO {
 
 	}
 
+	// Add Stall to the current StallList and update existing canteen
+	/**
+	 * Adds a new Stall to the Canteen
+	 * 
+	 * @param c The designated Canteen to add the Stall
+	 * @param s The Stall to be added to the Canteen
+	 */
+	public void addStallToCanteen(Canteen c, Stall s) {
+		Set<Stall> stallList = c.getStallList();
+		if (stallList == null) {
+			stallList = new HashSet<Stall>();
+		}
+		stallList.add(s);
+		updateCanteen(c);
+	}
+
+	/**
+	 * Removes the designated Canteen object from the Database
+	 * 
+	 * @param c The Canteen object to be removed
+	 */
+	public void deleteCanteen(Canteen c) {
+		MyConnection.delete(c);
+	}
+	
 	/**
 	 * Retrieves all the Canteens from the Database
 	 * 
@@ -51,23 +76,15 @@ public class CanteenDAO {
 	}
 
 	/**
-	 * Retrieve the Canteen based on the provided canteen name
+	 * Retrieve the Canteen based on the provided ID
 	 * 
-	 * @param canteenName The name of the Canteen
-	 * @return The Canteen object that has the provided canteen name
+	 * @param canteenId The ID used for retrieving the Canteen
+	 * @return The Canteen object that has the provided ID
 	 */
-	public Canteen getCanteenByName(String canteenName) {
-		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
-		dc.add(Restrictions.eq("name", canteenName));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-		if (l.size() == 0) {
-			return null;
-		}
-		return (Canteen) l.get(0);
+	public Canteen getCanteen(int canteenId) {
+		return (Canteen) MyConnection.get(Canteen.class, canteenId);
 	}
-	
+
 	/**
 	 * Retrieve the Canteen based on the provided address
 	 * 
@@ -87,29 +104,21 @@ public class CanteenDAO {
 	}
 
 	/**
-	 * Retrieve the Canteen based on the provided ID
+	 * Retrieve the Canteen based on the provided canteen name
 	 * 
-	 * @param canteenId The ID used for retrieving the Canteen
-	 * @return The Canteen object that has the provided ID
+	 * @param canteenName The name of the Canteen
+	 * @return The Canteen object that has the provided canteen name
 	 */
-	public Canteen getCanteen(int canteenId) {
-		return (Canteen) MyConnection.get(Canteen.class, canteenId);
-	}
+	public Canteen getCanteenByName(String canteenName) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
+		dc.add(Restrictions.eq("name", canteenName));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
-	// Add Stall to the current StallList and update existing canteen
-	/**
-	 * Adds a new Stall to the Canteen
-	 * 
-	 * @param c The designated Canteen to add the Stall
-	 * @param s The Stall to be added to the Canteen
-	 */
-	public void addStallToCanteen(Canteen c, Stall s) {
-		Set<Stall> stallList = c.getStallList();
-		if (stallList == null) {
-			stallList = new HashSet<Stall>();
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+		if (l.size() == 0) {
+			return null;
 		}
-		stallList.add(s);
-		updateCanteen(c);
+		return (Canteen) l.get(0);
 	}
 
 	/**
@@ -137,33 +146,6 @@ public class CanteenDAO {
 	}
 
 	/**
-	 * Adds a new Canteen object to the Database
-	 * 
-	 * @param c The Canteen object to be added in
-	 */
-	public void saveCanteen(Canteen c) {
-		MyConnection.save(c);
-	}
-
-	/**
-	 * Updates the designated Canteen object in the Database
-	 * 
-	 * @param c The Canteen object to be updated
-	 */
-	public void updateCanteen(Canteen c) {
-		MyConnection.update(c);
-	}
-
-	/**
-	 * Removes the designated Canteen object from the Database
-	 * 
-	 * @param c The Canteen object to be removed
-	 */
-	public void deleteCanteen(Canteen c) {
-		MyConnection.delete(c);
-	}
-
-	/**
 	 * Load the validated content of the Canteen.csv into the Database
 	 * 
 	 * @param content The list of Canteen data to be loaded into the Database
@@ -179,5 +161,23 @@ public class CanteenDAO {
 			Canteen newCanteen = new Canteen(canteenName, address, null);
 			saveCanteen(newCanteen);
 		}
+	}
+
+	/**
+	 * Adds a new Canteen object to the Database
+	 * 
+	 * @param c The Canteen object to be added in
+	 */
+	public void saveCanteen(Canteen c) {
+		MyConnection.save(c);
+	}
+
+	/**
+	 * Updates the designated Canteen object in the Database
+	 * 
+	 * @param c The Canteen object to be updated
+	 */
+	public void updateCanteen(Canteen c) {
+		MyConnection.update(c);
 	}
 }

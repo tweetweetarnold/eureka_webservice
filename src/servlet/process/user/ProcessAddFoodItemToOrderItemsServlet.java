@@ -90,8 +90,19 @@ public class ProcessAddFoodItemToOrderItemsServlet extends HttpServlet {
 			Set<Modifier> modifierList = food.getModifierList();
 			for (Modifier m : modifierList) {
 				String name = m.getName();
+				System.out.println("Chris Test-----> Expected " + name + " retrieved: " + request.getParameter("modifierDropdown"));
 				String value = request.getParameter(name);
+				String dropdownValue = request.getParameter("modifierDropdown");
 				if (value != null) {
+					Set<ModifierChosen> list = foodItem.getModifierChosenList();
+					out.println("<br>List: " + list);
+					ModifierChosen mc = new ModifierChosen(m, foodItem);
+					out.println(mc);
+					list.add(mc);
+					foodItem.setModifierChosenList(list);
+					out.println("fooditem: " + foodItem.getModifierChosenList());
+				}
+				if (dropdownValue != null && dropdownValue.equals(m.getName())) {
 					Set<ModifierChosen> list = foodItem.getModifierChosenList();
 					out.println("<br>List: " + list);
 					ModifierChosen mc = new ModifierChosen(m, foodItem);

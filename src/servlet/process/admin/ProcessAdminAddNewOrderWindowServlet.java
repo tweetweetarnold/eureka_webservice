@@ -54,8 +54,8 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 		CompanyController companyController = new CompanyController();
 		CanteenController canteenController = new CanteenController();
 
-		String weekString = request.getParameter("repeat");
-		String discountString = request.getParameter("discountValue");
+		String numberOfWeeksString = request.getParameter("repeat");
+		String discountAbsoluteString = request.getParameter("discountAbsolute");
 		String companyId = request.getParameter("company");
 		String canteenId = request.getParameter("canteen");
 		String startDatetimeString = request.getParameter("startDatetime");
@@ -69,6 +69,7 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 		System.out.println("canteenId: " + canteenId);
 
 		try {
+			// **Important: to format the time to SG timezone
 			DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm").withZone(
 					DateTimeZone.forID("Asia/Singapore"));
 			DateTime startDatetime = formatter.parseDateTime(startDatetimeString);
@@ -79,21 +80,26 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 
 			Company company = companyController.getCompany(Integer.parseInt(companyId));
 			Canteen canteen = canteenController.getCanteen(Integer.parseInt(canteenId));
-			double discount = 0;
-			int week = Integer.parseInt(weekString);
+			double discountAbsolute = 0;
+			int numberOfWeeks = Integer.parseInt(numberOfWeeksString);
+
 			try {
-				discount = Double.parseDouble(discountString);
+				discountAbsolute = Double.parseDouble(discountAbsoluteString);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 			boolean available = orderWindowController.checkForOrderWindowAvailability(
-					startDatetime, endDatetime, company, week);
+					startDatetime, endDatetime, company, numberOfWeeks);
+
 			if (!available) {
 				throw new Exception("Order Window have already been taken");
 			} else {
-				orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
-						canteen, 0.0, discount, week, remarks);
+				// orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
+				// canteen, numberOfWeeks, remarks, 0.0, discountAbsolute);
+				orderWindowController.createNewOrderWindow2(startDatetime, endDatetime, company,
+						canteen, numberOfWeeks, remarks, discountAbsolute);
 			}
 			session.setAttribute("success", "New Order Window created successfully.");
 

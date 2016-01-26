@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import value.StringValues;
+
 /**
  * Represents a Canteen entity model in the web application
  * 
@@ -25,7 +27,7 @@ public class Canteen {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int canteenId;
 	private Date createDate;
-	private String name;
+	private String name, status;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "canteen")
 	private Set<Stall> stallList;
 
@@ -47,6 +49,7 @@ public class Canteen {
 		this.name = name;
 		this.address = address;
 		this.createDate = new Date();
+		this.status = StringValues.ACTIVE;
 		this.stallList = stallList;
 	}
 
@@ -95,6 +98,10 @@ public class Canteen {
 		return stallList;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
 	/**
 	 * Changes the address of the Canteen
 	 * 
@@ -102,6 +109,14 @@ public class Canteen {
 	 */
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public void setCanteenId(int canteenId) {
+		this.canteenId = canteenId;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 	/**
@@ -120,6 +135,10 @@ public class Canteen {
 	 */
 	public void setStallList(Set<Stall> stallList) {
 		this.stallList = stallList;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }
