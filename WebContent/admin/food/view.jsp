@@ -107,7 +107,8 @@
 											<fmt:formatDate type="both" value="${food.createDate}" />
 										</td>
 										<td>
-											<img src="/eureka_webservice/${food.imageDirectory}" />
+											<img src="${food.imageDirectory}" />
+											<!--  <img src="/eureka_webservice/${food.imageDirectory}" /> -->
 										</td>
 										<td>
 											<c:forEach items="${food.modifierList}" var="modifier">- ${modifier.name}<br>

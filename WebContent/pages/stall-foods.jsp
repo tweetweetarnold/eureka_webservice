@@ -115,7 +115,8 @@
 							<fmt:formatNumber value="${food.price}" var="amt" minFractionDigits="2" />
 							$${amt}
 						</b>
-						<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+						<img class="img-responsive img-portfolio img-hover" src="${food.imageDirectory}" alt="">
+						<!--"http://placehold.it/700x450  -->
 
 					</a>
 
