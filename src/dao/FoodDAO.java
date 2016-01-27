@@ -52,7 +52,7 @@ public class FoodDAO {
 	 * @param f The Food object to be removed
 	 */
 	public void deleteFood(Food f) {
-		f.setDescription(StringValues.ARCHIVED);
+		f.setStatus(StringValues.ARCHIVED);
 		// f.setStall(null);
 		updateFood(f);
 	}

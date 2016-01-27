@@ -142,8 +142,45 @@ public class FoodController {
 		
 	}
 	
+	public String[] replaceImage(String oldPublicId, byte[] file) throws IOException {
+		return cloudinaryUpload.replaceImage(oldPublicId, file);
+		
+	}
+	
 	public boolean deleteImage(String publicId) throws IOException {
 		return cloudinaryUpload.deleteImage(publicId);
+	}
+	
+	public boolean haveChangesInParameters(Food currentFood, String inputName, String inputDescription, double inputPrice, String inputWeatherConditions) {
+		boolean hasChanges = false;
+		String currentName = currentFood.getName();
+		String currentDesc = currentFood.getDescription();
+		double currentPrice = currentFood.getPrice();
+		String currentWeather = currentFood.getWeatherConditions();
+		
+		if (!currentName.equals(inputName)) {
+			hasChanges = true;
+		}
+		
+		if (!currentDesc.equals(inputDescription)) {
+			hasChanges = true;
+		}
+		
+		if (!currentDesc.equals(inputDescription)) {
+			hasChanges = true;
+		}
+		
+		if (currentPrice != inputPrice) {
+			hasChanges = true;
+		}
+		
+		if (!currentWeather.equals(inputWeatherConditions)) {
+			hasChanges = true;
+		}
+		
+		return hasChanges;
+		
+		
 	}
 
 }
