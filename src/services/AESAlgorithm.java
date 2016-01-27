@@ -9,13 +9,9 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 public class AESAlgorithm {
-	public static String algo = "AES";
-	String secret = "agsjdjegqbentkdh";
-	public byte[] keyValue = secret.getBytes();
-
-	// public AESAlgorithm(String key) {
-	// keyValue = key.getBytes();
-	// }
+	private static String algo = "AES";
+	private String secret = "agsjdjegqbentkdh";
+	private byte[] keyValue = secret.getBytes();
 
 	public Key generateKey() throws Exception {
 		Key key = new SecretKeySpec(keyValue, algo);

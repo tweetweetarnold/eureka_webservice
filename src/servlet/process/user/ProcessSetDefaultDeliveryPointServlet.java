@@ -2,8 +2,6 @@ package servlet.process.user;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Locale;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,14 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
-import services.AESAlgorithm;
-import services.SendEmail;
-import value.StringValues;
 import controller.AccessController;
 import controller.EmployeeController;
 
@@ -58,6 +48,7 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 
 		String buildingName = (String) request.getParameter("deliveryPoint");
 
+		@SuppressWarnings("unchecked")
 		HashMap<String, String> userInput = (HashMap<String, String>) session
 				.getAttribute("userInput");
 

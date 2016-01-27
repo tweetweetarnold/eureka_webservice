@@ -1,7 +1,6 @@
 package model;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,8 +31,6 @@ public class Food {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int foodId;
-	// @Column(columnDefinition="longblob")
-	// private byte[] image;
 	private String imageDirectory;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<Modifier> modifierList;
@@ -63,7 +60,8 @@ public class Food {
 	 * @param imageDirectory The directory where the Food image is being stored
 	 * @param stall The Stall that sells this Food
 	 */
-	public Food(String name, String description, double price, String imageDirectory, String publicId, Stall stall) {
+	public Food(String name, String description, double price, String imageDirectory,
+			String publicId, Stall stall) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -283,12 +281,12 @@ public class Food {
 	public void setModifierSectionList(Set<ModifierSection> modifierSectionList) {
 		this.modifierSectionList = modifierSectionList;
 	}
-	
+
 	public void setPublicId(String publicId) {
 		this.publicId = publicId;
-		
+
 	}
-	
+
 	public String getPublicId() {
 		return publicId;
 	}

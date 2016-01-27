@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Employee;
-import services.AESAlgorithm;
 import controller.AccessController;
 import controller.EmployeeController;
 
@@ -53,7 +52,7 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		response.setContentType("application/json");
 
-		AESAlgorithm aesAlgo = new AESAlgorithm();
+		// AESAlgorithm aesAlgo = new AESAlgorithm();
 		EmployeeController userController = new EmployeeController();
 		AccessController accessController = new AccessController();
 
