@@ -74,7 +74,7 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="/eureka_webservice/ProcessAdminAddNewFoodServlet" id="submitForm">
+									<form role="form" action="/eureka_webservice/ProcessAdminAddNewFoodServlet" method="POST" id="submitForm" enctype="multipart/form-data">
 
 										<input type="hidden" name="stallId" value="${stallId}">
 
@@ -85,7 +85,7 @@
 
 										<div class="form-group">
 											<label>Food name (Chinese)</label>
-											<input class="form-control">
+											<input class="form-control" name="chineseName">
 										</div>
 
 										<div class="form-group">
@@ -99,13 +99,13 @@
 										</div>
 
 										<div class="form-group">
-											<label>Image Directory</label>
-											<input class="form-control" name="imageDirectory">
-										</div>
-
-										<div class="form-group">
 											<label>Weather Conditions</label>
 											<input class="form-control" name="weatherConditions">
+										</div>
+										
+										<div class="form-group">
+											<label>Image Directory</label>
+											<input type="file" name="file" style="width: 228px;"required/>
 										</div>
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add

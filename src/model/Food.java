@@ -45,6 +45,7 @@ public class Food {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<ModifierSection> modifierSectionList;
 	private String weatherConditions;
+	private String publicId;
 
 	/**
 	 * Creates a default constructor for Food
@@ -62,7 +63,7 @@ public class Food {
 	 * @param imageDirectory The directory where the Food image is being stored
 	 * @param stall The Stall that sells this Food
 	 */
-	public Food(String name, String description, double price, String imageDirectory, Stall stall) {
+	public Food(String name, String description, double price, String imageDirectory, String publicId, Stall stall) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -73,6 +74,7 @@ public class Food {
 		this.modifierList = new HashSet<>();
 		this.status = StringValues.ACTIVE;
 		this.weatherConditions = "default";
+		this.publicId = publicId;
 	}
 
 	// check if canteen, stall and food name are the same and returns true if
@@ -280,6 +282,15 @@ public class Food {
 
 	public void setModifierSectionList(Set<ModifierSection> modifierSectionList) {
 		this.modifierSectionList = modifierSectionList;
+	}
+	
+	public void setPublicId(String publicId) {
+		this.publicId = publicId;
+		
+	}
+	
+	public String getPublicId() {
+		return publicId;
 	}
 
 }

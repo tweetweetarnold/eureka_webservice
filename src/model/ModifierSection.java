@@ -51,8 +51,18 @@ public class ModifierSection  {
 //			e.printStackTrace();
 //		}
 //	}	
+	
+	
 	public String getCategoryName() {
 		return categoryName;
+	}
+
+	public int getModifierSectionId() {
+		return modifierSectionId;
+	}
+
+	public void setModifierSectionId(int modifierSectionId) {
+		this.modifierSectionId = modifierSectionId;
 	}
 
 	public void setCategoryName(String categoryName) {

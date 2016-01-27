@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -10,6 +11,7 @@ import model.Food;
 import model.OrderWindow;
 import model.Stall;
 import net.aksingh.owmjapis.AbstractWeather.Weather;
+import services.CloudinaryUpload;
 import dao.FoodDAO;
 
 /**
@@ -20,6 +22,7 @@ import dao.FoodDAO;
  */
 public class FoodController {
 	FoodDAO foodDAO = new FoodDAO();
+	CloudinaryUpload cloudinaryUpload = new CloudinaryUpload();
 
 	/**
 	 * Creates a default constructor for FoodController
@@ -132,6 +135,52 @@ public class FoodController {
 	 */
 	public void updateFood(Food f) {
 		foodDAO.updateFood(f);
+	}
+	
+	public String[] imageUpload(byte[] file) throws IOException {
+		return cloudinaryUpload.imageUpload(file);
+		
+	}
+	
+	public String[] replaceImage(String oldPublicId, byte[] file) throws IOException {
+		return cloudinaryUpload.replaceImage(oldPublicId, file);
+		
+	}
+	
+	public boolean deleteImage(String publicId) throws IOException {
+		return cloudinaryUpload.deleteImage(publicId);
+	}
+	
+	public boolean haveChangesInParameters(Food currentFood, String inputName, String inputDescription, double inputPrice, String inputWeatherConditions) {
+		boolean hasChanges = false;
+		String currentName = currentFood.getName();
+		String currentDesc = currentFood.getDescription();
+		double currentPrice = currentFood.getPrice();
+		String currentWeather = currentFood.getWeatherConditions();
+		
+		if (!currentName.equals(inputName)) {
+			hasChanges = true;
+		}
+		
+		if (!currentDesc.equals(inputDescription)) {
+			hasChanges = true;
+		}
+		
+		if (!currentDesc.equals(inputDescription)) {
+			hasChanges = true;
+		}
+		
+		if (currentPrice != inputPrice) {
+			hasChanges = true;
+		}
+		
+		if (!currentWeather.equals(inputWeatherConditions)) {
+			hasChanges = true;
+		}
+		
+		return hasChanges;
+		
+		
 	}
 
 }

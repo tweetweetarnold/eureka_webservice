@@ -70,7 +70,7 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="/eureka_webservice/ProcessAdminEditFoodServlet" id="submitForm">
+									<form role="form" action="/eureka_webservice/ProcessAdminEditFoodServlet" method="POST" id="submitForm" enctype="multipart/form-data">
 
 										<input type="hidden" name="foodId" value="${sessionScope.foodId}">
 
@@ -81,7 +81,7 @@
 
 										<div class="form-group">
 											<label>Food name (Chinese)</label>
-											<input class="form-control">
+											<input class="form-control" name="chineseName">
 										</div>
 
 										<div class="form-group">
@@ -95,13 +95,13 @@
 										</div>
 
 										<div class="form-group">
-											<label>Image Directory</label>
-											<input class="form-control" name="imageDirectory" value="${sessionScope.imageDirectory}">
-										</div>
-
-										<div class="form-group">
 											<label>Weather Conditions</label>
 											<input class="form-control" name="weatherConditions" value="${sessionScope.weatherConditions}">
+										</div>
+										
+										<div class="form-group">
+											<label>Replace Image</label>
+											<input type="file" name="file" style="width: 228px;"/>
 										</div>
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update

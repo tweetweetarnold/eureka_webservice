@@ -47,12 +47,12 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Removes the designated Food object from the Database
+	 * Archives the designated Food object from the Database
 	 * 
 	 * @param f The Food object to be removed
 	 */
 	public void deleteFood(Food f) {
-		f.setDescription(StringValues.ARCHIVED);
+		f.setStatus(StringValues.ARCHIVED);
 		// f.setStall(null);
 		updateFood(f);
 	}
@@ -159,7 +159,7 @@ public class FoodDAO {
 			System.out.println(stallName);
 			Stall stall = canteenDAO.getStallFromCanteen(canteenName, stallName);
 			System.out.println(stall);
-			Food newFood = new Food(foodName, description, priceValue, null, stall);
+			Food newFood = new Food(foodName, description, priceValue, null, null, stall);
 
 			// adds Food to the Stall's foodList
 			stallDAO.addFoodToStall(stall, newFood);

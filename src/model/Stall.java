@@ -31,6 +31,7 @@ public class Stall {
 	private Set<Food> foodList;
 	private String imageDirectory;
 	private String name;
+	private String status;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int stallId;
@@ -39,6 +40,7 @@ public class Stall {
 	 * Creates a default constructor for Stall
 	 */
 	public Stall() {
+		this.status = "Ok";
 	}
 
 	/**
@@ -59,6 +61,7 @@ public class Stall {
 		this.canteen = canteen;
 		this.createDate = new Date();
 		this.foodList = foodList;
+		this.status = "Ok";
 	}
 
 	/**
@@ -187,4 +190,12 @@ public class Stall {
 		this.stallId = stallId;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 }
