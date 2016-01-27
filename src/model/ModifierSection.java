@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "modifiersection")
-public class ModifierSection  {
+public class ModifierSection {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int modifierSectionId;
@@ -27,32 +26,32 @@ public class ModifierSection  {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "foodId")
 	private Food food;
-	
+
 	/**
 	 * Creates a default constructor for ModifierSection
 	 */
 	public ModifierSection() {
 	}
-	
-	public ModifierSection(String categoryName, String displayType, Set<Modifier> modifierList, Food food){
+
+	public ModifierSection(String categoryName, String displayType, Set<Modifier> modifierList,
+			Food food) {
 		this.categoryName = categoryName;
 		this.displayType = displayType;
 		this.modifierList = modifierList;
 		this.food = food;
 	}
-	
-//	public ModifierSection(String categoryName, String displayType, Set<Modifier> modifierList){
-//		this.categoryName = categoryName;
-//		this.displayType = displayType;
-//		this.modifierList = modifierList;
-//		try{
-//		this.food = modifierList..getFood();
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
-//	}	
-	
-	
+
+	// public ModifierSection(String categoryName, String displayType, Set<Modifier> modifierList){
+	// this.categoryName = categoryName;
+	// this.displayType = displayType;
+	// this.modifierList = modifierList;
+	// try{
+	// this.food = modifierList..getFood();
+	// }catch(Exception e){
+	// e.printStackTrace();
+	// }
+	// }
+
 	public String getCategoryName() {
 		return categoryName;
 	}
@@ -92,7 +91,5 @@ public class ModifierSection  {
 	public void setFood(Food food) {
 		this.food = food;
 	}
-	
-	
-	
+
 }

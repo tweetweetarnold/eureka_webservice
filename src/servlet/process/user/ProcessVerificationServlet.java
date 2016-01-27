@@ -1,9 +1,6 @@
 package servlet.process.user;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,18 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.validator.routines.EmailValidator;
+import model.Employee;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import controller.AccessController;
-import dao.EmployeeDAO;
-import model.Employee;
 import services.AESAlgorithm;
-import services.EmailGenerator;
 import value.StringValues;
+import dao.EmployeeDAO;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -37,26 +32,21 @@ public class ProcessVerificationServlet extends HttpServlet {
 	 */
 	public ProcessVerificationServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		process(request, response);
+		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		process(request, response);
 	}
 
@@ -64,24 +54,23 @@ public class ProcessVerificationServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		System.out.println("*********** VerificationServlet ***********");
 
 		HttpSession session = request.getSession();
 		AESAlgorithm aes = new AESAlgorithm();
 
 		try {
-			
+
 			EmployeeDAO employeedao = new EmployeeDAO();
-			String email = (String)request.getParameter("email");
+			String email = (String) request.getParameter("email");
 			String status = (String) request.getParameter("status");
 			String param = (String) request.getParameter("token");
-			String newEmail = email.replaceAll(" ","+");
+			String newEmail = email.replaceAll(" ", "+");
 			String eDecrypt = aes.decrypt(newEmail);
 			String verifiedStatus = aes.decrypt(status);
-			
+
 			Employee employee = employeedao.getEmployeeByEmail(eDecrypt);
-			
+
 			if (param.contains(" ")) {
 				param = param.replaceAll(" ", "+");
 			}
@@ -92,15 +81,15 @@ public class ProcessVerificationServlet extends HttpServlet {
 			DateTime startDatetime = formatter.parseDateTime(token);
 
 			DateTime currentTime = new DateTime(DateTimeZone.forID("Asia/Singapore"));
-			
-			System.out.println("Current time "+currentTime);
+
+			System.out.println("Current time " + currentTime);
 
 			long difference = currentTime.getMillis() - startDatetime.getMillis();
-			System.out.println("Current time in Millis"+ currentTime.getMillis());
-			System.out.println("Time from token in Millis "+ startDatetime.getMillis());
+			System.out.println("Current time in Millis" + currentTime.getMillis());
+			System.out.println("Time from token in Millis " + startDatetime.getMillis());
 			System.out.println(difference);
 			String currentStatus = employee.getStatus();
-			
+
 			if (difference > 300000) {
 				switch (currentStatus) {
 				case StringValues.EMPLOYEE_DESTROYED:
@@ -125,12 +114,13 @@ public class ProcessVerificationServlet extends HttpServlet {
 				case StringValues.EMPLOYEE_PENDING_VERIFICATION:
 					employee.setStatus(verifiedStatus);
 					employeedao.updateEmployee(employee);
-					
-					session.setAttribute("success","Your email has been verified. You may login now. Email:" + eDecrypt);
+
+					session.setAttribute("success",
+							"Your email has been verified. You may login now. Email:" + eDecrypt);
 					response.sendRedirect("/eureka_webservice/pages/login.jsp");
 				}
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("error", e.getMessage());
