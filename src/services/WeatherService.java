@@ -8,24 +8,25 @@ import org.json.JSONException;
 
 public class WeatherService {
 	private Weather weather;
-	
-	public WeatherService() throws JSONException {
-		OpenWeatherMap openWeatherMap = new OpenWeatherMap("78577dc02b9f967590f41cc1ce43a795");
 
-		CurrentWeather currentWeather = openWeatherMap.currentWeatherByCityCode(1880252);
-		String cityName = currentWeather.getCityName();
-		String rawResponse = currentWeather.getRawResponse();
-		weather = currentWeather.getWeatherInstance(0);
-		currentWeather.getWeatherInstance(0).getWeatherCode();
+	public WeatherService() {
+		OpenWeatherMap openWeatherMap = new OpenWeatherMap("78577dc02b9f967590f41cc1ce43a795");
+		CurrentWeather currentWeather;
+		try {
+			currentWeather = openWeatherMap.currentWeatherByCityCode(1880252);
+			String cityName = currentWeather.getCityName();
+			String rawResponse = currentWeather.getRawResponse();
+			weather = currentWeather.getWeatherInstance(0);
+			currentWeather.getWeatherInstance(0).getWeatherCode();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public Weather getWeather() {
 		return weather;
 	}
 
-	
-	
-	
-	
-	
 }
