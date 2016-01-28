@@ -29,11 +29,11 @@ public class Modifier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int modifierId;
-	private String name, status;
-	private double price;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "modifierSectionId")
 	private ModifierSection modifierSection;
+	private String name, status;
+	private double price;
 
 	/**
 	 * Creates a default constructor for Modifier
@@ -124,6 +124,10 @@ public class Modifier {
 		return modifierId;
 	}
 
+	public ModifierSection getModifierSection() {
+		return modifierSection;
+	}
+
 	/**
 	 * Retrieves the name of the Modifier
 	 * 
@@ -182,6 +186,11 @@ public class Modifier {
 		this.modifierId = modifierId;
 	}
 
+	public void setModifierSection(ModifierSection modifierSection) {
+		this.modifierSection = modifierSection;
+	}
+
+
 	/**
 	 * Changes the name of the Modifier
 	 * 
@@ -198,15 +207,6 @@ public class Modifier {
 	 */
 	public void setPrice(double price) {
 		this.price = price;
-	}
-
-
-	public ModifierSection getModifierSection() {
-		return modifierSection;
-	}
-
-	public void setModifierSection(ModifierSection modifierSection) {
-		this.modifierSection = modifierSection;
 	}
 	
 

@@ -34,15 +34,15 @@ public class Food {
 	private String imageDirectory;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<Modifier> modifierList;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
+	private Set<ModifierSection> modifierSectionList;
 	private String name, status;
 	private double price;
+	private String publicId;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "stallId")
 	private Stall stall;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
-	private Set<ModifierSection> modifierSectionList;
 	private String weatherConditions;
-	private String publicId;
 
 	/**
 	 * Creates a default constructor for Food
@@ -139,6 +139,10 @@ public class Food {
 		return modifierList;
 	}
 
+	public Set<ModifierSection> getModifierSectionList() {
+		return modifierSectionList;
+	}
+
 	/**
 	 * Retrieves the name of this Food
 	 * 
@@ -165,6 +169,10 @@ public class Food {
 	public String getPriceString() {
 		DecimalFormat df = new DecimalFormat("0.00");
 		return df.format(getPrice());
+	}
+
+	public String getPublicId() {
+		return publicId;
 	}
 
 	/**
@@ -234,6 +242,10 @@ public class Food {
 		this.modifierList = modifierList;
 	}
 
+	public void setModifierSectionList(Set<ModifierSection> modifierSectionList) {
+		this.modifierSectionList = modifierSectionList;
+	}
+
 	/**
 	 * Changes the current name of this Food
 	 * 
@@ -250,6 +262,11 @@ public class Food {
 	 */
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public void setPublicId(String publicId) {
+		this.publicId = publicId;
+
 	}
 
 	/**
@@ -272,23 +289,6 @@ public class Food {
 	 */
 	public void setWeatherConditions(String weatherConditions) {
 		this.weatherConditions = weatherConditions;
-	}
-
-	public Set<ModifierSection> getModifierSectionList() {
-		return modifierSectionList;
-	}
-
-	public void setModifierSectionList(Set<ModifierSection> modifierSectionList) {
-		this.modifierSectionList = modifierSectionList;
-	}
-
-	public void setPublicId(String publicId) {
-		this.publicId = publicId;
-
-	}
-
-	public String getPublicId() {
-		return publicId;
 	}
 
 }

@@ -13,13 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Food;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import model.Food;
-import model.Stall;
-import value.StringValues;
 import controller.FoodController;
 import dao.FoodDAO;
 
@@ -40,8 +39,7 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -49,13 +47,12 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		FoodController foodController = new FoodController();
 		String[] parameters = new String[8];
 		String[] output = new String[2];
@@ -112,18 +109,19 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 			Food food = foodController.getFood(foodId);
 			int stallId = food.getStall().getStallId();
 
-			boolean hasChanges = foodController.haveChangesInParameters(food, parameters[1], parameters[3], price,
-					parameters[5]);
+			boolean hasChanges = foodController.haveChangesInParameters(food, parameters[1],
+					parameters[3], price, parameters[5]);
 			if (hasChanges) {
 				foodDAO.deleteFood(food);
 				if (image.length == 0) {
-					Food newFood = new Food(parameters[1], parameters[3], price, food.getImageDirectory(),
-							food.getPublicId(), food.getStall());
+					Food newFood = new Food(parameters[1], parameters[3], price,
+							food.getImageDirectory(), food.getPublicId(), food.getStall());
 					foodController.saveFood(newFood);
 				} else {
 					output = foodController.replaceImage(food.getPublicId(), image);
 
-					Food newFood = new Food(parameters[1], parameters[3], price, output[0], output[1], food.getStall());
+					Food newFood = new Food(parameters[1], parameters[3], price, output[0],
+							output[1], food.getStall());
 					newFood.setWeatherConditions(parameters[5]);
 					foodController.saveFood(newFood);
 				}

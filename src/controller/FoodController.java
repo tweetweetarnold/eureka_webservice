@@ -21,14 +21,18 @@ import dao.FoodDAO;
  * 
  */
 public class FoodController {
-	FoodDAO foodDAO = new FoodDAO();
 	CloudinaryUpload cloudinaryUpload = new CloudinaryUpload();
+	FoodDAO foodDAO = new FoodDAO();
 
 	/**
 	 * Creates a default constructor for FoodController
 	 */
 	public FoodController() {
 
+	}
+
+	public boolean deleteImage(String publicId) throws IOException {
+		return cloudinaryUpload.deleteImage(publicId);
 	}
 
 	/**
@@ -40,7 +44,7 @@ public class FoodController {
 	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
 		return foodDAO.getAllFoodsUnderStall(stall);
 	}
-
+	
 	/**
 	 * Retrieve the Food object based on the specified ID
 	 * 
@@ -70,7 +74,7 @@ public class FoodController {
 
 		return choices.get(pick);
 	}
-	
+
 	/**
 	 * Get food recommendation for a given weather condition and order window
 	 * 
@@ -118,38 +122,6 @@ public class FoodController {
 	public String getFoodImageDirectory(int id) {
 		return foodDAO.getFood(id).getImageDirectory();
 	}
-
-	/**
-	 * Adds a new Food object to the Database
-	 * 
-	 * @param f The Food object to be added in
-	 */
-	public void saveFood(Food f) {
-		foodDAO.saveFood(f);
-	}
-	
-	/**
-	 * Updates the designated Food object in the Database
-	 * 
-	 * @param f The Food object to be updated
-	 */
-	public void updateFood(Food f) {
-		foodDAO.updateFood(f);
-	}
-	
-	public String[] imageUpload(byte[] file) throws IOException {
-		return cloudinaryUpload.imageUpload(file);
-		
-	}
-	
-	public String[] replaceImage(String oldPublicId, byte[] file) throws IOException {
-		return cloudinaryUpload.replaceImage(oldPublicId, file);
-		
-	}
-	
-	public boolean deleteImage(String publicId) throws IOException {
-		return cloudinaryUpload.deleteImage(publicId);
-	}
 	
 	public boolean haveChangesInParameters(Food currentFood, String inputName, String inputDescription, double inputPrice, String inputWeatherConditions) {
 		boolean hasChanges = false;
@@ -181,6 +153,34 @@ public class FoodController {
 		return hasChanges;
 		
 		
+	}
+	
+	public String[] imageUpload(byte[] file) throws IOException {
+		return cloudinaryUpload.imageUpload(file);
+		
+	}
+	
+	public String[] replaceImage(String oldPublicId, byte[] file) throws IOException {
+		return cloudinaryUpload.replaceImage(oldPublicId, file);
+		
+	}
+	
+	/**
+	 * Adds a new Food object to the Database
+	 * 
+	 * @param f The Food object to be added in
+	 */
+	public void saveFood(Food f) {
+		foodDAO.saveFood(f);
+	}
+	
+	/**
+	 * Updates the designated Food object in the Database
+	 * 
+	 * @param f The Food object to be updated
+	 */
+	public void updateFood(Food f) {
+		foodDAO.updateFood(f);
 	}
 
 }

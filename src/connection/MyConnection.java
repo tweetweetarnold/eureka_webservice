@@ -54,46 +54,6 @@ public class MyConnection {
 		}
 	}
 
-	public static Session getSession() {
-		System.out.println("MyConnection getSession is called");
-		try {
-			Session session = sessionFactory.openSession();
-			System.out.println("Session is set: " + session);
-			return session;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public static Session startSession() {
-		System.out.println("MyConnection startSession is called");
-		try {
-			Session session = getSession();
-			System.out.println("Session is set: " + session);
-			session.beginTransaction();
-			System.out.println("Session transaction started");
-			return session;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public static boolean endSession(Session session) {
-		System.out.println("MyConnection endSession is called");
-		try {
-			session.getTransaction().commit();
-			System.out.println("Session is committed");
-			session.close();
-			System.out.println("Session is closed");
-			return true;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
 	public static void closeSessionFactory() {
 		try {
 			sessionFactory.getCurrentSession().close();
@@ -112,12 +72,18 @@ public class MyConnection {
 		session.close();
 	}
 
-	public static void update(Object o) {
-		System.out.println("MyConnection: update");
-		Session session = startSession();
-		session.update(o);
-		session.getTransaction().commit();
-		session.close();
+	public static boolean endSession(Session session) {
+		System.out.println("MyConnection endSession is called");
+		try {
+			session.getTransaction().commit();
+			System.out.println("Session is committed");
+			session.close();
+			System.out.println("Session is closed");
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public static Object get(Class objClass, int id) {
@@ -128,15 +94,40 @@ public class MyConnection {
 		return o;
 	}
 
-	public static void save(Object o) {
-		System.out.println("MyConnection: save");
+	// used for registration in registrationcontroller
+	public static Object getCompanyByCompanyCode(String companyCode) {
 		Session session = startSession();
-		session.save(o);
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(Company.class);
+		criteria.add(Restrictions.eq("companyCode", companyCode)).list();
+		list = (List<Object>) criteria.list();
+
 		session.getTransaction().commit();
 		session.close();
+		if (list.size() == 0) {
+			return null;
+		}
+		return list.get(0);
 	}
 
-	// ****** End of MyConnection methods ******
+	public static List<Object> getFoodForDatesAndUser(Date earlierDate, Date laterDate,
+			Employee tempEmployee) {
+		Session session = startSession();
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(FoodOrder.class);
+		Criterion thirdCondition = Restrictions.conjunction()
+				.add(Restrictions.between("createDate", earlierDate, laterDate))
+				.add(Restrictions.eq("employee", tempEmployee));
+		criteria.add(thirdCondition).list();
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		list = (List<Object>) criteria.list();
+
+		session.getTransaction().commit();
+		session.close();
+
+		return list;
+
+	}
 
 	public static List<Object> getFoodOrderBetween(Date earlier, Date later) {
 		Session session = startSession();
@@ -148,57 +139,6 @@ public class MyConnection {
 		list = (List<Object>) criteria.list();
 
 		// Criteria criteria = dc.getExecutableCriteria(session);
-
-		session.getTransaction().commit();
-		session.close();
-		return list;
-	}
-
-	// get objects with criteria
-	public static List<Object> queryWithCriteria(DetachedCriteria dc) {
-		System.out.println("MyConnection: getWithCriteria");
-		Session session = startSession();
-
-		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY);
-		List<Object> l = criteria.list();
-
-		endSession(session);
-		return l;
-	}
-
-	// same as retrieveAll but with limit
-	public static List<Object> retrieveAllRecordsWithLimit(DetachedCriteria dc, int max) {
-		System.out.println("MyConnection: retrieveAllRecordsWithLimit");
-		Session session = startSession();
-		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		List<Object> list = (List<Object>) criteria.list();
-		session.getTransaction().commit();
-		session.close();
-		return list;
-	}
-
-	// retrieve all records
-	public static List<Object> retrieveAll(DetachedCriteria dc) {
-		System.out.println("MyConnection: retrieveAll");
-		Session session = startSession();
-		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY);
-		List<Object> list = (List<Object>) criteria.list();
-		session.getTransaction().commit();
-		session.close();
-		return list;
-	}
-
-	public static List<Object> getFoodOrderList(Employee employee) {
-		Session session = startSession();
-		List<Object> list = new ArrayList<>();
-		Criteria criteria = session.createCriteria(FoodOrder.class).setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY);
-		String email = employee.getEmail();
-		criteria.add(Restrictions.eq("employee", employee)).list();
-		list = (List<Object>) criteria.list();
 
 		session.getTransaction().commit();
 		session.close();
@@ -221,39 +161,20 @@ public class MyConnection {
 		return list;
 	}
 
-	public static List<Object> getFoodForDatesAndUser(Date earlierDate, Date laterDate,
-			Employee tempEmployee) {
+	// ****** End of MyConnection methods ******
+
+	public static List<Object> getFoodOrderList(Employee employee) {
 		Session session = startSession();
 		List<Object> list = new ArrayList<>();
-		Criteria criteria = session.createCriteria(FoodOrder.class);
-		Criterion thirdCondition = Restrictions.conjunction()
-				.add(Restrictions.between("createDate", earlierDate, laterDate))
-				.add(Restrictions.eq("employee", tempEmployee));
-		criteria.add(thirdCondition).list();
-		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		Criteria criteria = session.createCriteria(FoodOrder.class).setResultTransformer(
+				Criteria.DISTINCT_ROOT_ENTITY);
+		String email = employee.getEmail();
+		criteria.add(Restrictions.eq("employee", employee)).list();
 		list = (List<Object>) criteria.list();
 
 		session.getTransaction().commit();
 		session.close();
-
 		return list;
-
-	}
-
-	// used for registration in registrationcontroller
-	public static Object getCompanyByCompanyCode(String companyCode) {
-		Session session = startSession();
-		List<Object> list = new ArrayList<>();
-		Criteria criteria = session.createCriteria(Company.class);
-		criteria.add(Restrictions.eq("companyCode", companyCode)).list();
-		list = (List<Object>) criteria.list();
-
-		session.getTransaction().commit();
-		session.close();
-		if (list.size() == 0) {
-			return null;
-		}
-		return list.get(0);
 	}
 
 	// getting list of users whose payment status is owed(the input parameter)
@@ -262,6 +183,37 @@ public class MyConnection {
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(Employee.class);
 		criteria.add(Restrictions.eq("status", status)).list();
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		list = (List<Object>) criteria.list();
+
+		session.getTransaction().commit();
+		session.close();
+
+		return list;
+	}
+
+	public static Session getSession() {
+		System.out.println("MyConnection getSession is called");
+		try {
+			Session session = sessionFactory.openSession();
+			System.out.println("Session is set: " + session);
+			return session;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static List<Object> getUsersToChasePayment(Company company) {
+		Session session = startSession();
+
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(Employee.class);
+		Criterion thirdCondition = Restrictions.conjunction()
+				.add(Restrictions.eq("company", company))
+				.add(Restrictions.eq("status", "Suspended"))
+				.add(Restrictions.ge("amountOwed", 0.01));
+		criteria.add(thirdCondition).list();
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = (List<Object>) criteria.list();
 
@@ -288,23 +240,71 @@ public class MyConnection {
 		return list;
 	}
 
-	public static List<Object> getUsersToChasePayment(Company company) {
+	// get objects with criteria
+	public static List<Object> queryWithCriteria(DetachedCriteria dc) {
+		System.out.println("MyConnection: getWithCriteria");
 		Session session = startSession();
 
-		List<Object> list = new ArrayList<>();
-		Criteria criteria = session.createCriteria(Employee.class);
-		Criterion thirdCondition = Restrictions.conjunction()
-				.add(Restrictions.eq("company", company))
-				.add(Restrictions.eq("status", "Suspended"))
-				.add(Restrictions.ge("amountOwed", 0.01));
-		criteria.add(thirdCondition).list();
-		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		list = (List<Object>) criteria.list();
+		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(
+				Criteria.DISTINCT_ROOT_ENTITY);
+		List<Object> l = criteria.list();
 
+		endSession(session);
+		return l;
+	}
+
+	// retrieve all records
+	public static List<Object> retrieveAll(DetachedCriteria dc) {
+		System.out.println("MyConnection: retrieveAll");
+		Session session = startSession();
+		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(
+				Criteria.DISTINCT_ROOT_ENTITY);
+		List<Object> list = (List<Object>) criteria.list();
 		session.getTransaction().commit();
 		session.close();
-
 		return list;
+	}
+
+	// same as retrieveAll but with limit
+	public static List<Object> retrieveAllRecordsWithLimit(DetachedCriteria dc, int max) {
+		System.out.println("MyConnection: retrieveAllRecordsWithLimit");
+		Session session = startSession();
+		Criteria criteria = dc.getExecutableCriteria(session).setMaxResults(max)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		List<Object> list = (List<Object>) criteria.list();
+		session.getTransaction().commit();
+		session.close();
+		return list;
+	}
+
+	public static void save(Object o) {
+		System.out.println("MyConnection: save");
+		Session session = startSession();
+		session.save(o);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	public static Session startSession() {
+		System.out.println("MyConnection startSession is called");
+		try {
+			Session session = getSession();
+			System.out.println("Session is set: " + session);
+			session.beginTransaction();
+			System.out.println("Session transaction started");
+			return session;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static void update(Object o) {
+		System.out.println("MyConnection: update");
+		Session session = startSession();
+		session.update(o);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 }

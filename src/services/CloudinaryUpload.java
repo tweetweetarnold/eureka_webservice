@@ -10,15 +10,12 @@ import com.cloudinary.utils.ObjectUtils;
 
 public class CloudinaryUpload {
 	
-	public Cloudinary setCloudinaryProperties() {
-		Cloudinary cloudinary = new Cloudinary();
-		Map config = new HashMap();
-		config.put("cloud_name", "dmeln4k8n");
-		config.put("api_key", "771316116364356");
-		config.put("api_secret", "1LE3_mVy04CSKFQnrXdVBwYLol0");
-		cloudinary = new Cloudinary(config);
-		
-		return cloudinary;
+	public boolean deleteImage(String publicId) throws IOException {
+		Cloudinary cloudinary = setCloudinaryProperties();
+
+		Map uploadResult = cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
+
+		return true;
 	}
 	
 	
@@ -43,14 +40,6 @@ public class CloudinaryUpload {
 		return output;
 	}
 	
-	public boolean deleteImage(String publicId) throws IOException {
-		Cloudinary cloudinary = setCloudinaryProperties();
-
-		Map uploadResult = cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
-
-		return true;
-	}
-	
 	public String[] replaceImage(String inputPublicId, byte[] file) throws IOException {
 //		Cloudinary cloudinary = setCloudinaryProperties();
 		String[] output = new String[2];
@@ -61,6 +50,17 @@ public class CloudinaryUpload {
 			output = imageUpload(file);
 		}
 		return output;
+	}
+	
+	public Cloudinary setCloudinaryProperties() {
+		Cloudinary cloudinary = new Cloudinary();
+		Map config = new HashMap();
+		config.put("cloud_name", "dmeln4k8n");
+		config.put("api_key", "771316116364356");
+		config.put("api_secret", "1LE3_mVy04CSKFQnrXdVBwYLol0");
+		cloudinary = new Cloudinary(config);
+		
+		return cloudinary;
 	}
 	
 

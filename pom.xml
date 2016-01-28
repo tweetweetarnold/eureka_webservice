@@ -36,7 +36,7 @@
 	</build>
 	<dependencyManagement>
 		<dependencies>
-			
+
 			<dependency>
 				<groupId>javax.persistence</groupId>
 				<artifactId>persistence-api</artifactId>
@@ -55,10 +55,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<dependencies>
-		<dependency>
-			<groupId>com.cloudinary</groupId>
-			<artifactId>cloudinary-http44</artifactId>
-		</dependency>
-	</dependencies>
 </project>

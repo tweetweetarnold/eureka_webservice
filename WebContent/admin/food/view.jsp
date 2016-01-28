@@ -111,7 +111,9 @@
 											<!--  <img src="/eureka_webservice/${food.imageDirectory}" /> -->
 										</td>
 										<td>
-											<c:forEach items="${food.modifierList}" var="modifier">- ${modifier.name}<br>
+											<c:forEach items="${food.modifierList}" var="modifier">- ${modifier.name}&nbsp;
+											<fmt:formatNumber value="${modifier.price}" var="modPrice" minFractionDigits="2" />
+											($${modPrice})<br>
 											</c:forEach>
 										</td>
 										<td>

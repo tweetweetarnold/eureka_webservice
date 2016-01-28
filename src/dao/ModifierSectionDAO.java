@@ -10,12 +10,12 @@ public class ModifierSectionDAO {
 
 	}
 
-	public void saveModifierSection(ModifierSection modifierSection) {
-		MyConnection.save(modifierSection);
-	}
-
 	public void saveModifier(Modifier modifier) {
 		MyConnection.save(modifier);
+	}
+
+	public void saveModifierSection(ModifierSection modifierSection) {
+		MyConnection.save(modifierSection);
 	}
 
 	public void updateFoodOrder(ModifierSection modifierSection) {

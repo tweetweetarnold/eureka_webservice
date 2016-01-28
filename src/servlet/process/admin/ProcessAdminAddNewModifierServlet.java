@@ -22,37 +22,34 @@ public class ProcessAdminAddNewModifierServlet extends HttpServlet {
 	 */
 	public ProcessAdminAddNewModifierServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
+		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		ModifierSectionController controller = new ModifierSectionController();
+
 		try {
 			String modifierSectionID = request.getParameter("modifierSectionID");
 			String modifierName = request.getParameter("modifierName");
 			String modifierDescription = request.getParameter("modifierDescription");
 			double modifierPrice = Double.parseDouble(request.getParameter("modifierPrice"));
 			String foodID = request.getParameter("foodID");
-			
-			controller.createAndAddModifier(modifierName, modifierDescription, modifierPrice, foodID, modifierSectionID);
-			
+
+			controller.createAndAddModifier(modifierName, modifierDescription, modifierPrice,
+					foodID, modifierSectionID);
+
 			session.setAttribute("success", "Modifier added successfully.");
 			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
 		} catch (Exception e) {

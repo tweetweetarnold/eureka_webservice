@@ -215,6 +215,10 @@ public class OrderWindowController {
 
 	}
 
+	public ArrayList<OrderWindow> getAllClosedWindows() {
+		return orderWindowDAO.getAllClosedWindows();
+	}
+
 	/**
 	 * Get all OrderWindows with status "Opened"
 	 * 
@@ -232,10 +236,6 @@ public class OrderWindowController {
 	 */
 	public ArrayList<OrderWindow> getAllOpenedWindowsForCompany(Company company) {
 		return orderWindowDAO.getAllOpenedWindowsForCompany(company);
-	}
-
-	public ArrayList<OrderWindow> getAllClosedWindows() {
-		return orderWindowDAO.getAllClosedWindows();
 	}
 
 	/**

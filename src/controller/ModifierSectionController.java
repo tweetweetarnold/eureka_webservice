@@ -37,6 +37,7 @@ public class ModifierSectionController {
 
 	public boolean createAndAddModifier(String modifierName, String modifierDescription,
 			double modifierPrice, String foodID, String modifierSectionID) {
+		
 		boolean modifierSectionExists = false;
 		ModifierSection modifierSectionToEdit = null;
 		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();

@@ -10,12 +10,23 @@ import sun.misc.BASE64Encoder;
 
 public class AESAlgorithm {
 	private static String algo = "AES";
-	private String secret = "agsjdjegqbentkdh";
+	private static String secret = "agsjdjegqbentkdh";
 	private byte[] keyValue = secret.getBytes();
 
-	public Key generateKey() throws Exception {
-		Key key = new SecretKeySpec(keyValue, algo);
-		return key;
+	public String decrypt(String encryptedPassword) {
+		String decryptedPassword = null;
+		try {
+			Key key = generateKey();
+			Cipher c = Cipher.getInstance(algo);
+			c.init(Cipher.DECRYPT_MODE, key);
+			byte[] decodedValue = new BASE64Decoder().decodeBuffer(encryptedPassword);
+			byte[] decVal = c.doFinal(decodedValue);
+			decryptedPassword = new String(decVal);
+		} catch (Exception e) {
+			System.out.println("Error occurred at AES Encryption: " + e.getMessage());
+			e.printStackTrace();
+		}
+		return decryptedPassword;
 	}
 
 	public String encrypt(String password) {
@@ -33,20 +44,9 @@ public class AESAlgorithm {
 		return encryptedValue;
 	}
 
-	public String decrypt(String encryptedPassword) {
-		String decryptedPassword = null;
-		try {
-			Key key = generateKey();
-			Cipher c = Cipher.getInstance(algo);
-			c.init(Cipher.DECRYPT_MODE, key);
-			byte[] decodedValue = new BASE64Decoder().decodeBuffer(encryptedPassword);
-			byte[] decVal = c.doFinal(decodedValue);
-			decryptedPassword = new String(decVal);
-		} catch (Exception e) {
-			System.out.println("Error occurred at AES Encryption: " + e.getMessage());
-			e.printStackTrace();
-		}
-		return decryptedPassword;
+	public Key generateKey() throws Exception {
+		Key key = new SecretKeySpec(keyValue, algo);
+		return key;
 	}
 
 }

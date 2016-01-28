@@ -31,10 +31,10 @@ public class Stall {
 	private Set<Food> foodList;
 	private String imageDirectory;
 	private String name;
-	private String status;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int stallId;
+	private String status;
 
 	/**
 	 * Creates a default constructor for Stall
@@ -127,6 +127,10 @@ public class Stall {
 		return stallId;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
 	/**
 	 * Changes the Canteen of this Stall
 	 * 
@@ -188,10 +192,6 @@ public class Stall {
 	 */
 	public void setStallId(int stallId) {
 		this.stallId = stallId;
-	}
-
-	public String getStatus() {
-		return status;
 	}
 
 	public void setStatus(String status) {

@@ -16,39 +16,39 @@ import controller.ModifierSectionController;
 @WebServlet("/ProcessAdminAddNewModifierSectionServlet")
 public class ProcessAdminAddNewModifierSectionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProcessAdminAddNewModifierSectionServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ProcessAdminAddNewModifierSectionServlet() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 		ModifierSectionController controller = new ModifierSectionController();
-		
+
 		try {
 			String categoryName = request.getParameter("categoryName");
 			String displayType = request.getParameter("displayType");
 			String foodID = request.getParameter("foodID");
-			
+
 			controller.addModifierSection(foodID, categoryName, displayType);
-			
+
 			session.setAttribute("success", "ModifierSection added successfully.");
 			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
 		} catch (Exception e) {
