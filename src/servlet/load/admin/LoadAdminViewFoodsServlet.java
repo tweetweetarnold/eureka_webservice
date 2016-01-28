@@ -51,7 +51,7 @@ public class LoadAdminViewFoodsServlet extends HttpServlet {
 		int stallId = Integer.parseInt(stallIdString);
 
 		Stall stall = stallController.getStall(stallId);
-		ArrayList<Food> list = foodController.getAllFoodsUnderStall(stall);
+		ArrayList<Food> list = foodController.getAllActiveFoodsUnderStall(stall);
 
 		session.setAttribute("stallId", stallId);
 		session.setAttribute("stallName", stall.getName());

@@ -7,6 +7,7 @@ import java.util.Set;
 
 import model.Food;
 import model.Modifier;
+import model.ModifierSection;
 import model.Stall;
 
 import org.hibernate.criterion.CriteriaSpecification;
@@ -77,6 +78,32 @@ public class FoodDAO {
 		}
 		return returnList;
 	}
+	
+	/**
+	 * Retrieves a list of Food in the Stall that are Active
+	 * 
+	 * @param stall The designated Stall
+	 * @return An ArrayList of Food objects that are in the designated Stall
+	 */
+	public ArrayList<Food> getAllActiveFoodsUnderStall(Stall stall) {
+		ArrayList<Food> returnList = new ArrayList<Food>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Food.class);
+		dc.add(Restrictions.eq("stall", stall));
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+		if (l.size() == 0) {
+			return null;
+		} else {
+			for (Object o : l) {
+				returnList.add((Food) o);
+			}
+			return returnList;
+		}
+	}
+	
 
 	/**
 	 * Retrieves the Food based on the provided ID
@@ -211,5 +238,17 @@ public class FoodDAO {
 	 */
 	public void updateFood(Food f) {
 		MyConnection.update(f);
+	}
+	
+	public void updateModifierListToFood(Set<Modifier> modifierList, Food newFood) {
+		Set<Modifier> newList = newFood.getModifierList();
+		for (Modifier m : modifierList) {
+			m.setFood(newFood);
+			newList.add(m);
+			ModifierSection modifierSection = m.getModifierSection();
+			modifierSection.setFood(newFood);
+			ModifierSectionDAO modifierDAO = new ModifierSectionDAO();
+			modifierDAO.updateFoodOrder(modifierSection);
+		}
 	}
 }

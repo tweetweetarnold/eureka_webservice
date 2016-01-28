@@ -116,6 +116,7 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 				if (image.length == 0) {
 					Food newFood = new Food(parameters[1], parameters[3], price,
 							food.getImageDirectory(), food.getPublicId(), food.getStall());
+					foodController.updateModifierListToFood(food.getModifierList(), newFood);
 					foodController.saveFood(newFood);
 				} else {
 					output = foodController.replaceImage(food.getPublicId(), image);

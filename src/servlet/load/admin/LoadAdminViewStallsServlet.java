@@ -51,7 +51,7 @@ public class LoadAdminViewStallsServlet extends HttpServlet {
 
 		Canteen canteen = canteenController.getCanteen(canteenId);
 
-		ArrayList<Stall> list = stallController.getAllStallsUnderCanteen(canteen);
+		ArrayList<Stall> list = stallController.getAllActiveStallsUnderCanteen(canteen);
 
 		session.setAttribute("canteenName", canteen.getName());
 		session.setAttribute("canteenId", canteenId);

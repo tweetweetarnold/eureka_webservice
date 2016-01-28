@@ -83,7 +83,7 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="/eureka_webservice/ProcessAdminEditStallServlet" id="submitForm">
+									<form role="form" action="/eureka_webservice/ProcessAdminEditStallServlet" method="POST" id="submitForm" enctype="multipart/form-data">
 
 										<input type="hidden" name="stallId" value="${stallId}">
 
@@ -99,11 +99,11 @@
 
 										<div class="form-group">
 											<label>Image Directory</label>
-											<input class="form-control" name="imageDirectory" value="${sessionScope.imageDirectory}">
+											<input type="file" name="file" style="width: 228px;"/>
 										</div>
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update
-											Food details</button>
+											Stall details</button>
 
 									</form>
 								</div>

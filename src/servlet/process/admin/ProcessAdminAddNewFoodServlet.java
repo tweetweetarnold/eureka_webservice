@@ -104,9 +104,15 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			double price = Double.parseDouble(parameters[4]);
 			int stallId = Integer.parseInt(parameters[0]);
 
-			output = foodController.imageUpload(image);
+			
 
 			Stall stall = stallController.getStall(stallId);
+			boolean foodExists = foodController.checkFoodExists(parameters[1], stall);
+			if (foodExists) {
+				throw new Exception(parameters[1] + " already exists in " + stall.getName());
+			}
+			
+			output = foodController.imageUpload(image);
 			Food food = new Food(parameters[1], parameters[3], price, output[0], output[1], stall);
 
 			food.setWeatherConditions(parameters[5]);

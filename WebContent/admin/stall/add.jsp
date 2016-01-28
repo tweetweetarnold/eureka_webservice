@@ -74,7 +74,7 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="/eureka_webservice/ProcessAdminAddNewStallServlet" id="submitForm">
+									<form role="form" action="/eureka_webservice/ProcessAdminAddNewStallServlet" method="POST" id="submitForm" enctype="multipart/form-data">
 
 										<input type="hidden" name="canteenId" value="${canteenId}">
 
@@ -90,7 +90,7 @@
 
 										<div class="form-group">
 											<label>Image Directory</label>
-											<input class="form-control" name="imageDirectory">
+											<input type="file" name="file" style="width: 228px;"required/>
 										</div>
 
 

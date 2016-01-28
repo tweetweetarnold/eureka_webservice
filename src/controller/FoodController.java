@@ -8,6 +8,7 @@ import java.util.Set;
 
 import model.Canteen;
 import model.Food;
+import model.Modifier;
 import model.OrderWindow;
 import model.Stall;
 import net.aksingh.owmjapis.AbstractWeather.Weather;
@@ -181,6 +182,26 @@ public class FoodController {
 	 */
 	public void updateFood(Food f) {
 		foodDAO.updateFood(f);
+	}
+	
+	public ArrayList<Food> getAllActiveFoodsUnderStall(Stall stall) {
+		return foodDAO.getAllActiveFoodsUnderStall(stall);
+	}
+	
+	public boolean checkFoodExists(String inputFoodName, Stall stall) {
+		ArrayList<Food> foodList = getAllActiveFoodsUnderStall(stall);
+		if (foodList != null) {
+			for(Food f : foodList) {
+				if (inputFoodName.equals(f.getName())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public void updateModifierListToFood(Set<Modifier> modifierList, Food newFood) {
+		foodDAO.updateModifierListToFood(modifierList, newFood);
 	}
 
 }

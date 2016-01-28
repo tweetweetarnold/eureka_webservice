@@ -18,10 +18,10 @@ import javax.persistence.Table;
 public class ModifierSection {
 	private String categoryName;
 	private String displayType;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "foodId")
 	private Food food;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "modifierSection")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "modifierSection")
 	private Set<Modifier> modifierList;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

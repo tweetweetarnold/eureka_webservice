@@ -39,7 +39,7 @@ public class Food {
 	private String name, status;
 	private double price;
 	private String publicId;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "stallId")
 	private Stall stall;
 	private String weatherConditions;
