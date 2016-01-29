@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -240,15 +242,40 @@ public class FoodDAO {
 		MyConnection.update(f);
 	}
 	
-	public void updateModifierListToFood(Set<Modifier> modifierList, Food newFood) {
+	public void updateModifierListToFood(Food newFood, Set<ModifierSection> modifierSectionList) {
 		Set<Modifier> newList = newFood.getModifierList();
-		for (Modifier m : modifierList) {
-			m.setFood(newFood);
-			newList.add(m);
-			ModifierSection modifierSection = m.getModifierSection();
-			modifierSection.setFood(newFood);
-			ModifierSectionDAO modifierDAO = new ModifierSectionDAO();
-			modifierDAO.updateFoodOrder(modifierSection);
+		Set<ModifierSection> newModifierSectionList = new HashSet<ModifierSection>();
+		
+		newFood.setModifierList(newList);
+		for(ModifierSection modSection : modifierSectionList){
+			ModifierSection newModifierSection = new ModifierSection();
+			Set<Modifier> oldModifierList= modSection.getModifierList();
+			Set<Modifier> newModifierList = new HashSet<Modifier>();
+			
+			for(Modifier m :oldModifierList){
+				Modifier newM = new Modifier();
+				newM.setCreateDate(new Date());
+				newM.setDescription(m.getDescription());
+				newM.setName(m.getName());
+				newM.setPrice(m.getPrice());
+				newM.setStatus(m.getStatus());
+				newM.setFood(newFood);
+				newM.setModifierSection(newModifierSection);
+				newList.add(newM);
+				newModifierList.add(newM);
+//				MyConnection.save(newM);
+			}
+			newModifierSection.setCategoryName(modSection.getCategoryName());
+			newModifierSection.setDisplayType(modSection.getDisplayType());
+			newModifierSection.setModifierList(newModifierList);
+			newModifierSection.setFood(newFood);
+			newModifierSectionList.add(newModifierSection);
+			ModifierSectionDAO dao = new ModifierSectionDAO();
+			dao.saveModifierSection(newModifierSection);
+//			MyConnection.save(newModifierSection);
 		}
+		newFood.setModifierSectionList(newModifierSectionList);
+		newFood.setModifierList(newList);
+//		saveFood(newFood);
 	}
 }

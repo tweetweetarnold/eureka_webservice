@@ -9,6 +9,7 @@ import java.util.Set;
 import model.Canteen;
 import model.Food;
 import model.Modifier;
+import model.ModifierSection;
 import model.OrderWindow;
 import model.Stall;
 import net.aksingh.owmjapis.AbstractWeather.Weather;
@@ -200,8 +201,8 @@ public class FoodController {
 		return false;
 	}
 	
-	public void updateModifierListToFood(Set<Modifier> modifierList, Food newFood) {
-		foodDAO.updateModifierListToFood(modifierList, newFood);
+	public void updateModifierListToFood(Food newFood, Set<ModifierSection> modifierSectionList) {
+		foodDAO.updateModifierListToFood(newFood, modifierSectionList);
 	}
 
 }

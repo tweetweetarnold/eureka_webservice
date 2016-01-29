@@ -2,6 +2,7 @@ package servlet.process.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import model.Canteen;
+import model.Food;
 import model.Stall;
 import controller.CanteenController;
 import controller.StallController;
@@ -107,7 +109,7 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 			}
 			output = stallController.imageUpload(image);
 
-			Stall s = new Stall(parameters[1], contactNo, c, null, output[0], output[1]);
+			Stall s = new Stall(parameters[1], contactNo, c, new HashSet<Food>(), output[0], output[1]);
 
 			System.out.println("stallname: " + s.getName());
 			System.out.println("saving food...");

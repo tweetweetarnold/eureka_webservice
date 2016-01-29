@@ -23,7 +23,7 @@ import value.StringValues;
 public class Modifier {
 	private Date createDate;
 	private String description;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "foodId")
 	private Food food;
 	@Id
