@@ -166,7 +166,7 @@
 
 			<c:forEach items="${sessionScope.canteenList}" var="canteen">
 				<c:forEach items="${canteen.stallList}" var="stall">
-					<c:if test="${stall.status == 'Ok'}">
+					<c:if test="${stall.status == 'Active'}">
 						<div class="col-md-4 col-sm-6">
 							<a href="/eureka_webservice/LoadStallFoodServlet?stallId=${stall.stallId}">
 								<b style="font-size: large;">${stall.name}</b>
