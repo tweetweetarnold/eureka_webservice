@@ -1,6 +1,7 @@
 package controller;
 
 import model.Employee;
+import value.StringValues;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,5 +99,10 @@ public class EmployeeController {
 			employeeDAO.updateEmployee(employee);
 		}
 			
+	}
+	public void suspendUser(String email){
+		Employee employeeToSuspend = getEmployeeByEmail(email);
+		employeeToSuspend.setStatus(StringValues.EMPLOYEE_SUSPENDED);
+		updateEmployee(employeeToSuspend);
 	}
 }
