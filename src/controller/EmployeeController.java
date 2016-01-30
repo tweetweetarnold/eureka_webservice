@@ -1,6 +1,10 @@
 package controller;
 
 import model.Employee;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import dao.EmployeeDAO;
 
 /**
@@ -86,5 +90,13 @@ public class EmployeeController {
 	 */
 	public void updateEmployee(Employee e) {
 		employeeDAO.updateEmployee(e);
+	}
+	
+	public void updateAmountOwed(ArrayList<Employee> arrayList, double amount){
+		for(Employee employee :arrayList){
+			employee.setAmountOwed(amount);
+			employeeDAO.updateEmployee(employee);
+		}
+			
 	}
 }

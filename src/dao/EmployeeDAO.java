@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Company;
 import model.Employee;
 
 import org.hibernate.criterion.CriteriaSpecification;
@@ -54,7 +55,26 @@ public class EmployeeDAO {
 		}
 		return returnList;
 	}
+	
+	public ArrayList<Employee> getAllEmployeesFromCompany(int companyID) {
+		ArrayList<Employee> returnList = null;
+		CompanyDAO companyDAO = new CompanyDAO();
+		Company company = companyDAO.getCompany(companyID);
+		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
+		dc.add(Restrictions.eq("company", company));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		returnList = new ArrayList<Employee>();
+
+		for (Object o : l) {
+			returnList.add((Employee) o);
+		}
+		return returnList;
+	}
+	
+	
 	/**
 	 * Retrieves all users with outstanding payment that are above the specified amount(inclusive)
 	 * 
