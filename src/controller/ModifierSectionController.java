@@ -35,7 +35,7 @@ public class ModifierSectionController {
 		modifierSectionDAO.saveModifierSection(newModifierSection);
 	}
 
-	public boolean createAndAddModifier(String modifierName, String modifierDescription,
+	public boolean createAndAddModifier(String modifierName,String chineseName, String modifierDescription,
 			double modifierPrice, String foodID, String modifierSectionID) {
 		
 		boolean modifierSectionExists = false;
@@ -43,7 +43,7 @@ public class ModifierSectionController {
 		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 		FoodDAO foodDAO = new FoodDAO();
 		Food food = foodDAO.getFood(Integer.parseInt(foodID));
-		Modifier newModifier = new Modifier(modifierName, modifierDescription, modifierPrice, food);
+		Modifier newModifier = new Modifier(modifierName, chineseName, modifierDescription, modifierPrice, food);
 
 		// update Modifierlist in food
 		Set<Modifier> foodModifierList = food.getModifierList();

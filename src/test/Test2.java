@@ -89,7 +89,7 @@ public class Test2 {
 		Set<Food> foodListB9 = new HashSet<>();
 		Set<Food> foodListB10 = new HashSet<>();
 
-		Stall stall1 = new Stall("Sliced Fish Bee Hoon Stall", 91379160, null, null,
+	/*	Stall stall1 = new Stall("Sliced Fish Bee Hoon Stall", 91379160, null, null,
 				"resources/img/stall/img-slicedfishbeehoonstall.jpg", null);
 		Food food1 = new Food("Fish Slice Bee Hoon", "", 3.70,
 				"resources/img/food/img-fishslicebeehoon.jpg", null, stall1);
@@ -795,7 +795,7 @@ public class Test2 {
 		session.close();
 
 		System.out.println("Test.java completed");
-
+*/
 	}
 
 	// public static String loadImageDirectory(String relativePath) {

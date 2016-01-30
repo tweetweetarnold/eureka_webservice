@@ -36,7 +36,7 @@ public class Food {
 	private Set<Modifier> modifierList;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<ModifierSection> modifierSectionList;
-	private String name, status;
+	private String name, chineseName, status;
 	private double price;
 	private String publicId;
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -60,10 +60,11 @@ public class Food {
 	 * @param imageDirectory The directory where the Food image is being stored
 	 * @param stall The Stall that sells this Food
 	 */
-	public Food(String name, String description, double price, String imageDirectory,
+	public Food(String name, String chineseName, String description, double price, String imageDirectory,
 			String publicId, Stall stall) {
 		super();
 		this.name = name;
+		this.chineseName = chineseName;
 		this.description = description;
 		this.price = price;
 		this.stall = stall;
@@ -196,6 +197,10 @@ public class Food {
 	public String getWeatherConditions() {
 		return weatherConditions;
 	}
+	
+	public String getChineseName() {
+		return chineseName;
+	}
 
 	/**
 	 * Changes the current date of this Food object being created
@@ -289,6 +294,10 @@ public class Food {
 	 */
 	public void setWeatherConditions(String weatherConditions) {
 		this.weatherConditions = weatherConditions;
+	}
+	
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
 	}
 
 }

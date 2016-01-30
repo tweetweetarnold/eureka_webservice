@@ -45,7 +45,7 @@ public class FoodDisplayPayment {
 
 			FoodOrderItem tempfoodOrderItem = foodOrderItem;
 			Food oldFood = tempfoodOrderItem.getFood();
-			Food newFood = new Food(oldFood.getName(), oldFood.getDescription(),
+			Food newFood = new Food(oldFood.getName(), oldFood.getChineseName(), oldFood.getDescription(),
 					oldFood.getPrice(), oldFood.getImageDirectory(), oldFood.getPublicId(), oldFood.getStall());
 			newFood.setModifierList(oldFood.getModifierList());
 			double foodPrice = tempfoodOrderItem.getPrice();

@@ -43,11 +43,13 @@ public class ProcessAdminAddNewModifierServlet extends HttpServlet {
 		try {
 			String modifierSectionID = request.getParameter("modifierSectionID");
 			String modifierName = request.getParameter("modifierName");
+			
 			String modifierDescription = request.getParameter("modifierDescription");
 			double modifierPrice = Double.parseDouble(request.getParameter("modifierPrice"));
-			String foodID = request.getParameter("foodID");
+			String foodID = (String) request.getParameter("foodID");
+			String modifierChineseName = request.getParameter("modifierChineseName");
 
-			controller.createAndAddModifier(modifierName, modifierDescription, modifierPrice,
+			controller.createAndAddModifier(modifierName, modifierChineseName, modifierDescription, modifierPrice,
 					foodID, modifierSectionID);
 
 			session.setAttribute("success", "Modifier added successfully.");
