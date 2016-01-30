@@ -143,7 +143,8 @@
 												aria-labelledby="myModalLabel"
 											>
 												<div class="modal-dialog" role="document">
-													<form method="post" action="">
+													<form method="post" action="/eureka_webservice/ProcessAdminDeleteFoodServlet">
+													<input type="hidden" name="foodId" value="${food.foodId}">
 														<div class="modal-content">
 															<div class="modal-header">
 																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
