@@ -32,7 +32,7 @@ public class Modifier {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "modifierSectionId")
 	private ModifierSection modifierSection;
-	private String name, status;
+	private String name, chineseName, status;
 	private double price;
 
 	/**
@@ -49,9 +49,10 @@ public class Modifier {
 	 * @param price The price of the Modifier
 	 * @param food The Food that contains this Modifier
 	 */
-	public Modifier(String name, String description, double price, Food food) {
+	public Modifier(String name, String chineseName, String description, double price, Food food) {
 		super();
 		this.name = name;
+		this.chineseName = chineseName;
 		this.description = description;
 		this.price = price;
 		this.food = food;
@@ -59,9 +60,10 @@ public class Modifier {
 		this.status = StringValues.ACTIVE;
 	}
 	
-	public Modifier(String name, String description, double price, Food food, ModifierSection modifierSection) {
+	public Modifier(String name, String chineseName, String description, double price, Food food, ModifierSection modifierSection) {
 		super();
 		this.name = name;
+		this.chineseName = chineseName;
 		this.description = description;
 		this.price = price;
 		this.food = food;
@@ -149,7 +151,10 @@ public class Modifier {
 	public String getStatus() {
 		return status;
 	}
-
+	
+	public String getChineseName() {
+		return chineseName;
+	}
 	/**
 	 * Changes the current date of this Modifier object created
 	 * 
@@ -212,6 +217,10 @@ public class Modifier {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
 	}
 
 

@@ -188,7 +188,7 @@ public class FoodDAO {
 			System.out.println(stallName);
 			Stall stall = canteenDAO.getStallFromCanteen(canteenName, stallName);
 			System.out.println(stall);
-			Food newFood = new Food(foodName, description, priceValue, null, null, stall);
+			Food newFood = new Food(foodName, null, description, priceValue, null, null, stall);
 
 			// adds Food to the Stall's foodList
 			stallDAO.addFoodToStall(stall, newFood);
@@ -218,7 +218,7 @@ public class FoodDAO {
 			String canteenName = row[5].trim();
 
 			Food food = getFoodFromStallAndCanteen(foodName, stallName, canteenName);
-			Modifier newModifier = new Modifier(modifierName, description, priceValue, food);
+			Modifier newModifier = new Modifier(modifierName, "", description, priceValue, food);
 
 			addModifierToFood(newModifier, food);
 		}

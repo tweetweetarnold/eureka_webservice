@@ -37,7 +37,8 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -45,11 +46,15 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		response.setCharacterEncoding("UTF-8");
+
+		request.setCharacterEncoding("UTF-8");
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		FoodController foodController = new FoodController();
 		StallController stallController = new StallController();
@@ -89,8 +94,8 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 					// response.sendRedirect("result.jsp");
 				} else {
 					if (item.getFieldName().equals("chineseName")) {
-						// String inputValues = item.getString();
-						// parameters[index] = inputValues;
+						String inputValues = item.getString("UTF-8");
+						parameters[index] = inputValues;
 					} else {
 						String inputValues = item.getString();
 						parameters[index] = inputValues;
@@ -104,16 +109,14 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			double price = Double.parseDouble(parameters[4]);
 			int stallId = Integer.parseInt(parameters[0]);
 
-			
-
 			Stall stall = stallController.getStall(stallId);
 			boolean foodExists = foodController.checkFoodExists(parameters[1], stall);
 			if (foodExists) {
 				throw new Exception(parameters[1] + " already exists in " + stall.getName());
 			}
-			
+
 			output = foodController.imageUpload(image);
-			Food food = new Food(parameters[1], parameters[3], price, output[0], output[1], stall);
+			Food food = new Food(parameters[1], parameters[2], parameters[3], price, output[0], output[1], stall);
 
 			food.setWeatherConditions(parameters[5]);
 

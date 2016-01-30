@@ -49,6 +49,7 @@ public class LoadAdminEditFoodServlet extends HttpServlet {
 
 		session.setAttribute("foodId", foodId);
 		session.setAttribute("name", food.getName());
+		session.setAttribute("chineseName", food.getChineseName());
 		session.setAttribute("description", food.getDescription());
 		session.setAttribute("price", food.getPrice());
 		session.setAttribute("imageDirectory", food.getImageDirectory());

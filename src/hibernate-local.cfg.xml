@@ -8,7 +8,7 @@
 	<session-factory name="">
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost/eureka?useTimezone=true&amp;serverTimezone=Asia/Singapore</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/eureka?useTimezone=true&amp;serverTimezone=Asia/Singapore&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password" />
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
