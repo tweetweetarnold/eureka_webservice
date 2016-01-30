@@ -98,6 +98,7 @@
 								<tr>
 									<th>ID</th>
 									<th>Food</th>
+									<th>Chinese Name</th>
 									<th>Price</th>
 									<th>Create Date</th>
 									<th>Image</th>
@@ -111,6 +112,7 @@
 									<tr>
 										<td>${food.foodId}</td>
 										<td>${food.name}</td>
+										<td>${food.chineseName}</td>
 										<td>
 											$
 											<fmt:formatNumber value="${food.price}" var="amt" minFractionDigits="2" />${amt}

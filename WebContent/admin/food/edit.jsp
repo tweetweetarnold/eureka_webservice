@@ -97,7 +97,7 @@
 
 										<div class="form-group">
 											<label>Food name (Chinese)</label>
-											<input class="form-control" name="chineseName">
+											<input class="form-control" name="chineseName" value="${sessionScope.chineseName}" required>
 										</div>
 
 										<div class="form-group">

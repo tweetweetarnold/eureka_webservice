@@ -139,10 +139,11 @@ public class FoodController {
 		return foodDAO.getFood(id).getImageDirectory();
 	}
 
-	public boolean haveChangesInParameters(Food currentFood, String inputName,
+	public boolean haveChangesInParameters(Food currentFood, String inputName, String inputChineseName,
 			String inputDescription, double inputPrice, String inputWeatherConditions) {
 		boolean hasChanges = false;
 		String currentName = currentFood.getName();
+		String currentChineseName = currentFood.getChineseName();
 		String currentDesc = currentFood.getDescription();
 		double currentPrice = currentFood.getPrice();
 		String currentWeather = currentFood.getWeatherConditions();
@@ -151,7 +152,7 @@ public class FoodController {
 			hasChanges = true;
 		}
 
-		if (!currentDesc.equals(inputDescription)) {
+		if (!currentChineseName.equals(inputChineseName)) {
 			hasChanges = true;
 		}
 
