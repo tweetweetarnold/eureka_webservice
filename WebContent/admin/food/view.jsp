@@ -98,7 +98,7 @@
 								<tr>
 									<th>ID</th>
 									<th>Food</th>
-									<th>Chinese Name</th>
+								<!--  <th>Chinese Name</th>-->
 									<th>Price</th>
 									<th>Create Date</th>
 									<th>Image</th>
@@ -111,8 +111,9 @@
 								<c:forEach items="${sessionScope.foodList}" var="food" varStatus="loop">
 									<tr>
 										<td>${food.foodId}</td>
-										<td>${food.name}</td>
-										<td>${food.chineseName}</td>
+										<td>${food.name}<br>
+											${food.chineseName}
+										</td>
 										<td>
 											$
 											<fmt:formatNumber value="${food.price}" var="amt" minFractionDigits="2" />${amt}
@@ -121,11 +122,11 @@
 											<fmt:formatDate type="both" value="${food.createDate}" />
 										</td>
 										<td>
-											<img src="${food.imageDirectory}" />
+											<img src="${food.imageDirectory}" style="width:263px;height:169px;"/>
 											<!--  <img src="/eureka_webservice/${food.imageDirectory}" /> -->
 										</td>
 										<td>
-											<c:forEach items="${food.modifierList}" var="modifier">- ${modifier.name}&nbsp;
+											<c:forEach items="${food.modifierList}" var="modifier">- ${modifier.name}&nbsp;${modifier.chineseName}
 											<fmt:formatNumber value="${modifier.price}" var="modPrice" minFractionDigits="2" />
 											($${modPrice})<br>
 											</c:forEach>
