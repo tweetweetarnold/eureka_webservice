@@ -56,12 +56,12 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">Canteen Management</h1>
-					
+
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
 						<li class="active">Canteens</li>
 					</ol>
-					
+
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -122,18 +122,20 @@
 
 															<div class="modal-body">
 																<p>
-																	<b>WARNING: </b>
-																	You are deleting a canteen.
-																	<br>
-																	<br>
-																	Are you sure you want to continue?
+																	<!-- 																	<b>WARNING: </b> -->
+																	<!-- 																	You are deleting a canteen. -->
+																	<!-- 																	<br> -->
+																	<!-- 																	<br> -->
+																	<!-- 																	Are you sure you want to continue? -->
+																	<b>This feature is still under development. Unable to delete Canteen.</b>
 																</p>
 															</div>
 															<!-- / modal body -->
 
 															<div class="modal-footer">
-																<button type="button" class="btn btn-default" data-dismiss="modal">No, keep my canteen</button>
-																<button type="submit" class="btn btn-danger">Yes, delete the canteen</button>
+																<button type="button" class="btn btn-default" data-dismiss="modal">Return</button>
+																<!-- <button type="button" class="btn btn-default" data-dismiss="modal">No, keep my canteen</button> -->
+																<!-- <button type="submit" class="btn btn-danger">Yes, delete the canteen</button> -->
 															</div>
 															<!-- / modal footer -->
 														</div>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Food;
 import controller.FoodController;
 
 /**
@@ -42,11 +43,22 @@ public class ProcessAdminDeleteFoodServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		FoodController foodController = new FoodController();
 
-		request.getParameter("foodId");
+		String foodIdString = request.getParameter("foodId");
+		try {
+			int foodId = Integer.parseInt(foodIdString);
+			Food food = foodController.getFood(foodId);
 
-		// foodController.deleteFood() //TODO: delete food here
+			foodController.deleteFood(food);
 
-		response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=");
+			int stallId = (int) session.getAttribute("stallId");
+
+			session.setAttribute("success", food.getName() + " has been deleted.");
+
+			response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=" + stallId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
-
 }

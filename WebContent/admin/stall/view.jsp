@@ -134,7 +134,8 @@
 												aria-labelledby="myModalLabel"
 											>
 												<div class="modal-dialog" role="document">
-													<form action="">
+													<form action="/eureka_webservice/ProcessAdminDeleteStallServlet" method="post">
+														<input type="hidden" name="stallId" value="${stall.stallId}">
 														<div class="modal-content">
 															<div class="modal-header">
 																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
