@@ -28,7 +28,6 @@ public class ProcessAdminGetEmployeeServlet extends HttpServlet {
 	 */
 	public ProcessAdminGetEmployeeServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -36,7 +35,6 @@ public class ProcessAdminGetEmployeeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -45,7 +43,6 @@ public class ProcessAdminGetEmployeeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String email = request.getParameter("email");
 

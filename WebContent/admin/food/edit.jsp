@@ -43,7 +43,7 @@
 </head>
 
 <body>
-<fmt:setTimeZone value="GMT+8" />
+	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 
@@ -54,6 +54,20 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">Edit food</h1>
+
+					<!-- breadcrumb -->
+					<ol class="breadcrumb">
+						<li>
+							<a href="/eureka_webservice/LoadViewCanteenServlet">Canteens</a>
+						</li>
+						<li>
+							<a href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${sessionScope.canteenId}">Stalls</a>
+						</li>
+						<li>
+							<a href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId=${sessionScope.stallId}">Foods</a>
+						</li>
+					</ol>
+
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -70,7 +84,9 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="/eureka_webservice/ProcessAdminEditFoodServlet" method="POST" id="submitForm" enctype="multipart/form-data">
+									<form role="form" action="/eureka_webservice/ProcessAdminEditFoodServlet" method="POST" id="submitForm"
+										enctype="multipart/form-data"
+									>
 
 										<input type="hidden" name="foodId" value="${sessionScope.foodId}">
 
@@ -98,10 +114,10 @@
 											<label>Weather Conditions</label>
 											<input class="form-control" name="weatherConditions" value="${sessionScope.weatherConditions}">
 										</div>
-										
+
 										<div class="form-group">
 											<label>Replace Image</label>
-											<input type="file" name="file" style="width: 228px;"/>
+											<input type="file" name="file" style="width: 228px;" />
 										</div>
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update

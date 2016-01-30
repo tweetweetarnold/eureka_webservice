@@ -1,10 +1,8 @@
 package controller;
 
-import model.Employee;
-
 import java.util.ArrayList;
-import java.util.List;
 
+import model.Employee;
 import dao.EmployeeDAO;
 
 /**
@@ -71,6 +69,14 @@ public class EmployeeController {
 		employeeDAO.saveEmployee(e);
 	}
 
+	public void updateAmountOwed(ArrayList<Employee> arrayList, double amount){
+		for(Employee employee :arrayList){
+			employee.setAmountOwed(amount);
+			employeeDAO.updateEmployee(employee);
+		}
+			
+	}
+
 	/**
 	 * Updates the Employee's specified food delivery point
 	 * 
@@ -82,7 +88,7 @@ public class EmployeeController {
 		employee.setDeliveryPoint(buildingName);
 		employeeDAO.updateEmployee(employee);
 	}
-
+	
 	/**
 	 * Updates the designated Employee object in the Database
 	 * 
@@ -90,13 +96,5 @@ public class EmployeeController {
 	 */
 	public void updateEmployee(Employee e) {
 		employeeDAO.updateEmployee(e);
-	}
-	
-	public void updateAmountOwed(ArrayList<Employee> arrayList, double amount){
-		for(Employee employee :arrayList){
-			employee.setAmountOwed(amount);
-			employeeDAO.updateEmployee(employee);
-		}
-			
 	}
 }

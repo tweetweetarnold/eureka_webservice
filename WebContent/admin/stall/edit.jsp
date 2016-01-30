@@ -67,6 +67,17 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">Edit stall</h1>
+					
+					<!-- breadcrumb -->
+					<ol class="breadcrumb">
+						<li>
+							<a href="/eureka_webservice/LoadViewCanteenServlet">Canteens</a>
+						</li>
+						<li>
+							<a href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${sessionScope.canteenId}">Stalls</a>
+						</li>
+					</ol>
+					
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>

@@ -49,8 +49,18 @@
 
 		<div id="page-wrapper">
 			<div class="row">
+
 				<div class="col-lg-12">
 					<h1 class="page-header">${sessionScope.canteenName}:&nbsp;Stalls</h1>
+
+					<!-- breadcrumb -->
+					<ol class="breadcrumb">
+						<li>
+							<a href="/eureka_webservice/LoadViewCanteenServlet">Canteens</a>
+						</li>
+						<li class="active">Stalls</li>
+					</ol>
+
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -58,6 +68,8 @@
 
 			<div class="row">
 				<div class="col-lg-12">
+
+
 
 					<!-- Success message handling -->
 					<c:if test="${not empty sessionScope.success}">
@@ -85,6 +97,7 @@
 								<tr>
 									<th>ID</th>
 									<th>Stall</th>
+									<th>Contact No</th>
 									<th>Create Date</th>
 									<th>Image</th>
 									<th></th>
@@ -97,6 +110,7 @@
 									<tr>
 										<td>${stall.stallId}</td>
 										<td>${stall.name}</td>
+										<td>${stall.contactNo}</td>
 										<td>
 											<fmt:formatDate type="both" value="${stall.createDate}" />
 										</td>
