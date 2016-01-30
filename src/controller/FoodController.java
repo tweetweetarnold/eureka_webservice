@@ -202,5 +202,9 @@ public class FoodController {
 	public void updateModifierListToFood(Food newFood, Set<ModifierSection> modifierSectionList) {
 		foodDAO.updateModifierListToFood(newFood, modifierSectionList);
 	}
-
+	
+	public void deleteFood(Food food){
+		foodDAO.deleteFood(food);
+	}
+	
 }
