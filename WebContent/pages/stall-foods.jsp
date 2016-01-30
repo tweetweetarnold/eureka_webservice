@@ -113,7 +113,7 @@
 						</b>
 						<img class="img-responsive img-portfolio img-hover" src="${food.imageDirectory}"
 							onerror="this.src='http://placehold.it/700x450'" alt=""
-						>
+						style="width:263px;height:169px;">
 						<!--"http://placehold.it/700x450  -->
 					</a>
 

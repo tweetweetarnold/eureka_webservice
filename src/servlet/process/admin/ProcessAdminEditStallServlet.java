@@ -135,6 +135,8 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("error", e.getMessage());
+			response.sendRedirect("/eureka_webservice/admin/stall/edit.jsp");
 		}
 
 		// String stallIdString = request.getParameter("stallId");

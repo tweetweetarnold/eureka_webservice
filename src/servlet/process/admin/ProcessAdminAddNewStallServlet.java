@@ -72,7 +72,7 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 		upload.setSizeMax(1024 * 1024 * 1000);
 
 		int index = 0;
-
+		int canteenId = 0;
 		try {
 			// Parse the request
 			List<FileItem> items = upload.parseRequest(request);
@@ -99,7 +99,7 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 				index++;
 			}
 
-			int canteenId = Integer.parseInt(parameters[0]);
+			canteenId = Integer.parseInt(parameters[0]);
 			long contactNo = stallController.validatesContactNumber(parameters[2]);
 
 			Canteen c = canteenController.getCanteen(canteenId);
@@ -121,6 +121,9 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("error", e.getMessage());
+			
+			response.sendRedirect("/eureka_webservice/admin/stall/add.jsp?canteenId=" + canteenId);
 		}
 
 		// String name = request.getParameter("name");

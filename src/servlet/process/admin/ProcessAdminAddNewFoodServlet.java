@@ -71,6 +71,7 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 		// Create a new file upload handler and set max size
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(1024 * 1024 * 1000);
+		int stallId = 0;
 		int index = 0;
 		try {
 			// Parse the request
@@ -107,7 +108,7 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			}
 
 			double price = Double.parseDouble(parameters[4]);
-			int stallId = Integer.parseInt(parameters[0]);
+			stallId = Integer.parseInt(parameters[0]);
 
 			Stall stall = stallController.getStall(stallId);
 			boolean foodExists = foodController.checkFoodExists(parameters[1], stall);
@@ -130,6 +131,8 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("error", e.getMessage());
+			response.sendRedirect("/eureka_webservice/admin/food/add.jsp?stallId=" + stallId);
 		}
 
 		// String name = request.getParameter("name");

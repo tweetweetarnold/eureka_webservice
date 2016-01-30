@@ -192,6 +192,8 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("error", e.getMessage());
+			response.sendRedirect("/eureka_webservice/admin/food/edit.jsp");
 		}
 
 		// String foodIdString = request.getParameter("foodId");

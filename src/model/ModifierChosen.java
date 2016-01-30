@@ -29,7 +29,7 @@ public class ModifierChosen {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int modifierChosenId;
-	private String name;
+	private String name, chineseName;
 	private double price;
 
 	/**
@@ -46,6 +46,7 @@ public class ModifierChosen {
 	 */
 	public ModifierChosen(Modifier m, FoodOrderItem item) {
 		this.name = m.getName();
+		this.chineseName = m.getChineseName();
 		this.description = m.getDescription();
 		this.price = m.getPrice();
 		this.createDate = new Date();
@@ -120,6 +121,10 @@ public class ModifierChosen {
 	public double getPrice() {
 		return price;
 	}
+	
+	public String getChineseName() {
+		return chineseName;
+	}
 
 	/**
 	 * Changes the current date of this Modifier object created
@@ -173,6 +178,10 @@ public class ModifierChosen {
 	 */
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
 	}
 
 }

@@ -281,11 +281,13 @@
 																	<c:forEach items="${foodDisplayObj.foodOrderItemList}" var="item">
 																		<tr>
 																			<td>
-																				<fmt:message bundle="${lang}" key="${fn:replace(item.food.name, ' ', '_')}" />
+																				${item.food.chineseName}
+																				<!--<fmt:message bundle="${lang}" key="${fn:replace(item.food.name, ' ', '_')}" />-->
 																			</td>
 																			<td>
 																				<c:forEach items="${item.modifierChosenList}" var="modifierChosen">
-																					<fmt:message bundle="${lang}" key="${fn:replace(modifierChosen.name, ' ', '_')}" />
+																					${modifierChosen.chineseName}
+																					<!--<fmt:message bundle="${lang}" key="${fn:replace(modifierChosen.name, ' ', '_')}" />-->
 																					<br>
 																				</c:forEach>
 																			</td>
