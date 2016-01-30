@@ -51,11 +51,10 @@ public class LoadAdminAddNewWindowServlet extends HttpServlet {
 			ArrayList<Company> companyList = coCtrl.getAllCompany();
 			ArrayList<Canteen> canteenList = caCtrl.getAllCanteens();
 			ArrayList<Integer> weekList = new ArrayList<Integer>();
-			for(int i = 1; i<54; i++){
+			for (int i = 1; i < 54; i++) {
 				weekList.add(i);
 			}
-			
-			
+
 			session.setAttribute("companyList", companyList);
 			session.setAttribute("canteenList", canteenList);
 			session.setAttribute("weekList", weekList);

@@ -8,7 +8,6 @@ import java.util.Set;
 
 import model.Canteen;
 import model.Food;
-import model.Modifier;
 import model.ModifierSection;
 import model.OrderWindow;
 import model.Stall;
@@ -30,11 +29,26 @@ public class FoodController {
 	 * Creates a default constructor for FoodController
 	 */
 	public FoodController() {
+	}
 
+	public boolean checkFoodExists(String inputFoodName, Stall stall) {
+		ArrayList<Food> foodList = getAllActiveFoodsUnderStall(stall);
+		if (foodList != null) {
+			for (Food f : foodList) {
+				if (inputFoodName.equals(f.getName())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public boolean deleteImage(String publicId) throws IOException {
 		return cloudinaryUpload.deleteImage(publicId);
+	}
+
+	public ArrayList<Food> getAllActiveFoodsUnderStall(Stall stall) {
+		return foodDAO.getAllActiveFoodsUnderStall(stall);
 	}
 
 	/**
@@ -46,7 +60,7 @@ public class FoodController {
 	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
 		return foodDAO.getAllFoodsUnderStall(stall);
 	}
-	
+
 	/**
 	 * Retrieve the Food object based on the specified ID
 	 * 
@@ -56,7 +70,7 @@ public class FoodController {
 	public Food getFood(int id) {
 		return foodDAO.getFood(id);
 	}
-	
+
 	/**
 	 * Get food recommendations for a given weather condition and order window
 	 * 
@@ -124,49 +138,49 @@ public class FoodController {
 	public String getFoodImageDirectory(int id) {
 		return foodDAO.getFood(id).getImageDirectory();
 	}
-	
-	public boolean haveChangesInParameters(Food currentFood, String inputName, String inputDescription, double inputPrice, String inputWeatherConditions) {
+
+	public boolean haveChangesInParameters(Food currentFood, String inputName,
+			String inputDescription, double inputPrice, String inputWeatherConditions) {
 		boolean hasChanges = false;
 		String currentName = currentFood.getName();
 		String currentDesc = currentFood.getDescription();
 		double currentPrice = currentFood.getPrice();
 		String currentWeather = currentFood.getWeatherConditions();
-		
+
 		if (!currentName.equals(inputName)) {
 			hasChanges = true;
 		}
-		
+
 		if (!currentDesc.equals(inputDescription)) {
 			hasChanges = true;
 		}
-		
+
 		if (!currentDesc.equals(inputDescription)) {
 			hasChanges = true;
 		}
-		
+
 		if (currentPrice != inputPrice) {
 			hasChanges = true;
 		}
-		
+
 		if (!currentWeather.equals(inputWeatherConditions)) {
 			hasChanges = true;
 		}
-		
+
 		return hasChanges;
-		
-		
+
 	}
-	
+
 	public String[] imageUpload(byte[] file) throws IOException {
 		return cloudinaryUpload.imageUpload(file);
-		
+
 	}
-	
+
 	public String[] replaceImage(String oldPublicId, byte[] file) throws IOException {
 		return cloudinaryUpload.replaceImage(oldPublicId, file);
-		
+
 	}
-	
+
 	/**
 	 * Adds a new Food object to the Database
 	 * 
@@ -175,7 +189,7 @@ public class FoodController {
 	public void saveFood(Food f) {
 		foodDAO.saveFood(f);
 	}
-	
+
 	/**
 	 * Updates the designated Food object in the Database
 	 * 
@@ -184,23 +198,7 @@ public class FoodController {
 	public void updateFood(Food f) {
 		foodDAO.updateFood(f);
 	}
-	
-	public ArrayList<Food> getAllActiveFoodsUnderStall(Stall stall) {
-		return foodDAO.getAllActiveFoodsUnderStall(stall);
-	}
-	
-	public boolean checkFoodExists(String inputFoodName, Stall stall) {
-		ArrayList<Food> foodList = getAllActiveFoodsUnderStall(stall);
-		if (foodList != null) {
-			for(Food f : foodList) {
-				if (inputFoodName.equals(f.getName())) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
+
 	public void updateModifierListToFood(Food newFood, Set<ModifierSection> modifierSectionList) {
 		foodDAO.updateModifierListToFood(newFood, modifierSectionList);
 	}

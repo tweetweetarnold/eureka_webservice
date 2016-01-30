@@ -198,7 +198,7 @@
 						</td>
 						<td>
 							<h4>
-								<fmt:formatNumber value="${sessionScope.orderWindow.priceModifierList[0].value * -1}" var="discount"
+								<fmt:formatNumber value="${sessionScope.orderWindow.priceModifierList[0].value}" var="discount"
 									minFractionDigits="2"
 								/>
 								-
@@ -216,11 +216,11 @@
 						<td>
 							<h2>
 								<i>
-									<fmt:formatNumber value="${overallPrice +  sessionScope.orderWindow.priceModifierList[0].value}"
+									<fmt:formatNumber value="${overallPrice - sessionScope.orderWindow.priceModifierList[0].value}"
 										var="amountPayable" minFractionDigits="2"
 									/>
 									<c:choose>
-										<c:when test="${overallPrice +  sessionScope.orderWindow.priceModifierList[0].value > 0}">
+										<c:when test="${overallPrice - sessionScope.orderWindow.priceModifierList[0].value > 0}">
 									$${amountPayable}
 									</c:when>
 										<c:otherwise>

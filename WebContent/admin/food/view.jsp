@@ -51,6 +51,18 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">${sessionScope.stallName}:&nbsp;Foods</h1>
+
+					<!-- breadcrumb -->
+					<ol class="breadcrumb">
+						<li>
+							<a href="/eureka_webservice/LoadViewCanteenServlet">Canteens</a>
+						</li>
+						<li>
+							<a href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${sessionScope.canteenId}">Stalls</a>
+						</li>
+						<li class="active">Foods</li>
+					</ol>
+
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -129,7 +141,7 @@
 												aria-labelledby="myModalLabel"
 											>
 												<div class="modal-dialog" role="document">
-													<form action="">
+													<form method="post" action="">
 														<div class="modal-content">
 															<div class="modal-header">
 																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
