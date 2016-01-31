@@ -120,7 +120,7 @@
 
 						<h4 class="text-center">Sign In to your account</h4>
 
-						<form class="sign-in-up-form" action="/eureka_webservice/ProcessLoginServlet" role="form">
+						<form method="post" class="sign-in-up-form" action="/eureka_webservice/ProcessLoginServlet" role="form">
 
 							<!-- Input 1 -->
 							<div class="form-group">

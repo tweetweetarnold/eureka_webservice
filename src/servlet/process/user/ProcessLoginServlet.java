@@ -46,7 +46,6 @@ public class ProcessLoginServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request, response);
 	}
 
 	/**
@@ -138,6 +137,7 @@ public class ProcessLoginServlet extends HttpServlet {
 				ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
 				canteenList.add(window.getCanteen());
 				session.setAttribute("canteenList", canteenList);
+				System.out.println("canteenList size: " + canteenList.size());
 			}
 			// For testing: print JSON rather than redirect
 			if (test != null && test.equals("true")) {

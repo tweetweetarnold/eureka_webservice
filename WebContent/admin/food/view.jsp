@@ -51,6 +51,18 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">${sessionScope.stallName}:&nbsp;Foods</h1>
+
+					<!-- breadcrumb -->
+					<ol class="breadcrumb">
+						<li>
+							<a href="/eureka_webservice/LoadViewCanteenServlet">Canteens</a>
+						</li>
+						<li>
+							<a href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${sessionScope.canteenId}">Stalls</a>
+						</li>
+						<li class="active">Foods</li>
+					</ol>
+
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -86,6 +98,7 @@
 								<tr>
 									<th>ID</th>
 									<th>Food</th>
+								<!--  <th>Chinese Name</th>-->
 									<th>Price</th>
 									<th>Create Date</th>
 									<th>Image</th>
@@ -98,7 +111,9 @@
 								<c:forEach items="${sessionScope.foodList}" var="food" varStatus="loop">
 									<tr>
 										<td>${food.foodId}</td>
-										<td>${food.name}</td>
+										<td>${food.name}<br>
+											${food.chineseName}
+										</td>
 										<td>
 											$
 											<fmt:formatNumber value="${food.price}" var="amt" minFractionDigits="2" />${amt}
@@ -107,10 +122,13 @@
 											<fmt:formatDate type="both" value="${food.createDate}" />
 										</td>
 										<td>
-											<img src="/eureka_webservice/${food.imageDirectory}" />
+											<img src="${food.imageDirectory}" style="width:263px;height:169px;"/>
+											<!--  <img src="/eureka_webservice/${food.imageDirectory}" /> -->
 										</td>
 										<td>
-											<c:forEach items="${food.modifierList}" var="modifier">- ${modifier.name}<br>
+											<c:forEach items="${food.modifierList}" var="modifier">- ${modifier.name}&nbsp;${modifier.chineseName}
+											<fmt:formatNumber value="${modifier.price}" var="modPrice" minFractionDigits="2" />
+											($${modPrice})<br>
 											</c:forEach>
 										</td>
 										<td>
@@ -126,7 +144,8 @@
 												aria-labelledby="myModalLabel"
 											>
 												<div class="modal-dialog" role="document">
-													<form action="">
+													<form method="post" action="/eureka_webservice/ProcessAdminDeleteFoodServlet">
+													<input type="hidden" name="foodId" value="${food.foodId}">
 														<div class="modal-content">
 															<div class="modal-header">
 																<button type="button" class="close" data-dismiss="modal" aria-label="Close">

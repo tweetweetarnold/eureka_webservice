@@ -27,34 +27,6 @@ public class EmailGenerator {
 	// javaEmail.sendEmail();
 	// }
 
-	public void setMailServerProperties() {
-
-		String emailPort = "587";// gmail's smtp port
-
-		emailProperties = System.getProperties();
-		emailProperties.put("mail.smtp.port", emailPort);
-		emailProperties.put("mail.smtp.auth", "true");
-		emailProperties.put("mail.smtp.starttls.enable", "true");
-
-	}
-
-	public void sendEmail(String subject, String messageBody, String[] toEmails)
-			throws AddressException, MessagingException {
-
-		String emailHost = "smtp.gmail.com";
-		String fromUser = "dabaomealorderapp";// just the id alone without
-												// @gmail.com
-		String fromUserEmailPassword = "{gxuvimr}";
-		MimeMessage emailMessage = createEmailMessage(subject, messageBody, toEmails);
-		Transport transport = mailSession.getTransport("smtp");
-
-		transport.connect(emailHost, fromUser, fromUserEmailPassword);
-		
-		transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
-		transport.close();
-		System.out.println("Email sent successfully.");
-	}
-
 	private MimeMessage createEmailMessage(String subject, String messageBody, String[] toEmails)
 			throws AddressException, MessagingException {
 		// String[] toEmails = {
@@ -83,6 +55,34 @@ public class EmailGenerator {
 			e.printStackTrace();
 		}
 		return emailMessage;
+	}
+
+	public void sendEmail(String subject, String messageBody, String[] toEmails)
+			throws AddressException, MessagingException {
+
+		String emailHost = "smtp.gmail.com";
+		String fromUser = "dabaomealorderapp";// just the id alone without
+												// @gmail.com
+		String fromUserEmailPassword = "{gxuvimr}";
+		MimeMessage emailMessage = createEmailMessage(subject, messageBody, toEmails);
+		Transport transport = mailSession.getTransport("smtp");
+
+		transport.connect(emailHost, fromUser, fromUserEmailPassword);
+		
+		transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
+		transport.close();
+		System.out.println("Email sent successfully.");
+	}
+
+	public void setMailServerProperties() {
+
+		String emailPort = "587";// gmail's smtp port
+
+		emailProperties = System.getProperties();
+		emailProperties.put("mail.smtp.port", emailPort);
+		emailProperties.put("mail.smtp.auth", "true");
+		emailProperties.put("mail.smtp.starttls.enable", "true");
+
 	}
 
 	/*

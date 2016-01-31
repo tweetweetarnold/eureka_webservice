@@ -85,6 +85,27 @@ public class FoodOrder {
 		return employee;
 	}
 
+	public double getFinalPrice() {
+		double result = getTotalPriceBeforePriceModifiers();
+
+		// order matters for which price modifier to affect the total price first
+		List<PriceModifier> priceModifierList = orderWindow.getPriceModifierList();
+		for (PriceModifier m : priceModifierList) {
+			String type = m.getType();
+			double value = m.getValue();
+			System.out.println("PriceModifier: Name=" + m.getName() + ", Type=" + type + ", Value="
+					+ value);
+
+			if (type.equals(StringValues.PRICEMODIFIER_ABSOLUTE)) {
+				result += value;
+			} else if (type.equals(StringValues.PRICEMODIFIER_PERCENTAGE)) {
+				result *= value;
+			}
+		}
+
+		return result;
+	}
+
 	/**
 	 * Retrieves the ID of the Food order
 	 * 
@@ -133,27 +154,6 @@ public class FoodOrder {
 			price += item.getTotalPrice();
 		}
 		return price;
-	}
-
-	public double getFinalPrice() {
-		double result = getTotalPriceBeforePriceModifiers();
-
-		// order matters for which price modifier to affect the total price first
-		List<PriceModifier> priceModifierList = orderWindow.getPriceModifierList();
-		for (PriceModifier m : priceModifierList) {
-			String type = m.getType();
-			double value = m.getValue();
-			System.out.println("PriceModifier: Name=" + m.getName() + ", Type=" + type + ", Value="
-					+ value);
-
-			if (type.equals(StringValues.PRICEMODIFIER_ABSOLUTE)) {
-				result += value;
-			} else if (type.equals(StringValues.PRICEMODIFIER_PERCENTAGE)) {
-				result *= value;
-			}
-		}
-
-		return result;
 	}
 
 	/**

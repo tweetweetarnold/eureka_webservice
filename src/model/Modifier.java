@@ -23,17 +23,17 @@ import value.StringValues;
 public class Modifier {
 	private Date createDate;
 	private String description;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "foodId")
 	private Food food;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int modifierId;
-	private String name, status;
-	private double price;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "modifierSectionId")
 	private ModifierSection modifierSection;
+	private String name, chineseName, status;
+	private double price;
 
 	/**
 	 * Creates a default constructor for Modifier
@@ -49,9 +49,10 @@ public class Modifier {
 	 * @param price The price of the Modifier
 	 * @param food The Food that contains this Modifier
 	 */
-	public Modifier(String name, String description, double price, Food food) {
+	public Modifier(String name, String chineseName, String description, double price, Food food) {
 		super();
 		this.name = name;
+		this.chineseName = chineseName;
 		this.description = description;
 		this.price = price;
 		this.food = food;
@@ -59,9 +60,10 @@ public class Modifier {
 		this.status = StringValues.ACTIVE;
 	}
 	
-	public Modifier(String name, String description, double price, Food food, ModifierSection modifierSection) {
+	public Modifier(String name, String chineseName, String description, double price, Food food, ModifierSection modifierSection) {
 		super();
 		this.name = name;
+		this.chineseName = chineseName;
 		this.description = description;
 		this.price = price;
 		this.food = food;
@@ -124,6 +126,10 @@ public class Modifier {
 		return modifierId;
 	}
 
+	public ModifierSection getModifierSection() {
+		return modifierSection;
+	}
+
 	/**
 	 * Retrieves the name of the Modifier
 	 * 
@@ -145,7 +151,10 @@ public class Modifier {
 	public String getStatus() {
 		return status;
 	}
-
+	
+	public String getChineseName() {
+		return chineseName;
+	}
 	/**
 	 * Changes the current date of this Modifier object created
 	 * 
@@ -182,6 +191,11 @@ public class Modifier {
 		this.modifierId = modifierId;
 	}
 
+	public void setModifierSection(ModifierSection modifierSection) {
+		this.modifierSection = modifierSection;
+	}
+
+
 	/**
 	 * Changes the name of the Modifier
 	 * 
@@ -199,19 +213,14 @@ public class Modifier {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
-
-	public ModifierSection getModifierSection() {
-		return modifierSection;
-	}
-
-	public void setModifierSection(ModifierSection modifierSection) {
-		this.modifierSection = modifierSection;
-	}
 	
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
 	}
 
 

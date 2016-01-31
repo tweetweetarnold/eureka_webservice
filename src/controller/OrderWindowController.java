@@ -169,23 +169,6 @@ public class OrderWindowController {
 		return occupiedSlots;
 	}
 
-	public void createNewOrderWindow2(DateTime startDate, DateTime endDate, Company company,
-			Canteen canteen, int numberOfWeeks, String remarks, double discountAbsolute) {
-
-		for (int i = 0; i < numberOfWeeks; i++) {
-			OrderWindow window = new OrderWindow(startDate.plusWeeks(i), endDate.plusWeeks(i),
-					company, canteen, remarks, null);
-
-			ArrayList<PriceModifier> list = new ArrayList<PriceModifier>();
-			PriceModifier discountAbsoluteModifier = new PriceModifier("Discount",
-					StringValues.PRICEMODIFIER_ABSOLUTE, discountAbsolute * -1, window);
-			list.add(discountAbsoluteModifier);
-			window.setPriceModifierList(list);
-			orderWindowDAO.saveOrderWindow(window);
-		}
-
-	}
-
 	public void createNewOrderWindow(DateTime startDate, DateTime endDate, Company company,
 			Canteen canteen, int numberOfWeeks, String remarks, double discountPercentage,
 			double discountAbsolute) {
@@ -213,6 +196,27 @@ public class OrderWindowController {
 			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen,
 					discountPercentage, discountAbsolute, remarks, null));
 		}
+	}
+
+	public void createNewOrderWindow2(DateTime startDate, DateTime endDate, Company company,
+			Canteen canteen, int numberOfWeeks, String remarks, double discountAbsolute) {
+
+		for (int i = 0; i < numberOfWeeks; i++) {
+			OrderWindow window = new OrderWindow(startDate.plusWeeks(i), endDate.plusWeeks(i),
+					company, canteen, remarks, null);
+
+			ArrayList<PriceModifier> list = new ArrayList<PriceModifier>();
+			PriceModifier discountAbsoluteModifier = new PriceModifier("Discount",
+					StringValues.PRICEMODIFIER_ABSOLUTE, discountAbsolute * -1, window);
+			list.add(discountAbsoluteModifier);
+			window.setPriceModifierList(list);
+			orderWindowDAO.saveOrderWindow(window);
+		}
+
+	}
+
+	public ArrayList<OrderWindow> getAllClosedWindows() {
+		return orderWindowDAO.getAllClosedWindows();
 	}
 
 	/**

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.Company;
 import model.Employee;
+import value.StringValues;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -28,7 +29,7 @@ public class WeeklySuspension implements Job {
 					MyConnection.getUsersWithOutstandingPaymentFromCompany(c));
 			for (Object o : objects) {
 				Employee tempEmployee = (Employee) o;
-				tempEmployee.setStatus("Suspended");
+				tempEmployee.setStatus(StringValues.EMPLOYEE_SUSPENDED);
 				employeeController.updateEmployee(tempEmployee);
 			}
 

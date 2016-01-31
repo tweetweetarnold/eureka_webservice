@@ -62,20 +62,6 @@ public class OrderWindow {
 	}
 
 	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			String remarks, ArrayList<PriceModifier> priceModifierList) {
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.startDateFormatted = startDate.toDate();
-		this.endDateFormatted = endDate.toDate();
-		this.company = company;
-		this.canteen = canteen;
-		this.createDate = new Date();
-		this.remarks = remarks;
-		this.status = StringValues.ACTIVE;
-		this.priceModifierList = priceModifierList;
-	}
-
-	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
 			double discount, double discountAbsolute, String remarks,
 			ArrayList<PriceModifier> priceModifierList) {
 		this.startDate = startDate;
@@ -87,6 +73,20 @@ public class OrderWindow {
 		this.discount = discount;
 		this.createDate = new Date();
 		this.discountAbsolute = discountAbsolute;
+		this.remarks = remarks;
+		this.status = StringValues.ACTIVE;
+		this.priceModifierList = priceModifierList;
+	}
+
+	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
+			String remarks, ArrayList<PriceModifier> priceModifierList) {
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startDateFormatted = startDate.toDate();
+		this.endDateFormatted = endDate.toDate();
+		this.company = company;
+		this.canteen = canteen;
+		this.createDate = new Date();
 		this.remarks = remarks;
 		this.status = StringValues.ACTIVE;
 		this.priceModifierList = priceModifierList;

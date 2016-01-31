@@ -61,7 +61,15 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-
+			<!-- Error message handling -->
+			<c:if test="${not empty sessionScope.error}">
+				<div class="alert alert-danger" role="alert">
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<span class="sr-only">Error: </span>
+					${error}
+				</div>
+				<c:remove var="error" scope="session" />
+			</c:if>
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-12">
@@ -74,7 +82,7 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="/eureka_webservice/ProcessAdminAddNewStallServlet" id="submitForm">
+									<form role="form" action="/eureka_webservice/ProcessAdminAddNewStallServlet" method="POST" id="submitForm" enctype="multipart/form-data">
 
 										<input type="hidden" name="canteenId" value="${canteenId}">
 
@@ -90,7 +98,7 @@
 
 										<div class="form-group">
 											<label>Image Directory</label>
-											<input class="form-control" name="imageDirectory">
+											<input type="file" name="file" style="width: 228px;"required/>
 										</div>
 
 

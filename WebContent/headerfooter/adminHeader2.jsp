@@ -73,6 +73,10 @@
 
 						</li>
 						<li>
+							<a href="/eureka_webservice/LoadAdminViewOrderWindowsClosedServlet">View: Closed</a>
+
+						</li>
+						<li>
 							<a href="/eureka_webservice/LoadAdminAddNewWindowServlet">Add New Window</a>
 						</li>
 

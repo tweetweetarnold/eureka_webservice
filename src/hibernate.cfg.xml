@@ -8,9 +8,9 @@
 	<session-factory name="">
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="hibernate.connection.url">jdbc:mysql://127.7.125.130:3306/eureka?useTimezone=true&amp;serverTimezone=Asia/Singapore</property>
-		<property name="hibernate.connection.username">adminWWwsYtc</property>
-		<property name="hibernate.connection.password">s6HRDPpc8rmp</property>
+		<property name="hibernate.connection.url">jdbc:mysql://127.6.200.130:3306/eureka?useTimezone=true&amp;serverTimezone=Asia/Singapore&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
+		<property name="hibernate.connection.username">admindtFiT36</property>
+		<property name="hibernate.connection.password">RL2YUz2zcArj</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.pool_size">1</property>
 		<property name="hibernate.connection.autocommit">false</property>

@@ -52,7 +52,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Order Windows: Opened</h1>
+					<h1 class="page-header">Order Window Management: Opened</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -281,11 +281,13 @@
 																	<c:forEach items="${foodDisplayObj.foodOrderItemList}" var="item">
 																		<tr>
 																			<td>
-																				<fmt:message bundle="${lang}" key="${fn:replace(item.food.name, ' ', '_')}" />
+																				${item.food.chineseName}
+																				<!--<fmt:message bundle="${lang}" key="${fn:replace(item.food.name, ' ', '_')}" />-->
 																			</td>
 																			<td>
 																				<c:forEach items="${item.modifierChosenList}" var="modifierChosen">
-																					<fmt:message bundle="${lang}" key="${fn:replace(modifierChosen.name, ' ', '_')}" />
+																					${modifierChosen.chineseName}
+																					<!--<fmt:message bundle="${lang}" key="${fn:replace(modifierChosen.name, ' ', '_')}" />-->
 																					<br>
 																				</c:forEach>
 																			</td>

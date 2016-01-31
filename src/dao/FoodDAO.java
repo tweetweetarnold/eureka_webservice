@@ -1,12 +1,15 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import model.Food;
 import model.Modifier;
+import model.ModifierSection;
 import model.Stall;
 
 import org.hibernate.criterion.CriteriaSpecification;
@@ -52,7 +55,7 @@ public class FoodDAO {
 	 * @param f The Food object to be removed
 	 */
 	public void deleteFood(Food f) {
-		f.setDescription(StringValues.ARCHIVED);
+		f.setStatus(StringValues.ARCHIVED);
 		// f.setStall(null);
 		updateFood(f);
 	}
@@ -77,6 +80,32 @@ public class FoodDAO {
 		}
 		return returnList;
 	}
+	
+	/**
+	 * Retrieves a list of Food in the Stall that are Active
+	 * 
+	 * @param stall The designated Stall
+	 * @return An ArrayList of Food objects that are in the designated Stall
+	 */
+	public ArrayList<Food> getAllActiveFoodsUnderStall(Stall stall) {
+		ArrayList<Food> returnList = new ArrayList<Food>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Food.class);
+		dc.add(Restrictions.eq("stall", stall));
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+		if (l.size() == 0) {
+			return null;
+		} else {
+			for (Object o : l) {
+				returnList.add((Food) o);
+			}
+			return returnList;
+		}
+	}
+	
 
 	/**
 	 * Retrieves the Food based on the provided ID
@@ -159,7 +188,7 @@ public class FoodDAO {
 			System.out.println(stallName);
 			Stall stall = canteenDAO.getStallFromCanteen(canteenName, stallName);
 			System.out.println(stall);
-			Food newFood = new Food(foodName, description, priceValue, null, stall);
+			Food newFood = new Food(foodName, null, description, priceValue, null, null, stall);
 
 			// adds Food to the Stall's foodList
 			stallDAO.addFoodToStall(stall, newFood);
@@ -189,7 +218,7 @@ public class FoodDAO {
 			String canteenName = row[5].trim();
 
 			Food food = getFoodFromStallAndCanteen(foodName, stallName, canteenName);
-			Modifier newModifier = new Modifier(modifierName, description, priceValue, food);
+			Modifier newModifier = new Modifier(modifierName, "", description, priceValue, food);
 
 			addModifierToFood(newModifier, food);
 		}
@@ -211,5 +240,42 @@ public class FoodDAO {
 	 */
 	public void updateFood(Food f) {
 		MyConnection.update(f);
+	}
+	
+	public void updateModifierListToFood(Food newFood, Set<ModifierSection> modifierSectionList) {
+		Set<Modifier> newList = newFood.getModifierList();
+		Set<ModifierSection> newModifierSectionList = new HashSet<ModifierSection>();
+		
+		newFood.setModifierList(newList);
+		for(ModifierSection modSection : modifierSectionList){
+			ModifierSection newModifierSection = new ModifierSection();
+			Set<Modifier> oldModifierList= modSection.getModifierList();
+			Set<Modifier> newModifierList = new HashSet<Modifier>();
+			
+			for(Modifier m :oldModifierList){
+				Modifier newM = new Modifier();
+				newM.setCreateDate(new Date());
+				newM.setDescription(m.getDescription());
+				newM.setName(m.getName());
+				newM.setPrice(m.getPrice());
+				newM.setStatus(m.getStatus());
+				newM.setFood(newFood);
+				newM.setModifierSection(newModifierSection);
+				newList.add(newM);
+				newModifierList.add(newM);
+//				MyConnection.save(newM);
+			}
+			newModifierSection.setCategoryName(modSection.getCategoryName());
+			newModifierSection.setDisplayType(modSection.getDisplayType());
+			newModifierSection.setModifierList(newModifierList);
+			newModifierSection.setFood(newFood);
+			newModifierSectionList.add(newModifierSection);
+			ModifierSectionDAO dao = new ModifierSectionDAO();
+			dao.saveModifierSection(newModifierSection);
+//			MyConnection.save(newModifierSection);
+		}
+		newFood.setModifierSectionList(newModifierSectionList);
+		newFood.setModifierList(newList);
+//		saveFood(newFood);
 	}
 }

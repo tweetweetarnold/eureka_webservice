@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import value.StringValues;
+
 /**
  * Represents the Stall entity model in the web application
  * 
@@ -31,16 +33,17 @@ public class Stall {
 	private Set<Food> foodList;
 	private String imageDirectory;
 	private String name;
-	private String status;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int stallId;
+	private String status;
+	private String publicId;
 
 	/**
 	 * Creates a default constructor for Stall
 	 */
 	public Stall() {
-		this.status = "Ok";
+		this.status = StringValues.ACTIVE;
 	}
 
 	/**
@@ -53,7 +56,7 @@ public class Stall {
 	 * @param imageDirectory The directory of storing the images of the Food
 	 */
 	public Stall(String name, long contactNo, Canteen canteen, Set<Food> foodList,
-			String imageDirectory) {
+			String imageDirectory, String publicId) {
 		super();
 		this.name = name;
 		this.contactNo = contactNo;
@@ -61,7 +64,8 @@ public class Stall {
 		this.canteen = canteen;
 		this.createDate = new Date();
 		this.foodList = foodList;
-		this.status = "Ok";
+		this.status = StringValues.ACTIVE;
+		this.publicId = publicId;
 	}
 
 	/**
@@ -127,6 +131,10 @@ public class Stall {
 		return stallId;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
 	/**
 	 * Changes the Canteen of this Stall
 	 * 
@@ -190,12 +198,16 @@ public class Stall {
 		this.stallId = stallId;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public String getPublicId() {
+		return publicId;
+	}
+	
+	public void setPublicId(String publicId) {
+		this.publicId = publicId;
 	}
 	
 }

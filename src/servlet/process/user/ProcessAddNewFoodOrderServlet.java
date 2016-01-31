@@ -2,6 +2,7 @@ package servlet.process.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +18,7 @@ import model.Employee;
 import model.FoodOrder;
 import model.FoodOrderItem;
 import model.OrderWindow;
+import model.PriceModifier;
 import value.StringValues;
 import controller.FoodOrderController;
 import controller.OrderWindowController;
@@ -84,7 +86,14 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 				}
 				myFoodOrder.setFoodOrderList(hashMyFoodOrderItems);
 				System.out.println("New FoodOrder created");
-				double discount = myFoodOrder.getOrderWindow().getPriceModifierList().get(0).getValue();
+				List<PriceModifier> priceModifierList =  myFoodOrder.getOrderWindow().getPriceModifierList();
+				System.out.print("Hopefully this is not 0 :    " + priceModifierList.size()); 
+				double discount = 0.0;
+				try{
+					discount = myFoodOrder.getOrderWindow().getPriceModifierList().get(0).getValue();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 				double amountToAdd = myFoodOrder.getTotalPriceBeforePriceModifiers()
 						+ discount;
 				if (amountToAdd > 0) {

@@ -76,6 +76,31 @@ public class StallDAO {
 		}
 		return returnList;
 	}
+	
+	/**
+	 * Retrieves all the Stalls from the Canteen
+	 * 
+	 * @param canteen The designated Canteen to retrieve the Stalls
+	 * @return An ArrayList of Stall objects in the designated Canteen
+	 */
+	public ArrayList<Stall> getAllActiveStallsUnderCanteen(Canteen canteen) {
+		ArrayList<Stall> returnList = new ArrayList<Stall>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Stall.class);
+		dc.add(Restrictions.eq("canteen", canteen));
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+		if (l.size() == 0) {
+			return null;
+		} else {
+			for (Object o : l) {
+				returnList.add((Stall) o);
+			}
+			return returnList;
+		}
+	}
 
 	/**
 	 * Retrieves the Stall based on the provided ID
@@ -106,7 +131,7 @@ public class StallDAO {
 			String canteenName = row[2].trim();
 			canteen = canteenDAO.getCanteenByName(canteenName);
 
-			Stall newStall = new Stall(stallName, contactNumber, canteen, null, null);
+			Stall newStall = new Stall(stallName, contactNumber, canteen, null, null, null);
 			// stallList.add(newStall);
 			canteenDAO.addStallToCanteen(canteen, newStall);
 			saveStall(newStall);
@@ -129,6 +154,18 @@ public class StallDAO {
 	 */
 	public void updateStall(Stall h) {
 		MyConnection.update(h);
+	}
+	
+	public void setFoodListToStall(Set<Food> oldFoodList, Stall newStall) {
+		FoodDAO foodDAO = new FoodDAO();
+		Set<Food> newList = newStall.getFoodList();
+		
+		for (Food f: oldFoodList) {
+			f.setStall(newStall);
+			newList.add(f);
+			foodDAO.updateFood(f);
+		}
+		//return fList;
 	}
 
 }

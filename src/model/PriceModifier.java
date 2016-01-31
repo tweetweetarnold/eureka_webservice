@@ -13,13 +13,13 @@ import javax.persistence.Table;
 @Table(name = "pricemodifier")
 public class PriceModifier {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int priceModifierId;
 	private String name;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "orderWindowId")
 	private OrderWindow orderWindow;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int priceModifierId;
 	private String type;
 	private double value;
 

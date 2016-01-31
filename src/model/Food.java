@@ -1,7 +1,6 @@
 package model;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,18 +31,17 @@ public class Food {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int foodId;
-	// @Column(columnDefinition="longblob")
-	// private byte[] image;
 	private String imageDirectory;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<Modifier> modifierList;
-	private String name, status;
-	private double price;
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "stallId")
-	private Stall stall;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<ModifierSection> modifierSectionList;
+	private String name, chineseName, status;
+	private double price;
+	private String publicId;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "stallId")
+	private Stall stall;
 	private String weatherConditions;
 
 	/**
@@ -62,9 +60,11 @@ public class Food {
 	 * @param imageDirectory The directory where the Food image is being stored
 	 * @param stall The Stall that sells this Food
 	 */
-	public Food(String name, String description, double price, String imageDirectory, Stall stall) {
+	public Food(String name, String chineseName, String description, double price, String imageDirectory,
+			String publicId, Stall stall) {
 		super();
 		this.name = name;
+		this.chineseName = chineseName;
 		this.description = description;
 		this.price = price;
 		this.stall = stall;
@@ -73,6 +73,7 @@ public class Food {
 		this.modifierList = new HashSet<>();
 		this.status = StringValues.ACTIVE;
 		this.weatherConditions = "default";
+		this.publicId = publicId;
 	}
 
 	// check if canteen, stall and food name are the same and returns true if
@@ -139,6 +140,10 @@ public class Food {
 		return modifierList;
 	}
 
+	public Set<ModifierSection> getModifierSectionList() {
+		return modifierSectionList;
+	}
+
 	/**
 	 * Retrieves the name of this Food
 	 * 
@@ -167,6 +172,10 @@ public class Food {
 		return df.format(getPrice());
 	}
 
+	public String getPublicId() {
+		return publicId;
+	}
+
 	/**
 	 * Retrieves the Stall of this Food
 	 * 
@@ -187,6 +196,10 @@ public class Food {
 	 */
 	public String getWeatherConditions() {
 		return weatherConditions;
+	}
+	
+	public String getChineseName() {
+		return chineseName;
 	}
 
 	/**
@@ -234,6 +247,10 @@ public class Food {
 		this.modifierList = modifierList;
 	}
 
+	public void setModifierSectionList(Set<ModifierSection> modifierSectionList) {
+		this.modifierSectionList = modifierSectionList;
+	}
+
 	/**
 	 * Changes the current name of this Food
 	 * 
@@ -250,6 +267,11 @@ public class Food {
 	 */
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public void setPublicId(String publicId) {
+		this.publicId = publicId;
+
 	}
 
 	/**
@@ -273,13 +295,9 @@ public class Food {
 	public void setWeatherConditions(String weatherConditions) {
 		this.weatherConditions = weatherConditions;
 	}
-
-	public Set<ModifierSection> getModifierSectionList() {
-		return modifierSectionList;
-	}
-
-	public void setModifierSectionList(Set<ModifierSection> modifierSectionList) {
-		this.modifierSectionList = modifierSectionList;
+	
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
 	}
 
 }

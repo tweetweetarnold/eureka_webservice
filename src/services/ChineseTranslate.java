@@ -8,9 +8,9 @@ import model.FoodDisplayObject;
 
 public class ChineseTranslate {
 
-	private String resourceName = "RBExample";
-
 	private ResourceBundle rb;
+
+	private String resourceName = "RBExample";
 
 	public ArrayList<FoodDisplayObject> translateFoodDisplayObject(ArrayList<FoodDisplayObject> fDO) {
 		rb = ResourceBundle.getBundle(resourceName, Locale.forLanguageTag("cn"));
