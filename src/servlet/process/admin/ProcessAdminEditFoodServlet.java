@@ -235,4 +235,46 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 		// }
 
 	}
+	
+	
+	
+	
+	
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		response.setCharacterEncoding("UTF-8");
+
+		request.setCharacterEncoding("UTF-8");
+		FoodController foodController = new FoodController();
+		String[] parameters = new String[8];
+		String[] output = new String[2];
+
+		// Create a factory for disk-based file items
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		// Configure a repository (to ensure a secure temp location is used)
+		ServletContext servletContext = this.getServletConfig().getServletContext();
+		File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+		factory.setRepository(repository);
+		// Create a new file upload handler and set max size
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		upload.setSizeMax(1024 * 1024 * 1000);
+		try{
+			List<FileItem> items = upload.parseRequest(request);
+			int foodId = Integer.parseInt(parameters[0]);
+			double price = Double.parseDouble(parameters[4]);
+			foodController.editFood(items, foodId, price);
+			int stallId = foodController.getFood(foodId).getStall().getStallId();
+			session.setAttribute("success", "Food updated successfully.");
+			response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=" + stallId);
+		}catch(Exception e){
+			e.printStackTrace();
+			session.setAttribute("error", e.getMessage());
+			response.sendRedirect("/eureka_webservice/admin/food/edit.jsp");
+		}
+	}
+	
+	
+	
 }
