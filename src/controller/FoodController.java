@@ -6,12 +6,15 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
+import com.detectlanguage.errors.APIError;
+
 import model.Canteen;
 import model.Food;
 import model.ModifierSection;
 import model.OrderWindow;
 import model.Stall;
 import net.aksingh.owmjapis.AbstractWeather.Weather;
+import services.ChineseValidation;
 import services.CloudinaryUpload;
 import dao.FoodDAO;
 
@@ -23,6 +26,7 @@ import dao.FoodDAO;
  */
 public class FoodController {
 	CloudinaryUpload cloudinaryUpload = new CloudinaryUpload();
+	ChineseValidation chineseValidation = new ChineseValidation();
 	FoodDAO foodDAO = new FoodDAO();
 
 	/**
@@ -206,6 +210,10 @@ public class FoodController {
 	
 	public void deleteFood(Food food){
 		foodDAO.deleteFood(food);
+	}
+	
+	public boolean checkChineseWords(String text) throws APIError {
+		return chineseValidation.checkForChineseWords(text);
 	}
 	
 }

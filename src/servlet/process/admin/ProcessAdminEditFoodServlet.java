@@ -113,7 +113,10 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 
 			Food food = foodController.getFood(foodId);
 			int stallId = food.getStall().getStallId();
-
+			boolean isChinese = foodController.checkChineseWords(parameters[2]);
+			if (!isChinese) {
+				throw new Exception(parameters[2] + " is not a valid chinese word.");
+			}
 			boolean hasChanges = foodController.haveChangesInParameters(food, parameters[1], parameters[2], parameters[3], price,
 					parameters[5]);
 			if (hasChanges) {

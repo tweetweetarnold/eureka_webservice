@@ -111,6 +111,10 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			stallId = Integer.parseInt(parameters[0]);
 
 			Stall stall = stallController.getStall(stallId);
+			boolean isChinese = foodController.checkChineseWords(parameters[2]);
+			if (!isChinese) {
+				throw new Exception(parameters[2] + " is not a valid chinese word.");
+			}
 			boolean foodExists = foodController.checkFoodExists(parameters[1], stall);
 			if (foodExists) {
 				throw new Exception(parameters[1] + " already exists in " + stall.getName());
