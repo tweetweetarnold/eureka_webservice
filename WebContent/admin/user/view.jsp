@@ -57,7 +57,17 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-
+					
+					<!-- Success message handling -->
+					<c:if test="${not empty sessionScope.success}">
+						<div class="alert alert-success" role="alert">
+							<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+							<span class="sr-only">Success: </span>
+							${success}
+						</div>
+						<c:remove var="success" scope="session" />
+					</c:if>
+					
 					<b>Total users:</b>
 					${fn:length(sessionScope.userMgmtView)}
 					<br>

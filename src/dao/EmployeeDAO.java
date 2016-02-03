@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.Company;
 import model.Employee;
+import value.StringValues;
 
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
@@ -32,7 +33,9 @@ public class EmployeeDAO {
 	 * @param e The Employee object to be removed
 	 */
 	public void deleteEmployee(Employee e) {
-		MyConnection.delete(e);
+		e.setStatus(StringValues.EMPLOYEE_DESTROYED);
+		updateEmployee(e);
+		//MyConnection.delete(e);
 	}
 
 	/**
@@ -62,6 +65,23 @@ public class EmployeeDAO {
 		Company company = companyDAO.getCompany(companyID);
 		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
 		dc.add(Restrictions.eq("company", company));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		returnList = new ArrayList<Employee>();
+
+		for (Object o : l) {
+			returnList.add((Employee) o);
+		}
+		return returnList;
+	}
+	
+	public ArrayList<Employee> getAllNonDestroyedEmployees() {
+		ArrayList<Employee> returnList = null;
+		
+		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
+		dc.add(Restrictions.ne("status", StringValues.EMPLOYEE_DESTROYED));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);

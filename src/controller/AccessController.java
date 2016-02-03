@@ -450,5 +450,19 @@ public class AccessController {
 		
 		
 	}
+	
+	public boolean constructDeleteUserNotificationEmail(String email) throws MessagingException {
+		String[] toSendEmail = {email};
+		SendEmail javaEmail = new SendEmail();
+		javaEmail.setMailServerProperties();
+		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Account Deleted", "Dear User,<br><br>"
+				+ "This email is to inform you that your account has been deleted. Thank you for using Koh Bus LunchTime Ordering App</b>:<br> "
+				+ "Regards,<br>"
+				+ "Admin<br><br>"
+				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
+				toSendEmail);
+
+		return true;
+	}
 
 }
