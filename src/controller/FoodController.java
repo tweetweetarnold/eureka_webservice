@@ -297,10 +297,14 @@ public class FoodController {
 				}
 			}
 		} else {
-			output = replaceImage(food.getPublicId(), image);
-			food.setImageDirectory(output[0]);
-			food.setPublicId(output[1]);
-			updateFood(food);
+			if (image.length == 0) {
+				throw new Exception("The details entered are the same as the current food details");
+			} else {
+				output = replaceImage(food.getPublicId(), image);
+				food.setImageDirectory(output[0]);
+				food.setPublicId(output[1]);
+				updateFood(food);
+			}
 		}
 
 	}

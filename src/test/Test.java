@@ -788,7 +788,7 @@ public class Test {
 
 		// oasis
 
-		Canteen canteen1 = new Canteen("Oasis Food Centre", "3 Yung Sheng Rd, Singapore 618499", null);
+		Canteen canteen1 = new Canteen("Oasis Food Centre", "3 Sakra Rd, Singapore 627878", null);
 
 		Stall kuehStall = new Stall("Oasis Kueh Stall", 90685620, canteen1, null,
 				"resources/img/stall/img-oasiskuehstall.jpg", null);

@@ -107,20 +107,22 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 				if (image.length == 0) {
 					Stall newStall = new Stall(parameters[1], contactNo, stall.getCanteen(), new HashSet<Food>(),
 							stall.getImageDirectory(), stall.getPublicId());
-
-					stallController.updateFoodListToStall(stall.getFoodList(), newStall);
-
-					stallController.updateStall(newStall);
+					if (!stall.getFoodList().isEmpty()) {
+						stallController.updateFoodListToStall(stall.getFoodList(), newStall);
+					}
+					stallController.saveStall(newStall);
 				} else {
 					output = stallController.replaceOldImage(stall.getPublicId(), image);
 					Stall newStall = new Stall(parameters[1], contactNo, stall.getCanteen(), new HashSet<Food>(),
 							output[0], output[1]);
-					stallController.updateFoodListToStall(stall.getFoodList(), newStall);
+					if (!stall.getFoodList().isEmpty()) {
+						stallController.updateFoodListToStall(stall.getFoodList(), newStall);
+					}
 					stallController.saveStall(newStall);
 				}
 			} else {
 				if (image.length == 0) {
-					throw new Exception("The details entered are the same as the current food details");
+					throw new Exception("The details entered are the same as the current stall details");
 				} else {
 					output = stallController.replaceOldImage(stall.getPublicId(), image);
 					stall.setImageDirectory(output[0]);

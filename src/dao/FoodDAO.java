@@ -255,6 +255,7 @@ public class FoodDAO {
 			for(Modifier m :oldModifierList){
 				Modifier newM = new Modifier();
 				newM.setCreateDate(new Date());
+				newM.setChineseName(m.getChineseName());
 				newM.setDescription(m.getDescription());
 				newM.setName(m.getName());
 				newM.setPrice(m.getPrice());
