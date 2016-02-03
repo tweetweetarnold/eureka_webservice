@@ -74,6 +74,11 @@
 					${fn:length(sessionScope.canteenList)}
 					<br>
 					<br>
+					<form action="">
+						<input type="hidden" name="" value="">
+						<button type="submit" class="btn btn-primary" disabled>Add canteen</button>
+					</form>
+					<br>
 
 					<div class="dataTable_wrapper">
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -83,6 +88,7 @@
 									<th>Canteen</th>
 									<th>Address</th>
 									<th>Create Date</th>
+									<th></th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -99,6 +105,9 @@
 										<td>
 											<a href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${canteen.canteenId}">View all
 												${fn:length(canteen.stallList)} stalls</a>
+										</td>
+										<td>
+											<a href="#">Edit canteen</a>
 										</td>
 										<td>
 											<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">

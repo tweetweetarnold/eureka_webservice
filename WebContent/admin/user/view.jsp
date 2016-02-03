@@ -40,7 +40,7 @@
 </head>
 
 <body>
-<fmt:setTimeZone value="GMT+8" />
+	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 
@@ -74,6 +74,8 @@
 									<th>O/S</th>
 									<th>Status</th>
 									<th></th>
+									<th></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -92,6 +94,50 @@
 										<td>
 											<a href="/eureka_webservice/LoadAdminViewUserOrderHistoryServlet?email=${user.email}&name=${user.name}">View
 												Order History</a>
+										</td>
+										<td>
+											<a href="#">Edit</a>
+										</td>
+										<td>
+											<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
+												<i class="fa fa-trash-o fa-2x"></i>
+											</button>
+
+											<!-- Modal delete -->
+											<div class="modal fade" id="modalDelete${loop.index}" tabindex="-1" role="dialog"
+												aria-labelledby="myModalLabel"
+											>
+												<div class="modal-dialog" role="document">
+													<form action="" method="post">
+														<input type="hidden" name="stallId" value="${stall.stallId}">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+																<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
+															</div>
+															<!-- / modal header -->
+															<div class="modal-body">
+																<p>
+																	<b>WARNING: </b>
+																	This feature is not implemented yet.
+																</p>
+															</div>
+															<!-- / modal body -->
+
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																<!-- <button type="button" class="btn btn-default" data-dismiss="modal">No, keep my stall</button> -->
+																<!-- <button type="submit" class="btn btn-danger">Yes, delete the stall</button> -->
+															</div>
+															<!-- / modal footer -->
+														</div>
+														<!-- / modal content -->
+													</form>
+												</div>
+											</div>
+											<!-- / Modal delete -->
 										</td>
 									</tr>
 								</c:forEach>
