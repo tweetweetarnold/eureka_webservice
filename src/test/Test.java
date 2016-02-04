@@ -1176,7 +1176,7 @@ public class Test {
 		Food seafood1 = new Food("Horfun (Dry)", "河粉（干）","dry type $4.00", 4.00, "resources/img/food/img-horfun.jpg", null,
 				seafoodTzeCharStall);
 		Food seafood2 = new Food("Fried Rice", "炒饭","", 4.00, "resources/img/food/img-friedrice.jpg", null, seafoodTzeCharStall);
-		Food seafood3 = new Food("Horfun (Wet)", "河粉（干）","", 3.70, null, null, seafoodTzeCharStall);
+		Food seafood3 = new Food("Horfun (Wet)", "河粉（湿）","", 3.70, null, null, seafoodTzeCharStall);
 		Food seafood4 = new Food("Hokkien Noodle","福建面", "", 4.20, null, null, seafoodTzeCharStall);
 		Food seafood5 = new Food("Mee Goreng", "炒面","", 4.20, "resources/img/food/img-meegoreng.jpg", null, seafoodTzeCharStall);
 		Food seafood6 = new Food("Ginger & Onion Fish","姜葱鱼", "", 4.50, "resources/img/food/img-gingeronionfishrice.jpg", null,
