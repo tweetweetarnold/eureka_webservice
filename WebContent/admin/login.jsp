@@ -23,13 +23,25 @@
 
 </head>
 
-<body>
-<fmt:setTimeZone value="GMT+8" />
+<body style="padding: 0px;">
+	<fmt:setTimeZone value="GMT+8" />
 
-	<div class="container">
+	<!-- 	<div class="container"> -->
 
+	<div class="col-md-7"
+		style="left: 0;
+	bottom: 0;
+	right: 0;
+	top: 0;
+	overflow: hidden;
+	position: absolute;
+	background-image:
+		url('http://e.fastcompany.net/multisite_files/coexist/imagecache/1280/article_feature/1280-eating-habits.jpg')"
+	></div>
+
+	<div class="col-md-5" style="padding-top: 40px; float: right;">
 		<form class="form-signin" method="post" action="/eureka_webservice/ProcessAdminLoginServlet">
-			<h2 class="form-signin-heading">Please sign in</h2>
+			<h2 class="form-signin-heading">Admin Login</h2>
 
 			<!-- User input -->
 			<input type="text" name="adminUsername" class="form-control" placeholder="Username" value="${sessionScope.username}"
@@ -63,8 +75,12 @@
 		</form>
 
 		<c:remove var="username" scope="session" />
-
 	</div>
+	<!-- /col-md-5 -->
+
+
+
+	<!-- 	</div> -->
 	<!-- /container -->
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
