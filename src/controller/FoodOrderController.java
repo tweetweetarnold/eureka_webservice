@@ -6,14 +6,17 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import model.Employee;
 import model.Food;
 import model.FoodDisplayObject;
 import model.FoodOrder;
 import model.FoodOrderItem;
+import model.ModifierChosen;
 import model.OrderWindow;
 import model.Stall;
+import value.StringValues;
 
 import org.joda.time.DateTime;
 
@@ -638,6 +641,34 @@ public class FoodOrderController {
 	 */
 	public void updateFoodOrder(FoodOrder f) {
 		foodOrderDAO.updateFoodOrder(f);
+	}
+	
+	
+	public void updateFoodOrder(int foodOrderItemId, Food newFood, Set<ModifierChosen> newModifierChosenSet, int quantity){
+		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
+		EmployeeDAO employeeDAO = new EmployeeDAO();
+		FoodOrderItem foodOrderItemToEdit = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
+		FoodOrder foodOrderToEdit = foodOrderItemToEdit.getFoodOrder();
+		Employee employee = foodOrderToEdit.getEmployee();
+		
+		// we need to change the amount owed of the employee so we remove the foodOrder price first
+		double amountOwed = employee.getAmountOwed()-foodOrderToEdit.getFinalPrice();
+		
+		//edit the foodOrderItem here
+		foodOrderItemToEdit.setFood(newFood);
+		foodOrderItemToEdit.setModifierChosenList(newModifierChosenSet);
+		foodOrderItemToEdit.setQuantity(quantity);
+		foodOrderItemToEdit.setRemarks(StringValues.EDITTED_BY_ADMIN);
+		
+		//update the amount owed for the employee
+		double newFinalPrice = foodOrderToEdit.getFinalPrice();
+		amountOwed += newFinalPrice;
+		employee.setAmountOwed(amountOwed);
+		
+		//update employee, foodOrderItem and foodOrder
+		employeeDAO.updateEmployee(employee);
+		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToEdit);
+		updateFoodOrder(foodOrderToEdit);
 	}
 
 }
