@@ -20,6 +20,7 @@ public final class StringValues {
 	public static final String ORDERWINDOW_CLOSED = "Closed";
 	public static final String ORDERWINDOW_OPENED = "Opened";
 	public static final String EDITTED_BY_ADMIN = "Editted by admin";
+	public static final String PAID = "Paid";
 
 	public static final String ORDERWINDOW_PROCESSING = "Processing";
 	// For OrderWindow status

@@ -644,11 +644,14 @@ public class FoodOrderController {
 	}
 	
 	
-	public void updateFoodOrder(int foodOrderItemId, Food newFood, Set<ModifierChosen> newModifierChosenSet, int quantity){
+	public void updateFoodOrder(int foodOrderItemId, Food newFood, Set<ModifierChosen> newModifierChosenSet, int quantity) throws Exception{
 		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
 		EmployeeDAO employeeDAO = new EmployeeDAO();
 		FoodOrderItem foodOrderItemToEdit = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
 		FoodOrder foodOrderToEdit = foodOrderItemToEdit.getFoodOrder();
+		if(foodOrderToEdit.getStatus()==StringValues.PAID){
+			throw new Exception("The food has already been paid for. Cannot edit Food Order.");
+		}
 		Employee employee = foodOrderToEdit.getEmployee();
 		
 		// we need to change the amount owed of the employee so we remove the foodOrder price first
