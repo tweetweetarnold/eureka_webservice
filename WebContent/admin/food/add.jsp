@@ -49,7 +49,7 @@
 
 </head>
 
-<body>
+<body ng-app='myApp' ng-controller='AddFoodController'>
 
 	<fmt:setTimeZone value="GMT+8" />
 
@@ -121,7 +121,29 @@
 											<label>Image Directory (*only accepts jpeg or jpg image formats)</label>
 											<input type="file" name="file" style="width: 228px;" required />
 										</div>
-										<br>
+
+										<div class="form-group">
+											<label>Modifiers</label>
+											<br>
+											<input type="text" ng-model='modifier.name' placeholder="Modifier Name">
+											<input type="text" name="modifierPrice" ng-model='modifier.price' placeholder="Modifier Price">
+											<button ng-click='addModifier()'>Add Modifier</button>
+											<br>
+											<div ng-show='myArray.length > 0'>
+												<br>
+												<table class="table">
+													<tr ng-repeat='modifier2 in myArray track by $index'>
+														<td>{{modifier2.name}}</td>
+														<td>{{modifier2.price | currency}}</td>
+														<td>
+															<button ng-click='removeModifier($index)' type="button" class="btn btn-link btn-xs">
+																<i class="fa fa-trash-o fa-2x"></i>
+															</button>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
 											new Food</button>
@@ -129,7 +151,7 @@
 									</form>
 
 									<br>
-									<div ng-app='Arnold' ng-controller='MyController as me'>{{me.name}}</div>
+
 
 
 								</div>
@@ -189,13 +211,20 @@
 	<script src="/eureka_webservice/resources/js/bootstrap-datetimepicker.min.js"></script>
 
 	<script>
-		(function() {
-			var app = angular.module('Arnold', []);
+		var app = angular.module('myApp', []);
 
-			app.controller('MyController', function() {
-				this.name = "Arnold";
-			});
-		})();
+		app.controller('AddFoodController', function($scope) {
+			$scope.myArray = [];
+
+			$scope.addModifier = function() {
+				$scope.myArray.push($scope.modifier);
+				$scope.modifier = {};
+			};
+			
+			$scope.removeModifier = function(index){
+				$scope.myArray.splice(this.index, 1);
+			};
+		});
 	</script>
 
 </body>
