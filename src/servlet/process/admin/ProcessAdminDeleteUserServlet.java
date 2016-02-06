@@ -44,8 +44,8 @@ public class ProcessAdminDeleteUserServlet extends HttpServlet {
 		EmployeeController employeeController = new EmployeeController();
 		AccessController accessController = new AccessController();
 		
-		String email = request.getParameter("email");
-		
+		String email = request.getParameter("emailID");
+		System.out.println("******Deleting: " + email);
 		try {
 			
 			Employee employee = employeeController.retrieveEmployeeViaEmail(email);
@@ -55,7 +55,7 @@ public class ProcessAdminDeleteUserServlet extends HttpServlet {
 			
 			session.setAttribute("success", employee.getName() + " has been deleted." );
 			
-			response.sendRedirect("/eureka_webservice/LoadViewUsersServlet");
+			response.sendRedirect("/eureka_webservice/LoadAdminViewUsersServlet");
 		} catch (Exception e){
 			e.printStackTrace();
 		}

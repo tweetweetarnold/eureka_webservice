@@ -89,7 +89,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.userMgmtView}" var="user">
+								<c:forEach items="${sessionScope.userMgmtView}" var="user" varStatus="loop">
 									<tr>
 										<td>${user.company.name}</td>
 										<td>${user.name}</td>
@@ -118,8 +118,8 @@
 												aria-labelledby="myModalLabel"
 											>
 												<div class="modal-dialog" role="document">
-													<form action="" method="post">
-														<input type="hidden" name="stallId" value="${stall.stallId}">
+													<form action="/eureka_webservice/ProcessAdminDeleteUserServlet" method="post">
+														<input type="hidden" name="emailID" value="${user.email}">
 														<div class="modal-content">
 															<div class="modal-header">
 																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -131,15 +131,18 @@
 															<div class="modal-body">
 																<p>
 																	<b>WARNING: </b>
-																	This feature is not implemented yet.
+																	You are deleting a user.
+																	<br>
+																	<br>
+																	Are you sure you want to continue?
 																</p>
 															</div>
 															<!-- / modal body -->
 
 															<div class="modal-footer">
-																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-																<!-- <button type="button" class="btn btn-default" data-dismiss="modal">No, keep my stall</button> -->
-																<!-- <button type="submit" class="btn btn-danger">Yes, delete the stall</button> -->
+																<!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+																 <button type="button" class="btn btn-default" data-dismiss="modal">No, keep the user</button> 
+																<button type="submit" class="btn btn-danger">Yes, delete the user</button> 
 															</div>
 															<!-- / modal footer -->
 														</div>
