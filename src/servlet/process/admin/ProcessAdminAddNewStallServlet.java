@@ -126,32 +126,6 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 			response.sendRedirect("/eureka_webservice/admin/stall/add.jsp?canteenId=" + canteenId);
 		}
 
-		// String name = request.getParameter("name");
-		// String contactNoString = request.getParameter("contactNo");
-		// String canteenIdString = request.getParameter("canteenId");
-		// System.out.println("String: " + canteenIdString);
-		//
-		// String imageDirectory = request.getParameter("imageDirectory");
-		//
-		// try {
-		// int canteenId = Integer.parseInt(canteenIdString);
-		// long contactNo = Long.parseLong(contactNoString);
-		//
-		// Canteen c = canteenController.getCanteen(canteenId);
-		// Stall s = new Stall(name, contactNo, c, null, imageDirectory);
-		//
-		// System.out.println("stallname: " + s.getName());
-		// System.out.println("saving food...");
-		// stallController.saveStall(s);
-		//
-		// session.setAttribute("success", "Stall added successfully.");
-		//
-		// response.sendRedirect("/eureka_webservice/LoadAdminViewStallsServlet?canteenId="
-		// + canteenId);
-		//
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
 
 	}
 }

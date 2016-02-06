@@ -37,8 +37,7 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -46,8 +45,7 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -123,7 +121,8 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			}
 
 			output = foodController.imageUpload(image);
-			Food food = new Food(parameters[1], parameters[2], parameters[3], price, output[0], output[1], stall);
+			Food food = new Food(parameters[1], parameters[2], parameters[3], price, output[0],
+					output[1], stall);
 
 			food.setWeatherConditions(parameters[5]);
 
@@ -141,37 +140,6 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			response.sendRedirect("/eureka_webservice/admin/food/add.jsp?stallId=" + stallId);
 		}
 
-		// String name = request.getParameter("name");
-		// String description = request.getParameter("description");
-		// String priceString = request.getParameter("price");
-		// String stallIdString = request.getParameter("stallId");
-		// System.out.println("String: " + stallIdString);
-		//
-		// String imageDirectory = request.getParameter("imageDirectory");
-		// String weatherConditions = request.getParameter("weatherConditions");
-		//
-		// try {
-		// double price = Double.parseDouble(priceString);
-		// int stallId = Integer.parseInt(stallIdString);
-		//
-		// Stall stall = stallController.getStall(stallId);
-		// Food food = new Food(name, description, price, imageDirectory,
-		// stall);
-		//
-		// food.setWeatherConditions(weatherConditions);
-		//
-		// System.out.println("foodname: " + food.getName());
-		// System.out.println("saving food...");
-		// foodController.saveFood(food);
-		//
-		// session.setAttribute("success", "Food added successfully.");
-		//
-		// response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId="
-		// + stallId);
-		//
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
 	}
 
 }
