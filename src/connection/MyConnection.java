@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import model.Canteen;
 import model.Company;
 import model.Employee;
 import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
+import model.OrderWindow;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -306,5 +308,5 @@ public class MyConnection {
 		session.getTransaction().commit();
 		session.close();
 	}
-
+	
 }

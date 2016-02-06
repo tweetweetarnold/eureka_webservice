@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import model.Canteen;
 import model.Company;
 import model.OrderWindow;
 
@@ -161,5 +162,22 @@ public class OrderWindowDAO {
 	public void updateOrderWindow(OrderWindow w) {
 		MyConnection.update(w);
 	}
+	
+	public ArrayList<OrderWindow> getAllWindowsForCanteen(Canteen canteen) {
+		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
+		dc.add(Restrictions.eq("canteen", canteen));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((OrderWindow) o);
+		}
+		return returnList;
+	}
+	
+	
 
 }
