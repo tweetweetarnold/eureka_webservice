@@ -44,9 +44,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+
 </head>
 
 <body>
+
 	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
@@ -118,11 +122,16 @@
 											<input type="file" name="file" style="width: 228px;" required />
 										</div>
 										<br>
-										
+
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
 											new Food</button>
 
 									</form>
+
+									<br>
+									<div ng-app='Arnold' ng-controller='MyController as me'>{{me.name}}</div>
+
+
 								</div>
 								<!-- /.col-lg-12 -->
 
@@ -178,6 +187,16 @@
 	<!-- Datetime picker -->
 	<script src="http://momentjs.com/downloads/moment.js"></script>
 	<script src="/eureka_webservice/resources/js/bootstrap-datetimepicker.min.js"></script>
+
+	<script>
+		(function() {
+			var app = angular.module('Arnold', []);
+
+			app.controller('MyController', function() {
+				this.name = "Arnold";
+			});
+		})();
+	</script>
 
 </body>
 

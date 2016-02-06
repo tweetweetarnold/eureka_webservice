@@ -107,7 +107,7 @@
 												${fn:length(canteen.stallList)} stalls</a>
 										</td>
 										<td>
-											<a href="#">Edit canteen</a>
+											<a href="#">Edit</a>
 										</td>
 										<td>
 											<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">

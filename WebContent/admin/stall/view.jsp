@@ -122,7 +122,7 @@
 												${fn:length(stall.foodList)} food</a>
 										</td>
 										<td>
-											<a href="/eureka_webservice/LoadAdminEditStallServlet?stallId=${stall.stallId}">Edit stall</a>
+											<a href="/eureka_webservice/LoadAdminEditStallServlet?stallId=${stall.stallId}">Edit</a>
 										</td>
 										<td>
 											<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
