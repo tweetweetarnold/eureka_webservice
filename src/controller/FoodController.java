@@ -232,104 +232,28 @@ public class FoodController {
 		return chineseValidation.checkForChineseWords(text);
 	}
 
-	public void addFood(ServletFileUpload upload, HttpServletRequest request ) throws Exception{
-		FoodController foodController = new FoodController();
+	public int addFood(ServletFileUpload upload, HttpServletRequest request) throws Exception {
+		// FoodController foodController = new FoodController();
 		StallController stallController = new StallController();
 		int stallId = 0;
 		int index = 0;
 		String[] parameters = new String[6];
 		String[] output = new String[2];
 		byte[] image = null;
-		
-			// Parse the request
-			List<FileItem> items = upload.parseRequest(request);
-			Iterator<FileItem> iter = items.iterator();
-			while (iter.hasNext()) {
-				FileItem item = (FileItem) iter.next();
-				if (!item.isFormField()) {
 
-					String contentType = item.getContentType();
-					if (!contentType.equals("image/jpeg")) {
-						throw new Exception("Invalid image format");
-					}
-
-					image = item.get();
-
-					// //
-					// parameters[index] = output[2];
-
-					// session.setAttribute("url", url);
-					// response.sendRedirect("result.jsp");
-				} else {
-					if (item.getFieldName().equals("chineseName")) {
-						String inputValues = item.getString("UTF-8");
-						parameters[index] = inputValues;
-					} else {
-						String inputValues = item.getString();
-						parameters[index] = inputValues;
-						System.out.println(item.getFieldName());
-						System.out.println(inputValues);
-					}
-				}
-				index++;
-			}
-
-			double price = Double.parseDouble(parameters[4]);
-			stallId = Integer.parseInt(parameters[0]);
-
-			Stall stall = stallController.getStall(stallId);
-			if (!parameters[2].isEmpty()) {
-				boolean isChinese = foodController.checkChineseWords(parameters[2]);
-				if (!isChinese) {
-					throw new Exception(parameters[2] + " is not a valid chinese word.");
-				}
-			}
-			boolean foodExists = foodController.checkFoodExists(parameters[1], stall);
-			if (foodExists) {
-				throw new Exception(parameters[1] + " already exists in " + stall.getName());
-			}
-
-			output = foodController.imageUpload(image);
-			Food food = new Food(parameters[1], parameters[2], parameters[3], price, output[0],
-					output[1], stall);
-
-			food.setWeatherConditions(parameters[5]);
-
-			System.out.println("foodname: " + food.getName());
-			System.out.println("saving food...");
-			saveFood(food);
-		
-	}
-	
-	
-	
-	
-	
-	
-	public void editFood(List<FileItem> items, int foodId, double price) throws Exception {
-		String[] parameters = new String[8];
-		String[] output = new String[2];
-		Food food = getFood(foodId);
+		// Parse the request
+		List<FileItem> items = upload.parseRequest(request);
 		Iterator<FileItem> iter = items.iterator();
-		int index = 0;
-		byte[] image = null;
 		while (iter.hasNext()) {
 			FileItem item = (FileItem) iter.next();
 			if (!item.isFormField()) {
-				image = item.get();
-				if (image.length != 0) {
-					String contentType = item.getContentType();
-					System.out.println(contentType);
-					if (!contentType.equals("image/jpeg")) {
-						throw new Exception("Invalid image format");
-					}
+
+				String contentType = item.getContentType();
+				if (!contentType.equals("image/jpeg")) {
+					throw new Exception("Invalid image format");
 				}
 
-				// //
-				// parameters[index] = output[2];
-
-				// session.setAttribute("url", url);
-				// response.sendRedirect("result.jsp");
+				image = item.get();
 			} else {
 				if (item.getFieldName().equals("chineseName")) {
 					String inputValues = item.getString("UTF-8");
@@ -344,18 +268,87 @@ public class FoodController {
 			index++;
 		}
 
-		boolean isChinese = checkChineseWords(parameters[2]);
-		if (!isChinese) {
-			throw new Exception(parameters[2] + " is not a valid chinese word.");
+		double price = Double.parseDouble(parameters[4]);
+		stallId = Integer.parseInt(parameters[0]);
+
+		Stall stall = stallController.getStall(stallId);
+		if (!parameters[2].isEmpty()) {
+			boolean isChinese = checkChineseWords(parameters[2]);
+			if (!isChinese) {
+				throw new Exception(parameters[2] + " is not a valid chinese word.");
+			}
 		}
+		boolean foodExists = checkFoodExists(parameters[1], stall);
+		if (foodExists) {
+			throw new Exception(parameters[1] + " already exists in " + stall.getName());
+		}
+
+		output = imageUpload(image);
+		Food food = new Food(parameters[1], parameters[2], parameters[3], price, output[0], output[1], stall);
+
+		food.setWeatherConditions(parameters[5]);
+
+		System.out.println("foodname: " + food.getName());
+		System.out.println("saving food...");
+		saveFood(food);
+		return stallId;
+
+	}
+	
+	public int editFood(ServletFileUpload upload, HttpServletRequest request ) throws Exception{
+		int index = 0;
+		byte[] image = null;
+		String[] parameters = new String[8];
+		String[] output = new String[2];
+		
+		// Parse the request
+		List<FileItem> items = upload.parseRequest(request);
+		Iterator<FileItem> iter = items.iterator();
+		while (iter.hasNext()) {
+			FileItem item = (FileItem) iter.next();
+			if (!item.isFormField()) {
+				image = item.get();
+				if (image.length != 0) {
+					String contentType = item.getContentType();
+					System.out.println(contentType);
+					if (!contentType.equals("image/jpeg")) {
+						throw new Exception("Invalid image format");
+					}
+				}
+			} else {
+				if (item.getFieldName().equals("chineseName")) {
+					String inputValues = item.getString("UTF-8");
+					parameters[index] = inputValues;
+				} else {
+					String inputValues = item.getString();
+					parameters[index] = inputValues;
+					System.out.println(item.getFieldName());
+					System.out.println(inputValues);
+				}
+			}
+			index++;
+		}
+
+		int foodId = Integer.parseInt(parameters[0]);
+		double price = Double.parseDouble(parameters[4]);
+
+		Food food = getFood(foodId);
+		int stallId = food.getStall().getStallId();
+		if (!parameters[2].isEmpty()) {
+			boolean isChinese = checkChineseWords(parameters[2]);
+			if (!isChinese) {
+				throw new Exception(parameters[2] + " is not a valid chinese word.");
+			}
+		}
+		
 		boolean hasChanges = haveChangesInParameters(food, parameters[1], parameters[2], parameters[3], price,
 				parameters[5]);
-
+		
 		if (hasChanges) {
 			foodDAO.deleteFood(food);
 			if (image.length == 0) {
-				Food newFood = new Food(parameters[1], parameters[2], parameters[3], price, food.getImageDirectory(),
-						food.getPublicId(), food.getStall());
+				Food newFood = new Food(parameters[1], parameters[2], parameters[3], price,
+						food.getImageDirectory(), food.getPublicId(), food.getStall());
 				if (!food.getModifierList().isEmpty()) {
 					updateModifierListToFood(newFood, food.getModifierSectionList());
 				} else {
@@ -383,7 +376,6 @@ public class FoodController {
 				updateFood(food);
 			}
 		}
-
+		return stallId;
 	}
-
 }
