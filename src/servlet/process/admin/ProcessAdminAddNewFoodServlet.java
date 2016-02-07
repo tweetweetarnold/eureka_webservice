@@ -16,6 +16,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import model.Food;
 import model.Stall;
@@ -51,6 +54,7 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html");
 
 		request.setCharacterEncoding("UTF-8");
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -71,60 +75,66 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 		upload.setSizeMax(1024 * 1024 * 1000);
 		int stallId = 0;
 		int index = 0;
+
 		try {
+			JSONParser parser = new JSONParser();
+			JSONObject data = (JSONObject) parser.parse(request.getReader());
+			System.out.println(data);
+
+			stallId = Integer.parseInt((String) data.get("stallId"));
+			String name = (String) data.get("name");
+			String chineseName = (String) data.get("chineseName");
+			String description = (String) data.get("description");
+			double price = Double.parseDouble((String) data.get("price"));
+			String weatherConditions = (String) data.get("weatherConditions");
+
 			// Parse the request
-			List<FileItem> items = upload.parseRequest(request);
-			Iterator<FileItem> iter = items.iterator();
-			while (iter.hasNext()) {
-				FileItem item = (FileItem) iter.next();
-				if (!item.isFormField()) {
+			// List<FileItem> items = upload.parseRequest(request);
+			// Iterator<FileItem> iter = items.iterator();
+			// while (iter.hasNext()) {
+			// FileItem item = (FileItem) iter.next();
+			// if (!item.isFormField()) {
+			//
+			// String contentType = item.getContentType();
+			// if (!contentType.equals("image/jpeg")) {
+			// throw new Exception("Invalid image format");
+			// }
+			//
+			// image = item.get();
+			//
+			// } else {
+			// if (item.getFieldName().equals("chineseName")) {
+			// String inputValues = item.getString("UTF-8");
+			// parameters[index] = inputValues;
+			// } else {
+			// String inputValues = item.getString();
+			// parameters[index] = inputValues;
+			// System.out.println(item.getFieldName());
+			// System.out.println(inputValues);
+			// }
+			// }
+			// index++;
+			// }
 
-					String contentType = item.getContentType();
-					if (!contentType.equals("image/jpeg")) {
-						throw new Exception("Invalid image format");
-					}
-
-					image = item.get();
-
-					// //
-					// parameters[index] = output[2];
-
-					// session.setAttribute("url", url);
-					// response.sendRedirect("result.jsp");
-				} else {
-					if (item.getFieldName().equals("chineseName")) {
-						String inputValues = item.getString("UTF-8");
-						parameters[index] = inputValues;
-					} else {
-						String inputValues = item.getString();
-						parameters[index] = inputValues;
-						System.out.println(item.getFieldName());
-						System.out.println(inputValues);
-					}
-				}
-				index++;
-			}
-
-			double price = Double.parseDouble(parameters[4]);
-			stallId = Integer.parseInt(parameters[0]);
+			// double price = Double.parseDouble(parameters[4]);
+			// stallId = Integer.parseInt(parameters[0]);
 
 			Stall stall = stallController.getStall(stallId);
-			if (!parameters[2].isEmpty()) {
-				boolean isChinese = foodController.checkChineseWords(parameters[2]);
-				if (!isChinese) {
-					throw new Exception(parameters[2] + " is not a valid chinese word.");
-				}
-			}
-			boolean foodExists = foodController.checkFoodExists(parameters[1], stall);
+			// if (!chineseName.isEmpty()) {
+			// boolean isChinese = foodController.checkChineseWords(chineseName);
+			// if (!isChinese) {
+			// throw new Exception(chineseName + " is not a valid chinese word.");
+			// }
+			// }
+			boolean foodExists = foodController.checkFoodExists(name, stall);
 			if (foodExists) {
-				throw new Exception(parameters[1] + " already exists in " + stall.getName());
+				throw new Exception(name + " already exists in " + stall.getName());
 			}
 
-			output = foodController.imageUpload(image);
-			Food food = new Food(parameters[1], parameters[2], parameters[3], price, output[0],
-					output[1], stall);
+			// output = foodController.imageUpload(image);
+			Food food = new Food(name, chineseName, description, price, null, null, stall);
 
-			food.setWeatherConditions(parameters[5]);
+			food.setWeatherConditions(weatherConditions);
 
 			System.out.println("foodname: " + food.getName());
 			System.out.println("saving food...");
@@ -132,7 +142,8 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 
 			session.setAttribute("success", "Food added successfully.");
 
-			response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=" + stallId);
+			// response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=" +
+			// stallId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,5 +152,4 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 		}
 
 	}
-
 }

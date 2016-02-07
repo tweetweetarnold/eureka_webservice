@@ -15,16 +15,25 @@
 
 <title>LunchTime - Admin</title>
 
+<!-- Bootstrap Core CSS -->
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 >
+
+<!-- MetisMenu CSS -->
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css"
 	rel="stylesheet"
 >
+
+<!-- Timeline CSS -->
 <link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/timeline.css" rel="stylesheet">
+
+<!-- Custom CSS -->
 <link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Morris Charts CSS -->
 <link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.css"
 	rel="stylesheet"
 >
@@ -44,13 +53,9 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-
-
 </head>
 
-<body ng-app='myApp' ng-controller='AddFoodController'>
-
+<body>
 	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
@@ -61,12 +66,18 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Add new food</h1>
+					<h1 class="page-header">Edit canteen</h1>
+
+					<!-- breadcrumb -->
+					<ol class="breadcrumb">
+						<li>
+							<a href="/eureka_webservice/LoadViewCanteenServlet">Canteens</a>
+						</li>
+					</ol>
+
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-			<!-- /.row -->
-
 			<!-- Error message handling -->
 			<c:if test="${not empty sessionScope.error}">
 				<div class="alert alert-danger" role="alert">
@@ -76,11 +87,11 @@
 				</div>
 				<c:remove var="error" scope="session" />
 			</c:if>
-
+			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Add new food</div>
+						<div class="panel-heading">Edit canteen</div>
 
 						<div class="panel-body">
 
@@ -88,76 +99,27 @@
 
 								<div class="col-lg-12">
 
-									<!-- 									<form name="addFoodForm" role="form" action="/eureka_webservice/ProcessAdminAddNewFoodServlet" method="POST" -->
-									<!-- 										id="submitForm" enctype="multipart/form-data" -->
-									<!-- 									> -->
-									<form id='addFoodForm' name="addFoodForm" novalidate>
+									<form role="form" action="/eureka_webservice/ProcessAdminEditCanteenServlet" method="POST" id="submitForm"
+										enctype="multipart/form-data"
+									>
 
-										<input ng-model='food.stallId' type="text" name="stallId" value="2">
+										<input type="hidden" name="canteenId" value="${canteenId}">
 
 										<div class="form-group">
-											<label>Food name</label>
-											<input ng-model='food.name' class="form-control" name="name" required>
+											<label>Canteen name</label>
+											<input class="form-control" name="name" value="${sessionScope.name}" required>
 										</div>
 
 										<div class="form-group">
-											<label>Food name (Chinese)</label>
-											<input ng-model='food.chineseName' class="form-control" name="chineseName">
+											<label>Contact no</label>
+											<input class="form-control" name="contactNo" value="${sessionScope.contactNo}" required>
 										</div>
 
-										<div class="form-group">
-											<label>Description (Optional)</label>
-											<input ng-model='food.description' class="form-control" name="description">
-										</div>
 
-										<div class="form-group">
-											<label>Price</label>
-											<input ng-model='food.price' class="form-control" name="price">
-										</div>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update
+											Canteen details</button>
 
-										<div class="form-group">
-											<label>Weather Conditions</label>
-											<input ng-model='food.weatherConditions' class="form-control" name="weatherConditions">
-										</div>
-
-										<div class="form-group">
-											<label>Image Directory (*only accepts jpeg or jpg image formats)</label>
-											<input ng-model='food.file' type="file" name="file" style="width: 228px;" />
-										</div>
 									</form>
-
-									<form name='modifierForm' novalidate>
-										<div class="form-group">
-											<label>Modifiers (Optional)</label>
-											<br>
-											<input type="text" name="name" ng-model='modifier.name' placeholder="Modifier Name" required>
-											<input type="number" name="price" ng-model='modifier.price' placeholder="Modifier Price" required>
-											<button ng-disabled='modifierForm.$invalid' ng-click='addModifier(modifier)'>Add Modifier</button>
-											<br>
-											<div ng-show='modifierList.length > 0'>
-												<br>
-												<table class="table">
-													<tr ng-repeat='modifier2 in modifierList track by $index'>
-														<td>{{modifier2.name}}</td>
-														<td>{{modifier2.price | currency}}</td>
-														<td>
-															<button type="submit" ng-click='removeModifier($index)' class="btn btn-link btn-xs">
-																<i class="fa fa-trash-o fa-2x"></i>
-															</button>
-														</td>
-													</tr>
-												</table>
-											</div>
-										</div>
-									</form>
-
-									<button ng-disabled='addFoodForm.$invalid' type="button" class="btn btn-primary" data-toggle="modal"
-										data-target=".bs-example-modal-sm"
-									>Add new Food</button>
-
-
-									<br>
-
 								</div>
 								<!-- /.col-lg-12 -->
 
@@ -180,16 +142,16 @@
 	<!-- /#wrapper -->
 
 	<!-- Create confirmation -->
-	<div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title">Confirmation</h4>
 				</div>
-				<div class="modal-body">Are you sure you want to Add new Food?</div>
+				<div class="modal-body">Are you sure you want to update Canteen details?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline btn-default">Cancel</button>
-					<button type="submit" ng-click='submitForm()' class="btn btn-primary">Confirm</button>
+					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
 				</div>
 			</div>
 		</div>
@@ -212,42 +174,7 @@
 
 	<!-- Datetime picker -->
 	<script src="http://momentjs.com/downloads/moment.js"></script>
-	<script src="/eureka_webservice/resources/js/bootstrap-datetimepicker.min.js"></script>
-
-	<script>
-		var app = angular.module('myApp', []);
-
-		app.controller('AddFoodController', function($scope, $http) {
-
-			$scope.modifierList = [];
-
-			$scope.addModifier = function(modifier) {
-				$scope.modifierList.push(angular.copy(modifier));
-				$scope.modifier = {};
-				console.log($scope.modifierList);
-			};
-
-			$scope.removeModifier = function(index) {
-				$scope.modifierList.splice(index, 1);
-				console.log('removing modifier');
-			};
-
-			$scope.submitForm = function() {
-				$scope.food.modifierList = angular.copy($scope.modifierList);
-
-				console.log($scope.food);
-
-				$http({
-					method : 'POST',
-					url : '/eureka_webservice/ProcessAdminAddNewFoodServlet',
-					data : $scope.food
-				}).then(function successCallback(response) {
-					alert('success');
-				});
-
-			};
-		});
-	</script>
+	<script src="resources/js/bootstrap-datetimepicker.min.js"></script>
 
 </body>
 

@@ -10,3 +10,5 @@ src/servlet/TestServlet.java
 /doc
 src/test/ArnoldTest.java
 WebContent/test.jsp
+src/servlet/MyJSONTestServlet.java
+src/servlet/process/admin/ProcessAdminAddNewFoodServlet2.java
