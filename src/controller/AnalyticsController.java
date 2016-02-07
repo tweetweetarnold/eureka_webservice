@@ -36,7 +36,7 @@ public class AnalyticsController {
 			allFoodOrderList.addAll( foodOrderDAO.getAllFoodOrderOfOrderWindow(orderWindow));
 		}
 		
-		LinkedHashMap<Food , Integer> returnMap = new LinkedHashMap<Food, Integer>(); 
+		LinkedHashMap<Food , Integer> foodCountMap = new LinkedHashMap<Food, Integer>(); 
 		
 		Set<FoodOrderItem> foodOrderItemSet = new HashSet<FoodOrderItem>();
 		
@@ -50,18 +50,18 @@ public class AnalyticsController {
 			Food food = foodOrderItem.getFood();
 			int count = 0;
 			
-			if(returnMap.containsKey(food)){
-				count = returnMap.get(food);
+			if(foodCountMap.containsKey(food)){
+				count = foodCountMap.get(food);
 			}
 			
 			int quantity = foodOrderItem.getQuantity();
 			count += quantity;
-			returnMap.put(food, count);
+			foodCountMap.put(food, count);
 		}
 		
 		//sort by integer
 		List<Map.Entry<Food, Integer>> entries =
-				  new ArrayList<Map.Entry<Food, Integer>>(returnMap.entrySet());
+				  new ArrayList<Map.Entry<Food, Integer>>(foodCountMap.entrySet());
 		Collections.sort(entries, new Comparator<Map.Entry<Food, Integer>>() {
 			  public int compare(Map.Entry<Food, Integer> a, Map.Entry<Food, Integer> b){
 			    return a.getValue().compareTo(b.getValue());

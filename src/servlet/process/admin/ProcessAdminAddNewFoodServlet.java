@@ -44,10 +44,62 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 		doPost(request, response);
 	}
 
+	
+	
+	
+	
+	
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		response.setCharacterEncoding("UTF-8");
+
+		request.setCharacterEncoding("UTF-8");
+		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		FoodController foodController = new FoodController();
+		
+
+		// Create a factory for disk-based file items
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		// Configure a repository (to ensure a secure temp location is used)
+		ServletContext servletContext = this.getServletConfig().getServletContext();
+		File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+		factory.setRepository(repository);
+		// Create a new file upload handler and set max size
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		upload.setSizeMax(1024 * 1024 * 1000);
+		int stallId = 0;
+		try {
+			foodController.addFood(upload,request);
+
+			session.setAttribute("success", "Food added successfully.");
+
+			response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=" + stallId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("error", e.getMessage());
+			response.sendRedirect("/eureka_webservice/admin/food/add.jsp?stallId=" + stallId);
+		}
+
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		response.setCharacterEncoding("UTF-8");
@@ -141,5 +193,6 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 		}
 
 	}
-
+	
+	
 }
