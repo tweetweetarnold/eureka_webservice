@@ -70,109 +70,9 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(1024 * 1024 * 1000);
 		int stallId = 0;
-		try {
-			foodController.addFood(upload, request);
-
-			session.setAttribute("success", "Food added successfully.");
-
-			response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=" + stallId);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			session.setAttribute("error", e.getMessage());
-			response.sendRedirect("/eureka_webservice/admin/food/add.jsp?stallId=" + stallId);
-		}
-
-	}
-
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		response.setCharacterEncoding("UTF-8");
-
-		request.setCharacterEncoding("UTF-8");
-		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		FoodController foodController = new FoodController();
-		StallController stallController = new StallController();
-		String[] parameters = new String[6];
-		String[] output = new String[2];
-		byte[] image = null;
-
-		// Create a factory for disk-based file items
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-		// Configure a repository (to ensure a secure temp location is used)
-		ServletContext servletContext = this.getServletConfig().getServletContext();
-		File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
-		factory.setRepository(repository);
-		// Create a new file upload handler and set max size
-		ServletFileUpload upload = new ServletFileUpload(factory);
-		upload.setSizeMax(1024 * 1024 * 1000);
-		int stallId = 0;
-		int index = 0;
 
 		try {
-			JSONParser parser = new JSONParser();
-			JSONObject data = (JSONObject) parser.parse(request.getReader());
-			System.out.println(data);
-
-			stallId = Integer.parseInt((String) data.get("stallId"));
-			String name = (String) data.get("name");
-			String chineseName = (String) data.get("chineseName");
-			String description = (String) data.get("description");
-			double price = Double.parseDouble((String) data.get("price"));
-			String weatherConditions = (String) data.get("weatherConditions");
-
-			// Parse the request
-			// List<FileItem> items = upload.parseRequest(request);
-			// Iterator<FileItem> iter = items.iterator();
-			// while (iter.hasNext()) {
-			// FileItem item = (FileItem) iter.next();
-			// if (!item.isFormField()) {
-			//
-			// String contentType = item.getContentType();
-			// if (!contentType.equals("image/jpeg")) {
-			// throw new Exception("Invalid image format");
-			// }
-			//
-			// image = item.get();
-			//
-			// } else {
-			// if (item.getFieldName().equals("chineseName")) {
-			// String inputValues = item.getString("UTF-8");
-			// parameters[index] = inputValues;
-			// } else {
-			// String inputValues = item.getString();
-			// parameters[index] = inputValues;
-			// System.out.println(item.getFieldName());
-			// System.out.println(inputValues);
-			// }
-			// }
-			// index++;
-			// }
-
-			// double price = Double.parseDouble(parameters[4]);
-			// stallId = Integer.parseInt(parameters[0]);
-
-			Stall stall = stallController.getStall(stallId);
-			// if (!chineseName.isEmpty()) {
-			// boolean isChinese = foodController.checkChineseWords(chineseName);
-			// if (!isChinese) {
-			// throw new Exception(chineseName + " is not a valid chinese word.");
-			// }
-			// }
-			boolean foodExists = foodController.checkFoodExists(name, stall);
-			if (foodExists) {
-				throw new Exception(name + " already exists in " + stall.getName());
-			}
-
-			// output = foodController.imageUpload(image);
-			Food food = new Food(name, chineseName, description, price, null, null, stall);
-
-			food.setWeatherConditions(weatherConditions);
-
-			System.out.println("foodname: " + food.getName());
-			System.out.println("saving food...");
-			foodController.saveFood(food);
+			stallId = foodController.addFood(upload, request);
 
 			session.setAttribute("success", "Food added successfully.");
 
@@ -186,5 +86,4 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 		}
 
 	}
-
 }

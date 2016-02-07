@@ -54,7 +54,7 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		StallController stallController = new StallController();
 		String[] parameters = new String[3];
-		String[] output = new String[2];
+		
 		byte[] image = null;
 
 		// Create a factory for disk-based file items
@@ -83,53 +83,20 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 							throw new Exception("Invalid image format");
 						}
 					}
-
 				} else {
 
 					String inputValues = item.getString();
 					parameters[index] = inputValues;
-					System.out.println(item.getFieldName());
-					System.out.println(inputValues);
-
 				}
 				index++;
 			}
+			//End of parsing the request
 
 			int stallId = Integer.parseInt(parameters[0]);
-			long contactNo = stallController.validatesContactNumber(parameters[2]);
-
-			Stall stall = stallController.getStall(stallId);
-			int canteenId = stall.getCanteen().getCanteenId();
-
-			boolean hasChanges = stallController.haveChangesInParameters(stall, parameters[1], contactNo);
-			if (hasChanges) {
-				stallController.deleteStall(stall);
-				if (image.length == 0) {
-					Stall newStall = new Stall(parameters[1], contactNo, stall.getCanteen(), new HashSet<Food>(),
-							stall.getImageDirectory(), stall.getPublicId());
-					if (!stall.getFoodList().isEmpty()) {
-						stallController.updateFoodListToStall(stall.getFoodList(), newStall);
-					}
-					stallController.saveStall(newStall);
-				} else {
-					output = stallController.replaceOldImage(stall.getPublicId(), image);
-					Stall newStall = new Stall(parameters[1], contactNo, stall.getCanteen(), new HashSet<Food>(),
-							output[0], output[1]);
-					if (!stall.getFoodList().isEmpty()) {
-						stallController.updateFoodListToStall(stall.getFoodList(), newStall);
-					}
-					stallController.saveStall(newStall);
-				}
-			} else {
-				if (image.length == 0) {
-					throw new Exception("The details entered are the same as the current stall details");
-				} else {
-					output = stallController.replaceOldImage(stall.getPublicId(), image);
-					stall.setImageDirectory(output[0]);
-					stall.setPublicId(output[1]);
-					stallController.updateStall(stall);
-				}
-			}
+			Stall currentStall = stallController.getStall(stallId);
+			int canteenId = currentStall.getCanteen().getCanteenId();
+			
+			stallController.processEditingStall(image, parameters, currentStall);
 
 			session.setAttribute("success", "Stall updated successfully.");
 
@@ -140,30 +107,6 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 			session.setAttribute("error", e.getMessage());
 			response.sendRedirect("/eureka_webservice/admin/stall/edit.jsp");
 		}
-
-		// String stallIdString = request.getParameter("stallId");
-		// String name = request.getParameter("name");
-		// String contactNoString = request.getParameter("contactNo");
-		// String imageDirectory = request.getParameter("imageDirectory");
-		//
-		// int stallId = Integer.parseInt(stallIdString);
-		// long contactNo = Long.parseLong(contactNoString);
-		//
-		// Stall stall = stallController.getStall(stallId);
-		// int canteenId = stall.getCanteen().getCanteenId();
-		//
-		// stall.setName(name);
-		// stall.setContactNo(contactNo);
-		// stall.setImageDirectory(imageDirectory);
-		//
-		// System.out.println("stallname: " + stall.getName());
-		// System.out.println("saving stall...");
-		// stallController.updateStall(stall);
-		//
-		// session.setAttribute("success", "Stall updated successfully.");
-		//
-		// response.sendRedirect("/eureka_webservice/LoadAdminViewStallsServlet?canteenId="
-		// + canteenId);
 	}
 
 }
