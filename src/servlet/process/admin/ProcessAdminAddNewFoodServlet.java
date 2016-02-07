@@ -43,12 +43,6 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doPost(request, response);
 	}
-
-	
-	
-	
-	
-	
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -57,8 +51,8 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		response.setCharacterEncoding("UTF-8");
-
 		request.setCharacterEncoding("UTF-8");
+		
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		FoodController foodController = new FoodController();
 		
@@ -71,10 +65,41 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 		// Create a new file upload handler and set max size
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(1024 * 1024 * 1000);
+		
 		int stallId = 0;
+		int index = 0;
+		String[] parameters = new String[6];
+		byte[] image = null;
 		
 		try {
-			stallId = foodController.addFood(upload,request);
+			// Parse the request
+			List<FileItem> items = upload.parseRequest(request);
+			Iterator<FileItem> iter = items.iterator();
+			while (iter.hasNext()) {
+				FileItem item = (FileItem) iter.next();
+				if (!item.isFormField()) {
+					String contentType = item.getContentType();
+					if (!contentType.equals("image/jpeg")) {
+						throw new Exception("Invalid image format");
+					}
+					image = item.get();
+				} else {
+					if (item.getFieldName().equals("chineseName")) {
+						String inputValues = item.getString("UTF-8");
+						parameters[index] = inputValues;
+					} else {
+						String inputValues = item.getString();
+						parameters[index] = inputValues;
+						System.out.println(item.getFieldName());
+						System.out.println(inputValues);
+					}
+				}
+				index++;
+			}
+			//End of parsing request
+			
+			stallId = Integer.parseInt(parameters[0]);
+			foodController.processAddingFood(image, parameters, stallId);
 
 			session.setAttribute("success", "Food added successfully.");
 

@@ -232,44 +232,17 @@ public class FoodController {
 		return chineseValidation.checkForChineseWords(text);
 	}
 
-	public int addFood(ServletFileUpload upload, HttpServletRequest request) throws Exception {
+	public void processAddingFood(byte[] image, String[] parameters, int stallId) throws Exception {
 		// FoodController foodController = new FoodController();
 		StallController stallController = new StallController();
-		int stallId = 0;
-		int index = 0;
-		String[] parameters = new String[6];
-		String[] output = new String[2];
-		byte[] image = null;
-
-		// Parse the request
-		List<FileItem> items = upload.parseRequest(request);
-		Iterator<FileItem> iter = items.iterator();
-		while (iter.hasNext()) {
-			FileItem item = (FileItem) iter.next();
-			if (!item.isFormField()) {
-
-				String contentType = item.getContentType();
-				if (!contentType.equals("image/jpeg")) {
-					throw new Exception("Invalid image format");
-				}
-
-				image = item.get();
-			} else {
-				if (item.getFieldName().equals("chineseName")) {
-					String inputValues = item.getString("UTF-8");
-					parameters[index] = inputValues;
-				} else {
-					String inputValues = item.getString();
-					parameters[index] = inputValues;
-					System.out.println(item.getFieldName());
-					System.out.println(inputValues);
-				}
-			}
-			index++;
-		}
+		String[] cloudinaryOutput = new String[2];
+		/*
+		 * cloudinaryOutput[0] stores the image url 
+		 * cloudinaryOutput[1] stores the image publicId
+		 */
 
 		double price = Double.parseDouble(parameters[4]);
-		stallId = Integer.parseInt(parameters[0]);
+		
 
 		Stall stall = stallController.getStall(stallId);
 		if (!parameters[2].isEmpty()) {
@@ -283,15 +256,15 @@ public class FoodController {
 			throw new Exception(parameters[1] + " already exists in " + stall.getName());
 		}
 
-		output = imageUpload(image);
-		Food food = new Food(parameters[1], parameters[2], parameters[3], price, output[0], output[1], stall);
+		cloudinaryOutput = imageUpload(image);
+		Food food = new Food(parameters[1], parameters[2], parameters[3], price, cloudinaryOutput[0], cloudinaryOutput[1], stall);
 
 		food.setWeatherConditions(parameters[5]);
 
 		System.out.println("foodname: " + food.getName());
 		System.out.println("saving food...");
 		saveFood(food);
-		return stallId;
+		
 
 	}
 	
@@ -299,7 +272,11 @@ public class FoodController {
 		int index = 0;
 		byte[] image = null;
 		String[] parameters = new String[8];
-		String[] output = new String[2];
+		String[] cloudinaryOutput = new String[2];
+		/*
+		 * cloudinaryOutput[0] stores the image url 
+		 * cloudinaryOutput[1] stores the image publicId
+		 */
 		
 		// Parse the request
 		List<FileItem> items = upload.parseRequest(request);
@@ -355,9 +332,9 @@ public class FoodController {
 					saveFood(newFood);
 				}
 			} else {
-				output = replaceImage(food.getPublicId(), image);
+				cloudinaryOutput = replaceImage(food.getPublicId(), image);
 
-				Food newFood = new Food(parameters[1], parameters[2], parameters[3], price, output[0], output[1],
+				Food newFood = new Food(parameters[1], parameters[2], parameters[3], price, cloudinaryOutput[0], cloudinaryOutput[1],
 						food.getStall());
 				newFood.setWeatherConditions(parameters[5]);
 				if (!food.getModifierList().isEmpty()) {
@@ -370,9 +347,9 @@ public class FoodController {
 			if (image.length == 0) {
 				throw new Exception("The details entered are the same as the current food details");
 			} else {
-				output = replaceImage(food.getPublicId(), image);
-				food.setImageDirectory(output[0]);
-				food.setPublicId(output[1]);
+				cloudinaryOutput = replaceImage(food.getPublicId(), image);
+				food.setImageDirectory(cloudinaryOutput[0]);
+				food.setPublicId(cloudinaryOutput[1]);
 				updateFood(food);
 			}
 		}
