@@ -1,13 +1,18 @@
 package servlet.load.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import model.Employee;
+
+import com.google.gson.Gson;
 
 import dao.EmployeeDAO;
 
@@ -39,12 +44,16 @@ public class LoadAdminViewUsersServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+
+		Gson gson = new Gson();
 
 		EmployeeDAO eDao = new EmployeeDAO();
-		//session.setAttribute("userMgmtView", eDao.getAllEmployees());
-		session.setAttribute("userMgmtView", eDao.getAllNonDestroyedEmployees());
-		response.sendRedirect("/eureka_webservice/admin/user/view.jsp");
+
+		ArrayList<Employee> list = eDao.getAllNonDestroyedEmployees();
+		out.print(gson.toJson(list));
+
 	}
 
 }

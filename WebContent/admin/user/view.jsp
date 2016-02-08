@@ -37,9 +37,11 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="ViewUserController">
 	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
@@ -58,18 +60,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 
-					<!-- Success message handling -->
-					<c:if test="${not empty sessionScope.success}">
-						<div class="alert alert-success" role="alert">
-							<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-							<span class="sr-only">Success: </span>
-							${success}
-						</div>
-						<c:remove var="success" scope="session" />
-					</c:if>
-
 					<b>Total users:</b>
-					${fn:length(sessionScope.userMgmtView)}
+					{{data.length}}
 					<br>
 					<br>
 
@@ -89,71 +81,63 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.userMgmtView}" var="user" varStatus="loop">
-									<tr>
-										<td>${user.company.name}</td>
-										<td>${user.name}</td>
-										<td>${user.email}</td>
-										<td>
-											<fmt:formatDate type="both" value="${user.createDate}" />
-										</td>
-										<td>
-											$
-											<fmt:formatNumber value="${user.amountOwed}" var="amt" minFractionDigits="2" />${amt}</td>
-										<td>${user.status}</td>
-										<td>
-											<a href="/eureka_webservice/LoadAdminViewUserOrderHistoryServlet?email=${user.email}&name=${user.name}">
-												Order History</a>
-										</td>
-										<td>
-											<a href="#">Edit</a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
-												<i class="fa fa-trash-o fa-2x"></i>
-											</button>
+								<tr ng-repeat="user in data track by $index">
+									<td>{{user.company.name}}</td>
+									<td>{{user.name}}</td>
+									<td>{{user.email}}</td>
+									<td>{{user.createDate}}</td>
+									<td>{{user.amountOwed | currency}}</td>
+									<td>{{user.status}}</td>
+									<td>
+										<a ng-href="/eureka_webservice/LoadAdminViewUserOrderHistoryServlet?email={{user.email}}&name={{user.name}}">
+											Order History</a>
+									</td>
+									<td>
+										<a href="#">Edit</a>
+									</td>
+									<td>
+										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete{{$index}}">
+											<i class="fa fa-trash-o fa-2x"></i>
+										</button>
 
-											<!-- Modal delete -->
-											<div class="modal fade" id="modalDelete${loop.index}" tabindex="-1" role="dialog"
-												aria-labelledby="myModalLabel"
-											>
-												<div class="modal-dialog" role="document">
-													<form action="/eureka_webservice/ProcessAdminDeleteUserServlet" method="post">
-														<input type="hidden" name="emailID" value="${user.email}">
-														<div class="modal-content">
-															<div class="modal-header">
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-																<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
-															</div>
-															<!-- / modal header -->
-															<div class="modal-body">
-																<p>
-																	<b>WARNING: </b>
-																	You are deleting a user.
-																	<br>
-																	<br>
-																	Are you sure you want to continue?
-																</p>
-															</div>
-															<!-- / modal body -->
-
-															<div class="modal-footer">
-																<!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-																<button type="button" class="btn btn-default" data-dismiss="modal">No, keep the user</button>
-																<button type="submit" class="btn btn-danger">Yes, delete the user</button>
-															</div>
-															<!-- / modal footer -->
+										<!-- Modal delete -->
+										<div class="modal fade" id="modalDelete{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<form action="/eureka_webservice/ProcessAdminDeleteUserServlet" method="post">
+													<input type="hidden" name="emailID" ng-value="user.email">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+															<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
 														</div>
-														<!-- / modal content -->
-													</form>
-												</div>
+														<!-- / modal header -->
+														<div class="modal-body">
+															<p>
+																<b>WARNING: </b>
+																You are deleting user {{user.name}} ({{user.email}}).
+																<br>
+																<br>
+																Are you sure you want to continue?
+															</p>
+														</div>
+														<!-- / modal body -->
+
+														<div class="modal-footer">
+															<!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+															<button type="button" class="btn btn-default" data-dismiss="modal">No, keep the user</button>
+															<button type="submit" class="btn btn-danger">Yes, delete the user</button>
+														</div>
+														<!-- / modal footer -->
+													</div>
+													<!-- / modal content -->
+												</form>
 											</div>
-											<!-- / Modal delete -->
-										</td>
-									</tr>
-								</c:forEach>
+										</div>
+										<!-- / Modal delete -->
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -179,6 +163,28 @@
 	></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+
+	<script>
+		var app = angular.module('myApp', []);
+
+		app.controller('ViewUserController', [ '$http', '$scope',
+				function($http, $scope) {
+					$http({
+						method : 'GET',
+						url : '/eureka_webservice/LoadAdminViewUsersServlet'
+					}).then(function successCallback(response) {
+						console.log(response);
+						console.log(response.data);
+						$scope.data = response.data;
+						$scope.display = response.status;
+					}, function errorCallback(response) {
+						alert('fail');
+					});
+				}
+
+		]);
+	</script>
+
 </body>
 
 </html>
