@@ -88,9 +88,6 @@
 
 								<div class="col-lg-12">
 
-									<!-- 									<form name="addFoodForm" role="form" action="/eureka_webservice/ProcessAdminAddNewFoodServlet" method="POST" -->
-									<!-- 										id="submitForm" enctype="multipart/form-data" -->
-									<!-- 									> -->
 									<form id='addFoodForm' name="addFoodForm" novalidate>
 
 										<input ng-model='food.stallId' type="text" name="stallId" value="2">
@@ -122,7 +119,7 @@
 
 										<div class="form-group">
 											<label>Image Directory (*only accepts jpeg or jpg image formats)</label>
-											<input ng-model='food.file' type="file" name="file" style="width: 228px;" />
+											<input fileread='food.file' type="file" name="file" style="width: 228px;" />
 										</div>
 									</form>
 
@@ -233,20 +230,39 @@
 			};
 
 			$scope.submitForm = function() {
+				var object = {};
 				$scope.food.modifierList = angular.copy($scope.modifierList);
+				object.food = $scope.food;
 
-				console.log($scope.food);
+				console.log(object);
 
 				$http({
 					method : 'POST',
 					url : '/eureka_webservice/ProcessAdminAddNewFoodServlet',
-					data : $scope.food
+					data : object
 				}).then(function successCallback(response) {
 					alert('success');
 				});
 
 			};
 		});
+
+		app.directive("fileread", [ function() {
+			return {
+				scope : {
+					fileread : "="
+				},
+				link : function(scope, element, attributes) {
+					element.bind("change", function(changeEvent) {
+						scope.$apply(function() {
+							scope.fileread = changeEvent.target.files[0];
+							// or all selected files:
+							// scope.fileread = changeEvent.target.files;
+						});
+					});
+				}
+			};
+		} ]);
 	</script>
 
 </body>

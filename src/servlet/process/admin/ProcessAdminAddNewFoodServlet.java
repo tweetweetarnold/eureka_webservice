@@ -2,8 +2,7 @@ package servlet.process.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,14 +15,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import model.Food;
-import model.Stall;
 import controller.FoodController;
-import controller.StallController;
 
 /**
  * Servlet implementation class ProcessAdminAddNewFoodServlet
@@ -52,27 +48,47 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
-
 		request.setCharacterEncoding("UTF-8");
-		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+
 		FoodController foodController = new FoodController();
 
 		// Create a factory for disk-based file items
 		DiskFileItemFactory factory = new DiskFileItemFactory();
+
 		// Configure a repository (to ensure a secure temp location is used)
 		ServletContext servletContext = this.getServletConfig().getServletContext();
+
 		File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
 		factory.setRepository(repository);
+
 		// Create a new file upload handler and set max size
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(1024 * 1024 * 1000);
+
 		int stallId = 0;
 
 		try {
-			stallId = foodController.addFood(upload, request);
+			JSONParser parser = new JSONParser();
+			JSONObject data = (JSONObject) parser.parse(request.getReader());
+			System.out.println(data);
+
+			JSONObject food = (JSONObject) data.get("food");
+			String name = (String) food.get("name");
+			String chineseName = (String) food.get("chineseName");
+			String description = (String) food.get("description");
+			String weatherConditions = (String) food.get("weatherConditions");
+			double price = Double.parseDouble((String) food.get("price"));
+			stallId = Integer.parseInt((String) food.get("stallId"));
+			byte[] image = food.get("file").toString().getBytes("utf-8");
+			JSONArray modifierList = (JSONArray) food.get("modifierList");
+
+			foodController.addFood2(name, chineseName, description, weatherConditions, image,
+					modifierList, price, stallId);
+			// stallId = foodController.addFood(upload, request);
 
 			session.setAttribute("success", "Food added successfully.");
 

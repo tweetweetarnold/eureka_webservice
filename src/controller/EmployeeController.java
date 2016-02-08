@@ -69,6 +69,12 @@ public class EmployeeController {
 		employeeDAO.saveEmployee(e);
 	}
 
+	public void suspendUser(String email){
+		Employee employeeToSuspend = getEmployeeByEmail(email);
+		employeeToSuspend.setStatus(StringValues.EMPLOYEE_SUSPENDED);
+		updateEmployee(employeeToSuspend);
+	}
+
 	public void updateAmountOwed(ArrayList<Employee> arrayList, double amount){
 		for(Employee employee :arrayList){
 			employee.setAmountOwed(amount);
@@ -76,7 +82,7 @@ public class EmployeeController {
 		}
 			
 	}
-
+	
 	/**
 	 * Updates the Employee's specified food delivery point
 	 * 
@@ -88,7 +94,7 @@ public class EmployeeController {
 		employee.setDeliveryPoint(buildingName);
 		employeeDAO.updateEmployee(employee);
 	}
-	
+
 	/**
 	 * Updates the designated Employee object in the Database
 	 * 
@@ -96,11 +102,5 @@ public class EmployeeController {
 	 */
 	public void updateEmployee(Employee e) {
 		employeeDAO.updateEmployee(e);
-	}
-
-	public void suspendUser(String email){
-		Employee employeeToSuspend = getEmployeeByEmail(email);
-		employeeToSuspend.setStatus(StringValues.EMPLOYEE_SUSPENDED);
-		updateEmployee(employeeToSuspend);
 	}
 }

@@ -57,7 +57,7 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					
+
 					<!-- Success message handling -->
 					<c:if test="${not empty sessionScope.success}">
 						<div class="alert alert-success" role="alert">
@@ -67,7 +67,7 @@
 						</div>
 						<c:remove var="success" scope="session" />
 					</c:if>
-					
+
 					<b>Total users:</b>
 					${fn:length(sessionScope.userMgmtView)}
 					<br>
@@ -102,7 +102,7 @@
 											<fmt:formatNumber value="${user.amountOwed}" var="amt" minFractionDigits="2" />${amt}</td>
 										<td>${user.status}</td>
 										<td>
-											<a href="/eureka_webservice/LoadAdminViewUserOrderHistoryServlet?email=${user.email}&name=${user.name}">View
+											<a href="/eureka_webservice/LoadAdminViewUserOrderHistoryServlet?email=${user.email}&name=${user.name}">
 												Order History</a>
 										</td>
 										<td>
@@ -141,8 +141,8 @@
 
 															<div class="modal-footer">
 																<!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-																 <button type="button" class="btn btn-default" data-dismiss="modal">No, keep the user</button> 
-																<button type="submit" class="btn btn-danger">Yes, delete the user</button> 
+																<button type="button" class="btn btn-default" data-dismiss="modal">No, keep the user</button>
+																<button type="submit" class="btn btn-danger">Yes, delete the user</button>
 															</div>
 															<!-- / modal footer -->
 														</div>
