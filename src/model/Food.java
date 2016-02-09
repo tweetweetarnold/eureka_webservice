@@ -16,6 +16,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
+
 import value.StringValues;
 
 /**
@@ -24,6 +30,7 @@ import value.StringValues;
  * @author SMU Team Eureka
  */
 @Entity
+@Indexed
 @Table(name = "food")
 public class Food {
 	private Date createDate;
@@ -36,7 +43,9 @@ public class Food {
 	private Set<Modifier> modifierList;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<ModifierSection> modifierSectionList;
-	private String name, chineseName, status;
+	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.YES)
+	private String name;
+	private String chineseName, status;
 	private double price;
 	private String publicId;
 	@ManyToOne(cascade = CascadeType.ALL)

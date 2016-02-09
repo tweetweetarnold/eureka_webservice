@@ -21,6 +21,8 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
 
 public class MyConnection {
 	private static SessionFactory sessionFactory;
@@ -51,6 +53,7 @@ public class MyConnection {
 				}
 				System.out.println("SessionFactory is set: " + sessionFactory);
 			}
+			
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
@@ -294,8 +297,13 @@ public class MyConnection {
 			System.out.println("Session is set: " + session);
 			session.beginTransaction();
 			System.out.println("Session transaction started");
+			FullTextSession fullTextSession = Search.getFullTextSession(session);
+			fullTextSession.createIndexer().startAndWait();
 			return session;
 		} catch (HibernateException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
