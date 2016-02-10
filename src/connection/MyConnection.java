@@ -297,13 +297,8 @@ public class MyConnection {
 			System.out.println("Session is set: " + session);
 			session.beginTransaction();
 			System.out.println("Session transaction started");
-			FullTextSession fullTextSession = Search.getFullTextSession(session);
-			fullTextSession.createIndexer().startAndWait();
 			return session;
 		} catch (HibernateException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
