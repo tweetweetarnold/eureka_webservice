@@ -100,36 +100,6 @@ public class StallController {
 		return cloudinaryUpload.imageUpload(image);
 	}
 
-	public String[] replaceOldImage(String oldPublicId, byte[] image) throws IOException {
-		return cloudinaryUpload.replaceImage(oldPublicId, image);
-	}
-
-	public void saveStall(Stall s) {
-		stallDAO.saveStall(s);
-	}
-
-	public void updateFoodListToStall(Set<Food> foodList, Stall newStall) {
-		stallDAO.setFoodListToStall(foodList, newStall);
-	}
-
-	/**
-	 * Updates the designated Stall object in the Database
-	 * 
-	 * @param s
-	 *            The Stall object to be updated
-	 */
-	public void updateStall(Stall s) {
-		stallDAO.updateStall(s);
-	}
-
-	public long validatesContactNumber(String contactNo) throws Exception {
-		if (contactNo.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
-			return Long.parseLong(contactNo);
-		} else {
-			throw new Exception("Invalid contact number");
-		}
-	}
-
 	public void processAddingStall(byte[] image, String[] parameters, int canteenId) throws Exception {
 		CanteenController canteenController = new CanteenController();
 		String[] cloudinaryOutput = new String[2];
@@ -191,6 +161,36 @@ public class StallController {
 				stall.setPublicId(cloudinaryOutput[1]);
 				updateStall(stall);
 			}
+		}
+	}
+
+	public String[] replaceOldImage(String oldPublicId, byte[] image) throws IOException {
+		return cloudinaryUpload.replaceImage(oldPublicId, image);
+	}
+
+	public void saveStall(Stall s) {
+		stallDAO.saveStall(s);
+	}
+
+	public void updateFoodListToStall(Set<Food> foodList, Stall newStall) {
+		stallDAO.setFoodListToStall(foodList, newStall);
+	}
+
+	/**
+	 * Updates the designated Stall object in the Database
+	 * 
+	 * @param s
+	 *            The Stall object to be updated
+	 */
+	public void updateStall(Stall s) {
+		stallDAO.updateStall(s);
+	}
+
+	public long validatesContactNumber(String contactNo) throws Exception {
+		if (contactNo.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+			return Long.parseLong(contactNo);
+		} else {
+			throw new Exception("Invalid contact number");
 		}
 	}
 }

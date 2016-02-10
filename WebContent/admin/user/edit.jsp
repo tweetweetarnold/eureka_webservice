@@ -38,6 +38,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
 
 </head>
 
@@ -60,9 +61,6 @@
 			<div class="row">
 				<div class="col-lg-12">
 
-					<b>Total users:</b>
-					{{data.length}}
-					<br>
 					<br>
 
 					<div class="dataTable_wrapper">
@@ -75,71 +73,29 @@
 									<th>Date Joined</th>
 									<th>O/S</th>
 									<th>Status</th>
-									<th></th>
-									<th></th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="user in data track by $index">
+								<tr>
 									<td>{{user.company.name}}</td>
-									<td>{{user.name}}</td>
-									<td>{{user.email}}</td>
+									<td>
+										<input type='text' ng-model='user.name' ng-value="user.name" placeholder='Chris Cheng'>
+									</td>
+									<td>
+										<input type='email' ng-model='user.email' ng-value="user.email" placeholder='chris.cheng.2013@smu.edu.sg'>
+									</td>
 									<td>{{user.createDate}}</td>
-									<td>{{user.amountOwed | currency}}</td>
-									<td>{{user.status}}</td>
 									<td>
-										<a ng-href="/eureka_webservice/admin/user/edit.jsp?email={{user.email}}&name={{user.name}}">
-											Order History</a>
+										<input type='text' ng-model='user.amountOwed' ng-value="user.amountOwed" placeholder='2.30'>
 									</td>
 									<td>
-										<a ng-href="/eureka_webservice/admin/user/edit.jsp?email={{user.email}}">Edit</a>
-									</td>
-									<td>
-										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete{{$index}}">
-											<i class="fa fa-trash-o fa-2x"></i>
-										</button>
-
-										<!-- Modal delete -->
-										<div class="modal fade" id="modalDelete{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-											<div class="modal-dialog" role="document">
-												<form action="/eureka_webservice/ProcessAdminDeleteUserServlet" method="post">
-													<input type="hidden" name="emailID" ng-value="user.email">
-													<div class="modal-content">
-														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																<span aria-hidden="true">&times;</span>
-															</button>
-															<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
-														</div>
-														<!-- / modal header -->
-														<div class="modal-body">
-															<p>
-																<b>WARNING: </b>
-																You are deleting user {{user.name}} ({{user.email}}).
-																<br>
-																<br>
-																Are you sure you want to continue?
-															</p>
-														</div>
-														<!-- / modal body -->
-
-														<div class="modal-footer">
-															<!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-															<button type="button" class="btn btn-default" data-dismiss="modal">No, keep the user</button>
-															<button type="submit" class="btn btn-danger">Yes, delete the user</button>
-														</div>
-														<!-- / modal footer -->
-													</div>
-													<!-- / modal content -->
-												</form>
-											</div>
-										</div>
-										<!-- / Modal delete -->
+										<input type='text' ng-model='user.status' ng-value="user.status" placeholder='Ok'>
 									</td>
 								</tr>
 							</tbody>
 						</table>
+
+						<button ng-click='updateUser()' class="btn btn-primary">Update</button>
 					</div>
 					<!-- /.table-responsive -->
 
@@ -165,24 +121,64 @@
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 	<script>
-		var app = angular.module('myApp', []);
+		var app = angular.module('myApp', [ 'ngRoute' ]);
 
-		app.controller('ViewUserController', [ '$http', '$scope',
-				function($http, $scope) {
-					$http({
-						method : 'GET',
-						url : '/eureka_webservice/LoadAdminViewUsersServlet'
-					}).then(function successCallback(response) {
-						console.log(response);
-						console.log(response.data);
-						$scope.data = response.data;
-						$scope.display = response.status;
-					}, function errorCallback(response) {
-						alert('fail');
-					});
-				}
+		app.config([ '$locationProvider', function($locationProvider) {
+			$locationProvider.html5Mode({
+				enabled : true,
+				requireBase : false
+			});
+		} ]);
 
-		]);
+		app
+				.controller(
+						'ViewUserController',
+						[
+								'$http',
+								'$scope',
+								'$location',
+								'$window',
+								function($http, $scope, $location, $window) {
+
+									var email = $location.search().email;
+
+									$http(
+											{
+												method : 'GET',
+												url : '/eureka_webservice/LoadAdminEditUserServlet',
+												params : {
+													'email' : email
+												}
+											}).then(
+											function successCallback(response) {
+												console.log(response);
+												console.log(response.data);
+												$scope.user = response.data;
+											},
+											function errorCallback(response) {
+												alert('fail');
+											});
+
+									$scope.updateUser = function() {
+												$http(
+														{
+															method : 'POST',
+															url : '/eureka_webservice/ProcessAdminEditUserServlet',
+															data : $scope.user
+														})
+														.then(
+																function successCallback(
+																		response) {
+																	$window.location.href = '/eureka_webservice/admin/user/view.jsp';
+																}),
+												function errorCallback(repsonse) {
+													alert('fail');
+												};
+
+									};
+								}
+
+						]);
 	</script>
 
 </body>

@@ -214,51 +214,6 @@ public class OrderWindowController {
 
 	}
 
-	public ArrayList<OrderWindow> getAllClosedWindows() {
-		return orderWindowDAO.getAllClosedWindows();
-	}
-
-	/**
-	 * Get all OrderWindows with status "Opened"
-	 * 
-	 * @return Returns an ArrayList of OrderWindows with status "Opened"
-	 */
-	public ArrayList<OrderWindow> getAllOpenedWindows() {
-		return orderWindowDAO.getAllOpenedWindows();
-	}
-
-	/**
-	 * Get all OrderWindows with status "Opened" for the given Company
-	 * 
-	 * @param company
-	 *            The company whose "Opened" OrderWindows are to be retrieved
-	 * @return Returns an ArrayList of OrderWindows with status "Opened" for the
-	 *         given Company
-	 */
-	public ArrayList<OrderWindow> getAllOpenedWindowsForCompany(Company company) {
-		return orderWindowDAO.getAllOpenedWindowsForCompany(company);
-	}
-
-	/**
-	 * Retrieve all the OrderWindows
-	 * 
-	 * @return An ArrayList of all OrderWindows regardless of status
-	 */
-	public ArrayList<OrderWindow> getAllOrderWindows() {
-		return orderWindowDAO.getAllOrderWindows();
-	}
-
-	/**
-	 * Retrieves the OrderWindow based on the provided ID
-	 * 
-	 * @param orderWindowId
-	 *            The ID of the OrderWindow
-	 * @return The OrderWindow object that has the provided ID
-	 */
-	public OrderWindow getOrderWindow(Integer orderWindowId) {
-		return orderWindowDAO.getOrderWindow(orderWindowId);
-	}
-
 	public void deleteOrderWindow(int orderWindowId) {
 		OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
 		OrderWindow orderWindowToArchive = getOrderWindow(orderWindowId);
@@ -331,6 +286,51 @@ public class OrderWindowController {
 			throw new Exception("Order Window Cannot be editted");
 		}
 
+	}
+
+	public ArrayList<OrderWindow> getAllClosedWindows() {
+		return orderWindowDAO.getAllClosedWindows();
+	}
+
+	/**
+	 * Get all OrderWindows with status "Opened"
+	 * 
+	 * @return Returns an ArrayList of OrderWindows with status "Opened"
+	 */
+	public ArrayList<OrderWindow> getAllOpenedWindows() {
+		return orderWindowDAO.getAllOpenedWindows();
+	}
+
+	/**
+	 * Get all OrderWindows with status "Opened" for the given Company
+	 * 
+	 * @param company
+	 *            The company whose "Opened" OrderWindows are to be retrieved
+	 * @return Returns an ArrayList of OrderWindows with status "Opened" for the
+	 *         given Company
+	 */
+	public ArrayList<OrderWindow> getAllOpenedWindowsForCompany(Company company) {
+		return orderWindowDAO.getAllOpenedWindowsForCompany(company);
+	}
+
+	/**
+	 * Retrieve all the OrderWindows
+	 * 
+	 * @return An ArrayList of all OrderWindows regardless of status
+	 */
+	public ArrayList<OrderWindow> getAllOrderWindows() {
+		return orderWindowDAO.getAllOrderWindows();
+	}
+
+	/**
+	 * Retrieves the OrderWindow based on the provided ID
+	 * 
+	 * @param orderWindowId
+	 *            The ID of the OrderWindow
+	 * @return The OrderWindow object that has the provided ID
+	 */
+	public OrderWindow getOrderWindow(Integer orderWindowId) {
+		return orderWindowDAO.getOrderWindow(orderWindowId);
 	}
 
 }

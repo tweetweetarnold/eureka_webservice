@@ -2,7 +2,6 @@ package servlet.load.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,19 +13,19 @@ import model.Employee;
 
 import com.google.gson.Gson;
 
-import dao.EmployeeDAO;
+import controller.EmployeeController;
 
 /**
- * Servlet implementation class LoadAdminViewUsersServlet
+ * Servlet implementation class LoadAdminEditUserServlet
  */
-@WebServlet("/LoadAdminViewUsersServlet")
-public class LoadAdminViewUsersServlet extends HttpServlet {
+@WebServlet("/LoadAdminEditUserServlet")
+public class LoadAdminEditUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewUsersServlet() {
+	public LoadAdminEditUserServlet() {
 		super();
 	}
 
@@ -44,15 +43,17 @@ public class LoadAdminViewUsersServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("application/json");
+		response.setContentType("applcation/json");
 		PrintWriter out = response.getWriter();
 
+		EmployeeController employeeCtrl = new EmployeeController();
+		String email = request.getParameter("email");
+		System.out.println("email: " + email);
+
+		Employee e = employeeCtrl.getEmployeeByEmail(email);
+
 		Gson gson = new Gson();
-
-		EmployeeDAO eDao = new EmployeeDAO();
-
-		ArrayList<Employee> list = eDao.getAllNonDestroyedEmployees();
-		out.print(gson.toJson(list));
+		out.print(gson.toJson(e));
 
 	}
 

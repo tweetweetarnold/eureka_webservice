@@ -15,16 +15,25 @@
 
 <title>LunchTime - Admin</title>
 
+<!-- Bootstrap Core CSS -->
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 >
+
+<!-- MetisMenu CSS -->
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css"
 	rel="stylesheet"
 >
+
+<!-- Timeline CSS -->
 <link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/timeline.css" rel="stylesheet">
+
+<!-- Custom CSS -->
 <link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Morris Charts CSS -->
 <link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.css"
 	rel="stylesheet"
 >
@@ -57,7 +66,15 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Add new food</h1>
+					<h1 class="page-header">Edit canteen</h1>
+
+					<!-- breadcrumb -->
+					<ol class="breadcrumb">
+						<li>
+							<a href="/eureka_webservice/LoadViewCanteenServlet">Canteens</a>
+						</li>
+					</ol>
+
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -74,7 +91,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Add new food</div>
+						<div class="panel-heading">Edit canteen</div>
 
 						<div class="panel-body">
 
@@ -82,45 +99,25 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="/eureka_webservice/ProcessAdminAddNewFoodServlet" method="POST" id="submitForm"
+									<form role="form" action="/eureka_webservice/ProcessAdminEditCanteenServlet" method="POST" id="submitForm"
 										enctype="multipart/form-data"
 									>
 
-										<input type="hidden" name="stallId" value="${stallId}">
+										<input type="hidden" name="canteenId" value="${canteenId}">
 
 										<div class="form-group">
-											<label>Food name</label>
-											<input class="form-control" name="name" required>
+											<label>Canteen name</label>
+											<input class="form-control" name="name" value="${sessionScope.name}" required>
 										</div>
 
 										<div class="form-group">
-											<label>Food name (Chinese)</label>
-											<input class="form-control" name="chineseName">
+											<label>Contact no</label>
+											<input class="form-control" name="contactNo" value="${sessionScope.contactNo}" required>
 										</div>
 
-										<div class="form-group">
-											<label>Description</label>
-											<input class="form-control" name="description">
-										</div>
 
-										<div class="form-group">
-											<label>Price</label>
-											<input class="form-control" name="price" required>
-										</div>
-
-										<div class="form-group">
-											<label>Weather Conditions</label>
-											<input class="form-control" name="weatherConditions">
-										</div>
-
-										<div class="form-group">
-											<label>Image Directory</label>
-											<input type="file" name="file" style="width: 228px;" required />
-										</div>
-										<br>
-										
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
-											new Food</button>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update
+											Canteen details</button>
 
 									</form>
 								</div>
@@ -145,13 +142,13 @@
 	<!-- /#wrapper -->
 
 	<!-- Create confirmation -->
-	<div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title">Confirmation</h4>
 				</div>
-				<div class="modal-body">Are you sure you want to Add new Food?</div>
+				<div class="modal-body">Are you sure you want to update Canteen details?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline btn-default">Cancel</button>
 					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
@@ -177,7 +174,7 @@
 
 	<!-- Datetime picker -->
 	<script src="http://momentjs.com/downloads/moment.js"></script>
-	<script src="/eureka_webservice/resources/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="resources/js/bootstrap-datetimepicker.min.js"></script>
 
 </body>
 

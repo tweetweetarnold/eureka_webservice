@@ -120,7 +120,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="/eureka_webservice/LoadAdminViewUsersServlet">View: All</a>
+							<a href="/eureka_webservice/admin/user/view.jsp">View: All</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->
