@@ -33,11 +33,11 @@ public class Stall {
 	private Set<Food> foodList;
 	private String imageDirectory;
 	private String name;
+	private String publicId;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int stallId;
 	private String status;
-	private String publicId;
 
 	/**
 	 * Creates a default constructor for Stall
@@ -122,6 +122,10 @@ public class Stall {
 		return name;
 	}
 
+	public String getPublicId() {
+		return publicId;
+	}
+
 	/**
 	 * Retrieves the ID of the Stall
 	 * 
@@ -189,6 +193,10 @@ public class Stall {
 		this.name = name;
 	}
 
+	public void setPublicId(String publicId) {
+		this.publicId = publicId;
+	}
+	
 	/**
 	 * Changes the ID of the Stall
 	 * 
@@ -197,17 +205,9 @@ public class Stall {
 	public void setStallId(int stallId) {
 		this.stallId = stallId;
 	}
-
+	
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	
-	public String getPublicId() {
-		return publicId;
-	}
-	
-	public void setPublicId(String publicId) {
-		this.publicId = publicId;
 	}
 	
 }

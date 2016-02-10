@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import model.Employee;
 import model.Food;
 import model.Modifier;
 import model.ModifierSection;
@@ -62,27 +61,6 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Retrieves a list of Food in the Stall
-	 * 
-	 * @param stall The designated Stall
-	 * @return An ArrayList of Food objects that are in the designated Stall
-	 */
-	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
-		ArrayList<Food> returnList = new ArrayList<Food>();
-
-		DetachedCriteria dc = DetachedCriteria.forClass(Food.class);
-		dc.add(Restrictions.eq("stall", stall));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		for (Object o : l) {
-			returnList.add((Food) o);
-		}
-		return returnList;
-	}
-	
-	/**
 	 * Retrieves a list of Food in the Stall that are Active
 	 * 
 	 * @param stall The designated Stall
@@ -105,6 +83,27 @@ public class FoodDAO {
 			}
 			return returnList;
 		}
+	}
+	
+	/**
+	 * Retrieves a list of Food in the Stall
+	 * 
+	 * @param stall The designated Stall
+	 * @return An ArrayList of Food objects that are in the designated Stall
+	 */
+	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
+		ArrayList<Food> returnList = new ArrayList<Food>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Food.class);
+		dc.add(Restrictions.eq("stall", stall));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((Food) o);
+		}
+		return returnList;
 	}
 	
 

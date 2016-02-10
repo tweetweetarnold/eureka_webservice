@@ -135,6 +135,21 @@ public class OrderWindowDAO {
 		return returnList;
 	}
 
+	public ArrayList<OrderWindow> getAllWindowsForCanteen(Canteen canteen) {
+		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
+		dc.add(Restrictions.eq("canteen", canteen));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((OrderWindow) o);
+		}
+		return returnList;
+	}
+
 	/**
 	 * Retrieve the OrderWindow based on the provided ID
 	 * 
@@ -153,7 +168,7 @@ public class OrderWindowDAO {
 	public void saveOrderWindow(OrderWindow w) {
 		MyConnection.save(w);
 	}
-
+	
 	/**
 	 * Updates the designated OrderWindow object in the Database
 	 * 
@@ -161,21 +176,6 @@ public class OrderWindowDAO {
 	 */
 	public void updateOrderWindow(OrderWindow w) {
 		MyConnection.update(w);
-	}
-	
-	public ArrayList<OrderWindow> getAllWindowsForCanteen(Canteen canteen) {
-		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
-
-		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
-		dc.add(Restrictions.eq("canteen", canteen));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		for (Object o : l) {
-			returnList.add((OrderWindow) o);
-		}
-		return returnList;
 	}
 	
 	

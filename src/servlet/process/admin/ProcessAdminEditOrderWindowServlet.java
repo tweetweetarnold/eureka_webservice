@@ -1,12 +1,16 @@
 package servlet.process.admin;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import model.Canteen;
+import model.Company;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -16,8 +20,6 @@ import org.joda.time.format.DateTimeFormatter;
 import controller.CanteenController;
 import controller.CompanyController;
 import controller.OrderWindowController;
-import model.Canteen;
-import model.Company;
 
 /**
  * Servlet implementation class ProcessAdminEditOrderWindowServlet

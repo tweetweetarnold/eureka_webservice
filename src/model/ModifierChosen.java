@@ -68,6 +68,10 @@ public class ModifierChosen {
 		}
 	}
 
+	public String getChineseName() {
+		return chineseName;
+	}
+
 	/**
 	 * Retrieves the date which this ModifierChosen object is created
 	 * 
@@ -112,7 +116,7 @@ public class ModifierChosen {
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * Retrieves the price of the ModifierChosen
 	 * 
@@ -121,9 +125,9 @@ public class ModifierChosen {
 	public double getPrice() {
 		return price;
 	}
-	
-	public String getChineseName() {
-		return chineseName;
+
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
 	}
 
 	/**
@@ -170,7 +174,7 @@ public class ModifierChosen {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * Changes the current price of the ModifierChosen
 	 * 
@@ -178,10 +182,6 @@ public class ModifierChosen {
 	 */
 	public void setPrice(double price) {
 		this.price = price;
-	}
-	
-	public void setChineseName(String chineseName) {
-		this.chineseName = chineseName;
 	}
 
 }

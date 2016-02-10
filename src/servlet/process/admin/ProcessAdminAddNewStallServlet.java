@@ -2,7 +2,6 @@ package servlet.process.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,10 +17,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import model.Canteen;
-import model.Food;
-import model.Stall;
-import controller.CanteenController;
 import controller.StallController;
 
 /**

@@ -17,10 +17,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import model.Food;
-import model.Stall;
 import controller.FoodController;
-import controller.StallController;
 
 /**
  * Servlet implementation class ProcessAdminAddNewFoodServlet

@@ -33,6 +33,7 @@ import value.StringValues;
 @Indexed
 @Table(name = "food")
 public class Food {
+	private String chineseName, status;
 	private Date createDate;
 	private String description;
 	@Id
@@ -45,7 +46,6 @@ public class Food {
 	private Set<ModifierSection> modifierSectionList;
 	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.YES)
 	private String name;
-	private String chineseName, status;
 	private double price;
 	private String publicId;
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -102,6 +102,10 @@ public class Food {
 			}
 		}
 		return false;
+	}
+
+	public String getChineseName() {
+		return chineseName;
 	}
 
 	/**
@@ -197,7 +201,7 @@ public class Food {
 	public String getStatus() {
 		return status;
 	}
-
+	
 	/**
 	 * Retrieves the weather condition indicated in this Food
 	 * 
@@ -206,9 +210,9 @@ public class Food {
 	public String getWeatherConditions() {
 		return weatherConditions;
 	}
-	
-	public String getChineseName() {
-		return chineseName;
+
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
 	}
 
 	/**
@@ -295,7 +299,7 @@ public class Food {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+	
 	/**
 	 * Changes the current weather condition indicated in this Food
 	 * 
@@ -303,10 +307,6 @@ public class Food {
 	 */
 	public void setWeatherConditions(String weatherConditions) {
 		this.weatherConditions = weatherConditions;
-	}
-	
-	public void setChineseName(String chineseName) {
-		this.chineseName = chineseName;
 	}
 
 }

@@ -90,6 +90,10 @@ public class Modifier {
 
 	}
 
+	public String getChineseName() {
+		return chineseName;
+	}
+
 	/**
 	 * Retrieves the date which this Modifier object is created
 	 * 
@@ -147,14 +151,14 @@ public class Modifier {
 	public double getPrice() {
 		return price;
 	}
-
+	
 	public String getStatus() {
 		return status;
 	}
-	
-	public String getChineseName() {
-		return chineseName;
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
 	}
+
 	/**
 	 * Changes the current date of this Modifier object created
 	 * 
@@ -191,10 +195,10 @@ public class Modifier {
 		this.modifierId = modifierId;
 	}
 
+
 	public void setModifierSection(ModifierSection modifierSection) {
 		this.modifierSection = modifierSection;
 	}
-
 
 	/**
 	 * Changes the name of the Modifier
@@ -204,6 +208,7 @@ public class Modifier {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 
 	/**
 	 * Changes the current price of the Modifier
@@ -214,13 +219,8 @@ public class Modifier {
 		this.price = price;
 	}
 	
-
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	
-	public void setChineseName(String chineseName) {
-		this.chineseName = chineseName;
 	}
 
 
