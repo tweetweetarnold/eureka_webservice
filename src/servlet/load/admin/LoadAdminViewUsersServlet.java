@@ -14,7 +14,7 @@ import model.Employee;
 
 import com.google.gson.Gson;
 
-import dao.EmployeeDAO;
+import controller.EmployeeController;
 
 /**
  * Servlet implementation class LoadAdminViewUsersServlet
@@ -49,9 +49,9 @@ public class LoadAdminViewUsersServlet extends HttpServlet {
 
 		Gson gson = new Gson();
 
-		EmployeeDAO eDao = new EmployeeDAO();
+		EmployeeController employeeCtrl = new EmployeeController();
 
-		ArrayList<Employee> list = eDao.getAllNonDestroyedEmployees();
+		ArrayList<Employee> list = employeeCtrl.getAllNonDestroyedEmployees();
 		out.print(gson.toJson(list));
 
 	}

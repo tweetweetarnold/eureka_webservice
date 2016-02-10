@@ -98,7 +98,7 @@
 								<tr>
 									<th>ID</th>
 									<th>Food</th>
-								<!--  <th>Chinese Name</th>-->
+									<!--  <th>Chinese Name</th>-->
 									<th>Price</th>
 									<th>Create Date</th>
 									<th>Image</th>
@@ -122,14 +122,15 @@
 											<fmt:formatDate type="both" value="${food.createDate}" />
 										</td>
 										<td>
-											<img src="${food.imageDirectory}" style="width:263px;height:169px;"/>
-											<!--  <img src="/eureka_webservice/${food.imageDirectory}" /> -->
+											<img src="${food.imageDirectory}" style="width: 263px;
+	height: 169px;" />
 										</td>
 										<td>
 											<c:forEach items="${food.modifierList}" var="modifier">- ${modifier.name}&nbsp;${modifier.chineseName}
 											<fmt:formatNumber value="${modifier.price}" var="modPrice" minFractionDigits="2" />
 											($${modPrice})<br>
 											</c:forEach>
+											<a href='/eureka_webservice/admin/food/addon-add.jsp?foodId=${food.foodId}'>Add Add-On</a>
 										</td>
 										<td>
 											<a href="/eureka_webservice/LoadAdminEditFoodServlet?foodId=${food.foodId}">Edit</a>
@@ -145,7 +146,7 @@
 											>
 												<div class="modal-dialog" role="document">
 													<form method="post" action="/eureka_webservice/ProcessAdminDeleteFoodServlet">
-													<input type="hidden" name="foodId" value="${food.foodId}">
+														<input type="hidden" name="foodId" value="${food.foodId}">
 														<div class="modal-content">
 															<div class="modal-header">
 																<button type="button" class="close" data-dismiss="modal" aria-label="Close">

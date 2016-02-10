@@ -20,6 +20,10 @@ public class EmployeeController {
 	public EmployeeController() {
 	}
 
+	public ArrayList<Employee> getAllNonDestroyedEmployees() {
+		return employeeDAO.getAllNonDestroyedEmployees();
+	}
+
 	/**
 	 * Retrieve the Employee's specified food delivery point
 	 * 
@@ -69,20 +73,20 @@ public class EmployeeController {
 		employeeDAO.saveEmployee(e);
 	}
 
-	public void suspendUser(String email){
+	public void suspendUser(String email) {
 		Employee employeeToSuspend = getEmployeeByEmail(email);
 		employeeToSuspend.setStatus(StringValues.EMPLOYEE_SUSPENDED);
 		updateEmployee(employeeToSuspend);
 	}
 
-	public void updateAmountOwed(ArrayList<Employee> arrayList, double amount){
-		for(Employee employee :arrayList){
+	public void updateAmountOwed(ArrayList<Employee> arrayList, double amount) {
+		for (Employee employee : arrayList) {
 			employee.setAmountOwed(amount);
 			employeeDAO.updateEmployee(employee);
 		}
-			
+
 	}
-	
+
 	/**
 	 * Updates the Employee's specified food delivery point
 	 * 
