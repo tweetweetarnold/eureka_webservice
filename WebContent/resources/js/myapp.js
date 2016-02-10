@@ -2,7 +2,7 @@
  * 
  */
 
-var app = angular.module('myApp', [ '$http' ]);
+var app = angular.module('myApp', []);
 
 app.config([ '$locationProvider', function($locationProvider) {
 	$locationProvider.html5Mode({
@@ -10,4 +10,3 @@ app.config([ '$locationProvider', function($locationProvider) {
 		requireBase : false
 	});
 } ]);
-

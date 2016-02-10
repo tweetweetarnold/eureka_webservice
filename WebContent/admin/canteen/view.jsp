@@ -107,7 +107,11 @@
 												${fn:length(canteen.stallList)} stalls</a>
 										</td>
 										<td>
-											<a href="#">Edit</a>
+											<a href='/eureka_webservice/admin/canteen/edit.jsp'>
+												<button type="button" class="btn btn-link btn-xs">
+													<i class="fa fa-pencil fa-2x"></i>
+												</button>
+											</a>
 										</td>
 										<td>
 											<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">

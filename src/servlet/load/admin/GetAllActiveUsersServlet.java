@@ -17,16 +17,16 @@ import com.google.gson.Gson;
 import controller.EmployeeController;
 
 /**
- * Servlet implementation class LoadAdminViewUsersServlet
+ * Servlet implementation class GetAllActiveUsersServlet
  */
-@WebServlet("/LoadAdminViewUsersServlet")
-public class LoadAdminViewUsersServlet extends HttpServlet {
+@WebServlet("/GetAllActiveUsersServlet")
+public class GetAllActiveUsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewUsersServlet() {
+	public GetAllActiveUsersServlet() {
 		super();
 	}
 
@@ -35,15 +35,7 @@ public class LoadAdminViewUsersServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+		
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 
@@ -53,7 +45,13 @@ public class LoadAdminViewUsersServlet extends HttpServlet {
 
 		ArrayList<Employee> list = employeeCtrl.getAllNonDestroyedEmployees();
 		out.print(gson.toJson(list));
+	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 }

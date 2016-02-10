@@ -133,7 +133,11 @@
 											<a href='/eureka_webservice/admin/food/addon-add.jsp?foodId=${food.foodId}'>Add Add-On</a>
 										</td>
 										<td>
-											<a href="/eureka_webservice/LoadAdminEditFoodServlet?foodId=${food.foodId}">Edit</a>
+											<a href="/eureka_webservice/LoadAdminEditFoodServlet?foodId=${food.foodId}">
+												<button type="button" class="btn btn-link btn-xs">
+													<i class="fa fa-pencil fa-2x"></i>
+												</button>
+											</a>
 										</td>
 										<td>
 											<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">

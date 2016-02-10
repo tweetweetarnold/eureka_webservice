@@ -92,7 +92,12 @@
 										<a ng-href="/eureka_webservice/admin/user/edit.jsp?email={{user.email}}&name={{user.name}}"> Order History</a>
 									</td>
 									<td>
-										<a ng-href="/eureka_webservice/admin/user/edit.jsp?email={{user.email}}">Edit</a>
+										<a ng-href="/eureka_webservice/admin/user/edit.jsp?email={{user.email}}">
+											<button type="button" class="btn btn-link btn-xs">
+												<i class="fa fa-pencil fa-2x"></i>
+											</button>
+										</a>
+
 									</td>
 									<td>
 										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete{{$index}}">
@@ -169,7 +174,7 @@
 				function($http, $scope) {
 					$http({
 						method : 'GET',
-						url : '/eureka_webservice/LoadAdminViewUsersServlet'
+						url : '/eureka_webservice/GetAllActiveUsersServlet'
 					}).then(function successCallback(response) {
 						console.log(response);
 						console.log(response.data);

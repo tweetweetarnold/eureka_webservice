@@ -115,14 +115,19 @@
 											<fmt:formatDate type="both" value="${stall.createDate}" />
 										</td>
 										<td>
-											<img src="${stall.imageDirectory}" style="width:263px;height:169px;"/>
+											<img src="${stall.imageDirectory}" style="width: 263px;
+	height: 169px;" />
 										</td>
 										<td>
 											<a href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId=${stall.stallId}">View all
 												${fn:length(stall.foodList)} food</a>
 										</td>
 										<td>
-											<a href="/eureka_webservice/LoadAdminEditStallServlet?stallId=${stall.stallId}">Edit</a>
+											<a href='/eureka_webservice/LoadAdminEditStallServlet?stallId=${stall.stallId}'>
+												<button type="button" class="btn btn-link btn-xs">
+													<i class="fa fa-pencil fa-2x"></i>
+												</button>
+											</a>
 										</td>
 										<td>
 											<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
