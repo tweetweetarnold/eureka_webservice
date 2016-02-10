@@ -89,8 +89,7 @@
 									<td>{{user.amountOwed | currency}}</td>
 									<td>{{user.status}}</td>
 									<td>
-										<a ng-href="/eureka_webservice/admin/user/edit.jsp?email={{user.email}}&name={{user.name}}">
-											Order History</a>
+										<a ng-href="/eureka_webservice/admin/user/edit.jsp?email={{user.email}}&name={{user.name}}"> Order History</a>
 									</td>
 									<td>
 										<a ng-href="/eureka_webservice/admin/user/edit.jsp?email={{user.email}}">Edit</a>
@@ -164,9 +163,8 @@
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
+	<script src='/eureka_webservice/resources/js/myapp.js'></script>
 	<script>
-		var app = angular.module('myApp', []);
-
 		app.controller('ViewUserController', [ '$http', '$scope',
 				function($http, $scope) {
 					$http({

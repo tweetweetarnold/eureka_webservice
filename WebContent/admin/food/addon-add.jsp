@@ -135,16 +135,9 @@
 	<script src="http://momentjs.com/downloads/moment.js"></script>
 	<script src="/eureka_webservice/resources/js/bootstrap-datetimepicker.min.js"></script>
 
+
+	<script src='/eureka_webservice/resources/js/myapp.js'></script>
 	<script>
-		var app = angular.module('myApp', []);
-
-		app.config([ '$locationProvider', function($locationProvider) {
-			$locationProvider.html5Mode({
-				enabled : true,
-				requireBase : false
-			});
-		} ]);
-
 		app
 				.controller(
 						'AddModifierController',
@@ -156,10 +149,6 @@
 								function($scope, $http, $window, $location) {
 
 									$scope.modifierList = [];
-									$scope.modifier = {
-										name : 'Arnold',
-										price : '123'
-									};
 
 									$scope.addModifier = function() {
 										$scope.modifierList
@@ -191,6 +180,13 @@
 												})
 												.then(
 														function successCallback() {
+															$http
+																	.post(
+																			'/eureka_webservice/SetSessionMessageServlet',
+																			{
+																				success : 'Add-On(s) added successfully.'
+																			});
+
 															$window.location.href = '/eureka_webservice/admin/food/view.jsp';
 														});
 
