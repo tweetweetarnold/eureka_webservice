@@ -16,7 +16,7 @@ public class ModifierSectionController {
 	}
 
 	// assuming the person just wants to create an empty container
-	public void addModifierSection(String foodID, String categoryName, String displayType) {
+	public int addModifierSection(String foodID, String categoryName, String displayType) {
 		FoodDAO foodDAO = new FoodDAO();
 		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 		Set<Modifier> modifierSectionSet = new HashSet<Modifier>();
@@ -33,6 +33,7 @@ public class ModifierSectionController {
 		// update the existing food object and save the new ModifierSection
 		foodDAO.updateFood(food);
 		modifierSectionDAO.saveModifierSection(newModifierSection);
+		return newModifierSection.getModifierSectionId();
 	}
 
 	public boolean createAndAddModifier(String modifierName,String chineseName, String modifierDescription,

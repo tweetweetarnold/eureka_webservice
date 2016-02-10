@@ -14,6 +14,8 @@ import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
 
+import controller.ModifierSectionController;
+
 /**
  * Servlet implementation class ProcessAdminAddModifierToFoodServlet
  */
@@ -48,13 +50,18 @@ public class ProcessAdminAddModifierToFoodServlet extends HttpServlet {
 			JSONObject data = (JSONObject) parser.parse(request.getReader());
 			System.out.println(gson.toJson(data));
 
-			int foodId = Integer.parseInt((String) data.get("foodId"));
+			String foodId = (String) data.get("foodId");
 			System.out.println("foodID: " + foodId);
 			JSONArray arr = (JSONArray) data.get("modifierList");
+			ModifierSectionController modifierSectionController = new ModifierSectionController();
+			String modifierSectionId = "" + modifierSectionController.addModifierSection(foodId, "Add-ons", "c");
 			for (int i = 0; i < arr.size(); i++) {
 				JSONObject obj = (JSONObject) arr.get(i);
 				String name = (String) obj.get("name");
 				double price = Double.parseDouble((String) obj.get("price"));
+				//modifier creation
+				modifierSectionController.createAndAddModifier(name, "", "", price, foodId, modifierSectionId);
+				
 				System.out.println("name: " + name);
 				System.out.println("price: " + price);
 			}
