@@ -16,6 +16,7 @@ import model.Canteen;
 import model.Food;
 import model.Stall;
 import services.CloudinaryUpload;
+import dao.FoodDAO;
 import dao.StallDAO;
 
 /**
@@ -51,7 +52,12 @@ public class StallController {
 	}
 
 	public void deleteStall(Stall s) {
+		FoodController foodController = new FoodController();
 		stallDAO.deleteStall(s);
+		Set<Food> foodList = s.getFoodList();
+		for(Food f :foodList){
+			foodController.deleteFood(f);
+		}
 	}
 
 	public ArrayList<Stall> getAllActiveStallsUnderCanteen(Canteen c) {
