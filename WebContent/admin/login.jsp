@@ -36,10 +36,11 @@
 	overflow: hidden;
 	position: absolute;
 	background-image:
-		url('http://e.fastcompany.net/multisite_files/coexist/imagecache/1280/article_feature/1280-eating-habits.jpg')"
+		url('http://www.dgvaishnavcollege.com/images/images/CanteenCG1.jpg')"
 	></div>
 
-	<div class="col-md-5" style="padding-top: 40px; float: right;">
+	<div class="col-md-5" style="padding-top: 40px;
+	float: right;">
 		<form class="form-signin" method="post" action="/eureka_webservice/ProcessAdminLoginServlet">
 			<h2 class="form-signin-heading">Admin Login</h2>
 

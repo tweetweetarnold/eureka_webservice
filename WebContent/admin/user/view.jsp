@@ -174,7 +174,7 @@
 				function($http, $scope) {
 					$http({
 						method : 'GET',
-						url : '/eureka_webservice/GetAllActiveUsersServlet'
+						url : '/eureka_webservice/GetAllUsersServlet'
 					}).then(function successCallback(response) {
 						console.log(response);
 						console.log(response.data);

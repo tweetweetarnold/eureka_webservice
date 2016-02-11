@@ -134,7 +134,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadViewCanteenServlet">View: All</a>
+							<a target="_self" href="/eureka_webservice/admin/canteen/view.jsp">View: All</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->

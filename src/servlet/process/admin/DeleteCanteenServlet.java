@@ -1,8 +1,6 @@
-package servlet.load.admin;
+package servlet.process.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,24 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Employee;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
 
-import controller.EmployeeController;
-
 /**
- * Servlet implementation class GetAllActiveUsersServlet
+ * Servlet implementation class DeleteCanteenServlet
  */
-@WebServlet("/GetAllActiveUsersServlet")
-public class GetAllActiveUsersServlet extends HttpServlet {
+@WebServlet("/DeleteCanteenServlet")
+public class DeleteCanteenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetAllActiveUsersServlet() {
+	public DeleteCanteenServlet() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -35,16 +33,6 @@ public class GetAllActiveUsersServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
-
-		Gson gson = new Gson();
-
-		EmployeeController employeeCtrl = new EmployeeController();
-
-		ArrayList<Employee> list = employeeCtrl.getAllNonDestroyedEmployees();
-		out.print(gson.toJson(list));
 	}
 
 	/**
@@ -52,6 +40,22 @@ public class GetAllActiveUsersServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	}
 
+		// PrintWriter out = response.getWriter();
+		response.setContentType("application/json");
+
+		try {
+			Gson gson = new Gson();
+
+			JSONParser parser = new JSONParser();
+			JSONObject data = (JSONObject) parser.parse(request.getReader());
+			System.out.println(gson.toJson(data));
+
+			long canteenId = (long) data.get("canteenId");
+			System.out.println("canteenID: " + canteenId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
