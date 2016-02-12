@@ -17,6 +17,7 @@ import org.quartz.DateBuilder;
 import background.PaymentNotification;
 import background.WeeklySuspension;
 import background.ChasePayment;
+import background.SendNotification;
 
 import org.quartz.JobDetail;
 
@@ -45,6 +46,12 @@ public class QuartzTest {
             JobDetail job3 = newJob(ChasePayment.class)
             		.withIdentity("job3","group1")
                 	.build();
+            
+            JobDetail job4 = newJob(SendNotification.class)
+            		.withIdentity("job4","group1")
+                	.build();
+            
+            
             // Trigger the job to run now, and then repeat every 40 seconds
             Trigger trigger1 = newTrigger()
                 .withIdentity("trigger1", "group1")

@@ -1,14 +1,17 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import model.Canteen;
 import model.Company;
 import model.OrderWindow;
 import model.PriceModifier;
+import services.QuartzService;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.quartz.SchedulerException;
 
 import value.StringValues;
 import dao.OrderWindowDAO;
@@ -198,18 +201,26 @@ public class OrderWindowController {
 	}
 
 	public void createNewOrderWindow2(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			int numberOfWeeks, String remarks, double discountAbsolute) {
-
+			int numberOfWeeks, String remarks, double discountAbsolute) throws Exception {
+		QuartzService quartzService = new QuartzService();
+		
 		for (int i = 0; i < numberOfWeeks; i++) {
-			OrderWindow window = new OrderWindow(startDate.plusWeeks(i), endDate.plusWeeks(i), company, canteen,
+			DateTime newStartTime = startDate.plusWeeks(i);
+			Date startDateForQuartz = newStartTime.toDate();
+			OrderWindow window = new OrderWindow(newStartTime, endDate.plusWeeks(i), company, canteen,
 					remarks, null);
-
+			
+			
 			ArrayList<PriceModifier> list = new ArrayList<PriceModifier>();
 			PriceModifier discountAbsoluteModifier = new PriceModifier("Discount", StringValues.PRICEMODIFIER_ABSOLUTE,
 					discountAbsolute * -1, window);
 			list.add(discountAbsoluteModifier);
 			window.setPriceModifierList(list);
 			orderWindowDAO.saveOrderWindow(window);
+			int orderWindowID = orderWindowDAO.updateOrderWindow(window);
+			System.out.println(orderWindowID);
+			//quartz stuff
+			quartzService.setupNewJobAndTrigger(""+orderWindowID, startDateForQuartz);
 		}
 
 	}

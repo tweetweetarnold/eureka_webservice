@@ -174,9 +174,12 @@ public class OrderWindowDAO {
 	 * 
 	 * @param w The OrderWindow object to be updated
 	 */
-	public void updateOrderWindow(OrderWindow w) {
+	public int updateOrderWindow(OrderWindow w) {
 		MyConnection.update(w);
+		int windowID = w.getWindowId();
+		return windowID;
 	}
+	
 	
 	
 
