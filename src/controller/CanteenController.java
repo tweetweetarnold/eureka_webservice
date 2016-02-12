@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -97,5 +98,41 @@ public class CanteenController {
 		canteenDAO.deleteCanteen(canteenToDelete);
 		
 	}
-
+	
+	public void addCanteen(String name, String address) throws Exception {
+		String errorMessages = validateNewCanteenInputs(name, address);
+		if (!errorMessages.isEmpty()) {
+			throw new Exception(errorMessages);
+		}
+		boolean canteenExist = checkCanteenExists(name, address);
+		if (canteenExist) {
+			throw new Exception("Canteen already exists");
+		} else {
+			Canteen newCanteen = new Canteen(name, address, new HashSet<Stall>());
+			canteenDAO.saveCanteen(newCanteen);
+		}
+		
+	}
+	
+	public boolean checkCanteenExists(String name, String address) {
+		Canteen c = canteenDAO.getCanteenByName(name);
+		Canteen canteenAddress = canteenDAO.getCanteenByAddress(address);
+		if (c != null || canteenAddress != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String validateNewCanteenInputs(String name, String address) {
+		String errors = "";
+		if (name == null || name.isEmpty()) {
+			errors += "Canteen Name is Empty.\n";
+		}
+		
+		if (address == null || address.isEmpty()) {
+			errors+= "Canteen Address is Empty.";
+		}
+		return errors;
+	}
+ 
 }
