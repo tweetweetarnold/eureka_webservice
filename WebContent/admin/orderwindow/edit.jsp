@@ -40,7 +40,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="ViewUserController">
+<body ng-app="myApp" ng-controller="EditOrderWindowController">
 
 	<div id="wrapper">
 
@@ -49,7 +49,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">User Management</h1>
+					<h1 class="page-header">Order Window Management: Edit</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -64,30 +64,26 @@
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
+									<th>Id</th>
 									<th>Company</th>
-									<th>Name</th>
-									<th>Email</th>
-									<th>Date Joined</th>
-									<th>O/S</th>
-									<th>Status</th>
+									<th>Canteen</th>
+									<th>Discount</th>
+									<th>Date Created</th>
+									<th>Start Date</th>
+									<th>End date</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td>{{user.company.name}}</td>
 									<td>
-										<input type='text' ng-model='user.name' ng-value="user.name" placeholder='Chris Cheng'>
+										<input ng-value='window.windowId' ng-model='window.windowId' required>
 									</td>
-									<td>
-										<input type='email' ng-model='user.email' ng-value="user.email" placeholder='chris.cheng.2013@smu.edu.sg'>
-									</td>
-									<td>{{user.createDate}}</td>
-									<td>
-										<input type='text' ng-model='user.amountOwed' ng-value="user.amountOwed" placeholder='2.30'>
-									</td>
-									<td>
-										<input type='text' ng-model='user.status' ng-value="user.status" placeholder='Ok'>
-									</td>
+									<td>{{window.company.name}}</td>
+									<td>{{window.canteen.name}}</td>
+									<td>{{window.discountAbsolute | currency}}</td>
+									<td>{{window.createDate}}</td>
+									<td>{{window.startDateFormatted}}</td>
+									<td>{{window.endDateFormatted}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -118,18 +114,9 @@
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 	<script>
-		var app = angular.module('myApp', [ 'ngRoute' ]);
-
-		app.config([ '$locationProvider', function($locationProvider) {
-			$locationProvider.html5Mode({
-				enabled : true,
-				requireBase : false
-			});
-		} ]);
-
 		app
 				.controller(
-						'ViewUserController',
+						'EditOrderWindowController',
 						[
 								'$http',
 								'$scope',
@@ -137,30 +124,30 @@
 								'$window',
 								function($http, $scope, $location, $window) {
 
-									var email = $location.search().email;
+									var windowId = $location.search().windowId;
 
 									$http(
 											{
 												method : 'GET',
-												url : '/eureka_webservice/GetUserByEmailServlet',
+												url : '/eureka_webservice/GetOrderWindowByIdServlet',
 												params : {
-													'email' : email
+													windowId : windowId
 												}
 											}).then(
 											function successCallback(response) {
 												console.log(response);
 												console.log(response.data);
-												$scope.user = response.data;
+												$scope.window = response.data;
 											},
 											function errorCallback(response) {
 												alert('fail');
 											});
 
-									$scope.updateUser = function() {
+									$scope.updateWindow = function() {
 												$http(
 														{
 															method : 'POST',
-															url : '/eureka_webservice/ProcessAdminEditUserServlet',
+															url : '/eureka_webservice/',
 															data : $scope.user
 														})
 														.then(

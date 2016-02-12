@@ -16,16 +16,16 @@ import com.google.gson.Gson;
 import controller.EmployeeController;
 
 /**
- * Servlet implementation class LoadAdminEditUserServlet
+ * Servlet implementation class GetUserByEmailServlet
  */
-@WebServlet("/LoadAdminEditUserServlet")
-public class LoadAdminEditUserServlet extends HttpServlet {
+@WebServlet("/GetUserByEmailServlet")
+public class GetUserByEmailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminEditUserServlet() {
+	public GetUserByEmailServlet() {
 		super();
 	}
 

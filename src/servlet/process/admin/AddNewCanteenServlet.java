@@ -1,7 +1,6 @@
 package servlet.process.admin;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,16 +15,16 @@ import com.google.gson.Gson;
 import controller.CanteenController;
 
 /**
- * Servlet implementation class DeleteCanteenServlet
+ * Servlet implementation class AddNewCanteenServlet
  */
-@WebServlet("/DeleteCanteenServlet")
-public class DeleteCanteenServlet extends HttpServlet {
+@WebServlet("/AddNewCanteenServlet")
+public class AddNewCanteenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteCanteenServlet() {
+	public AddNewCanteenServlet() {
 		super();
 	}
 
@@ -52,12 +51,16 @@ public class DeleteCanteenServlet extends HttpServlet {
 			JSONParser parser = new JSONParser();
 			JSONObject data = (JSONObject) parser.parse(request.getReader());
 			System.out.println(gson.toJson(data));
+			
+			String name = (String) data.get("name");
+			String address = (String) data.get("address");
+			
+			canteenCtrl.addCanteen(name, address);
 
-			int canteenId = ((Long) data.get("canteenId")).intValue();
-			canteenCtrl.deleteCanteen(canteenId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 }

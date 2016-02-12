@@ -53,8 +53,12 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<!-- Angular -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+<link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
+<script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
+<script src='/eureka_webservice/resources/js/myapp.js'></script>
 
 </head>
 
@@ -80,16 +84,7 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-			<!-- Error message handling -->
-			<c:if test="${not empty sessionScope.error}">
-				<div class="alert alert-danger" role="alert">
-					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-					<span class="sr-only">Error: </span>
-					${error}
-				</div>
-				<c:remove var="error" scope="session" />
-			</c:if>
-			<!-- /.row -->
+
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
@@ -173,7 +168,7 @@
 	<script src="http://momentjs.com/downloads/moment.js"></script>
 	<script src="resources/js/bootstrap-datetimepicker.min.js"></script>
 
-	<script src='/eureka_webservice/resources/js/myapp.js'></script>
+
 	<script>
 		app
 				.controller(

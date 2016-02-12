@@ -40,8 +40,10 @@
 
 <!-- Angular -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
 <link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
 <script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
+<script src='/eureka_webservice/resources/js/myapp.js'></script>
 
 </head>
 
@@ -182,7 +184,7 @@
 	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
-	<script src='/eureka_webservice/resources/js/myapp.js'></script>
+
 	<script>
 		app
 				.controller(

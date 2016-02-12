@@ -65,7 +65,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewOrderWindowsServlet">View: All</a>
+							<a target="_self" href="/eureka_webservice/admin/orderwindow/view.jsp">View: All</a>
 
 						</li>
 						<li>

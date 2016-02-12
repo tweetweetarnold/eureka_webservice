@@ -31,16 +31,16 @@
 	rel="stylesheet" type="text/css"
 >
 
-
-<!-- library import for JSTL -->
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+<link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
+<script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
+<script src='/eureka_webservice/resources/js/myapp.js'></script>
 
 </head>
 
-<body>
-	<fmt:setTimeZone value="GMT+8" />
+<body ng-app="myApp" ng-controller="ViewOrderWindowController">
 
 	<div id="wrapper">
 
@@ -60,11 +60,12 @@
 				<div class="col-lg-12">
 
 					<b>Total order windows:</b>
-					${fn:length(sessionScope.orderWindowList)}
+					{{data.length}}
 					<br>
 					<br>
 
 					<div class="dataTable_wrapper">
+						<div cg-busy='loading'></div>
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
@@ -75,26 +76,57 @@
 									<th>Date Created</th>
 									<th>Start Date</th>
 									<th>End date</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.orderWindowList}" var="window">
-									<tr>
-										<td>${window.windowId}</td>
-										<td>${window.company.name}</td>
-										<td>${window.canteen.name}</td>
-										<td>$${window.discountAbsolute}</td>
-										<td>
-											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.createDate}" />
-										</td>
-										<td>
-											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.startDateFormatted}" />
-										</td>
-										<td>
-											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.endDateFormatted}" />
-										</td>
-									</tr>
-								</c:forEach>
+								<tr ng-repeat="window in data track by $index">
+									<td>{{window.windowId}}</td>
+									<td>{{window.company.name}}</td>
+									<td>{{window.canteen.name}}</td>
+									<td>{{window.discountAbsolute | currency}}</td>
+									<td>{{window.createDate}}</td>
+									<td>{{window.startDateFormatted}}</td>
+									<td>{{window.endDateFormatted}}</td>
+									<td>
+										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete{{$index}}">
+											<i class="fa fa-trash-o fa-2x"></i>
+										</button>
+
+										<!-- Modal delete -->
+										<div class="modal fade" id="modalDelete{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+														<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
+													</div>
+													<!-- / modal header -->
+													<div class="modal-body">
+														<p>
+															<b>WARNING: </b>
+															You are deleting Order Window ID: {{window.windowId}}.
+															<br>
+															<br>
+															Are you sure you want to continue?
+														</p>
+													</div>
+													<!-- / modal body -->
+
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+														<button type="submit" class="btn btn-danger">Yes, delete</button>
+													</div>
+													<!-- / modal footer -->
+												</div>
+												<!-- / modal content -->
+											</div>
+										</div>
+										<!-- / Modal delete -->
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -120,6 +152,22 @@
 	></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+
+	<script>
+		app.controller('ViewOrderWindowController', [ '$http', '$scope',
+				function($http, $scope) {
+
+					$scope.loading = $http({
+						method : 'GET',
+						url : '/eureka_webservice/GetAllOrderWindowsServlet'
+					}).then(function successCallback(response) {
+						$scope.data = response.data;
+						console.log(response);
+					});
+
+				} ])
+	</script>
+
 </body>
 
 </html>

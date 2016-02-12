@@ -39,7 +39,12 @@
 <link href="/eureka_webservice/resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
 
 
+<!-- Angular -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+<link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
+<script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
+<script src='/eureka_webservice/resources/js/myapp.js'></script>
 
 </head>
 
@@ -145,9 +150,18 @@
 	<script src="http://momentjs.com/downloads/moment.js"></script>
 	<script src="/eureka_webservice/resources/js/bootstrap-datetimepicker.min.js"></script>
 
-	<script src='/eureka_webservice/resources/js/myapp.js'></script>
 	<script>
-		
+		app.controller('AddCanteenController', [ '$scope', function($scope) {
+			$scope.submit = function() {
+				$http({
+					method : 'POST',
+					url : '/eureka_webservice/AddNewCanteenServlet',
+					params : {}
+				}).then(function successCallback() {
+
+				});
+			};
+		} ]);
 	</script>
 
 

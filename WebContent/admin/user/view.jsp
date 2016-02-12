@@ -31,14 +31,16 @@
 	rel="stylesheet" type="text/css"
 >
 
-
-
+<!-- Angular -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+<link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
+<script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
+<script src='/eureka_webservice/resources/js/myapp.js'></script>
 
 </head>
 
 <body ng-app="myApp" ng-controller="ViewUserController">
-	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 
@@ -62,6 +64,7 @@
 					<br>
 
 					<div class="dataTable_wrapper">
+						<div cg-busy='loading'></div>
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
@@ -164,11 +167,13 @@
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
-	<script src='/eureka_webservice/resources/js/myapp.js'></script>
+
+	
 	<script>
 		app.controller('ViewUserController', [ '$http', '$scope',
 				function($http, $scope) {
-					$http({
+
+					$scope.loading = $http({
 						method : 'GET',
 						url : '/eureka_webservice/GetAllUsersServlet'
 					}).then(function successCallback(response) {

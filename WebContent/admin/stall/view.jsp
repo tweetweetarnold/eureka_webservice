@@ -38,7 +38,12 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<!-- Angular -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+<link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
+<script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
+<script src='/eureka_webservice/resources/js/myapp.js'></script>
 
 </head>
 
@@ -219,8 +224,9 @@
 											{
 												method : 'GET',
 												url : '/eureka_webservice/GetAllStallsUnderCanteenServlet',
-												params:{
-													canteenId: $location.search().canteenId
+												params : {
+													canteenId : $location
+															.search().canteenId
 												}
 											}).then(
 											function successCallback(response) {
