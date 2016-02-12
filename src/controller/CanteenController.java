@@ -17,6 +17,7 @@ import dao.CanteenDAO;
  */
 public class CanteenController {
 	CanteenDAO canteenDAO = new CanteenDAO();
+	StallController stallCtrl = new StallController();
 
 	/**
 	 * Creates a default constructor for CanteenController
@@ -56,45 +57,45 @@ public class CanteenController {
 	/**
 	 * Retrieve a Canteen from the database by an ID
 	 * 
-	 * @param canteenId
-	 *            The ID that belongs to the Canteen
+	 * @param canteenId The ID that belongs to the Canteen
 	 * @return A Canteen object that has the specified ID
 	 */
 	public Canteen getCanteen(int canteenId) {
 		return canteenDAO.getCanteen(canteenId);
 	}
 
-	public void editCanteen(String canteenId, String name, String address) throws Exception {
+	public void editCanteen(int canteenId, String name, String address) throws Exception {
 		boolean changesExist = false;
 
-		Canteen canteenToEdit = getCanteen(Integer.parseInt(canteenId));
-		if (!name.equals(canteenToEdit.getName()) || name != null ) {
+		Canteen canteenToEdit = getCanteen(canteenId);
+		
+		if (!name.equals(canteenToEdit.getName()) || name != null) {
 			canteenToEdit.setName(name);
 			changesExist = true;
 		}
-		if (!address.equals(canteenToEdit.getAddress())||address != null ) {
+		if (!address.equals(canteenToEdit.getAddress()) || address != null) {
 			canteenToEdit.setAddress(address);
 			changesExist = true;
 		}
-		
-		if(changesExist){
+
+		if (changesExist) {
 			canteenDAO.updateCanteen(canteenToEdit);
-		}else{
+		} else {
 			throw new Exception("No changes were made to the Canteen");
 		}
-		
 
 	}
-	
-	public void deleteCanteen(String canteenId) throws Exception{
-		StallController stallController = new StallController();
-		Canteen canteenToDelete = getCanteen(Integer.parseInt(canteenId));
+
+	public void deleteCanteen(int canteenId) throws Exception {
+		CanteenDAO canteenDAO = new CanteenDAO();
+		Canteen canteenToDelete = getCanteen(canteenId);
+
 		Set<Stall> stallsToDelete = canteenToDelete.getStallList();
-		for(Stall stall: stallsToDelete){
-			stallController.deleteStall(stall);
+		for (Stall stall : stallsToDelete) {
+			stallCtrl.deleteStall(stall);
 		}
+		canteenDAO.deleteCanteen(canteenToDelete);
+		
 	}
-	
-	
 
 }

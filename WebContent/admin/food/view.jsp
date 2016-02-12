@@ -55,10 +55,10 @@
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
 						<li>
-							<a href="/eureka_webservice/admin/canteen/view.jsp">Canteens</a>
+							<a target="_self" href="/eureka_webservice/admin/canteen/view.jsp">Canteens</a>
 						</li>
 						<li>
-							<a href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${sessionScope.canteenId}">Stalls</a>
+							<a target="_self" href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${sessionScope.canteenId}">Stalls</a>
 						</li>
 						<li class="active">Foods</li>
 					</ol>

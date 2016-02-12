@@ -38,12 +38,10 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<!-- library import for JSTL -->
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<!-- Angular -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
+<script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
 
 </head>
 
@@ -76,13 +74,13 @@
 					{{data.length}}
 					<br>
 					<br>
-					<form action="">
-						<input type="hidden" name="" value="">
-						<button type="submit" class="btn btn-primary" disabled>Add canteen</button>
-					</form>
+					<a href='/eureka_webservice/admin/canteen/add.jsp' class="btn btn-primary">Add canteen</a>
+					<br>
 					<br>
 
 					<div class="dataTable_wrapper">
+						<div cg-busy='loading'></div>
+
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
@@ -105,7 +103,7 @@
 										<a ng-href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId={{canteen.canteenId}}">View all stalls</a>
 									</td>
 									<td>
-										<a ng-href='/eureka_webservice/admin/canteen/edit.jsp'>
+										<a ng-href='/eureka_webservice/admin/canteen/edit.jsp?canteenId={{canteen.canteenId}}'>
 											<button type="button" class="btn btn-link btn-xs">
 												<i class="fa fa-pencil fa-2x"></i>
 											</button>
@@ -129,6 +127,7 @@
 													<!-- / modal header -->
 
 													<div class="modal-body">
+														<div cg-busy='loading2'></div>
 														<p>
 															<b>WARNING: </b>
 															You are deleting a canteen.
@@ -141,8 +140,9 @@
 
 													<div class="modal-footer">
 														<button type="button" class="btn btn-default" data-dismiss="modal">No, keep my canteen</button>
-														<button type="button" ng-click='deleteCanteen(canteen.canteenId)' class="btn btn-danger">Yes,
-															delete the canteen</button>
+														<button type="button" ng-click='deleteCanteen(canteen.canteenId)' class="btn btn-danger"
+															ng-disabled='loading2'
+														>Yes, delete the canteen</button>
 													</div>
 													<!-- / modal footer -->
 												</div>
@@ -184,36 +184,57 @@
 
 	<script src='/eureka_webservice/resources/js/myapp.js'></script>
 	<script>
-		app.controller('ViewCanteenController', [ '$http', '$scope',
-				function($http, $scope) {
-					$http({
-						method : 'GET',
-						url : '/eureka_webservice/GetAllCanteensServlet'
-					}).then(function successCallback(response) {
-						console.log(response);
-						console.log(response.data);
-						$scope.data = response.data;
-						$scope.display = response.status;
-					}, function errorCallback(response) {
-						alert('fail');
-						console.log(response);
-					});
+		app
+				.controller(
+						'ViewCanteenController',
+						[
+								'$http',
+								'$scope',
+								'$window',
+								function($http, $scope, $window) {
+									$scope.loading = $http(
+											{
+												method : 'GET',
+												url : '/eureka_webservice/GetAllCanteensServlet'
+											})
+											.then(
+													function successCallback(
+															response) {
+														console.log(response);
+														console
+																.log(response.data);
+														$scope.data = response.data;
+														$scope.display = response.status;
+													},
+													function errorCallback(
+															response) {
+														alert('fail');
+														console.log(response);
+													});
 
-					$scope.deleteCanteen = function(canteenId) {
-						$http({
-							method : 'POST',
-							url : '/eureka_webservice/DeleteCanteenServlet',
-							data : {
-								canteenId : canteenId
-							}
-						}).then(function successCallback(response) {
-							alert('success');
-						});
-					};
+									$scope.deleteCanteen = function(canteenId) {
+										console.log({
+											canteenId : canteenId
+										});
 
-				}
+										$scope.loading2 = $http(
+												{
+													method : 'POST',
+													url : '/eureka_webservice/DeleteCanteenServlet',
+													data : {
+														canteenId : canteenId
+													}
+												})
+												.then(
+														function successCallback(
+																response) {
+															$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
+														});
+									};
 
-		]);
+								}
+
+						]);
 	</script>
 </body>
 

@@ -15,25 +15,16 @@
 
 <title>LunchTime - Admin</title>
 
-<!-- Bootstrap Core CSS -->
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 >
-
-<!-- MetisMenu CSS -->
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css"
 	rel="stylesheet"
 >
-
-<!-- Timeline CSS -->
 <link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/timeline.css" rel="stylesheet">
-
-<!-- Custom CSS -->
 <link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/css/sb-admin-2.css" rel="stylesheet">
-
-<!-- Morris Charts CSS -->
 <link href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.css"
 	rel="stylesheet"
 >
@@ -48,17 +39,11 @@
 <link href="/eureka_webservice/resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
 
 
-<!-- library import for JSTL -->
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
 
 </head>
 
-<body ng-app="myApp" ng-controller="EditCanteenController">
+<body>
 
 	<div id="wrapper">
 
@@ -68,32 +53,17 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Edit canteen</h1>
-
-					<!-- breadcrumb -->
-					<ol class="breadcrumb">
-						<li>
-							<a target='_self' href="/eureka_webservice/LoadViewCanteenServlet">Canteens</a>
-						</li>
-					</ol>
-
+					<h1 class="page-header">Add new canteen</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-			<!-- Error message handling -->
-			<c:if test="${not empty sessionScope.error}">
-				<div class="alert alert-danger" role="alert">
-					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-					<span class="sr-only">Error: </span>
-					${error}
-				</div>
-				<c:remove var="error" scope="session" />
-			</c:if>
+
+
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Edit canteen</div>
+						<div class="panel-heading">Add new canteen</div>
 
 						<div class="panel-body">
 
@@ -101,22 +71,24 @@
 
 								<div class="col-lg-12">
 
+									<form role="form" id="submitForm">
 
-									<!-- <input type="hidden" name="canteenId" value="${canteenId}"> -->
+										<div class="form-group">
+											<label>Canteen name</label>
+											<input class="form-control" ng-model='canteen.name' name="name" required>
+										</div>
 
-									<div class="form-group">
-										<label>Canteen name</label>
-										<input class="form-control" name="name" ng-model='canteen.name' ng-value="canteen.name" required>
-									</div>
+										<div class="form-group">
+											<label>Address</label>
+											<input class="form-control" ng-model='canteen.address' name="address">
+										</div>
 
-									<div class="form-group">
-										<label>Address</label>
-										<input class="form-control" name="address" ng-model='canteen.address' ng-value="canteen.address" required>
-									</div>
+										<br>
 
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update
-										Canteen details</button>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
+											new Canteen</button>
 
+									</form>
 								</div>
 								<!-- /.col-lg-12 -->
 
@@ -139,16 +111,16 @@
 	<!-- /#wrapper -->
 
 	<!-- Create confirmation -->
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title">Confirmation</h4>
 				</div>
-				<div class="modal-body">Are you sure you want to update Canteen details?</div>
+				<div class="modal-body">Are you sure you want to Add new Canteen?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline btn-default">Cancel</button>
-					<button type="button" ng-click="submit()" class="btn btn-primary">Confirm</button>
+					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
 				</div>
 			</div>
 		</div>
@@ -171,53 +143,13 @@
 
 	<!-- Datetime picker -->
 	<script src="http://momentjs.com/downloads/moment.js"></script>
-	<script src="resources/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="/eureka_webservice/resources/js/bootstrap-datetimepicker.min.js"></script>
 
 	<script src='/eureka_webservice/resources/js/myapp.js'></script>
 	<script>
-		app
-				.controller(
-						'EditCanteenController',
-						[
-								'$http',
-								'$location',
-								'$scope',
-								'$window',
-								function($http, $location, $scope, $window) {
-									$http(
-											{
-												method : 'GET',
-												url : '/eureka_webservice/GetCanteenServlet',
-												params : {
-													canteenId : $location
-															.search().canteenId
-												}
-											}).then(
-											function successCallback(response) {
-												console.log(response);
-												$scope.canteen = response.data;
-												console.log($scope.canteen);
-											});
-
-									$scope.submit = function() {
-
-										console.log($scope.canteen);
-
-										$http(
-												{
-													method : 'POST',
-													url : '/eureka_webservice/SetCanteenServlet',
-													data : $scope.canteen
-												})
-												.then(
-														function successCallback(
-																response) {
-															$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
-														});
-									};
-
-								} ]);
+		
 	</script>
+
 
 </body>
 

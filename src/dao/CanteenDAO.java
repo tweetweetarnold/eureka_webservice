@@ -13,6 +13,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
+import value.StringValues;
 import connection.MyConnection;
 
 /**
@@ -51,7 +52,8 @@ public class CanteenDAO {
 	 * @param c The Canteen object to be removed
 	 */
 	public void deleteCanteen(Canteen c) {
-		MyConnection.delete(c);
+		c.setStatus(StringValues.ARCHIVED);
+		updateCanteen(c);
 	}
 	
 	/**

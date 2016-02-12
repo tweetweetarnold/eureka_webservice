@@ -2,7 +2,7 @@
  * 
  */
 
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['cgBusy']);
 
 app.config([ '$locationProvider', function($locationProvider) {
 	$locationProvider.html5Mode({
@@ -10,3 +10,5 @@ app.config([ '$locationProvider', function($locationProvider) {
 		requireBase : false
 	});
 } ]);
+
+

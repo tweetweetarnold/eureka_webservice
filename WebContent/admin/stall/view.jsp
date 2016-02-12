@@ -38,10 +38,11 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
 </head>
 
-<body>
-	<fmt:setTimeZone value="GMT+8" />
+<body ng-app='myApp' ng-controller='ViewStallController'>
 
 	<div id="wrapper">
 
@@ -56,7 +57,7 @@
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
 						<li>
-							<a href="/eureka_webservice/admin/canteen/view.jsp">Canteens</a>
+							<a target="_self" href="/eureka_webservice/admin/canteen/view.jsp">Canteens</a>
 						</li>
 						<li class="active">Stalls</li>
 					</ol>
@@ -204,6 +205,29 @@
 	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+
+	<script src='/eureka_webservice/resources/js/myapp.js'></script>
+	<script>
+		app
+				.controller(
+						'ViewStallController',
+						[
+								'$http',
+								'$location',
+								function($http, $location) {
+									$http(
+											{
+												method : 'GET',
+												url : '/eureka_webservice/GetAllStallsUnderCanteenServlet',
+												params:{
+													canteenId: $location.search().canteenId
+												}
+											}).then(
+											function successCallback(response) {
+												console.log(response);
+											});
+								} ]);
+	</script>
 </body>
 
 </html>

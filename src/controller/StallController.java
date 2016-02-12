@@ -3,20 +3,12 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import model.Canteen;
 import model.Food;
 import model.Stall;
 import services.CloudinaryUpload;
-import dao.FoodDAO;
 import dao.StallDAO;
 
 /**

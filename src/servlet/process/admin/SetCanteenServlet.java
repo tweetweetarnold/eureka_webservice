@@ -16,16 +16,16 @@ import com.google.gson.Gson;
 import controller.CanteenController;
 
 /**
- * Servlet implementation class DeleteCanteenServlet
+ * Servlet implementation class SetCanteenServlet
  */
-@WebServlet("/DeleteCanteenServlet")
-public class DeleteCanteenServlet extends HttpServlet {
+@WebServlet("/SetCanteenServlet")
+public class SetCanteenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteCanteenServlet() {
+	public SetCanteenServlet() {
 		super();
 	}
 
@@ -42,24 +42,26 @@ public class DeleteCanteenServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
-
-		CanteenController canteenCtrl = new CanteenController();
 
 		try {
 			Gson gson = new Gson();
+			CanteenController canteenCtrl = new CanteenController();
 
 			JSONParser parser = new JSONParser();
 			JSONObject data = (JSONObject) parser.parse(request.getReader());
 			System.out.println(gson.toJson(data));
 
 			int canteenId = ((Long) data.get("canteenId")).intValue();
-			System.out.println("i am here");
-			canteenCtrl.deleteCanteen(canteenId);
+			String name = (String) data.get("name");
+			String address = (String) data.get("address");
+
+			canteenCtrl.editCanteen(canteenId, name, address);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
+
 }

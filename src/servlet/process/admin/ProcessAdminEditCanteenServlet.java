@@ -17,49 +17,47 @@ import controller.CanteenController;
 @WebServlet("/ProcessAdminEditCanteenServlet")
 public class ProcessAdminEditCanteenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProcessAdminEditCanteenServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ProcessAdminEditCanteenServlet() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		
+
 		CanteenController canteenController = new CanteenController();
 		String canteenId = request.getParameter("canteenId");
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
-		
 
 		try {
-			canteenController.editCanteen(canteenId,name,address);
+			canteenController.editCanteen(Integer.parseInt(canteenId), name, address);
 			session.setAttribute("success", "Canteen updated successfully.");
-			//redirect
+			// redirect
 			response.sendRedirect("DO SOMETHING");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("error", e.getMessage());
-			//redirect
+			// redirect
 			response.sendRedirect("DO SOMETHING");
 		}
 	}
