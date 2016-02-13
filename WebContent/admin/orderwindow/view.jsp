@@ -57,7 +57,7 @@
 			<!-- /.row -->
 
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-12" cg-busy='loading'>
 
 					<b>Total order windows:</b>
 					{{data.length}}
@@ -65,7 +65,6 @@
 					<br>
 
 					<div class="dataTable_wrapper">
-						<div cg-busy='loading'></div>
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>

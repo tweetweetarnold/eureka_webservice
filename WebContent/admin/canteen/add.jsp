@@ -48,7 +48,7 @@
 
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="AddCanteenController">
 
 	<div id="wrapper">
 
@@ -59,6 +59,14 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">Add new canteen</h1>
+
+					<!-- breadcrumb -->
+					<ol class="breadcrumb">
+						<li>
+							<a target="_self" href="/eureka_webservice/admin/canteen/view.jsp">Canteens</a>
+						</li>
+					</ol>
+
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -76,24 +84,21 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" id="submitForm">
+									<div class="form-group">
+										<label>Canteen name</label>
+										<input class="form-control" ng-model='canteen.name' name="name" required>
+									</div>
 
-										<div class="form-group">
-											<label>Canteen name</label>
-											<input class="form-control" ng-model='canteen.name' name="name" required>
-										</div>
+									<div class="form-group">
+										<label>Address</label>
+										<input class="form-control" ng-model='canteen.address' name="address">
+									</div>
 
-										<div class="form-group">
-											<label>Address</label>
-											<input class="form-control" ng-model='canteen.address' name="address">
-										</div>
+									<br>
 
-										<br>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
+										new Canteen</button>
 
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
-											new Canteen</button>
-
-									</form>
 								</div>
 								<!-- /.col-lg-12 -->
 
@@ -125,7 +130,7 @@
 				<div class="modal-body">Are you sure you want to Add new Canteen?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline btn-default">Cancel</button>
-					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
+					<button type="button" ng-click="submit()" class="btn btn-primary">Confirm</button>
 				</div>
 			</div>
 		</div>
@@ -151,17 +156,40 @@
 	<script src="/eureka_webservice/resources/js/bootstrap-datetimepicker.min.js"></script>
 
 	<script>
-		app.controller('AddCanteenController', [ '$scope', function($scope) {
-			$scope.submit = function() {
-				$http({
-					method : 'POST',
-					url : '/eureka_webservice/AddNewCanteenServlet',
-					params : {}
-				}).then(function successCallback() {
+		app
+				.controller(
+						'AddCanteenController',
+						[
+								'$scope',
+								'$http',
+								'$window',
+								function($scope, $http, $window) {
 
-				});
-			};
-		} ]);
+									$scope.submit = function() {
+										console.log($scope.canteen);
+
+										$http(
+												{
+													method : 'POST',
+													url : '/eureka_webservice/AddNewCanteenServlet',
+													data : {
+														name : $scope.canteen.name,
+														address : $scope.canteen.address
+													}
+												})
+												.then(
+														function successCallback(
+																response) {
+															console
+																	.log(response);
+															$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
+														},
+														(function errorCallback(
+																response) {
+															alert('fail');
+														}));
+									};
+								} ]);
 	</script>
 
 

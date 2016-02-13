@@ -61,7 +61,7 @@
 
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
-						<li class="active">Canteens</li>
+						<li class='active'>Canteens</li>
 					</ol>
 
 				</div>
@@ -70,7 +70,7 @@
 			<!-- /.row -->
 
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-12" cg-busy='loading'>
 
 					<b>Total canteens:</b>
 					{{data.length}}
@@ -81,7 +81,7 @@
 					<br>
 
 					<div class="dataTable_wrapper">
-						<div cg-busy='loading'></div>
+
 
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
@@ -162,6 +162,7 @@
 
 				</div>
 				<!-- /.col-lg-12 -->
+
 			</div>
 			<!-- /.row -->
 

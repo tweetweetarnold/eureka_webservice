@@ -123,7 +123,7 @@ public class CanteenController {
 		return false;
 	}
 	
-	public String validateNewCanteenInputs(String name, String address) {
+	private String validateNewCanteenInputs(String name, String address) {
 		String errors = "";
 		if (name == null || name.isEmpty()) {
 			errors += "Canteen Name is Empty.\n";

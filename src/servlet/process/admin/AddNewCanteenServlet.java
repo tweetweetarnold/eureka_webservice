@@ -51,12 +51,11 @@ public class AddNewCanteenServlet extends HttpServlet {
 			JSONParser parser = new JSONParser();
 			JSONObject data = (JSONObject) parser.parse(request.getReader());
 			System.out.println(gson.toJson(data));
-			
+
 			String name = (String) data.get("name");
 			String address = (String) data.get("address");
-			
-			canteenCtrl.addCanteen(name, address);
 
+			canteenCtrl.addCanteen(name, address);
 
 		} catch (Exception e) {
 			e.printStackTrace();
