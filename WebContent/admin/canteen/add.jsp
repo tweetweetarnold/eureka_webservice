@@ -183,10 +183,11 @@
 															console
 																	.log(response);
 															$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
+
 														},
 														(function errorCallback(
 																response) {
-															alert('fail');
+															alert(response);
 														}));
 									};
 								} ]);

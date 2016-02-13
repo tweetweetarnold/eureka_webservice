@@ -36,7 +36,7 @@
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <![endif]-->
 
 <!-- Angular -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
@@ -66,6 +66,17 @@
 
 				</div>
 				<!-- /.col-lg-12 -->
+
+				<!-- Success message handling -->
+				<div class="col-lg-12">
+					<div class="alert alert-success" role="alert" ng-show="success != null">
+						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+						<span class="sr-only">Success: </span>
+						{{success}}
+					</div>
+				</div>
+
+
 			</div>
 			<!-- /.row -->
 
@@ -194,7 +205,16 @@
 								'$http',
 								'$scope',
 								'$window',
-								function($http, $scope, $window) {
+								'$rootScope',
+								'myMessages',
+								function($http, $scope, $window, $rootScope,
+										myMessages) {
+
+									$scope.success = angular
+											.copy($window.sessionStorage.success);
+									$window.sessionStorage
+											.removeItem('success');
+
 									$scope.loading = $http(
 											{
 												method : 'GET',
@@ -203,15 +223,11 @@
 											.then(
 													function successCallback(
 															response) {
-														console.log(response);
-														console
-																.log(response.data);
 														$scope.data = response.data;
 														$scope.display = response.status;
 													},
 													function errorCallback(
 															response) {
-														alert('fail');
 														console.log(response);
 													});
 
@@ -231,6 +247,9 @@
 												.then(
 														function successCallback(
 																response) {
+															console
+																	.log(response);
+															$window.sessionStorage.success = response.data.success;
 															$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
 														});
 									};
