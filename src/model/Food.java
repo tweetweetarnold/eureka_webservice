@@ -153,6 +153,16 @@ public class Food {
 		return modifierList;
 	}
 
+	public Set<Modifier> getActiveModifierList() {
+		Set<Modifier> returnSet = new HashSet<Modifier>();
+		for(Modifier s:modifierList){
+			if(s.getStatus().equals(StringValues.ACTIVE)){
+				returnSet.add(s);
+			}
+		}
+		return returnSet;
+	}
+	
 	public Set<ModifierSection> getModifierSectionList() {
 		return modifierSectionList;
 	}

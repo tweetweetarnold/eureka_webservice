@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -104,6 +105,16 @@ public class Stall {
 		return foodList;
 	}
 
+	public Set<Food> getActiveFoodList() {
+		Set<Food> returnSet = new HashSet<Food>();
+		for(Food s:foodList){
+			if(s.getStatus().equals(StringValues.ACTIVE)){
+				returnSet.add(s);
+			}
+		}
+		return returnSet;
+	}
+	
 	/**
 	 * Retrieves the directory that stores the Food images
 	 * 

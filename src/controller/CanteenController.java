@@ -27,6 +27,11 @@ public class CanteenController {
 
 	}
 
+	public ArrayList<Canteen> getAllActiveCanteens() {
+		return canteenDAO.getAllActiveCanteens();
+	}
+	
+	
 	/**
 	 * Retrieves All the Canteens stored in the Database
 	 * 

@@ -76,6 +76,26 @@ public class CanteenDAO {
 		}
 		return returnList;
 	}
+	
+	public ArrayList<Canteen> getAllActiveCanteens() {
+		ArrayList<Canteen> returnList = null;
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		returnList = new ArrayList<Canteen>();
+
+		for (Object o : l) {
+			returnList.add((Canteen) o);
+		}
+		return returnList;
+	}
+	
+	
+	
 
 	/**
 	 * Retrieve the Canteen based on the provided ID

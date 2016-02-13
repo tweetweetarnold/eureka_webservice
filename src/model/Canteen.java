@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -97,6 +98,17 @@ public class Canteen {
 	public Set<Stall> getStallList() {
 		return stallList;
 	}
+	
+	public Set<Stall> getActiveStallList() {
+		Set<Stall> returnSet = new HashSet<Stall>();
+		for(Stall s:stallList){
+			if(s.getStatus().equals(StringValues.ACTIVE)){
+				returnSet.add(s);
+			}
+		}
+		return returnSet;
+	}
+	
 
 	public String getStatus() {
 		return status;

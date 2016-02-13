@@ -7,6 +7,7 @@ import java.util.List;
 import model.Canteen;
 import model.Company;
 import model.OrderWindow;
+import value.StringValues;
 
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
@@ -150,6 +151,22 @@ public class OrderWindowDAO {
 		return returnList;
 	}
 
+	
+	public ArrayList<OrderWindow> getAllNonDeletedOrderWindows() {
+		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
+		dc.add(Restrictions.ne("status", StringValues.ARCHIVED));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((OrderWindow) o);
+		}
+		return returnList;
+	}
+	
 	/**
 	 * Retrieve the OrderWindow based on the provided ID
 	 * 

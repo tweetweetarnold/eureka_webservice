@@ -343,5 +343,9 @@ public class OrderWindowController {
 	public OrderWindow getOrderWindow(Integer orderWindowId) {
 		return orderWindowDAO.getOrderWindow(orderWindowId);
 	}
+	
+	public ArrayList<OrderWindow> getAllNonDeletedOrderWindows(){
+		return orderWindowDAO.getAllNonDeletedOrderWindows();
+	}
 
 }

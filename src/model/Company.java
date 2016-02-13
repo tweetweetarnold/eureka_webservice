@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -67,6 +68,15 @@ public class Company {
 		return canteenList;
 	}
 
+	public Set<Canteen> getActiveCanteenList() {
+		Set<Canteen> returnSet = new HashSet<Canteen>();
+		for(Canteen s:canteenList){
+			if(s.getStatus().equals(StringValues.ACTIVE)){
+				returnSet.add(s);
+			}
+		}
+		return returnSet;
+	}
 	/**
 	 * Retrieves the current company code of the Company
 	 * 
