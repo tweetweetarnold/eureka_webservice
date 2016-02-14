@@ -2,7 +2,13 @@ package controller;
 
 import value.StringValues;
 import java.util.ArrayList;
+
+import javax.mail.MessagingException;
+
+import connection.MyConnection;
+import model.Company;
 import model.Employee;
+import services.SendEmail;
 import dao.EmployeeDAO;
 
 /**
@@ -107,4 +113,46 @@ public class EmployeeController {
 	public void updateEmployee(Employee e) {
 		employeeDAO.updateEmployee(e);
 	}
+	
+	public void suspendOverduePaymentFromCompany(Company c){
+		
+		
+		ArrayList<String> emailList = new ArrayList<String>();
+		SendEmail emailGen = new SendEmail();
+		String url = "PLEASE ENTER";
+		String subject = "Koh Bus LunchTime Ordering App - Payment Overdue";
+		String messageBody = "Dear User,<br><br>"
+				+ "Please note that you will not be able to place any new orders until you have cleared your payment!<br><br>"
+				+"<a href="
+				+ url
+				+ ">"
+				+ url
+				+ "</a>"
+				+ "<br><br>"
+				+ "Regards,<br>"
+				+ "Admin<br><br>"
+				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
+		
+		
+		ArrayList<Object> objects = new ArrayList<Object>(
+				MyConnection.getUsersWithOutstandingPaymentFromCompany(c));
+		for (Object o : objects) {
+			Employee tempEmployee = (Employee) o;
+			tempEmployee.setStatus(StringValues.EMPLOYEE_SUSPENDED);
+			String tempEmail = tempEmployee.getEmail();
+			emailList.add(tempEmail);
+			updateEmployee(tempEmployee);
+			
+		}
+		String[] toEmails = new String[emailList.size()];
+		toEmails = emailList.toArray(toEmails);
+		String[] ccEmails = {"sumon123may@eastman.com", "wch123ow@eastman.com"};
+		try {
+			emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
