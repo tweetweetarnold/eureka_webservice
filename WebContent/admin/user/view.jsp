@@ -52,6 +52,24 @@
 					<h1 class="page-header">User Management</h1>
 				</div>
 				<!-- /.col-lg-12 -->
+
+
+				<!-- Message handling -->
+				<div class="col-lg-12">
+					<div class="alert alert-success" role="alert" ng-show="success != null">
+						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+						<span class="sr-only">Success: </span>
+						{{success}}
+					</div>
+					<div class="alert alert-danger" role="alert" ng-show="error != null">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error: </span>
+						{{error}}
+					</div>
+				</div>
+				<!-- / message handling -->
+
+
 			</div>
 			<!-- /.row -->
 
@@ -167,10 +185,19 @@
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 
-	
+
 	<script>
-		app.controller('ViewUserController', [ '$http', '$scope',
-				function($http, $scope) {
+		app.controller('ViewUserController', [
+				'$http',
+				'$scope',
+				'$window',
+				function($http, $scope, $window) {
+
+					$scope.success = angular
+							.copy($window.sessionStorage.success);
+					$scope.error = angular.copy($window.sessionStorage.error);
+					$window.sessionStorage.removeItem('success');
+					$window.sessionStorage.removeItem('error');
 
 					$scope.loading = $http({
 						method : 'GET',
@@ -181,7 +208,7 @@
 						$scope.data = response.data;
 						$scope.display = response.status;
 					}, function errorCallback(response) {
-						alert('fail');
+						alert(response);
 					});
 				}
 

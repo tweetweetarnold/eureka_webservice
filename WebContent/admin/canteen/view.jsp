@@ -67,14 +67,20 @@
 				</div>
 				<!-- /.col-lg-12 -->
 
-				<!-- Success message handling -->
+				<!-- Message handling -->
 				<div class="col-lg-12">
 					<div class="alert alert-success" role="alert" ng-show="success != null">
 						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
 						<span class="sr-only">Success: </span>
 						{{success}}
 					</div>
+					<div class="alert alert-danger" role="alert" ng-show="error != null">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error: </span>
+						{{error}}
+					</div>
 				</div>
+				<!-- / message handling -->
 
 
 			</div>
@@ -143,7 +149,7 @@
 														<div cg-busy='loading2'></div>
 														<p>
 															<b>WARNING: </b>
-															You are deleting a canteen.
+															You are deleting Canteen {{canteen.name}}.
 															<br>
 															<br>
 															Are you sure you want to continue?
@@ -153,7 +159,7 @@
 
 													<div class="modal-footer">
 														<button type="button" class="btn btn-default" data-dismiss="modal">No, keep my canteen</button>
-														<button type="button" ng-click='deleteCanteen(canteen.canteenId)' class="btn btn-danger"
+														<button type="button" ng-click='deleteCanteen(canteen.canteenId, canteen.name)' class="btn btn-danger"
 															ng-disabled='loading2'
 														>Yes, delete the canteen</button>
 													</div>
@@ -205,15 +211,15 @@
 								'$http',
 								'$scope',
 								'$window',
-								'$rootScope',
-								'myMessages',
-								function($http, $scope, $window, $rootScope,
-										myMessages) {
+								function($http, $scope, $window) {
 
 									$scope.success = angular
 											.copy($window.sessionStorage.success);
+									$scope.error = angular
+											.copy($window.sessionStorage.error);
 									$window.sessionStorage
 											.removeItem('success');
+									$window.sessionStorage.removeItem('error');
 
 									$scope.loading = $http(
 											{
@@ -231,9 +237,11 @@
 														console.log(response);
 													});
 
-									$scope.deleteCanteen = function(canteenId) {
+									$scope.deleteCanteen = function(canteenId,
+											canteenName) {
 										console.log({
-											canteenId : canteenId
+											canteenId : canteenId,
+											canteenName : canteenName
 										});
 
 										$scope.loading2 = $http(
@@ -241,7 +249,8 @@
 													method : 'POST',
 													url : '/eureka_webservice/DeleteCanteenServlet',
 													data : {
-														canteenId : canteenId
+														canteenId : canteenId,
+														canteenName : canteenName
 													}
 												})
 												.then(
@@ -251,7 +260,12 @@
 																	.log(response);
 															$window.sessionStorage.success = response.data.success;
 															$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
-														});
+														},
+														(function errorCallback(
+																response) {
+															$window.sessionStorage.error = response.data.error;
+															$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
+														}));
 									};
 
 								}

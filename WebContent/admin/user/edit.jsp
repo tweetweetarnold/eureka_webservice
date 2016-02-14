@@ -137,6 +137,10 @@
 								'$window',
 								function($http, $scope, $location, $window) {
 
+									$scope.error = angular
+											.copy($window.sessionStorage.error);
+									$window.sessionStorage.removeItem('error');
+
 									var email = $location.search().email;
 
 									$http(
@@ -157,20 +161,25 @@
 											});
 
 									$scope.updateUser = function() {
-												$http(
-														{
-															method : 'POST',
-															url : '/eureka_webservice/ProcessAdminEditUserServlet',
-															data : $scope.user
-														})
-														.then(
-																function successCallback(
-																		response) {
-																	$window.location.href = '/eureka_webservice/admin/user/view.jsp';
-																}),
-												function errorCallback(repsonse) {
-													alert('fail');
-												};
+										$http(
+												{
+													method : 'POST',
+													url : '/eureka_webservice/EditUserServlet',
+													data : $scope.user
+												})
+												.then(
+														function successCallback(
+																response) {
+															if (response.data.success != null) {
+																$window.sessionStorage.success = response.data.success;
+																$window.location.href = '/eureka_webservice/admin/user/view.jsp';
+															} else if (response.data.error != null) {
+																$window.sessionStorage.error = response.data.error;
+																$window.location.href = '/eureka_webservice/admin/user/edit.jsp';
+															} else {
+																alert(response);
+															}
+														});
 
 									};
 								}

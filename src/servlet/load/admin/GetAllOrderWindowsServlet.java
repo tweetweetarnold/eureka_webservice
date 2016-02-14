@@ -70,7 +70,7 @@ public class GetAllOrderWindowsServlet extends HttpServlet {
 
 		OrderWindowController orderWindowController = new OrderWindowController();
 
-		ArrayList<OrderWindow> list = orderWindowController.getAllOrderWindows();
+		ArrayList<OrderWindow> list = orderWindowController.getAllNonDeletedOrderWindows();
 
 		out.print(gson.toJson(list));
 	}

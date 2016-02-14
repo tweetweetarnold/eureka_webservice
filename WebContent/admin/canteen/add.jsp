@@ -69,6 +69,19 @@
 
 				</div>
 				<!-- /.col-lg-12 -->
+
+
+				<!-- Message handling -->
+				<div class="col-lg-12">
+					<div class="alert alert-danger" role="alert" ng-show="error != null">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error: </span>
+						{{error}}
+					</div>
+				</div>
+				<!-- / message handling -->
+
+
 			</div>
 
 
@@ -165,6 +178,10 @@
 								'$window',
 								function($scope, $http, $window) {
 
+									$scope.error = angular
+											.copy($window.sessionStorage.error);
+									$window.sessionStorage.removeItem('error');
+
 									$scope.submit = function() {
 										console.log($scope.canteen);
 
@@ -182,13 +199,17 @@
 																response) {
 															console
 																	.log(response);
-															$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
+															if (response.data.success != null) {
+																$window.sessionStorage.success = response.data.success;
+																$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
+															} else if (response.data.error != null) {
+																$window.sessionStorage.error = response.data.error;
+																$window.location.href = '/eureka_webservice/admin/canteen/add.jsp';
+															} else {
+																alert(response);
+															}
 
-														},
-														(function errorCallback(
-																response) {
-															alert(response);
-														}));
+														});
 									};
 								} ]);
 	</script>

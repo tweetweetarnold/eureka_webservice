@@ -17,7 +17,7 @@
 		<!-- Disable the second-level cache -->
 		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 		<!-- Echo all executed SQL to stdout -->
-		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.c3p0.idle_test_period">300</property>
 		
 		<property name="hibernate.search.default.directory_provider">filesystem</property>

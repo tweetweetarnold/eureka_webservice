@@ -1,6 +1,8 @@
 package servlet.process.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,11 +44,14 @@ public class AddNewCanteenServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
 
 		CanteenController canteenCtrl = new CanteenController();
 
+		JSONObject returnJson = new JSONObject();
+		Gson gson = new Gson();
+
 		try {
-			Gson gson = new Gson();
 
 			JSONParser parser = new JSONParser();
 			JSONObject data = (JSONObject) parser.parse(request.getReader());
@@ -57,9 +62,16 @@ public class AddNewCanteenServlet extends HttpServlet {
 
 			canteenCtrl.addCanteen(name, address);
 
+			returnJson.put("success", "Canteen " + name + " has been added.");
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("add new canteene error");
+			returnJson.put("error", e.getMessage());
 		}
+		
+		System.out.println(gson.toJson(returnJson));
+		out.print(gson.toJson(returnJson));
 	}
 
 }

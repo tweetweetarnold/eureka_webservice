@@ -11,23 +11,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
-import controller.CanteenController;
+import controller.EmployeeController;
+import model.Employee;
 
 /**
- * Servlet implementation class DeleteCanteenServlet
+ * Servlet implementation class EditUserServlet
  */
-@WebServlet("/DeleteCanteenServlet")
-public class DeleteCanteenServlet extends HttpServlet {
+@WebServlet("/EditUserServlet")
+public class EditUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteCanteenServlet() {
-		super();
+	public EditUserServlet() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -46,29 +48,30 @@ public class DeleteCanteenServlet extends HttpServlet {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 
-		JSONObject returnJson = new JSONObject();
 		Gson gson = new Gson();
-
-		CanteenController canteenCtrl = new CanteenController();
+		EmployeeController employeeCtrl = new EmployeeController();
+		JSONObject returnJson = new JSONObject();
 
 		try {
 			JSONParser parser = new JSONParser();
 			JSONObject data = (JSONObject) parser.parse(request.getReader());
-			System.out.println(gson.toJson(data));
 
-			int canteenId = ((Long) data.get("canteenId")).intValue();
-			String canteenName = (String) data.get("canteenName");
-			canteenCtrl.deleteCanteen(canteenId);
+			System.out.println(data);
 
-			returnJson.put("success", "Canteen " + canteenName + " has been deleted.");
+			String jsonString = gson.toJson(data);
+			Employee e = gson.fromJson(jsonString, Employee.class);
 
-		} catch (Exception e) {
-			e.printStackTrace();
+			employeeCtrl.updateEmployee(e);
 			
+			returnJson.put("success", "Employee " + e.getName() + " has been updated.");
+
+		} catch (ParseException e) {
+			e.printStackTrace();
 			returnJson.put("error", e.getMessage());
 		}
-
+		
 		out.println(gson.toJson(returnJson));
 
 	}
+
 }

@@ -53,6 +53,24 @@
 					<h1 class="page-header">Order Window Management: All</h1>
 				</div>
 				<!-- /.col-lg-12 -->
+
+
+				<!-- Message handling -->
+				<div class="col-lg-12">
+					<div class="alert alert-success" role="alert" ng-show="success != null">
+						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+						<span class="sr-only">Success: </span>
+						{{success}}
+					</div>
+					<div class="alert alert-danger" role="alert" ng-show="error != null">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error: </span>
+						{{error}}
+					</div>
+				</div>
+				<!-- / message handling -->
+
+
 			</div>
 			<!-- /.row -->
 
@@ -115,8 +133,9 @@
 													<!-- / modal body -->
 
 													<div class="modal-footer">
-														<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-														<button type="submit" class="btn btn-danger">Yes, delete</button>
+														<button type="button" class="btn btn-default" data-dismiss="modal">No, keep the window</button>
+														<button type="button" ng-click="deleteWindow(window.windowId)" class="btn btn-danger">Yes, delete
+															the window</button>
 													</div>
 													<!-- / modal footer -->
 												</div>
@@ -153,18 +172,52 @@
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 	<script>
-		app.controller('ViewOrderWindowController', [ '$http', '$scope',
-				function($http, $scope) {
+		app
+				.controller(
+						'ViewOrderWindowController',
+						[
+								'$http',
+								'$scope',
+								'$window',
+								function($http, $scope, $window) {
 
-					$scope.loading = $http({
-						method : 'GET',
-						url : '/eureka_webservice/GetAllOrderWindowsServlet'
-					}).then(function successCallback(response) {
-						$scope.data = response.data;
-						console.log(response);
-					});
+									$scope.loading = $http(
+											{
+												method : 'GET',
+												url : '/eureka_webservice/GetAllOrderWindowsServlet'
+											}).then(
+											function successCallback(response) {
+												$scope.data = response.data;
+												console.log(response);
+											});
 
-				} ])
+									$scope.deleteWindow = function(windowId) {
+
+										console.log(windowId);
+
+										$http(
+												{
+													method : 'POST',
+													url : '/eureka_webservice/DeleteOrderWindowServlet',
+													data : {
+														windowId : windowId
+													}
+												})
+												.then(
+														function successCallback(
+																response) {
+
+															if (response.data.success != null) {
+																$window.sessionStorage.success = response.data.success;
+															} else if (response.data.error != null) {
+																$window.sessionStorage.error = response.data.error;
+															} else {
+																alert(response);
+															}
+															$window.location.href = '/eureka_webservice/admin/orderwindow/view.jsp';
+														});
+									};
+								} ])
 	</script>
 
 </body>

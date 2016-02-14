@@ -57,10 +57,10 @@ public class GetAllCanteensServlet extends HttpServlet {
 			public boolean shouldSkipField(FieldAttributes c) {
 				return (c.getDeclaringClass() == Stall.class && c.getName().equals("canteen"))
 						|| (c.getDeclaringClass() == Food.class && c.getName().equals("stall"))
-						|| (c.getDeclaringClass() == ModifierSection.class && c.getName().equals(
-								"food"))
-						|| (c.getDeclaringClass() == Modifier.class && c.getName().equals(
-								"modifierSection"))
+						|| (c.getDeclaringClass() == ModifierSection.class
+								&& c.getName().equals("food"))
+						|| (c.getDeclaringClass() == Modifier.class
+								&& c.getName().equals("modifierSection"))
 						|| (c.getDeclaringClass() == Modifier.class && c.getName().equals("food"));
 			}
 
@@ -68,7 +68,7 @@ public class GetAllCanteensServlet extends HttpServlet {
 
 		CanteenController canteenCtrl = new CanteenController();
 
-		ArrayList<Canteen> list = canteenCtrl.getAllCanteens();
+		ArrayList<Canteen> list = canteenCtrl.getAllActiveCanteens();
 		out.print(gson.toJson(list));
 	}
 
