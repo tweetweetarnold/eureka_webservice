@@ -102,7 +102,7 @@
 									<td>{{window.company.name}}</td>
 									<td>{{window.canteen.name}}</td>
 									<td>{{window.discountAbsolute | currency}}</td>
-									<td>{{window.createDate}}</td>
+									<td>{{window.createDate | date:'medium' : '+0800' }}</td>
 									<td>{{window.startDateFormatted}}</td>
 									<td>{{window.endDateFormatted}}</td>
 									<td>
