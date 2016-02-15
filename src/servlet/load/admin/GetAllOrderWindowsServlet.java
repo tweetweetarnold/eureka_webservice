@@ -2,7 +2,9 @@ package servlet.load.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,10 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 import controller.OrderWindowController;
 import model.Food;
@@ -66,7 +72,7 @@ public class GetAllOrderWindowsServlet extends HttpServlet {
 										&& c.getName().equals("orderWindow"));
 			}
 
-		}).create();
+		}).registerTypeAdapter(Date.class, dateSerialize).create();
 
 		OrderWindowController orderWindowController = new OrderWindowController();
 
@@ -81,5 +87,15 @@ public class GetAllOrderWindowsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
+
+	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
+
+		@Override
+		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
+			final long dateString = src.getTime();
+			return new JsonPrimitive(dateString);
+		}
+
+	};
 
 }
