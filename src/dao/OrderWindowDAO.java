@@ -67,7 +67,8 @@ public class OrderWindowDAO {
 
 		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
 		dc.add(Restrictions.ge("endDateFormatted", currentDatetime)).add(
-				Restrictions.le("startDateFormatted", currentDatetime));
+				Restrictions.le("startDateFormatted", currentDatetime)).add(
+				Restrictions.ne("status", StringValues.ARCHIVED));
 		dc.addOrder(Order.asc("endDateFormatted"));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
