@@ -94,8 +94,8 @@ public class StallController {
 		return hasChanges;
 	}
 
-	public String[] imageUpload(byte[] image) throws IOException {
-		return cloudinaryUpload.imageUpload(image);
+	public String[] imageUploadForStall(byte[] image) throws IOException {
+		return cloudinaryUpload.stallImageUpload(image);
 	}
 
 	public void processAddingStall(byte[] image, String[] parameters, int canteenId) throws Exception {
@@ -113,7 +113,7 @@ public class StallController {
 		if (stallExists) {
 			throw new Exception(parameters[1] + " already exists in " + c.getName());
 		}
-		cloudinaryOutput = imageUpload(image);
+		cloudinaryOutput = imageUploadForStall(image);
 
 		Stall s = new Stall(parameters[1], contactNo, c, new HashSet<Food>(), cloudinaryOutput[0], cloudinaryOutput[1]);
 
@@ -141,7 +141,7 @@ public class StallController {
 					updateFoodListToStall(stall.getFoodList(), newStall);
 				}
 			} else {
-				cloudinaryOutput = replaceOldImage(stall.getPublicId(), image);
+				cloudinaryOutput = replaceStallOldImage(stall.getPublicId(), image);
 				Stall newStall = new Stall(parameters[1], contactNo, stall.getCanteen(), new HashSet<Food>(),
 						cloudinaryOutput[0], cloudinaryOutput[1]);
 				if (!stall.getFoodList().isEmpty()) {
@@ -152,7 +152,7 @@ public class StallController {
 			if (image.length == 0) {
 				throw new Exception("The details entered are the same as the current stall details");
 			} else {
-				cloudinaryOutput = replaceOldImage(stall.getPublicId(), image);
+				cloudinaryOutput = replaceStallOldImage(stall.getPublicId(), image);
 				stall.setImageDirectory(cloudinaryOutput[0]);
 				stall.setPublicId(cloudinaryOutput[1]);
 				updateStall(stall);
@@ -160,8 +160,8 @@ public class StallController {
 		}
 	}
 
-	public String[] replaceOldImage(String oldPublicId, byte[] image) throws IOException {
-		return cloudinaryUpload.replaceImage(oldPublicId, image);
+	public String[] replaceStallOldImage(String oldPublicId, byte[] image) throws IOException {
+		return cloudinaryUpload.replaceStallImage(oldPublicId, image);
 	}
 
 	public void saveStall(Stall s) {
