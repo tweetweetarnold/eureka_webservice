@@ -200,8 +200,12 @@ public class FoodController {
 		}
 
 		int foodId = Integer.parseInt(parameters[0]);
-		double price = Double.parseDouble(parameters[4]);
-
+		double price = 0.0;
+		try{
+			price = Double.parseDouble(parameters[4]);
+		}catch(Exception e){
+			throw new Exception("Invalid input for price");
+		}
 		Food food = getFood(foodId);
 		int stallId = food.getStall().getStallId();
 		if (!parameters[2].isEmpty()) {

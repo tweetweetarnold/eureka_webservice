@@ -140,7 +140,6 @@ public class StallController {
 				if (!stall.getFoodList().isEmpty()) {
 					updateFoodListToStall(stall.getFoodList(), newStall);
 				}
-				saveStall(newStall);
 			} else {
 				cloudinaryOutput = replaceOldImage(stall.getPublicId(), image);
 				Stall newStall = new Stall(parameters[1], contactNo, stall.getCanteen(), new HashSet<Food>(),
@@ -148,7 +147,6 @@ public class StallController {
 				if (!stall.getFoodList().isEmpty()) {
 					updateFoodListToStall(stall.getFoodList(), newStall);
 				}
-				saveStall(newStall);
 			}
 		} else {
 			if (image.length == 0) {

@@ -85,6 +85,9 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 
 			try {
 				discountAbsolute = Double.parseDouble(discountAbsoluteString);
+				if(discountAbsolute>0){
+					discountAbsolute*=-1;
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
