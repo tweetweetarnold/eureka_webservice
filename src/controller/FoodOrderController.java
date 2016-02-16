@@ -710,7 +710,7 @@ public class FoodOrderController {
 		
 		// update FoodOrder (Remove FoodOrderItem)
 		foodOrderToDelete.getFoodOrderList().remove(foodOrderItemToDelete);
-		foodOrderDAO.updateFoodOrder(foodOrderToDelete);
+		updateFoodOrder(foodOrderToDelete);
 		
 		// remove ModifierChosen
 		Set<ModifierChosen> modifierList = foodOrderItemToDelete.getModifierChosenList();
@@ -719,6 +719,10 @@ public class FoodOrderController {
 		}
 		
 		//delete FoodOrderItem
+		foodOrderItemToDelete.setFood(null);
+		foodOrderItemToDelete.setFoodOrder(null);
+		foodOrderItemToDelete.setModifierChosenList(null);
+		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToDelete);
 		foodOrderItemDAO.deleteFoodOrderItem(foodOrderItemToDelete);
 		
 
