@@ -139,6 +139,8 @@ public class StallController {
 						stall.getImageDirectory(), stall.getPublicId());
 				if (!stall.getFoodList().isEmpty()) {
 					updateFoodListToStall(stall.getFoodList(), newStall);
+				}else{
+					saveStall(newStall);
 				}
 			} else {
 				cloudinaryOutput = replaceOldImage(stall.getPublicId(), image);
@@ -146,6 +148,8 @@ public class StallController {
 						cloudinaryOutput[0], cloudinaryOutput[1]);
 				if (!stall.getFoodList().isEmpty()) {
 					updateFoodListToStall(stall.getFoodList(), newStall);
+				}else{
+					saveStall(newStall);
 				}
 			}
 		} else {
