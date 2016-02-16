@@ -724,4 +724,10 @@ public class FoodOrderController {
 
 	}
 
+	public void addFoodOrderItemIntoFoodOrder(FoodOrderItem foodOrderItem, FoodOrder foodOrder){
+		Set<FoodOrderItem> foodOrderItemList = foodOrder.getFoodOrderList();
+		foodOrderItemList.add(foodOrderItem);
+		foodOrder.setFoodOrderList(foodOrderItemList);
+		updateFoodOrder(foodOrder);
+	}
 }
