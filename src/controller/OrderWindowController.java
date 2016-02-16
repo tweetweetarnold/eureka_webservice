@@ -229,11 +229,16 @@ public class OrderWindowController {
 
 	}
 
-	public void deleteOrderWindow(int orderWindowId) {
+	public void deleteOrderWindow(int orderWindowId) throws Exception {
 		OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
 		OrderWindow orderWindowToArchive = getOrderWindow(orderWindowId);
-		orderWindowToArchive.setStatus(StringValues.ARCHIVED);
-		orderWindowDAO.updateOrderWindow(orderWindowToArchive);
+		FoodOrderController foodOrderController = new FoodOrderController();
+		if (foodOrderController.getAllFoodOrderOfOrderWindowGroupedByStall(orderWindowToArchive).size() == 0) {
+			orderWindowToArchive.setStatus(StringValues.ARCHIVED);
+			orderWindowDAO.updateOrderWindow(orderWindowToArchive);
+		}else{
+			throw new Exception("Cannot delete order window if a order has already been placed");
+		}
 	}
 
 	public void editOrderWindow(int orderWindowId, DateTime newStartDate, DateTime newEndDate, Canteen canteen,
