@@ -2,8 +2,7 @@ package servlet.load.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Type;
-import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,34 +10,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 
-import controller.OrderWindowController;
+import controller.CanteenController;
 import model.Food;
 import model.Modifier;
 import model.ModifierSection;
-import model.OrderWindow;
 import model.PriceModifier;
 import model.Stall;
 
 /**
- * Servlet implementation class GetOrderWindowByIdServlet
+ * Servlet implementation class GetAllFoodsServlet
  */
-@WebServlet("/GetOrderWindowByIdServlet")
-public class GetOrderWindowByIdServlet extends HttpServlet {
+@WebServlet("/GetAllFoodsServlet")
+public class GetAllFoodsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetOrderWindowByIdServlet() {
+	public GetAllFoodsServlet() {
 		super();
 	}
 
@@ -48,14 +44,10 @@ public class GetOrderWindowByIdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("applcation/json");
+		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 
-		OrderWindowController orderWindowCtrl = new OrderWindowController();
-		int orderWindowId = Integer.parseInt(request.getParameter("windowId"));
-		System.out.println("orderWindowId: " + orderWindowId);
-
-		OrderWindow window = orderWindowCtrl.getOrderWindow(orderWindowId);
+		CanteenController canteenCtrl = new CanteenController();
 
 		Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
 
@@ -77,9 +69,17 @@ public class GetOrderWindowByIdServlet extends HttpServlet {
 										&& c.getName().equals("orderWindow"));
 			}
 
-		}).registerTypeAdapter(Date.class, dateSerialize).create();
-		
-		out.print(gson.toJson(window));
+		}).create();
+
+		try {
+
+			List<Food> list = canteenCtrl.getAllFood();
+			out.println(gson.toJson(list));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -88,15 +88,5 @@ public class GetOrderWindowByIdServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
-	
-	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
-
-		@Override
-		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
-			final long dateString = src.getTime();
-			return new JsonPrimitive(dateString);
-		}
-
-	};
 
 }

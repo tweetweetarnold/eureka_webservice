@@ -105,7 +105,9 @@
 									<td>{{user.amountOwed | currency}}</td>
 									<td>{{user.status}}</td>
 									<td>
-										<a ng-href="/eureka_webservice/admin/user/edit.jsp?email={{user.email}}&name={{user.name}}"> Order History</a>
+										<a target="_self"
+											ng-href="/eureka_webservice/LoadAdminViewUserOrderHistoryServlet?email={{user.email}}&name={{user.name}}"
+										> Order History</a>
 									</td>
 									<td>
 										<a ng-href="/eureka_webservice/admin/user/edit.jsp?email={{user.email}}">
@@ -113,7 +115,6 @@
 												<i class="fa fa-pencil fa-2x"></i>
 											</button>
 										</a>
-
 									</td>
 									<td>
 										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete{{$index}}">

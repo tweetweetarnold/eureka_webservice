@@ -81,9 +81,9 @@
 									<td>{{window.company.name}}</td>
 									<td>{{window.canteen.name}}</td>
 									<td>{{window.discountAbsolute | currency}}</td>
-									<td>{{window.createDate}}</td>
-									<td>{{window.startDateFormatted}}</td>
-									<td>{{window.endDateFormatted}}</td>
+									<td>{{window.createDate | date:'medium' : '+0800'}}</td>
+									<td>{{window.startDateFormatted | date:'medium' : '+0800'}}</td>
+									<td>{{window.endDateFormatted | date:'medium' : '+0800'}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -147,13 +147,21 @@
 												$http(
 														{
 															method : 'POST',
-															url : '/eureka_webservice/',
-															data : $scope.user
+															url : '/eureka_webservice/EditOrderWindowServlet',
+															data : $scope.window
 														})
 														.then(
 																function successCallback(
 																		response) {
-																	$window.location.href = '/eureka_webservice/admin/user/view.jsp';
+
+																	if (response.data.success != null) {
+																		$window.sessionStorage.success = response.data.success;
+																	} else if (response.data.error != null) {
+																		$window.sessionStorage.error = response.data.error;
+																	} else {
+																		alert(response);
+																	}
+																	$window.location.href = '/eureka_webservice/admin/orderwindow/view.jsp';
 																}),
 												function errorCallback(repsonse) {
 													alert('fail');

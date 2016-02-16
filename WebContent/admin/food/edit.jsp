@@ -118,10 +118,7 @@
 											<input class="form-control" name="price" value="${sessionScope.price}" required>
 										</div>
 
-										<div class="form-group">
-											<label>Weather Conditions</label>
-											<input class="form-control" name="weatherConditions" value="${sessionScope.weatherConditions}">
-										</div>
+										<input name="weatherConditions" type="hidden" value="${sessionScope.weatherConditions}">
 
 										<div class="form-group">
 											<label>Replace Image</label>

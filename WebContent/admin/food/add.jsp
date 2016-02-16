@@ -108,17 +108,14 @@
 											<input class="form-control" name="price" required>
 										</div>
 
-										<div class="form-group">
-											<label>Weather Conditions</label>
-											<input class="form-control" name="weatherConditions">
-										</div>
+										<input name="weatherConditions" type="hidden" value="${sessionScope.weatherConditions}">
 
 										<div class="form-group">
 											<label>Image Directory</label>
 											<input type="file" name="file" style="width: 228px;" required />
 										</div>
 										<br>
-										
+
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
 											new Food</button>
 
