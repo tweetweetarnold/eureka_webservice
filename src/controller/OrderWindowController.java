@@ -57,31 +57,33 @@ public class OrderWindowController {
 
 				if (startTimeTemp.isBefore(endTimeTemp)) {
 					for (OrderWindow w : allOrderWindows) {
-						DateTime wStart = w.getStartDate();
-						DateTime wEnd = w.getEndDate();
-						if (startTimeTemp.isEqual(wStart)) {
-							return false;
-						}
-						if ((startTimeTemp.isAfter(wStart))) {
-							System.out.println("***Alog 1*****");
-							System.out.println((startTimeTemp.isBefore(endTimeTemp)));
-							if (startTimeTemp.isBefore(wEnd)) {
-								if (endTimeTemp.isBefore(wEnd)) {
-									return false;
-								} else if (endTimeTemp.isAfter(wEnd)) {
-									return false;
+						if (w.getStatus().equals(StringValues.ORDERWINDOW_OPENED)) {
+							DateTime wStart = w.getStartDate();
+							DateTime wEnd = w.getEndDate();
+							if (startTimeTemp.isEqual(wStart)) {
+								return false;
+							}
+							if ((startTimeTemp.isAfter(wStart))) {
+								System.out.println("***Alog 1*****");
+								System.out.println((startTimeTemp.isBefore(endTimeTemp)));
+								if (startTimeTemp.isBefore(wEnd)) {
+									if (endTimeTemp.isBefore(wEnd)) {
+										return false;
+									} else if (endTimeTemp.isAfter(wEnd)) {
+										return false;
+									}
 								}
 							}
-						}
 
-						if ((startTimeTemp.isBefore(wStart))) {
-							System.out.println("***Alog 2*****");
+							if ((startTimeTemp.isBefore(wStart))) {
+								System.out.println("***Alog 2*****");
 
-							if (endTimeTemp.isAfter(wStart)) {
-								if (endTimeTemp.isBefore(wEnd)) {
-									return false;
-								} else if (endTimeTemp.isAfter(wEnd)) {
-									return false;
+								if (endTimeTemp.isAfter(wStart)) {
+									if (endTimeTemp.isBefore(wEnd)) {
+										return false;
+									} else if (endTimeTemp.isAfter(wEnd)) {
+										return false;
+									}
 								}
 							}
 						}
@@ -94,31 +96,33 @@ public class OrderWindowController {
 
 			if (startTime.isBefore(endTime)) {
 				for (OrderWindow w : allOrderWindows) {
-					DateTime wStart = w.getStartDate();
-					DateTime wEnd = w.getEndDate();
-					if (startTime.isEqual(wStart)) {
-						return false;
-					}
-					if ((startTime.isAfter(wStart))) {
-						System.out.println("***Alog 1*****");
-						System.out.println((startTime.isBefore(endTime)));
-						if (startTime.isBefore(wEnd)) {
-							if (endTime.isBefore(wEnd)) {
-								return false;
-							} else if (endTime.isAfter(wEnd)) {
-								return false;
+					if (w.getStatus().equals(StringValues.ORDERWINDOW_OPENED)) {
+						DateTime wStart = w.getStartDate();
+						DateTime wEnd = w.getEndDate();
+						if (startTime.isEqual(wStart)) {
+							return false;
+						}
+						if ((startTime.isAfter(wStart))) {
+							System.out.println("***Alog 1*****");
+							System.out.println((startTime.isBefore(endTime)));
+							if (startTime.isBefore(wEnd)) {
+								if (endTime.isBefore(wEnd)) {
+									return false;
+								} else if (endTime.isAfter(wEnd)) {
+									return false;
+								}
 							}
 						}
-					}
 
-					if ((startTime.isBefore(wStart))) {
-						System.out.println("***Alog 2*****");
+						if ((startTime.isBefore(wStart))) {
+							System.out.println("***Alog 2*****");
 
-						if (endTime.isAfter(wStart)) {
-							if (endTime.isBefore(wEnd)) {
-								return false;
-							} else if (endTime.isAfter(wEnd)) {
-								return false;
+							if (endTime.isAfter(wStart)) {
+								if (endTime.isBefore(wEnd)) {
+									return false;
+								} else if (endTime.isAfter(wEnd)) {
+									return false;
+								}
 							}
 						}
 					}
@@ -139,29 +143,31 @@ public class OrderWindowController {
 
 		if (startTime.isBefore(endTime)) {
 			for (OrderWindow w : allOrderWindows) {
-				DateTime wStart = w.getStartDate();
-				DateTime wEnd = w.getEndDate();
+				if (w.getStatus().equals(StringValues.ORDERWINDOW_OPENED)) {
+					DateTime wStart = w.getStartDate();
+					DateTime wEnd = w.getEndDate();
 
-				if ((startTime.isAfter(wStart))) {
-					System.out.println("***Alog 1*****");
-					System.out.println((startTime.isBefore(endTime)));
-					if (startTime.isBefore(wEnd)) {
-						if (endTime.isBefore(wEnd)) {
-							occupiedSlots.add(w);
-						} else if (endTime.isAfter(wEnd)) {
-							occupiedSlots.add(w);
+					if ((startTime.isAfter(wStart))) {
+						System.out.println("***Alog 1*****");
+						System.out.println((startTime.isBefore(endTime)));
+						if (startTime.isBefore(wEnd)) {
+							if (endTime.isBefore(wEnd)) {
+								occupiedSlots.add(w);
+							} else if (endTime.isAfter(wEnd)) {
+								occupiedSlots.add(w);
+							}
 						}
 					}
-				}
 
-				if ((startTime.isBefore(wStart))) {
-					System.out.println("***Alog 2*****");
+					if ((startTime.isBefore(wStart))) {
+						System.out.println("***Alog 2*****");
 
-					if (endTime.isAfter(wStart)) {
-						if (endTime.isBefore(wEnd)) {
-							occupiedSlots.add(w);
-						} else if (endTime.isAfter(wEnd)) {
-							occupiedSlots.add(w);
+						if (endTime.isAfter(wStart)) {
+							if (endTime.isBefore(wEnd)) {
+								occupiedSlots.add(w);
+							} else if (endTime.isAfter(wEnd)) {
+								occupiedSlots.add(w);
+							}
 						}
 					}
 				}
@@ -203,14 +209,12 @@ public class OrderWindowController {
 	public void createNewOrderWindow2(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
 			int numberOfWeeks, String remarks, double discountAbsolute) throws Exception {
 		QuartzService quartzService = new QuartzService();
-		
+
 		for (int i = 0; i < numberOfWeeks; i++) {
 			DateTime newStartTime = startDate.plusWeeks(i);
 			Date startDateForQuartz = newStartTime.toDate();
-			OrderWindow window = new OrderWindow(newStartTime, endDate.plusWeeks(i), company, canteen,
-					remarks, null);
-			
-			
+			OrderWindow window = new OrderWindow(newStartTime, endDate.plusWeeks(i), company, canteen, remarks, null);
+
 			ArrayList<PriceModifier> list = new ArrayList<PriceModifier>();
 			PriceModifier discountAbsoluteModifier = new PriceModifier("Discount", StringValues.PRICEMODIFIER_ABSOLUTE,
 					discountAbsolute * -1, window);
@@ -219,8 +223,8 @@ public class OrderWindowController {
 			orderWindowDAO.saveOrderWindow(window);
 			int orderWindowID = orderWindowDAO.updateOrderWindow(window);
 			System.out.println(orderWindowID);
-			//quartz stuff
-			quartzService.setupNewJobAndTrigger(""+orderWindowID, startDateForQuartz);
+			// quartz stuff
+			quartzService.setupNewJobAndTrigger("" + orderWindowID, startDateForQuartz);
 		}
 
 	}
@@ -240,19 +244,19 @@ public class OrderWindowController {
 		DateTime dateStart = orderWindowToEdit.getStartDate();
 		DateTimeZone dateTimeZone = DateTimeZone.forID("Asia/Singapore");
 		DateTime currentTime = DateTime.now(dateTimeZone);
-		
-		//to check for clashing orderwindows 
+
+		// to check for clashing orderwindows
 		ArrayList<OrderWindow> orderWindowList = checkOrderWindowAvailability(newStartDate, newEndDate,
 				orderWindowToEdit.getCompany());
-		
+
 		if (dateStart.isAfter(currentTime)) {
 			// edit OrderWindow orderWindowToEdit
 			if (newStartDate.isBefore(currentTime)) {
 				throw new Exception("Cannot set start date to before current time");
-				// check if new order window clash with other order windows 
+				// check if new order window clash with other order windows
 			} else {
-				
-				//if list is empty no clash
+
+				// if list is empty no clash
 				if (orderWindowList.isEmpty()) {
 					orderWindowToEdit.setCanteen(canteen);
 					orderWindowToEdit.setStartDate(newStartDate);
@@ -261,8 +265,9 @@ public class OrderWindowController {
 					orderWindowToEdit.setDiscount(discountPercentage);
 					orderWindowToEdit.setDiscountAbsolute(discountAbsolute);
 					orderWindowDAO.updateOrderWindow(orderWindowToEdit);
-				//if list has one order window and it is the same order window go ahead and edit it
-				}else if ((orderWindowList.size() == 1) && (orderWindowList.get(0).getWindowId() == orderWindowId)) {
+					// if list has one order window and it is the same order
+					// window go ahead and edit it
+				} else if ((orderWindowList.size() == 1) && (orderWindowList.get(0).getWindowId() == orderWindowId)) {
 					orderWindowToEdit.setCanteen(canteen);
 					orderWindowToEdit.setStartDate(newStartDate);
 					orderWindowToEdit.setEndDate(newEndDate);
@@ -270,29 +275,32 @@ public class OrderWindowController {
 					orderWindowToEdit.setDiscount(discountPercentage);
 					orderWindowToEdit.setDiscountAbsolute(discountAbsolute);
 					orderWindowDAO.updateOrderWindow(orderWindowToEdit);
-				//if both conditions not satisfied then it clashes with one or more windows  
-				}else{
+					// if both conditions not satisfied then it clashes with one
+					// or more windows
+				} else {
 					throw new Exception("New order window dates clash with another order window");
 				}
 			}
 		} else if (dateStart.isBefore(currentTime) && dateEnd.isAfter(currentTime)) {
 			// can only edit endDate
-			//if list is empty no clash
+			// if list is empty no clash
 			if (orderWindowList.isEmpty()) {
 				orderWindowToEdit.setEndDate(newEndDate);
 				orderWindowDAO.updateOrderWindow(orderWindowToEdit);
-				
-			//if list has one order window and it is the same order window go ahead and edit it
-			}else if ((orderWindowList.size() == 1) && (orderWindowList.get(0).getWindowId() == orderWindowId)) {
+
+				// if list has one order window and it is the same order window
+				// go ahead and edit it
+			} else if ((orderWindowList.size() == 1) && (orderWindowList.get(0).getWindowId() == orderWindowId)) {
 				orderWindowToEdit.setEndDate(newEndDate);
 				orderWindowDAO.updateOrderWindow(orderWindowToEdit);
-				
+
 			}
-			//if both conditions not satisfied then it clashes with one or more windows  
-			else{
+			// if both conditions not satisfied then it clashes with one or more
+			// windows
+			else {
 				throw new Exception("New order window dates clash with another order window");
 			}
-			
+
 		} else {
 			throw new Exception("Order Window Cannot be editted");
 		}
@@ -343,8 +351,8 @@ public class OrderWindowController {
 	public OrderWindow getOrderWindow(Integer orderWindowId) {
 		return orderWindowDAO.getOrderWindow(orderWindowId);
 	}
-	
-	public ArrayList<OrderWindow> getAllNonDeletedOrderWindows(){
+
+	public ArrayList<OrderWindow> getAllNonDeletedOrderWindows() {
 		return orderWindowDAO.getAllNonDeletedOrderWindows();
 	}
 
