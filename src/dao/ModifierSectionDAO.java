@@ -1,6 +1,7 @@
 package dao;
 
 import model.Modifier;
+import model.ModifierChosen;
 import model.ModifierSection;
 import connection.MyConnection;
 
@@ -20,5 +21,9 @@ public class ModifierSectionDAO {
 
 	public void updateFoodOrder(ModifierSection modifierSection) {
 		MyConnection.update(modifierSection);
+	}
+	
+	public void deleteModifierChosen(ModifierChosen modifierChosen){
+		MyConnection.delete(modifierChosen);
 	}
 }
