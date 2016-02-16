@@ -181,6 +181,14 @@
 								'$window',
 								function($http, $scope, $window) {
 
+									$scope.success = angular
+											.copy($window.sessionStorage.success);
+									$scope.error = angular
+											.copy($window.sessionStorage.error);
+									$window.sessionStorage
+											.removeItem('success');
+									$window.sessionStorage.removeItem('error');
+
 									$scope.loading = $http(
 											{
 												method : 'GET',

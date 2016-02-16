@@ -57,10 +57,10 @@ public class DeleteOrderWindowServlet extends HttpServlet {
 			System.out.println(gson.toJson(data));
 
 			int windowId = ((Long) data.get("windowId")).intValue();
-			
+
 			orderWindowCtrl.deleteOrderWindow(windowId);
 
-			returnJson.put("success", null);
+			returnJson.put("success", "Order Window ID: " + windowId + " has been deleted.");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,6 +68,7 @@ public class DeleteOrderWindowServlet extends HttpServlet {
 		}
 
 		out.println(gson.toJson(returnJson));
+		System.out.println(gson.toJson(returnJson));
 
 	}
 

@@ -125,11 +125,11 @@
 	height: 169px;" />
 										</td>
 										<td>
-											<a href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId=${stall.stallId}">View all
-												${fn:length(stall.foodList)} food</a>
+											<a target='_self' href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId=${stall.stallId}">View all
+												food</a>
 										</td>
 										<td>
-											<a href='/eureka_webservice/LoadAdminEditStallServlet?stallId=${stall.stallId}'>
+											<a target='_self' href='/eureka_webservice/LoadAdminEditStallServlet?stallId=${stall.stallId}'>
 												<button type="button" class="btn btn-link btn-xs">
 													<i class="fa fa-pencil fa-2x"></i>
 												</button>

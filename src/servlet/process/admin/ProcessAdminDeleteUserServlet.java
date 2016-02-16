@@ -55,7 +55,7 @@ public class ProcessAdminDeleteUserServlet extends HttpServlet {
 			
 			session.setAttribute("success", employee.getName() + " has been deleted." );
 			
-			response.sendRedirect("/eureka_webservice/GetAllUsersServlet");
+			response.sendRedirect("/eureka_webservice/admin/user/view.jsp");
 		} catch (Exception e){
 			e.printStackTrace();
 		}
