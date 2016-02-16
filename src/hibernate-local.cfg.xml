@@ -5,7 +5,7 @@
 	GNU Lesser General Public License (LGPL), version 2.1 or later. ~ See the 
 	lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>. -->
 <hibernate-configuration>
-	<session-factory name="">
+	<session-factory>
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost/eureka?useTimezone=true&amp;serverTimezone=Asia/Singapore&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
@@ -22,10 +22,6 @@
 		<!-- Echo all executed SQL to stdout -->
 		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.c3p0.idle_test_period">300</property>
-		
-		<property name="hibernate.search.default.directory_provider">filesystem</property>
-        <property name="hibernate.search.default.indexBase">WebContent/resources/indexes</property>
-
 		
 		
 		<!-- ******** This segment should be removed in production to prevent changes 
