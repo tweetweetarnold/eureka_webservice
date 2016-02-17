@@ -47,7 +47,7 @@ public class CloudinaryUpload {
 		Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
 		String publicId = (String) uploadResult.get("public_id");
 		output[1] = publicId;
-		String url = cloudinary.url().transformation(new Transformation().width(360).height(231).crop("fit")).imageTag(publicId);
+		String url = cloudinary.url().transformation(new Transformation().width(360).height(231).crop("fit")).generate(publicId);
 		output[0] = url;
 		System.out.println(url);
 		//System.out.println(htmltag);

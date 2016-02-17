@@ -217,7 +217,7 @@ public class OrderWindowController {
 
 			ArrayList<PriceModifier> list = new ArrayList<PriceModifier>();
 			PriceModifier discountAbsoluteModifier = new PriceModifier("Discount", StringValues.PRICEMODIFIER_ABSOLUTE,
-					discountAbsolute * -1, window);
+					discountAbsolute, window);
 			list.add(discountAbsoluteModifier);
 			window.setPriceModifierList(list);
 			orderWindowDAO.saveOrderWindow(window);
