@@ -119,6 +119,7 @@ public class EmployeeController {
 		
 		ArrayList<String> emailList = new ArrayList<String>();
 		SendEmail emailGen = new SendEmail();
+		emailGen.setMailServerProperties();
 		String url = "http://lunchtime.dal.jelastic.vps-host.net/eureka_webservice/pages/login.jsp";
 		String subject = "Koh Bus LunchTime Ordering App - Payment Overdue";
 		String messageBody = "Dear User,<br><br>"
@@ -146,6 +147,7 @@ public class EmployeeController {
 		}
 		String[] toEmails = new String[emailList.size()];
 		toEmails = emailList.toArray(toEmails);
+		System.out.println(toEmails[0]);
 		String[] ccEmails = {"sumon123may@eastman.com", "wch123ow@eastman.com"};
 		try {
 			emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
