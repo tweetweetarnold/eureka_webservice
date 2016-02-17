@@ -57,9 +57,11 @@ public class OrderWindowController {
 
 				if (startTimeTemp.isBefore(endTimeTemp)) {
 					for (OrderWindow w : allOrderWindows) {
-						if (w.getStatus().equals(StringValues.ORDERWINDOW_OPENED)) {
+						System.out.println(w.getCanteen().getName());
+						if (w.getStatus().equals(StringValues.ACTIVE)) {
 							DateTime wStart = w.getStartDate();
 							DateTime wEnd = w.getEndDate();
+							
 							if (startTimeTemp.isEqual(wStart)) {
 								return false;
 							}
@@ -93,11 +95,15 @@ public class OrderWindowController {
 				}
 			}
 		} else {
-
+			
 			if (startTime.isBefore(endTime)) {
+				
 				for (OrderWindow w : allOrderWindows) {
-					if (w.getStatus().equals(StringValues.ORDERWINDOW_OPENED)) {
+					
+					if (w.getStatus().equals(StringValues.ACTIVE)) {
+						
 						DateTime wStart = w.getStartDate();
+						System.out.println(wStart + "  vs  " +  startTime);
 						DateTime wEnd = w.getEndDate();
 						if (startTime.isEqual(wStart)) {
 							return false;
@@ -128,6 +134,7 @@ public class OrderWindowController {
 					}
 				}
 			} else {
+				
 				throw new Exception("Invalid start time and end time");
 			}
 		}
