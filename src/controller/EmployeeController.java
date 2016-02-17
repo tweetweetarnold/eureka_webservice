@@ -119,7 +119,7 @@ public class EmployeeController {
 		
 		ArrayList<String> emailList = new ArrayList<String>();
 		SendEmail emailGen = new SendEmail();
-		String url = "PLEASE ENTER";
+		String url = "http://lunchtime.dal.jelastic.vps-host.net/eureka_webservice/pages/login.jsp";
 		String subject = "Koh Bus LunchTime Ordering App - Payment Overdue";
 		String messageBody = "Dear User,<br><br>"
 				+ "Please note that you will not be able to place any new orders until you have cleared your payment!<br><br>"

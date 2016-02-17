@@ -26,11 +26,11 @@ public class SendNotification implements Job {
 		ArrayList<String> emailList = new ArrayList<String>();
 		try {
 			
-			String url = "PLEASE ENTER";
+			String url = "http://lunchtime.dal.jelastic.vps-host.net/eureka_webservice/pages/login.jsp";
 			System.out.println("Sending Payment Notification");
 			SendEmail emailGen = new SendEmail();
 			emailGen.setMailServerProperties();
-			String subject = "Koh Bus LunchTime Ordering App - Payment Due";
+			String subject = "Koh Bus LunchTime Ordering App - Order Window Available!";
 			String messageBody = "Dear User,<br><br>" + "A new order window is now avaialable!<br><br>" + "<a href="
 					+ url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>" + "Admin<br><br>"
 					+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
