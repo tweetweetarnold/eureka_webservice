@@ -47,7 +47,7 @@
 </head>
 
 <body>
-<fmt:setTimeZone value="GMT+8" />
+	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 
@@ -82,7 +82,9 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="/eureka_webservice/ProcessAdminAddNewStallServlet" method="POST" id="submitForm" enctype="multipart/form-data">
+									<form role="form" action="/eureka_webservice/ProcessAdminAddNewStallServlet" method="POST" id="submitForm"
+										enctype="multipart/form-data"
+									>
 
 										<input type="hidden" name="canteenId" value="${canteenId}">
 
@@ -98,7 +100,7 @@
 
 										<div class="form-group">
 											<label>Image Directory (*only accepts jpeg or jpg image formats)</label>
-											<input type="file" name="file" style="width: 228px;"required/>
+											<input type="file" name="file" style="width: 228px;" required />
 										</div>
 
 
@@ -128,7 +130,7 @@
 	<!-- /#wrapper -->
 
 	<!-- Create confirmation -->
-	<div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -136,7 +138,7 @@
 				</div>
 				<div class="modal-body">Are you sure you want to Add new Stall?</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-outline btn-default">Cancel</button>
+					<button type="button" data-dismiss='modal' class="btn btn-outline btn-default">Cancel</button>
 					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
 				</div>
 			</div>

@@ -56,7 +56,7 @@
 </head>
 
 <body>
-<fmt:setTimeZone value="GMT+8" />
+	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 
@@ -67,7 +67,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">Edit stall</h1>
-					
+
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
 						<li>
@@ -77,7 +77,7 @@
 							<a href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${sessionScope.canteenId}">Stalls</a>
 						</li>
 					</ol>
-					
+
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -102,7 +102,9 @@
 
 								<div class="col-lg-12">
 
-									<form role="form" action="/eureka_webservice/ProcessAdminEditStallServlet" method="POST" id="submitForm" enctype="multipart/form-data">
+									<form role="form" action="/eureka_webservice/ProcessAdminEditStallServlet" method="POST" id="submitForm"
+										enctype="multipart/form-data"
+									>
 
 										<input type="hidden" name="stallId" value="${stallId}">
 
@@ -118,7 +120,7 @@
 
 										<div class="form-group">
 											<label>Image Directory</label>
-											<input type="file" name="file" style="width: 228px;"/>
+											<input type="file" name="file" style="width: 228px;" />
 										</div>
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update
@@ -155,7 +157,7 @@
 				</div>
 				<div class="modal-body">Are you sure you want to update Stall details?</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-outline btn-default">Cancel</button>
+					<button type="button" data-dismiss='modal' class="btn btn-outline btn-default">Cancel</button>
 					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
 				</div>
 			</div>

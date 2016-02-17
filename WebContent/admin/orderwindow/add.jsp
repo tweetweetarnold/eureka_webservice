@@ -143,7 +143,7 @@
 											Order Window</button>
 
 										<!-- Modal confirmation -->
-										<div class="modal" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
 													<div class="modal-header">

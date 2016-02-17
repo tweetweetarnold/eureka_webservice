@@ -142,7 +142,7 @@
 				</div>
 				<div class="modal-body">Are you sure you want to update Canteen details?</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-outline btn-default">Cancel</button>
+					<button type="button" data-dismiss='modal' class="btn btn-outline btn-default">Cancel</button>
 					<button type="button" ng-click="submit()" class="btn btn-primary">Confirm</button>
 				</div>
 			</div>
