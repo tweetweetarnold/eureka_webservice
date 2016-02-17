@@ -61,7 +61,7 @@ public class ProcessAdminAddModifierToFoodServlet extends HttpServlet {
 				double price = Double.parseDouble((String) obj.get("price"));
 				//modifier creation
 				modifierSectionController.createAndAddModifier(name, "", "", price, foodId, modifierSectionId);
-				
+				System.out.println("DUBUGGING HERE " + modifierSectionId);
 				System.out.println("name: " + name);
 				System.out.println("price: " + price);
 			}

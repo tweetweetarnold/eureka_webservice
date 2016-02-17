@@ -72,9 +72,10 @@ public class ModifierSectionController {
 			modifierSectionToEdit.setModifierList(modifierListToEdit);
 			replacementModifierSectionList.add(modifierSectionToEdit);
 			food.setModifierSectionList(replacementModifierSectionList);
-			foodDAO.saveFood(food);
-			modifierSectionDAO.saveModifier(newModifier);
-			modifierSectionDAO.saveModifierSection(modifierSectionToEdit);
+			foodDAO.updateFood(food);
+			newModifier.setModifierSection(modifierSectionToEdit);
+//			modifierSectionDAO.saveModifier(newModifier);
+//			modifierSectionDAO.saveModifierSection(modifierSectionToEdit);
 		}
 		return modifierSectionExists;
 
