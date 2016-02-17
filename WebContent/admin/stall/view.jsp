@@ -121,8 +121,7 @@
 											<fmt:formatDate type="both" value="${stall.createDate}" />
 										</td>
 										<td>
-											<img src="${stall.imageDirectory}" style="width: 263px;
-	height: 169px;" />
+											<img src="${stall.imageDirectory}" />
 										</td>
 										<td>
 											<a target='_self' href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId=${stall.stallId}">View all

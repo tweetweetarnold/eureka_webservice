@@ -171,7 +171,7 @@
 							<a href="/eureka_webservice/LoadStallFoodServlet?stallId=${stall.stallId}">
 								<b style="font-size: large;">${stall.name}</b>
 								<img class="img-responsive img-portfolio img-hover" onerror="this.src='http://placehold.it/700x450'"
-									src="http://placehold.it/700x450" alt=""
+									src="${stall.imageDirectory}" alt=""
 								>
 							</a>
 						</div>

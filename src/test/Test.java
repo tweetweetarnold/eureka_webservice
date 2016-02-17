@@ -102,12 +102,12 @@ public class Test {
 		Food food1 = new Food("Fish Slice Beehoon","鱼片米粉", "add veg $0.50", 3.70,
 				"resources/img/food/img-fishslicebeehoon.jpg", null, stall1);
 		Food food2 = new Food("Fish Soup and Rice", "鱼汤和饭", "add veg $0.50", 4.70,
-				"resources/img/food/img-fishsoupwithrice.jpg", null, stall1);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627042/Food%20Images%20Raw/fishsoup_with_rice.jpg", null, stall1);
 
 		Food nfood1 = new Food("Fish Head Soup and Beehoon", "鱼头米粉汤", "add veg $0.50", 4.20, null, null, stall1);
 		Food nfood2 = new Food("Fish Soup", "鱼汤", "add veg $0.50", 4.20, null, null, stall1);
-		Food nfood3 = new Food("Fried Fish Soup and Beehoon", "炸鱼汤米粉", "add veg $0.50", 3.70, null, null, stall1);
-		Food nfood4 = new Food("Fish Soup and Beehoon", "鱼汤米粉","add veg $0.50", 3.70, null, null, stall1);
+		Food nfood3 = new Food("Fried Fish Soup and Beehoon", "炸鱼汤米粉", "add veg $0.50", 3.70, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627090/Food%20Images%20Raw/Fried_Fish_soup_with_Beehoon.jpg", null, stall1);
+		Food nfood4 = new Food("Fish Soup and Beehoon", "鱼汤米粉","add veg $0.50", 3.70, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627030/Food%20Images%20Raw/fishsoup_with_beehoon.jpg", null, stall1);
 
 		Modifier modifierNew1 = new Modifier("Add Veg", "加菜","", 0.50, food1);
 		Set<Modifier> modifierListNew1 = new HashSet<Modifier>();
@@ -191,7 +191,7 @@ public class Test {
 				"resources/img/food/img-malaychillichicken.jpg", null, stall2);
 		Food food4 = new Food("Fried Chicken + Veg", "炸鸡加菜","upsize to $3.50", 3.00,
 				"resources/img/food/img-malayfriedchicken.jpg", null, stall2);
-		Food food5 = new Food("Curry Fish + Veg", "咖喱鱼加菜","upsize to $3.50", 3.00, "resources/img/food/img-malaycurryfish.jpg",
+		Food food5 = new Food("Curry Fish + Veg", "咖喱鱼加菜","upsize to $3.50", 3.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627012/Food%20Images%20Raw/curry_fish_plus_veg.jpg",
 				null, stall2);
 		Food foodMalay1 = new Food("Fried Fish + Veg", "炸鱼加菜", "upsize to $3.50", 3.00,
 				"resources/img/food/img-malayfriedfish.jpg", null, stall2);
@@ -249,7 +249,7 @@ public class Test {
 		foodMalay1.setModifierSectionList(modifierSectionSet10);
 
 		Stall stall3 = new Stall("Mixed Rice Stall", 93482772, null, null, "resources/img/stall/img-tjmixedrice.jpg", null);
-		Food food6 = new Food("1 Meat + 2 Veg", "1肉2菜","", 3.00, "resources/img/food/img-mixedrice.jpg", null, stall3);
+		Food food6 = new Food("1 Meat + 2 Veg", "1肉2菜","", 3.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627151/Food%20Images%20Raw/1meat_plus_2veg.jpg", null, stall3);
 		Food food7 = new Food("All Veg", "全菜","", 3.00, "resources/img/food/img-porridge.jpg", null, stall3);
 
 		Modifier modifierMixed1 = new Modifier("Add Veg", "加菜","", 0.50, food6);
@@ -293,14 +293,14 @@ public class Test {
 		// stall4.setFoodList(foodListB4);
 
 		Stall stall5 = new Stall("Indian Food Stall", 93841009, null, null, "resources/img/stall/img-indianstall.jpg", null);
-		Food food9 = new Food("Curry Chicken Briyani", "马来咖喱鸡饭","", 3.50, "resources/img/food/img-currychickenbriyani.jpg", null,
+		Food food9 = new Food("Curry Chicken Briyani", "马来咖喱鸡饭","", 3.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455637596/Food%20Images%20Raw/Curry_Chicken_Briyani.jpg", null,
 				stall5);
-		Food food10 = new Food("Fish Briyani", "马来鱼饭","", 3.50, "resources/img/food/img-fishbiryani.jpg", null, stall5);
+		Food food10 = new Food("Fish Briyani", "马来鱼饭","", 3.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627097/Food%20Images%20Raw/Fish_Briyani.jpg", null, stall5);
 		Food food11 = new Food("Vegetarian Briyani", "马来菜饭","", 4.00, "resources/img/food/img-vegetablebriyani.jpg", null, stall5);
 		Food food12 = new Food("Fried Chicken Briyani", "马来炸鸡饭","", 4.00, "resources/img/food/img-friedchickenbiryani.jpg", null,
 				stall5);
 
-		Food nfood6 = new Food("Mutton Briyani", "马来羊肉饭","", 4.00, null, null, stall5);
+		Food nfood6 = new Food("Mutton Briyani", "马来羊肉饭","", 4.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627086/Food%20Images%20Raw/mutton_briyani.jpg", null, stall5);
 
 		foodListB5.add(food9);
 		foodListB5.add(food10);
@@ -312,7 +312,7 @@ public class Test {
 		Stall stall6 = new Stall("Roast Duck & Chicken Rice Stall", 98427347, null, null,
 				"resources/img/stall/img-roastmeatstall.jpg", null);
 		Food food13 = new Food("Roast Chicken Rice", "烧鸡饭", "", 2.50, "resources/img/food/img-roastchickenrice.jpg", null, stall6);
-		Food food14 = new Food("CharSiew Rice", "叉烧饭", "", 2.50, "resources/img/food/img-charsiewrice.jpg", null, stall6);
+		Food food14 = new Food("CharSiew Rice", "叉烧饭", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627009/Food%20Images%20Raw/charsiew_rice.jpg", null, stall6);
 		Food food15 = new Food("Roast Meat Rice", "烧肉饭","", 2.50, "resources/img/food/img-roastmeatrice.jpg", null, stall6);
 		// Food foodC16 = new Food("CharSiew + Roast Meat Rice", "", 3.00,
 		// "resources/img/food/img-charsiewrice.jpg", stall6);
@@ -376,7 +376,7 @@ public class Test {
 		// "resources/img/food/img-beeffriedrice.jpg", stall7);
 		Food food20 = new Food("Seafood Horfun(Wet)", "海鲜河粉（湿）","", 3.50, "resources/img/food/img-seafoodhorfun.jpg", null, stall7);
 		Food food21 = new Food("Seafood Horfun(Dry)", "海鲜河粉（干）","", 4.00, "resources/img/food/img-horfun.jpg", null, stall7);
-		Food food22 = new Food("Chicken Porridge", "鸡肉粥", "", 3.00, "resources/img/food/img-chickenporridge.jpg", null, stall7);
+		Food food22 = new Food("Chicken Porridge", "鸡肉粥", "", 3.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627120/Food%20Images%20Raw/porridge.jpg", null, stall7);
 		Food food23 = new Food("Fish Porridge", "鱼粥", "", 3.00, "resources/img/food/img-fishporridge.jpg", null, stall7);
 		Food foodA24 = new Food("Chicken Horfun(Wet)", "鸡肉河粉（汤）","", 3.50, "resources/img/food/img-chickenhorfunwet.jpg", null, stall7);
 		Food foodA25 = new Food("Chicken Horfun(Dry)", "鸡肉河粉（干）", "", 4.00, "resources/img/food/img-chickenhorfundry.jpg", null, stall7);
@@ -468,7 +468,7 @@ public class Test {
 		food17.setModifierSectionList(modifierSectionSet16);
 
 		Stall stall8 = new Stall("Vegetarian Stall", 91182963, null, null, "resources/img/stall/img-tj.jpg", null);
-		Food food24 = new Food("Vegetarian Rice", "斋饭","add veg $0.50", 2.50, "resources/img/food/img-vegrice.jpg", null, stall8);
+		Food food24 = new Food("Vegetarian Rice", "斋饭","add veg $0.50", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627166/Food%20Images%20Raw/Vegetarian_Rice.jpg", null, stall8);
 		Food food25 = new Food("Vegetarian Beehoon", "斋米粉","add veg $0.50", 2.50,
 				"resources/img/food/img-vegetarianbeehoon.jpg", null, stall8);
 		Food food26 = new Food("Vegetarian Mee","斋面", "add veg $0.50", 2.50, "resources/img/food/img-vergetarianmee.jpg", null,
@@ -545,7 +545,7 @@ public class Test {
 		Food food27 = new Food("Minced Meat Noodles(Mee Kia)","肉挫面（面仔）", "upsize to $3.20", 2.70,
 				"resources/img/food/img-mincedmeatnoodles.jpg", null, stall9);
 
-		Food nfood9 = new Food("Minced Meat Noodles(Mee Pok)","肉挫面（面薄）", "upsize to $3.20", 2.70, null, null, stall9);
+		Food nfood9 = new Food("Minced Meat Noodles(Mee Pok)","肉挫面（面薄）", "upsize to $3.20", 2.70, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627087/Food%20Images%20Raw/minced_meat_noodles.jpg", null, stall9);
 		Food nfood10 = new Food("Minced Meat Noodles(Mee Tai Mak)","肉挫面（米台目）", "upsize to $3.20", 2.70, null, null, stall9);
 
 		Modifier modifierA27 = new Modifier("Upsize to $3.20", "加大","", 0.50, food27);
@@ -591,9 +591,9 @@ public class Test {
 		Stall stall10 = new Stall("Noodle Stall", 96946576, null, null, "resources/img/stall/img-tj.jpg", null);
 		Food food28 = new Food("Lor Mee", "卤面","", 3.00, "resources/img/food/img-lormee.jpg", null, stall10);
 		Food food29 = new Food("Prawn Mee", "虾面","", 3.00, "resources/img/food/img-prawnnoodle.jpg", null, stall10);
-		Food food30 = new Food("Fishball Noodles", "鱼圆面","", 3.00, "resources/img/food/img-fishballnoodle.jpg", null, stall10);
-		Food food31 = new Food("Laksa", "叻沙","", 3.00, "resources/img/food/img-laksa.jpg", null, stall10);
-		Food food32 = new Food("Hokkien Mee", "福建面","", 3.00, "resources/img/food/img-hokkiennoodles.jpg", null, stall10);
+		Food food30 = new Food("Fishball Noodles", "鱼圆面","", 3.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627057/Food%20Images%20Raw/fishball_noodles.jpg", null, stall10);
+		Food food31 = new Food("Laksa", "叻沙","", 3.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627064/Food%20Images%20Raw/laksa.jpg", null, stall10);
+		Food food32 = new Food("Hokkien Mee", "福建面","", 3.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627077/Food%20Images%20Raw/hokkien_mee.jpg", null, stall10);
 		Food food33 = new Food("Dumpling Noodles", "水饺面","", 3.00, "resources/img/food/img-dumplingnoodle.jpg", null, stall10);
 
 		// Food nfood11 = new Food("Fishball Noodles(Thick Beehoon)", "", 3.00,
@@ -659,19 +659,19 @@ public class Test {
 
 		Stall stall11 = new Stall("Fruits Stall", 91151608, null, null, null, null);
 
-		Food food34 = new Food("Apple", "苹果","", 0.60, "resources/img/food/img-apple.jpg", null, stall11);
+		Food food34 = new Food("Apple", "苹果","", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/apple.jpg", null, stall11);
 
 		Food food35 = new Food("Apple Juice", "苹果汁","", 2.50, null, null, stall11);
 
-		Food food36 = new Food("Watermelon", "西瓜","", 0.60, "resources/img/food/img-watermelon.jpg", null, stall11);
+		Food food36 = new Food("Watermelon", "西瓜","", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627161/Food%20Images%20Raw/watermelon.jpg", null, stall11);
 
 		Food food37 = new Food("Watermelon Juice", "西瓜汁","", 2.50, null, null, stall11);
 
-		Food food38 = new Food("Dragonfruit", "龙珠果","", 0.60, "resources/img/food/img-dragonfruit.jpg", null, stall11);
+		Food food38 = new Food("Dragonfruit", "龙珠果","", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/dragonfruits.jpg", null, stall11);
 
 		Food food39 = new Food("Dragonfruit Juice", "龙珠果汁","", 2.50, null, null, stall11);
 
-		Food food40 = new Food("Pear", "梨","", 0.60, "resources/img/food/img-pear.jpg", null, stall11);
+		Food food40 = new Food("Pear", "梨","", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/pear.jpg", null, stall11);
 
 		Food food41 = new Food("Pear Juice", "梨汁","", 2.50, null, null, stall11);
 
@@ -683,17 +683,17 @@ public class Test {
 
 		Food food45 = new Food("Papaya Juice", "木瓜汁","", 2.60, null, null, stall11);
 
-		Food food46 = new Food("Pineapple", "黄梨","", 0.60, "resources/img/food/img-pineapple.jpg", null, stall11);
+		Food food46 = new Food("Pineapple", "黄梨","", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627163/Food%20Images%20Raw/pineapple.jpg", null, stall11);
 
 		Food food47 = new Food("Pineapple Juice", "黄梨汁","", 2.50, null, null, stall11);
 
-		Food food48 = new Food("Banana", "香蕉","", 0.70, "resources/img/food/img-banana.jpg", null, stall11);
+		Food food48 = new Food("Banana", "香蕉","", 0.70, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627006/Food%20Images%20Raw/banana.jpg", null, stall11);
 
 		Food food49 = new Food("Banana Juice", "香蕉汁","", 2.60, null, null, stall11);
 
 		Food food50 = new Food("Agar Agar", "燕菜糕","", 0.60, "resources/img/food/img-agaragar.jpg", null, stall11);
 
-		Food food51 = new Food("Orange", "橙","", 0.60, "resources/img/food/img-orange.jpg", null, stall11);
+		Food food51 = new Food("Orange", "橙","", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/orange.jpg", null, stall11);
 
 		Food food52 = new Food("Orange Juice", "橙汁","", 2.50, null, null, stall11);
 
@@ -705,7 +705,7 @@ public class Test {
 
 		Food food56 = new Food("Sarawak Pineapple Juice", "沙捞越黄梨汁","", 3.10, null, null, stall11);
 
-		Food food57 = new Food("Mixed Fruits", "水果盘","upsize $3.50", 3.00, "resources/img/food/img-mixedfruits.jpg", null, stall11);
+		Food food57 = new Food("Mixed Fruits", "水果盘","upsize $3.50", 3.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627095/Food%20Images%20Raw/mixed_fruits.jpg", null, stall11);
 
 		Modifier modifierA28 = new Modifier("Mixed fruits upsize", "果盘加大","", 0.50, food57);
 		Set<Modifier> modifierListA17 = new HashSet<Modifier>();
@@ -791,13 +791,13 @@ public class Test {
 		Canteen canteen1 = new Canteen("Oasis Food Centre", "3 Sakra Rd, Singapore 627878", null);
 
 		Stall kuehStall = new Stall("Oasis Kueh Stall", 90685620, canteen1, null,
-				"resources/img/stall/img-oasiskuehstall.jpg", null);
-		Food kuehfood1 = new Food("Chee Cheong Fun","猪肠粉", "", 0.60, "resources/img/food/img-cheecheongfun.jpg", null, kuehStall);
-		Food kuehfood2 = new Food("Yam cake", "芋头糕","", 1.20, "resources/img/food/img-yamcake.jpg", null, kuehStall);
-		Food kuehfood3 = new Food("Dumpling", "粽子","", 0.90, "resources/img/food/img-dumpling.png", null, kuehStall);
-		Food kuehfood4 = new Food("Pau", "包子","", 0.80, "resources/img/food/img-pau.jpg", null, kuehStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455641259/Stall%20Images%20Raw/oasis_kueh_stall.jpg", null);
+		Food kuehfood1 = new Food("Chee Cheong Fun","猪肠粉", "", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/chee_cheong_fun.jpg", null, kuehStall);
+		Food kuehfood2 = new Food("Yam cake", "芋头糕","", 1.20, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627138/Food%20Images%20Raw/yam_cake.jpg", null, kuehStall);
+		Food kuehfood3 = new Food("Dumpling", "粽子","", 0.90, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627030/Food%20Images%20Raw/dumpling.jpg", null, kuehStall);
+		Food kuehfood4 = new Food("Pau", "包子","", 0.80, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627080/Food%20Images%20Raw/bao.jpg", null, kuehStall);
 		Food kuehfood5 = new Food("Lor Mai Kai", "糯米鸡","", 1.50, "resources/img/food/img-lormaikai.jpg", null, kuehStall);
-		Food kuehfood6 = new Food("Fan Choy", "饭菜","", 1.80, "resources/img/food/img-fanchoy.jpg", null, kuehStall);
+		Food kuehfood6 = new Food("Fan Choy", "饭菜","", 1.80, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627080/Food%20Images%20Raw/lor_mai_kai.jpg", null, kuehStall);
 		// add food to list to the stall
 
 		// load image file
@@ -812,13 +812,13 @@ public class Test {
 		foodList1.add(kuehfood6);
 		kuehStall.setFoodList(foodList1);
 
-		Stall malayStall = new Stall("Oasis Malay Stall", 93848341, canteen1, null,
-				"resources/img/stall/img-oasismalaystall.jpg", null);
+		Stall malayStall = new Stall("Oasis Muslim Stall", 93848341, canteen1, null,
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638292/Stall%20Images%20Raw/oasis_muslim_stall.jpg", null);
 		Food mfood1 = new Food("Curry Chicken + Veg", "咖喱鸡加菜","more vegs, less fried meat", 3.70,
 				"resources/img/food/img-mixedvegricemalay.jpg", null, malayStall);
 		Food mfood2 = new Food("Asam Fish + Veg", "亚叁鱼加菜","more vegs, less fried meat", 3.70,
-				"resources/img/food/img-malayasamfish.jpg", null, malayStall);
-		Food mfood3 = new Food("Curry Fish + Veg", "咖喱鱼加菜","more vegs, less fried meat", 3.70, null, null, malayStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627015/Food%20Images%20Raw/asam_fish_plus_veg.jpg", null, malayStall);
+		Food mfood3 = new Food("Curry Fish + Veg", "咖喱鱼加菜","more vegs, less fried meat", 3.70, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627012/Food%20Images%20Raw/curry_fish_plus_veg.jpg", null, malayStall);
 		// Food mfood4 = new Food("Beef + Veg", "more vegs, less fried meat",
 		// 3.70,
 		// "resources/img/food/img-malaybeef.jpg", malayStall);
@@ -928,19 +928,19 @@ public class Test {
 		malayStall.setFoodList(foodList2);
 
 		Stall indianStall = new Stall("Indian Stall", 98717752, canteen1, null,
-				"resources/img/stall/img-indianstall.jpg", null);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638270/Stall%20Images%20Raw/oasis_indian_stall.jpg", null);
 		Food infood1 = new Food("White Rice(Chicken)", "白饭（鸡肉）","Chicken/Fish/Mutton", 4.00,
 				"resources/img/food/img-whiterice.jpg", null, indianStall);
 		Food infood2 = new Food("White Rice(Fish)", "白饭（鱼肉）","Chicken/Fish/Mutton", 4.00, "resources/img/food/img-whiterice.jpg", null,
 				indianStall);
 		Food infood3 = new Food("White Rice(Mutton)", "白饭（羊肉）","Chicken/Fish/Mutton", 4.00,
 				"resources/img/food/img-whiterice.jpg", null, indianStall);
-		Food infood4 = new Food("Vegetable White Rice", "菜白饭","", 3.00, "resources/img/food/img-vegetablewhiterice.jpg", null,
+		Food infood4 = new Food("Vegetable White Rice", "菜白饭","", 3.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/vegetable_white_rice.jpg", null,
 				indianStall);
-		Food infood5 = new Food("Chicken Briyani", "马来鸡肉饭","Chicken", 5.00, "resources/img/food/img-currychickenbriyani.jpg", null,
+		Food infood5 = new Food("Chicken Briyani", "马来鸡肉饭","Chicken", 5.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627030/Food%20Images%20Raw/chicken_briyani.jpg", null,
 				indianStall);
-		Food infood6 = new Food("Fish Briyani", "马来鱼肉饭","Fish", 5.00, "resources/img/food/img-fishbiryani.jpg", null, indianStall);
-		Food infood7 = new Food("Mutton Briyani","马来羊肉饭", "Mutton", 5.00, "resources/img/food/img-muttonbriyani.jpg", null,
+		Food infood6 = new Food("Fish Briyani", "马来鱼肉饭","Fish", 5.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627097/Food%20Images%20Raw/Fish_Briyani.jpg", null, indianStall);
+		Food infood7 = new Food("Mutton Briyani","马来羊肉饭", "Mutton", 5.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627086/Food%20Images%20Raw/mutton_briyani.jpg", null,
 				indianStall);
 		Food infood8 = new Food("Vegetarian Briyani", "马来素菜饭","Vegetarian", 5.00, "resources/img/food/img-vegetablebriyani.jpg", null,
 				indianStall);
@@ -1039,9 +1039,9 @@ public class Test {
 		indianStall.setFoodList(foodList3);
 
 		Stall chineseMixVegStall = new Stall("Chinese Mix Veg Stall", 93848341, canteen1, null,
-				"resources/img/stall/img-oasischinesemixvegstall.jpg", null);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638272/Stall%20Images%20Raw/oasis_mixed_rice_stall.jpg", null);
 		Food mixVegRice1 = new Food("1 Meat 2 Veg", "1肉2菜","more meat, less fried meat, or upsize to $3.50", 3.00,
-				"resources/img/food/img-mixvegricechinese.jpg", null, chineseMixVegStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627151/Food%20Images%20Raw/1meat_plus_2veg.jpg", null, chineseMixVegStall);
 		Food mixVegRice2 = new Food("All Veg", "全菜","", 3.00, "resources/img/food/img-mixvegricechinese.jpg", null,
 				chineseMixVegStall);
 		// Food mixVegRice3 = new Food("Porridge", "", 3.20,
@@ -1103,16 +1103,16 @@ public class Test {
 		chineseMixVegStall.setFoodList(foodList4);
 
 		Stall roastMeatStall = new Stall("Roast Meat Stall", 123, canteen1, null,
-				"resources/img/stall/img-roastmeatstall.jpg", null);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638264/Stall%20Images%20Raw/oasis_chicken_rice_stall.jpg", null);
 		Food roastfood1 = new Food("Roast Chicken Rice", "烧鸡饭","2 meat choices $4", 3.00,
 				"resources/img/food/img-roastchickenrice.jpg", null, roastMeatStall);
 		Food roastfood2 = new Food("Wanton Mee(Dry)", "云吞面（干）","", 3.20, "resources/img/food/img-wantonmee.jpg", null, roastMeatStall);
 		Food roastfood3 = new Food("CharSiew Rice", "叉烧饭","2 meat choices $4", 3.00,
-				"resources/img/food/img-charsiewrice.jpg", null, roastMeatStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627009/Food%20Images%20Raw/charsiew_rice.jpg", null, roastMeatStall);
 		Food roastfood4 = new Food("Roast Meat Rice", "烧肉饭","2 meat choices $4", 3.00,
 				"resources/img/food/img-roastmeatrice.jpg", null, roastMeatStall);
 
-		Food roastfood5 = new Food("Wanton Mee(Soup)", "云吞面（汤）","", 3.20, null, null, roastMeatStall);
+		Food roastfood5 = new Food("Wanton Mee(Soup)", "云吞面（汤）","", 3.20, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627114/Food%20Images%20Raw/wanton_mee.jpg", null, roastMeatStall);
 
 		// for roastfood1 modifiers
 		Modifier modifier12 = new Modifier("Add charsiew", "加叉烧", "", 1.00, roastfood1);
@@ -1171,23 +1171,23 @@ public class Test {
 		roastMeatStall.setFoodList(foodList5);
 
 		Stall seafoodTzeCharStall = new Stall("Seafood Tze Char Stall", 92262376, canteen1, null,
-				"resources/img/stall/img-seafoodtzecharstall.jpg", null);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638309/Stall%20Images%20Raw/oasis_seafood_stall.jpg", null);
 
 		Food seafood1 = new Food("Horfun (Dry)", "河粉（干）","dry type $4.00", 4.00, "resources/img/food/img-horfun.jpg", null,
 				seafoodTzeCharStall);
-		Food seafood2 = new Food("Fried Rice", "炒饭","", 4.00, "resources/img/food/img-friedrice.jpg", null, seafoodTzeCharStall);
+		Food seafood2 = new Food("Fried Rice", "炒饭","", 4.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627008/Food%20Images%20Raw/chicken_fried_rice.jpg", null, seafoodTzeCharStall);
 		Food seafood3 = new Food("Horfun (Wet)", "河粉（湿）","", 3.70, null, null, seafoodTzeCharStall);
-		Food seafood4 = new Food("Hokkien Noodle","福建面", "", 4.20, null, null, seafoodTzeCharStall);
-		Food seafood5 = new Food("Mee Goreng", "炒面","", 4.20, "resources/img/food/img-meegoreng.jpg", null, seafoodTzeCharStall);
+		Food seafood4 = new Food("Hokkien Noodle","福建面", "", 4.20, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627077/Food%20Images%20Raw/hokkien_mee.jpg", null, seafoodTzeCharStall);
+		Food seafood5 = new Food("Mee Goreng", "炒面","", 4.20, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627087/Food%20Images%20Raw/mee_goreng.jpg.png", null, seafoodTzeCharStall);
 		Food seafood6 = new Food("Ginger & Onion Fish","姜葱鱼", "", 4.50, "resources/img/food/img-gingeronionfishrice.jpg", null,
 				seafoodTzeCharStall);
 		Food seafood7 = new Food("Dried Chilli Chicken", "干辣椒鸡","", 4.50, "resources/img/food/img-driedchillichicken.jpg", null,
 				seafoodTzeCharStall);
-		Food seafood8 = new Food("Sweet & Sour Pork", "酸甜猪肉","", 4.50, "resources/img/food/img-sweetandsourpork.jpg", null,
+		Food seafood8 = new Food("Sweet & Sour Pork", "酸甜猪肉","", 4.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/sweet_and_sour_pork.jpg", null,
 				seafoodTzeCharStall);
 		Food seafood9 = new Food("Pork Rib Soup", "排骨汤","", 4.80, "resources/img/food/img-porkribsoup.jpg", null,
 				seafoodTzeCharStall);
-		Food seafood10 = new Food("Black Chicken Soup", "黑鸡汤","", 5.80, "resources/img/food/img-blackchickensoup.jpg", null,
+		Food seafood10 = new Food("Black Chicken Soup", "黑鸡汤","", 5.80, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627087/Food%20Images%20Raw/black_chicken_soup.jpg", null,
 				seafoodTzeCharStall);
 		Food seafood11 = new Food("White Chicken Soup", "白鸡汤","", 5.50, "resources/img/food/img-whitechickensoup.jpg", null,
 				seafoodTzeCharStall);
@@ -1295,13 +1295,13 @@ public class Test {
 		seafoodTzeCharStall.setFoodList(foodList6);
 
 		Stall fishBeehoonStall = new Stall("Fish Beehoon Stall", 98367790, canteen1, null,
-				"resources/img/stall/img-fishbeehoonstall.jpg", null);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638253/Stall%20Images%20Raw/oasis_fish_soup_stall.jpg", null);
 		Food fishBeehoonfood1 = new Food("Fish Soup With Beehoon", "鱼汤与米粉","add bittergourd: $0.50", 3.50,
-				"resources/img/food/img-fishsoupwithbeehoon.jpg", null, fishBeehoonStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627030/Food%20Images%20Raw/fishsoup_with_beehoon.jpg", null, fishBeehoonStall);
 		Food fishBeehoonfood2 = new Food("Fish Soup With Rice", "鱼汤与饭","add bittergourd: $0.50", 4.00,
-				"resources/img/food/img-fishsoupwithrice.jpg", null, fishBeehoonStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627042/Food%20Images%20Raw/fishsoup_with_rice.jpg", null, fishBeehoonStall);
 		Food fishBeehoonfood3 = new Food("Fried Fish Soup With Beehoon", "炸鱼汤与米粉","add bittergourd: $0.50", 5.00,
-				"resources/img/food/img-friedfishsoupwithbeehoon.jpg", null, fishBeehoonStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627090/Food%20Images%20Raw/Fried_Fish_soup_with_Beehoon.jpg", null, fishBeehoonStall);
 
 		Food fishBeehoonfood4 = new Food("Fish Soup", "鱼汤","add bittergourd: $0.50", 3.50, null, null, fishBeehoonStall);
 		Food fishBeehoonfood5 = new Food("Fish Soup With Mee Sua", "鱼汤面线","add bittergourd: $0.50", 3.50, null, null,
@@ -1377,21 +1377,21 @@ public class Test {
 
 		fishBeehoonStall.setFoodList(foodList7);
 
-		Stall fruitStall = new Stall("Fruit Stall", 91151608, canteen1, null, "resources/img/stall/img-fruitstall.jpg", null);
+		Stall fruitStall = new Stall("Fruit Stall", 91151608, canteen1, null, "http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638266/Stall%20Images%20Raw/oasis_fruit_stall.jpg", null);
 
-		Food apple = new Food("Apple", "苹果","", 0.60, "resources/img/food/img-apple.jpg", null, fruitStall);
+		Food apple = new Food("Apple", "苹果","", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/apple.jpg", null, fruitStall);
 
 		Food appleJuice = new Food("Apple Juice", "苹果汁","", 2.50, null, null, fruitStall);
 
-		Food watermelon = new Food("Watermelon", "西瓜","", 0.60, "resources/img/food/img-watermelon.jpg", null, fruitStall);
+		Food watermelon = new Food("Watermelon", "西瓜","", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627161/Food%20Images%20Raw/watermelon.jpg", null, fruitStall);
 
 		Food watermelonJuice = new Food("Watermelon Juice", "西瓜汁","", 2.50, null, null, fruitStall);
 
-		Food dragonfruit = new Food("Dragonfruit", "龙珠果","", 0.60, "resources/img/food/img-dragonfruit.jpg", null, fruitStall);
+		Food dragonfruit = new Food("Dragonfruit", "龙珠果","", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/dragonfruits.jpg", null, fruitStall);
 
 		Food dragonfruitJuice = new Food("Dragonfruit Juice", "龙珠果汁","", 2.50, null, null, fruitStall);
 
-		Food pear = new Food("Pear", "梨","", 0.60, "resources/img/food/img-pear.jpg", null, fruitStall);
+		Food pear = new Food("Pear", "梨","", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/pear.jpg", null, fruitStall);
 
 		Food pearJuice = new Food("Pear Juice", "梨汁","", 2.50, null, null, fruitStall);
 
@@ -1403,17 +1403,17 @@ public class Test {
 
 		Food papayaJuice = new Food("Papaya Juice", "木瓜汁", "", 2.60, null, null, fruitStall);
 
-		Food pineapple = new Food("Pineapple", "黄梨","", 0.60, "resources/img/food/img-pineapple.jpg", null, fruitStall);
+		Food pineapple = new Food("Pineapple", "黄梨","", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627163/Food%20Images%20Raw/pineapple.jpg", null, fruitStall);
 
 		Food pineappleJuice = new Food("Pineapple Juice","黄梨汁", "", 2.50, null, null, fruitStall);
 
-		Food banana = new Food("Banana", "香蕉","", 0.70, "resources/img/food/img-banana.jpg", null, fruitStall);
+		Food banana = new Food("Banana", "香蕉","", 0.70, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627006/Food%20Images%20Raw/banana.jpg", null, fruitStall);
 
 		Food bananaJuice = new Food("Banana Juice", "香蕉汁","", 2.60, null, null, fruitStall);
 
 		Food agaragar = new Food("Agar Agar","燕菜糕", "", 0.60, "resources/img/food/img-agaragar.jpg", null, fruitStall);
 
-		Food orange = new Food("Orange","橙", "", 0.60, "resources/img/food/img-orange.jpg", null, fruitStall);
+		Food orange = new Food("Orange","橙", "", 0.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/orange.jpg", null, fruitStall);
 
 		Food orangeJuice = new Food("Orange Juice", "橙汁","", 2.50, null, null, fruitStall);
 
@@ -1426,7 +1426,7 @@ public class Test {
 
 		Food sarawakPineappleJuice = new Food("Sarawak Pineapple Juice", "沙捞越黄梨果汁","", 3.10, null, null, fruitStall);
 
-		Food mixedFruits = new Food("Mixed Fruits", "水果盘","upsize $3.50", 3.00, "resources/img/food/img-mixedfruits.jpg", null,
+		Food mixedFruits = new Food("Mixed Fruits", "水果盘","upsize $3.50", 3.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627095/Food%20Images%20Raw/mixed_fruits.jpg", null,
 				fruitStall);
 
 		// Modifier modifier25 = new Modifier("Change to juice", "", 1.90,
