@@ -54,12 +54,57 @@ public class FoodOrderController {
 		foodOrderDAO.saveFoodOrder(f);
 	}
 
+	public void addFoodOrderItemIntoFoodOrder(FoodOrderItem foodOrderItem, FoodOrder foodOrder){
+		Set<FoodOrderItem> foodOrderItemList = foodOrder.getFoodOrderList();
+		foodOrderItemList.add(foodOrderItem);
+		foodOrder.setFoodOrderList(foodOrderItemList);
+		updateFoodOrder(foodOrder);
+	}
+
 	public boolean checkForExistingOrder(Employee employee, OrderWindow orderWindow) {
 		FoodOrderDAO foodOrderDao = new FoodOrderDAO();
 		if (foodOrderDao.getAllFoodOrderOfOrderWindowForUser(employee, orderWindow).isEmpty()) {
 			return false;
 		}
 		return true;
+	}
+
+	public void deleteFoodOrderItem(int foodOrderItemId) throws Exception {
+		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
+		FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
+		EmployeeDAO employeeDAO = new EmployeeDAO();
+		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+		FoodOrderItem foodOrderItemToDelete = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
+		FoodOrder foodOrderToDelete = foodOrderItemToDelete.getFoodOrder();
+		if (foodOrderToDelete.getStatus() == StringValues.PAID) {
+			throw new Exception("The food has already been paid for. Cannot delete Food Order.");
+		}
+		Employee employee = foodOrderToDelete.getEmployee();
+		double amountOwed = employee.getAmountOwed();
+		double newAmountOwed = amountOwed - foodOrderItemToDelete.getTotalPrice();
+		employee.setAmountOwed(newAmountOwed);
+
+		// update employee, foodOrderItem and foodOrder
+		employeeDAO.updateEmployee(employee);
+		
+		// update FoodOrder (Remove FoodOrderItem)
+		foodOrderToDelete.getFoodOrderList().remove(foodOrderItemToDelete);
+		updateFoodOrder(foodOrderToDelete);
+		
+		// remove ModifierChosen
+		Set<ModifierChosen> modifierList = foodOrderItemToDelete.getModifierChosenList();
+		for(ModifierChosen modifierChosen : modifierList){
+			modifierSectionDAO.deleteModifierChosen(modifierChosen);
+		}
+		
+		//delete FoodOrderItem
+		foodOrderItemToDelete.setFood(null);
+		foodOrderItemToDelete.setFoodOrder(null);
+		foodOrderItemToDelete.setModifierChosenList(null);
+		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToDelete);
+		foodOrderItemDAO.deleteFoodOrderItem(foodOrderItemToDelete);
+		
+
 	}
 
 	/**
@@ -688,50 +733,5 @@ public class FoodOrderController {
 		employeeDAO.updateEmployee(employee);
 		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToEdit);
 		updateFoodOrder(foodOrderToEdit);
-	}
-
-	public void deleteFoodOrderItem(int foodOrderItemId) throws Exception {
-		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
-		FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
-		EmployeeDAO employeeDAO = new EmployeeDAO();
-		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
-		FoodOrderItem foodOrderItemToDelete = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
-		FoodOrder foodOrderToDelete = foodOrderItemToDelete.getFoodOrder();
-		if (foodOrderToDelete.getStatus() == StringValues.PAID) {
-			throw new Exception("The food has already been paid for. Cannot delete Food Order.");
-		}
-		Employee employee = foodOrderToDelete.getEmployee();
-		double amountOwed = employee.getAmountOwed();
-		double newAmountOwed = amountOwed - foodOrderItemToDelete.getTotalPrice();
-		employee.setAmountOwed(newAmountOwed);
-
-		// update employee, foodOrderItem and foodOrder
-		employeeDAO.updateEmployee(employee);
-		
-		// update FoodOrder (Remove FoodOrderItem)
-		foodOrderToDelete.getFoodOrderList().remove(foodOrderItemToDelete);
-		updateFoodOrder(foodOrderToDelete);
-		
-		// remove ModifierChosen
-		Set<ModifierChosen> modifierList = foodOrderItemToDelete.getModifierChosenList();
-		for(ModifierChosen modifierChosen : modifierList){
-			modifierSectionDAO.deleteModifierChosen(modifierChosen);
-		}
-		
-		//delete FoodOrderItem
-		foodOrderItemToDelete.setFood(null);
-		foodOrderItemToDelete.setFoodOrder(null);
-		foodOrderItemToDelete.setModifierChosenList(null);
-		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToDelete);
-		foodOrderItemDAO.deleteFoodOrderItem(foodOrderItemToDelete);
-		
-
-	}
-
-	public void addFoodOrderItemIntoFoodOrder(FoodOrderItem foodOrderItem, FoodOrder foodOrder){
-		Set<FoodOrderItem> foodOrderItemList = foodOrder.getFoodOrderList();
-		foodOrderItemList.add(foodOrderItem);
-		foodOrder.setFoodOrderList(foodOrderItemList);
-		updateFoodOrder(foodOrder);
 	}
 }

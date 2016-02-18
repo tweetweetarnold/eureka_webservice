@@ -115,9 +115,9 @@
 							<tbody>
 								<tr ng-repeat="canteen in data track by $index">
 									<td>{{canteen.canteenId}}</td>
-									<td>{{canteen.name}}</td>
-									<td>{{canteen.address}}</td>
-									<td>{{canteen.createDate}}</td>
+									<td>{{canteen.name | date:'medium' : '+0800'}}</td>
+									<td>{{canteen.address | date:'medium' : '+0800'}}</td>
+									<td>{{canteen.createDate | date:'medium' : '+0800'}}</td>
 									<td>
 										<a ng-href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId={{canteen.canteenId}}">View all stalls</a>
 									</td>

@@ -31,8 +31,8 @@ public class OrderWindowController {
 	public OrderWindowController() {
 	}
 
-	public boolean checkForOrderWindowAvailability(DateTime startTime, DateTime endTime, Company coy, int weeks)
-			throws Exception {
+	public boolean checkForOrderWindowAvailability(DateTime startTime, DateTime endTime,
+			Company coy, int weeks) throws Exception {
 		ArrayList<OrderWindow> allOrderWindows = orderWindowDAO.getAllOrderWindowsUnderCompany(coy);
 		// ArrayList<OrderWindow> occupiedSlots = new ArrayList<OrderWindow>();
 		System.out.println("startDate: " + startTime);
@@ -61,7 +61,7 @@ public class OrderWindowController {
 						if (w.getStatus().equals(StringValues.ACTIVE)) {
 							DateTime wStart = w.getStartDate();
 							DateTime wEnd = w.getEndDate();
-							
+
 							if (startTimeTemp.isEqual(wStart)) {
 								return false;
 							}
@@ -95,15 +95,15 @@ public class OrderWindowController {
 				}
 			}
 		} else {
-			
+
 			if (startTime.isBefore(endTime)) {
-				
+
 				for (OrderWindow w : allOrderWindows) {
-					
+
 					if (w.getStatus().equals(StringValues.ACTIVE)) {
-						
+
 						DateTime wStart = w.getStartDate();
-						System.out.println(wStart + "  vs  " +  startTime);
+						System.out.println(wStart + "  vs  " + startTime);
 						DateTime wEnd = w.getEndDate();
 						if (startTime.isEqual(wStart)) {
 							return false;
@@ -134,15 +134,15 @@ public class OrderWindowController {
 					}
 				}
 			} else {
-				
+
 				throw new Exception("Invalid start time and end time");
 			}
 		}
 		return true;
 	}
 
-	public ArrayList<OrderWindow> checkOrderWindowAvailability(DateTime startTime, DateTime endTime, Company coy)
-			throws Exception {
+	public ArrayList<OrderWindow> checkOrderWindowAvailability(DateTime startTime, DateTime endTime,
+			Company coy) throws Exception {
 		ArrayList<OrderWindow> allOrderWindows = orderWindowDAO.getAllOrderWindowsUnderCompany(coy);
 		ArrayList<OrderWindow> occupiedSlots = new ArrayList<OrderWindow>();
 		System.out.println("startDate: " + startTime);
@@ -186,46 +186,51 @@ public class OrderWindowController {
 		return occupiedSlots;
 	}
 
-	public void createNewOrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			int numberOfWeeks, String remarks, double discountPercentage, double discountAbsolute) {
-		if (numberOfWeeks > 0) {
-			ArrayList<DateTime> startTimeList = new ArrayList<DateTime>();
-			ArrayList<DateTime> endTimeList = new ArrayList<DateTime>();
-			startTimeList.add(startDate);
-			endTimeList.add(endDate);
-			for (int i = 1; i < numberOfWeeks; i++) {
-				DateTime tempStartDateTime = startDate.plusWeeks(1);
-				startDate = tempStartDateTime;
-				DateTime tempEndDateTime = endDate.plusWeeks(1);
-				endDate = tempEndDateTime;
-				startTimeList.add(tempStartDateTime);
-				endTimeList.add(tempEndDateTime);
-			}
+	// public void createNewOrderWindow(DateTime startDate, DateTime endDate, Company company,
+	// Canteen canteen, int numberOfWeeks, String remarks, double discountPercentage,
+	// double discountAbsolute) {
+	// if (numberOfWeeks > 0) {
+	// ArrayList<DateTime> startTimeList = new ArrayList<DateTime>();
+	// ArrayList<DateTime> endTimeList = new ArrayList<DateTime>();
+	// startTimeList.add(startDate);
+	// endTimeList.add(endDate);
+	// for (int i = 1; i < numberOfWeeks; i++) {
+	// DateTime tempStartDateTime = startDate.plusWeeks(1);
+	// startDate = tempStartDateTime;
+	// DateTime tempEndDateTime = endDate.plusWeeks(1);
+	// endDate = tempEndDateTime;
+	// startTimeList.add(tempStartDateTime);
+	// endTimeList.add(tempEndDateTime);
+	// }
+	//
+	// for (int i = 0; i < startTimeList.size(); i++) {
+	// orderWindowDAO.saveOrderWindow(
+	// new OrderWindow(startTimeList.get(i), endTimeList.get(i), company, canteen,
+	// discountPercentage, discountAbsolute, remarks, null));
+	// }
+	//
+	// } else {
+	// orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen,
+	// discountPercentage, discountAbsolute, remarks, null));
+	// }
+	// }
 
-			for (int i = 0; i < startTimeList.size(); i++) {
-				orderWindowDAO.saveOrderWindow(new OrderWindow(startTimeList.get(i), endTimeList.get(i), company,
-						canteen, discountPercentage, discountAbsolute, remarks, null));
-			}
-
-		} else {
-			orderWindowDAO.saveOrderWindow(new OrderWindow(startDate, endDate, company, canteen, discountPercentage,
-					discountAbsolute, remarks, null));
-		}
-	}
-
-	public void createNewOrderWindow2(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			int numberOfWeeks, String remarks, double discountAbsolute) throws Exception {
+	public void createNewOrderWindow2(DateTime startDate, DateTime endDate, Company company,
+			Canteen canteen, int numberOfWeeks, String remarks, double discountAbsolute)
+					throws Exception {
 		QuartzService quartzService = new QuartzService();
 
 		for (int i = 0; i < numberOfWeeks; i++) {
 			DateTime newStartTime = startDate.plusWeeks(i);
 			Date startDateForQuartz = newStartTime.toDate();
-			OrderWindow window = new OrderWindow(newStartTime, endDate.plusWeeks(i), company, canteen, remarks, null);
+			OrderWindow window = new OrderWindow(newStartTime, endDate.plusWeeks(i), company,
+					canteen, remarks, null);
 
 			ArrayList<PriceModifier> list = new ArrayList<PriceModifier>();
-			PriceModifier discountAbsoluteModifier = new PriceModifier("Discount", StringValues.PRICEMODIFIER_ABSOLUTE,
-					discountAbsolute, window);
+			PriceModifier discountAbsoluteModifier = new PriceModifier("Discount",
+					StringValues.PRICEMODIFIER_ABSOLUTE, discountAbsolute, window);
 			list.add(discountAbsoluteModifier);
+			System.out.println("pricemodifierlist size window: " + list.size());
 			window.setPriceModifierList(list);
 			orderWindowDAO.saveOrderWindow(window);
 			int orderWindowID = orderWindowDAO.updateOrderWindow(window);
@@ -240,16 +245,18 @@ public class OrderWindowController {
 		OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
 		OrderWindow orderWindowToArchive = getOrderWindow(orderWindowId);
 		FoodOrderController foodOrderController = new FoodOrderController();
-		if (foodOrderController.getAllFoodOrderOfOrderWindowGroupedByStall(orderWindowToArchive).size() == 0) {
+		if (foodOrderController.getAllFoodOrderOfOrderWindowGroupedByStall(orderWindowToArchive)
+				.size() == 0) {
 			orderWindowToArchive.setStatus(StringValues.ARCHIVED);
 			orderWindowDAO.updateOrderWindow(orderWindowToArchive);
-		}else{
+		} else {
 			throw new Exception("Cannot delete order window if a order has already been placed");
 		}
 	}
 
-	public void editOrderWindow(int orderWindowId, DateTime newStartDate, DateTime newEndDate, Canteen canteen,
-			String remarks, double discountPercentage, double discountAbsolute) throws Exception {
+	public void editOrderWindow(int orderWindowId, DateTime newStartDate, DateTime newEndDate,
+			Canteen canteen, String remarks, double discountPercentage, double discountAbsolute)
+					throws Exception {
 		OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
 		OrderWindow orderWindowToEdit = getOrderWindow(orderWindowId);
 		DateTime dateEnd = orderWindowToEdit.getEndDate();
@@ -258,8 +265,8 @@ public class OrderWindowController {
 		DateTime currentTime = DateTime.now(dateTimeZone);
 
 		// to check for clashing orderwindows
-		ArrayList<OrderWindow> orderWindowList = checkOrderWindowAvailability(newStartDate, newEndDate,
-				orderWindowToEdit.getCompany());
+		ArrayList<OrderWindow> orderWindowList = checkOrderWindowAvailability(newStartDate,
+				newEndDate, orderWindowToEdit.getCompany());
 
 		if (dateStart.isAfter(currentTime)) {
 			// edit OrderWindow orderWindowToEdit
@@ -279,7 +286,8 @@ public class OrderWindowController {
 					orderWindowDAO.updateOrderWindow(orderWindowToEdit);
 					// if list has one order window and it is the same order
 					// window go ahead and edit it
-				} else if ((orderWindowList.size() == 1) && (orderWindowList.get(0).getWindowId() == orderWindowId)) {
+				} else if ((orderWindowList.size() == 1)
+						&& (orderWindowList.get(0).getWindowId() == orderWindowId)) {
 					orderWindowToEdit.setCanteen(canteen);
 					orderWindowToEdit.setStartDate(newStartDate);
 					orderWindowToEdit.setEndDate(newEndDate);
@@ -302,7 +310,8 @@ public class OrderWindowController {
 
 				// if list has one order window and it is the same order window
 				// go ahead and edit it
-			} else if ((orderWindowList.size() == 1) && (orderWindowList.get(0).getWindowId() == orderWindowId)) {
+			} else if ((orderWindowList.size() == 1)
+					&& (orderWindowList.get(0).getWindowId() == orderWindowId)) {
 				orderWindowToEdit.setEndDate(newEndDate);
 				orderWindowDAO.updateOrderWindow(orderWindowToEdit);
 
@@ -323,6 +332,10 @@ public class OrderWindowController {
 		return orderWindowDAO.getAllClosedWindows();
 	}
 
+	public ArrayList<OrderWindow> getAllNonDeletedOrderWindows() {
+		return orderWindowDAO.getAllNonDeletedOrderWindows();
+	}
+
 	/**
 	 * Get all OrderWindows with status "Opened"
 	 * 
@@ -335,10 +348,8 @@ public class OrderWindowController {
 	/**
 	 * Get all OrderWindows with status "Opened" for the given Company
 	 * 
-	 * @param company
-	 *            The company whose "Opened" OrderWindows are to be retrieved
-	 * @return Returns an ArrayList of OrderWindows with status "Opened" for the
-	 *         given Company
+	 * @param company The company whose "Opened" OrderWindows are to be retrieved
+	 * @return Returns an ArrayList of OrderWindows with status "Opened" for the given Company
 	 */
 	public ArrayList<OrderWindow> getAllOpenedWindowsForCompany(Company company) {
 		return orderWindowDAO.getAllOpenedWindowsForCompany(company);
@@ -356,16 +367,11 @@ public class OrderWindowController {
 	/**
 	 * Retrieves the OrderWindow based on the provided ID
 	 * 
-	 * @param orderWindowId
-	 *            The ID of the OrderWindow
+	 * @param orderWindowId The ID of the OrderWindow
 	 * @return The OrderWindow object that has the provided ID
 	 */
 	public OrderWindow getOrderWindow(Integer orderWindowId) {
 		return orderWindowDAO.getOrderWindow(orderWindowId);
-	}
-
-	public ArrayList<OrderWindow> getAllNonDeletedOrderWindows() {
-		return orderWindowDAO.getAllNonDeletedOrderWindows();
 	}
 
 }

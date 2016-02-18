@@ -10,8 +10,8 @@ import connection.MyConnection;
 import model.Food;
 
 public class AutoComplete {
-	private int sizeOfList;
 	private ArrayList<Food> foodList;
+	private int sizeOfList;
 	
 	public AutoComplete(){
 		this.foodList = getAllFood(); 

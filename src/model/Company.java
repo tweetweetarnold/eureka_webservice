@@ -59,15 +59,6 @@ public class Company {
 		this.status = StringValues.ACTIVE;
 	}
 
-	/**
-	 * Retrieves the current list of Canteens
-	 * 
-	 * @return The list of Canteens
-	 */
-	public Set<Canteen> getCanteenList() {
-		return canteenList;
-	}
-
 	public Set<Canteen> getActiveCanteenList() {
 		Set<Canteen> returnSet = new HashSet<Canteen>();
 		for(Canteen s:canteenList){
@@ -76,6 +67,15 @@ public class Company {
 			}
 		}
 		return returnSet;
+	}
+
+	/**
+	 * Retrieves the current list of Canteens
+	 * 
+	 * @return The list of Canteens
+	 */
+	public Set<Canteen> getCanteenList() {
+		return canteenList;
 	}
 	/**
 	 * Retrieves the current company code of the Company

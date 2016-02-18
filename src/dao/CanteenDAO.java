@@ -56,15 +56,11 @@ public class CanteenDAO {
 		updateCanteen(c);
 	}
 	
-	/**
-	 * Retrieves all the Canteens from the Database
-	 * 
-	 * @return An ArrayList of Canteen objects
-	 */
-	public ArrayList<Canteen> getAllCanteens() {
+	public ArrayList<Canteen> getAllActiveCanteens() {
 		ArrayList<Canteen> returnList = null;
 
 		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -77,11 +73,15 @@ public class CanteenDAO {
 		return returnList;
 	}
 	
-	public ArrayList<Canteen> getAllActiveCanteens() {
+	/**
+	 * Retrieves all the Canteens from the Database
+	 * 
+	 * @return An ArrayList of Canteen objects
+	 */
+	public ArrayList<Canteen> getAllCanteens() {
 		ArrayList<Canteen> returnList = null;
 
 		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
-		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);

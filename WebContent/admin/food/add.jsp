@@ -116,8 +116,7 @@
 										</div>
 										<br>
 
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
-											new Food</button>
+										<button type="submit" class="btn btn-primary">Add new Food</button>
 
 									</form>
 								</div>

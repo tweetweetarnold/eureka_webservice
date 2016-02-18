@@ -102,6 +102,16 @@ public class Food {
 		return false;
 	}
 
+	public Set<Modifier> getActiveModifierList() {
+		Set<Modifier> returnSet = new HashSet<Modifier>();
+		for(Modifier s:modifierList){
+			if(s.getStatus().equals(StringValues.ACTIVE)){
+				returnSet.add(s);
+			}
+		}
+		return returnSet;
+	}
+
 	public String getChineseName() {
 		return chineseName;
 	}
@@ -149,16 +159,6 @@ public class Food {
 	 */
 	public Set<Modifier> getModifierList() {
 		return modifierList;
-	}
-
-	public Set<Modifier> getActiveModifierList() {
-		Set<Modifier> returnSet = new HashSet<Modifier>();
-		for(Modifier s:modifierList){
-			if(s.getStatus().equals(StringValues.ACTIVE)){
-				returnSet.add(s);
-			}
-		}
-		return returnSet;
 	}
 	
 	public Set<ModifierSection> getModifierSectionList() {

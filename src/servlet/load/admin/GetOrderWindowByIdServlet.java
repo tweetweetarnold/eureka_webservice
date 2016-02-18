@@ -35,6 +35,16 @@ import model.Stall;
 public class GetOrderWindowByIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
+
+		@Override
+		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
+			final long dateString = src.getTime();
+			return new JsonPrimitive(dateString);
+		}
+
+	};
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -81,22 +91,12 @@ public class GetOrderWindowByIdServlet extends HttpServlet {
 		
 		out.print(gson.toJson(window));
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
-	
-	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
-
-		@Override
-		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
-			final long dateString = src.getTime();
-			return new JsonPrimitive(dateString);
-		}
-
-	};
 
 }

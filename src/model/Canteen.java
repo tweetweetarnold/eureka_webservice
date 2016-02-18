@@ -54,6 +54,16 @@ public class Canteen {
 		this.stallList = stallList;
 	}
 
+	public Set<Stall> getActiveStallList() {
+		Set<Stall> returnSet = new HashSet<Stall>();
+		for(Stall s:stallList){
+			if(s.getStatus().equals(StringValues.ACTIVE)){
+				returnSet.add(s);
+			}
+		}
+		return returnSet;
+	}
+
 	/**
 	 * Retrieves the address of the Canteen
 	 * 
@@ -89,7 +99,7 @@ public class Canteen {
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * Retrieves the list of current Stalls in the Canteen
 	 * 
@@ -97,16 +107,6 @@ public class Canteen {
 	 */
 	public Set<Stall> getStallList() {
 		return stallList;
-	}
-	
-	public Set<Stall> getActiveStallList() {
-		Set<Stall> returnSet = new HashSet<Stall>();
-		for(Stall s:stallList){
-			if(s.getStatus().equals(StringValues.ACTIVE)){
-				returnSet.add(s);
-			}
-		}
-		return returnSet;
 	}
 	
 

@@ -40,20 +40,6 @@ public class CloudinaryUpload {
 		return output;
 	}
 	
-	public String[] stallImageUpload(byte[] file) throws IOException {
-		Cloudinary cloudinary = setCloudinaryProperties();
-		String[] output = new String[2];
-		
-		Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
-		String publicId = (String) uploadResult.get("public_id");
-		output[1] = publicId;
-		String url = cloudinary.url().transformation(new Transformation().width(360).height(231).crop("fit")).generate(publicId);
-		output[0] = url;
-		System.out.println(url);
-		//System.out.println(htmltag);
-		return output;
-	}
-	
 	public String[] replaceImage(String inputPublicId, byte[] file) throws IOException {
 //		Cloudinary cloudinary = setCloudinaryProperties();
 		String[] output = new String[2];
@@ -88,6 +74,20 @@ public class CloudinaryUpload {
 		cloudinary = new Cloudinary(config);
 		
 		return cloudinary;
+	}
+	
+	public String[] stallImageUpload(byte[] file) throws IOException {
+		Cloudinary cloudinary = setCloudinaryProperties();
+		String[] output = new String[2];
+		
+		Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+		String publicId = (String) uploadResult.get("public_id");
+		output[1] = publicId;
+		String url = cloudinary.url().transformation(new Transformation().width(360).height(231).crop("fit")).generate(publicId);
+		output[0] = url;
+		System.out.println(url);
+		//System.out.println(htmltag);
+		return output;
 	}
 	
 

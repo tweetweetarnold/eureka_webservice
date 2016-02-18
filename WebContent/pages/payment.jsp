@@ -195,7 +195,7 @@
 								Canteen: ${foodOrder.orderWindow.canteen.name}
 								<br>
 								Price:
-								<fmt:formatNumber value="${foodOrder.finalPrice}" var="amt" minFractionDigits="2" />
+								<fmt:formatNumber value="${foodOrder.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
 								$${amt}
 								<br>
 								Discount:
@@ -203,6 +203,10 @@
 									minFractionDigits="2"
 								/>
 								$${discount}
+								<br>
+								Payable:
+								<fmt:formatNumber value="${foodOrder.finalPrice}" var="payable" minFractionDigits="2" />
+								$${payable}
 								<br>
 								<br>
 

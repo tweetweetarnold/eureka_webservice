@@ -27,47 +27,41 @@ public class CanteenController {
 
 	}
 
-	public ArrayList<Canteen> getAllActiveCanteens() {
-		return canteenDAO.getAllActiveCanteens();
-	}
-	
-	
-	/**
-	 * Retrieves All the Canteens stored in the Database
-	 * 
-	 * @return A list of all the Canteen objects from the Database
-	 */
-	public ArrayList<Canteen> getAllCanteens() {
-		return canteenDAO.getAllCanteens();
-	}
-
-	/**
-	 * Retrieves All the Food stored in the Database
-	 * 
-	 * @return A list of all the Food objects from the Database
-	 */
-	public List<Food> getAllFood() {
-		List<Food> returnList = new ArrayList<Food>();
-		List<Canteen> canteenList = getAllCanteens();
-
-		for (Canteen c : canteenList) {
-			Set<Stall> stallList = c.getStallList();
-			for (Stall s : stallList) {
-				Set<Food> foodList = s.getFoodList();
-				returnList.addAll(foodList);
-			}
+	public void addCanteen(String name, String address) throws Exception {
+		String errorMessages = validateNewCanteenInputs(name, address);
+		if (!errorMessages.isEmpty()) {
+			throw new Exception(errorMessages);
 		}
-		return returnList;
+		boolean canteenExist = checkCanteenExists(name, address);
+		if (canteenExist) {
+			throw new Exception("Canteen already exists");
+		} else {
+			Canteen newCanteen = new Canteen(name, address, new HashSet<Stall>());
+			canteenDAO.saveCanteen(newCanteen);
+		}
+		
+	}
+	
+	
+	public boolean checkCanteenExists(String name, String address) {
+		Canteen c = canteenDAO.getCanteenByName(name);
+		Canteen canteenAddress = canteenDAO.getCanteenByAddress(address);
+		if (c != null || canteenAddress != null) {
+			return true;
+		}
+		return false;
 	}
 
-	/**
-	 * Retrieve a Canteen from the database by an ID
-	 * 
-	 * @param canteenId The ID that belongs to the Canteen
-	 * @return A Canteen object that has the specified ID
-	 */
-	public Canteen getCanteen(int canteenId) {
-		return canteenDAO.getCanteen(canteenId);
+	public void deleteCanteen(int canteenId) throws Exception {
+		CanteenDAO canteenDAO = new CanteenDAO();
+		Canteen canteenToDelete = getCanteen(canteenId);
+
+		Set<Stall> stallsToDelete = canteenToDelete.getStallList();
+		for (Stall stall : stallsToDelete) {
+			stallCtrl.deleteStall(stall);
+		}
+		canteenDAO.deleteCanteen(canteenToDelete);
+		
 	}
 
 	public void editCanteen(int canteenId, String name, String address) throws Exception {
@@ -92,40 +86,46 @@ public class CanteenController {
 
 	}
 
-	public void deleteCanteen(int canteenId) throws Exception {
-		CanteenDAO canteenDAO = new CanteenDAO();
-		Canteen canteenToDelete = getCanteen(canteenId);
+	public ArrayList<Canteen> getAllActiveCanteens() {
+		return canteenDAO.getAllActiveCanteens();
+	}
 
-		Set<Stall> stallsToDelete = canteenToDelete.getStallList();
-		for (Stall stall : stallsToDelete) {
-			stallCtrl.deleteStall(stall);
-		}
-		canteenDAO.deleteCanteen(canteenToDelete);
-		
+	/**
+	 * Retrieves All the Canteens stored in the Database
+	 * 
+	 * @return A list of all the Canteen objects from the Database
+	 */
+	public ArrayList<Canteen> getAllCanteens() {
+		return canteenDAO.getAllCanteens();
 	}
 	
-	public void addCanteen(String name, String address) throws Exception {
-		String errorMessages = validateNewCanteenInputs(name, address);
-		if (!errorMessages.isEmpty()) {
-			throw new Exception(errorMessages);
+	/**
+	 * Retrieves All the Food stored in the Database
+	 * 
+	 * @return A list of all the Food objects from the Database
+	 */
+	public List<Food> getAllFood() {
+		List<Food> returnList = new ArrayList<Food>();
+		List<Canteen> canteenList = getAllCanteens();
+
+		for (Canteen c : canteenList) {
+			Set<Stall> stallList = c.getStallList();
+			for (Stall s : stallList) {
+				Set<Food> foodList = s.getFoodList();
+				returnList.addAll(foodList);
+			}
 		}
-		boolean canteenExist = checkCanteenExists(name, address);
-		if (canteenExist) {
-			throw new Exception("Canteen already exists");
-		} else {
-			Canteen newCanteen = new Canteen(name, address, new HashSet<Stall>());
-			canteenDAO.saveCanteen(newCanteen);
-		}
-		
+		return returnList;
 	}
 	
-	public boolean checkCanteenExists(String name, String address) {
-		Canteen c = canteenDAO.getCanteenByName(name);
-		Canteen canteenAddress = canteenDAO.getCanteenByAddress(address);
-		if (c != null || canteenAddress != null) {
-			return true;
-		}
-		return false;
+	/**
+	 * Retrieve a Canteen from the database by an ID
+	 * 
+	 * @param canteenId The ID that belongs to the Canteen
+	 * @return A Canteen object that has the specified ID
+	 */
+	public Canteen getCanteen(int canteenId) {
+		return canteenDAO.getCanteen(canteenId);
 	}
 	
 	private String validateNewCanteenInputs(String name, String address) {

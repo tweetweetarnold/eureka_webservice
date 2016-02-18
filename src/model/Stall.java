@@ -69,6 +69,16 @@ public class Stall {
 		this.publicId = publicId;
 	}
 
+	public Set<Food> getActiveFoodList() {
+		Set<Food> returnSet = new HashSet<Food>();
+		for(Food s:foodList){
+			if(s.getStatus().equals(StringValues.ACTIVE)){
+				returnSet.add(s);
+			}
+		}
+		return returnSet;
+	}
+
 	/**
 	 * Retrieves the Canteen of this Stall
 	 * 
@@ -103,16 +113,6 @@ public class Stall {
 	 */
 	public Set<Food> getFoodList() {
 		return foodList;
-	}
-
-	public Set<Food> getActiveFoodList() {
-		Set<Food> returnSet = new HashSet<Food>();
-		for(Food s:foodList){
-			if(s.getStatus().equals(StringValues.ACTIVE)){
-				returnSet.add(s);
-			}
-		}
-		return returnSet;
 	}
 	
 	/**

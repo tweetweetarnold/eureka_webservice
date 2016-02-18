@@ -104,7 +104,7 @@
 										</div>
 
 
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
+										<button type="submit" class="btn btn-primary">Add
 											new Stall</button>
 
 									</form>

@@ -78,16 +78,12 @@
 									<td>
 										<input type='text' ng-model='user.name' ng-value="user.name" placeholder='Chris Cheng'>
 									</td>
-									<td>
-										<input type='email' ng-model='user.email' ng-value="user.email" placeholder='chris.cheng.2013@smu.edu.sg'>
-									</td>
+									<td>{{user.email}}</td>
 									<td>{{user.createDate}}</td>
 									<td>
 										<input type='text' ng-model='user.amountOwed' ng-value="user.amountOwed" placeholder='2.30'>
 									</td>
-									<td>
-										<input type='text' ng-model='user.status' ng-value="user.status" placeholder='Ok'>
-									</td>
+									<td>{{user.status}}</td>
 								</tr>
 							</tbody>
 						</table>

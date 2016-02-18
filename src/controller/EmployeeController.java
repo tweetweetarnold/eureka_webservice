@@ -79,41 +79,6 @@ public class EmployeeController {
 		employeeDAO.saveEmployee(e);
 	}
 
-	public void suspendUser(String email) {
-		Employee employeeToSuspend = getEmployeeByEmail(email);
-		employeeToSuspend.setStatus(StringValues.EMPLOYEE_SUSPENDED);
-		updateEmployee(employeeToSuspend);
-	}
-
-	public void updateAmountOwed(ArrayList<Employee> arrayList, double amount) {
-		for (Employee employee : arrayList) {
-			employee.setAmountOwed(amount);
-			employeeDAO.updateEmployee(employee);
-		}
-
-	}
-
-	/**
-	 * Updates the Employee's specified food delivery point
-	 * 
-	 * @param email The email address of the Employee
-	 * @param buildingName The name of the building for the new delivery point
-	 */
-	public void updateDefaultDeliveryPoint(String email, String buildingName) {
-		Employee employee = retrieveEmployeeViaEmail(email);
-		employee.setDeliveryPoint(buildingName);
-		employeeDAO.updateEmployee(employee);
-	}
-
-	/**
-	 * Updates the designated Employee object in the Database
-	 * 
-	 * @param e The Employee object to be updated
-	 */
-	public void updateEmployee(Employee e) {
-		employeeDAO.updateEmployee(e);
-	}
-	
 	public void suspendOverduePaymentFromCompany(Company c){
 		
 		
@@ -155,6 +120,41 @@ public class EmployeeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void suspendUser(String email) {
+		Employee employeeToSuspend = getEmployeeByEmail(email);
+		employeeToSuspend.setStatus(StringValues.EMPLOYEE_SUSPENDED);
+		updateEmployee(employeeToSuspend);
+	}
+
+	public void updateAmountOwed(ArrayList<Employee> arrayList, double amount) {
+		for (Employee employee : arrayList) {
+			employee.setAmountOwed(amount);
+			employeeDAO.updateEmployee(employee);
+		}
+
+	}
+
+	/**
+	 * Updates the Employee's specified food delivery point
+	 * 
+	 * @param email The email address of the Employee
+	 * @param buildingName The name of the building for the new delivery point
+	 */
+	public void updateDefaultDeliveryPoint(String email, String buildingName) {
+		Employee employee = retrieveEmployeeViaEmail(email);
+		employee.setDeliveryPoint(buildingName);
+		employeeDAO.updateEmployee(employee);
+	}
+	
+	/**
+	 * Updates the designated Employee object in the Database
+	 * 
+	 * @param e The Employee object to be updated
+	 */
+	public void updateEmployee(Employee e) {
+		employeeDAO.updateEmployee(e);
 	}
 	
 }

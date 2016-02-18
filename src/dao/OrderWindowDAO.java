@@ -56,6 +56,21 @@ public class OrderWindowDAO {
 		return returnList;
 	}
 
+	public ArrayList<OrderWindow> getAllNonDeletedOrderWindows() {
+		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
+		dc.add(Restrictions.ne("status", StringValues.ARCHIVED));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((OrderWindow) o);
+		}
+		return returnList;
+	}
+
 	/**
 	 * Get all OrderWindows with status "Opened"
 	 * 
@@ -137,27 +152,12 @@ public class OrderWindowDAO {
 		return returnList;
 	}
 
+	
 	public ArrayList<OrderWindow> getAllWindowsForCanteen(Canteen canteen) {
 		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
 		dc.add(Restrictions.eq("canteen", canteen));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		for (Object o : l) {
-			returnList.add((OrderWindow) o);
-		}
-		return returnList;
-	}
-
-	
-	public ArrayList<OrderWindow> getAllNonDeletedOrderWindows() {
-		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
-
-		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
-		dc.add(Restrictions.ne("status", StringValues.ARCHIVED));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);

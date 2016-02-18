@@ -36,6 +36,16 @@ import model.Stall;
 public class GetAllOrderWindowsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
+
+		@Override
+		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
+			final long dateString = src.getTime();
+			return new JsonPrimitive(dateString);
+		}
+
+	};
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -87,15 +97,5 @@ public class GetAllOrderWindowsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
-
-	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
-
-		@Override
-		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
-			final long dateString = src.getTime();
-			return new JsonPrimitive(dateString);
-		}
-
-	};
 
 }

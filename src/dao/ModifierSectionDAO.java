@@ -11,6 +11,10 @@ public class ModifierSectionDAO {
 
 	}
 
+	public void deleteModifierChosen(ModifierChosen modifierChosen){
+		MyConnection.delete(modifierChosen);
+	}
+
 	public void saveModifier(Modifier modifier) {
 		MyConnection.save(modifier);
 	}
@@ -18,12 +22,8 @@ public class ModifierSectionDAO {
 	public void saveModifierSection(ModifierSection modifierSection) {
 		MyConnection.save(modifierSection);
 	}
-
+	
 	public void updateFoodOrder(ModifierSection modifierSection) {
 		MyConnection.update(modifierSection);
-	}
-	
-	public void deleteModifierChosen(ModifierChosen modifierChosen){
-		MyConnection.delete(modifierChosen);
 	}
 }

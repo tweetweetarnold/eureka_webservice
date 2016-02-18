@@ -216,7 +216,7 @@
 						<td>
 							<h2>
 								<i>
-									<fmt:formatNumber value="${overallPrice - sessionScope.orderWindow.priceModifierList[0].value}"
+									<fmt:formatNumber value="${overallPrice + sessionScope.orderWindow.priceModifierList[0].value}"
 										var="amountPayable" minFractionDigits="2"
 									/>
 									<c:choose>
