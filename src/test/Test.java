@@ -474,7 +474,7 @@ public class Test {
 		Food food26 = new Food("Vegetarian Mee","斋面", "add veg $0.50", 2.50, "resources/img/food/img-vergetarianmee.jpg", null,
 				stall8);
 
-		Food nfood7 = new Food("Vegetarian Kway Tiao", "素粿条","add veg $0.50", 2.50, null, null, stall8);
+		Food nfood7 = new Food("Vegetarian Kway Tiao", "素粿条","add veg $0.50", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455774076/Food%20Images%20Raw/Vegetarian_Kway_Tiao.jpg", null, stall8);
 		Food nfood8 = new Food("Vegetarian Beehoon Kway Tiao", "素米粉粿条","add veg $0.50", 2.50, null, null, stall8);
 
 		Modifier modifierNew7 = new Modifier("Add Veg", "加菜","", 0.50, food24);
