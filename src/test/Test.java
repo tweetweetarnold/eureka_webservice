@@ -272,7 +272,7 @@ public class Test {
 		Food food6 = new Food("1 Meat + 2 Veg", "1肉2菜", "", 3.00,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627151/Food%20Images%20Raw/1meat_plus_2veg.jpg",
 				null, stall3);
-		Food food7 = new Food("All Veg", "全菜", "", 3.00, "resources/img/food/img-porridge.jpg",
+		Food food7 = new Food("All Veg", "全菜", "", 3.00, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1455808739/Food%20Images%20Raw/all_veg.jpg",
 				null, stall3);
 
 		Modifier modifierMixed1 = new Modifier("Add Veg", "加菜", "", 0.50, food6);
@@ -326,7 +326,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627097/Food%20Images%20Raw/Fish_Briyani.jpg",
 				null, stall5);
 		Food food11 = new Food("Vegetarian Briyani", "马来菜饭", "", 4.00,
-				"resources/img/food/img-vegetablebriyani.jpg", null, stall5);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455808150/Food%20Images%20Raw/Vegetarian_Briyani.jpg", null, stall5);
 		Food food12 = new Food("Fried Chicken Briyani", "马来炸鸡饭", "", 4.00,
 				"resources/img/food/img-friedchickenbiryani.jpg", null, stall5);
 
@@ -410,7 +410,7 @@ public class Test {
 		Food food16 = new Food("Chicken Rice(Chicken Wing)", "鸡饭（鸡翅膀）", "", 3.00,
 				"resources/img/food/img-friedchickenbiryani.jpg", null, stall7);
 		Food food17 = new Food("Fried Rice", "炒饭", "", 3.00,
-				"resources/img/food/img-chickenfriedrice.jpg", null, stall7);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627008/Food%20Images%20Raw/chicken_fried_rice.jpg", null, stall7);
 		// Food food18 = new Food("Seafood Fried Rice", "", 3.50,
 		// "resources/img/food/img-seafoodfriedrice.jpg", stall7);
 		// Food food19 = new Food("Beef Fried Rice", "", 4.00,
@@ -1071,7 +1071,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627086/Food%20Images%20Raw/mutton_briyani.jpg",
 				null, indianStall);
 		Food infood8 = new Food("Vegetarian Briyani", "马来素菜饭", "Vegetarian", 5.00,
-				"resources/img/food/img-vegetablebriyani.jpg", null, indianStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455808150/Food%20Images%20Raw/Vegetarian_Briyani.jpg", null, indianStall);
 
 		Modifier modifierI1 = new Modifier("More vegetables", "多菜", "", 0.5, infood1);
 		Modifier modifierI2 = new Modifier("More vegetables", "多菜", "", 0.5, infood2);
@@ -1182,7 +1182,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627151/Food%20Images%20Raw/1meat_plus_2veg.jpg",
 				null, chineseMixVegStall);
 		Food mixVegRice2 = new Food("All Veg", "全菜", "", 3.00,
-				"resources/img/food/img-mixvegricechinese.jpg", null, chineseMixVegStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455808739/Food%20Images%20Raw/all_veg.jpg", null, chineseMixVegStall);
 		// Food mixVegRice3 = new Food("Porridge", "", 3.20,
 		// "resources/img/food/img-fishporridge.jpg", chineseMixVegStall);
 		Food mixVegRice4 = new Food("Porridge(1 Meat + 2 Veg)", "粥（1肉2菜）", "", 3.70, null, null,
