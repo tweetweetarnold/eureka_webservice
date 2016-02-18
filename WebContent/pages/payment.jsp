@@ -119,33 +119,19 @@
 						<c:set var="count" value="0" />
 
 						<c:forEach items="${sessionScope.paymentFoodOrderList}" var="order" varStatus="orderLoop">
-
-							<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
 								<c:set var="count" value="${count + 1}" />
-								<c:set var="modifiedFoodName" value="${foodItem.food.name}" />
-
-								<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen" varStatus="modifierChosenLoop">
-									<c:choose>
-										<c:when test="${fn:contains(modifierChosen.name, 'Upsize')}">
-											<c:set var="modifiedFoodName" value="${modifiedFoodName} with Upsize" />
-										</c:when>
-
-										<c:when test="${fn:contains(modifierChosen.name, 'juice')}">
-											<c:set var="modifiedFoodName" value="${modifiedFoodName} juice" />
-										</c:when>
-
-										<c:otherwise>
-											<c:set var="modifiedFoodName" value="${modifiedFoodName} with ${modifierChosen.name}" />
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-
-								<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${modifiedFoodName}" />">
-								<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${foodItem.quantity}" />">
-								<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
-								<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
-
-							</c:forEach>
+								<fmt:formatNumber value="${order.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
+								
+								<fmt:formatNumber value="${order.orderWindow.priceModifierList[0].value * -1}" var="discount"
+									minFractionDigits="2"
+								/>
+								
+						
+								<input type="hidden" name="item_name_<c:out value="${count}"/>" value="Food Order ID No.${order.foodOrderId}, Order Placed On:<fmt:formatDate type="both" value="${order.createDate}" />">
+								
+								<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${amt}" />">
+								
+								<input type="hidden" name="discount_amount_<c:out value="${count}"/>" value="${discount}">
 
 						</c:forEach>
 
