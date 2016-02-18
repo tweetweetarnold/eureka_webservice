@@ -31,7 +31,7 @@ public class SendNotification implements Job {
 			SendEmail emailGen = new SendEmail();
 			emailGen.setMailServerProperties();
 			String subject = "Koh Bus LunchTime Ordering App - Order Window Available!";
-			String messageBody = "Dear User,<br><br>" + "A new order window is now avaialable!<br><br>" + "<a href="
+			String messageBody = "Dear User,<br><br>" + "A new order window is now available!<br><br>" + "<a href="
 					+ url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>" + "Admin<br><br>"
 					+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
 
