@@ -134,11 +134,6 @@
 											</select>
 										</div>
 
-										<div class="form-group">
-											<input type="checkbox" name="reminder" value="true"> Send reminder to all employees?
-										</div>
-
-
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm">Add New
 											Order Window</button>
 
