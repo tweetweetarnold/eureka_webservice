@@ -64,43 +64,66 @@
 		</div>
 		<!-- /.row -->
 
-		<c:if test="${empty sessionScope.paymentFoodOrderList}">
-			You haven't ordered anything! Go order something!
-		</c:if>
+		<c:choose>
 
-		<c:if test="${not empty sessionScope.paymentSuccess}">
-			<c:remove var="paymentFoodOrderList" scope="session" />
-		</c:if>
+			<c:when test="${not empty sessionScope.paymentSuccess}">
+				<c:remove var="paymentFoodOrderList" scope="session" />
+			</c:when>
 
-		<c:if test="${not empty sessionScope.error}">
-			<c:remove var="paymentFoodOrderList" scope="session" />
-		</c:if>
+			<c:when test="${not empty sessionScope.error}">
+				<c:remove var="paymentFoodOrderList" scope="session" />
+			</c:when>
 
-		<!-- Success message handling -->
-		<c:if test="${not empty sessionScope.paymentSuccess}">
-			<div class="alert alert-success alert-dismissible fade in" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-				<span class="sr-only">Success:</span>
-				<c:out value="${paymentSuccess}" />
-			</div>
-			<c:remove var="paymentSuccess" scope="session" />
-		</c:if>
+			<c:when test="${not empty sessionScope.paymentSuccess}">
+				<div class="alert alert-success alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+					<span class="sr-only">Success:</span>
+					<c:out value="${paymentSuccess}" />
+				</div>
+				<c:remove var="paymentSuccess" scope="session" />
+			</c:when>
 
-		<!-- Error message handling -->
-		<c:if test="${not empty sessionScope.error}">
-			<div class="alert alert-danger alert-dismissible fade in" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				<c:out value="${error}" />
-			</div>
-			<c:remove var="error" scope="session" />
-		</c:if>
+			<c:when test="${not empty sessionScope.error}">
+				<div class="alert alert-danger alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<span class="sr-only">Error:</span>
+					<c:out value="${error}" />
+				</div>
+				<c:remove var="error" scope="session" />
+			</c:when>
+
+			<c:when test="${not empty sessionScope.warning}">
+				<div class="alert alert-warning alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<span class="sr-only">Warning:</span>
+					<c:out value="${warning}" />
+				</div>
+				<c:remove var="warning" scope="session" />
+			</c:when>
+
+			<c:when test="${empty sessionScope.paymentFoodOrderList}">
+				<div class="alert alert-warning alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<span class="sr-only">Warning:</span>
+					You haven't ordered anything! Go order something!
+				</div>
+			</c:when>
+
+
+		</c:choose>
+
 
 
 		<div class="row">
@@ -119,19 +142,21 @@
 						<c:set var="count" value="0" />
 
 						<c:forEach items="${sessionScope.paymentFoodOrderList}" var="order" varStatus="orderLoop">
-								<c:set var="count" value="${count + 1}" />
-								<fmt:formatNumber value="${order.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
-								
-								<fmt:formatNumber value="${order.orderWindow.priceModifierList[0].value * -1}" var="discount"
-									minFractionDigits="2"
-								/>
-								
-						
-								<input type="hidden" name="item_name_<c:out value="${count}"/>" value="Food Order ID No.${order.foodOrderId}, Order Placed On:<fmt:formatDate type="both" value="${order.createDate}" />">
-								
-								<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${amt}" />">
-								
-								<input type="hidden" name="discount_amount_<c:out value="${count}"/>" value="${discount}">
+							<c:set var="count" value="${count + 1}" />
+							<fmt:formatNumber value="${order.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
+
+							<fmt:formatNumber value="${order.orderWindow.priceModifierList[0].value * -1}" var="discount"
+								minFractionDigits="2"
+							/>
+
+
+							<input type="hidden" name="item_name_<c:out value="${count}"/>"
+								value="Food Order ID No.${order.foodOrderId}, Order Placed On:<fmt:formatDate type="both" value="${order.createDate}" />"
+							>
+
+							<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${amt}" />">
+
+							<input type="hidden" name="discount_amount_<c:out value="${count}"/>" value="${discount}">
 
 						</c:forEach>
 

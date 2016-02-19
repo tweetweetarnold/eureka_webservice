@@ -73,7 +73,10 @@
 			</div>
 			<!-- Error message handling -->
 			<c:if test="${not empty sessionScope.error}">
-				<div class="alert alert-danger" role="alert">
+				<div class="alert alert-danger alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 					<span class="sr-only">Error: </span>
 					${error}

@@ -57,12 +57,18 @@
 
 				<!-- Message handling -->
 				<div class="col-lg-12">
-					<div class="alert alert-success" role="alert" ng-show="success != null">
+					<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
 						<span class="sr-only">Success: </span>
 						{{success}}
 					</div>
-					<div class="alert alert-danger" role="alert" ng-show="error != null">
+					<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 						<span class="sr-only">Error: </span>
 						{{error}}
@@ -106,11 +112,13 @@
 									<td>{{window.createDate | date:'medium' : '+0800'}}</td>
 									<td>{{window.startDateFormatted | date:'medium' : '+0800'}}</td>
 									<td>{{window.endDateFormatted | date:'medium' : '+0800'}}</td>
-									<td><a ng-href="/eureka_webservice/admin/orderwindow/edit.jsp?windowId={{window.windowId}}">
+									<td>
+										<a ng-href="/eureka_webservice/admin/orderwindow/edit.jsp?windowId={{window.windowId}}">
 											<button type="button" class="btn btn-link btn-xs">
 												<i class="fa fa-pencil fa-2x"></i>
 											</button>
-										</a></td>
+										</a>
+									</td>
 									<td>
 										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete{{$index}}">
 											<i class="fa fa-trash-o fa-2x"></i>

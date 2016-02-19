@@ -56,12 +56,18 @@
 
 				<!-- Message handling -->
 				<div class="col-lg-12">
-					<div class="alert alert-success" role="alert" ng-show="success != null">
+					<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
 						<span class="sr-only">Success: </span>
 						{{success}}
 					</div>
-					<div class="alert alert-danger" role="alert" ng-show="error != null">
+					<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 						<span class="sr-only">Error: </span>
 						{{error}}

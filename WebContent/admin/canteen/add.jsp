@@ -73,7 +73,10 @@
 
 				<!-- Message handling -->
 				<div class="col-lg-12">
-					<div class="alert alert-danger" role="alert" ng-show="error != null">
+					<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 						<span class="sr-only">Error: </span>
 						{{error}}
@@ -142,7 +145,7 @@
 				</div>
 				<div class="modal-body">Are you sure you want to Add new Canteen?</div>
 				<div class="modal-footer">
-					<button type="button" data-dismiss='modal'  class="btn btn-outline btn-default">Cancel</button>
+					<button type="button" data-dismiss='modal' class="btn btn-outline btn-default">Cancel</button>
 					<button type="button" ng-click="submit()" class="btn btn-primary">Confirm</button>
 				</div>
 			</div>

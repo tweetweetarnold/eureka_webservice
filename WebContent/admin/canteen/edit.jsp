@@ -96,9 +96,6 @@
 
 								<div class="col-lg-12">
 
-
-									<!-- <input type="hidden" name="canteenId" value="${canteenId}"> -->
-
 									<div class="form-group">
 										<label>Canteen name</label>
 										<input class="form-control" name="name" ng-model='canteen.name' ng-value="canteen.name" required>

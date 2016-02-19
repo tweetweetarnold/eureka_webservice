@@ -93,6 +93,8 @@ public class ProcessLoginServlet extends HttpServlet {
 						"It seems you have not verified your account. Please verify your account from your email first!");
 			case StringValues.EMPLOYEE_SUSPENDED:
 				session.setAttribute("suspended", "true");
+				session.setAttribute("warning",
+						"You have outstanding payment. To make orders, please clear your outstanding payment.");
 				response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 				break;
 			case StringValues.EMPLOYEE_DESTROYED:
