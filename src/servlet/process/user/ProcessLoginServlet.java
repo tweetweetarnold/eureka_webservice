@@ -135,7 +135,7 @@ public class ProcessLoginServlet extends HttpServlet {
 			System.out.println("TokenID is set in session");
 
 			// for login2
-			if (window != null) {
+			if (window != null && window.getStatus().equals(StringValues.ACTIVE)) {
 				ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
 				canteenList.add(window.getCanteen());
 				session.setAttribute("canteenList", canteenList);
