@@ -127,7 +127,7 @@ public class FoodDAO {
 	 */
 	public Food getFoodFromFoodList(Set<Food> foodList, String foodName) {
 		for (Food f : foodList) {
-			if (f.getName().equals(foodName)) {
+			if (f.getName().equals(foodName) && f.getStatus().equals(StringValues.ACTIVE)) {
 				return f;
 			}
 		}
@@ -160,7 +160,7 @@ public class FoodDAO {
 	public Modifier getModifierFromFood(String modifierName, Food f) {
 		Set<Modifier> modifierList = f.getModifierList();
 		for (Modifier m : modifierList) {
-			if (m.getName().equals(modifierName)) {
+			if (m.getName().equals(modifierName) && m.getStatus().equals(StringValues.ACTIVE)) {
 				return m;
 			}
 		}

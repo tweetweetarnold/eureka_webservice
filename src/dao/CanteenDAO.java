@@ -116,6 +116,7 @@ public class CanteenDAO {
 	public Canteen getCanteenByAddress(String address) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
 		dc.add(Restrictions.eq("address", address));
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -134,6 +135,7 @@ public class CanteenDAO {
 	public Canteen getCanteenByName(String canteenName) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
 		dc.add(Restrictions.eq("name", canteenName));
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -157,7 +159,7 @@ public class CanteenDAO {
 			Set<Stall> stallList = c.getStallList();
 			System.out.println(stallList);
 			for (Stall s : stallList) {
-				if (s.getName().equals(stallName)) {
+				if (s.getName().equals(stallName) && s.getStatus().equals(StringValues.ACTIVE)) {
 					return s;
 				}
 			}
