@@ -45,7 +45,7 @@ public class OrderWindowDAO {
 
 		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
 		dc.add(Restrictions.le("endDateFormatted", currentDatetime));
-		dc.addOrder(Order.asc("endDateFormatted"));
+		dc.addOrder(Order.asc("startDateFormatted"));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -81,10 +81,10 @@ public class OrderWindowDAO {
 		Date currentDatetime = new Date();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(OrderWindow.class);
-		dc.add(Restrictions.ge("endDateFormatted", currentDatetime)).add(
-				Restrictions.le("startDateFormatted", currentDatetime)).add(
-				Restrictions.ne("status", StringValues.ARCHIVED));
-		dc.addOrder(Order.asc("endDateFormatted"));
+		dc.add(Restrictions.ge("endDateFormatted", currentDatetime))
+				.add(Restrictions.le("startDateFormatted", currentDatetime))
+				.add(Restrictions.ne("status", StringValues.ARCHIVED));
+		dc.addOrder(Order.asc("startDateFormatted"));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -152,7 +152,6 @@ public class OrderWindowDAO {
 		return returnList;
 	}
 
-	
 	public ArrayList<OrderWindow> getAllWindowsForCanteen(Canteen canteen) {
 		ArrayList<OrderWindow> returnList = new ArrayList<OrderWindow>();
 
@@ -167,7 +166,7 @@ public class OrderWindowDAO {
 		}
 		return returnList;
 	}
-	
+
 	/**
 	 * Retrieve the OrderWindow based on the provided ID
 	 * 
@@ -186,7 +185,7 @@ public class OrderWindowDAO {
 	public void saveOrderWindow(OrderWindow w) {
 		MyConnection.save(w);
 	}
-	
+
 	/**
 	 * Updates the designated OrderWindow object in the Database
 	 * 
@@ -197,8 +196,5 @@ public class OrderWindowDAO {
 		int windowID = w.getWindowId();
 		return windowID;
 	}
-	
-	
-	
 
 }
