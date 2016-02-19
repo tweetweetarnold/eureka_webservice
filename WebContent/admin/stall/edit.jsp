@@ -126,8 +126,7 @@
 											<input type="file" name="file" style="width: 228px;" />
 										</div>
 
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update
-											Stall details</button>
+										<button type="submit" class="btn btn-primary">Update Stall details</button>
 
 									</form>
 								</div>

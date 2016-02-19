@@ -74,9 +74,7 @@
 							<tbody>
 								<tr>
 									<td>{{user.company.name}}</td>
-									<td>
-										<input type='text' ng-model='user.name' ng-value="user.name" placeholder='Chris Cheng'>
-									</td>
+									<td>{{user.name}}</td>
 									<td>{{user.email}}</td>
 									<td>
 										<input type='text' ng-model='user.amountOwed' ng-value="user.amountOwed" placeholder='2.30'>
