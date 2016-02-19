@@ -67,7 +67,6 @@
 									<th>Company</th>
 									<th>Name</th>
 									<th>Email</th>
-									<th>Date Joined</th>
 									<th>O/S</th>
 									<th>Status</th>
 								</tr>
@@ -79,11 +78,14 @@
 										<input type='text' ng-model='user.name' ng-value="user.name" placeholder='Chris Cheng'>
 									</td>
 									<td>{{user.email}}</td>
-									<td>{{user.createDate}}</td>
 									<td>
 										<input type='text' ng-model='user.amountOwed' ng-value="user.amountOwed" placeholder='2.30'>
 									</td>
-									<td>{{user.status}}</td>
+									<td>
+										<select ng-model="user.status">
+											<option ng-repeat="choice in options track by $index" ng-value="choice">{{choice}}</option>
+										</select>
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -138,6 +140,18 @@
 									$window.sessionStorage.removeItem('error');
 
 									var email = $location.search().email;
+
+									$http(
+											{
+												method : 'GET',
+												url : '/eureka_webservice/GetAvailableUserStatus'
+											}).then(
+											function successCallback(response) {
+												$scope.options = response.data;
+											},
+											function errorCallback(response) {
+												alert('fail');
+											});
 
 									$http(
 											{
