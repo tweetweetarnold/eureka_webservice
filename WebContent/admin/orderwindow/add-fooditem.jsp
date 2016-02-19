@@ -130,7 +130,7 @@
 									</div>
 
 									<br>
-									<button class="btn btn-primary" ng-click="submit()">Submit</button>
+									<button class="btn btn-primary" ng-click="submit()">Add new food item</button>
 
 								</div>
 								<!-- /col-lg-6 -->

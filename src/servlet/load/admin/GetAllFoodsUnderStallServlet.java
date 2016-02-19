@@ -17,7 +17,7 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import controller.CanteenController;
+import controller.FoodController;
 import controller.StallController;
 import model.Canteen;
 import model.Food;
@@ -26,16 +26,16 @@ import model.ModifierSection;
 import model.Stall;
 
 /**
- * Servlet implementation class GetAllStallsUnderCanteenServlet
+ * Servlet implementation class GetAllFoodsUnderStallServlet
  */
-@WebServlet("/GetAllStallsUnderCanteenServlet")
-public class GetAllStallsUnderCanteenServlet extends HttpServlet {
+@WebServlet("/GetAllFoodsUnderStallServlet")
+public class GetAllFoodsUnderStallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetAllStallsUnderCanteenServlet() {
+	public GetAllFoodsUnderStallServlet() {
 		super();
 	}
 
@@ -48,8 +48,8 @@ public class GetAllStallsUnderCanteenServlet extends HttpServlet {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 
-		CanteenController canteenCtrl = new CanteenController();
 		StallController stallCtrl = new StallController();
+		FoodController foodCtrl = new FoodController();
 
 		JSONObject returnJson = new JSONObject();
 		Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
@@ -72,18 +72,17 @@ public class GetAllStallsUnderCanteenServlet extends HttpServlet {
 
 		}).create();
 
-		String canteenIdString = request.getParameter("canteenId");
-		int canteenId = Integer.parseInt(canteenIdString);
-		System.out.println("canteenID: " + canteenId);
+		String stallIdString = request.getParameter("stallId");
+		int stallId = Integer.parseInt(stallIdString);
+		System.out.println("stallID: " + stallId);
 
-		Canteen canteen = canteenCtrl.getCanteen(canteenId);
-		ArrayList<Stall> list = stallCtrl.getAllActiveStallsUnderCanteen(canteen);
+		Stall stall = stallCtrl.getStall(stallId);
+		ArrayList<Food> list = foodCtrl.getAllActiveFoodsUnderStall(stall);
 
-		returnJson.put("canteen", canteen);
-		returnJson.put("stalls", list);
+		returnJson.put("stall", stall);
+		returnJson.put("foods", list);
 
 		out.print(gson.toJson(returnJson));
-
 	}
 
 	/**
@@ -92,4 +91,5 @@ public class GetAllStallsUnderCanteenServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
+
 }

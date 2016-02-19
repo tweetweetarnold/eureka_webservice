@@ -33,11 +33,6 @@
 >
 
 
-<!-- library import for JSTL -->
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <!-- Angular -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
@@ -57,7 +52,7 @@
 			<div class="row">
 
 				<div class="col-lg-12">
-					<h1 class="page-header">${sessionScope.canteenName}:&nbsp;Stalls</h1>
+					<h1 class="page-header">{{canteen.name}}:&nbsp;Stalls</h1>
 
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
@@ -72,24 +67,35 @@
 			</div>
 			<!-- /.row -->
 
-			<div class="row">
+			<div class="row" cg-busy='loading'>
 				<div class="col-lg-12">
 
-					<!-- Success message handling -->
-					<c:if test="${not empty sessionScope.success}">
-						<div class="alert alert-success alert-dismissible fade in" role="alert">
+
+					<!-- Message handling -->
+					<div class="col-lg-12">
+						<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 							<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
 							<span class="sr-only">Success: </span>
-							${success}
+							{{success}}
 						</div>
-						<c:remove var="success" scope="session" />
-					</c:if>
+						<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error: </span>
+							{{error}}
+						</div>
+					</div>
+					<!-- / message handling -->
+
+
 
 					<b>Total stalls:</b>
-					${fn:length(sessionScope.stallList)}
+					{{stallList.length}}
 					<br>
 					<br>
 					<form action="/eureka_webservice/admin/stall/add.jsp">
@@ -113,74 +119,70 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.stallList}" var="stall" varStatus="loop">
-									<tr>
-										<td>${stall.stallId}</td>
-										<td>${stall.name}</td>
-										<td>${stall.contactNo}</td>
-										<td>
-											<fmt:formatDate type="both" value="${stall.createDate}" />
-										</td>
-										<td>
-											<img src="${stall.imageDirectory}" />
-										</td>
-										<td>
-											<a target='_self' href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId=${stall.stallId}">View all
-												food</a>
-										</td>
-										<td>
-											<a target='_self' href='/eureka_webservice/LoadAdminEditStallServlet?stallId=${stall.stallId}'>
-												<button type="button" class="btn btn-link btn-xs">
-													<i class="fa fa-pencil fa-2x"></i>
-												</button>
-											</a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
-												<i class="fa fa-trash-o fa-2x"></i>
+								<tr ng-repeat='stall in stallList track by stall.stallId'>
+									<td>{{stall.stallId}}</td>
+									<td>{{stall.name}}</td>
+									<td>{{stall.contactNo}}</td>
+									<td>{{stall.createDate | date:'medium' : '+0800'}}</td>
+									<td>
+										<img ng-src="{{stall.imageDirectory}}" />
+									</td>
+									<td>
+										<a target='_self' ng-href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId={{stall.stallId}}">View
+											all food</a>
+									</td>
+									<td>
+										<a target='_self' ng-href='/eureka_webservice/LoadAdminEditStallServlet?stallId={{stall.stallId}}'>
+											<button type="button" class="btn btn-link btn-xs">
+												<i class="fa fa-pencil fa-2x"></i>
 											</button>
+										</a>
+									</td>
+									<td>
+										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
+											<i class="fa fa-trash-o fa-2x"></i>
+										</button>
 
-											<!-- Modal delete -->
-											<div class="modal fade" id="modalDelete${loop.index}" tabindex="-1" role="dialog"
-												aria-labelledby="myModalLabel"
-											>
-												<div class="modal-dialog" role="document">
-													<form action="/eureka_webservice/ProcessAdminDeleteStallServlet" method="post">
-														<input type="hidden" name="stallId" value="${stall.stallId}">
-														<div class="modal-content">
-															<div class="modal-header">
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-																<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
-															</div>
-															<!-- / modal header -->
-															<div class="modal-body">
-																<p>
-																	<b>WARNING: </b>
-																	You are deleting a stall from canteen.
-																	<br>
-																	<br>
-																	Are you sure you want to continue?
-																</p>
-															</div>
-															<!-- / modal body -->
-
-															<div class="modal-footer">
-																<button type="button" class="btn btn-default" data-dismiss="modal">No, keep my stall</button>
-																<button type="submit" class="btn btn-danger">Yes, delete the stall</button>
-															</div>
-															<!-- / modal footer -->
+										<!-- Modal delete -->
+										<div class="modal fade" id="modalDelete${loop.index}" tabindex="-1" role="dialog"
+											aria-labelledby="myModalLabel"
+										>
+											<div class="modal-dialog" role="document">
+												<form action="/eureka_webservice/ProcessAdminDeleteStallServlet" method="post">
+													<input type="hidden" name="stallId" value="${stall.stallId}">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+															<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
 														</div>
-														<!-- / modal content -->
-													</form>
-												</div>
-											</div>
-											<!-- / Modal delete -->
+														<!-- / modal header -->
+														<div class="modal-body">
+															<p>
+																<b>WARNING: </b>
+																You are deleting a stall from canteen.
+																<br>
+																<br>
+																Are you sure you want to continue?
+															</p>
+														</div>
+														<!-- / modal body -->
 
-										</td>
-									</tr>
-								</c:forEach>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default" data-dismiss="modal">No, keep my stall</button>
+															<button type="submit" class="btn btn-danger">Yes, delete the stall</button>
+														</div>
+														<!-- / modal footer -->
+													</div>
+													<!-- / modal content -->
+												</form>
+											</div>
+										</div>
+										<!-- / Modal delete -->
+
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -219,8 +221,19 @@
 						[
 								'$http',
 								'$location',
-								function($http, $location) {
-									$http(
+								'$scope',
+								'$window',
+								function($http, $location, $scope, $window) {
+
+									$scope.success = angular
+											.copy($window.sessionStorage.success);
+									$scope.error = angular
+											.copy($window.sessionStorage.error);
+									$window.sessionStorage
+											.removeItem('success');
+									$window.sessionStorage.removeItem('error');
+
+									$scope.loading = $http(
 											{
 												method : 'GET',
 												url : '/eureka_webservice/GetAllStallsUnderCanteenServlet',
@@ -228,10 +241,14 @@
 													canteenId : $location
 															.search().canteenId
 												}
-											}).then(
-											function successCallback(response) {
-												console.log(response);
-											});
+											})
+											.then(
+													function successCallback(
+															response) {
+														console.log(response);
+														$scope.canteen = response.data.canteen;
+														$scope.stallList = response.data.stalls;
+													});
 								} ]);
 	</script>
 </body>

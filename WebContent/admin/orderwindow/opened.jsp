@@ -61,6 +61,15 @@
 
 			<div class="row">
 				<div class="col-lg-12">
+
+					<c:if test="${empty sessionScope.orderWindowMap}">
+						<div class="alert alert-warning fade in" role="alert">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Warning:</span>
+							There are no order windows opened!
+						</div>
+					</c:if>
+
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 						<c:forEach items="${sessionScope.orderWindowMap}" var="map" varStatus="mapLoop">
@@ -84,7 +93,7 @@
 										</a>
 									</h4>
 								</div>
-								<div id="collapse${mapLoop.index}" class="panel-collapse collapse" role="tabpanel"
+								<div id="collapse${mapLoop.index}" class="panel-collapse collapse in" role="tabpanel"
 									aria-labelledby="heading${mapLoop.index}"
 								>
 									<div class="panel-body">

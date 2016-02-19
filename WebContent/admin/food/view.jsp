@@ -58,7 +58,7 @@
 							<a target="_self" href="/eureka_webservice/admin/canteen/view.jsp">Canteens</a>
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${sessionScope.canteenId}">Stalls</a>
+							<a target="_self" href="/eureka_webservice/admin/stall/view.jsp?canteenId=${sessionScope.canteenId}">Stalls</a>
 						</li>
 						<li class="active">Foods</li>
 					</ol>

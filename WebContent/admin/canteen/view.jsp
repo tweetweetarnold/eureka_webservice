@@ -125,7 +125,7 @@
 									<td>{{canteen.address | date:'medium' : '+0800'}}</td>
 									<td>{{canteen.createDate | date:'medium' : '+0800'}}</td>
 									<td>
-										<a ng-href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId={{canteen.canteenId}}">View all stalls</a>
+										<a ng-href="/eureka_webservice/admin/stall/view.jsp?canteenId={{canteen.canteenId}}">View all stalls</a>
 									</td>
 									<td>
 										<a ng-href='/eureka_webservice/admin/canteen/edit.jsp?canteenId={{canteen.canteenId}}'>

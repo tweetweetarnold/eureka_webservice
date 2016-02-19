@@ -55,6 +55,7 @@ public class LoadAdminViewFoodsServlet extends HttpServlet {
 
 		session.setAttribute("stallId", stallId);
 		session.setAttribute("stallName", stall.getName());
+		session.setAttribute("canteenId", stall.getCanteen().getCanteenId());
 		session.setAttribute("foodList", list);
 
 		response.sendRedirect("/eureka_webservice/admin/food/view.jsp");
