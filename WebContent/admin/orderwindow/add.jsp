@@ -206,10 +206,6 @@
 	</div>
 	<!-- /#wrapper -->
 
-
-
-
-
 	<script
 		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"
 	></script>

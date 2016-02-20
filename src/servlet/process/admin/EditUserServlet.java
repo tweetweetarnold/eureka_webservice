@@ -29,7 +29,6 @@ public class EditUserServlet extends HttpServlet {
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public EditUserServlet() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

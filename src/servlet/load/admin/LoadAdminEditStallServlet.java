@@ -40,6 +40,7 @@ public class LoadAdminEditStallServlet extends HttpServlet {
 
 		Stall stall = stallController.getStall(stallId);
 
+		session.setAttribute("canteenId", stall.getCanteen().getCanteenId());
 		session.setAttribute("stallId", stallId);
 		session.setAttribute("name", stall.getName());
 		session.setAttribute("contactNo", stall.getContactNo());

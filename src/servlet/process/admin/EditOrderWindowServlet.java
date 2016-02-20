@@ -1,22 +1,18 @@
 package servlet.process.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import com.google.gson.Gson;
-
-import controller.EmployeeController;
-import model.Employee;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  * Servlet implementation class EditOrderWindowServlet
@@ -44,32 +40,40 @@ public class EditOrderWindowServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
 
-		Gson gson = new Gson();
-		EmployeeController employeeCtrl = new EmployeeController();
-		JSONObject returnJson = new JSONObject();
+		HttpSession session = request.getSession();
+
+		String startDatetimeString = request.getParameter("startDatetime");
+		String endDatetimeString = request.getParameter("endDatetime");
 
 		try {
-			JSONParser parser = new JSONParser();
-			JSONObject data = (JSONObject) parser.parse(request.getReader());
 
-			System.out.println(data);
+			// **Important: to format the time to SG timezone
+			DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm")
+					.withZone(DateTimeZone.forID("Asia/Singapore"));
+			DateTime startDatetime = formatter.parseDateTime(startDatetimeString);
+			DateTime endDatetime = formatter.parseDateTime(endDatetimeString);
 
-			String jsonString = gson.toJson(data);
-			Employee e = gson.fromJson(jsonString, Employee.class);
+			System.out.println("startDatetime: " + startDatetime);
+			System.out.println("endDatetime: " + endDatetime);
 
-			employeeCtrl.updateEmployee(e);
+			/*
+			 * TODO:
+			 * 
+			 * CHRIS CHENG OVERE HERE!!
+			 *
+			 * WORK FOR CHRIS CHENG TO DO!!!!!!!!!!!!!!!!!!!!!
+			 * 
+			 * CHRIS CHENG OVER HERE!!
+			 * 
+			 */
 
-			returnJson.put("success", "Employee " + e.getName() + " has been updated.");
-
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			returnJson.put("error", e.getMessage());
+			session.setAttribute("error", e.getMessage());
+			response.sendRedirect("/eureka_webservice/admin/orderwindow/view.jsp");
 		}
 
-		out.println(gson.toJson(returnJson));
 	}
 
 }

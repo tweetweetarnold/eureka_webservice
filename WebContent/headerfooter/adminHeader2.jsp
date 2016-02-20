@@ -104,7 +104,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewUsersWithOutstandingPaymentServlet">Outstanding</a>
+							<a target="_self" href="/eureka_webservice/LoadAdminViewUsersWithOutstandingPaymentServlet" style="color: white;">Outstanding</a>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->

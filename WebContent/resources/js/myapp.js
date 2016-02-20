@@ -10,4 +10,3 @@ app.config([ '$locationProvider', function($locationProvider) {
 		requireBase : false
 	});
 } ]);
-

@@ -96,18 +96,29 @@
 
 								<div class="col-lg-12">
 
-									<div class="form-group">
-										<label>Canteen name</label>
-										<input class="form-control" name="name" ng-model='canteen.name' ng-value="canteen.name" required>
-									</div>
+									<form name="form">
 
-									<div class="form-group">
-										<label>Address</label>
-										<input class="form-control" name="address" ng-model='canteen.address' ng-value="canteen.address" required>
-									</div>
+										<div class="form-group">
+											<label>Canteen name</label>
+											<input class="form-control" name="name" ng-model='canteen.name' ng-value="canteen.name" required>
+											<span ng-show='form.name.$error.required'>
+												<font style="color: red;">This is required!</font>
+											</span>
+										</div>
 
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update
-										Canteen details</button>
+										<div class="form-group">
+											<label>Address</label>
+											<input class="form-control" name="address" ng-model='canteen.address' ng-value="canteen.address" required>
+											<span ng-show='form.address.$error.required'>
+												<font style="color: red;">This is required!</font>
+											</span>
+										</div>
+
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm"
+											ng-disabled='form.$invalid'
+										>Update Canteen details</button>
+
+									</form>
 
 								</div>
 								<!-- /.col-lg-12 -->
@@ -140,7 +151,7 @@
 				<div class="modal-body">Are you sure you want to update Canteen details?</div>
 				<div class="modal-footer">
 					<button type="button" data-dismiss='modal' class="btn btn-outline btn-default">Cancel</button>
-					<button type="button" ng-click="submit()" class="btn btn-primary">Confirm</button>
+					<button type="submit" ng-click='submit()' class="btn btn-primary">Confirm</button>
 				</div>
 			</div>
 		</div>
@@ -204,6 +215,14 @@
 												.then(
 														function successCallback(
 																response) {
+
+															if (response.data.success != null) {
+																$window.sessionStorage.success = response.data.success;
+															} else if (response.data.error != null) {
+																$window.sessionStorage.error = response.data.error;
+															} else {
+																alert('fail');
+															}
 															$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
 														});
 									};

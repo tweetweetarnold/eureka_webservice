@@ -155,7 +155,9 @@
 														<div cg-busy='loading2'></div>
 														<p>
 															<b>WARNING: </b>
-															You are deleting Canteen {{canteen.name}}.
+															You are deleting Canteen
+															<b>{{canteen.name}}</b>
+															.
 															<br>
 															<br>
 															Are you sure you want to continue?

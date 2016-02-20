@@ -125,11 +125,12 @@
 									<td>{{stall.contactNo}}</td>
 									<td>{{stall.createDate | date:'medium' : '+0800'}}</td>
 									<td>
-										<img ng-src="{{stall.imageDirectory}}"onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_231,w_173/v1455951761/default/img-error.jpg'"/>
+										<img ng-src="{{stall.imageDirectory}}"
+											onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_231,w_173/v1455951761/default/img-error.jpg'"
+										/>
 									</td>
 									<td>
-										<a target='_self' ng-href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId={{stall.stallId}}">View
-											all food</a>
+										<a target='_self' ng-href="/eureka_webservice/admin/food/view.jsp?stallId={{stall.stallId}}">View all food</a>
 									</td>
 									<td>
 										<a target='_self' ng-href='/eureka_webservice/LoadAdminEditStallServlet?stallId={{stall.stallId}}'>
@@ -161,7 +162,9 @@
 														<div class="modal-body">
 															<p>
 																<b>WARNING: </b>
-																You are deleting a stall from canteen.
+																You are deleting stall
+																<b>{{stall.name}}</b>
+																from canteen {{canteen.name}}.
 																<br>
 																<br>
 																Are you sure you want to continue?
@@ -213,7 +216,6 @@
 
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
-	<script src='/eureka_webservice/resources/js/myapp.js'></script>
 	<script>
 		app
 				.controller(

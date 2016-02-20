@@ -75,9 +75,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>
-										<input ng-value='window.windowId' ng-model='window.windowId' required>
-									</td>
+									<td>{{window.windowId}}</td>
 									<td>{{window.company.name}}</td>
 									<td>{{window.canteen.name}}</td>
 									<td>{{window.discountAbsolute | currency}}</td>
@@ -88,7 +86,46 @@
 							</tbody>
 						</table>
 
-						<button ng-click='updateUser()' class="btn btn-primary">Update</button>
+
+						<form action="" method="post" name="form">
+
+							<div class="container">
+								<div class='col-md-3'>
+									<div class="form-group">
+										<label>New Start Date</label>
+										<div class='input-group date' id='datetimepicker6'>
+											<input type='text' class="form-control" name="startDatetime" placeholder="Start Date" required />
+											<span class="input-group-addon">
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<div class='col-md-3'>
+									<div class="form-group">
+										<label>New End Date</label>
+										<div class='input-group date' id='datetimepicker7'>
+											<input type='text' class="form-control" name="endDatetime" placeholder="End Date" required />
+											<span class="input-group-addon">
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<button type="submit" class="btn btn-primary">Update</button>
+
+							<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
+								data-content="The end date cannot be earlier than the start date!" data-placement="right"
+							>
+								<i class="fa fa-question-circle"></i>
+							</a>
+
+						</form>
+
 					</div>
 					<!-- /.table-responsive -->
 
@@ -113,6 +150,39 @@
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
+
+	<!-- Datetime picker -->
+	<script src="http://momentjs.com/downloads/moment.js"></script>
+	<script src="/eureka_webservice/resources/js/bootstrap-datetimepicker.min.js"></script>
+
+	<!-- new datepicker -->
+	<script type="text/javascript">
+		$(function() {
+			$('#datetimepicker6').datetimepicker({
+				format : 'DD-MMMM-YYYY HH:mm'
+			});
+			$('#datetimepicker7').datetimepicker({
+				useCurrent : false,
+				format : 'DD-MMMM-YYYY HH:mm'
+			//Important! See issue #1075
+			});
+			$("#datetimepicker6").on("dp.change", function(e) {
+				$('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+			});
+			$("#datetimepicker7").on("dp.change", function(e) {
+				$('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+			});
+		});
+	</script>
+
+	<!-- popover -->
+	<script>
+		$(function() {
+			$('[data-toggle="popover"]').popover();
+		});
+	</script>
+
+
 	<script>
 		app
 				.controller(
@@ -126,7 +196,7 @@
 
 									var windowId = $location.search().windowId;
 
-									$http(
+									$scope.loading = $http(
 											{
 												method : 'GET',
 												url : '/eureka_webservice/GetOrderWindowByIdServlet',

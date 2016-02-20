@@ -45,7 +45,7 @@ public class GetAllFoodsUnderStallServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("application/json");
+		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		StallController stallCtrl = new StallController();
@@ -79,6 +79,7 @@ public class GetAllFoodsUnderStallServlet extends HttpServlet {
 		Stall stall = stallCtrl.getStall(stallId);
 		ArrayList<Food> list = foodCtrl.getAllActiveFoodsUnderStall(stall);
 
+		returnJson.put("canteenId", stall.getCanteen().getCanteenId());
 		returnJson.put("stall", stall);
 		returnJson.put("foods", list);
 

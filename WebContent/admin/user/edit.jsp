@@ -38,6 +38,7 @@
 <script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
 <script src='/eureka_webservice/resources/js/myapp.js'></script>
 
+
 </head>
 
 <body ng-app="myApp" ng-controller="ViewUserController">
@@ -61,34 +62,51 @@
 					<br>
 
 					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-							<thead>
-								<tr>
-									<th>Company</th>
-									<th>Name</th>
-									<th>Email</th>
-									<th>O/S</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{{user.company.name}}</td>
-									<td>{{user.name}}</td>
-									<td>{{user.email}}</td>
-									<td>
-										<input type='text' ng-model='user.amountOwed' ng-value="user.amountOwed" placeholder='2.30'>
-									</td>
-									<td>
-										<select ng-model="user.status">
-											<option ng-repeat="choice in options track by $index" ng-value="choice">{{choice}}</option>
-										</select>
-									</td>
-								</tr>
-							</tbody>
-						</table>
 
-						<button ng-click='updateUser()' class="btn btn-primary">Update</button>
+						<form name="form" novalidate>
+
+							<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+								<thead>
+									<tr>
+										<th>Company</th>
+										<th>Name</th>
+										<th>Email</th>
+										<th>O/S</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr>
+										<td>{{user.company.name}}</td>
+										<td>{{user.name}}</td>
+										<td>{{user.email}}</td>
+										<td>
+											<input type='text' name="amountOwed" ng-model='user.amountOwed' ng-value="user.amountOwed" placeholder='2.30'
+												required
+											>
+										</td>
+										<td>
+											<select ng-model="user.status">
+												<option ng-repeat="choice in options track by $index" ng-value="choice">{{choice}}</option>
+											</select>
+										</td>
+									</tr>
+
+								</tbody>
+
+							</table>
+
+							<button ng-click='updateUser()' class="btn btn-primary" ng-disabled='form.$invalid'>Update</button>
+							<span ng-show='form.amountOwed.$error.required'>
+								<font style="color: red;">Amount Owed cannot be empty!</font>
+							</span>
+
+						</form>
+
+
+
 					</div>
 					<!-- /.table-responsive -->
 
@@ -114,15 +132,6 @@
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 	<script>
-		var app = angular.module('myApp', [ 'ngRoute' ]);
-
-		app.config([ '$locationProvider', function($locationProvider) {
-			$locationProvider.html5Mode({
-				enabled : true,
-				requireBase : false
-			});
-		} ]);
-
 		app
 				.controller(
 						'ViewUserController',
