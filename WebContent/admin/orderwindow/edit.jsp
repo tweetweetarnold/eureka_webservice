@@ -89,6 +89,8 @@
 
 						<form action="" method="post" name="form">
 
+							<input type="hidden" name="orderWindowId" ng-value="window.windowId">
+
 							<div class="container">
 								<div class='col-md-3'>
 									<div class="form-group">

@@ -43,6 +43,7 @@ public class EditOrderWindowServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
+		String orderWindowIdString = request.getParameter("orderWindowId");
 		String startDatetimeString = request.getParameter("startDatetime");
 		String endDatetimeString = request.getParameter("endDatetime");
 
