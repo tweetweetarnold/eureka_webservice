@@ -14,6 +14,8 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import controller.OrderWindowController;
+
 /**
  * Servlet implementation class EditOrderWindowServlet
  */
@@ -42,6 +44,7 @@ public class EditOrderWindowServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		OrderWindowController orderWindowController = new OrderWindowController();
 
 		String orderWindowIdString = request.getParameter("orderWindowId");
 		String startDatetimeString = request.getParameter("startDatetime");
@@ -68,6 +71,9 @@ public class EditOrderWindowServlet extends HttpServlet {
 			 * CHRIS CHENG OVER HERE!!
 			 * 
 			 */
+			
+			orderWindowController.editOrderWindow(Integer.parseInt(orderWindowIdString), startDatetime,
+					endDatetime);
 
 		} catch (Exception e) {
 			e.printStackTrace();

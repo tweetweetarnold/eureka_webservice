@@ -254,8 +254,7 @@ public class OrderWindowController {
 		}
 	}
 
-	public void editOrderWindow(int orderWindowId, DateTime newStartDate, DateTime newEndDate,
-			Canteen canteen, String remarks, double discountPercentage, double discountAbsolute)
+	public void editOrderWindow(int orderWindowId, DateTime newStartDate, DateTime newEndDate)
 					throws Exception {
 		OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
 		OrderWindow orderWindowToEdit = getOrderWindow(orderWindowId);
@@ -269,6 +268,7 @@ public class OrderWindowController {
 				newEndDate, orderWindowToEdit.getCompany());
 
 		if (dateStart.isAfter(currentTime)) {
+			System.out.println("TESTING>>>>>>>>>>>");
 			// edit OrderWindow orderWindowToEdit
 			if (newStartDate.isBefore(currentTime)) {
 				throw new Exception("Cannot set start date to before current time");
@@ -277,23 +277,15 @@ public class OrderWindowController {
 
 				// if list is empty no clash
 				if (orderWindowList.isEmpty()) {
-					orderWindowToEdit.setCanteen(canteen);
 					orderWindowToEdit.setStartDate(newStartDate);
 					orderWindowToEdit.setEndDate(newEndDate);
-					orderWindowToEdit.setRemarks(remarks);
-					orderWindowToEdit.setDiscount(discountPercentage);
-					orderWindowToEdit.setDiscountAbsolute(discountAbsolute);
 					orderWindowDAO.updateOrderWindow(orderWindowToEdit);
 					// if list has one order window and it is the same order
 					// window go ahead and edit it
 				} else if ((orderWindowList.size() == 1)
 						&& (orderWindowList.get(0).getWindowId() == orderWindowId)) {
-					orderWindowToEdit.setCanteen(canteen);
 					orderWindowToEdit.setStartDate(newStartDate);
 					orderWindowToEdit.setEndDate(newEndDate);
-					orderWindowToEdit.setRemarks(remarks);
-					orderWindowToEdit.setDiscount(discountPercentage);
-					orderWindowToEdit.setDiscountAbsolute(discountAbsolute);
 					orderWindowDAO.updateOrderWindow(orderWindowToEdit);
 					// if both conditions not satisfied then it clashes with one
 					// or more windows
