@@ -113,13 +113,21 @@ public class StallController {
 		if (stallExists) {
 			throw new Exception(parameters[1] + " already exists in " + c.getName());
 		}
-		cloudinaryOutput = imageUploadForStall(image);
+		if (image.length == 0) {
+			Stall s = new Stall(parameters[1], contactNo, c, new HashSet<Food>(), null, null);
 
-		Stall s = new Stall(parameters[1], contactNo, c, new HashSet<Food>(), cloudinaryOutput[0], cloudinaryOutput[1]);
-
-		System.out.println("stallname: " + s.getName());
-		System.out.println("saving food...");
-		saveStall(s);
+			System.out.println("stallname: " + s.getName());
+			System.out.println("saving food...");
+			saveStall(s);
+		} else {
+			cloudinaryOutput = imageUploadForStall(image);
+	
+			Stall s = new Stall(parameters[1], contactNo, c, new HashSet<Food>(), cloudinaryOutput[0], cloudinaryOutput[1]);
+	
+			System.out.println("stallname: " + s.getName());
+			System.out.println("saving food...");
+			saveStall(s);
+		}
 
 	}
 

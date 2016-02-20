@@ -2,6 +2,8 @@ package servlet.process.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,11 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import controller.FoodController;
 import dao.FoodDAO;
+import model.Food;
 
 /**
  * Servlet implementation class ProcessAdminEditFoodServlet
@@ -64,10 +68,44 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 		// Create a new file upload handler and set max size
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(1024 * 1024 * 1000);
-
+		
+		int index = 0;
+		byte[] image = null;
+		String[] parameters = new String[8];
+		
+		
 		try {
-
-			int stallId = foodController.editFood(upload, request);
+			// Parse the request
+			List<FileItem> items = upload.parseRequest(request);
+			Iterator<FileItem> iter = items.iterator();
+			while (iter.hasNext()) {
+				FileItem item = (FileItem) iter.next();
+				if (!item.isFormField()) {
+					image = item.get();
+					if (image.length != 0) {
+						String contentType = item.getContentType();
+						System.out.println(contentType);
+						if (!contentType.equals("image/jpeg")) {
+							throw new Exception("Invalid image format");
+						}
+					}
+				} else {
+					if (item.getFieldName().equals("chineseName")) {
+						String inputValues = item.getString("UTF-8");
+						parameters[index] = inputValues;
+					} else {
+						String inputValues = item.getString();
+						parameters[index] = inputValues;
+						System.out.println(item.getFieldName());
+						System.out.println(inputValues);
+					}
+				}
+				index++;
+			}
+			int foodId = Integer.parseInt(parameters[0]);
+			Food food = foodController.getFood(foodId);
+			int stallId = food.getStall().getStallId();
+			foodController.editFood(image, parameters, food, stallId);
 
 			session.setAttribute("success", "Food updated successfully.");
 

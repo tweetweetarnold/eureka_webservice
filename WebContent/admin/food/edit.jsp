@@ -124,7 +124,7 @@
 										<input name="weatherConditions" type="hidden" value="${sessionScope.weatherConditions}">
 
 										<div class="form-group">
-											<label>Replace Image</label>
+											<label>Replace Image(*only accepts jpeg or jpg image formats)</label>
 											<input type="file" name="file" style="width: 228px;" />
 										</div>
 

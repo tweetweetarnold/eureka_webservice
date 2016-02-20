@@ -103,7 +103,7 @@
 
 										<div class="form-group">
 											<label>Image Directory (*only accepts jpeg or jpg image formats)</label>
-											<input type="file" name="file" style="width: 228px;" required />
+											<input type="file" name="file" style="width: 228px;" />
 										</div>
 
 

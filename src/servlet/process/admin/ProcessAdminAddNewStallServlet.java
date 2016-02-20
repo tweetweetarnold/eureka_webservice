@@ -73,11 +73,14 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 			while (iter.hasNext()) {
 				FileItem item = (FileItem) iter.next();
 				if (!item.isFormField()) {
-					String contentType = item.getContentType();
-					if (!contentType.equals("image/jpeg")) {
-						throw new Exception("Invalid image format");
-					}
 					image = item.get();
+					if (image.length != 0) {
+						String contentType = item.getContentType();
+						if (!contentType.equals("image/jpeg")) {
+							throw new Exception("Invalid image format");
+						}
+					}
+					
 				} else {
 					String inputValues = item.getString();
 					parameters[index] = inputValues;

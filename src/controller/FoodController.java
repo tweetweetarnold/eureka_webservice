@@ -162,52 +162,22 @@ public class FoodController {
 		return cloudinaryUpload.deleteImage(publicId);
 	}
 
-	public int editFood(ServletFileUpload upload, HttpServletRequest request) throws Exception {
-		int index = 0;
-		byte[] image = null;
-		String[] parameters = new String[8];
+	public void editFood(byte[] image, String[] parameters, Food food, int stallId) throws Exception {
 		String[] cloudinaryOutput = new String[2];
 		/*
-		 * cloudinaryOutput[0] stores the image url cloudinaryOutput[1] stores the image publicId
+		 * cloudinaryOutput[0] stores the image url 
+		 * cloudinaryOutput[1] stores the image publicId
 		 */
 
-		// Parse the request
-		List<FileItem> items = upload.parseRequest(request);
-		Iterator<FileItem> iter = items.iterator();
-		while (iter.hasNext()) {
-			FileItem item = (FileItem) iter.next();
-			if (!item.isFormField()) {
-				image = item.get();
-				if (image.length != 0) {
-					String contentType = item.getContentType();
-					System.out.println(contentType);
-					if (!contentType.equals("image/jpeg")) {
-						throw new Exception("Invalid image format");
-					}
-				}
-			} else {
-				if (item.getFieldName().equals("chineseName")) {
-					String inputValues = item.getString("UTF-8");
-					parameters[index] = inputValues;
-				} else {
-					String inputValues = item.getString();
-					parameters[index] = inputValues;
-					System.out.println(item.getFieldName());
-					System.out.println(inputValues);
-				}
-			}
-			index++;
-		}
-
-		int foodId = Integer.parseInt(parameters[0]);
+		
 		double price = 0.0;
 		try{
 			price = Double.parseDouble(parameters[4]);
-		}catch(Exception e){
+		} catch (Exception e) {
 			throw new Exception("Invalid input for price");
 		}
-		Food food = getFood(foodId);
-		int stallId = food.getStall().getStallId();
+		
+		
 		if (!parameters[2].isEmpty()) {
 			boolean isChinese = checkChineseWords(parameters[2]);
 			if (!isChinese) {
@@ -250,7 +220,7 @@ public class FoodController {
 				updateFood(food);
 			}
 		}
-		return stallId;
+		
 	}
 
 	public ArrayList<Food> getAllActiveFoodsUnderStall(Stall stall) {
@@ -405,16 +375,26 @@ public class FoodController {
 		if (foodExists) {
 			throw new Exception(parameters[1] + " already exists in " + stall.getName());
 		}
-
-		cloudinaryOutput = imageUpload(image);
-		Food food = new Food(parameters[1], parameters[2], parameters[3], price,
-				cloudinaryOutput[0], cloudinaryOutput[1], stall);
-
-		food.setWeatherConditions(parameters[5]);
-
-		System.out.println("foodname: " + food.getName());
-		System.out.println("saving food...");
-		saveFood(food);
+		if (image.length == 0) {
+			Food food = new Food(parameters[1], parameters[2], parameters[3], price,
+					null, null, stall);
+	
+			food.setWeatherConditions(parameters[5]);
+	
+			System.out.println("foodname: " + food.getName());
+			System.out.println("saving food...");
+			saveFood(food);
+		} else {
+			cloudinaryOutput = imageUpload(image);
+			Food food = new Food(parameters[1], parameters[2], parameters[3], price,
+					cloudinaryOutput[0], cloudinaryOutput[1], stall);
+	
+			food.setWeatherConditions(parameters[5]);
+	
+			System.out.println("foodname: " + food.getName());
+			System.out.println("saving food...");
+			saveFood(food);
+		}
 
 	}
 

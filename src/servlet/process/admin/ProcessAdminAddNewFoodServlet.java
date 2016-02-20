@@ -75,11 +75,14 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			while (iter.hasNext()) {
 				FileItem item = (FileItem) iter.next();
 				if (!item.isFormField()) {
-					String contentType = item.getContentType();
-					if (!contentType.equals("image/jpeg")) {
-						throw new Exception("Invalid image format");
-					}
 					image = item.get();
+					if (image.length != 0) {
+						String contentType = item.getContentType();
+						if (!contentType.equals("image/jpeg")) {
+							throw new Exception("Invalid image format");
+						}
+					}
+					
 				} else {
 					if (item.getFieldName().equals("chineseName")) {
 						String inputValues = item.getString("UTF-8");
