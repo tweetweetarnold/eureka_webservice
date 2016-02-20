@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.StandardBasicTypes;
+import org.hibernate.type.Type;
 
 import model.Employee;
 import model.FoodOrder;
@@ -168,5 +174,70 @@ public class FoodOrderDAO {
 	 */
 	public void updateFoodOrder(FoodOrder f) {
 		MyConnection.update(f);
+	}
+	
+	
+	public List<Object> getUniqueMonthYearInFoodOrderForUser(Employee employee) {
+		List<Object> returnList = new ArrayList<>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
+		//dc.add(Restrictions.eq("orderWindow", orderWindow));
+		dc.add(Restrictions.eq("employee", employee));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		
+		ProjectionList projectionList = Projections.projectionList();
+		   projectionList.add(Projections.sqlGroupProjection(
+		          "Date_format(createDate, '%Y-%m') as yearmonth",
+		         "Date_format(createDate, '%Y-%m')", new String[] { "yearmonth" },
+		            new Type[] { StandardBasicTypes.STRING }));
+		   
+//		   projectionList.add(Projections.sqlGroupProjection(
+//			          "YEAR(createDate) as year",
+//			         "YEAR(createDate)", new String[] { "year" },
+//			            new Type[] { StandardBasicTypes.STRING }));
+		
+		    //projectionList.add(Projections.rowCount());
+		 dc.setProjection(projectionList);
+		 dc.addOrder(org.hibernate.criterion.Order.desc("createDate"));
+		    //return criteria.list();
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((Object) o);
+		}
+		return returnList;
+	}
+	
+	public List<Object> getUniqueYearInFoodOrderForUser(Employee employee) {
+		List<Object> returnList = new ArrayList<>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
+		//dc.add(Restrictions.eq("orderWindow", orderWindow));
+		dc.add(Restrictions.eq("employee", employee));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		
+		ProjectionList projectionList = Projections.projectionList();
+		   projectionList.add(Projections.sqlGroupProjection(
+		          "Date_format(createDate, '%Y') as year",
+		         "Date_format(createDate, '%Y')", new String[] { "year" },
+		            new Type[] { StandardBasicTypes.STRING }));
+		   
+//		   projectionList.add(Projections.sqlGroupProjection(
+//			          "YEAR(createDate) as year",
+//			         "YEAR(createDate)", new String[] { "year" },
+//			            new Type[] { StandardBasicTypes.STRING }));
+		
+		    //projectionList.add(Projections.rowCount());
+		 dc.setProjection(projectionList);
+		 dc.addOrder(org.hibernate.criterion.Order.desc("createDate"));
+		    //return criteria.list();
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((Object) o);
+		}
+		return returnList;
 	}
 }
