@@ -140,6 +140,11 @@ public class ProcessLoginServlet extends HttpServlet {
 				canteenList.add(window.getCanteen());
 				session.setAttribute("canteenList", canteenList);
 				System.out.println("canteenList size: " + canteenList.size());
+			}else{
+				if (!response.isCommitted()) {
+					session.setAttribute("suspended", "true");
+					response.sendRedirect("/eureka_webservice/LoadUserPaymentServlet");
+				}
 			}
 			// For testing: print JSON rather than redirect
 			if (test != null && test.equals("true")) {
