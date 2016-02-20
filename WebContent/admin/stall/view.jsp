@@ -125,7 +125,7 @@
 									<td>{{stall.contactNo}}</td>
 									<td>{{stall.createDate | date:'medium' : '+0800'}}</td>
 									<td>
-										<img ng-src="{{stall.imageDirectory}}" />
+										<img ng-src="{{stall.imageDirectory}}"onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_231,w_173/v1455951761/default/img-error.jpg'"/>
 									</td>
 									<td>
 										<a target='_self' ng-href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId={{stall.stallId}}">View

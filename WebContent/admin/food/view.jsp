@@ -125,7 +125,7 @@
 											<fmt:formatDate type="both" value="${food.createDate}" />
 										</td>
 										<td>
-											<img src="${food.imageDirectory}" style="width: 263px;
+											<img src="${food.imageDirectory}" onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg'"style="width: 263px;
 	height: 169px;" />
 										</td>
 										<td>
