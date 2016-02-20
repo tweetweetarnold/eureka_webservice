@@ -99,60 +99,36 @@
 				</li>
 
 				<li>
-					<a target="_self" href="#">
+					<a target="_self" href="/eureka_webservice/LoadAdminViewCompaniesServlet">
 						<i class="fa fa-building fa-fw"></i>
 						Company
 						<span class="fa arrow"></span>
 					</a>
-					<ul class="nav nav-second-level">
-						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewCompaniesServlet">View: All</a>
-						</li>
-					</ul>
-					<!-- /.nav-second-level -->
 				</li>
 
 				<li>
-					<a target="_self" href="#">
+					<a target="_self" href="/eureka_webservice/admin/user/view.jsp">
 						<i class="fa fa-user fa-fw"></i>
 						User
 						<span class="fa arrow"></span>
 					</a>
-					<ul class="nav nav-second-level">
-						<li>
-							<a target="_self" href="/eureka_webservice/admin/user/view.jsp">View: All</a>
-						</li>
-					</ul>
-					<!-- /.nav-second-level -->
 				</li>
 
 				<li>
-					<a target="_self" href="#">
+					<a target="_self" href="/eureka_webservice/admin/canteen/view.jsp">
 						<i class="fa fa-cutlery fa-fw"></i>
 						Canteen
 						<span class="fa arrow"></span>
 					</a>
-					<ul class="nav nav-second-level">
-						<li>
-							<a target="_self" href="/eureka_webservice/admin/canteen/view.jsp">View: All</a>
-						</li>
-					</ul>
-					<!-- /.nav-second-level -->
 				</li>
 
-				<li>
-					<a target="_self" href="#">
-						<i class="fa fa-cloud-upload fa-fw"></i>
-						File Upload
-						<span class="fa arrow"></span>
-					</a>
-					<ul class="nav nav-second-level">
-						<li>
-							<a target="_self" href="/eureka_webservice/admin/file-upload.jsp">Upload files</a>
-						</li>
-					</ul>
-					<!-- /.nav-second-level -->
-				</li>
+				<!-- 				<li> -->
+				<!-- 					<a target="_self" href="/eureka_webservice/admin/file-upload.jsp"> -->
+				<!-- 						<i class="fa fa-cloud-upload fa-fw"></i> -->
+				<!-- 						File Upload -->
+				<!-- 						<span class="fa arrow"></span> -->
+				<!-- 					</a> -->
+				<!-- 				</li> -->
 
 
 			</ul>
