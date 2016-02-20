@@ -1,6 +1,9 @@
 <!-- library import for JSTL -->
 
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-static-top" role="navigation"
+	style="margin-bottom: 0;
+	background-color: #e73f4d;"
+>
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 			<span class="sr-only">Toggle navigation</span>
@@ -8,13 +11,13 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a target="_self" class="navbar-brand" href="/eureka_webservice/LoadOrderWindowOpenedServlet">LunchTime</a>
+		<a target="_self" class="navbar-brand" href="/eureka_webservice/LoadOrderWindowOpenedServlet" style="color: white;">LunchTime</a>
 	</div>
 	<!-- /.navbar-header -->
 
 	<ul class="nav navbar-top-links navbar-right">
 		<li class="dropdown">
-			<a target="_self" class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<a target="_self" class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: white;">
 				<i class="fa fa-sign-out fa-fw"></i>
 				<i class="fa fa-caret-down"></i>
 			</a>
