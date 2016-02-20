@@ -16,21 +16,29 @@
 	<!-- /.navbar-header -->
 
 	<ul class="nav navbar-top-links navbar-right">
-		<li class="dropdown">
-			<a target="_self" class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: white;">
+		<li>
+			<a target="_self" href="/eureka_webservice/ProcessAdminLogoutServlet" style="color: white;">
 				<i class="fa fa-sign-out fa-fw"></i>
-				<i class="fa fa-caret-down"></i>
+				Logout
 			</a>
-			<ul class="dropdown-menu">
-				<li>
-					<a target="_self" href="/eureka_webservice/ProcessAdminLogoutServlet">
-						<i class="fa fa-sign-out fa-fw"></i>
-						Logout
-					</a>
-				</li>
-			</ul>
-			<!-- /.dropdown-user -->
 		</li>
+
+
+		<!-- 		<li class="dropdown"> -->
+		<!-- 			<a target="_self" class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: white;"> -->
+		<!-- 				<i class="fa fa-sign-out fa-fw"></i> -->
+		<!-- 				<i class="fa fa-caret-down"></i> -->
+		<!-- 			</a> -->
+		<!-- 			<ul class="dropdown-menu"> -->
+		<!-- 				<li> -->
+		<!-- 					<a target="_self" href="/eureka_webservice/ProcessAdminLogoutServlet"> -->
+		<!-- 						<i class="fa fa-sign-out fa-fw"></i> -->
+		<!-- 						Logout -->
+		<!-- 					</a> -->
+		<!-- 				</li> -->
+		<!-- 			</ul> -->
+		<!-- 			<!-- /.dropdown-user -->
+		<!-- 		</li> -->
 		<!-- /.dropdown -->
 	</ul>
 	<!-- /.navbar-top-links -->
