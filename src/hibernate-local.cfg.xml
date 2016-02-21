@@ -23,6 +23,12 @@
 		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.c3p0.idle_test_period">300</property>
 		
+		<property name="hibernate.search.default.directory_provider">
+          filesystem</property> 
+
+		<property name="hibernate.search.default.indexBase">
+          /eureka_webservice/resources/lucene/indexes </property>  
+		
 		
 		<!-- ******** This segment should be removed in production to prevent changes 
 			to database tables ******** Drop and re-create the database schema on startup 
