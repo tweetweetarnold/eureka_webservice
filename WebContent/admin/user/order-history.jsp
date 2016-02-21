@@ -94,7 +94,16 @@
 										$${discount} <br> Amount Payable:
 										<fmt:formatNumber value="${orderHistory.finalPrice}"
 											var="payable" minFractionDigits="2" />
-										$${payable} <br> <br>
+
+										<c:choose>
+											<c:when test="${orderHistory.finalPrice < 0 }">
+												$0.00
+											</c:when>
+											<c:otherwise>
+												$${payable}
+											</c:otherwise>
+										</c:choose>
+										<br> <br>
 
 										<div class="dataTable_wrapper">
 											<table class="table table-striped table-bordered table-hover"

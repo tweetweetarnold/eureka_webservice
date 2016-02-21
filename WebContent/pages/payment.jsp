@@ -98,7 +98,7 @@
 				<c:remove var="error" scope="session" />
 			</c:when>
 
-			<c:when test="${not empty sessionScope.warning}">
+			<c:when test="${sessionScope.orderWindow == null}">
 				<div class="alert alert-warning alert-dismissible fade in" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -107,10 +107,10 @@
 					<span class="sr-only">Warning:</span>
 					<c:out value="${warning}" />
 				</div>
-				<c:remove var="warning" scope="session" />
+				<c:remove var="orderWindow" scope="session" />
 			</c:when>
 
-			<c:when test="${empty sessionScope.paymentFoodOrderList}">
+			<c:when test="${fn:length(sessionScope.paymentFoodOrderList) eq 0}">
 				<div class="alert alert-warning alert-dismissible fade in" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -119,6 +119,7 @@
 					<span class="sr-only">Warning:</span>
 					You haven't ordered anything! Go order something!
 				</div>
+				<c:remove var="paymentFoodOrderList" scope="session" />
 			</c:when>
 
 
@@ -130,6 +131,13 @@
 			<div class="col-md-12">
 				<!-- PayPal form -->
 				<c:if test="${not empty sessionScope.paymentFoodOrderList}">
+				<c:set var="sum" value="0" />
+				<c:forEach items="${sessionScope.paymentFoodOrderList}" var="order" varStatus="orderLoop">
+							<c:set var="count" value="${sum + order.finalPrice}" />
+							
+				</c:forEach>
+					
+					<c:if test="${sum > 0 }">
 					<form action="${initParam['posturl']}" method="post">
 						<input type="hidden" name="upload" value="1" />
 						<input type="hidden" name="return"
@@ -149,20 +157,22 @@
 								minFractionDigits="2"
 							/>
 
-
-							<input type="hidden" name="item_name_<c:out value="${count}"/>"
-								value="Food Order ID No.${order.foodOrderId}, Order Placed On:<fmt:formatDate type="both" value="${order.createDate}" />"
-							>
-
-							<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${amt}" />">
-
-							<input type="hidden" name="discount_amount_<c:out value="${count}"/>" value="${discount}">
+							<c:if test="${order.finalPrice > 0 }">
+								<input type="hidden" name="item_name_<c:out value="${count}"/>"
+									value="Food Order ID No.${order.foodOrderId}, Order Placed On:<fmt:formatDate type="both" value="${order.createDate}" />"
+								>
+	
+								<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${amt}" />">
+	
+								<input type="hidden" name="discount_amount_<c:out value="${count}"/>" value="${discount}">
+							</c:if>
 
 						</c:forEach>
 
 						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
 
 					</form>
+					</c:if>
 				</c:if>
 				<!-- End of PayPal -->
 				<div class="row"></div>
@@ -217,7 +227,14 @@
 								<br>
 								Payable:
 								<fmt:formatNumber value="${foodOrder.finalPrice}" var="payable" minFractionDigits="2" />
+								<c:choose>
+								<c:when test="${foodOrder.finalPrice < 0 }">
+									$0.00
+								</c:when>
+								<c:otherwise>
 								$${payable}
+								</c:otherwise>
+								</c:choose>
 								<br>
 								<br>
 
