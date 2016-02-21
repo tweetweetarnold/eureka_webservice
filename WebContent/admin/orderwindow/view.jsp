@@ -113,7 +113,7 @@
 									<td>{{window.startDateFormatted | date:'medium' : '+0800'}}</td>
 									<td>{{window.endDateFormatted | date:'medium' : '+0800'}}</td>
 									<td>
-										<a ng-href="/eureka_webservice/admin/orderwindow/edit.jsp?windowId={{window.windowId}}">
+										<a ng-href="/eureka_webservice/LoadAdminEditOrderWindowServlet?windowId={{window.windowId}}">
 											<button type="button" class="btn btn-link btn-xs">
 												<i class="fa fa-pencil fa-2x"></i>
 											</button>

@@ -31,16 +31,14 @@
 	rel="stylesheet" type="text/css"
 >
 
-<!-- Angular -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
-<link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
-<script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
-<script src='/eureka_webservice/resources/js/myapp.js'></script>
+<!-- library import for JSTL -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 </head>
 
-<body ng-app="myApp" ng-controller="EditOrderWindowController">
+<body>
 
 	<div id="wrapper">
 
@@ -54,6 +52,28 @@
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
+
+			<!-- Success message handling -->
+			<c:if test="${not empty sessionScope.success}">
+				<div class="alert alert-success" role="alert">
+					<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+					<span class="sr-only">Success: </span>
+					${success}
+				</div>
+				<c:remove var="success" scope="session" />
+			</c:if>
+
+			<!-- Error message handling -->
+			<c:if test="${not empty sessionScope.error}">
+				<div class="alert alert-danger" role="alert">
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<span class="sr-only">Error: </span>
+					${error}
+				</div>
+				<c:remove var="error" scope="session" />
+			</c:if>
+
+
 
 			<div class="row">
 				<div class="col-lg-12">
@@ -74,22 +94,32 @@
 								</tr>
 							</thead>
 							<tbody>
+								<c:set value="${sessionScope.window}" var="window" />
 								<tr>
-									<td>{{window.windowId}}</td>
-									<td>{{window.company.name}}</td>
-									<td>{{window.canteen.name}}</td>
-									<td>{{window.discountAbsolute | currency}}</td>
-									<td>{{window.createDate | date:'medium' : '+0800'}}</td>
-									<td>{{window.startDateFormatted | date:'medium' : '+0800'}}</td>
-									<td>{{window.endDateFormatted | date:'medium' : '+0800'}}</td>
+									<td>${window.windowId}</td>
+									<td>${window.company.name}</td>
+									<td>${window.canteen.name}</td>
+									<td>
+										$
+										<fmt:formatNumber value="${window.discountAbsolute}" var="amt" minFractionDigits="2" />${amt}
+									</td>
+									<td>
+										<fmt:formatDate type="both" value="${window.createDate}" />
+									</td>
+									<td>
+										<fmt:formatDate type="both" value="${window.startDateFormatted}" />
+									</td>
+									<td>
+										<fmt:formatDate type="both" value="${window.endDateFormatted}" />
+									</td>
 								</tr>
 							</tbody>
 						</table>
 
 
-						<form action="" method="post" name="form">
+						<form name="form" action="/eureka_webservice/EditOrderWindowServlet" method="post">
 
-							<input type="hidden" name="orderWindowId" ng-value="window.windowId">
+							<input type="hidden" value="${window.windowId}" name="orderWindowId">
 
 							<div class="container">
 								<div class='col-md-3'>
@@ -185,65 +215,6 @@
 	</script>
 
 
-	<script>
-		app
-				.controller(
-						'EditOrderWindowController',
-						[
-								'$http',
-								'$scope',
-								'$location',
-								'$window',
-								function($http, $scope, $location, $window) {
-
-									var windowId = $location.search().windowId;
-
-									$scope.loading = $http(
-											{
-												method : 'GET',
-												url : '/eureka_webservice/GetOrderWindowByIdServlet',
-												params : {
-													windowId : windowId
-												}
-											}).then(
-											function successCallback(response) {
-												console.log(response);
-												console.log(response.data);
-												$scope.window = response.data;
-											},
-											function errorCallback(response) {
-												alert('fail');
-											});
-
-									$scope.updateWindow = function() {
-												$http(
-														{
-															method : 'POST',
-															url : '/eureka_webservice/EditOrderWindowServlet',
-															data : $scope.window
-														})
-														.then(
-																function successCallback(
-																		response) {
-
-																	if (response.data.success != null) {
-																		$window.sessionStorage.success = response.data.success;
-																	} else if (response.data.error != null) {
-																		$window.sessionStorage.error = response.data.error;
-																	} else {
-																		alert(response);
-																	}
-																	$window.location.href = '/eureka_webservice/admin/orderwindow/view.jsp';
-																}),
-												function errorCallback(repsonse) {
-													alert('fail');
-												};
-
-									};
-								}
-
-						]);
-	</script>
 
 </body>
 

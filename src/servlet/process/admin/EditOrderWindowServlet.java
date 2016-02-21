@@ -1,6 +1,7 @@
 package servlet.process.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,9 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.json.simple.JSONObject;
+
+import com.google.gson.Gson;
 
 import controller.OrderWindowController;
 
@@ -43,14 +47,24 @@ public class EditOrderWindowServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+
 		HttpSession session = request.getSession();
+
+		JSONObject returnJson = new JSONObject();
+		Gson gson = new Gson();
+
 		OrderWindowController orderWindowController = new OrderWindowController();
 
-		String orderWindowIdString = request.getParameter("orderWindowId");
-		String startDatetimeString = request.getParameter("startDatetime");
-		String endDatetimeString = request.getParameter("endDatetime");
-
 		try {
+			String orderWindowIdString = request.getParameter("orderWindowId");
+			String startDatetimeString = request.getParameter("startDatetime");
+			String endDatetimeString = request.getParameter("endDatetime");
+
+			System.out.println(orderWindowIdString);
+			System.out.println(startDatetimeString);
+			System.out.println(endDatetimeString);
 
 			// **Important: to format the time to SG timezone
 			DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm")
@@ -61,25 +75,21 @@ public class EditOrderWindowServlet extends HttpServlet {
 			System.out.println("startDatetime: " + startDatetime);
 			System.out.println("endDatetime: " + endDatetime);
 
-			/*
-			 * TODO:
-			 * 
-			 * CHRIS CHENG OVERE HERE!!
-			 *
-			 * WORK FOR CHRIS CHENG TO DO!!!!!!!!!!!!!!!!!!!!!
-			 * 
-			 * CHRIS CHENG OVER HERE!!
-			 * 
-			 */
-			
-			orderWindowController.editOrderWindow(Integer.parseInt(orderWindowIdString), startDatetime,
-					endDatetime);
+			orderWindowController.editOrderWindow(Integer.parseInt(orderWindowIdString),
+					startDatetime, endDatetime);
+
+			returnJson.put("success", "Order Window updated.");
+			session.setAttribute("success", "Order window updated");
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			returnJson.put("error", e.getMessage());
 			session.setAttribute("error", e.getMessage());
-			response.sendRedirect("/eureka_webservice/admin/orderwindow/view.jsp");
+
 		}
+		response.sendRedirect("/eureka_webservice/admin/orderwindow/edit.jsp");
+
+		out.println(gson.toJson(returnJson));
 
 	}
 
