@@ -89,7 +89,7 @@
 										enctype="multipart/form-data"
 									>
 
-										<input type="hidden" name="canteenId" value="${canteenId}">
+										<input type="hidden" name="canteenId" value="${param.canteenId}">
 
 										<div class="form-group">
 											<label>Stall name</label>

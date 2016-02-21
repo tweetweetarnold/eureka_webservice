@@ -105,7 +105,7 @@
 
 					<form action="/eureka_webservice/admin/food/add.jsp">
 						<input type="hidden" name="stallId" ng-value="stall.stallId">
-						<button type="submit" class="btn btn-primary">Add food</button>
+						<button type="submit" class="btn btn-primary">Add Food</button>
 					</form>
 					<br>
 
@@ -167,7 +167,10 @@
 										>
 											<div class="modal-dialog" role="document">
 												<form method="post" action="/eureka_webservice/ProcessAdminDeleteFoodServlet">
+
+													<input type="hidden" name="stallId" ng-value="stallId">
 													<input type="hidden" name="foodId" ng-value="food.foodId">
+
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -251,6 +254,8 @@
 									$window.sessionStorage
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
+
+									$scope.stallId = $location.search().stallId;
 
 									$scope.loading = $http(
 											{

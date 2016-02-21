@@ -89,7 +89,7 @@
 										enctype="multipart/form-data"
 									>
 
-										<input type="hidden" name="stallId" value="${stallId}">
+										<input type="hidden" name="stallId" value="${param.stallId}">
 
 										<div class="form-group">
 											<label>Food name</label>

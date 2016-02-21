@@ -34,8 +34,7 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -43,8 +42,7 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -80,21 +78,23 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 							throw new Exception("Invalid image format");
 						}
 					}
-					
+
 				} else {
 					String inputValues = item.getString();
 					parameters[index] = inputValues;
 				}
 				index++;
 			}
-			//End of parsing the request
+			// End of parsing the request
 			System.out.println("CanteenID VAlidation" + parameters[0]);
 			canteenId = Integer.parseInt(parameters[0]);
 			stallController.processAddingStall(image, parameters, canteenId);
 
 			session.setAttribute("success", "Stall added successfully.");
 
-			response.sendRedirect("/eureka_webservice/LoadAdminViewStallsServlet?canteenId=" + canteenId);
+			// response.sendRedirect("/eureka_webservice/LoadAdminViewStallsServlet?canteenId=" +
+			// canteenId);
+			response.sendRedirect("/eureka_webservice/admin/stall/view.jsp?canteenId=" + canteenId);
 
 		} catch (Exception e) {
 			e.printStackTrace();

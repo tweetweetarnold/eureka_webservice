@@ -98,10 +98,9 @@
 					{{stallList.length}}
 					<br>
 					<br>
-					<form action="/eureka_webservice/admin/stall/add.jsp">
-						<input type="hidden" name="canteenId" value="${sessionScope.canteenId}">
-						<button type="submit" class="btn btn-primary">Add stall</button>
-					</form>
+					<a class="btn btn-primary" ng-href='/eureka_webservice/admin/stall/add.jsp?canteenId={{canteenId}}' target="_self">Add
+						Stall</a>
+					<br>
 					<br>
 
 					<div class="dataTable_wrapper">
@@ -140,17 +139,21 @@
 										</a>
 									</td>
 									<td>
-										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
+										<button type="button" class="btn btn-link btn-xs" data-toggle="modal"
+											data-target="#modalDelete{{stall.stallId}}"
+										>
 											<i class="fa fa-trash-o fa-2x"></i>
 										</button>
 
 										<!-- Modal delete -->
-										<div class="modal fade" id="modalDelete${loop.index}" tabindex="-1" role="dialog"
+										<div class="modal fade" id="modalDelete{{stall.stallId}}" tabindex="-1" role="dialog"
 											aria-labelledby="myModalLabel"
 										>
 											<div class="modal-dialog" role="document">
 												<form action="/eureka_webservice/ProcessAdminDeleteStallServlet" method="post">
-													<input type="hidden" name="stallId" value="${stall.stallId}">
+													<input type="hidden" name="stallId" ng-value="stall.stallId">
+													<input type="hidden" name="canteenId" ng-value="canteenId">
+													
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -235,13 +238,15 @@
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
 
+									$scope.canteenId = $location.search().canteenId;
+									var canteenId = $location.search().canteenId;
+
 									$scope.loading = $http(
 											{
 												method : 'GET',
 												url : '/eureka_webservice/GetAllStallsUnderCanteenServlet',
 												params : {
-													canteenId : $location
-															.search().canteenId
+													canteenId : canteenId
 												}
 											})
 											.then(
@@ -251,6 +256,7 @@
 														$scope.canteen = response.data.canteen;
 														$scope.stallList = response.data.stalls;
 													});
+
 								} ]);
 	</script>
 </body>

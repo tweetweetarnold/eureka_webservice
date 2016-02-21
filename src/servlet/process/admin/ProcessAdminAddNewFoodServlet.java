@@ -40,7 +40,7 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doPost(request, response);
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -49,10 +49,10 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		
+
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		FoodController foodController = new FoodController();
-		
+
 		// Create a factory for disk-based file items
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		// Configure a repository (to ensure a secure temp location is used)
@@ -62,12 +62,12 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 		// Create a new file upload handler and set max size
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(1024 * 1024 * 1000);
-		
+
 		int stallId = 0;
 		int index = 0;
 		String[] parameters = new String[6];
 		byte[] image = null;
-		
+
 		try {
 			// Parse the request
 			List<FileItem> items = upload.parseRequest(request);
@@ -82,7 +82,7 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 							throw new Exception("Invalid image format");
 						}
 					}
-					
+
 				} else {
 					if (item.getFieldName().equals("chineseName")) {
 						String inputValues = item.getString("UTF-8");
@@ -96,14 +96,14 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 				}
 				index++;
 			}
-			//End of parsing request
-			
+			// End of parsing request
+
 			stallId = Integer.parseInt(parameters[0]);
 			foodController.processAddingFood(image, parameters, stallId);
 
 			session.setAttribute("success", "Food added successfully.");
 
-			response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=" + stallId);
+			response.sendRedirect("/eureka_webservice/admin/food/view.jsp?stallId=" + stallId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
