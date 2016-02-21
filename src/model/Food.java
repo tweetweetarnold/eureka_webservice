@@ -27,7 +27,6 @@ import value.StringValues;
  * @author SMU Team Eureka
  */
 @Entity
-@Indexed
 @Table(name = "food")
 public class Food {
 	private String chineseName, status;
@@ -41,7 +40,6 @@ public class Food {
 	private Set<Modifier> modifierList;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<ModifierSection> modifierSectionList;
-	@Field
 	private String name;
 	private double price;
 	private String publicId;

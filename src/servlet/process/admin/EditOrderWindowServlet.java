@@ -56,9 +56,9 @@ public class EditOrderWindowServlet extends HttpServlet {
 		Gson gson = new Gson();
 
 		OrderWindowController orderWindowController = new OrderWindowController();
-
+		String orderWindowIdString = request.getParameter("orderWindowId");
 		try {
-			String orderWindowIdString = request.getParameter("orderWindowId");
+			
 			String startDatetimeString = request.getParameter("startDatetime");
 			String endDatetimeString = request.getParameter("endDatetime");
 
@@ -72,6 +72,10 @@ public class EditOrderWindowServlet extends HttpServlet {
 			DateTime startDatetime = formatter.parseDateTime(startDatetimeString);
 			DateTime endDatetime = formatter.parseDateTime(endDatetimeString);
 
+			if(startDatetime.isAfter(endDatetime)){
+				throw new Exception("Start time cannot be after end time");
+			}
+			
 			System.out.println("startDatetime: " + startDatetime);
 			System.out.println("endDatetime: " + endDatetime);
 
@@ -87,7 +91,7 @@ public class EditOrderWindowServlet extends HttpServlet {
 			session.setAttribute("error", e.getMessage());
 
 		}
-		response.sendRedirect("/eureka_webservice/admin/orderwindow/edit.jsp");
+		response.sendRedirect("/eureka_webservice/LoadAdminEditOrderWindowServlet?windowId="+ orderWindowIdString);
 
 		out.println(gson.toJson(returnJson));
 
