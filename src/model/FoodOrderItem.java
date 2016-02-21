@@ -161,14 +161,6 @@ public class FoodOrderItem {
 			}
 		}
 
-		// if (!modifierChosenList.isEmpty()) {
-		// Iterator<ModifierChosen> iter = modifierChosenList.iterator();
-		//
-		// while (iter.hasNext()) {
-		// ModifierChosen tempMod = (ModifierChosen) iter.next();
-		// price += tempMod.getPrice();
-		// }
-		// }
 		return price;
 	}
 
@@ -180,16 +172,6 @@ public class FoodOrderItem {
 	public int getQuantity() {
 		return quantity;
 	}
-
-	/**
-	 * Formats the price value into 2 decimal place
-	 * 
-	 * @return The price value in 2 decimal places
-	 */
-	// public String getPriceString() {
-	// DecimalFormat df = new DecimalFormat("0.00");
-	// return df.format(getPrice());
-	// }
 
 	/**
 	 * Retrieves the remarks of the FoodOrderItem

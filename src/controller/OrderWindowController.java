@@ -3,18 +3,16 @@ package controller;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+
+import dao.OrderWindowDAO;
 import model.Canteen;
 import model.Company;
 import model.OrderWindow;
 import model.PriceModifier;
 import services.QuartzService;
-
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.quartz.SchedulerException;
-
 import value.StringValues;
-import dao.OrderWindowDAO;
 
 /**
  * Process the business logic of the order window for the application

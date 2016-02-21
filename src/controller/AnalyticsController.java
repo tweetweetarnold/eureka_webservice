@@ -44,7 +44,7 @@ public class AnalyticsController {
 			foodOrderItemSet.addAll(foodOrder.getFoodOrderList());
 		}
 		
-		Iterator iter = foodOrderItemSet.iterator();
+		Iterator<FoodOrderItem> iter = foodOrderItemSet.iterator();
 		while(iter.hasNext()){
 			FoodOrderItem foodOrderItem = (FoodOrderItem)iter.next();
 			Food food = foodOrderItem.getFood();

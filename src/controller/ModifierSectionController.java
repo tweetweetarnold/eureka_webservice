@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import dao.FoodDAO;
+import dao.ModifierSectionDAO;
 import model.Food;
 import model.Modifier;
 import model.ModifierSection;
-import dao.FoodDAO;
-import dao.ModifierSectionDAO;
 
 public class ModifierSectionController {
 	public ModifierSectionController() {
@@ -36,15 +36,17 @@ public class ModifierSectionController {
 		return newModifierSection.getModifierSectionId();
 	}
 
-	public boolean createAndAddModifier(String modifierName,String chineseName, String modifierDescription,
-			double modifierPrice, String foodID, String modifierSectionID) {
-		
+	public boolean createAndAddModifier(String modifierName, String chineseName,
+			String modifierDescription, double modifierPrice, String foodID,
+			String modifierSectionID) {
+
 		boolean modifierSectionExists = false;
 		ModifierSection modifierSectionToEdit = null;
-		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+		// ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 		FoodDAO foodDAO = new FoodDAO();
 		Food food = foodDAO.getFood(Integer.parseInt(foodID));
-		Modifier newModifier = new Modifier(modifierName, chineseName, modifierDescription, modifierPrice, food);
+		Modifier newModifier = new Modifier(modifierName, chineseName, modifierDescription,
+				modifierPrice, food);
 
 		// update Modifierlist in food
 		Set<Modifier> foodModifierList = food.getModifierList();
@@ -74,8 +76,8 @@ public class ModifierSectionController {
 			food.setModifierSectionList(replacementModifierSectionList);
 			foodDAO.updateFood(food);
 			newModifier.setModifierSection(modifierSectionToEdit);
-//			modifierSectionDAO.saveModifier(newModifier);
-//			modifierSectionDAO.saveModifierSection(modifierSectionToEdit);
+			// modifierSectionDAO.saveModifier(newModifier);
+			// modifierSectionDAO.saveModifierSection(modifierSectionToEdit);
 		}
 		return modifierSectionExists;
 

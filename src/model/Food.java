@@ -16,12 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
-
 import value.StringValues;
 
 /**
@@ -67,8 +61,8 @@ public class Food {
 	 * @param imageDirectory The directory where the Food image is being stored
 	 * @param stall The Stall that sells this Food
 	 */
-	public Food(String name, String chineseName, String description, double price, String imageDirectory,
-			String publicId, Stall stall) {
+	public Food(String name, String chineseName, String description, double price,
+			String imageDirectory, String publicId, Stall stall) {
 		super();
 		this.name = name;
 		this.chineseName = chineseName;
@@ -104,8 +98,8 @@ public class Food {
 
 	public Set<Modifier> getActiveModifierList() {
 		Set<Modifier> returnSet = new HashSet<Modifier>();
-		for(Modifier s:modifierList){
-			if(s.getStatus().equals(StringValues.ACTIVE)){
+		for (Modifier s : modifierList) {
+			if (s.getStatus().equals(StringValues.ACTIVE)) {
 				returnSet.add(s);
 			}
 		}
@@ -160,7 +154,7 @@ public class Food {
 	public Set<Modifier> getModifierList() {
 		return modifierList;
 	}
-	
+
 	public Set<ModifierSection> getModifierSectionList() {
 		return modifierSectionList;
 	}
@@ -209,7 +203,7 @@ public class Food {
 	public String getStatus() {
 		return status;
 	}
-	
+
 	/**
 	 * Retrieves the weather condition indicated in this Food
 	 * 
@@ -307,7 +301,7 @@ public class Food {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	/**
 	 * Changes the current weather condition indicated in this Food
 	 * 
