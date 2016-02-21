@@ -266,7 +266,6 @@ public class OrderWindowController {
 				newEndDate, orderWindowToEdit.getCompany());
 
 		if (dateStart.isAfter(currentTime)) {
-			System.out.println("TESTING>>>>>>>>>>>");
 			// edit OrderWindow orderWindowToEdit
 			if (newStartDate.isBefore(currentTime)) {
 				throw new Exception("Cannot set start date to before current time");
@@ -313,7 +312,7 @@ public class OrderWindowController {
 			}
 
 		} else {
-			throw new Exception("Order Window Cannot be editted");
+			throw new Exception("Order Window Cannot be edited");
 		}
 
 	}
