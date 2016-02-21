@@ -66,7 +66,7 @@ public class AddNewCanteenServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("add new canteene error");
+			System.out.println("add new canteen error");
 			returnJson.put("error", e.getMessage());
 		}
 		

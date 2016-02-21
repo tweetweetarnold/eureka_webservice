@@ -88,7 +88,7 @@ public class ProcessAdminAddNewStallServlet extends HttpServlet {
 				index++;
 			}
 			//End of parsing the request
-
+			System.out.println("CanteenID VAlidation" + parameters[0]);
 			canteenId = Integer.parseInt(parameters[0]);
 			stallController.processAddingStall(image, parameters, canteenId);
 
