@@ -145,7 +145,9 @@
 											{{modifier.name}}&nbsp;{{modifier.chineseName}} - ({{modifier.price | currency}})
 											<br>
 										</p>
-										<a target="_self" ng-href='/eureka_webservice/admin/food/addon-add.jsp?foodId=${food.foodId}'>Add Add-On</a>
+										<a target="_self"
+											ng-href='/eureka_webservice/admin/food/addon-add.jsp?stallId={{stallId}}&foodId={{food.foodId}}'
+										>Add Add-On</a>
 									</td>
 									<td>
 										<a target="_self" ng-href="/eureka_webservice/LoadAdminEditFoodServlet?foodId={{food.foodId}}">

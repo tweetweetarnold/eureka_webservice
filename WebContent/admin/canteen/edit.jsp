@@ -77,7 +77,7 @@
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
 						<li>
-							<a target='_self' href="/eureka_webservice/LoadViewCanteenServlet">Canteens</a>
+							<a target='_self' href="/eureka_webservice/admin/canteen/view.jsp">Canteens</a>
 						</li>
 					</ol>
 

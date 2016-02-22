@@ -1,6 +1,7 @@
 package servlet.process.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,8 +44,13 @@ public class ProcessAdminAddModifierToFoodServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+
+		Gson gson = new Gson();
+		JSONObject returnJson = new JSONObject();
+
 		try {
-			Gson gson = new Gson();
 
 			JSONParser parser = new JSONParser();
 			JSONObject data = (JSONObject) parser.parse(request.getReader());
@@ -54,21 +60,27 @@ public class ProcessAdminAddModifierToFoodServlet extends HttpServlet {
 			System.out.println("foodID: " + foodId);
 			JSONArray arr = (JSONArray) data.get("modifierList");
 			ModifierSectionController modifierSectionController = new ModifierSectionController();
-			String modifierSectionId = "" + modifierSectionController.addModifierSection(foodId, "Add-ons", "c");
+			String modifierSectionId = ""
+					+ modifierSectionController.addModifierSection(foodId, "Add-ons", "c");
 			for (int i = 0; i < arr.size(); i++) {
 				JSONObject obj = (JSONObject) arr.get(i);
 				String name = (String) obj.get("name");
 				double price = Double.parseDouble((String) obj.get("price"));
-				//modifier creation
-				modifierSectionController.createAndAddModifier(name, "", "", price, foodId, modifierSectionId);
-				System.out.println("DUBUGGING HERE " + modifierSectionId);
+				// modifier creation
+				modifierSectionController.createAndAddModifier(name, "", "", price, foodId,
+						modifierSectionId);
 				System.out.println("name: " + name);
 				System.out.println("price: " + price);
 			}
 
+			returnJson.put("success", "Modifiers added to Food");
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			returnJson.put("error", e.getMessage());
 		}
+
+		out.println(gson.toJson(returnJson));
 	}
 
 }

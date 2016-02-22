@@ -97,7 +97,7 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 
 			session.setAttribute("success", "Stall updated successfully.");
 
-			response.sendRedirect("/eureka_webservice/admin/stall/edit.jsp?canteenId=" + canteenId);
+			response.sendRedirect("/eureka_webservice/admin/stall/view.jsp?canteenId=" + canteenId);
 
 		} catch (Exception e) {
 			e.printStackTrace();

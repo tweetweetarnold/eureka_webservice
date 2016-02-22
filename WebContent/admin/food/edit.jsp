@@ -58,13 +58,13 @@
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
 						<li>
-							<a href="/eureka_webservice/LoadViewCanteenServlet">Canteens</a>
+							<a href="/eureka_webservice/admin/canteen/view.jsp">Canteens</a>
 						</li>
 						<li>
-							<a href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${sessionScope.canteenId}">Stalls</a>
+							<a href="/eureka_webservice/admin/stall/view.jsp?canteenId=${sessionScope.canteenId}">Stalls</a>
 						</li>
 						<li>
-							<a href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId=${sessionScope.stallId}">Foods</a>
+							<a href="/eureka_webservice/admin/food/view.jsp?stallId=${sessionScope.stallId}">Foods</a>
 						</li>
 					</ol>
 

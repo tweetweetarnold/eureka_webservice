@@ -145,6 +145,7 @@
 								'$location',
 								function($scope, $http, $window, $location) {
 
+									var stallId = $location.search().stallId;
 									$scope.modifierList = [];
 
 									$scope.addModifier = function() {
@@ -176,15 +177,22 @@
 													}
 												})
 												.then(
-														function successCallback() {
-															$http
-																	.post(
-																			'/eureka_webservice/SetSessionMessageServlet',
-																			{
-																				success : 'Add-On(s) added successfully.'
-																			});
+														function successCallback(
+																response) {
+															if (response.data.success != null) {
+																$window.sessionStorage.success = response.data.success;
+																$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
+																		+ stallId;
+															} else if (response.data.error != null) {
+																$window.sessionStorage.error = response.data.error;
+																$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
+																		+ stallId;
+															} else {
+																console
+																		.log(response);
+																alert('fail');
+															}
 
-															$window.location.href = '/eureka_webservice/admin/food/view.jsp';
 														});
 
 									};

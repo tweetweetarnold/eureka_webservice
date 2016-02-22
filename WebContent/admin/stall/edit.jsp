@@ -74,7 +74,7 @@
 							<a href="/eureka_webservice/admin/canteen/view.jsp">Canteens</a>
 						</li>
 						<li>
-							<a href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${sessionScope.canteenId}">Stalls</a>
+							<a href="/eureka_webservice/admin/stall/view.jsp?canteenId=${sessionScope.canteenId}">Stalls</a>
 						</li>
 					</ol>
 
