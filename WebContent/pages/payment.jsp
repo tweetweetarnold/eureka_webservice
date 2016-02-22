@@ -133,7 +133,7 @@
 				<c:if test="${not empty sessionScope.paymentFoodOrderList}">
 				<c:set var="sum" value="0" />
 				<c:forEach items="${sessionScope.paymentFoodOrderList}" var="order" varStatus="orderLoop">
-							<c:set var="count" value="${sum + order.finalPrice}" />
+							<c:set var="sum" value="${sum + order.finalPrice}" />
 							
 				</c:forEach>
 					
