@@ -38,8 +38,7 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -47,8 +46,7 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -56,7 +54,7 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		
+
 		FoodController foodController = new FoodController();
 
 		// Create a factory for disk-based file items
@@ -68,12 +66,11 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 		// Create a new file upload handler and set max size
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(1024 * 1024 * 1000);
-		
+
 		int index = 0;
 		byte[] image = null;
 		String[] parameters = new String[8];
-		
-		
+
 		try {
 			// Parse the request
 			List<FileItem> items = upload.parseRequest(request);
@@ -109,7 +106,7 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 
 			session.setAttribute("success", "Food updated successfully.");
 
-			response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=" + stallId);
+			response.sendRedirect("/eureka_webservice/admin/food/view.jsp?stallId=" + stallId);
 
 		} catch (Exception e) {
 			e.printStackTrace();

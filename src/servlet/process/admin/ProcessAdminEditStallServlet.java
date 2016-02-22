@@ -36,8 +36,7 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -45,15 +44,14 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		StallController stallController = new StallController();
 		String[] parameters = new String[3];
-		
+
 		byte[] image = null;
 
 		// Create a factory for disk-based file items
@@ -89,17 +87,17 @@ public class ProcessAdminEditStallServlet extends HttpServlet {
 				}
 				index++;
 			}
-			//End of parsing the request
+			// End of parsing the request
 
 			int stallId = Integer.parseInt(parameters[0]);
 			Stall currentStall = stallController.getStall(stallId);
 			int canteenId = currentStall.getCanteen().getCanteenId();
-			
+
 			stallController.processEditingStall(image, parameters, currentStall);
 
 			session.setAttribute("success", "Stall updated successfully.");
 
-			response.sendRedirect("/eureka_webservice/LoadAdminViewStallsServlet?canteenId=" + canteenId);
+			response.sendRedirect("/eureka_webservice/admin/stall/edit.jsp?canteenId=" + canteenId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
