@@ -101,7 +101,7 @@
 									<td>${window.canteen.name}</td>
 									<td>
 										$
-										<fmt:formatNumber value="${window.discountAbsolute}" var="amt" minFractionDigits="2" />${amt}
+										<fmt:formatNumber value="${window.priceModifierList[0].value}" var="amt" minFractionDigits="2" />${amt}
 									</td>
 									<td>
 										<fmt:formatDate type="both" value="${window.createDate}" />
