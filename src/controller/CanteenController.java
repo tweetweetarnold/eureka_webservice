@@ -45,8 +45,7 @@ public class CanteenController {
 	
 	public boolean checkCanteenExists(String name, String address) {
 		Canteen c = canteenDAO.getCanteenByName(name);
-		Canteen canteenAddress = canteenDAO.getCanteenByAddress(address);
-		if (c != null && canteenAddress != null) {
+		if (c != null) {
 			return true;
 		}
 		return false;
@@ -77,11 +76,14 @@ public class CanteenController {
 			canteenToEdit.setAddress(address);
 			changesExist = true;
 		}
-
-		if (changesExist) {
-			canteenDAO.updateCanteen(canteenToEdit);
-		} else {
-			throw new Exception("No changes were made to the Canteen");
+		if(!checkCanteenExists(name,address)){
+			if (changesExist) {
+				canteenDAO.updateCanteen(canteenToEdit);
+			} else {
+				throw new Exception("No changes were made to the Canteen");
+			}
+		}else{
+			throw new Exception("Canteen name already taken");
 		}
 
 	}
