@@ -143,18 +143,24 @@
 												<span class="glyphicon glyphicon-calendar"></span>
 											</span>
 										</div>
+
+										<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
+											data-content="The end date cannot be earlier than the start date!" data-placement="right"
+										>
+											<i class="fa fa-question-circle"></i>
+										</a>
+
+
 									</div>
 								</div>
+
+								<div class="col-md-1"></div>
 							</div>
 
 
 							<button type="submit" class="btn btn-primary">Update</button>
 
-							<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
-								data-content="The end date cannot be earlier than the start date!" data-placement="right"
-							>
-								<i class="fa fa-question-circle"></i>
-							</a>
+
 
 						</form>
 
