@@ -93,6 +93,8 @@ public class ProcessLoginServlet extends HttpServlet {
 						"It seems you have not verified your account. Please verify your account from your email first!");
 			case StringValues.EMPLOYEE_SUSPENDED:
 				session.setAttribute("suspended", "true");
+				session.setAttribute("warning",
+						"You have outstanding payment. To make orders, please clear your outstanding payment.");
 				response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 				break;
 			case StringValues.EMPLOYEE_DESTROYED:
@@ -122,7 +124,7 @@ public class ProcessLoginServlet extends HttpServlet {
 				session.setAttribute("user", emp);
 				session.setAttribute("tokenID", tokenID);
 				if (!response.isCommitted()) {
-					response.sendRedirect("/eureka_webservice/pages/payment.jsp");
+					response.sendRedirect("/eureka_webservice/LoadUserPaymentServlet");
 				}
 			}
 
@@ -133,11 +135,16 @@ public class ProcessLoginServlet extends HttpServlet {
 			System.out.println("TokenID is set in session");
 
 			// for login2
-			if (window != null) {
+			if (window != null && window.getStatus().equals(StringValues.ACTIVE)) {
 				ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
 				canteenList.add(window.getCanteen());
 				session.setAttribute("canteenList", canteenList);
 				System.out.println("canteenList size: " + canteenList.size());
+			}else{
+				if (!response.isCommitted()) {
+					session.setAttribute("suspended", "true");
+					response.sendRedirect("/eureka_webservice/LoadUserPaymentServlet");
+				}
 			}
 			// For testing: print JSON rather than redirect
 			if (test != null && test.equals("true")) {

@@ -62,27 +62,6 @@ public class StallDAO {
 	 * @param canteen The designated Canteen to retrieve the Stalls
 	 * @return An ArrayList of Stall objects in the designated Canteen
 	 */
-	public ArrayList<Stall> getAllStallsUnderCanteen(Canteen canteen) {
-		ArrayList<Stall> returnList = new ArrayList<Stall>();
-
-		DetachedCriteria dc = DetachedCriteria.forClass(Stall.class);
-		dc.add(Restrictions.eq("canteen", canteen));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		for (Object o : l) {
-			returnList.add((Stall) o);
-		}
-		return returnList;
-	}
-	
-	/**
-	 * Retrieves all the Stalls from the Canteen
-	 * 
-	 * @param canteen The designated Canteen to retrieve the Stalls
-	 * @return An ArrayList of Stall objects in the designated Canteen
-	 */
 	public ArrayList<Stall> getAllActiveStallsUnderCanteen(Canteen canteen) {
 		ArrayList<Stall> returnList = new ArrayList<Stall>();
 
@@ -100,6 +79,27 @@ public class StallDAO {
 			}
 			return returnList;
 		}
+	}
+	
+	/**
+	 * Retrieves all the Stalls from the Canteen
+	 * 
+	 * @param canteen The designated Canteen to retrieve the Stalls
+	 * @return An ArrayList of Stall objects in the designated Canteen
+	 */
+	public ArrayList<Stall> getAllStallsUnderCanteen(Canteen canteen) {
+		ArrayList<Stall> returnList = new ArrayList<Stall>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Stall.class);
+		dc.add(Restrictions.eq("canteen", canteen));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((Stall) o);
+		}
+		return returnList;
 	}
 
 	/**
@@ -147,15 +147,6 @@ public class StallDAO {
 		MyConnection.save(h);
 	}
 	
-	/**
-	 * Updates the designated Stall object in the Database
-	 * 
-	 * @param h The Stall object to be updated
-	 */
-	public void updateStall(Stall h) {
-		MyConnection.update(h);
-	}
-	
 	public void setFoodListToStall(Set<Food> oldFoodList, Stall newStall) {
 		FoodDAO foodDAO = new FoodDAO();
 		Set<Food> newList = newStall.getFoodList();
@@ -166,6 +157,15 @@ public class StallDAO {
 			foodDAO.updateFood(f);
 		}
 		//return fList;
+	}
+	
+	/**
+	 * Updates the designated Stall object in the Database
+	 * 
+	 * @param h The Stall object to be updated
+	 */
+	public void updateStall(Stall h) {
+		MyConnection.update(h);
 	}
 
 }

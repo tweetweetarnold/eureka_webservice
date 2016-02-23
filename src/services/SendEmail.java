@@ -103,7 +103,11 @@ public class SendEmail {
 
 	public void sendEmailWithCarbonCopy(String subject, String messageBody, String[] toEmails,
 			String[] ccEmails) throws MessagingException {
-
+		System.out.println(subject);
+		System.out.println(messageBody);
+		System.out.println(toEmails);
+		System.out.println(ccEmails);
+		
 		Message emailMessage = createEmailMessageWithCarbonCopy(subject, messageBody, toEmails,
 				ccEmails);
 		Transport.send(emailMessage);

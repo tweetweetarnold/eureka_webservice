@@ -43,10 +43,11 @@ public class LoadViewCanteenServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		CanteenController canteenController = new CanteenController();
+		String canteenId = "";
 
 		ArrayList<Canteen> list = canteenController.getAllCanteens();
 		session.setAttribute("canteenList", list);
-
+		session.setAttribute("canteenId", canteenId);
 		response.sendRedirect("/eureka_webservice/admin/canteen/view.jsp");
 	}
 

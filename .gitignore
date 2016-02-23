@@ -10,3 +10,9 @@ src/servlet/TestServlet.java
 /doc
 src/test/ArnoldTest.java
 WebContent/test.jsp
+src/servlet/MyJSONTestServlet.java
+src/servlet/process/admin/ProcessAdminAddNewFoodServlet2.java
+src/servlet/ImageTestServlet.java
+WebContent/admin/picupload.jsp
+WebContent/admin/picupload3.jsp
+WebContent/admin/picupload2.jsp

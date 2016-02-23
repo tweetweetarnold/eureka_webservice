@@ -90,16 +90,22 @@ public class FoodOrder {
 
 		// order matters for which price modifier to affect the total price first
 		List<PriceModifier> priceModifierList = orderWindow.getPriceModifierList();
-		for (PriceModifier m : priceModifierList) {
-			String type = m.getType();
-			double value = m.getValue();
-			System.out.println("PriceModifier: Name=" + m.getName() + ", Type=" + type + ", Value="
-					+ value);
+		System.out.println("pricemodifierlist size: " + priceModifierList.size());
 
-			if (type.equals(StringValues.PRICEMODIFIER_ABSOLUTE)) {
-				result += value;
-			} else if (type.equals(StringValues.PRICEMODIFIER_PERCENTAGE)) {
-				result *= value;
+		if (!priceModifierList.isEmpty()) { // temporary fix. pricemodifierlist no idea why size
+											// more than specified
+			for (int i = 0; i < 1; i++) {
+				PriceModifier m = priceModifierList.get(i);
+				String type = m.getType();
+				double value = m.getValue();
+				System.out.println("PriceModifier: Name=" + m.getName() + ", Type=" + type
+						+ ", Value=" + value);
+
+				if (type.equals(StringValues.PRICEMODIFIER_ABSOLUTE)) {
+					result += value;
+				} else if (type.equals(StringValues.PRICEMODIFIER_PERCENTAGE)) {
+					result *= value;
+				}
 			}
 		}
 

@@ -6,20 +6,23 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-
-import model.Employee;
-import model.Food;
-import model.FoodDisplayObject;
-import model.FoodOrder;
-import model.FoodOrderItem;
-import model.OrderWindow;
-import model.Stall;
+import java.util.Set;
 
 import org.joda.time.DateTime;
 
 import dao.EmployeeDAO;
 import dao.FoodOrderDAO;
 import dao.FoodOrderItemDAO;
+import dao.ModifierSectionDAO;
+import model.Employee;
+import model.Food;
+import model.FoodDisplayObject;
+import model.FoodOrder;
+import model.FoodOrderItem;
+import model.ModifierChosen;
+import model.OrderWindow;
+import model.Stall;
+import value.StringValues;
 
 /**
  * Process the business logic of managing the Food orders for the web application
@@ -47,12 +50,56 @@ public class FoodOrderController {
 		foodOrderDAO.saveFoodOrder(f);
 	}
 
+	public void addFoodOrderItemIntoFoodOrder(FoodOrderItem foodOrderItem, FoodOrder foodOrder) {
+		Set<FoodOrderItem> foodOrderItemList = foodOrder.getFoodOrderList();
+		foodOrderItemList.add(foodOrderItem);
+		foodOrder.setFoodOrderList(foodOrderItemList);
+		updateFoodOrder(foodOrder);
+	}
+
 	public boolean checkForExistingOrder(Employee employee, OrderWindow orderWindow) {
 		FoodOrderDAO foodOrderDao = new FoodOrderDAO();
 		if (foodOrderDao.getAllFoodOrderOfOrderWindowForUser(employee, orderWindow).isEmpty()) {
 			return false;
 		}
 		return true;
+	}
+
+	public void deleteFoodOrderItem(int foodOrderItemId) throws Exception {
+		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
+		// FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
+		EmployeeDAO employeeDAO = new EmployeeDAO();
+		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+		FoodOrderItem foodOrderItemToDelete = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
+		FoodOrder foodOrderToDelete = foodOrderItemToDelete.getFoodOrder();
+		if (foodOrderToDelete.getStatus() == StringValues.PAID) {
+			throw new Exception("The food has already been paid for. Cannot delete Food Order.");
+		}
+		Employee employee = foodOrderToDelete.getEmployee();
+		double amountOwed = employee.getAmountOwed();
+		double newAmountOwed = amountOwed - foodOrderItemToDelete.getTotalPrice();
+		employee.setAmountOwed(newAmountOwed);
+
+		// update employee, foodOrderItem and foodOrder
+		employeeDAO.updateEmployee(employee);
+
+		// update FoodOrder (Remove FoodOrderItem)
+		foodOrderToDelete.getFoodOrderList().remove(foodOrderItemToDelete);
+		updateFoodOrder(foodOrderToDelete);
+
+		// remove ModifierChosen
+		Set<ModifierChosen> modifierList = foodOrderItemToDelete.getModifierChosenList();
+		for (ModifierChosen modifierChosen : modifierList) {
+			modifierSectionDAO.deleteModifierChosen(modifierChosen);
+		}
+
+		// delete FoodOrderItem
+		foodOrderItemToDelete.setFood(null);
+		foodOrderItemToDelete.setFoodOrder(null);
+		foodOrderItemToDelete.setModifierChosenList(null);
+		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToDelete);
+		foodOrderItemDAO.deleteFoodOrderItem(foodOrderItemToDelete);
+
 	}
 
 	/**
@@ -70,11 +117,13 @@ public class FoodOrderController {
 		HashMap<Employee, ArrayList<FoodOrderItem>> map = new HashMap<Employee, ArrayList<FoodOrderItem>>();
 
 		// iterate through each foodorder from tempfoodorderlist and add it into
-		// hashmap. if already have record of existing user, add to that same list
+		// hashmap. if already have record of existing user, add to that same
+		// list
 		for (FoodOrder o : tempFoodOrderList) {
 			Employee emp = o.getEmployee();
 
-			// check if entry exists. if not, create new arraylist and add into map
+			// check if entry exists. if not, create new arraylist and add into
+			// map
 			ArrayList<FoodOrderItem> tempItems = map.get(emp);
 			if (tempItems == null) {
 				tempItems = new ArrayList<FoodOrderItem>();
@@ -171,7 +220,8 @@ public class FoodOrderController {
 			HashMap<Integer, Integer> quantityForFoodOrderItem = new HashMap<Integer, Integer>();
 			ArrayList<FoodOrderItem> uniqueFoodOrderItem = new ArrayList<FoodOrderItem>();
 			// this loops Through the foodOrderItems in (AA) in order to take
-			// out the unique FoodOrderItems and stores them in UniqueFoodOrderItem
+			// out the unique FoodOrderItems and stores them in
+			// UniqueFoodOrderItem
 			for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 				Iterator<FoodOrderItem> iterator = uniqueFoodOrderItem.iterator();
 				int equalCount = 0;
@@ -217,7 +267,8 @@ public class FoodOrderController {
 						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
 						usernames.add(tempUsername);
 					}
-					// usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<String>(
+					// usernamesForFoodItem.put(f.getFoodOrderItemId(), new
+					// ArrayList<String>(
 					// usernames));
 				}
 
@@ -225,8 +276,8 @@ public class FoodOrderController {
 					Employee tempEmployee = employeeDAO.getEmployeeByEmail(s);
 					employees.add(tempEmployee);
 				}
-				usernamesForFoodItem
-						.put(f.getFoodOrderItemId(), new ArrayList<Employee>(employees));
+				usernamesForFoodItem.put(f.getFoodOrderItemId(),
+						new ArrayList<Employee>(employees));
 			}
 			// Populating the price for the FoodOrderItem
 			HashMap<Integer, Double> foodOrderItemPrices = new HashMap<Integer, Double>();
@@ -402,14 +453,15 @@ public class FoodOrderController {
 				HashSet<Employee> employees = new HashSet<Employee>();
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 					if (f.equals2(i)) {
-						// String tempUsername = i.getFoodOrder().getEmployee().getEmail();
+						// String tempUsername =
+						// i.getFoodOrder().getEmployee().getEmail();
 					}
 					for (String s : usernames) {
 						Employee tempEmployee = employeeDAO.getEmployeeByEmail(s);
 						employees.add(tempEmployee);
 					}
-					usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<Employee>(
-							employees));
+					usernamesForFoodItem.put(f.getFoodOrderItemId(),
+							new ArrayList<Employee>(employees));
 				}
 			}
 			// Populating the price for the FoodOrderItem
@@ -457,8 +509,8 @@ public class FoodOrderController {
 			Date laterDate) {
 		// ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
 		// getFoodOrderBetweenCutOff(earlierDate, laterDate));
-		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(today.minusDays(1)
-				.toDate(), today.toDate());
+		List<FoodOrder> tempFoodOrderList = foodOrderDAO
+				.getFoodOrderByDate(today.minusDays(1).toDate(), today.toDate());
 
 		ArrayList<FoodOrderItem> allFoodOrderItems = new ArrayList<FoodOrderItem>();
 		HashSet<Integer> uniqueStallNames = new HashSet<Integer>();
@@ -494,8 +546,8 @@ public class FoodOrderController {
 	 * @return A list of FoodOrder(s)
 	 */
 	public List<FoodOrder> getFoodOrderSet(String email) {
-		List<FoodOrder> returnList = incrementQuantity(foodOrderDAO.getFoodOrderSet(employeeDAO
-				.getEmployeeByEmail(email)));
+		List<FoodOrder> returnList = incrementQuantity(
+				foodOrderDAO.getFoodOrderSet(employeeDAO.getEmployeeByEmail(email)));
 		return returnList;
 	}
 
@@ -509,8 +561,8 @@ public class FoodOrderController {
 	 */
 	public List<FoodOrder> getUserFoodOrdersByStatus(String email, String status) {
 		List<FoodOrder> returnList = new ArrayList<FoodOrder>();
-		List<FoodOrder> foodOrderList = foodOrderDAO.getFoodOrderSet(employeeDAO
-				.getEmployeeByEmail(email));
+		List<FoodOrder> foodOrderList = foodOrderDAO
+				.getFoodOrderSet(employeeDAO.getEmployeeByEmail(email));
 
 		for (FoodOrder f : foodOrderList) {
 			if (f.getStatus().equals(status)) {
@@ -640,4 +692,35 @@ public class FoodOrderController {
 		foodOrderDAO.updateFoodOrder(f);
 	}
 
+	public void updateFoodOrder(int foodOrderItemId, Food newFood,
+			Set<ModifierChosen> newModifierChosenSet, int quantity) throws Exception {
+		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
+		EmployeeDAO employeeDAO = new EmployeeDAO();
+		FoodOrderItem foodOrderItemToEdit = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
+		FoodOrder foodOrderToEdit = foodOrderItemToEdit.getFoodOrder();
+		if (foodOrderToEdit.getStatus() == StringValues.PAID) {
+			throw new Exception("The food has already been paid for. Cannot edit Food Order.");
+		}
+		Employee employee = foodOrderToEdit.getEmployee();
+
+		// we need to change the amount owed of the employee so we remove the
+		// foodOrder price first
+		double amountOwed = employee.getAmountOwed() - foodOrderToEdit.getFinalPrice();
+
+		// edit the foodOrderItem here
+		foodOrderItemToEdit.setFood(newFood);
+		foodOrderItemToEdit.setModifierChosenList(newModifierChosenSet);
+		foodOrderItemToEdit.setQuantity(quantity);
+		foodOrderItemToEdit.setRemarks(StringValues.EDITTED_BY_ADMIN);
+
+		// update the amount owed for the employee
+		double newFinalPrice = foodOrderToEdit.getFinalPrice();
+		amountOwed += newFinalPrice;
+		employee.setAmountOwed(amountOwed);
+
+		// update employee, foodOrderItem and foodOrder
+		employeeDAO.updateEmployee(employee);
+		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToEdit);
+		updateFoodOrder(foodOrderToEdit);
+	}
 }

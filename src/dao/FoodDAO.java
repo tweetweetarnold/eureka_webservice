@@ -61,27 +61,6 @@ public class FoodDAO {
 	}
 
 	/**
-	 * Retrieves a list of Food in the Stall
-	 * 
-	 * @param stall The designated Stall
-	 * @return An ArrayList of Food objects that are in the designated Stall
-	 */
-	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
-		ArrayList<Food> returnList = new ArrayList<Food>();
-
-		DetachedCriteria dc = DetachedCriteria.forClass(Food.class);
-		dc.add(Restrictions.eq("stall", stall));
-		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
-		List<Object> l = MyConnection.queryWithCriteria(dc);
-
-		for (Object o : l) {
-			returnList.add((Food) o);
-		}
-		return returnList;
-	}
-	
-	/**
 	 * Retrieves a list of Food in the Stall that are Active
 	 * 
 	 * @param stall The designated Stall
@@ -106,6 +85,27 @@ public class FoodDAO {
 		}
 	}
 	
+	/**
+	 * Retrieves a list of Food in the Stall
+	 * 
+	 * @param stall The designated Stall
+	 * @return An ArrayList of Food objects that are in the designated Stall
+	 */
+	public ArrayList<Food> getAllFoodsUnderStall(Stall stall) {
+		ArrayList<Food> returnList = new ArrayList<Food>();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Food.class);
+		dc.add(Restrictions.eq("stall", stall));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		for (Object o : l) {
+			returnList.add((Food) o);
+		}
+		return returnList;
+	}
+	
 
 	/**
 	 * Retrieves the Food based on the provided ID
@@ -127,7 +127,7 @@ public class FoodDAO {
 	 */
 	public Food getFoodFromFoodList(Set<Food> foodList, String foodName) {
 		for (Food f : foodList) {
-			if (f.getName().equals(foodName)) {
+			if (f.getName().equals(foodName) && f.getStatus().equals(StringValues.ACTIVE)) {
 				return f;
 			}
 		}
@@ -160,7 +160,7 @@ public class FoodDAO {
 	public Modifier getModifierFromFood(String modifierName, Food f) {
 		Set<Modifier> modifierList = f.getModifierList();
 		for (Modifier m : modifierList) {
-			if (m.getName().equals(modifierName)) {
+			if (m.getName().equals(modifierName) && m.getStatus().equals(StringValues.ACTIVE)) {
 				return m;
 			}
 		}
@@ -255,6 +255,7 @@ public class FoodDAO {
 			for(Modifier m :oldModifierList){
 				Modifier newM = new Modifier();
 				newM.setCreateDate(new Date());
+				newM.setChineseName(m.getChineseName());
 				newM.setDescription(m.getDescription());
 				newM.setName(m.getName());
 				newM.setPrice(m.getPrice());
@@ -278,4 +279,6 @@ public class FoodDAO {
 		newFood.setModifierList(newList);
 //		saveFood(newFood);
 	}
+	
+	
 }

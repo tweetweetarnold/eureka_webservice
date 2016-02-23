@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,11 +34,11 @@ public class Stall {
 	private Set<Food> foodList;
 	private String imageDirectory;
 	private String name;
+	private String publicId;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int stallId;
 	private String status;
-	private String publicId;
 
 	/**
 	 * Creates a default constructor for Stall
@@ -66,6 +67,16 @@ public class Stall {
 		this.foodList = foodList;
 		this.status = StringValues.ACTIVE;
 		this.publicId = publicId;
+	}
+
+	public Set<Food> getActiveFoodList() {
+		Set<Food> returnSet = new HashSet<Food>();
+		for(Food s:foodList){
+			if(s.getStatus().equals(StringValues.ACTIVE)){
+				returnSet.add(s);
+			}
+		}
+		return returnSet;
 	}
 
 	/**
@@ -103,7 +114,7 @@ public class Stall {
 	public Set<Food> getFoodList() {
 		return foodList;
 	}
-
+	
 	/**
 	 * Retrieves the directory that stores the Food images
 	 * 
@@ -120,6 +131,10 @@ public class Stall {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	public String getPublicId() {
+		return publicId;
 	}
 
 	/**
@@ -189,6 +204,10 @@ public class Stall {
 		this.name = name;
 	}
 
+	public void setPublicId(String publicId) {
+		this.publicId = publicId;
+	}
+	
 	/**
 	 * Changes the ID of the Stall
 	 * 
@@ -197,17 +216,9 @@ public class Stall {
 	public void setStallId(int stallId) {
 		this.stallId = stallId;
 	}
-
+	
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	
-	public String getPublicId() {
-		return publicId;
-	}
-	
-	public void setPublicId(String publicId) {
-		this.publicId = publicId;
 	}
 	
 }

@@ -73,7 +73,6 @@
 									<th>Date Joined</th>
 									<th>O/S</th>
 									<th>Status</th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -89,9 +88,6 @@
 											$
 											<fmt:formatNumber value="${user.amountOwed}" var="amt" minFractionDigits="2" />${amt}</td>
 										<td>${user.status}</td>
-										<td>
-											<a href="#">Link</a>
-										</td>
 									</tr>
 								</c:forEach>
 							</tbody>

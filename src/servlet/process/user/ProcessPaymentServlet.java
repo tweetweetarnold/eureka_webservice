@@ -61,7 +61,7 @@ public class ProcessPaymentServlet extends HttpServlet {
 				// update the status of the user's orders from "Submitted" to "Paid"
 				// iterate through user's list of food orders and update the status to "Paid"
 				for (FoodOrder f : foodOrderList) {
-					f.setStatus("Paid");
+					f.setStatus(StringValues.PAID);
 					f.setTransactionId(transactionId);
 					foodOrderController.updateFoodOrder(f);
 				}

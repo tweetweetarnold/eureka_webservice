@@ -1,4 +1,4 @@
-package servlet.load.admin;
+package servlet;
 
 import java.io.IOException;
 
@@ -9,19 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.EmployeeDAO;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class LoadAdminViewUsersServlet
+ * Servlet implementation class SetSessionMessageServlet
  */
-@WebServlet("/LoadAdminViewUsersServlet")
-public class LoadAdminViewUsersServlet extends HttpServlet {
+@WebServlet("/SetSessionMessageServlet")
+public class SetSessionMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewUsersServlet() {
+	public SetSessionMessageServlet() {
 		super();
 	}
 
@@ -30,7 +33,6 @@ public class LoadAdminViewUsersServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request, response);
 	}
 
 	/**
@@ -39,11 +41,24 @@ public class LoadAdminViewUsersServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
+		try {
+			HttpSession session = request.getSession();
 
-		EmployeeDAO eDao = new EmployeeDAO();
-		session.setAttribute("userMgmtView", eDao.getAllEmployees());
-		response.sendRedirect("/eureka_webservice/admin/user/view.jsp");
+			Gson gson = new Gson();
+			JSONParser parser = new JSONParser();
+
+			JSONObject data = (JSONObject) parser.parse(request.getReader());
+			System.out.println(gson.toJson(data));
+
+			String success = (String) data.get("success");
+			String error = (String) data.get("error");
+
+			session.setAttribute("success", success);
+			session.setAttribute("error", error);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

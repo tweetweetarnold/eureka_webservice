@@ -36,17 +36,19 @@
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <![endif]-->
 
-<!-- library import for JSTL -->
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+<link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
+<script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
+<script src='/eureka_webservice/resources/js/myapp.js'></script>
 
 </head>
 
-<body>
-	<fmt:setTimeZone value="GMT+8" />
+<body ng-app="myApp" ng-controller="ViewCanteenController">
+
 
 	<div id="wrapper">
 
@@ -59,23 +61,51 @@
 
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
-						<li class="active">Canteens</li>
+						<li class='active'>Canteens</li>
 					</ol>
 
 				</div>
 				<!-- /.col-lg-12 -->
+
+				<!-- Message handling -->
+				<div class="col-lg-12">
+					<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+						<span class="sr-only">Success: </span>
+						{{success}}
+					</div>
+					<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error: </span>
+						{{error}}
+					</div>
+				</div>
+				<!-- / message handling -->
+
+
 			</div>
 			<!-- /.row -->
 
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-12" cg-busy='loading'>
 
 					<b>Total canteens:</b>
-					${fn:length(sessionScope.canteenList)}
+					{{data.length}}
+					<br>
+					<br>
+					<a href='/eureka_webservice/admin/canteen/add.jsp' class="btn btn-primary">Add canteen</a>
 					<br>
 					<br>
 
 					<div class="dataTable_wrapper">
+
+
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
@@ -85,69 +115,71 @@
 									<th>Create Date</th>
 									<th></th>
 									<th></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.canteenList}" var="canteen" varStatus="loop">
-									<tr>
-										<td>${canteen.canteenId}</td>
-										<td>${canteen.name}</td>
-										<td>${canteen.address}</td>
-										<td>
-											<fmt:formatDate type="both" value="${canteen.createDate}" />
-										</td>
-										<td>
-											<a href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${canteen.canteenId}">View all
-												${fn:length(canteen.stallList)} stalls</a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
-												<i class="fa fa-trash-o fa-2x"></i>
+								<tr ng-repeat="canteen in data track by $index">
+									<td>{{canteen.canteenId}}</td>
+									<td>{{canteen.name | date:'medium' : '+0800'}}</td>
+									<td>{{canteen.address | date:'medium' : '+0800'}}</td>
+									<td>{{canteen.createDate | date:'medium' : '+0800'}}</td>
+									<td>
+										<a ng-href="/eureka_webservice/admin/stall/view.jsp?canteenId={{canteen.canteenId}}">View all stalls</a>
+									</td>
+									<td>
+										<a ng-href='/eureka_webservice/admin/canteen/edit.jsp?canteenId={{canteen.canteenId}}'>
+											<button type="button" class="btn btn-link btn-xs">
+												<i class="fa fa-pencil fa-2x"></i>
 											</button>
+										</a>
+									</td>
+									<td>
+										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete{{$index}}">
+											<i class="fa fa-trash-o fa-2x"></i>
+										</button>
 
-											<!-- Modal delete -->
-											<div class="modal fade" id="modalDelete${loop.index}" tabindex="-1" role="dialog"
-												aria-labelledby="myModalLabel"
-											>
-												<div class="modal-dialog" role="document">
-													<form action="">
-														<div class="modal-content">
-															<div class="modal-header">
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-																<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
-															</div>
-															<!-- / modal header -->
+										<!-- Modal delete -->
+										<div class="modal fade" id="modalDelete{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+														<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
+													</div>
+													<!-- / modal header -->
 
-															<div class="modal-body">
-																<p>
-																	<!-- 																	<b>WARNING: </b> -->
-																	<!-- 																	You are deleting a canteen. -->
-																	<!-- 																	<br> -->
-																	<!-- 																	<br> -->
-																	<!-- 																	Are you sure you want to continue? -->
-																	<b>This feature is still under development. Unable to delete Canteen.</b>
-																</p>
-															</div>
-															<!-- / modal body -->
+													<div class="modal-body">
+														<div cg-busy='loading2'></div>
+														<p>
+															<b>WARNING: </b>
+															You are deleting Canteen
+															<b>{{canteen.name}}</b>
+															.
+															<br>
+															<br>
+															Are you sure you want to continue?
+														</p>
+													</div>
+													<!-- / modal body -->
 
-															<div class="modal-footer">
-																<button type="button" class="btn btn-default" data-dismiss="modal">Return</button>
-																<!-- <button type="button" class="btn btn-default" data-dismiss="modal">No, keep my canteen</button> -->
-																<!-- <button type="submit" class="btn btn-danger">Yes, delete the canteen</button> -->
-															</div>
-															<!-- / modal footer -->
-														</div>
-														<!-- / modal content -->
-													</form>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">No, keep my canteen</button>
+														<button type="button" ng-click='deleteCanteen(canteen.canteenId, canteen.name)' class="btn btn-danger"
+															ng-disabled='loading2'
+														>Yes, delete the canteen</button>
+													</div>
+													<!-- / modal footer -->
 												</div>
+												<!-- / modal content -->
 											</div>
-											<!-- / Modal delete -->
+										</div>
+										<!-- / Modal delete -->
 
-										</td>
-									</tr>
-								</c:forEach>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -155,6 +187,7 @@
 
 				</div>
 				<!-- /.col-lg-12 -->
+
 			</div>
 			<!-- /.row -->
 
@@ -176,6 +209,77 @@
 	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
 	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+
+
+	<script>
+		app
+				.controller(
+						'ViewCanteenController',
+						[
+								'$http',
+								'$scope',
+								'$window',
+								function($http, $scope, $window) {
+
+									$scope.success = angular
+											.copy($window.sessionStorage.success);
+									$scope.error = angular
+											.copy($window.sessionStorage.error);
+									$window.sessionStorage
+											.removeItem('success');
+									$window.sessionStorage.removeItem('error');
+
+									$scope.loading = $http(
+											{
+												method : 'GET',
+												url : '/eureka_webservice/GetAllCanteensServlet'
+											})
+											.then(
+													function successCallback(
+															response) {
+														$scope.data = response.data;
+														$scope.display = response.status;
+													},
+													function errorCallback(
+															response) {
+														console.log(response);
+													});
+
+									$scope.deleteCanteen = function(canteenId,
+											canteenName) {
+										console.log({
+											canteenId : canteenId,
+											canteenName : canteenName
+										});
+
+										$scope.loading2 = $http(
+												{
+													method : 'POST',
+													url : '/eureka_webservice/DeleteCanteenServlet',
+													data : {
+														canteenId : canteenId,
+														canteenName : canteenName
+													}
+												})
+												.then(
+														function successCallback(
+																response) {
+															console
+																	.log(response);
+															$window.sessionStorage.success = response.data.success;
+															$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
+														},
+														(function errorCallback(
+																response) {
+															$window.sessionStorage.error = response.data.error;
+															$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
+														}));
+									};
+
+								}
+
+						]);
+	</script>
 </body>
 
 </html>

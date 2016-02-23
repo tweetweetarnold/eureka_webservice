@@ -49,7 +49,7 @@ public class LoadAdminAddNewWindowServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 
 			ArrayList<Company> companyList = coCtrl.getAllCompany();
-			ArrayList<Canteen> canteenList = caCtrl.getAllCanteens();
+			ArrayList<Canteen> canteenList = caCtrl.getAllActiveCanteens();
 			ArrayList<Integer> weekList = new ArrayList<Integer>();
 			for (int i = 1; i < 54; i++) {
 				weekList.add(i);

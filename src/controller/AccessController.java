@@ -242,6 +242,20 @@ public class AccessController {
 
 	}
 
+	public boolean constructDeleteUserNotificationEmail(String email) throws MessagingException {
+		String[] toSendEmail = {email};
+		SendEmail javaEmail = new SendEmail();
+		javaEmail.setMailServerProperties();
+		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Account Deleted", "Dear User,<br><br>"
+				+ "This email is to inform you that your account has been deleted.<br> Thank you for using Koh Bus LunchTime Ordering App.<br><br> "
+				+ "Regards,<br>"
+				+ "Admin<br><br>"
+				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
+				toSendEmail);
+
+		return true;
+	}
+	
 	/**
 	 * Constructs an email message for Resetting password
 	 * 
@@ -281,7 +295,7 @@ public class AccessController {
 
 		return true;
 	}
-	
+
 	public boolean constructVerifyEmail(String serverName, int serverPort,
 			String contextPath, String email, String[] toSendEmail) throws MessagingException {
 		SendEmail javaEmail = new SendEmail();
@@ -334,7 +348,7 @@ public class AccessController {
 	private String encryptPassword(String email, String password) {
 		return aesAlgo.encrypt(email + password);
 	}
-
+	
 	/**
 	 * Registers a new Administrator to gain access to classified information
 	 * 
@@ -353,7 +367,7 @@ public class AccessController {
 
 		return newAdmin.getUsername();
 	}
-	
+
 	/**
 	 * Registers a new user to gain access to the application
 	 * 
@@ -388,7 +402,7 @@ public class AccessController {
 		}
 		return newEmployee.getEmail();
 	}
-
+	
 	/**
 	 * Update the current contact number of the Employee in the database
 	 * 

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import model.Canteen;
 import model.Company;
 import model.Employee;
 import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
+import model.OrderWindow;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -19,6 +21,8 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
 
 public class MyConnection {
 	private static SessionFactory sessionFactory;
@@ -49,6 +53,7 @@ public class MyConnection {
 				}
 				System.out.println("SessionFactory is set: " + sessionFactory);
 			}
+			
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
@@ -306,5 +311,5 @@ public class MyConnection {
 		session.getTransaction().commit();
 		session.close();
 	}
-
+	
 }

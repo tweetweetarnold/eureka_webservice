@@ -17,10 +17,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import model.Food;
-import model.Stall;
 import controller.FoodController;
-import controller.StallController;
 
 /**
  * Servlet implementation class ProcessAdminAddNewFoodServlet
@@ -37,8 +34,7 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -46,21 +42,16 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		response.setCharacterEncoding("UTF-8");
-
 		request.setCharacterEncoding("UTF-8");
+
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		FoodController foodController = new FoodController();
-		StallController stallController = new StallController();
-		String[] parameters = new String[6];
-		String[] output = new String[2];
-		byte[] image = null;
 
 		// Create a factory for disk-based file items
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -71,8 +62,12 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 		// Create a new file upload handler and set max size
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(1024 * 1024 * 1000);
+
 		int stallId = 0;
 		int index = 0;
+		String[] parameters = new String[6];
+		byte[] image = null;
+
 		try {
 			// Parse the request
 			List<FileItem> items = upload.parseRequest(request);
@@ -80,19 +75,14 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			while (iter.hasNext()) {
 				FileItem item = (FileItem) iter.next();
 				if (!item.isFormField()) {
-
-					String contentType = item.getContentType();
-					if (!contentType.equals("image/jpeg")) {
-						throw new Exception("Invalid image format");
+					image = item.get();
+					if (image.length != 0) {
+						String contentType = item.getContentType();
+						if (!contentType.equals("image/jpeg")) {
+							throw new Exception("Invalid image format");
+						}
 					}
 
-					image = item.get();
-
-					// //
-					// parameters[index] = output[2];
-
-					// session.setAttribute("url", url);
-					// response.sendRedirect("result.jsp");
 				} else {
 					if (item.getFieldName().equals("chineseName")) {
 						String inputValues = item.getString("UTF-8");
@@ -106,32 +96,14 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 				}
 				index++;
 			}
+			// End of parsing request
 
-			double price = Double.parseDouble(parameters[4]);
 			stallId = Integer.parseInt(parameters[0]);
-
-			Stall stall = stallController.getStall(stallId);
-			boolean isChinese = foodController.checkChineseWords(parameters[2]);
-			if (!isChinese) {
-				throw new Exception(parameters[2] + " is not a valid chinese word.");
-			}
-			boolean foodExists = foodController.checkFoodExists(parameters[1], stall);
-			if (foodExists) {
-				throw new Exception(parameters[1] + " already exists in " + stall.getName());
-			}
-
-			output = foodController.imageUpload(image);
-			Food food = new Food(parameters[1], parameters[2], parameters[3], price, output[0], output[1], stall);
-
-			food.setWeatherConditions(parameters[5]);
-
-			System.out.println("foodname: " + food.getName());
-			System.out.println("saving food...");
-			foodController.saveFood(food);
+			foodController.processAddingFood(image, parameters, stallId);
 
 			session.setAttribute("success", "Food added successfully.");
 
-			response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=" + stallId);
+			response.sendRedirect("/eureka_webservice/admin/food/view.jsp?stallId=" + stallId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -139,37 +111,5 @@ public class ProcessAdminAddNewFoodServlet extends HttpServlet {
 			response.sendRedirect("/eureka_webservice/admin/food/add.jsp?stallId=" + stallId);
 		}
 
-		// String name = request.getParameter("name");
-		// String description = request.getParameter("description");
-		// String priceString = request.getParameter("price");
-		// String stallIdString = request.getParameter("stallId");
-		// System.out.println("String: " + stallIdString);
-		//
-		// String imageDirectory = request.getParameter("imageDirectory");
-		// String weatherConditions = request.getParameter("weatherConditions");
-		//
-		// try {
-		// double price = Double.parseDouble(priceString);
-		// int stallId = Integer.parseInt(stallIdString);
-		//
-		// Stall stall = stallController.getStall(stallId);
-		// Food food = new Food(name, description, price, imageDirectory,
-		// stall);
-		//
-		// food.setWeatherConditions(weatherConditions);
-		//
-		// System.out.println("foodname: " + food.getName());
-		// System.out.println("saving food...");
-		// foodController.saveFood(food);
-		//
-		// session.setAttribute("success", "Food added successfully.");
-		//
-		// response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId="
-		// + stallId);
-		//
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
 	}
-
 }

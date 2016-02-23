@@ -95,7 +95,7 @@
 							<c:set value="0" var="overallPrice" />
 
 							<!-- 1st tab - group by users -->
-							<div class="tab-pane fade in active" id="nogroup">
+							<div class="tab-pane fade in active" id="nogroup${mapLoop.index }">
 								<div class="dataTable_wrapper">
 									<br>
 									<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -107,6 +107,7 @@
 												<th>Add-On(s)</th>
 												<th>Qty</th>
 												<th>Price($)</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -115,6 +116,9 @@
 													<td rowspan="${fn:length(order.value) + 1}">${loop.index + 1}</td>
 													<td rowspan="${fn:length(order.value) + 1}">
 														<p title="${order.key.email}">${order.key.name}&nbsp;(${order.key.deliveryPoint})</p>
+														<a
+															href="/eureka_webservice/admin/orderwindow/add-fooditem.jsp?foodOrderId=${order.value[0].foodOrder.foodOrderId}"
+														>Add new line</a>
 													</td>
 
 													<c:forEach items="${order.value}" var="foodOrderItem">
@@ -133,6 +137,54 @@
 																/>
 																$${combinedPrice}
 																<c:set value="${overallPrice + combinedPrice}" var="overallPrice" />
+															</td>
+															<td>
+																<button type="button" class="btn btn-link btn-xs" data-toggle="modal"
+																	data-target="#modalDelete${innerLoop}"
+																>
+																	<i class="fa fa-trash-o fa-2x"></i>
+																</button>
+
+																<!-- Modal delete -->
+																<div class="modal fade" id="modalDelete${innerLoop}" tabindex="-1" role="dialog"
+																	aria-labelledby="myModalLabel"
+																>
+																	<div class="modal-dialog" role="document">
+																		<form action="/eureka_webservice/ProcessAdminDeleteFoodOrderItemServlet" method="post">
+																			<input type="hidden" name="foodOrderItemId" value="${foodOrderItem.foodOrderItemId}">
+																			<div class="modal-content">
+																				<div class="modal-header">
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						<span aria-hidden="true">&times;</span>
+																					</button>
+																					<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
+																				</div>
+																				<!-- / modal header -->
+																				<div class="modal-body">
+																					<p>
+																						<b>WARNING: </b>
+																						You are deleting food order item.
+																						<br>
+																						<br>
+																						Are you sure you want to continue?
+																					</p>
+																				</div>
+																				<!-- / modal body -->
+
+																				<div class="modal-footer">
+																					<!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+																					<button type="button" class="btn btn-default" data-dismiss="modal">No, keep the item</button>
+																					<button type="submit" class="btn btn-danger">Yes, delete the item</button>
+																				</div>
+																				<!-- / modal footer -->
+																			</div>
+																			<!-- / modal content -->
+																		</form>
+																	</div>
+																</div>
+																<!-- / Modal delete -->
+
+
 															</td>
 														</tr>
 													</c:forEach>

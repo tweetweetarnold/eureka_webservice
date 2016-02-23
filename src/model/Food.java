@@ -16,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import value.StringValues;
 
 /**
@@ -26,6 +29,7 @@ import value.StringValues;
 @Entity
 @Table(name = "food")
 public class Food {
+	private String chineseName, status;
 	private Date createDate;
 	private String description;
 	@Id
@@ -36,7 +40,7 @@ public class Food {
 	private Set<Modifier> modifierList;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "food")
 	private Set<ModifierSection> modifierSectionList;
-	private String name, chineseName, status;
+	private String name;
 	private double price;
 	private String publicId;
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -60,8 +64,8 @@ public class Food {
 	 * @param imageDirectory The directory where the Food image is being stored
 	 * @param stall The Stall that sells this Food
 	 */
-	public Food(String name, String chineseName, String description, double price, String imageDirectory,
-			String publicId, Stall stall) {
+	public Food(String name, String chineseName, String description, double price,
+			String imageDirectory, String publicId, Stall stall) {
 		super();
 		this.name = name;
 		this.chineseName = chineseName;
@@ -93,6 +97,20 @@ public class Food {
 			}
 		}
 		return false;
+	}
+
+	public Set<Modifier> getActiveModifierList() {
+		Set<Modifier> returnSet = new HashSet<Modifier>();
+		for (Modifier s : modifierList) {
+			if (s.getStatus().equals(StringValues.ACTIVE)) {
+				returnSet.add(s);
+			}
+		}
+		return returnSet;
+	}
+
+	public String getChineseName() {
+		return chineseName;
 	}
 
 	/**
@@ -197,9 +215,9 @@ public class Food {
 	public String getWeatherConditions() {
 		return weatherConditions;
 	}
-	
-	public String getChineseName() {
-		return chineseName;
+
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
 	}
 
 	/**
@@ -294,10 +312,6 @@ public class Food {
 	 */
 	public void setWeatherConditions(String weatherConditions) {
 		this.weatherConditions = weatherConditions;
-	}
-	
-	public void setChineseName(String chineseName) {
-		this.chineseName = chineseName;
 	}
 
 }

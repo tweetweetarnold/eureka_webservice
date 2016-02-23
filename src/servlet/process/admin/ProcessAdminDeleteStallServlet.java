@@ -43,18 +43,20 @@ public class ProcessAdminDeleteStallServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		StallController stallController = new StallController();
 
-		String stallIdString = request.getParameter("stallId");
 		try {
+			String stallIdString = request.getParameter("stallId");
+			String canteenIdString = request.getParameter("canteenId");
+
+			int canteenId = Integer.parseInt(canteenIdString);
 			int stallId = Integer.parseInt(stallIdString);
+
 			Stall stall = stallController.getStall(stallId);
 
 			stallController.deleteStall(stall);
 
-			int canteenId = (int) session.getAttribute("canteenId");
-
 			session.setAttribute("success", stall.getName() + " has been deleted.");
 
-			response.sendRedirect("/eureka_webservice/LoadAdminViewStallsServlet?canteenId=" + canteenId);
+			response.sendRedirect("/eureka_webservice/admin/stall/view.jsp?canteenId=" + canteenId);
 
 		} catch (Exception e) {
 			e.printStackTrace();

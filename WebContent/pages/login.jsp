@@ -272,31 +272,33 @@
 
 			<div class="row">
 
-				<div class="col-md-5 col-features text-center">
+				<div class="col-md-6 col-features text-center">
 
 					<!-- Images showcase -->
 					<figure>
-						<img class="img-iPhone" src="/eureka_webservice/resources/guri-one/templates/images/iphone/1.png" alt="">
+						<img src="/eureka_webservice/resources/img/login/login1.png" alt="" style="padding-top: 100px;
+	width: 450px;">
 					</figure>
 
 				</div>
-				<!-- /.col-md-5 -->
+				<!-- /.col-md-7 -->
 
-				<div class="col-md-7 col-features features-content">
+				<div class="col-md-6 col-features features-content">
 
 					<!-- Title -->
 					<h3 id="title-1">Register an account</h3>
 
 					<!-- Description -->
-					<p>Register an account by clicking on "Register" button. You will need your company's code in order to
-						register. Please contact your HR Department to find out more.</p>
+					<p>Register an account with LunchTime! Simply click on the “Register” button and fill in your particulars. Your
+						company code will be given to you by your administrator. Verify your account via email and you are all set and
+						ready to order your lunch with us!</p>
 
 					<p>
 						<a class="btn btn-danger" href="/eureka_webservice/pages/register.jsp">Register</a>
 					</p>
 
 				</div>
-				<!-- /.col-md-7 -->
+				<!-- /.col-md-5 -->
 
 			</div>
 			<!-- /.row -->
@@ -306,28 +308,29 @@
 
 			<div class="row media-screen-800">
 
-				<div class="col-md-7 col-features features-content">
+				<div class="col-md-6 col-features features-content">
 
 					<!-- Title -->
-					<h3 id="title-2">Order your food order</h3>
+					<h3 id="title-2">Order your lunch</h3>
 
 					<!-- Description -->
-					<p>Browse through the canteen selected for today! Make your order and submit into cart.</p>
-
-				</div>
-				<!-- /.col-md-7 -->
-
-				<div class="col-md-5 col-features text-center">
-
-					<!-- Images showcase -->
-					<figure>
-						<img class="img-iPhone margin-top margin-screen-800"
-							src="/eureka_webservice/resources/guri-one/templates/images/iphone/4.png" alt=""
-						>
-					</figure>
+					<p>LunchTime allows you to browse through food menus easily and without fuss. Select the food that you like and
+						submit to cart. Remember to confirm your orders in the “cart” tab and the food will be prepared and delivered to
+						you!</p>
 
 				</div>
 				<!-- /.col-md-5 -->
+
+				<div class="col-md-6 col-features text-center">
+
+					<!-- Images showcase -->
+					<figure>
+						<img src="/eureka_webservice/resources/img/login/login1.png" alt="" style="padding-top: 100px;
+	width: 450px;">
+					</figure>
+
+				</div>
+				<!-- /.col-md-7 -->
 
 			</div>
 			<!-- /.row -->
@@ -337,26 +340,25 @@
 
 			<div class="row">
 
-				<div class="col-md-5 col-features text-center">
+				<div class="col-md-6 col-features text-center">
 
 					<!-- Images showcase -->
 					<figure>
-						<img class="img-iPhone margin-top margin-top-1"
-							src="/eureka_webservice/resources/guri-one/templates/images/iphone/3.png" alt=""
-						>
+						<img src="/eureka_webservice/resources/img/login/login1.png" alt="" style="padding-top: 100px;
+	width: 450px;">
 					</figure>
 
 				</div>
 				<!-- /.col-md-5 -->
 
-				<div class="col-md-7 col-features features-content">
+				<div class="col-md-6 col-features features-content">
 
 					<!-- Title -->
-					<h3 id="title-3">Pay only at the end of the week</h3>
+					<h3 id="title-3">Payment</h3>
 
 					<!-- Description -->
-					<p>We know that you may not always carry your wallet around with you. So, pay only at the end of the week! You
-						can make payment through Paypal. All you need is a Paypal account or your credit card number.</p>
+					<p>To pay fast and secure online, all you need is a Paypal account or your credit card number. What’s more,
+						LunchTime allows you to pay your accumulated lunch orders only at the end of every week!</p>
 
 				</div>
 				<!-- /.col-md-7 -->

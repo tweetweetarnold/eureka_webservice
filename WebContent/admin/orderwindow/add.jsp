@@ -134,12 +134,11 @@
 											</select>
 										</div>
 
-
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm">Add New
 											Order Window</button>
 
 										<!-- Modal confirmation -->
-										<div class="modal" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -206,10 +205,6 @@
 
 	</div>
 	<!-- /#wrapper -->
-
-
-
-
 
 	<script
 		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"

@@ -48,7 +48,8 @@ public class ProcessAdminAddNewModifierServlet extends HttpServlet {
 			double modifierPrice = Double.parseDouble(request.getParameter("modifierPrice"));
 			String foodID = (String) request.getParameter("foodID");
 			String modifierChineseName = request.getParameter("modifierChineseName");
-
+			System.out.println("DUBUGGING HERE " + modifierSectionID);
+ 
 			controller.createAndAddModifier(modifierName, modifierChineseName, modifierDescription, modifierPrice,
 					foodID, modifierSectionID);
 

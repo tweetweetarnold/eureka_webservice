@@ -13,6 +13,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
+import value.StringValues;
 import connection.MyConnection;
 
 /**
@@ -51,7 +52,25 @@ public class CanteenDAO {
 	 * @param c The Canteen object to be removed
 	 */
 	public void deleteCanteen(Canteen c) {
-		MyConnection.delete(c);
+		c.setStatus(StringValues.ARCHIVED);
+		updateCanteen(c);
+	}
+	
+	public ArrayList<Canteen> getAllActiveCanteens() {
+		ArrayList<Canteen> returnList = null;
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		returnList = new ArrayList<Canteen>();
+
+		for (Object o : l) {
+			returnList.add((Canteen) o);
+		}
+		return returnList;
 	}
 	
 	/**
@@ -74,6 +93,9 @@ public class CanteenDAO {
 		}
 		return returnList;
 	}
+	
+	
+	
 
 	/**
 	 * Retrieve the Canteen based on the provided ID
@@ -94,6 +116,7 @@ public class CanteenDAO {
 	public Canteen getCanteenByAddress(String address) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
 		dc.add(Restrictions.eq("address", address));
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -112,6 +135,7 @@ public class CanteenDAO {
 	public Canteen getCanteenByName(String canteenName) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Canteen.class);
 		dc.add(Restrictions.eq("name", canteenName));
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -135,7 +159,7 @@ public class CanteenDAO {
 			Set<Stall> stallList = c.getStallList();
 			System.out.println(stallList);
 			for (Stall s : stallList) {
-				if (s.getName().equals(stallName)) {
+				if (s.getName().equals(stallName) && s.getStatus().equals(StringValues.ACTIVE)) {
 					return s;
 				}
 			}

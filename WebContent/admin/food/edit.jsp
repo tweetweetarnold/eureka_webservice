@@ -58,13 +58,13 @@
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
 						<li>
-							<a href="/eureka_webservice/LoadViewCanteenServlet">Canteens</a>
+							<a href="/eureka_webservice/admin/canteen/view.jsp">Canteens</a>
 						</li>
 						<li>
-							<a href="/eureka_webservice/LoadAdminViewStallsServlet?canteenId=${sessionScope.canteenId}">Stalls</a>
+							<a href="/eureka_webservice/admin/stall/view.jsp?canteenId=${sessionScope.canteenId}">Stalls</a>
 						</li>
 						<li>
-							<a href="/eureka_webservice/LoadAdminViewFoodsServlet?stallId=${sessionScope.stallId}">Foods</a>
+							<a href="/eureka_webservice/admin/food/view.jsp?stallId=${sessionScope.stallId}">Foods</a>
 						</li>
 					</ol>
 
@@ -73,7 +73,10 @@
 			</div>
 			<!-- Error message handling -->
 			<c:if test="${not empty sessionScope.error}">
-				<div class="alert alert-danger" role="alert">
+				<div class="alert alert-danger alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 					<span class="sr-only">Error: </span>
 					${error}
@@ -118,18 +121,14 @@
 											<input class="form-control" name="price" value="${sessionScope.price}" required>
 										</div>
 
-										<div class="form-group">
-											<label>Weather Conditions</label>
-											<input class="form-control" name="weatherConditions" value="${sessionScope.weatherConditions}">
-										</div>
+										<input name="weatherConditions" type="hidden" value="${sessionScope.weatherConditions}">
 
 										<div class="form-group">
-											<label>Replace Image</label>
+											<label>Replace Image(*only accepts jpeg or jpg image formats)</label>
 											<input type="file" name="file" style="width: 228px;" />
 										</div>
 
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Update
-											Food details</button>
+										<button type="submit" class="btn btn-primary">Update Food details</button>
 
 									</form>
 								</div>
@@ -162,7 +161,7 @@
 				</div>
 				<div class="modal-body">Are you sure you want to update Food details?</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-outline btn-default">Cancel</button>
+					<button type="button" data-dismiss='modal' class="btn btn-outline btn-default">Cancel</button>
 					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
 				</div>
 			</div>

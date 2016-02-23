@@ -63,7 +63,10 @@
 			</div>
 			<!-- Error message handling -->
 			<c:if test="${not empty sessionScope.error}">
-				<div class="alert alert-danger" role="alert">
+				<div class="alert alert-danger alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 					<span class="sr-only">Error: </span>
 					${error}
@@ -86,7 +89,7 @@
 										enctype="multipart/form-data"
 									>
 
-										<input type="hidden" name="stallId" value="${stallId}">
+										<input type="hidden" name="stallId" value="${param.stallId}">
 
 										<div class="form-group">
 											<label>Food name</label>
@@ -95,7 +98,7 @@
 
 										<div class="form-group">
 											<label>Food name (Chinese)</label>
-											<input class="form-control" name="chineseName">
+											<input class="form-control" name="chineseName" required>
 										</div>
 
 										<div class="form-group">
@@ -108,19 +111,15 @@
 											<input class="form-control" name="price" required>
 										</div>
 
-										<div class="form-group">
-											<label>Weather Conditions</label>
-											<input class="form-control" name="weatherConditions">
-										</div>
+										<input name="weatherConditions" type="hidden" value="${sessionScope.weatherConditions}">
 
 										<div class="form-group">
-											<label>Image Directory</label>
-											<input type="file" name="file" style="width: 228px;" required />
+											<label>Image Directory(*only accepts jpeg or jpg image formats)</label>
+											<input type="file" name="file" style="width: 228px;"/>
 										</div>
 										<br>
-										
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
-											new Food</button>
+
+										<button type="submit" class="btn btn-primary">Add new Food</button>
 
 									</form>
 								</div>
@@ -145,7 +144,7 @@
 	<!-- /#wrapper -->
 
 	<!-- Create confirmation -->
-	<div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -153,7 +152,7 @@
 				</div>
 				<div class="modal-body">Are you sure you want to Add new Food?</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-outline btn-default">Cancel</button>
+					<button type="button" data-dismiss='modal' class="btn btn-outline btn-default">Cancel</button>
 					<button type="submit" form="submitForm" class="btn btn-primary">Confirm</button>
 				</div>
 			</div>

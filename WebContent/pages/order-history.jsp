@@ -97,7 +97,7 @@
 									<fmt:formatNumber value="${foodOrder.orderWindow.priceModifierList[0].value * -1}" var="discamt"
 										minFractionDigits="2"
 									/>
-									-$${discamt}
+									$${discamt}
 									<br>
 									<br>
 									<table class="table table-striped">

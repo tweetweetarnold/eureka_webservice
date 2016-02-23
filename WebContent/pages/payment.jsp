@@ -64,49 +64,80 @@
 		</div>
 		<!-- /.row -->
 
-		<c:if test="${empty sessionScope.paymentFoodOrderList}">
-			You haven't ordered anything! Go order something!
-		</c:if>
+		<c:choose>
 
-		<c:if test="${not empty sessionScope.paymentSuccess}">
-			<c:remove var="paymentFoodOrderList" scope="session" />
-		</c:if>
+			<c:when test="${not empty sessionScope.paymentSuccess}">
+				<c:remove var="paymentFoodOrderList" scope="session" />
+			</c:when>
 
-		<c:if test="${not empty sessionScope.error}">
-			<c:remove var="paymentFoodOrderList" scope="session" />
-		</c:if>
+			<c:when test="${not empty sessionScope.error}">
+				<c:remove var="paymentFoodOrderList" scope="session" />
+			</c:when>
 
-		<!-- Success message handling -->
-		<c:if test="${not empty sessionScope.paymentSuccess}">
-			<div class="alert alert-success alert-dismissible fade in" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-				<span class="sr-only">Success:</span>
-				<c:out value="${paymentSuccess}" />
-			</div>
-			<c:remove var="paymentSuccess" scope="session" />
-		</c:if>
+			<c:when test="${not empty sessionScope.paymentSuccess}">
+				<div class="alert alert-success alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+					<span class="sr-only">Success:</span>
+					<c:out value="${paymentSuccess}" />
+				</div>
+				<c:remove var="paymentSuccess" scope="session" />
+			</c:when>
 
-		<!-- Error message handling -->
-		<c:if test="${not empty sessionScope.error}">
-			<div class="alert alert-danger alert-dismissible fade in" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				<c:out value="${error}" />
-			</div>
-			<c:remove var="error" scope="session" />
-		</c:if>
+			<c:when test="${not empty sessionScope.error}">
+				<div class="alert alert-danger alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<span class="sr-only">Error:</span>
+					<c:out value="${error}" />
+				</div>
+				<c:remove var="error" scope="session" />
+			</c:when>
+
+			<c:when test="${sessionScope.orderWindow == null}">
+				<div class="alert alert-warning alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<span class="sr-only">Warning:</span>
+					<c:out value="${warning}" />
+				</div>
+				<c:remove var="orderWindow" scope="session" />
+			</c:when>
+
+			<c:when test="${fn:length(sessionScope.paymentFoodOrderList) eq 0}">
+				<div class="alert alert-warning alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<span class="sr-only">Warning:</span>
+					You haven't ordered anything! Go order something!
+				</div>
+				<c:remove var="paymentFoodOrderList" scope="session" />
+			</c:when>
+
+
+		</c:choose>
+
 
 
 		<div class="row">
 			<div class="col-md-12">
 				<!-- PayPal form -->
 				<c:if test="${not empty sessionScope.paymentFoodOrderList}">
+				<c:set var="sum" value="0" />
+				<c:forEach items="${sessionScope.paymentFoodOrderList}" var="order" varStatus="orderLoop">
+							<c:set var="sum" value="${sum + order.finalPrice}" />
+							
+				</c:forEach>
+					
+					<c:if test="${sum > 0 }">
 					<form action="${initParam['posturl']}" method="post">
 						<input type="hidden" name="upload" value="1" />
 						<input type="hidden" name="return"
@@ -119,39 +150,29 @@
 						<c:set var="count" value="0" />
 
 						<c:forEach items="${sessionScope.paymentFoodOrderList}" var="order" varStatus="orderLoop">
+							<c:set var="count" value="${count + 1}" />
+							<fmt:formatNumber value="${order.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
 
-							<c:forEach items="${order.foodOrderList}" var="foodItem" varStatus="foodItemLoop">
-								<c:set var="count" value="${count + 1}" />
-								<c:set var="modifiedFoodName" value="${foodItem.food.name}" />
+							<fmt:formatNumber value="${order.orderWindow.priceModifierList[0].value * -1}" var="discount"
+								minFractionDigits="2"
+							/>
 
-								<c:forEach items="${foodItem.modifierChosenList}" var="modifierChosen" varStatus="modifierChosenLoop">
-									<c:choose>
-										<c:when test="${fn:contains(modifierChosen.name, 'Upsize')}">
-											<c:set var="modifiedFoodName" value="${modifiedFoodName} with Upsize" />
-										</c:when>
-
-										<c:when test="${fn:contains(modifierChosen.name, 'juice')}">
-											<c:set var="modifiedFoodName" value="${modifiedFoodName} juice" />
-										</c:when>
-
-										<c:otherwise>
-											<c:set var="modifiedFoodName" value="${modifiedFoodName} with ${modifierChosen.name}" />
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-
-								<input type="hidden" name="item_name_<c:out value="${count}"/>" value="<c:out value="${modifiedFoodName}" />">
-								<input type="hidden" name="quantity_<c:out value="${count}"/>" value="<c:out value="${foodItem.quantity}" />">
-								<fmt:formatNumber value="${foodItem.price}" var="newPrice" minFractionDigits="2" />
-								<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${newPrice}" />">
-
-							</c:forEach>
+							<c:if test="${order.finalPrice > 0 }">
+								<input type="hidden" name="item_name_<c:out value="${count}"/>"
+									value="Food Order ID No.${order.foodOrderId}, Order Placed On:<fmt:formatDate type="both" value="${order.createDate}" />"
+								>
+	
+								<input type="hidden" name="amount_<c:out value="${count}"/>" value="<c:out value="${amt}" />">
+	
+								<input type="hidden" name="discount_amount_<c:out value="${count}"/>" value="${discount}">
+							</c:if>
 
 						</c:forEach>
 
 						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
 
 					</form>
+					</c:if>
 				</c:if>
 				<!-- End of PayPal -->
 				<div class="row"></div>
@@ -195,7 +216,7 @@
 								Canteen: ${foodOrder.orderWindow.canteen.name}
 								<br>
 								Price:
-								<fmt:formatNumber value="${foodOrder.finalPrice}" var="amt" minFractionDigits="2" />
+								<fmt:formatNumber value="${foodOrder.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
 								$${amt}
 								<br>
 								Discount:
@@ -203,6 +224,17 @@
 									minFractionDigits="2"
 								/>
 								$${discount}
+								<br>
+								Payable:
+								<fmt:formatNumber value="${foodOrder.finalPrice}" var="payable" minFractionDigits="2" />
+								<c:choose>
+								<c:when test="${foodOrder.finalPrice < 0 }">
+									$0.00
+								</c:when>
+								<c:otherwise>
+								$${payable}
+								</c:otherwise>
+								</c:choose>
 								<br>
 								<br>
 

@@ -64,7 +64,7 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 
 		System.out.println("startDate string: " + startDatetimeString);
 		System.out.println("endDate string: " + endDatetimeString);
-
+		System.out.println("discount " + discountAbsoluteString);
 		System.out.println("companyId: " + companyId);
 		System.out.println("canteenId: " + canteenId);
 
@@ -85,6 +85,10 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 
 			try {
 				discountAbsolute = Double.parseDouble(discountAbsoluteString);
+				if(discountAbsolute>0){
+					discountAbsolute*=-1;
+					System.out.println("In the try : " + discountAbsolute);
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();

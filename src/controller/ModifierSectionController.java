@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import dao.FoodDAO;
+import dao.ModifierSectionDAO;
 import model.Food;
 import model.Modifier;
 import model.ModifierSection;
-import dao.FoodDAO;
-import dao.ModifierSectionDAO;
 
 public class ModifierSectionController {
 	public ModifierSectionController() {
@@ -16,7 +16,7 @@ public class ModifierSectionController {
 	}
 
 	// assuming the person just wants to create an empty container
-	public void addModifierSection(String foodID, String categoryName, String displayType) {
+	public int addModifierSection(String foodID, String categoryName, String displayType) {
 		FoodDAO foodDAO = new FoodDAO();
 		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 		Set<Modifier> modifierSectionSet = new HashSet<Modifier>();
@@ -33,17 +33,20 @@ public class ModifierSectionController {
 		// update the existing food object and save the new ModifierSection
 		foodDAO.updateFood(food);
 		modifierSectionDAO.saveModifierSection(newModifierSection);
+		return newModifierSection.getModifierSectionId();
 	}
 
-	public boolean createAndAddModifier(String modifierName,String chineseName, String modifierDescription,
-			double modifierPrice, String foodID, String modifierSectionID) {
-		
+	public boolean createAndAddModifier(String modifierName, String chineseName,
+			String modifierDescription, double modifierPrice, String foodID,
+			String modifierSectionID) {
+
 		boolean modifierSectionExists = false;
 		ModifierSection modifierSectionToEdit = null;
-		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+		// ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 		FoodDAO foodDAO = new FoodDAO();
 		Food food = foodDAO.getFood(Integer.parseInt(foodID));
-		Modifier newModifier = new Modifier(modifierName, chineseName, modifierDescription, modifierPrice, food);
+		Modifier newModifier = new Modifier(modifierName, chineseName, modifierDescription,
+				modifierPrice, food);
 
 		// update Modifierlist in food
 		Set<Modifier> foodModifierList = food.getModifierList();
@@ -71,9 +74,10 @@ public class ModifierSectionController {
 			modifierSectionToEdit.setModifierList(modifierListToEdit);
 			replacementModifierSectionList.add(modifierSectionToEdit);
 			food.setModifierSectionList(replacementModifierSectionList);
-			foodDAO.saveFood(food);
-			modifierSectionDAO.saveModifier(newModifier);
-			modifierSectionDAO.saveModifierSection(modifierSectionToEdit);
+			foodDAO.updateFood(food);
+			newModifier.setModifierSection(modifierSectionToEdit);
+			// modifierSectionDAO.saveModifier(newModifier);
+			// modifierSectionDAO.saveModifierSection(modifierSectionToEdit);
 		}
 		return modifierSectionExists;
 

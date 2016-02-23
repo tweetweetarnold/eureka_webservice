@@ -43,18 +43,20 @@ public class ProcessAdminDeleteFoodServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		FoodController foodController = new FoodController();
 
-		String foodIdString = request.getParameter("foodId");
 		try {
+			String foodIdString = request.getParameter("foodId");
+			String stallIdString = request.getParameter("stallId");
+
+			int stallId = Integer.parseInt(stallIdString);
 			int foodId = Integer.parseInt(foodIdString);
+
 			Food food = foodController.getFood(foodId);
 
 			foodController.deleteFood(food);
 
-			int stallId = (int) session.getAttribute("stallId");
-
 			session.setAttribute("success", food.getName() + " has been deleted.");
 
-			response.sendRedirect("/eureka_webservice/LoadAdminViewFoodsServlet?stallId=" + stallId);
+			response.sendRedirect("/eureka_webservice/admin/food/view.jsp?stallId=" + stallId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
