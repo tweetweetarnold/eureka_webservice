@@ -46,7 +46,7 @@ public class CanteenController {
 	public boolean checkCanteenExists(String name, String address) {
 		Canteen c = canteenDAO.getCanteenByName(name);
 		Canteen canteenAddress = canteenDAO.getCanteenByAddress(address);
-		if (c != null || canteenAddress != null) {
+		if (c != null && canteenAddress != null) {
 			return true;
 		}
 		return false;
