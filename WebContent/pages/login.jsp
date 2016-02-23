@@ -325,7 +325,7 @@
 
 					<!-- Images showcase -->
 					<figure>
-						<img src="/eureka_webservice/resources/img/login/login1.png" alt="" style="padding-top: 100px;
+						<img src="/eureka_webservice/resources/img/login/login2.png" alt="" style="padding-top: 100px;
 	width: 450px;">
 					</figure>
 
@@ -344,7 +344,7 @@
 
 					<!-- Images showcase -->
 					<figure>
-						<img src="/eureka_webservice/resources/img/login/login1.png" alt="" style="padding-top: 100px;
+						<img src="/eureka_webservice/resources/img/login/login3.png" alt="" style="padding-top: 100px;
 	width: 450px;">
 					</figure>
 
