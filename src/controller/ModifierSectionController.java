@@ -31,7 +31,7 @@ public class ModifierSectionController {
 		foodModifierSections.add(newModifierSection);
 		food.setModifierSectionList(foodModifierSections);
 		// update the existing food object and save the new ModifierSection
-		foodDAO.updateFood(food);
+		
 		modifierSectionDAO.saveModifierSection(newModifierSection);
 		return newModifierSection.getModifierSectionId();
 	}
@@ -42,7 +42,7 @@ public class ModifierSectionController {
 
 		boolean modifierSectionExists = false;
 		ModifierSection modifierSectionToEdit = null;
-		// ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 		FoodDAO foodDAO = new FoodDAO();
 		Food food = foodDAO.getFood(Integer.parseInt(foodID));
 		Modifier newModifier = new Modifier(modifierName, chineseName, modifierDescription,
@@ -55,13 +55,14 @@ public class ModifierSectionController {
 
 		// insert Modifier into an existing ModifierSection
 		Set<ModifierSection> modifierSectionList = food.getModifierSectionList();
-		Set<ModifierSection> replacementModifierSectionList = food.getModifierSectionList();
+		Set<ModifierSection> replacementModifierSectionList = new HashSet<ModifierSection>();
 		Iterator<ModifierSection> iter = modifierSectionList.iterator();
 		while (iter.hasNext()) {
 			ModifierSection existingModifierSection = (ModifierSection) iter.next();
 			// Check if modifierSection already exists
 			if (existingModifierSection.getModifierSectionId() == Integer
 					.parseInt(modifierSectionID)) {
+				System.out.println("ModifierSection ID = " + modifierSectionID );
 				modifierSectionExists = true;
 				modifierSectionToEdit = existingModifierSection;
 			} else {
@@ -74,8 +75,9 @@ public class ModifierSectionController {
 			modifierSectionToEdit.setModifierList(modifierListToEdit);
 			replacementModifierSectionList.add(modifierSectionToEdit);
 			food.setModifierSectionList(replacementModifierSectionList);
-			foodDAO.updateFood(food);
 			newModifier.setModifierSection(modifierSectionToEdit);
+			modifierSectionDAO.updateModifierSection(modifierSectionToEdit);
+			
 			// modifierSectionDAO.saveModifier(newModifier);
 			// modifierSectionDAO.saveModifierSection(modifierSectionToEdit);
 		}

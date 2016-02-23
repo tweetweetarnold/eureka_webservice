@@ -23,7 +23,7 @@ public class ModifierSectionDAO {
 		MyConnection.save(modifierSection);
 	}
 	
-	public void updateFoodOrder(ModifierSection modifierSection) {
+	public void updateModifierSection(ModifierSection modifierSection) {
 		MyConnection.update(modifierSection);
 	}
 }

@@ -272,12 +272,12 @@ public class FoodDAO {
 			newModifierSection.setFood(newFood);
 			newModifierSectionList.add(newModifierSection);
 			ModifierSectionDAO dao = new ModifierSectionDAO();
-			dao.saveModifierSection(newModifierSection);
+			//dao.saveModifierSection(newModifierSection);
 //			MyConnection.save(newModifierSection);
 		}
 		newFood.setModifierSectionList(newModifierSectionList);
 		newFood.setModifierList(newList);
-//		saveFood(newFood);
+		saveFood(newFood);
 	}
 	
 	
