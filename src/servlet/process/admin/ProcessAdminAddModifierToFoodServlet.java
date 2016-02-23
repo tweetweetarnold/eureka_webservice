@@ -73,7 +73,7 @@ public class ProcessAdminAddModifierToFoodServlet extends HttpServlet {
 				System.out.println("price: " + price);
 			}
 
-			returnJson.put("success", "Modifiers added to Food");
+			returnJson.put("success", "Add-Ons added successfully.");
 
 		} catch (Exception e) {
 			e.printStackTrace();
