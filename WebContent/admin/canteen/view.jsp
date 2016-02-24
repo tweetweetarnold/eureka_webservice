@@ -99,7 +99,10 @@
 					{{data.length}}
 					<br>
 					<br>
-					<a href='/eureka_webservice/admin/canteen/add.jsp' class="btn btn-primary">Add canteen</a>
+					<a href='/eureka_webservice/admin/canteen/add.jsp' class="btn btn-primary">
+						<i class="fa fa-plus fa-lg"></i>
+						Add Canteen
+					</a>
 					<br>
 					<br>
 

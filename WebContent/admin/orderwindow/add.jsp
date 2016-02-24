@@ -98,29 +98,23 @@
 											</select>
 										</div>
 
-										<div class="container">
-											<div class='col-md-3'>
-												<div class="form-group">
-													<label>Start Datetime</label>
-													<div class='input-group date' id='datetimepicker6'>
-														<input type='text' class="form-control" name="startDatetime" placeholder="Start Date" required />
-														<span class="input-group-addon">
-															<span class="glyphicon glyphicon-calendar"></span>
-														</span>
-													</div>
-												</div>
+										<div class="form-group">
+											<label>Start Datetime</label>
+											<div class='input-group date' id='datetimepicker6'>
+												<input type='text' class="form-control" name="startDatetime" placeholder="Start Date" required />
+												<span class="input-group-addon">
+													<span class="glyphicon glyphicon-calendar"></span>
+												</span>
 											</div>
+										</div>
 
-											<div class='col-md-3'>
-												<div class="form-group">
-													<label>End Datetime</label>
-													<div class='input-group date' id='datetimepicker7'>
-														<input type='text' class="form-control" name="endDatetime" placeholder="End Date" required />
-														<span class="input-group-addon">
-															<span class="glyphicon glyphicon-calendar"></span>
-														</span>
-													</div>
-												</div>
+										<div class="form-group">
+											<label>End Datetime</label>
+											<div class='input-group date' id='datetimepicker7'>
+												<input type='text' class="form-control" name="endDatetime" placeholder="End Date" required />
+												<span class="input-group-addon">
+													<span class="glyphicon glyphicon-calendar"></span>
+												</span>
 											</div>
 										</div>
 
@@ -134,8 +128,10 @@
 											</select>
 										</div>
 
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm">Add New
-											Order Window</button>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm">
+											<i class="fa fa-plus fa-lg"></i>
+											Add New Order Window
+										</button>
 
 										<!-- Modal confirmation -->
 										<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

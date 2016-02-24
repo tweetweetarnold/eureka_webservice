@@ -98,8 +98,10 @@
 					{{stallList.length}}
 					<br>
 					<br>
-					<a class="btn btn-primary" ng-href='/eureka_webservice/admin/stall/add.jsp?canteenId={{canteenId}}' target="_self">Add
-						Stall</a>
+					<a class="btn btn-primary" ng-href='/eureka_webservice/admin/stall/add.jsp?canteenId={{canteenId}}' target="_self">
+						<i class="fa fa-plus fa-lg"></i>
+						Add Stall
+					</a>
 					<br>
 					<br>
 
@@ -153,7 +155,7 @@
 												<form action="/eureka_webservice/ProcessAdminDeleteStallServlet" method="post">
 													<input type="hidden" name="stallId" ng-value="stall.stallId">
 													<input type="hidden" name="canteenId" ng-value="canteenId">
-													
+
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -238,15 +240,16 @@
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
 
+									$window.sessionStorage.canteenId = $location
+											.search().canteenId;
 									$scope.canteenId = $location.search().canteenId;
-									var canteenId = $location.search().canteenId;
 
 									$scope.loading = $http(
 											{
 												method : 'GET',
 												url : '/eureka_webservice/GetAllStallsUnderCanteenServlet',
 												params : {
-													canteenId : canteenId
+													canteenId : $location.search().canteenId
 												}
 											})
 											.then(

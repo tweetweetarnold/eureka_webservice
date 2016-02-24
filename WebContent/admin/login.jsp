@@ -143,7 +143,10 @@
 
 					<!-- Footer 1 -->
 					<section class="text-center">
-						<p>This is for Admin login only.</p>
+						<p>
+							This is for Admin login only
+							<a target="_self" href="/eureka_webservice/pages/login.jsp">.</a>
+						</p>
 					</section>
 
 					<!-- Social media links -->
@@ -165,11 +168,7 @@
 				</div>
 				<!-- /.col-md-4 -->
 
-				<div class="col-md-4 col-footer">
-
-					</section>
-
-				</div>
+				<div class="col-md-4 col-footer"></div>
 				<!-- /.col-md-4 -->
 
 			</div>

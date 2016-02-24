@@ -48,19 +48,19 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		FoodOrderController foodOrderController = new FoodOrderController();
-		OrderWindowController orderWindowController = new OrderWindowController();
+		FoodOrderController foodOrderCtrl = new FoodOrderController();
+		OrderWindowController orderWindowCtrl = new OrderWindowController();
 
 		try {
 			LinkedHashMap<OrderWindow, Object[]> map = new LinkedHashMap<OrderWindow, Object[]>();
-			ArrayList<OrderWindow> openedWindowList = orderWindowController.getAllOpenedWindows();
+			ArrayList<OrderWindow> openedWindowList = orderWindowCtrl.getAllOpenedWindows();
 
 			for (OrderWindow window : openedWindowList) {
 				Object[] arr = new Object[2];
-				HashMap<Employee, ArrayList<FoodOrderItem>> noGroup = foodOrderController
+				HashMap<Employee, ArrayList<FoodOrderItem>> noGroup = foodOrderCtrl
 						.getAllFoodOrderOfOrderWindow(window);
 
-				ArrayList<FoodDisplayObject> groupedByStall = foodOrderController
+				ArrayList<FoodDisplayObject> groupedByStall = foodOrderCtrl
 						.getAllFoodOrderOfOrderWindowGroupedByStall(window);
 
 				System.out.println("nogroup size: " + noGroup.size());

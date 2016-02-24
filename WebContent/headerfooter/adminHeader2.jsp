@@ -60,7 +60,7 @@
 
 				<li>
 					<a target="_self" href="/eureka_webservice/LoadOrderWindowOpenedServlet">
-						<i class="fa fa-dashboard fa-fw"></i>
+						<i class="fa fa-home fa-fw"></i>
 						Homepage
 					</a>
 				</li>
@@ -110,7 +110,6 @@
 					<a target="_self" href="/eureka_webservice/LoadAdminViewCompaniesServlet">
 						<i class="fa fa-building fa-fw"></i>
 						Company
-						<span class="fa arrow"></span>
 					</a>
 				</li>
 
@@ -118,7 +117,6 @@
 					<a target="_self" href="/eureka_webservice/admin/user/view.jsp">
 						<i class="fa fa-user fa-fw"></i>
 						User
-						<span class="fa arrow"></span>
 					</a>
 				</li>
 
@@ -126,7 +124,6 @@
 					<a target="_self" href="/eureka_webservice/admin/canteen/view.jsp">
 						<i class="fa fa-cutlery fa-fw"></i>
 						Canteen
-						<span class="fa arrow"></span>
 					</a>
 				</li>
 
@@ -137,6 +134,13 @@
 				<!-- 						<span class="fa arrow"></span> -->
 				<!-- 					</a> -->
 				<!-- 				</li> -->
+
+				<li>
+					<a target="_self" href="/eureka_webservice/admin/help.jsp">
+						<i class="fa fa-info fa-fw"></i>
+						Help & Guides
+					</a>
+				</li>
 
 
 			</ul>

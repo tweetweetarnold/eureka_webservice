@@ -40,7 +40,7 @@
 </head>
 
 <body>
-<fmt:setTimeZone value="GMT+8" />
+	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 
@@ -60,6 +60,17 @@
 
 					<b>Total companies:</b>
 					${fn:length(sessionScope.companyList)}
+					<br>
+					<br>
+					<a class="btn btn-primary" ng-href='#' target="_self" disabled>
+						<i class="fa fa-plus fa-lg"></i>
+						Add Company
+					</a>
+					<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
+						data-content="This feature is not ready yet." data-placement="right"
+					>
+						<i class="fa fa-question-circle"></i>
+					</a>
 					<br>
 					<br>
 
@@ -88,7 +99,16 @@
 											</c:forEach>
 										</td>
 										<td>
-											<a href="#">Edit</a>
+											<a ng-href="#">
+												<button type="button" class="btn btn-link btn-xs">
+													<i class="fa fa-pencil fa-2x"></i>
+												</button>
+											</a>
+											<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
+												data-content="This feature is not ready yet." data-placement="left"
+											>
+												<i class="fa fa-question-circle"></i>
+											</a>
 										</td>
 									</tr>
 								</c:forEach>
@@ -117,6 +137,12 @@
 	></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+
+	<script>
+		$(function() {
+			$('[data-toggle="popover"]').popover();
+		});
+	</script>
 </body>
 
 </html>

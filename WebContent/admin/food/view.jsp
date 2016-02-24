@@ -105,7 +105,10 @@
 
 					<form action="/eureka_webservice/admin/food/add.jsp">
 						<input type="hidden" name="stallId" ng-value="stall.stallId">
-						<button type="submit" class="btn btn-primary">Add Food</button>
+						<button type="submit" class="btn btn-primary">
+							<i class="fa fa-plus fa-lg"></i>
+							Add Food
+						</button>
 					</form>
 					<br>
 
@@ -257,7 +260,10 @@
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
 
+									$window.sessionStorage.stallId = $location
+											.search().stallId;
 									$scope.stallId = $location.search().stallId;
+									$scope.canteenId = $window.sessionStorage.canteenId;
 
 									$scope.loading = $http(
 											{
@@ -275,7 +281,6 @@
 													function successCallback(
 															response) {
 														console.log(response);
-														$scope.canteenId = response.data.canteenId;
 														$scope.stall = response.data.stall;
 														$scope.foodList = response.data.foods;
 													});

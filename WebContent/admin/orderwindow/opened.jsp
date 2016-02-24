@@ -66,7 +66,7 @@
 						<div class="alert alert-warning fade in" role="alert">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Warning:</span>
-							There are no order windows opened!
+							There are no Order Windows opened!
 						</div>
 					</c:if>
 

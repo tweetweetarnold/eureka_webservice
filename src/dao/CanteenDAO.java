@@ -27,7 +27,6 @@ public class CanteenDAO {
 	 * Creates a default constructor for CanteenDAO
 	 */
 	public CanteenDAO() {
-
 	}
 
 	// Add Stall to the current StallList and update existing canteen
@@ -55,7 +54,7 @@ public class CanteenDAO {
 		c.setStatus(StringValues.ARCHIVED);
 		updateCanteen(c);
 	}
-	
+
 	public ArrayList<Canteen> getAllActiveCanteens() {
 		ArrayList<Canteen> returnList = null;
 
@@ -72,7 +71,7 @@ public class CanteenDAO {
 		}
 		return returnList;
 	}
-	
+
 	/**
 	 * Retrieves all the Canteens from the Database
 	 * 
@@ -93,9 +92,6 @@ public class CanteenDAO {
 		}
 		return returnList;
 	}
-	
-	
-	
 
 	/**
 	 * Retrieve the Canteen based on the provided ID

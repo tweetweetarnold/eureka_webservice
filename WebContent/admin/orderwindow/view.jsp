@@ -87,6 +87,12 @@
 					{{data.length}}
 					<br>
 					<br>
+					<a class="btn btn-primary" ng-href='/eureka_webservice/admin/orderwindow/add.jsp' target="_self">
+						<i class="fa fa-plus fa-lg"></i>
+						Add Order Window
+					</a>
+					<br>
+					<br>
 
 					<div class="dataTable_wrapper">
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
