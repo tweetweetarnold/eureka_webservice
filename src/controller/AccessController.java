@@ -31,8 +31,8 @@ public class AccessController {
 
 	AdminDAO adminDAO = new AdminDAO();
 	AESAlgorithm aesAlgo = new AESAlgorithm();
-	CompanyController companyController = new CompanyController();
-	EmployeeController employeeController = new EmployeeController();
+	CompanyController companyCtrl = new CompanyController();
+	EmployeeController employeeCtrl = new EmployeeController();
 
 	/**
 	 * Creates a default constructor for AccessController
@@ -57,6 +57,7 @@ public class AccessController {
 		}
 		return null;
 	}
+
 	/**
 	 * Process the information provided by the user and verifies for a valid user
 	 * 
@@ -65,7 +66,7 @@ public class AccessController {
 	 * @return An Employee object upon successful verification, otherwise it returns null
 	 */
 	public Employee authenticateUser(String inputEmail, String inputPassword) {
-		Employee emp = employeeController.getEmployeeByEmail(inputEmail);
+		Employee emp = employeeCtrl.getEmployeeByEmail(inputEmail);
 		try {
 			if (emp != null) {
 				String password = emp.getPassword();
@@ -80,7 +81,7 @@ public class AccessController {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Validates the acknowledgement of the Terms and Conditions
 	 * 
@@ -94,9 +95,9 @@ public class AccessController {
 		}
 		return messages;
 	}
-	
-	public ArrayList<String> checkChangePasswordRequirements(Employee e, String oldPassword, String newPassword,
-			String confirmNewPassword) {
+
+	public ArrayList<String> checkChangePasswordRequirements(Employee e, String oldPassword,
+			String newPassword, String confirmNewPassword) {
 		ArrayList<String> messages = new ArrayList<String>();
 		boolean isNotCorrect = false;
 		if (!e.getPassword().equals(encryptPassword(e.getEmail(), oldPassword))) {
@@ -105,7 +106,7 @@ public class AccessController {
 		}
 		ArrayList<String> errorMessages = checkPasswordMeetRequirements(newPassword,
 				confirmNewPassword);
-		
+
 		if (!errorMessages.isEmpty()) {
 			if (isNotCorrect) {
 				errorMessages.add("Old password is invalid.");
@@ -114,22 +115,22 @@ public class AccessController {
 		}
 		return messages;
 	}
-	
+
 	public ArrayList<String> checkCompanyCode(String companyCode) {
 		ArrayList<String> messages = new ArrayList<String>();
 		if (companyCode.equals("")) {
 			messages.add("Company code cannot be empty.");
 		} else {
-			Company company = companyController.getCompanyByCompanyCode(companyCode);
+			Company company = companyCtrl.getCompanyByCompanyCode(companyCode);
 			if (company == null) {
 				messages.add("Failed to find company");
 			}
 		}
 		return messages;
 	}
-	
+
 	/**
-	 * Validates the contact number for any violation of the following requirements: 
+	 * Validates the contact number for any violation of the following requirements:
 	 * <ul>
 	 * <li>Contact number is less than 8 numbers
 	 * <li>Contact number does not adhere to the standard numbering ranges
@@ -145,7 +146,7 @@ public class AccessController {
 		}
 		return messages;
 	}
-	
+
 	/**
 	 * Validates the email address provided by the Employee
 	 * 
@@ -159,12 +160,13 @@ public class AccessController {
 		}
 		EmployeeController employeeController = new EmployeeController();
 		Employee tempEmployee = employeeController.retrieveEmployeeViaEmail(email);
-		if(tempEmployee!=null){
-			messages.add("Email in use. Please try again. If you forgot your password try resetting your password.");
+		if (tempEmployee != null) {
+			messages.add(
+					"Email in use. Please try again. If you forgot your password try resetting your password.");
 		}
 		return messages;
 	}
-	
+
 	/**
 	 * Validates the name of the Employee
 	 * 
@@ -196,16 +198,17 @@ public class AccessController {
 		if (!password.equals(confirmPwd)) {
 			messages.add("Passwords do not match.");
 		}
-		//in the case where password is less than 7
+		// in the case where password is less than 7
 		if (!(password.length() >= 7)) {
 			messages.add("Password must be at least 7 characters long.");
-			//after validating that it is less than 7, check for empty spaces
+			// after validating that it is less than 7, check for empty spaces
 			if (password.contains(" ")) {
 				messages.add("Password should not contain empty spaces.");
 			}
-			
-		} else { 
-			// in the case where password is greater than 7, it will proceed to valid for empty spaces
+
+		} else {
+			// in the case where password is greater than 7, it will proceed to valid for empty
+			// spaces
 			if (password.contains(" ")) {
 				messages.add("Password should not contain empty spaces.");
 			}
@@ -243,19 +246,19 @@ public class AccessController {
 	}
 
 	public boolean constructDeleteUserNotificationEmail(String email) throws MessagingException {
-		String[] toSendEmail = {email};
+		String[] toSendEmail = { email };
 		SendEmail javaEmail = new SendEmail();
 		javaEmail.setMailServerProperties();
-		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Account Deleted", "Dear User,<br><br>"
-				+ "This email is to inform you that your account has been deleted.<br> Thank you for using Koh Bus LunchTime Ordering App.<br><br> "
-				+ "Regards,<br>"
-				+ "Admin<br><br>"
-				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
+		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Account Deleted",
+				"Dear User,<br><br>"
+						+ "This email is to inform you that your account has been deleted.<br> Thank you for using Koh Bus LunchTime Ordering App.<br><br> "
+						+ "Regards,<br>" + "Admin<br><br>"
+						+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
 				toSendEmail);
 
 		return true;
 	}
-	
+
 	/**
 	 * Constructs an email message for Resetting password
 	 * 
@@ -273,69 +276,61 @@ public class AccessController {
 		AESAlgorithm aes = new AESAlgorithm();
 
 		String appUrl = "http://" + serverName + ":" + serverPort + contextPath;
-		
+
 		DateTimeZone.setDefault(DateTimeZone.forID("Asia/Singapore"));
 		System.out.println("Controller TIME ZONE: " + DateTimeZone.getDefault().toString());
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm");
 		DateTime currentTime = new DateTime(DateTimeZone.forID("Asia/Singapore"));
 		System.out.println("NOW: " + currentTime);
-		
+
 		String time = aes.encrypt(formatter.print(currentTime));
 		String token = time;
 		String eEncrypt = aes.encrypt(email);
 		String url = appUrl + "/LoadResetPasswordPage?email=" + eEncrypt + "&token=" + token;
 
 		javaEmail.setMailServerProperties();
-		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Password Reset", "Dear User,<br><br>"
-				+ "To reset your password for LunchTime Ordering App, please on click the following link <b>within 5 minutes</b>:<br> "
-				+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
-				+ "Admin<br><br>"
-				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
+		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Password Reset",
+				"Dear User,<br><br>"
+						+ "To reset your password for LunchTime Ordering App, please on click the following link <b>within 5 minutes</b>:<br> "
+						+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
+						+ "Admin<br><br>"
+						+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
 				toSendEmail);
 
 		return true;
 	}
 
-	public boolean constructVerifyEmail(String serverName, int serverPort,
-			String contextPath, String email, String[] toSendEmail) throws MessagingException {
+	public boolean constructVerifyEmail(String serverName, int serverPort, String contextPath,
+			String email, String[] toSendEmail) throws MessagingException {
 		SendEmail javaEmail = new SendEmail();
-		
+
 		String appUrl = "http://" + serverName + ":" + serverPort + contextPath;
-		
+
 		DateTimeZone.setDefault(DateTimeZone.forID("Asia/Singapore"));
 		System.out.println("Controller TIME ZONE: " + DateTimeZone.getDefault().toString());
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm");
 		DateTime currentTime = new DateTime(DateTimeZone.forID("Asia/Singapore"));
 		System.out.println("NOW: " + currentTime);
-		
+
 		String time = aesAlgo.encrypt(formatter.print(currentTime));
 		String token = time;
 		String eEncrypt = aesAlgo.encrypt(email);
 		String encryptedStatus = aesAlgo.encrypt(StringValues.EMPLOYEE_OK);
-		
-		
-		String url = appUrl + "/ProcessVerificationServlet?email="
-				+ eEncrypt + "&status=" + encryptedStatus + "&token=" + token;
-		
+
+		String url = appUrl + "/ProcessVerificationServlet?email=" + eEncrypt + "&status="
+				+ encryptedStatus + "&token=" + token;
+
 		javaEmail.setMailServerProperties();
-		javaEmail
-		.sendEmail(
-				"Koh Bus LunchTime Ordering App - Verify Your Email",
+		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Verify Your Email",
 				"Dear User,<br><br>"
 						+ "Welcome to LunchTime Ordering App, please click the following link <b>within 5 minutes</b> to verify your email address:<br><br> "
-						+ "<a href="
-						+ url
-						+ ">"
-						+ url
-						+ "</a>"
-						+ "<br><br>"
-						+ "Regards,<br>"
+						+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
 						+ "Admin<br><br>"
 						+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
 				toSendEmail);
-		
+
 		return true;
-		
+
 	}
 
 	/**
@@ -348,7 +343,7 @@ public class AccessController {
 	private String encryptPassword(String email, String password) {
 		return aesAlgo.encrypt(email + password);
 	}
-	
+
 	/**
 	 * Registers a new Administrator to gain access to classified information
 	 * 
@@ -386,8 +381,8 @@ public class AccessController {
 		Company company = null;
 
 		try {
-			company = companyController.getCompanyByCompanyCode(companyCode);
-			
+			company = companyCtrl.getCompanyByCompanyCode(companyCode);
+
 		} catch (Exception exception) {
 			throw new Exception("Failed to find company");
 		}
@@ -396,30 +391,31 @@ public class AccessController {
 		newEmployee.setDeliveryPoint(deliveryPoint);
 		newEmployee.setStatus(StringValues.EMPLOYEE_PENDING_VERIFICATION);
 		try {
-			employeeController.saveEmployee(newEmployee);
+			employeeCtrl.saveEmployee(newEmployee);
 		} catch (ConstraintViolationException e) {
 			throw new Exception("Email already exists! Please log in with that email.");
 		}
 		return newEmployee.getEmail();
 	}
-	
+
 	/**
 	 * Update the current contact number of the Employee in the database
 	 * 
 	 * @param e The designated Employee to be updated
 	 * @param newContactNumber The new contact number provided by the Employee
 	 * @return Returns true when the contact number has been updated
-	 * @throws Exception if the new contact number of the Employee could not be updated in the database
+	 * @throws Exception if the new contact number of the Employee could not be updated in the
+	 *             database
 	 */
-	public boolean updateEmployeeContactNumber(Employee e, String newContactNumber) throws Exception {
+	public boolean updateEmployeeContactNumber(Employee e, String newContactNumber)
+			throws Exception {
 		long newContactNum = Long.parseLong(newContactNumber);
 		e.setContactNo(newContactNum);
-		employeeController.updateEmployee(e);
-		
+		employeeCtrl.updateEmployee(e);
+
 		return true;
 	}
-	
-	//used in ProcessChangePasswordServlet
+
 	/**
 	 * Updates the current password of the Employee in the database
 	 * 
@@ -430,10 +426,10 @@ public class AccessController {
 	 */
 	public boolean updateEmployeePassword(Employee e, String password) throws Exception {
 		e.setPassword(encryptPassword(e.getEmail(), password));
-		employeeController.updateEmployee(e);
+		employeeCtrl.updateEmployee(e);
 		return true;
 	}
-	
+
 	/**
 	 * Updates the current password of the Employee in the database
 	 * 
@@ -447,22 +443,20 @@ public class AccessController {
 	public boolean updateEmployeePassword(Employee e, String oldPassword, String newPassword,
 			String confirmNewPassword) throws Exception {
 
-			ArrayList<String> errorMessages = checkChangePasswordRequirements(e, oldPassword, newPassword,
-					confirmNewPassword);
-			if (!errorMessages.isEmpty()) {
-				String msg = "";
-				for (String s : errorMessages) {
-					msg = s + "\n" + msg;
-				}
-				throw new Exception(msg);
-
-				
+		ArrayList<String> errorMessages = checkChangePasswordRequirements(e, oldPassword,
+				newPassword, confirmNewPassword);
+		if (!errorMessages.isEmpty()) {
+			String msg = "";
+			for (String s : errorMessages) {
+				msg = s + "\n" + msg;
 			}
-			e.setPassword(encryptPassword(e.getEmail(), newPassword));
-			employeeController.updateEmployee(e);
-			return true;
-		
-		
+			throw new Exception(msg);
+
+		}
+		e.setPassword(encryptPassword(e.getEmail(), newPassword));
+		employeeCtrl.updateEmployee(e);
+		return true;
+
 	}
 
 }

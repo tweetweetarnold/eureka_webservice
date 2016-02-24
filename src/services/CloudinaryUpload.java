@@ -9,7 +9,7 @@ import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 
 public class CloudinaryUpload {
-	
+
 	public boolean deleteImage(String publicId) throws IOException {
 		Cloudinary cloudinary = setCloudinaryProperties();
 
@@ -17,31 +17,30 @@ public class CloudinaryUpload {
 
 		return true;
 	}
-	
-	
-	
+
 	public String[] imageUpload(byte[] file) throws IOException {
 		Cloudinary cloudinary = setCloudinaryProperties();
 		String[] output = new String[2];
-		
+
 		Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
 		String publicId = (String) uploadResult.get("public_id");
 		output[1] = publicId;
 		String url = cloudinary.url().generate(publicId);
-//		String htmltag = cloudinary.url().format("jpeg")
-//				.transformation(new Transformation().width(700).height(450).crop("fill")).imageTag(publicId);
+		// String htmltag = cloudinary.url().format("jpeg")
+		// .transformation(new
+		// Transformation().width(700).height(450).crop("fill")).imageTag(publicId);
 		// If setting defining a public_id
 		// String url = cloudinary.url().generate("new");
 		// String htmltag = cloudinary.url().format("jpeg").transformation(new
 		// Transformation().width(100).height(100).crop("fill")).imageTag("public_id");
 		output[0] = url;
 		System.out.println(url);
-		//System.out.println(htmltag);
+		// System.out.println(htmltag);
 		return output;
 	}
-	
+
 	public String[] replaceImage(String inputPublicId, byte[] file) throws IOException {
-//		Cloudinary cloudinary = setCloudinaryProperties();
+		// Cloudinary cloudinary = setCloudinaryProperties();
 		String[] output = new String[2];
 		if (inputPublicId != null) {
 			deleteImage(inputPublicId);
@@ -51,10 +50,10 @@ public class CloudinaryUpload {
 		}
 		return output;
 	}
-	
-	//for replacing stall images
+
+	// for replacing stall images
 	public String[] replaceStallImage(String inputPublicId, byte[] file) throws IOException {
-//		Cloudinary cloudinary = setCloudinaryProperties();
+		// Cloudinary cloudinary = setCloudinaryProperties();
 		String[] output = new String[2];
 		if (inputPublicId != null) {
 			deleteImage(inputPublicId);
@@ -64,7 +63,7 @@ public class CloudinaryUpload {
 		}
 		return output;
 	}
-	
+
 	public Cloudinary setCloudinaryProperties() {
 		Cloudinary cloudinary = new Cloudinary();
 		Map config = new HashMap();
@@ -72,23 +71,24 @@ public class CloudinaryUpload {
 		config.put("api_key", "771316116364356");
 		config.put("api_secret", "1LE3_mVy04CSKFQnrXdVBwYLol0");
 		cloudinary = new Cloudinary(config);
-		
+
 		return cloudinary;
 	}
-	
+
 	public String[] stallImageUpload(byte[] file) throws IOException {
 		Cloudinary cloudinary = setCloudinaryProperties();
 		String[] output = new String[2];
-		
+
 		Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
 		String publicId = (String) uploadResult.get("public_id");
 		output[1] = publicId;
-		String url = cloudinary.url().transformation(new Transformation().width(360).height(231).crop("fit")).generate(publicId);
+		String url = cloudinary.url()
+				.transformation(new Transformation().width(360).height(231).crop("fit"))
+				.generate(publicId);
 		output[0] = url;
 		System.out.println(url);
-		//System.out.println(htmltag);
+		// System.out.println(htmltag);
 		return output;
 	}
-	
 
 }

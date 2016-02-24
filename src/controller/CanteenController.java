@@ -39,10 +39,8 @@ public class CanteenController {
 			Canteen newCanteen = new Canteen(name, address, new HashSet<Stall>());
 			canteenDAO.saveCanteen(newCanteen);
 		}
-		
 	}
-	
-	
+
 	public boolean checkCanteenExists(String name, String address) {
 		Canteen c = canteenDAO.getCanteenByName(name);
 		if (c != null) {
@@ -52,7 +50,6 @@ public class CanteenController {
 	}
 
 	public void deleteCanteen(int canteenId) throws Exception {
-		CanteenDAO canteenDAO = new CanteenDAO();
 		Canteen canteenToDelete = getCanteen(canteenId);
 
 		Set<Stall> stallsToDelete = canteenToDelete.getStallList();
@@ -60,14 +57,14 @@ public class CanteenController {
 			stallCtrl.deleteStall(stall);
 		}
 		canteenDAO.deleteCanteen(canteenToDelete);
-		
+
 	}
 
 	public void editCanteen(int canteenId, String name, String address) throws Exception {
 		boolean changesExist = false;
 
 		Canteen canteenToEdit = getCanteen(canteenId);
-		
+
 		if (!name.equals(canteenToEdit.getName()) || name != null) {
 			canteenToEdit.setName(name);
 			changesExist = true;
@@ -76,13 +73,13 @@ public class CanteenController {
 			canteenToEdit.setAddress(address);
 			changesExist = true;
 		}
-		if(!checkCanteenExists(name,address)){
+		if (!checkCanteenExists(name, address)) {
 			if (changesExist) {
 				canteenDAO.updateCanteen(canteenToEdit);
 			} else {
 				throw new Exception("No changes were made to the Canteen");
 			}
-		}else{
+		} else {
 			throw new Exception("Canteen name already taken");
 		}
 
@@ -100,7 +97,7 @@ public class CanteenController {
 	public ArrayList<Canteen> getAllCanteens() {
 		return canteenDAO.getAllCanteens();
 	}
-	
+
 	/**
 	 * Retrieves All the Food stored in the Database
 	 * 
@@ -119,7 +116,7 @@ public class CanteenController {
 		}
 		return returnList;
 	}
-	
+
 	/**
 	 * Retrieve a Canteen from the database by an ID
 	 * 
@@ -129,17 +126,17 @@ public class CanteenController {
 	public Canteen getCanteen(int canteenId) {
 		return canteenDAO.getCanteen(canteenId);
 	}
-	
+
 	private String validateNewCanteenInputs(String name, String address) {
 		String errors = "";
 		if (name == null || name.isEmpty()) {
 			errors += "Canteen Name is Empty.\n";
 		}
-		
+
 		if (address == null || address.isEmpty()) {
-			errors+= "Canteen Address is Empty.";
+			errors += "Canteen Address is Empty.";
 		}
 		return errors;
 	}
- 
+
 }

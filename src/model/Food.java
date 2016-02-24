@@ -16,9 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-
 import value.StringValues;
 
 /**
@@ -80,8 +77,6 @@ public class Food {
 		this.publicId = publicId;
 	}
 
-	// check if canteen, stall and food name are the same and returns true if
-	// they are all the same
 	/**
 	 * Checks if this Food's name and its Canteen and Stall's name are the same as the other Food
 	 * 

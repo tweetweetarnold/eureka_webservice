@@ -158,25 +158,6 @@ public class FoodOrderDAO {
 		return returnList;
 	}
 
-	/**
-	 * Adds a new FoodOrder object to the Database
-	 * 
-	 * @param f The FoodOrder object to be added in
-	 */
-	public void saveFoodOrder(FoodOrder f) {
-		MyConnection.save(f);
-	}
-
-	/**
-	 * Updates the designated FoodOrder object in the Database
-	 * 
-	 * @param f The FoodOrder object to be updated
-	 */
-	public void updateFoodOrder(FoodOrder f) {
-		MyConnection.update(f);
-	}
-	
-	
 	public List<Object> getUniqueMonthYearInFoodOrderForUser(Employee employee) {
 		List<Object> returnList = new ArrayList<>();
 
@@ -208,7 +189,7 @@ public class FoodOrderDAO {
 		}
 		return returnList;
 	}
-	
+
 	public List<Object> getUniqueYearInFoodOrderForUser(Employee employee) {
 		List<Object> returnList = new ArrayList<>();
 
@@ -239,5 +220,24 @@ public class FoodOrderDAO {
 			returnList.add((Object) o);
 		}
 		return returnList;
+	}
+	
+	
+	/**
+	 * Adds a new FoodOrder object to the Database
+	 * 
+	 * @param f The FoodOrder object to be added in
+	 */
+	public void saveFoodOrder(FoodOrder f) {
+		MyConnection.save(f);
+	}
+	
+	/**
+	 * Updates the designated FoodOrder object in the Database
+	 * 
+	 * @param f The FoodOrder object to be updated
+	 */
+	public void updateFoodOrder(FoodOrder f) {
+		MyConnection.update(f);
 	}
 }

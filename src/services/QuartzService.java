@@ -28,23 +28,6 @@ public class QuartzService {
 	public QuartzService() {
 
 	}
-	// for order window notification
-	public void setupNewJobAndTrigger(String orderWindowId, Date startTime) throws SchedulerException{
-	    Scheduler sched = StdSchedulerFactory.getDefaultScheduler();
-	    JobDetail job1 = newJob(SendNotification.class).withIdentity(orderWindowId,"group2").build();
-	    job1.getJobDataMap().put(SendNotification.ORDERWINDOW_ID, orderWindowId);
-	    SimpleTrigger trigger1 = (SimpleTrigger) newTrigger() 
-	    	    .withIdentity(orderWindowId, "group2")
-	    	    .startAt(startTime) // some Date 
-	    	    .forJob(orderWindowId, "group2") // identify job with name, group strings
-	    	    .build();
-	    sched.scheduleJob(job1, trigger1);
-	    sched.start();
-	    System.out.println("Job Scheduled");
-	}
-	
-	//for weekly suspension,payment notificaion on friday and daily chase payment
-	
 	public void doProcess(){
 
         try {
@@ -115,6 +98,23 @@ public class QuartzService {
             se.printStackTrace();
         }
     }
+	
+	//for weekly suspension,payment notificaion on friday and daily chase payment
+	
+	// for order window notification
+	public void setupNewJobAndTrigger(String orderWindowId, Date startTime) throws SchedulerException{
+	    Scheduler sched = StdSchedulerFactory.getDefaultScheduler();
+	    JobDetail job1 = newJob(SendNotification.class).withIdentity(orderWindowId,"group2").build();
+	    job1.getJobDataMap().put(SendNotification.ORDERWINDOW_ID, orderWindowId);
+	    SimpleTrigger trigger1 = (SimpleTrigger) newTrigger() 
+	    	    .withIdentity(orderWindowId, "group2")
+	    	    .startAt(startTime) // some Date 
+	    	    .forJob(orderWindowId, "group2") // identify job with name, group strings
+	    	    .build();
+	    sched.scheduleJob(job1, trigger1);
+	    sched.start();
+	    System.out.println("Job Scheduled");
+	}
 	
 
 }
