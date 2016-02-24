@@ -47,7 +47,6 @@ public class GetAvailableUserStatus extends HttpServlet {
 		arr.add(StringValues.EMPLOYEE_SUSPENDED);
 
 		out.println(gson.toJson(arr));
-
 	}
 
 	/**

@@ -40,6 +40,7 @@ public class AddNewCanteenServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -52,7 +53,6 @@ public class AddNewCanteenServlet extends HttpServlet {
 		Gson gson = new Gson();
 
 		try {
-
 			JSONParser parser = new JSONParser();
 			JSONObject data = (JSONObject) parser.parse(request.getReader());
 			System.out.println(gson.toJson(data));
@@ -66,10 +66,9 @@ public class AddNewCanteenServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("add new canteen error");
 			returnJson.put("error", e.getMessage());
 		}
-		
+
 		System.out.println(gson.toJson(returnJson));
 		out.print(gson.toJson(returnJson));
 	}

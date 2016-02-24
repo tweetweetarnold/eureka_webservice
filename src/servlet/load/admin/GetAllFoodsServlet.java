@@ -72,7 +72,6 @@ public class GetAllFoodsServlet extends HttpServlet {
 		}).create();
 
 		try {
-
 			List<Food> list = canteenCtrl.getAllFood();
 			out.println(gson.toJson(list));
 

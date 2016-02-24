@@ -61,12 +61,6 @@ public class GetOrderWindowByIdServlet extends HttpServlet {
 		response.setContentType("applcation/json");
 		PrintWriter out = response.getWriter();
 
-		OrderWindowController orderWindowCtrl = new OrderWindowController();
-		int orderWindowId = Integer.parseInt(request.getParameter("windowId"));
-		System.out.println("orderWindowId: " + orderWindowId);
-
-		OrderWindow window = orderWindowCtrl.getOrderWindow(orderWindowId);
-
 		Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
 
 			@Override
@@ -88,10 +82,22 @@ public class GetOrderWindowByIdServlet extends HttpServlet {
 			}
 
 		}).registerTypeAdapter(Date.class, dateSerialize).create();
-		
+
+		OrderWindowController orderWindowCtrl = new OrderWindowController();
+		OrderWindow window = null;
+
+		try {
+			int orderWindowId = Integer.parseInt(request.getParameter("windowId"));
+			System.out.println("orderWindowId: " + orderWindowId);
+
+			window = orderWindowCtrl.getOrderWindow(orderWindowId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		out.print(gson.toJson(window));
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

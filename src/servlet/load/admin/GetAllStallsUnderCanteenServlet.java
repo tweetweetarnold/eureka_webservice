@@ -42,6 +42,7 @@ public class GetAllStallsUnderCanteenServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -72,15 +73,20 @@ public class GetAllStallsUnderCanteenServlet extends HttpServlet {
 
 		}).create();
 
-		String canteenIdString = request.getParameter("canteenId");
-		int canteenId = Integer.parseInt(canteenIdString);
-		System.out.println("canteenID: " + canteenId);
+		try {
+			String canteenIdString = request.getParameter("canteenId");
+			int canteenId = Integer.parseInt(canteenIdString);
+			System.out.println("canteenID: " + canteenId);
 
-		Canteen canteen = canteenCtrl.getCanteen(canteenId);
-		ArrayList<Stall> list = stallCtrl.getAllActiveStallsUnderCanteen(canteen);
+			Canteen canteen = canteenCtrl.getCanteen(canteenId);
+			ArrayList<Stall> list = stallCtrl.getAllActiveStallsUnderCanteen(canteen);
 
-		returnJson.put("canteen", canteen);
-		returnJson.put("stalls", list);
+			returnJson.put("canteen", canteen);
+			returnJson.put("stalls", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put("error", e.getMessage());
+		}
 
 		out.print(gson.toJson(returnJson));
 

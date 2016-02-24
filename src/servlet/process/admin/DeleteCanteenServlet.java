@@ -40,6 +40,7 @@ public class DeleteCanteenServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -64,7 +65,6 @@ public class DeleteCanteenServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			
 			returnJson.put("error", e.getMessage());
 		}
 

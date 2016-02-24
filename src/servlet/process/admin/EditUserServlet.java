@@ -41,6 +41,7 @@ public class EditUserServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -61,14 +62,14 @@ public class EditUserServlet extends HttpServlet {
 			Employee e = gson.fromJson(jsonString, Employee.class);
 
 			employeeCtrl.updateEmployee(e);
-			
+
 			returnJson.put("success", "Employee " + e.getName() + " has been updated.");
 
 		} catch (ParseException e) {
 			e.printStackTrace();
 			returnJson.put("error", e.getMessage());
 		}
-		
+
 		out.println(gson.toJson(returnJson));
 
 	}
