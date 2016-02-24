@@ -31,8 +31,6 @@ public class AccessController {
 
 	AdminDAO adminDAO = new AdminDAO();
 	AESAlgorithm aesAlgo = new AESAlgorithm();
-	CompanyController companyCtrl = new CompanyController();
-	EmployeeController employeeCtrl = new EmployeeController();
 
 	/**
 	 * Creates a default constructor for AccessController
@@ -66,6 +64,7 @@ public class AccessController {
 	 * @return An Employee object upon successful verification, otherwise it returns null
 	 */
 	public Employee authenticateUser(String inputEmail, String inputPassword) {
+		EmployeeController employeeCtrl = new EmployeeController();
 		Employee emp = employeeCtrl.getEmployeeByEmail(inputEmail);
 		try {
 			if (emp != null) {
@@ -117,6 +116,7 @@ public class AccessController {
 	}
 
 	public ArrayList<String> checkCompanyCode(String companyCode) {
+		CompanyController companyCtrl = new CompanyController();
 		ArrayList<String> messages = new ArrayList<String>();
 		if (companyCode.equals("")) {
 			messages.add("Company code cannot be empty.");
@@ -379,6 +379,8 @@ public class AccessController {
 			String companyCode, String deliveryPoint) throws Exception {
 		String encryptPassword = encryptPassword(email, password);
 		Company company = null;
+		CompanyController companyCtrl = new CompanyController();
+		EmployeeController employeeCtrl = new EmployeeController();
 
 		try {
 			company = companyCtrl.getCompanyByCompanyCode(companyCode);
@@ -409,6 +411,9 @@ public class AccessController {
 	 */
 	public boolean updateEmployeeContactNumber(Employee e, String newContactNumber)
 			throws Exception {
+
+		EmployeeController employeeCtrl = new EmployeeController();
+
 		long newContactNum = Long.parseLong(newContactNumber);
 		e.setContactNo(newContactNum);
 		employeeCtrl.updateEmployee(e);
@@ -425,6 +430,7 @@ public class AccessController {
 	 * @throws Exception if the new password of the Employee could not be updated in the database
 	 */
 	public boolean updateEmployeePassword(Employee e, String password) throws Exception {
+		EmployeeController employeeCtrl = new EmployeeController();
 		e.setPassword(encryptPassword(e.getEmail(), password));
 		employeeCtrl.updateEmployee(e);
 		return true;
@@ -442,6 +448,8 @@ public class AccessController {
 	 */
 	public boolean updateEmployeePassword(Employee e, String oldPassword, String newPassword,
 			String confirmNewPassword) throws Exception {
+
+		EmployeeController employeeCtrl = new EmployeeController();
 
 		ArrayList<String> errorMessages = checkChangePasswordRequirements(e, oldPassword,
 				newPassword, confirmNewPassword);

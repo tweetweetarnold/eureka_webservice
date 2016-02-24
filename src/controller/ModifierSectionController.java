@@ -31,7 +31,7 @@ public class ModifierSectionController {
 		foodModifierSections.add(newModifierSection);
 		food.setModifierSectionList(foodModifierSections);
 		// update the existing food object and save the new ModifierSection
-		
+
 		modifierSectionDAO.saveModifierSection(newModifierSection);
 		return newModifierSection.getModifierSectionId();
 	}
@@ -62,7 +62,7 @@ public class ModifierSectionController {
 			// Check if modifierSection already exists
 			if (existingModifierSection.getModifierSectionId() == Integer
 					.parseInt(modifierSectionID)) {
-				System.out.println("ModifierSection ID = " + modifierSectionID );
+				System.out.println("ModifierSection ID = " + modifierSectionID);
 				modifierSectionExists = true;
 				modifierSectionToEdit = existingModifierSection;
 			} else {
@@ -77,7 +77,7 @@ public class ModifierSectionController {
 			food.setModifierSectionList(replacementModifierSectionList);
 			newModifier.setModifierSection(modifierSectionToEdit);
 			modifierSectionDAO.updateModifierSection(modifierSectionToEdit);
-			
+
 			// modifierSectionDAO.saveModifier(newModifier);
 			// modifierSectionDAO.saveModifierSection(modifierSectionToEdit);
 		}

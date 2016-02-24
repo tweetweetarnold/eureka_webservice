@@ -18,9 +18,7 @@ import dao.StallDAO;
  * 
  */
 public class StallController {
-	CanteenController canteenCtrl = new CanteenController();
 	CloudinaryUpload cloudinaryUpload = new CloudinaryUpload();
-	FoodController foodCtrl = new FoodController();
 	StallDAO stallDAO = new StallDAO();
 
 	/**
@@ -47,7 +45,7 @@ public class StallController {
 	}
 
 	public void deleteStall(Stall s) {
-
+		FoodController foodCtrl = new FoodController();
 		stallDAO.deleteStall(s);
 		Set<Food> foodList = s.getFoodList();
 		for (Food f : foodList) {
@@ -103,6 +101,7 @@ public class StallController {
 
 		long contactNo = validatesContactNumber(parameters[2]);
 
+		CanteenController canteenCtrl = new CanteenController();
 		Canteen c = canteenCtrl.getCanteen(canteenId);
 		boolean stallExists = checkStallExists(parameters[1], c);
 		if (stallExists) {

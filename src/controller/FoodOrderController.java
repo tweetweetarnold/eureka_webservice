@@ -36,7 +36,6 @@ public class FoodOrderController {
 	DateTime today = new DateTime();
 	FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
 	ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
-	FoodController foodCtrl = new FoodController();
 
 	/**
 	 * Creates a default constructor for FoodOrderController
@@ -665,6 +664,7 @@ public class FoodOrderController {
 	 * 
 	 */
 	public void replaceWithFavoriteFood(int foodUnavailableID, Date earlierDate, Date laterDate) {
+		FoodController foodCtrl = new FoodController();
 		Food foodUnavailable = foodCtrl.getFood(foodUnavailableID);
 
 		ArrayList<Object> foodOrderItemUnavailableList = new ArrayList<Object>(

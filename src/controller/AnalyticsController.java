@@ -19,7 +19,6 @@ import model.FoodOrderItem;
 import model.OrderWindow;
 
 public class AnalyticsController {
-	CanteenController canteenCtrl = new CanteenController();
 	OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
 	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
 
@@ -28,6 +27,7 @@ public class AnalyticsController {
 
 	// return a sorted linkedhashmap of all food from the canteen
 	public LinkedHashMap<Food, Integer> topKfoods(int canteenId) {
+		CanteenController canteenCtrl = new CanteenController();
 		Canteen canteen = canteenCtrl.getCanteen(canteenId);
 
 		ArrayList<OrderWindow> orderWindowList = orderWindowDAO.getAllWindowsForCanteen(canteen);

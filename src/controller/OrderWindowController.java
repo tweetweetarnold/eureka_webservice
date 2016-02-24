@@ -22,7 +22,6 @@ import value.StringValues;
  */
 public class OrderWindowController {
 	OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
-	FoodOrderController foodOrderCtrl = new FoodOrderController();
 
 	/**
 	 * Creates a default constructor for the OrderWindowController
@@ -215,6 +214,7 @@ public class OrderWindowController {
 
 	public void deleteOrderWindow(int orderWindowId) throws Exception {
 
+		FoodOrderController foodOrderCtrl = new FoodOrderController();
 		OrderWindow orderWindowToArchive = getOrderWindow(orderWindowId);
 
 		if (foodOrderCtrl.getAllFoodOrderOfOrderWindowGroupedByStall(orderWindowToArchive)

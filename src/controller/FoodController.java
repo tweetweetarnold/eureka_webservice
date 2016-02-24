@@ -25,7 +25,6 @@ public class FoodController {
 	ChineseValidation chineseValidation = new ChineseValidation();
 	CloudinaryUpload cloudinaryUpload = new CloudinaryUpload();
 	FoodDAO foodDAO = new FoodDAO();
-	StallController stallCtrl = new StallController();
 
 	/**
 	 * Creates a default constructor for FoodController
@@ -99,6 +98,8 @@ public class FoodController {
 			String weatherConditions, byte[] image, JSONArray modifierList, double price,
 			int stallId) throws Exception {
 		String[] output = new String[2];
+
+		StallController stallCtrl = new StallController();
 
 		if (!checkChineseWords(chineseName)) {
 			throw new Exception(chineseName + " is not a valid chinese word.");
@@ -321,7 +322,7 @@ public class FoodController {
 		/*
 		 * cloudinaryOutput[0] stores the image url cloudinaryOutput[1] stores the image publicId
 		 */
-
+		StallController stallCtrl = new StallController();
 		double price = Double.parseDouble(parameters[4]);
 
 		Stall stall = stallCtrl.getStall(stallId);

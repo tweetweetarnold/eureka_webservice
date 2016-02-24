@@ -18,13 +18,11 @@ import dao.CanteenDAO;
  */
 public class CanteenController {
 	CanteenDAO canteenDAO = new CanteenDAO();
-	StallController stallCtrl = new StallController();
 
 	/**
 	 * Creates a default constructor for CanteenController
 	 */
 	public CanteenController() {
-
 	}
 
 	public void addCanteen(String name, String address) throws Exception {
@@ -50,6 +48,8 @@ public class CanteenController {
 	}
 
 	public void deleteCanteen(int canteenId) throws Exception {
+
+		StallController stallCtrl = new StallController();
 		Canteen canteenToDelete = getCanteen(canteenId);
 
 		Set<Stall> stallsToDelete = canteenToDelete.getStallList();
