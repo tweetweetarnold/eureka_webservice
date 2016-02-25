@@ -2957,8 +2957,8 @@ textarea.input-lg,.input-group-lg>textarea.form-control,.input-group-lg>textarea
 
 .btn-success.disabled,.btn-success.disabled:hover,.btn-success.disabled:focus,.btn-success.disabled:active,.btn-success.disabled.active,.btn-success[disabled],.btn-success[disabled]:hover,.btn-success[disabled]:focus,.btn-success[disabled]:active,.btn-success[disabled].active,fieldset[disabled] .btn-success,fieldset[disabled] .btn-success:hover,fieldset[disabled] .btn-success:focus,fieldset[disabled] .btn-success:active,fieldset[disabled] .btn-success.active
 	{
-	background-color: #00b6ad;
-	border-color: #009d95;
+	background-color: #EDA79E;
+	border-color: #CD9189;
 }
 
 .btn-success .badge {

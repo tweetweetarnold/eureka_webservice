@@ -48,9 +48,18 @@
 
 <!-- Modernizr Scripts -->
 <script src="/eureka_webservice/resources/guri-one/templates/javascript/vendor/modernizr-2.7.1.min.js"></script>
+
+<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+<link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
+<script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
+<script src='/eureka_webservice/resources/js/myapp.js'></script>
+
+
 </head>
 
-<body class="index" id="to-top">
+<body ng-app='myApp' ng-controller='LoginController' class="index" id="to-top">
 
 
 	<!-- Jumbotron -->
@@ -83,7 +92,8 @@
 							<!-- /.form-group -->
 
 							<!-- Button -->
-							<button class="btn btn-success btn-block" type="submit">Sign In</button>
+							<button class="btn btn-success btn-block" type="submit" ng-show='btn' ng-click='onPress()'>Sign In</button>
+							<button class="btn btn-success btn-block" type="button" disabled ng-hide='btn'>Loading...</button>
 							<br>
 
 							<!-- Error message handling -->
@@ -184,5 +194,26 @@
 	<script src="/eureka_webservice/resources/guri-one/templates/javascript/vendor/jquery-2.1.0.min.js"></script>
 	<script src="/eureka_webservice/resources/guri-one/templates/javascript/bootstrap.min.js"></script>
 	<script src="/eureka_webservice/resources/guri-one/templates/javascript/assets/application.js"></script>
+
+
+	<script>
+		app.controller('LoginController', [ '$http', '$scope', '$window',
+				function($http, $scope, $window) {
+
+					$scope.btn = true;
+
+					$scope.onPress = function() {
+						if ($scope.btn == true) {
+							$scope.btn = false;
+						} else {
+							$scope.btn = true;
+						}
+					}
+				}
+
+		]);
+	</script>
+
+
 </body>
 </html>

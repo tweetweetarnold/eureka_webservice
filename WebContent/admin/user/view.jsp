@@ -107,8 +107,7 @@
 									<td>{{user.company.name}}</td>
 									<td>{{user.name}}</td>
 									<td>{{user.email}}</td>
-									<td>
-										{{user.createDate | date:'medium' : '+0800'}}</td>
+									<td>{{user.createDate | date:'medium' : '+0800'}}</td>
 									<td>{{user.amountOwed | currency}}</td>
 									<td>{{user.status}}</td>
 									<td>
@@ -131,36 +130,33 @@
 										<!-- Modal delete -->
 										<div class="modal fade" id="modalDelete{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 											<div class="modal-dialog" role="document">
-												<form action="/eureka_webservice/ProcessAdminDeleteUserServlet" method="post">
-													<input type="hidden" name="emailID" ng-value="user.email">
-													<div class="modal-content">
-														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																<span aria-hidden="true">&times;</span>
-															</button>
-															<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
-														</div>
-														<!-- / modal header -->
-														<div class="modal-body">
-															<p>
-																<b>WARNING: </b>
-																You are deleting user {{user.name}} ({{user.email}}).
-																<br>
-																<br>
-																Are you sure you want to continue?
-															</p>
-														</div>
-														<!-- / modal body -->
-
-														<div class="modal-footer">
-															<!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-															<button type="button" class="btn btn-default" data-dismiss="modal">No, keep the user</button>
-															<button type="submit" class="btn btn-danger">Yes, delete the user</button>
-														</div>
-														<!-- / modal footer -->
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+														<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
 													</div>
-													<!-- / modal content -->
-												</form>
+													<!-- / modal header -->
+													<div class="modal-body">
+														<p>
+															<b>WARNING: </b>
+															You are deleting user {{user.name}} ({{user.email}}).
+															<br>
+															<br>
+															Are you sure you want to continue?
+														</p>
+													</div>
+													<!-- / modal body -->
+
+													<div class="modal-footer" cg-busy='loading'>
+														<button type="button" class="btn btn-default" data-dismiss="modal">No, keep the user</button>
+														<button type="button" ng-click='deleteUser(user.email)' class="btn btn-danger">Yes, delete the
+															user</button>
+													</div>
+													<!-- / modal footer -->
+												</div>
+												<!-- / modal content -->
 											</div>
 										</div>
 										<!-- / Modal delete -->
@@ -195,33 +191,69 @@
 
 
 	<script>
-		app.controller('ViewUserController', [
-				'$http',
-				'$scope',
-				'$window',
-				function($http, $scope, $window) {
+		app
+				.controller(
+						'ViewUserController',
+						[
+								'$http',
+								'$scope',
+								'$window',
+								function($http, $scope, $window) {
 
-					$scope.success = angular
-							.copy($window.sessionStorage.success);
-					$scope.error = angular.copy($window.sessionStorage.error);
-					$window.sessionStorage.removeItem('success');
-					$window.sessionStorage.removeItem('error');
+									$scope.success = angular
+											.copy($window.sessionStorage.success);
+									$scope.error = angular
+											.copy($window.sessionStorage.error);
+									$window.sessionStorage
+											.removeItem('success');
+									$window.sessionStorage.removeItem('error');
 
-					$scope.loading = $http({
-						method : 'GET',
-						url : '/eureka_webservice/GetAllUsersServlet'
-					}).then(function successCallback(response) {
-						console.log(response);
-						console.log(response.data);
-						$scope.data = response.data;
-						$scope.display = response.status;
-					}, function errorCallback(response) {
-						alert(response);
-					});
+									$scope.loading = $http(
+											{
+												method : 'GET',
+												url : '/eureka_webservice/GetAllUsersServlet'
+											})
+											.then(
+													function successCallback(
+															response) {
+														console.log(response);
+														console
+																.log(response.data);
+														$scope.data = response.data;
+														$scope.display = response.status;
+													},
+													function errorCallback(
+															response) {
+														alert(response);
+													});
 
-				}
+									$scope.deleteUser = function(email) {
 
-		]);
+										$scope.loading = $http(
+												{
+													method : 'POST',
+													url : '/eureka_webservice/DeleteUserServlet',
+													data : {
+														email : email
+													}
+												})
+												.then(
+														function successCallback(
+																response) {
+															if (response.data.success != null) {
+																$window.sessionStorage.success = response.data.success;
+															} else if (response.data.error != null) {
+																$window.sessionStorage.error = response.data.error;
+															} else {
+																alert('fail');
+															}
+															$window.location.href = '/eureka_webservice/admin/user/view.jsp';
+														});
+									}
+
+								}
+
+						]);
 	</script>
 
 </body>
