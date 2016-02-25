@@ -78,7 +78,9 @@
 
 									<input type="text" ng-model='modifier.name' placeholder="Add meat">
 									<input type='text' ng-model='modifier.price' placeholder='2.30'>
-									<input type='submit' class='btn btn-primary' ng-click='addModifier()' value='Add Add-On'>
+									<input type='submit' class='btn btn-primary' ng-disabled='!(modifier.name && modifier.price)'
+										ng-click='addModifier()' value='Add Add-On'
+									>
 									<button class="btn btn-primary" ng-click='done()'>Done</button>
 
 									<br>
