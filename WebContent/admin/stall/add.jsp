@@ -107,7 +107,10 @@
 										</div>
 
 
-										<button type="submit" class="btn btn-primary">Add new Stall</button>
+										<button type="submit" class="btn btn-primary">
+											<i class="fa fa-plus fa-lg"></i>
+											Add new Stall
+										</button>
 
 									</form>
 								</div>

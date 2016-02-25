@@ -115,11 +115,14 @@
 
 										<div class="form-group">
 											<label>Image Directory(*only accepts jpeg or jpg image formats)</label>
-											<input type="file" name="file" style="width: 228px;"/>
+											<input type="file" name="file" style="width: 228px;" />
 										</div>
 										<br>
 
-										<button type="submit" class="btn btn-primary">Add new Food</button>
+										<button type="submit" class="btn btn-primary">
+											<i class="fa fa-plus fa-lg"></i>
+											Add new Food
+										</button>
 
 									</form>
 								</div>

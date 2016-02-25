@@ -32,15 +32,16 @@
 >
 
 
-<!-- library import for JSTL -->
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+<link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
+<script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
+<script src='/eureka_webservice/resources/js/myapp.js'></script>
 
 </head>
 
-<body>
-	<fmt:setTimeZone value="GMT+8" />
+<body ng-app="myApp" ng-controller="ViewCompanyController">
 
 	<div id="wrapper">
 
@@ -56,20 +57,15 @@
 			<!-- /.row -->
 
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-12" cg-busy='loading'>
 
 					<b>Total companies:</b>
-					${fn:length(sessionScope.companyList)}
+					{{companyList.length}}
 					<br>
 					<br>
-					<a class="btn btn-primary" ng-href='#' target="_self" disabled>
+					<a class="btn btn-primary" ng-href='/eureka_webservice/admin/company/add.jsp' target="_self">
 						<i class="fa fa-plus fa-lg"></i>
 						Add Company
-					</a>
-					<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
-						data-content="This feature is not ready yet." data-placement="right"
-					>
-						<i class="fa fa-question-circle"></i>
 					</a>
 					<br>
 					<br>
@@ -86,32 +82,26 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.companyList}" var="company">
-									<tr>
-										<td>${company.name}</td>
-										<td>${company.companyCode}</td>
-										<td>
-											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${company.createDate}" />
-										</td>
-										<td>
-											<c:forEach items="${company.deliveryPointSet}" var="deliveryPoint">
-												${deliveryPoint}, 
-											</c:forEach>
-										</td>
-										<td>
-											<a ng-href="#">
-												<button type="button" class="btn btn-link btn-xs">
-													<i class="fa fa-pencil fa-2x"></i>
-												</button>
-											</a>
-											<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
-												data-content="This feature is not ready yet." data-placement="left"
-											>
-												<i class="fa fa-question-circle"></i>
-											</a>
-										</td>
-									</tr>
-								</c:forEach>
+								<tr ng-repeat="company in companyList track by $index">
+									<td>{{company.name}}</td>
+									<td>{{company.companyCode}}</td>
+									<td>{{company.createDate | date:'medium' : '+0800'}}</td>
+									<td>
+										<p ng-repeat="deliveryPoint in company.deliveryPointSet track by $index">{{deliveryPoint}},</p>
+									</td>
+									<td>
+										<a target="_self" ng-href="#">
+											<button type="button" class="btn btn-link btn-xs">
+												<i class="fa fa-pencil fa-2x"></i>
+											</button>
+										</a>
+										<a target="_self" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
+											data-content="This feature is not ready yet." data-placement="left"
+										>
+											<i class="fa fa-question-circle"></i>
+										</a>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -138,11 +128,30 @@
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
+
+	<script>
+		app.controller('ViewCompanyController', [ '$scope', '$http',
+				function($scope, $http) {
+
+					$scope.loading = $http({
+						method : 'GET',
+						url : '/eureka_webservice/GetAllCompaniesServlet'
+					}).then(function successCallback(response) {
+						$scope.companyList = response.data;
+						console.log(response.data);
+					});
+
+				} ]);
+	</script>
+
+
 	<script>
 		$(function() {
 			$('[data-toggle="popover"]').popover();
 		});
 	</script>
+
+
 </body>
 
 </html>

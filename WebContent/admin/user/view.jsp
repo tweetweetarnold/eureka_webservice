@@ -107,7 +107,8 @@
 									<td>{{user.company.name}}</td>
 									<td>{{user.name}}</td>
 									<td>{{user.email}}</td>
-									<td>{{user.createDate}}</td>
+									<td>
+										{{user.createDate | date:'medium' : '+0800'}}</td>
 									<td>{{user.amountOwed | currency}}</td>
 									<td>{{user.status}}</td>
 									<td>

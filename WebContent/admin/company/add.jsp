@@ -48,7 +48,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="AddCanteenController">
+<body ng-app="myApp" ng-controller="AddCompanyController">
 
 	<div id="wrapper">
 
@@ -58,31 +58,18 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Add new canteen</h1>
+					<h1 class="page-header">Add new Company</h1>
 
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
 						<li>
-							<a target="_self" href="/eureka_webservice/admin/canteen/view.jsp">Canteens</a>
+							<a target="_self" href="/eureka_webservice/admin/company/view.jsp">Back</a>
 						</li>
 					</ol>
 
 				</div>
 				<!-- /.col-lg-12 -->
 
-
-				<!-- Message handling -->
-				<div class="col-lg-12">
-					<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error: </span>
-						{{error}}
-					</div>
-				</div>
-				<!-- / message handling -->
 
 
 			</div>
@@ -92,7 +79,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Add new Canteen</div>
+						<div class="panel-heading">Add new Company</div>
 
 						<div class="panel-body">
 
@@ -100,28 +87,25 @@
 
 								<div class="col-lg-12">
 
-									<form name="form">
-
+									<form name="form" novalidate>
 										<div class="form-group">
-											<label>Canteen name</label>
-											<input class="form-control" ng-model='canteen.name' name="name" required>
+											<label> Company name </label>
+											<input class="form-control" ng-model='company.name' name="name" required>
 											<span style="color: red;" ng-show='form.name.$error.required'>This is required!</span>
 										</div>
 
 										<div class="form-group">
-											<label>Address</label>
-											<input class="form-control" ng-model='canteen.address' name="address" required>
-											<span style="color: red;" ng-show='form.address.$error.required'>This is required!</span>
+											<label>Code</label>
+											<input class="form-control" ng-model='company.code' name="code" required>
+											<span style="color: red;" ng-show='form.code.$error.required'>This is required!</span>
 										</div>
 
+										<br>
 
-										<button ng-disabled='!(canteen.name && canteen.address)' type="button" class="btn btn-primary"
-											data-toggle="modal" data-target=".bs-example-modal-sm"
-										>
+										<button disabled type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">
 											<i class="fa fa-plus fa-lg"></i>
-											Add new Canteen
+											Add new Company
 										</button>
-
 									</form>
 
 								</div>
@@ -152,7 +136,7 @@
 				<div class="modal-header">
 					<h4 class="modal-title">Confirmation</h4>
 				</div>
-				<div class="modal-body">Are you sure you want to Add new Canteen?</div>
+				<div class="modal-body">Are you sure you want to Add new Company?</div>
 				<div class="modal-footer">
 					<button type="button" data-dismiss='modal' class="btn btn-outline btn-default">Cancel</button>
 					<button type="button" ng-click="submit()" class="btn btn-primary">Confirm</button>
@@ -183,7 +167,7 @@
 	<script>
 		app
 				.controller(
-						'AddCanteenController',
+						'AddCompanyController',
 						[
 								'$scope',
 								'$http',
@@ -195,15 +179,15 @@
 									$window.sessionStorage.removeItem('error');
 
 									$scope.submit = function() {
-										console.log($scope.canteen);
+										console.log($scope.company);
 
 										$http(
 												{
 													method : 'POST',
-													url : '/eureka_webservice/AddNewCanteenServlet',
+													url : '/eureka_webservice/AddNewCompanyServlet',
 													data : {
-														name : $scope.canteen.name,
-														address : $scope.canteen.address
+														name : $scope.company.name,
+														code : $scope.company.code
 													}
 												})
 												.then(
@@ -213,10 +197,10 @@
 																	.log(response);
 															if (response.data.success != null) {
 																$window.sessionStorage.success = response.data.success;
-																$window.location.href = '/eureka_webservice/admin/canteen/view.jsp';
+																$window.location.href = '/eureka_webservice/admin/company/view.jsp';
 															} else if (response.data.error != null) {
 																$window.sessionStorage.error = response.data.error;
-																$window.location.href = '/eureka_webservice/admin/canteen/add.jsp';
+																$window.location.href = '/eureka_webservice/admin/company/add.jsp';
 															} else {
 																alert(response);
 															}
