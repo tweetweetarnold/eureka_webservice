@@ -1,12 +1,14 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.joda.time.DateTime;
 
@@ -715,5 +717,67 @@ public class FoodOrderController {
 		employeeDAO.updateEmployee(employee);
 		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToEdit);
 		updateFoodOrder(foodOrderToEdit);
+	}
+	
+	/*
+	 * Returns a Map with monthYear as the key and the list of FoodOrders that is within the monthYear
+	 * example of monthYear format: 2016-12
+	 */
+	public TreeMap<String, ArrayList<FoodOrder>> getFoodOrderSetByMonthYear(Employee employee) {
+		//Employee employee = employeeDAO.getEmployeeByEmail(email);
+		String email = employee.getEmail();
+		List<Object> list = foodOrderDAO.getUniqueMonthYearInFoodOrderForUser(employee);
+		List<FoodOrder> userFoodOrders = getFoodOrderSet(email);
+		TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders = new TreeMap<>(Collections.reverseOrder());
+		for (Object obj : list) {
+			String monthYear = (String) obj;
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder order : userFoodOrders) {
+				String str = order.getCreateDate().toString();
+				if (str.contains(monthYear)) {
+					sortList.add(order);
+					//System.out.println(str + " added");
+				}
+				//System.out.println("End of 3rd Layer");
+			}
+		//	System.out.println("Putting " + monthYear + " into Map");
+			yearMonthToFoodOrders.put(monthYear, sortList);
+		}
+		
+		return yearMonthToFoodOrders;
+	}
+	
+	
+	public TreeMap<String, Double> getFoodOrderSetTotalPriceByMonthYear(TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders) {
+		Set<String> keyList = yearMonthToFoodOrders.keySet();
+		TreeMap<String, Double> yearMonthToFoodOrdersTotalPrice = new TreeMap<>(Collections.reverseOrder());
+		Iterator iter = keyList.iterator();
+		while(iter.hasNext()) {
+			String yearMonth = (String) iter.next();
+//			System.out.println("**********");
+//			System.out.println("MONTH " + yearMonth);
+//			System.out.println("**********");
+			ArrayList<FoodOrder> tList = yearMonthToFoodOrders.get(yearMonth);
+			double sumOfFinalPrices = 0.0;
+			for(FoodOrder fo : tList) {
+				double price = convertPriceToTwoDecimal(fo.getFinalPrice());
+				if (price < 0) {
+					price = 0.0;
+				}
+				sumOfFinalPrices += price;
+			//	System.out.println(fo.getCreateDate().toString() + "\t Final Price:" + price);
+			//	System.out.println("=======================");
+				
+			}
+			System.out.println("Total price for the month: " + sumOfFinalPrices);
+			System.out.println();
+			yearMonthToFoodOrdersTotalPrice.put(yearMonth, sumOfFinalPrices);
+//				
+		}
+		return yearMonthToFoodOrdersTotalPrice;
+	}
+	
+	public double convertPriceToTwoDecimal(double finalPrice) {
+		return Math.round(finalPrice * 100.0) / 100.0;
 	}
 }

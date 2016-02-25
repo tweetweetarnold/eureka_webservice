@@ -24,15 +24,15 @@ public class QueryTest {
 		List<Object> list = foodOrderDAO.getUniqueMonthYearInFoodOrderForUser(employee);
 		List<Object> yearList = foodOrderDAO.getUniqueYearInFoodOrderForUser(employee);
 		List<FoodOrder> theList = foodOrderController.getFoodOrderSet("chris.cheng.2013@sis.smu.edu.sg");
-		TreeMap<String, ArrayList<FoodOrder>> map = new TreeMap<>(Collections.reverseOrder());
+		TreeMap<String, ArrayList<FoodOrder>> monthToFoodOrders = new TreeMap<>(Collections.reverseOrder());
 		System.out.println(list.size());
 		
 		TreeMap<String,ArrayList<String> > yearToMonthList = new TreeMap<>(Collections.reverseOrder());
 		
-		for (Object o : yearList) {
-			String year = (String) o;
-			//System.out.println("LOOP 1st layer " + year);
-			ArrayList<String> l = new ArrayList<>();
+//		for (Object o : yearList) {
+//			String year = (String) o;
+//			//System.out.println("LOOP 1st layer " + year);
+//			ArrayList<String> l = new ArrayList<>();
 			for (Object obj : list) {
 				String monthYear = (String) obj;
 				//System.out.println("LOOP 2nd layer ");
@@ -40,8 +40,8 @@ public class QueryTest {
 				
 				
 				ArrayList<FoodOrder> sortList = new ArrayList<>();
-				if (monthYear.contains(year)) {
-					l.add(monthYear);
+				//if (monthYear.contains(year)) {
+				//	l.add(monthYear);
 					//System.out.println("**" + year + " and " + monthYear + " true");
 					for (FoodOrder order : theList) {
 						//System.out.println("LOOP 3rd layer ");
@@ -54,41 +54,50 @@ public class QueryTest {
 						//System.out.println("End of 3rd Layer");
 					}
 				//	System.out.println("Putting " + monthYear + " into Map");
-					map.put(monthYear, sortList);
+					monthToFoodOrders.put(monthYear, sortList);
 				}
-			}
+	
 		//	System.out.println("Putting " + year + " into Map");
-			yearToMonthList.put(year, l);
-		}
+	//		yearToMonthList.put(year, l);
+//		}
 		
 		
 		
 		
 		
-		
-		
-		
-		Set<String> key = yearToMonthList.keySet();
-		Iterator iter = key.iterator();
-		while (iter.hasNext()) {
-			String yr = (String) iter.next();
-			System.out.println("----------");
-			System.out.println("YEAR " + yr);
-			System.out.println("----------");
-			ArrayList<String> s = yearToMonthList.get(yr);
-			for (String str : s) {
+		Set<String> keyList = monthToFoodOrders.keySet();
+		Iterator itera = keyList.iterator();
+		while(itera.hasNext()) {
+			String str = (String) itera.next();
+		//Set<String> key = yearToMonthList.keySet();
+		//Iterator iter = key.iterator();
+	//	while (iter.hasNext()) {
+		//	String yr = (String) iter.next();
+		//	System.out.println("----------");
+		//	System.out.println("YEAR " + yr);
+		//	System.out.println("----------");
+		//	ArrayList<String> s = yearToMonthList.get(yr);
+			//for (String str : s) {
 				System.out.println("**********");
 				System.out.println("MONTH " + str);
 				System.out.println("**********");
-				ArrayList<FoodOrder> tList = map.get(str);
+				ArrayList<FoodOrder> tList = monthToFoodOrders.get(str);
+				double sum = 0.0;
 				for(FoodOrder fo : tList) {
-					System.out.println(fo.getCreateDate().toString());
+					double price = Math.round(fo.getFinalPrice() * 100.0) / 100.0;
+					if (price < 0) {
+						price = 0.0;
+					}
+					sum += price;
+					System.out.println(fo.getCreateDate().toString() + "\t Final Price:" + price);
 					System.out.println("=======================");
+					
 				}
+				System.out.println("Total price for the month: " + sum);
 				System.out.println();
 //				
 			}
-		}
+//	}
 		
 		
 //		Set<String> keyYear = yearToMonthList.keySet();
