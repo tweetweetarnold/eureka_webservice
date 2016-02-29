@@ -671,7 +671,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627077/Food%20Images%20Raw/hokkien_mee.jpg",
 				null, stall10);
 		Food food33 = new Food("Dumpling Noodles", "水饺面", "", 3.00,
-				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1456556090/Food%20Images%20Raw/dumpling_noodle.jpg", null, stall10);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_lpad,h_169,w_263/v1456745890/Food%20Images%20Raw/dumpling_noodle.jpg", null, stall10);
 
 		// Food nfood11 = new Food("Fishball Noodles(Thick Beehoon)", "", 3.00,
 		// null, stall10);
