@@ -62,7 +62,7 @@ public class LoadUserWeeklyChart extends HttpServlet {
 			      
 			}
 			
-			JFreeChart chart = ChartFactory.createBarChart("Average Weekly Spending Summary","Week", "Amt Spend",dataset);
+			JFreeChart chart = ChartFactory.createLineChart("Weekly Spending Summary","Week", "Amt Spend",dataset);
 			int width = 600;
 			int height = 350;
 			ChartUtilities.writeChartAsJPEG(os, chart, width, height);

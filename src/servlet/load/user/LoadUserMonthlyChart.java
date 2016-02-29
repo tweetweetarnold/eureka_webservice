@@ -67,7 +67,7 @@ public class LoadUserMonthlyChart extends HttpServlet {
 			      
 			}
 			
-			JFreeChart chart = ChartFactory.createBarChart("Average Monthly Spending Summary","Year-Month", "Amt Spend",dataset);
+			JFreeChart chart = ChartFactory.createLineChart("Monthly Spending Summary","Year-Month", "Amt Spend",dataset);
 			int width = 600;
 			int height = 350;
 			ChartUtilities.writeChartAsJPEG(os, chart, width, height);
