@@ -1,5 +1,8 @@
 package controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -27,7 +30,8 @@ import model.Stall;
 import value.StringValues;
 
 /**
- * Process the business logic of managing the Food orders for the web application
+ * Process the business logic of managing the Food orders for the web
+ * application
  * 
  * @author SMU Team Eureka
  * 
@@ -48,7 +52,8 @@ public class FoodOrderController {
 	/**
 	 * Add a new FoodOrder into Database
 	 * 
-	 * @param f The FoodOrder object to be added to Database
+	 * @param f
+	 *            The FoodOrder object to be added to Database
 	 */
 	public void addFoodOrder(FoodOrder f) {
 		foodOrderDAO.saveFoodOrder(f);
@@ -103,14 +108,15 @@ public class FoodOrderController {
 	}
 
 	/**
-	 * Returns all FoodOrderItem objects in the OrderWindow sorted in a HashMap with Employee (key)
-	 * and ArrayList<FoodOrderItem>
+	 * Returns all FoodOrderItem objects in the OrderWindow sorted in a HashMap
+	 * with Employee (key) and ArrayList<FoodOrderItem>
 	 * 
-	 * @param orderWindow OrderWindow of FoodOrderItem(s) to retrieve
-	 * @return a HashMap with Employee as Key and his corresponding FoodOrderItem(s) ordered
+	 * @param orderWindow
+	 *            OrderWindow of FoodOrderItem(s) to retrieve
+	 * @return a HashMap with Employee as Key and his corresponding
+	 *         FoodOrderItem(s) ordered
 	 */
-	public HashMap<Employee, ArrayList<FoodOrderItem>> getAllFoodOrderOfOrderWindow(
-			OrderWindow orderWindow) {
+	public HashMap<Employee, ArrayList<FoodOrderItem>> getAllFoodOrderOfOrderWindow(OrderWindow orderWindow) {
 		// get all orders made today
 		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getAllFoodOrderOfOrderWindow(orderWindow);
 		// hashmap for return later
@@ -144,17 +150,16 @@ public class FoodOrderController {
 	}
 
 	/**
-	 * Returns a ArrayList of FoodDisplayObjects to be use in the admin food order display (by
-	 * stalls)
+	 * Returns a ArrayList of FoodDisplayObjects to be use in the admin food
+	 * order display (by stalls)
 	 * 
-	 * @param orderWindow OrderWindow of FoodDisplayObject(s) to retrieve
+	 * @param orderWindow
+	 *            OrderWindow of FoodDisplayObject(s) to retrieve
 	 * @return a ArrayList of the FoodDisplayObject(s) within the order window
 	 */
-	public ArrayList<FoodDisplayObject> getAllFoodOrderOfOrderWindowGroupedByStall(
-			OrderWindow orderWindow) {
+	public ArrayList<FoodDisplayObject> getAllFoodOrderOfOrderWindowGroupedByStall(OrderWindow orderWindow) {
 
-		ArrayList<FoodOrder> tempFoodOrderList = foodOrderDAO
-				.getAllFoodOrderOfOrderWindow(orderWindow);
+		ArrayList<FoodOrder> tempFoodOrderList = foodOrderDAO.getAllFoodOrderOfOrderWindow(orderWindow);
 
 		// This is what we will eventually return. (FINAL)
 		ArrayList<FoodDisplayObject> foodDisplayList = new ArrayList<FoodDisplayObject>();
@@ -168,8 +173,7 @@ public class FoodOrderController {
 		// (A)stallToFoodItemLinkedHash
 		for (int i = 0; i < tempFoodOrderList.size(); i++) {
 			FoodOrder tempFoodOrder = tempFoodOrderList.get(i);
-			ArrayList<FoodOrderItem> tempFoodOrderItem = new ArrayList<FoodOrderItem>(
-					tempFoodOrder.getFoodOrderList());
+			ArrayList<FoodOrderItem> tempFoodOrderItem = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
 
 			// looping through the FoodOrderItems in the tempFoodOrderItemList
 			// and then checking
@@ -193,8 +197,7 @@ public class FoodOrderController {
 				if (!stallToFoodItemLinkedHash.containsKey(stallName)) {
 					stallToFoodItemLinkedHash.put(stallName, tempFoodOrderItemList);
 				} else {
-					ArrayList<FoodOrderItem> tempFoodOrderItemToCombi = stallToFoodItemLinkedHash
-							.get(stallName);
+					ArrayList<FoodOrderItem> tempFoodOrderItemToCombi = stallToFoodItemLinkedHash.get(stallName);
 					tempFoodOrderItemToCombi.addAll(tempFoodOrderItemList);
 					stallToFoodItemLinkedHash.put(stallName, tempFoodOrderItemToCombi);
 				}
@@ -213,8 +216,7 @@ public class FoodOrderController {
 			HashMap<Integer, ArrayList<Employee>> usernamesForFoodItem = new HashMap<Integer, ArrayList<Employee>>();
 			String stallName = (String) iter.next();
 			// (AA)This holds all the FoodOrderItems for the stall.
-			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash
-					.get(stallName);
+			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash.get(stallName);
 			// this (C)LinkedHashMap will store the quantity of the particular
 			// FoodOrderItem.
 			HashMap<Integer, Integer> quantityForFoodOrderItem = new HashMap<Integer, Integer>();
@@ -273,8 +275,7 @@ public class FoodOrderController {
 					Employee tempEmployee = employeeDAO.getEmployeeByEmail(s);
 					employees.add(tempEmployee);
 				}
-				usernamesForFoodItem.put(f.getFoodOrderItemId(),
-						new ArrayList<Employee>(employees));
+				usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<Employee>(employees));
 			}
 			// Populating the price for the FoodOrderItem
 			HashMap<Integer, Double> foodOrderItemPrices = new HashMap<Integer, Double>();
@@ -311,7 +312,8 @@ public class FoodOrderController {
 	/**
 	 * Retrieve the FoodOrder object based on the specified ID
 	 * 
-	 * @param foodOrderId The ID for the FoodOrder object to be retrieved.
+	 * @param foodOrderId
+	 *            The ID for the FoodOrder object to be retrieved.
 	 * @return The FoodOrder that has the specified ID
 	 */
 	public FoodOrder getFoodOrder(int foodOrderId) {
@@ -322,8 +324,10 @@ public class FoodOrderController {
 	/**
 	 * Retrieve the FoodOrder(s) between the cut-off time
 	 * 
-	 * @param earlierDate The start of the cut-off time
-	 * @param laterDate The end of the cut-off time
+	 * @param earlierDate
+	 *            The start of the cut-off time
+	 * @param laterDate
+	 *            The end of the cut-off time
 	 * @return An ArrayList of FoodOrder that are within the cut-off timing
 	 */
 	public List<FoodOrder> getFoodOrderBetweenCutOff(Date earlierDate, Date laterDate) {
@@ -331,12 +335,15 @@ public class FoodOrderController {
 	}
 
 	/**
-	 * Retrieves an ArrayList of FoodDisplayObject in the designated cut-off time (grouped the
-	 * FoodDisplayObject by Stalls)
+	 * Retrieves an ArrayList of FoodDisplayObject in the designated cut-off
+	 * time (grouped the FoodDisplayObject by Stalls)
 	 * 
-	 * @param earlierDate The start of the cut-off time
-	 * @param laterDate The end of the cut-off time
-	 * @return An ArrayList of FoodDisplayObject(s) within the designated cut-off time
+	 * @param earlierDate
+	 *            The start of the cut-off time
+	 * @param laterDate
+	 *            The end of the cut-off time
+	 * @return An ArrayList of FoodDisplayObject(s) within the designated
+	 *         cut-off time
 	 */
 	public ArrayList<FoodDisplayObject> getFoodOrderForCutOff(Date earlierDate, Date laterDate) {
 
@@ -348,23 +355,24 @@ public class FoodOrderController {
 		ArrayList<FoodDisplayObject> foodDisplayList = new ArrayList<FoodDisplayObject>();
 
 		/*
-		 * (A) LinkedHashMap for all the FoodOrderItems with the store as the key
+		 * (A) LinkedHashMap for all the FoodOrderItems with the store as the
+		 * key
 		 */
 		HashMap<String, ArrayList<FoodOrderItem>> stallToFoodItemLinkedHash = new HashMap<String, ArrayList<FoodOrderItem>>();
 
 		/*
-		 * retrieving all the FoodOrderItems from a FoodOrder in order to populate the
-		 * (A)stallToFoodItemLinkedHash
+		 * retrieving all the FoodOrderItems from a FoodOrder in order to
+		 * populate the (A)stallToFoodItemLinkedHash
 		 */
 		for (int i = 0; i < tempFoodOrderList.size(); i++) {
 			FoodOrder tempFoodOrder = tempFoodOrderList.get(i);
-			ArrayList<FoodOrderItem> tempFoodOrderItem = new ArrayList<FoodOrderItem>(
-					tempFoodOrder.getFoodOrderList());
+			ArrayList<FoodOrderItem> tempFoodOrderItem = new ArrayList<FoodOrderItem>(tempFoodOrder.getFoodOrderList());
 
 			/*
-			 * looping through the FoodOrderItems in the tempFoodOrderItemList and then checking if
-			 * the stall of the FoodOrderItem already exists in (A)stallToFoodItemLinkedHash if it
-			 * does then add the foodOrderItem into the existing list with the stall as the key in
+			 * looping through the FoodOrderItems in the tempFoodOrderItemList
+			 * and then checking if the stall of the FoodOrderItem already
+			 * exists in (A)stallToFoodItemLinkedHash if it does then add the
+			 * foodOrderItem into the existing list with the stall as the key in
 			 * (A) else create a new Stall Key in (A)
 			 */
 			for (FoodOrderItem foodItem : tempFoodOrderItem) {
@@ -379,8 +387,7 @@ public class FoodOrderController {
 				if (!stallToFoodItemLinkedHash.containsKey(stallName)) {
 					stallToFoodItemLinkedHash.put(stallName, tempFoodOrderItemList);
 				} else {
-					ArrayList<FoodOrderItem> tempFoodOrderItemToCombi = stallToFoodItemLinkedHash
-							.get(stallName);
+					ArrayList<FoodOrderItem> tempFoodOrderItemToCombi = stallToFoodItemLinkedHash.get(stallName);
 					tempFoodOrderItemToCombi.addAll(tempFoodOrderItemList);
 					stallToFoodItemLinkedHash.put(stallName, tempFoodOrderItemToCombi);
 				}
@@ -394,22 +401,23 @@ public class FoodOrderController {
 		// This will populate the (FINAL) list
 		while (iter.hasNext()) {
 			/*
-			 * this (B)LinkedHashMap will store all the users who ordered the particular
-			 * FoodOrderItem.
+			 * this (B)LinkedHashMap will store all the users who ordered the
+			 * particular FoodOrderItem.
 			 */
 			HashMap<Integer, ArrayList<Employee>> usernamesForFoodItem = new HashMap<Integer, ArrayList<Employee>>();
 			String stallName = (String) iter.next();
 			// (AA)This holds all the FoodOrderItems for the stall.
-			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash
-					.get(stallName);
+			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash.get(stallName);
 			/*
-			 * this (C)LinkedHashMap will store the quantity of the particular FoodOrderItem.
+			 * this (C)LinkedHashMap will store the quantity of the particular
+			 * FoodOrderItem.
 			 */
 			HashMap<Integer, Integer> quantityForFoodOrderItem = new HashMap<Integer, Integer>();
 			ArrayList<FoodOrderItem> uniqueFoodOrderItem = new ArrayList<FoodOrderItem>();
 			/*
-			 * this loops Through the foodOrderItems in (AA) in order to take out the unique
-			 * FoodOrderItems and stores them in UniqueFoodOrderItem
+			 * this loops Through the foodOrderItems in (AA) in order to take
+			 * out the unique FoodOrderItems and stores them in
+			 * UniqueFoodOrderItem
 			 */
 			for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 				Iterator<FoodOrderItem> iterator = uniqueFoodOrderItem.iterator();
@@ -459,8 +467,7 @@ public class FoodOrderController {
 						Employee tempEmployee = employeeDAO.getEmployeeByEmail(s);
 						employees.add(tempEmployee);
 					}
-					usernamesForFoodItem.put(f.getFoodOrderItemId(),
-							new ArrayList<Employee>(employees));
+					usernamesForFoodItem.put(f.getFoodOrderItemId(), new ArrayList<Employee>(employees));
 				}
 			}
 			// Populating the price for the FoodOrderItem
@@ -499,15 +506,16 @@ public class FoodOrderController {
 	 * Returns A HashMap with all FoodOrderItems between two dates
 	 * 
 	 * 
-	 * @param earlierDate The start date
-	 * @param laterDate The end date
-	 * @return a HashMap with StallID as Key and the corresponding FoodOrderItem(s) ordered in a
-	 *         ArrayList
+	 * @param earlierDate
+	 *            The start date
+	 * @param laterDate
+	 *            The end date
+	 * @return a HashMap with StallID as Key and the corresponding
+	 *         FoodOrderItem(s) ordered in a ArrayList
 	 */
-	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall(Date earlierDate,
-			Date laterDate) {
-		List<FoodOrder> tempFoodOrderList = foodOrderDAO
-				.getFoodOrderByDate(today.minusDays(1).toDate(), today.toDate());
+	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall(Date earlierDate, Date laterDate) {
+		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getFoodOrderByDate(today.minusDays(1).toDate(),
+				today.toDate());
 
 		ArrayList<FoodOrderItem> allFoodOrderItems = new ArrayList<FoodOrderItem>();
 		HashSet<Integer> uniqueStallNames = new HashSet<Integer>();
@@ -525,8 +533,7 @@ public class FoodOrderController {
 		for (Integer tempStallID : uniqueStallNames) {
 			ArrayList<FoodOrderItem> foodOrderListForStallName = new ArrayList<FoodOrderItem>();
 			for (FoodOrderItem tempFoodOrderItem : allFoodOrderItems) {
-				Integer tempFoodOrderItemStallID = tempFoodOrderItem.getFood().getStall()
-						.getStallId();
+				Integer tempFoodOrderItemStallID = tempFoodOrderItem.getFood().getStall().getStallId();
 				if (tempFoodOrderItemStallID == tempStallID) {
 					foodOrderListForStallName.add(tempFoodOrderItem);
 				}
@@ -539,7 +546,8 @@ public class FoodOrderController {
 	/**
 	 * Retrieves all FoodOrder(s) made by a Employee
 	 * 
-	 * @param email Email of the Employee
+	 * @param email
+	 *            Email of the Employee
 	 * @return A list of FoodOrder(s)
 	 */
 	public List<FoodOrder> getFoodOrderSet(String email) {
@@ -549,17 +557,19 @@ public class FoodOrderController {
 	}
 
 	/**
-	 * Retrieves a list of FoodOrders under a specified Employee with a specified status
+	 * Retrieves a list of FoodOrders under a specified Employee with a
+	 * specified status
 	 * 
-	 * @param email The email of the Employee
-	 * @param status The status of the FoodOrder
-	 * @return A list of FoodOrders with the specified status user the Employee. If no results
-	 *         found, returns empty List.
+	 * @param email
+	 *            The email of the Employee
+	 * @param status
+	 *            The status of the FoodOrder
+	 * @return A list of FoodOrders with the specified status user the Employee.
+	 *         If no results found, returns empty List.
 	 */
 	public List<FoodOrder> getUserFoodOrdersByStatus(String email, String status) {
 		List<FoodOrder> returnList = new ArrayList<FoodOrder>();
-		List<FoodOrder> foodOrderList = foodOrderDAO
-				.getFoodOrderSet(employeeDAO.getEmployeeByEmail(email));
+		List<FoodOrder> foodOrderList = foodOrderDAO.getFoodOrderSet(employeeDAO.getEmployeeByEmail(email));
 
 		for (FoodOrder f : foodOrderList) {
 			if (f.getStatus().equals(status)) {
@@ -571,17 +581,17 @@ public class FoodOrderController {
 	}
 
 	/**
-	 * Removes duplicate FoodOrderItems within a list of FoodOrders and increments the quantity
-	 * parameter of duplicated FoodOrderItems
+	 * Removes duplicate FoodOrderItems within a list of FoodOrders and
+	 * increments the quantity parameter of duplicated FoodOrderItems
 	 * 
-	 * @param foodOrderList A List of FoodOrder(s)
+	 * @param foodOrderList
+	 *            A List of FoodOrder(s)
 	 * @return A cleaned list of FoodOrder(s)
 	 */
 	public List<FoodOrder> incrementQuantity(List<FoodOrder> foodOrderList) {
 		List<FoodOrder> returnList = new ArrayList<FoodOrder>();
 		for (FoodOrder f : foodOrderList) {
-			ArrayList<FoodOrderItem> foodOrderItemList = new ArrayList<FoodOrderItem>(
-					f.getFoodOrderList());
+			ArrayList<FoodOrderItem> foodOrderItemList = new ArrayList<FoodOrderItem>(f.getFoodOrderList());
 			ArrayList<FoodOrderItem> UniquefoodOrderItemList = new ArrayList<FoodOrderItem>();
 			for (FoodOrderItem tempFoodItem : foodOrderItemList) {
 				Iterator<FoodOrderItem> iterator = UniquefoodOrderItemList.iterator();
@@ -617,10 +627,11 @@ public class FoodOrderController {
 	}
 
 	/**
-	 * Removes duplicates within a list of FoodOrderItems and increments the quantity parameter of
-	 * duplicated FoodOrderItems
+	 * Removes duplicates within a list of FoodOrderItems and increments the
+	 * quantity parameter of duplicated FoodOrderItems
 	 * 
-	 * @param list a List of FoodOrderItem(s)
+	 * @param list
+	 *            a List of FoodOrderItem(s)
 	 * @return A cleaned list of FoodOrderItems with quantity incremented
 	 */
 	public List<FoodOrderItem> incrementQuantityFoodOrderItem(List<FoodOrderItem> list) {
@@ -657,12 +668,15 @@ public class FoodOrderController {
 	}
 
 	/**
-	 * Replaces all unavailable Food in the database with the employee's favorite food.(Within the
-	 * specified time frame)
+	 * Replaces all unavailable Food in the database with the employee's
+	 * favorite food.(Within the specified time frame)
 	 * 
-	 * @param foodUnavailableID The id of the unavailable food
-	 * @param earlierDate The start date of the time frame
-	 * @param laterDate The end date of the time frame
+	 * @param foodUnavailableID
+	 *            The id of the unavailable food
+	 * @param earlierDate
+	 *            The start date of the time frame
+	 * @param laterDate
+	 *            The end date of the time frame
 	 * 
 	 */
 	public void replaceWithFavoriteFood(int foodUnavailableID, Date earlierDate, Date laterDate) {
@@ -682,14 +696,15 @@ public class FoodOrderController {
 	/**
 	 * Update a FoodOrder object in Database
 	 * 
-	 * @param f The FoodOrder object to be updated to Database
+	 * @param f
+	 *            The FoodOrder object to be updated to Database
 	 */
 	public void updateFoodOrder(FoodOrder f) {
 		foodOrderDAO.updateFoodOrder(f);
 	}
 
-	public void updateFoodOrder(int foodOrderItemId, Food newFood,
-			Set<ModifierChosen> newModifierChosenSet, int quantity) throws Exception {
+	public void updateFoodOrder(int foodOrderItemId, Food newFood, Set<ModifierChosen> newModifierChosenSet,
+			int quantity) throws Exception {
 		FoodOrderItem foodOrderItemToEdit = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
 		FoodOrder foodOrderToEdit = foodOrderItemToEdit.getFoodOrder();
 		if (foodOrderToEdit.getStatus() == StringValues.PAID) {
@@ -698,7 +713,8 @@ public class FoodOrderController {
 		Employee employee = foodOrderToEdit.getEmployee();
 
 		/*
-		 * we need to change the amount owed of the employee so we remove the foodOrder price first
+		 * we need to change the amount owed of the employee so we remove the
+		 * foodOrder price first
 		 */
 		double amountOwed = employee.getAmountOwed() - foodOrderToEdit.getFinalPrice();
 
@@ -718,13 +734,13 @@ public class FoodOrderController {
 		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToEdit);
 		updateFoodOrder(foodOrderToEdit);
 	}
-	
+
 	/*
-	 * Returns a Map with monthYear as the key and the list of FoodOrders that is within the monthYear
-	 * example of monthYear format: 2016-12
+	 * Returns a Map with monthYear as the key and the list of FoodOrders that
+	 * is within the monthYear example of monthYear format: 2016-12
 	 */
 	public TreeMap<String, ArrayList<FoodOrder>> getFoodOrderSetByMonthYear(Employee employee) {
-		//Employee employee = employeeDAO.getEmployeeByEmail(email);
+		// Employee employee = employeeDAO.getEmployeeByEmail(email);
 		String email = employee.getEmail();
 		List<Object> list = foodOrderDAO.getUniqueMonthYearInFoodOrderForUser(employee);
 		List<FoodOrder> userFoodOrders = getFoodOrderSet(email);
@@ -736,48 +752,136 @@ public class FoodOrderController {
 				String str = order.getCreateDate().toString();
 				if (str.contains(monthYear)) {
 					sortList.add(order);
-					//System.out.println(str + " added");
+					// System.out.println(str + " added");
 				}
-				//System.out.println("End of 3rd Layer");
+				// System.out.println("End of 3rd Layer");
 			}
-		//	System.out.println("Putting " + monthYear + " into Map");
+			// System.out.println("Putting " + monthYear + " into Map");
 			yearMonthToFoodOrders.put(monthYear, sortList);
 		}
-		
+
 		return yearMonthToFoodOrders;
 	}
-	
-	
-	public TreeMap<String, Double> getFoodOrderSetTotalPriceByMonthYear(TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders) {
+
+	public TreeMap<String, Double> getFoodOrderSetTotalPriceByMonthYear(
+			TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders) {
 		Set<String> keyList = yearMonthToFoodOrders.keySet();
 		TreeMap<String, Double> yearMonthToFoodOrdersTotalPrice = new TreeMap<>(Collections.reverseOrder());
 		Iterator iter = keyList.iterator();
-		while(iter.hasNext()) {
+		while (iter.hasNext()) {
 			String yearMonth = (String) iter.next();
-//			System.out.println("**********");
-//			System.out.println("MONTH " + yearMonth);
-//			System.out.println("**********");
+			// System.out.println("**********");
+			// System.out.println("MONTH " + yearMonth);
+			// System.out.println("**********");
 			ArrayList<FoodOrder> tList = yearMonthToFoodOrders.get(yearMonth);
 			double sumOfFinalPrices = 0.0;
-			for(FoodOrder fo : tList) {
+			for (FoodOrder fo : tList) {
 				double price = convertPriceToTwoDecimal(fo.getFinalPrice());
 				if (price < 0) {
 					price = 0.0;
 				}
 				sumOfFinalPrices += price;
-			//	System.out.println(fo.getCreateDate().toString() + "\t Final Price:" + price);
-			//	System.out.println("=======================");
-				
+				// System.out.println(fo.getCreateDate().toString() + "\t Final
+				// Price:" + price);
+				// System.out.println("=======================");
+
 			}
 			System.out.println("Total price for the month: " + sumOfFinalPrices);
 			System.out.println();
 			yearMonthToFoodOrdersTotalPrice.put(yearMonth, sumOfFinalPrices);
-//				
+			//
 		}
 		return yearMonthToFoodOrdersTotalPrice;
 	}
-	
+
 	public double convertPriceToTwoDecimal(double finalPrice) {
 		return Math.round(finalPrice * 100.0) / 100.0;
+	}
+
+	public TreeMap<String, ArrayList<FoodOrder>> getFoodOrderSetByWeek(Employee employee) {
+		String email = employee.getEmail();
+		List<String> week = foodOrderDAO.getUniqueWeekInFoodOrderForUser(employee);
+		List<FoodOrder> userFoodOrders = getFoodOrderSet(email);
+		ArrayList<ArrayList<Date>> dateList = dateTransformation(week);
+
+		TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrder = new TreeMap<>(Collections.reverseOrder());
+
+		for (int i = 0; i < dateList.size(); i++) {
+			ArrayList<Date> dlist = dateList.get(i);
+			Date start = dlist.get(0);
+			Date end = dlist.get(1);
+
+			System.out.println("====");
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder fo : userFoodOrders) {
+				Date fd = fo.getCreateDate();
+				if ((fd.after(start)) && (fd.before(end))) {
+					sortList.add(fo);
+				}
+			}
+			if (!sortList.isEmpty()) {
+				weekToFoodOrder.put(week.get(i), sortList);
+			}
+		}
+		return weekToFoodOrder;
+	}
+
+	public ArrayList<ArrayList<Date>> dateTransformation(List<String> week) {
+		ArrayList<ArrayList<Date>> wl = new ArrayList<>();
+		for (Object o : week) {
+			String d = (String) o;
+			String[] arr = d.split("to");
+			ArrayList<Date> dateRange = new ArrayList<>();
+			for (int i = 0; i < arr.length; i++) {
+				// Date.parse(sp);
+				String sp = arr[i];
+				if (i == 1) {
+					sp = arr[i] + " 23:59:59";
+				} else {
+					sp = arr[i] + " 00:00:00";
+				}
+
+				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+				try {
+					Date date = formatter.parse(sp);
+					System.out.println(date);
+					dateRange.add(date);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+
+			}
+			// System.out.println(d);
+			wl.add(dateRange);
+			System.out.println("");
+		}
+		return wl;
+	}
+
+	public TreeMap<String, Double> getFoodOrderSetTotalPriceByWeek(TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrder) {
+		TreeMap<String, Double> weekToTotalPrice = new TreeMap<>(Collections.reverseOrder());
+
+		Set<String> keySet = weekToFoodOrder.keySet();
+		Iterator iter = keySet.iterator();
+		while (iter.hasNext()) {
+			String weeklabel = (String) iter.next();
+			System.out.println(weeklabel);
+			System.out.println("-------");
+			ArrayList<FoodOrder> fList = weekToFoodOrder.get(weeklabel);
+			double sum = 0.0;
+			for (FoodOrder fo : fList) {
+				System.out.println(fo.getCreateDate());
+				System.out.println(fo.getFinalPrice());
+				double price = convertPriceToTwoDecimal(fo.getFinalPrice());
+				if (price < 0) {
+					price = 0.0;
+				}
+				sum += price;
+			}
+			weekToTotalPrice.put(weeklabel, sum);
+		}
+		
+		return weekToTotalPrice;
 	}
 }

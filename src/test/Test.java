@@ -671,7 +671,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627077/Food%20Images%20Raw/hokkien_mee.jpg",
 				null, stall10);
 		Food food33 = new Food("Dumpling Noodles", "水饺面", "", 3.00,
-				"resources/img/food/img-dumplingnoodle.jpg", null, stall10);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1456556090/Food%20Images%20Raw/dumpling_noodle.jpg", null, stall10);
 
 		// Food nfood11 = new Food("Fishball Noodles(Thick Beehoon)", "", 3.00,
 		// null, stall10);
@@ -740,7 +740,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/apple.jpg",
 				null, stall11);
 
-		Food food35 = new Food("Apple Juice", "苹果汁", "", 2.50, null, null, stall11);
+		Food food35 = new Food("Apple Juice", "苹果汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555990/Food%20Images%20Raw/Apple_juice.jpg", null, stall11);
 
 		Food food36 = new Food("Watermelon", "西瓜", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627161/Food%20Images%20Raw/watermelon.jpg",
@@ -758,7 +758,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/pear.jpg",
 				null, stall11);
 
-		Food food41 = new Food("Pear Juice", "梨汁", "", 2.50, null, null, stall11);
+		Food food41 = new Food("Pear Juice", "梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456729605/Food%20Images%20Raw/Pear_juice.jpg", null, stall11);
 
 		Food food42 = new Food("Honeydew", "哈蜜瓜", "", 0.70, "resources/img/food/img-honeydew.jpg",
 				null, stall11);
@@ -789,12 +789,12 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/orange.jpg",
 				null, stall11);
 
-		Food food52 = new Food("Orange Juice", "橙汁", "", 2.50, null, null, stall11);
+		Food food52 = new Food("Orange Juice", "橙汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555997/Food%20Images%20Raw/Orange_juice.jpg", null, stall11);
 
 		Food food53 = new Food("Guava", "番石榴", "", 0.70, "resources/img/food/img-guava.jpg", null,
 				stall11);
 
-		Food food54 = new Food("Guava Juice", "番石榴汁", "", 2.50, null, null, stall11);
+		Food food54 = new Food("Guava Juice", "番石榴汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555994/Food%20Images%20Raw/Guava_Juice.jpg", null, stall11);
 
 		Food food55 = new Food("Sarawak Pineapple", "沙捞越黄梨", "", 1.20,
 				"resources/img/food/img-sarawakpineapple.jpg", null, stall11);
@@ -1565,7 +1565,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/apple.jpg",
 				null, fruitStall);
 
-		Food appleJuice = new Food("Apple Juice", "苹果汁", "", 2.50, null, null, fruitStall);
+		Food appleJuice = new Food("Apple Juice", "苹果汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555990/Food%20Images%20Raw/Apple_juice.jpg", null, fruitStall);
 
 		Food watermelon = new Food("Watermelon", "西瓜", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627161/Food%20Images%20Raw/watermelon.jpg",
@@ -1585,7 +1585,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/pear.jpg",
 				null, fruitStall);
 
-		Food pearJuice = new Food("Pear Juice", "梨汁", "", 2.50, null, null, fruitStall);
+		Food pearJuice = new Food("Pear Juice", "梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456729605/Food%20Images%20Raw/Pear_juice.jpg", null, fruitStall);
 
 		Food honeydew = new Food("Honeydew", "哈密瓜", "", 0.70, "resources/img/food/img-honeydew.jpg",
 				null, fruitStall);
@@ -1616,12 +1616,12 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/orange.jpg",
 				null, fruitStall);
 
-		Food orangeJuice = new Food("Orange Juice", "橙汁", "", 2.50, null, null, fruitStall);
+		Food orangeJuice = new Food("Orange Juice", "橙汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555997/Food%20Images%20Raw/Orange_juice.jpg", null, fruitStall);
 
 		Food guava = new Food("Guava", "番石榴", "", 0.70, "resources/img/food/img-guava.jpg", null,
 				fruitStall);
 
-		Food guavaJuice = new Food("Guava Juice", "番石榴汁", "", 2.50, null, null, fruitStall);
+		Food guavaJuice = new Food("Guava Juice", "番石榴汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555994/Food%20Images%20Raw/Guava_Juice.jpg", null, fruitStall);
 
 		Food sarawakPineapple = new Food("Sarawak Pineapple", "沙捞越黄梨", "", 1.20,
 				"resources/img/food/img-sarawakpineapple.jpg", null, fruitStall);

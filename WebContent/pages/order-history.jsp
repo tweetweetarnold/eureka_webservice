@@ -58,6 +58,13 @@
 						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
 					</li>
 					<li class="active">Order History</li>
+					<li>
+						<a href="/eureka_webservice/LoadUserSpendingSummaryByMonth">Monthly Spending Summary</a>
+					</li>
+					<li>
+						<a href="/eureka_webservice/LoadUserSpendingSummaryByWeek">Weekly Spending Summary</a>
+					</li>
+					
 				</ol>
 			</div>
 		</div>

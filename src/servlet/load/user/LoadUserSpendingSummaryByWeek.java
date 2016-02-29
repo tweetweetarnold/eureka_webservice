@@ -16,40 +16,36 @@ import model.Employee;
 import model.FoodOrder;
 
 /**
- * Servlet implementation class LoadUserSpendingSummaryByMonth
+ * Servlet implementation class LoadUserSpendingSummaryByWeek
  */
-@WebServlet("/LoadUserSpendingSummaryByMonth")
-public class LoadUserSpendingSummaryByMonth extends HttpServlet {
+@WebServlet("/LoadUserSpendingSummaryByWeek")
+public class LoadUserSpendingSummaryByWeek extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LoadUserSpendingSummaryByWeek() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public LoadUserSpendingSummaryByMonth() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
-
+	
 	protected void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -59,13 +55,13 @@ public class LoadUserSpendingSummaryByMonth extends HttpServlet {
 			Employee emp = (Employee) session.getAttribute("user");
 
 			FoodOrderController foodOrderController = new FoodOrderController();
-			TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders = foodOrderController.getFoodOrderSetByMonthYear(emp);
-			TreeMap<String, Double>  yearMonthToTotalPrice = foodOrderController.getFoodOrderSetTotalPriceByMonthYear(yearMonthToFoodOrders);
+			TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders = foodOrderController.getFoodOrderSetByWeek(emp);
+			TreeMap<String, Double>  weekToTotalPrice = foodOrderController.getFoodOrderSetTotalPriceByWeek(weekToFoodOrders);
 			
-			session.setAttribute("yearMonthToFoodOrders", yearMonthToFoodOrders);
-			session.setAttribute("yearMonthToTotalPrice", yearMonthToTotalPrice);
+			session.setAttribute("weekToFoodOrders", weekToFoodOrders);
+			session.setAttribute("weekToTotalPrice", weekToTotalPrice);
 			//***Haven't define the jsp page to redirect***
-			response.sendRedirect("/eureka_webservice/pages/monthly-summary.jsp");
+			response.sendRedirect("/eureka_webservice/pages/weekly-summary.jsp");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,5 +70,6 @@ public class LoadUserSpendingSummaryByMonth extends HttpServlet {
 			response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 		}
 	}
+
 
 }
