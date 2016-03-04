@@ -349,7 +349,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627009/Food%20Images%20Raw/charsiew_rice.jpg",
 				null, stall6);
 		Food food15 = new Food("Roast Meat Rice", "烧肉饭", "", 2.50,
-				"resources/img/food/img-roastmeatrice.jpg", null, stall6);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847815/Food%20Images%20Raw/Roast_meat_rice.jpg", null, stall6);
 		// Food foodC16 = new Food("CharSiew + Roast Meat Rice", "", 3.00,
 		// "resources/img/food/img-charsiewrice.jpg", stall6);
 
@@ -525,7 +525,7 @@ public class Test {
 		Food food25 = new Food("Vegetarian Beehoon", "斋米粉", "add veg $0.50", 2.50,
 				"resources/img/food/img-vegetarianbeehoon.jpg", null, stall8);
 		Food food26 = new Food("Vegetarian Mee", "斋面", "add veg $0.50", 2.50,
-				"resources/img/food/img-vergetarianmee.jpg", null, stall8);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059120/Food%20Images%20Raw/Vegetarian_mee.jpg", null, stall8);
 
 		Food nfood7 = new Food("Vegetarian Kway Tiao", "素粿条", "add veg $0.50", 2.50,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455774076/Food%20Images%20Raw/Vegetarian_Kway_Tiao.jpg",
@@ -768,13 +768,13 @@ public class Test {
 		Food food44 = new Food("Papaya", "木瓜", "", 0.70, "resources/img/food/img-papaya.jpg", null,
 				stall11);
 
-		Food food45 = new Food("Papaya Juice", "木瓜汁", "", 2.60, null, null, stall11);
+		Food food45 = new Food("Papaya Juice", "木瓜汁", "", 2.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847809/Food%20Images%20Raw/Papaya_juice.jpg", null, stall11);
 
 		Food food46 = new Food("Pineapple", "黄梨", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627163/Food%20Images%20Raw/pineapple.jpg",
 				null, stall11);
 
-		Food food47 = new Food("Pineapple Juice", "黄梨汁", "", 2.50, null, null, stall11);
+		Food food47 = new Food("Pineapple Juice", "黄梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg", null, stall11);
 
 		Food food48 = new Food("Banana", "香蕉", "", 0.70,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627006/Food%20Images%20Raw/banana.jpg",
@@ -1257,7 +1257,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627009/Food%20Images%20Raw/charsiew_rice.jpg",
 				null, roastMeatStall);
 		Food roastfood4 = new Food("Roast Meat Rice", "烧肉饭", "2 meat choices $4", 3.00,
-				"resources/img/food/img-roastmeatrice.jpg", null, roastMeatStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847815/Food%20Images%20Raw/Roast_meat_rice.jpg", null, roastMeatStall);
 
 		Food roastfood5 = new Food("Wanton Mee(Soup)", "云吞面（汤）", "", 3.20,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627114/Food%20Images%20Raw/wanton_mee.jpg",
@@ -1595,13 +1595,13 @@ public class Test {
 		Food papaya = new Food("Papaya", "木瓜", "", 0.70, "resources/img/food/img-papaya.jpg", null,
 				fruitStall);
 
-		Food papayaJuice = new Food("Papaya Juice", "木瓜汁", "", 2.60, null, null, fruitStall);
+		Food papayaJuice = new Food("Papaya Juice", "木瓜汁", "", 2.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847809/Food%20Images%20Raw/Papaya_juice.jpg", null, fruitStall);
 
 		Food pineapple = new Food("Pineapple", "黄梨", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627163/Food%20Images%20Raw/pineapple.jpg",
 				null, fruitStall);
 
-		Food pineappleJuice = new Food("Pineapple Juice", "黄梨汁", "", 2.50, null, null, fruitStall);
+		Food pineappleJuice = new Food("Pineapple Juice", "黄梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg", null, fruitStall);
 
 		Food banana = new Food("Banana", "香蕉", "", 0.70,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627006/Food%20Images%20Raw/banana.jpg",
