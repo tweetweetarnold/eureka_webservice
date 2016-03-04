@@ -59,11 +59,23 @@ public class LoadUserSpendingSummaryByMonth extends HttpServlet {
 			Employee emp = (Employee) session.getAttribute("user");
 
 			FoodOrderController foodOrderController = new FoodOrderController();
+			TreeMap<String, ArrayList<String>> yearToMonthList = foodOrderController.getYearToMonthList(emp);
+			session.setAttribute("yearToMonthList", yearToMonthList);
+			
+			System.out.println(yearToMonthList.size());
+			
+			String year = request.getParameter("id");
+			if (year != null) {
 			TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders = foodOrderController.getFoodOrderSetByMonthYear(emp);
 			TreeMap<String, Double>  yearMonthToTotalPrice = foodOrderController.getFoodOrderSetTotalPriceByMonthYear(yearMonthToFoodOrders);
 			
+			//session.setAttribute("yearToMonthList", yearToMonthList);
+			session.setAttribute("result", year);
 			session.setAttribute("yearMonthToFoodOrders", yearMonthToFoodOrders);
 			session.setAttribute("yearMonthToTotalPrice", yearMonthToTotalPrice);
+			
+			}
+			
 			//***Haven't define the jsp page to redirect***
 			response.sendRedirect("/eureka_webservice/pages/monthly-summary.jsp");
 			

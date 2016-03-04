@@ -2,6 +2,7 @@ package servlet.load.user;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.TreeMap;
 
 import javax.servlet.ServletException;
@@ -57,9 +58,16 @@ public class LoadUserSpendingSummaryByWeek extends HttpServlet {
 			FoodOrderController foodOrderController = new FoodOrderController();
 			TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders = foodOrderController.getFoodOrderSetByWeek(emp);
 			TreeMap<String, Double>  weekToTotalPrice = foodOrderController.getFoodOrderSetTotalPriceByWeek(weekToFoodOrders);
+			Set<String> weekList = weekToTotalPrice.keySet();
+			session.setAttribute("weekList", weekList);
 			
-			session.setAttribute("weekToFoodOrders", weekToFoodOrders);
-			session.setAttribute("weekToTotalPrice", weekToTotalPrice);
+			String week = (String) request.getParameter("id");
+			if (week != null) {
+				session.setAttribute("resultSet", week);
+				session.setAttribute("weekToFoodOrders", weekToFoodOrders);
+				session.setAttribute("weekToTotalPrice", weekToTotalPrice);
+			}
+			
 			//***Haven't define the jsp page to redirect***
 			response.sendRedirect("/eureka_webservice/pages/weekly-summary.jsp");
 			

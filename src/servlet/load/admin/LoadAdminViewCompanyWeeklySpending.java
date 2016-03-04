@@ -1,42 +1,31 @@
-package servlet.load.user;
+package servlet.load.admin;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.DefaultCategoryDataset;
-
 import controller.FoodOrderController;
-import model.Employee;
 import model.FoodOrder;
 
 /**
- * Servlet implementation class LoadUserWeeklyChart
+ * Servlet implementation class LoadAdminViewCompanyWeeklySpending
  */
-@WebServlet("/LoadUserWeeklyChart")
-public class LoadUserWeeklyChart extends HttpServlet {
+@WebServlet("/LoadAdminViewCompanyWeeklySpending")
+public class LoadAdminViewCompanyWeeklySpending extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoadUserWeeklyChart() {
+    public LoadAdminViewCompanyWeeklySpending() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,28 +35,39 @@ public class LoadUserWeeklyChart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("image/jpeg");
-		ServletOutputStream os = response.getOutputStream();
+		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		try {
-			Employee emp = (Employee) session.getAttribute("user");
 
+			String companyCode = request.getParameter("company");
+			String companyName = request.getParameter("name");
 			FoodOrderController foodOrderController = new FoodOrderController();
-			String week = request.getParameter("week");
-			TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders = foodOrderController.getFoodOrderSetByWeek(emp);
-			
+			TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders = foodOrderController
+					.getCompanyFoodOrderSetByWeek(companyCode);
 			TreeMap<String, Double>  weekToTotalPrice = foodOrderController.getFoodOrderSetTotalPriceByWeek(weekToFoodOrders);
-			
-			
-			JFreeChart chart = foodOrderController.generateWeeklyChart(weekToFoodOrders, week);
-			int width = 600;
-			int height = 350;
-			ChartUtilities.writeChartAsJPEG(os, chart, width, height);
+			session.setAttribute("name", companyName);
+			Set<String> weekList = weekToTotalPrice.keySet();
+			session.setAttribute("weekList", weekList);
+
+			String week = request.getParameter("id");
+			if (week != null) {
+				
+
+				// session.setAttribute("yearToMonthList", yearToMonthList);
+				session.setAttribute("resultSet", week);
+				session.setAttribute("weekToFoodOrders", weekToFoodOrders);
+				session.setAttribute("weekToTotalPrice", weekToTotalPrice);
+
+			}
+
+			// ***Haven't define the jsp page to redirect***
+			 response.sendRedirect("/eureka_webservice/admin/company/weekly-summary.jsp?company=" + companyCode);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error msg: " + e.getMessage());
 			session.setAttribute("error", "Something went wrong");
-			response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
+		//	response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 		}
 	}
 

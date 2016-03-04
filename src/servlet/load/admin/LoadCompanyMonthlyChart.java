@@ -1,12 +1,7 @@
-package servlet.load.user;
+package servlet.load.admin;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
 import java.util.TreeMap;
 
 import javax.servlet.ServletException;
@@ -17,26 +12,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.DefaultCategoryDataset;
 
 import controller.FoodOrderController;
 import model.Employee;
 import model.FoodOrder;
 
 /**
- * Servlet implementation class LoadUserWeeklyChart
+ * Servlet implementation class LoadCompanyMonthlyChart
  */
-@WebServlet("/LoadUserWeeklyChart")
-public class LoadUserWeeklyChart extends HttpServlet {
+@WebServlet("/LoadCompanyMonthlyChart")
+public class LoadCompanyMonthlyChart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoadUserWeeklyChart() {
+    public LoadCompanyMonthlyChart() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,16 +43,15 @@ public class LoadUserWeeklyChart extends HttpServlet {
 		ServletOutputStream os = response.getOutputStream();
 		HttpSession session = request.getSession();
 		try {
-			Employee emp = (Employee) session.getAttribute("user");
+			String companyCode = request.getParameter("company");
 
 			FoodOrderController foodOrderController = new FoodOrderController();
-			String week = request.getParameter("week");
-			TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders = foodOrderController.getFoodOrderSetByWeek(emp);
-			
-			TreeMap<String, Double>  weekToTotalPrice = foodOrderController.getFoodOrderSetTotalPriceByWeek(weekToFoodOrders);
-			
-			
-			JFreeChart chart = foodOrderController.generateWeeklyChart(weekToFoodOrders, week);
+			String year = request.getParameter("year");
+			TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders = foodOrderController
+					.getCompanyFoodOrderSetByMonthYear(companyCode);
+			TreeMap<String, Double> yearMonthToTotalPrice = foodOrderController
+					.getFoodOrderSetTotalPriceByMonthYear(yearMonthToFoodOrders);
+			JFreeChart chart = foodOrderController.generateMonthlyChart(yearMonthToTotalPrice, year);
 			int width = 600;
 			int height = 350;
 			ChartUtilities.writeChartAsJPEG(os, chart, width, height);
@@ -67,8 +59,9 @@ public class LoadUserWeeklyChart extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("Error msg: " + e.getMessage());
 			session.setAttribute("error", "Something went wrong");
-			response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
+			response.sendRedirect("/eureka_webservice/admin/company/view.jsp");
 		}
+
 	}
 
 	/**

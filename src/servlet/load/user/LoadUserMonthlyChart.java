@@ -2,6 +2,8 @@ package servlet.load.user;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -33,19 +35,21 @@ import model.FoodOrder;
 @WebServlet("/LoadUserMonthlyChart")
 public class LoadUserMonthlyChart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoadUserMonthlyChart() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public LoadUserMonthlyChart() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("image/jpeg");
 		ServletOutputStream os = response.getOutputStream();
@@ -54,20 +58,12 @@ public class LoadUserMonthlyChart extends HttpServlet {
 			Employee emp = (Employee) session.getAttribute("user");
 
 			FoodOrderController foodOrderController = new FoodOrderController();
-			TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders = foodOrderController.getFoodOrderSetByMonthYear(emp);
-			TreeMap<String, Double>  yearMonthToTotalPrice = foodOrderController.getFoodOrderSetTotalPriceByMonthYear(yearMonthToFoodOrders);
-			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-			String series1 = "spending";
-			Set<String> keySet = yearMonthToTotalPrice.keySet();
-			java.util.Iterator<String> iter = keySet.iterator();
-			while(iter.hasNext()) {
-				String yearMonth = (String) iter.next();
-				double price = yearMonthToTotalPrice.get(yearMonth);
-				 dataset.addValue(price, series1, yearMonth);
-			      
-			}
-			
-			JFreeChart chart = ChartFactory.createLineChart("Monthly Spending Summary","Year-Month", "Amt Spend",dataset);
+			String year = request.getParameter("year");
+			TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders = foodOrderController
+					.getFoodOrderSetByMonthYear(emp);
+			TreeMap<String, Double> yearMonthToTotalPrice = foodOrderController
+					.getFoodOrderSetTotalPriceByMonthYear(yearMonthToFoodOrders);
+			JFreeChart chart = foodOrderController.generateMonthlyChart(yearMonthToTotalPrice, year);
 			int width = 600;
 			int height = 350;
 			ChartUtilities.writeChartAsJPEG(os, chart, width, height);
@@ -77,13 +73,15 @@ public class LoadUserMonthlyChart extends HttpServlet {
 			session.setAttribute("error", "Something went wrong");
 			response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 		}
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

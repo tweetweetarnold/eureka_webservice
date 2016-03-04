@@ -67,65 +67,124 @@
 			</div>
 		</div>
 		<!-- /.row -->
-		<c:if test="${not empty sessionScope.yearMonthToFoodOrders}"> 
-			<center><img src="/eureka_webservice/LoadUserMonthlyChart" /></center> <br> <br>
-		</c:if>
+
 		<div class="row">
 			<div class="col-lg-12">
+				<c:if test="${not empty sessionScope.yearToMonthList}">
+					<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the Year to display the monthly Summary</b>
+					<br>
+					<br>
+					<form class="sign-in-up-form"
+						action="/eureka_webservice/LoadUserSpendingSummaryByMonth"
+						role="form">
+						<div class="col-md-2">
+						
+							<select class="form-control" name="id" required>
+								<c:forEach items="${sessionScope.yearToMonthList}" var="map">
 
-				<div class="panel-group" id="accordion" role="tablist"
-					aria-multiselectable="true">
-					<c:forEach items="${sessionScope.yearMonthToTotalPrice}" var="map"
-						varStatus="loop">
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingOne">
-								<h4 class="panel-title">
-									<a role="button" data-toggle="collapse"
-										data-parent="#accordion" href="#collapse${loop.index}"
-										aria-expanded="true" aria-controls="collapse${loop.index}">
-										<c:set var="key" value="${map.key}" /> Year-Month: ${key} <fmt:formatNumber
-											value="${map.value}" var="amt" minFractionDigits="2" /> <i
-										class="pull-right">Amount Spent: $${amt}</i>
+									<option value="${map.key}">${map.key}</option>
+								</c:forEach>
+
+							</select>
+						</div>
+						<div class="col-md-2">
+							<button class="btn btn-success btn-block" type="submit">Display</button>
+						</div>
+					</form>
 
 
-									</a>
-								</h4>
-							</div>
-							<div id="collapse${loop.index}" class="panel-collapse collapse"
-								role="tabpanel" aria-labelledby="headingOne">
-								<div class="panel-body">
+					<br>
+					<br>
+					<!--<c:forEach items="${sessionScope.yearToMonthList}" var="map" varStatus="iterator">-->
 
-									<c:set var="foodOrdersMap"
-										value="${sessionScope.yearMonthToFoodOrders}" />
-									<c:set var="list" value="${foodOrdersMap[key]}" />
-									<c:forEach items="${list}" var="foodOrder" varStatus="loop">
+					<!--<c:out value="${map.key}"/>-->
+					<!--  	<a href="/eureka_webservice/LoadUserSpendingSummaryByMonth?id=${map.key}">${map.key}</a>-->
+
+					<!--  	</c:forEach>-->
+				</c:if>
+
+
+
+				<c:if test="${not empty sessionScope.result}">
+					<c:set var="yearValue" value="${result}" />
+					<center>
+						<img
+							src="/eureka_webservice/LoadUserMonthlyChart?year=${yearValue}" />
+					</center>
+					<br>
+					<br>
+
+
+					<div class="panel-group" id="accordion" role="tablist"
+						aria-multiselectable="true">
+						<c:forEach items="${sessionScope.yearMonthToTotalPrice}" var="map"
+							varStatus="loop">
+							<c:set var="key" value="${map.key}" />
+							<c:if test="${fn:contains(key,yearValue)}">
+								<div class="panel panel-default">
+									<div class="panel-heading" role="tab" id="headingOne">
+										<h4 class="panel-title">
+											<a role="button" data-toggle="collapse"
+												data-parent="#accordion" href="#collapse${loop.index}"
+												aria-expanded="true" aria-controls="collapse${loop.index}">
+
+
+
+
+
+
+
+
+
+
+
+												Year-Month: ${key} <fmt:formatNumber value="${map.value}"
+													var="amt" minFractionDigits="2" /> <i class="pull-right">Amount
+													Spent: $${amt}</i>
+
+
+											</a>
+										</h4>
+									</div>
+									<div id="collapse${loop.index}" class="panel-collapse collapse"
+										role="tabpanel" aria-labelledby="headingOne">
+										<div class="panel-body">
+
+											<c:set var="foodOrdersMap"
+												value="${sessionScope.yearMonthToFoodOrders}" />
+											<c:set var="list" value="${foodOrdersMap[key]}" />
+											<c:forEach items="${list}" var="foodOrder" varStatus="loop">
 										
 										 Order ID: ${foodOrder.foodOrderId} &mdash;
 										<fmt:formatDate type="both" value="${foodOrder.createDate}" />
-										<fmt:formatNumber value="${foodOrder.finalPrice}" var="amtSpent"
-											minFractionDigits="2" />
-										<i class="pull-right">Price: $${amtSpent} </i>
-										<br>
-									</c:forEach>
+												<fmt:formatNumber value="${foodOrder.finalPrice}"
+													var="amtSpent" minFractionDigits="2" />
+												<i class="pull-right">Price: $${amtSpent} </i>
+												<br>
+											</c:forEach>
+										</div>
+									</div>
 								</div>
-							</div>
-							</div>
-					</c:forEach>
-				</div>
-				
-			
 
-		
+							</c:if>
+						</c:forEach>
+					</div>
+					<c:remove var="result" scope="session" />
+				</c:if>
 
 
 
-	</div>
-	<!-- /col-lg-12 -->
-	</div>
-	<!-- /row -->
 
 
-	<jsp:include page="footer.jsp" />
+
+
+			</div>
+			<!-- /col-lg-12 -->
+		</div>
+		<!-- /row -->
+
+
+		<jsp:include page="footer.jsp" />
 
 	</div>
 	<!-- /.container -->

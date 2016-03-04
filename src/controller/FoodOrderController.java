@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,12 +14,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.joda.time.DateTime;
 
 import dao.EmployeeDAO;
 import dao.FoodOrderDAO;
 import dao.FoodOrderItemDAO;
 import dao.ModifierSectionDAO;
+import model.Company;
 import model.Employee;
 import model.Food;
 import model.FoodDisplayObject;
@@ -42,6 +47,7 @@ public class FoodOrderController {
 	DateTime today = new DateTime();
 	FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
 	ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+	CompanyController companyController = new CompanyController();
 
 	/**
 	 * Creates a default constructor for FoodOrderController
@@ -542,7 +548,13 @@ public class FoodOrderController {
 		}
 		return mapToReturn;
 	}
-
+	
+	public List<FoodOrder> getCompanyFoodOrderSet(Company company) {
+		List<FoodOrder> returnList = incrementQuantity(
+				foodOrderDAO.getCompanyFoodOrderSet(company));
+		return returnList;
+	}
+	
 	/**
 	 * Retrieves all FoodOrder(s) made by a Employee
 	 * 
@@ -555,7 +567,7 @@ public class FoodOrderController {
 				foodOrderDAO.getFoodOrderSet(employeeDAO.getEmployeeByEmail(email)));
 		return returnList;
 	}
-
+	
 	/**
 	 * Retrieves a list of FoodOrders under a specified Employee with a
 	 * specified status
@@ -762,6 +774,34 @@ public class FoodOrderController {
 
 		return yearMonthToFoodOrders;
 	}
+	
+	/*
+	 * Returns a Map with monthYear as the key and the list of FoodOrders that
+	 * is within the monthYear example of monthYear format: 2016-12
+	 */
+	public TreeMap<String, ArrayList<FoodOrder>> getCompanyFoodOrderSetByMonthYear(String companyCode) {
+		// Employee employee = employeeDAO.getEmployeeByEmail(email);
+		Company company = companyController.getCompanyByCompanyCode(companyCode);
+		List<Object> list = foodOrderDAO.getUniqueMonthYearInFoodOrderForCompany(company);
+		List<FoodOrder> userFoodOrders = getCompanyFoodOrderSet(company);
+		TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders = new TreeMap<>(Collections.reverseOrder());
+		for (Object obj : list) {
+			String monthYear = (String) obj;
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder order : userFoodOrders) {
+				String str = order.getCreateDate().toString();
+				if (str.contains(monthYear)) {
+					sortList.add(order);
+					// System.out.println(str + " added");
+				}
+				// System.out.println("End of 3rd Layer");
+			}
+			// System.out.println("Putting " + monthYear + " into Map");
+			yearMonthToFoodOrders.put(monthYear, sortList);
+		}
+
+		return yearMonthToFoodOrders;
+	}
 
 	public TreeMap<String, Double> getFoodOrderSetTotalPriceByMonthYear(
 			TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders) {
@@ -798,6 +838,35 @@ public class FoodOrderController {
 		return Math.round(finalPrice * 100.0) / 100.0;
 	}
 
+	public TreeMap<String, ArrayList<FoodOrder>> getCompanyFoodOrderSetByWeek(String companyCode) {
+		Company company = companyController.getCompanyByCompanyCode(companyCode);
+		List<String> week = foodOrderDAO.getUniqueWeekInFoodOrderForCompany(company);
+		List<FoodOrder> companyFoodOrders = getCompanyFoodOrderSet(company);
+		ArrayList<ArrayList<Date>> dateList = dateTransformation(week);
+
+		TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrder = new TreeMap<>(Collections.reverseOrder());
+
+		for (int i = 0; i < dateList.size(); i++) {
+			ArrayList<Date> dlist = dateList.get(i);
+			Date start = dlist.get(0);
+			Date end = dlist.get(1);
+
+			System.out.println("====");
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder fo :companyFoodOrders) {
+				Date fd = fo.getCreateDate();
+				if ((fd.after(start)) && (fd.before(end))) {
+					sortList.add(fo);
+				}
+			}
+			if (!sortList.isEmpty()) {
+				weekToFoodOrder.put(week.get(i), sortList);
+			}
+		}
+		return weekToFoodOrder;
+	}
+
+	
 	public TreeMap<String, ArrayList<FoodOrder>> getFoodOrderSetByWeek(Employee employee) {
 		String email = employee.getEmail();
 		List<String> week = foodOrderDAO.getUniqueWeekInFoodOrderForUser(employee);
@@ -883,5 +952,125 @@ public class FoodOrderController {
 		}
 		
 		return weekToTotalPrice;
+	}
+	
+	public TreeMap<String, ArrayList<String>> getYearToMonthList(Employee employee) {
+		List<Object> yearList = foodOrderDAO.getUniqueYearInFoodOrderForUser(employee);
+		List<Object> monthList = foodOrderDAO.getUniqueMonthYearInFoodOrderForUser(employee);
+		TreeMap<String, ArrayList<String>> yearToMonthList = new TreeMap<>(Collections.reverseOrder());
+		for(Object obj : yearList) {
+			String year = (String) obj;
+			ArrayList<String> filteredMonthList = new ArrayList<>();
+			for (Object o : monthList) {
+				String month = (String) o;
+				if (month.contains(year)) {
+					filteredMonthList.add(month);
+				}
+			}
+			yearToMonthList.put(year, filteredMonthList);
+			
+		}
+		return yearToMonthList;
+		
+	}
+	
+	public TreeMap<String, ArrayList<String>> getCompanyYearToMonthList(String companyCode) {
+		Company company = companyController.getCompanyByCompanyCode(companyCode);
+		List<Object> yearList = foodOrderDAO.getUniqueYearInFoodOrderForCompany(company);
+		List<Object> monthList = foodOrderDAO.getUniqueMonthYearInFoodOrderForCompany(company);
+		
+		for (Object o : monthList) {
+			System.out.println(o.toString());
+		}
+		TreeMap<String, ArrayList<String>> yearToMonthList = new TreeMap<>(Collections.reverseOrder());
+		for(Object obj : yearList) {
+			String year = (String) obj;
+			ArrayList<String> filteredMonthList = new ArrayList<>();
+			for (Object o : monthList) {
+				String month = (String) o;
+				if (month.contains(year)) {
+					filteredMonthList.add(month);
+				}
+			}
+			yearToMonthList.put(year, filteredMonthList);
+			
+		}
+		return yearToMonthList;
+		
+	}
+	
+	public JFreeChart generateMonthlyChart(TreeMap<String, Double> yearMonthToTotalPrice, String year) {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		String series1 = "spending";
+		String[] keySet = yearMonthToTotalPrice.keySet().toArray(new String[yearMonthToTotalPrice.size()]);
+		Arrays.sort(keySet);
+		//java.util.Iterator<String> iter = keySet.iterator();
+		for (String yearMonth: keySet) {
+			if (yearMonth.contains(year)) {
+				double price = yearMonthToTotalPrice.get(yearMonth);
+				dataset.addValue(price, series1, yearMonth);
+			}
+		}
+		JFreeChart chart = ChartFactory.createLineChart("Monthly Spending For " + year, "Year-Month", "Amount Spend($)",
+				dataset);
+		return chart;
+		
+	}
+	
+	public JFreeChart generateWeeklyChart(TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders, String week) {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		String series1 = "spending";
+		Set<String> keySet = weekToFoodOrders.keySet();
+		java.util.Iterator<String> iter = keySet.iterator();
+		TreeMap<String, Double> dateToFoodOrders = new TreeMap<>();
+		String pattern = "yyyy-MMM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		
+		while(iter.hasNext()) {
+			String weekLabel = (String) iter.next();
+			if (weekLabel.equals(week)) {
+				ArrayList<FoodOrder> foodOrders = weekToFoodOrders.get(weekLabel);
+				FoodOrder initFo = foodOrders.get(foodOrders.size() - 1);
+				double sum = initFo.getFinalPrice();
+				Date init = initFo.getCreateDate();
+				String currentDate = simpleDateFormat.format(init);
+				for (int i=foodOrders.size()-2; i>=0;i--) {
+					FoodOrder fo = foodOrders.get(i);
+					double value = fo.getFinalPrice();
+					Date date = fo.getCreateDate();
+					
+	
+					String newconvertedDate = simpleDateFormat.format(date);
+					
+					if (newconvertedDate.equals(currentDate)) {
+						sum += value;
+						dateToFoodOrders.put(currentDate, sum);
+					} else {
+						currentDate = newconvertedDate;
+						
+						dateToFoodOrders.put(currentDate, value);
+					}
+					
+					
+					
+				
+				}
+				 
+			}
+		}
+		
+		
+		
+		Set<String> datelabel = dateToFoodOrders.keySet();
+		Iterator iter1 = datelabel.iterator();
+		while (iter1.hasNext()) {
+			String date = (String) iter1.next();
+			double price = dateToFoodOrders.get(date);
+			dataset.addValue(price, series1, date);
+		}
+		
+		
+		JFreeChart chart = ChartFactory.createLineChart("Weekly Spending from " + week,"Date", "Amount Spend($)",dataset);
+		return chart;
 	}
 }

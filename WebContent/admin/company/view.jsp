@@ -79,6 +79,7 @@
 									<th>Date Joined</th>
 									<th>Delivery Points</th>
 									<th></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -88,6 +89,15 @@
 									<td>{{company.createDate | date:'medium' : '+0800'}}</td>
 									<td>
 										<p ng-repeat="deliveryPoint in company.deliveryPointSet track by $index">{{deliveryPoint}},</p>
+									</td>
+									<td>
+										<a target="_self"
+											ng-href="/eureka_webservice/LoadAdminViewCompanyMonthlySpending?company={{company.companyCode}}&name={{company.name}}"
+										>Monthly Spending Summary</a>
+										<br>
+										<a target="_self"
+											ng-href="/eureka_webservice/LoadAdminViewCompanyWeeklySpending?company={{company.companyCode}}&name={{company.name}}"
+										>Weekly Spending Summary</a>
 									</td>
 									<td>
 										<a target="_self" ng-href="#">
@@ -101,6 +111,7 @@
 											<i class="fa fa-question-circle"></i>
 										</a>
 									</td>
+									
 								</tr>
 							</tbody>
 						</table>

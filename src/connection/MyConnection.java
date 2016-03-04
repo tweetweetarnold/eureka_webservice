@@ -181,6 +181,23 @@ public class MyConnection {
 		session.close();
 		return list;
 	}
+	
+	public static List<Object> getCompanyFoodOrderList(Company company) {
+		Session session = startSession();
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(FoodOrder.class);
+		//String email = employee.getEmail();
+		criteria.createCriteria("employee")
+		   .add(Restrictions.eq("company", company));
+		criteria.setResultTransformer(
+				Criteria.DISTINCT_ROOT_ENTITY);
+	//	criteria.add(Restrictions.eq("company", company)).list();
+		list = (List<Object>) criteria.list();
+
+		session.getTransaction().commit();
+		session.close();
+		return list;
+	}
 
 	// getting list of users whose payment status is owed(the input parameter)
 	public static List<Object> getPaymentOwedList(String status) {

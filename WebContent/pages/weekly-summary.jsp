@@ -69,28 +69,55 @@
 			</div>
 		</div>
 		<!-- /.row -->
-		<c:if test="${not empty sessionScope.weekToFoodOrders}">
-			<center>
-				<img src="/eureka_webservice/LoadUserWeeklyChart" />
-			</center>
-		</c:if>
-		<br> <br>
+		
 		<div class="row">
 			<div class="col-lg-12">
+				<c:if test="${not empty sessionScope.weekList}">
+					<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the week range to display the Spending Summary of the week</b>
+					<br>
+					<br>
+					<form class="sign-in-up-form"
+						action="/eureka_webservice/LoadUserSpendingSummaryByWeek"
+						role="form">
+						<div class="col-md-3">
+						
+							<select class="form-control" name="id" required>
+								<c:forEach items="${sessionScope.weekList}" var="map">
 
+									<option value="${map}">${map}</option>
+								</c:forEach>
+
+							</select>
+						</div>
+						<div class="col-md-2">
+							<button class="btn btn-success btn-block" type="submit">Display</button>
+						</div>
+					</form>
+					</c:if>
+				<br><br>
+				<c:if test="${not empty sessionScope.resultSet}">
+					<c:set var="weekValue" value="${resultSet}" />
+					<center>
+				<img src="/eureka_webservice/LoadUserWeeklyChart?week=${weekValue}" />
+			</center> <br><br>
+		
+						
 
 
 				<div class="panel-group" id="accordion" role="tablist"
 					aria-multiselectable="true">
 					<c:forEach items="${sessionScope.weekToTotalPrice}" var="map"
 						varStatus="loop">
+						<c:set var="key" value="${map.key}" />
+						<c:if test="${key == weekValue}">
+						
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingOne">
 								<h4 class="panel-title">
 									<a role="button" data-toggle="collapse"
 										data-parent="#accordion" href="#collapse${loop.index}"
 										aria-expanded="true" aria-controls="collapse${loop.index}">
-										<c:set var="key" value="${map.key}" /> Week: ${key} <fmt:formatNumber
+										 Week: ${key} <fmt:formatNumber
 											value="${map.value}" var="amt" minFractionDigits="2" /> <i
 										class="pull-right">Amount Spent: $${amt}</i>
 
@@ -114,8 +141,11 @@
 								</div>
 							</div>
 						</div>
+						</c:if>
 					</c:forEach>
 				</div>
+					<c:remove var="resultSet" scope="session" />
+				</c:if>
 
 
 
