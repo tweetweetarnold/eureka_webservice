@@ -8,12 +8,12 @@
 	<session-factory>
 		<property name="hibernate.hbm2ddl.auto">create</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-	<property name="hibernate.connection.url">jdbc:mysql://localhost/eureka?useTimezone=true&amp;serverTimezone=Asia/Singapore&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
-	<property name="hibernate.connection.username">root</property>
-	<property name="hibernate.connection.password" />
-<!-- 		<property name="hibernate.connection.url">jdbc:mysql://mysql6355-lunchtime.dal.jelastic.vps-host.net/eureka?useTimezone=true&amp;serverTimezone=Asia/Singapore&amp;useUnicode=true&amp;characterEncoding=UTF-8</property> -->
-<!--     <property name="hibernate.connection.username">root</property> -->
-<!--     <property name="hibernate.connection.password" >LBTvzi02756</property> -->
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/eureka?useTimezone=true&amp;serverTimezone=Asia/Singapore&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password" />
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://mysql6355-lunchtime.dal.jelastic.vps-host.net/eureka?useTimezone=true&amp;serverTimezone=Asia/Singapore&amp;useUnicode=true&amp;characterEncoding=UTF-8</property> -->
+		<!-- <property name="hibernate.connection.username">root</property> -->
+		<!-- <property name="hibernate.connection.password" >LBTvzi02756</property> -->
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.pool_size">1</property>
 		<property name="hibernate.connection.autocommit">false</property>
@@ -22,9 +22,9 @@
 		<!-- Echo all executed SQL to stdout -->
 		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.c3p0.idle_test_period">300</property>
-		
 
-	
+
+
 		<!-- ******** This segment should be removed in production to prevent changes 
 			to database tables ******** Drop and re-create the database schema on startup 
 			Mention here all the model classes along with their package name -->
@@ -37,7 +37,7 @@
 		<mapping class="model.FoodOrderItem" />
 		<mapping class="model.Modifier" />
 		<mapping class="model.ModifierChosen" />
-		<mapping class="model.OrderWindow" />
+		<mapping class="model.OrderPeriod" />
 		<mapping class="model.PriceModifier" />
 		<mapping class="model.Stall" />
 		<mapping class="model.ModifierSection" />

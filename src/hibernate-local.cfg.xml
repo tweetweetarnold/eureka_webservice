@@ -36,7 +36,7 @@
 		<mapping class="model.FoodOrderItem" />
 		<mapping class="model.Modifier" />
 		<mapping class="model.ModifierChosen" />
-		<mapping class="model.OrderWindow" />
+		<mapping class="model.OrderPeriod" />
 		<mapping class="model.PriceModifier" />
 		<mapping class="model.Stall" />
 		<mapping class="model.ModifierSection" />
