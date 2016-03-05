@@ -16,16 +16,16 @@ import controller.CanteenController;
 import controller.CompanyController;
 
 /**
- * Servlet implementation class LoadAdminAddNewWindowServlet
+ * Servlet implementation class LoadAdminAddNewPeriodServlet
  */
-@WebServlet("/LoadAdminAddNewWindowServlet")
-public class LoadAdminAddNewWindowServlet extends HttpServlet {
+@WebServlet("/LoadAdminAddNewPeriodServlet")
+public class LoadAdminAddNewPeriodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminAddNewWindowServlet() {
+	public LoadAdminAddNewPeriodServlet() {
 		super();
 	}
 
@@ -58,11 +58,11 @@ public class LoadAdminAddNewWindowServlet extends HttpServlet {
 			session.setAttribute("companyList", companyList);
 			session.setAttribute("canteenList", canteenList);
 			session.setAttribute("weekList", weekList);
-			response.sendRedirect("/eureka_webservice/admin/orderwindow/add.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderperiod/add.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("An error has occurred at LoadAdminAddNewWindowServlet: "
+			System.out.println("An error has occurred at LoadAdminAddNewPeriodServlet: "
 					+ e.getMessage());
 		}
 	}
