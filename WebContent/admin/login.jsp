@@ -197,8 +197,8 @@
 
 
 	<script>
-		app.controller('LoginController', [ '$http', '$scope', '$period',
-				function($http, $scope, $period) {
+		app.controller('LoginController', [ '$http', '$scope',
+				function($http, $scope) {
 
 					$scope.btn = true;
 

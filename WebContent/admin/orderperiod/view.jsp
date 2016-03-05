@@ -87,7 +87,7 @@
 					{{data.length}}
 					<br>
 					<br>
-					<a class="btn btn-primary" ng-href='/eureka_webservice/admin/orderperiod/add.jsp' target="_self">
+					<a class="btn btn-primary" ng-href='/eureka_webservice/LoadAdminAddNewPeriodServlet' target="_self">
 						<i class="fa fa-plus fa-lg"></i>
 						Add Order Period
 					</a>
