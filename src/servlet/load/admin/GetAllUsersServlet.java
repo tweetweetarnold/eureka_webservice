@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Employee;
+import org.json.simple.JSONArray;
 
 import com.google.gson.Gson;
 
 import controller.EmployeeController;
+import model.Employee;
 
 /**
  * Servlet implementation class GetAllUsersServlet
@@ -35,7 +36,7 @@ public class GetAllUsersServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 
@@ -44,7 +45,10 @@ public class GetAllUsersServlet extends HttpServlet {
 		EmployeeController employeeCtrl = new EmployeeController();
 
 		ArrayList<Employee> list = employeeCtrl.getAllNonDestroyedEmployees();
-		out.print(gson.toJson(list));
+
+		JSONArray arr = new JSONArray();
+		arr.addAll(list);
+		out.println(gson.toJson(arr));
 	}
 
 	/**

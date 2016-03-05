@@ -100,16 +100,38 @@
 
 					<b>Total foods:</b>
 					{{foodList.length}}
+
 					<br>
 					<br>
 
-					<form action="/eureka_webservice/admin/food/add.jsp">
-						<input type="hidden" name="stallId" ng-value="stall.stallId">
-						<button type="submit" class="btn btn-primary">
-							<i class="fa fa-plus fa-lg"></i>
-							Add Food
-						</button>
-					</form>
+					<div class="row">
+						<div class="col-md-5">
+							<div class="input-group">
+
+								<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+								<div class="input-group-btn">
+									<button class="btn btn-default">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-7">
+							<form action="/eureka_webservice/admin/food/add.jsp">
+								<input type="hidden" name="stallId" ng-value="stall.stallId">
+								<button type="submit" class="btn btn-primary pull-right">
+									<i class="fa fa-plus fa-lg"></i>
+									Add Food
+								</button>
+							</form>
+						</div>
+
+					</div>
+					<!-- /row -->
+
+
 					<br>
 
 					<div class="dataTable_wrapper">
@@ -117,7 +139,13 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Food</th>
+									<th>
+										<a href="#" ng-click="sortType = 'food'; sortReverse = !sortReverse">
+											Food
+											<span ng-show="sortType == 'food' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'food' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>Price</th>
 									<th>Create Date</th>
 									<th>Image</th>
@@ -127,7 +155,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat='food in foodList track by food.foodId'>
+								<tr ng-repeat='food in foodList | orderBy:sortType:sortReverse | filter:searchText track by food.foodId'>
 									<td>{{food.foodId}}</td>
 									<td>
 										{{food.name}}
@@ -264,6 +292,9 @@
 											.search().stallId;
 									$scope.stallId = $location.search().stallId;
 									$scope.canteenId = $window.sessionStorage.canteenId;
+
+									$scope.sortType = 'food'; // set the default sort type
+									$scope.sortReverse = false; // set the default sort order
 
 									$scope.loading = $http(
 											{

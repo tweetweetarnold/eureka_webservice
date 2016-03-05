@@ -8,11 +8,30 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a target="_self" class="navbar-brand" href="/eureka_webservice/LoadOrderWindowOpenedServlet">LunchTime</a>
+		<a target="_self" class="navbar-brand" href="/eureka_webservice/LoadOrderPeriodOpenedServlet">LunchTime</a>
 	</div>
 	<!-- /.navbar-header -->
 
 	<ul class="nav navbar-top-links navbar-right">
+
+		<li class="dropdown">
+			<a target="_self" class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<i class="fa fa-cog fa-fw"></i>
+				Settings
+				<i class="fa fa-caret-down"></i>
+			</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a target="_self" href="#">
+						<i class="fa fa-play fa-fw"></i>
+						Run Quartz
+					</a>
+				</li>
+			</ul>
+			<!-- /.dropdown-menu -->
+		</li>
+		<!-- /.dropdown -->
+
 
 		<li class="dropdown">
 			<a target="_self" class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -28,9 +47,12 @@
 					</a>
 				</li>
 			</ul>
-			<!-- /.dropdown-user -->
+			<!-- /.dropdown-menu -->
 		</li>
 		<!-- /.dropdown -->
+
+
+
 	</ul>
 	<!-- /.navbar-top-links -->
 
@@ -53,7 +75,7 @@
 				<!-- 				</li> -->
 
 				<li>
-					<a target="_self" href="/eureka_webservice/LoadOrderWindowOpenedServlet">
+					<a target="_self" href="/eureka_webservice/LoadOrderPeriodOpenedServlet">
 						<i class="fa fa-home fa-fw"></i>
 						Homepage
 					</a>
@@ -62,24 +84,24 @@
 				<li>
 					<a target="_self" href="#">
 						<i class="fa fa-windows fa-fw"></i>
-						Order Windows
+						Order Periods
 						<span class="fa arrow"></span>
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a target="_self" href="/eureka_webservice/admin/orderwindow/view.jsp">View: All</a>
+							<a target="_self" href="/eureka_webservice/admin/orderperiod/view.jsp">View: All</a>
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadOrderWindowOpenedServlet">View: Opened</a>
+							<a target="_self" href="/eureka_webservice/LoadOrderPeriodOpenedServlet">View: Opened</a>
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewOrderWindowsClosedServlet">View: Closed</a>
+							<a target="_self" href="/eureka_webservice/LoadAdminViewOrderPeriodsClosedServlet">View: Closed</a>
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminAddNewWindowServlet">Add New Window</a>
+							<a target="_self" href="/eureka_webservice/LoadAdminAddNewPeriodServlet">Set Order Period</a>
 						</li>
 
 					</ul>

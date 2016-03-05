@@ -1,5 +1,8 @@
 package test;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +16,8 @@ import model.Canteen;
 import model.Company;
 import model.Employee;
 import model.Food;
+import model.FoodOrder;
+import model.FoodOrderItem;
 import model.Modifier;
 import model.ModifierSection;
 import model.OrderPeriod;
@@ -746,7 +751,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627161/Food%20Images%20Raw/watermelon.jpg",
 				null, stall11);
 
-		Food food37 = new Food("Watermelon Juice", "西瓜汁", "", 2.50, null, null, stall11);
+		Food food37 = new Food("Watermelon Juice", "西瓜汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457084066/Food%20Images%20Raw/Watermelon_juice.jpg", null, stall11);
 
 		Food food38 = new Food("Dragonfruit", "龙珠果", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/dragonfruits.jpg",
@@ -780,7 +785,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627006/Food%20Images%20Raw/banana.jpg",
 				null, stall11);
 
-		Food food49 = new Food("Banana Juice", "香蕉汁", "", 2.60, null, null, stall11);
+		Food food49 = new Food("Banana Juice", "香蕉汁", "", 2.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457155104/Food%20Images%20Raw/Banana_juice.jpg", null, stall11);
 
 		Food food50 = new Food("Agar Agar", "燕菜糕", "", 0.60, "resources/img/food/img-agaragar.jpg",
 				null, stall11);
@@ -799,7 +804,7 @@ public class Test {
 		Food food55 = new Food("Sarawak Pineapple", "沙捞越黄梨", "", 1.20,
 				"resources/img/food/img-sarawakpineapple.jpg", null, stall11);
 
-		Food food56 = new Food("Sarawak Pineapple Juice", "沙捞越黄梨汁", "", 3.10, null, null, stall11);
+		Food food56 = new Food("Sarawak Pineapple Juice", "沙捞越黄梨汁", "", 3.10, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg", null, stall11);
 
 		Food food57 = new Food("Mixed Fruits", "水果盘", "upsize $3.50", 3.00,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627095/Food%20Images%20Raw/mixed_fruits.jpg",
@@ -1571,7 +1576,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627161/Food%20Images%20Raw/watermelon.jpg",
 				null, fruitStall);
 
-		Food watermelonJuice = new Food("Watermelon Juice", "西瓜汁", "", 2.50, null, null,
+		Food watermelonJuice = new Food("Watermelon Juice", "西瓜汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457084066/Food%20Images%20Raw/Watermelon_juice.jpg", null,
 				fruitStall);
 
 		Food dragonfruit = new Food("Dragonfruit", "龙珠果", "", 0.60,
@@ -1607,7 +1612,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627006/Food%20Images%20Raw/banana.jpg",
 				null, fruitStall);
 
-		Food bananaJuice = new Food("Banana Juice", "香蕉汁", "", 2.60, null, null, fruitStall);
+		Food bananaJuice = new Food("Banana Juice", "香蕉汁", "", 2.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457155104/Food%20Images%20Raw/Banana_juice.jpg", null, fruitStall);
 
 		Food agaragar = new Food("Agar Agar", "燕菜糕", "", 0.60,
 				"resources/img/food/img-agaragar.jpg", null, fruitStall);
@@ -1626,7 +1631,7 @@ public class Test {
 		Food sarawakPineapple = new Food("Sarawak Pineapple", "沙捞越黄梨", "", 1.20,
 				"resources/img/food/img-sarawakpineapple.jpg", null, fruitStall);
 
-		Food sarawakPineappleJuice = new Food("Sarawak Pineapple Juice", "沙捞越黄梨果汁", "", 3.10, null,
+		Food sarawakPineappleJuice = new Food("Sarawak Pineapple Juice", "沙捞越黄梨果汁", "", 3.10, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg",
 				null, fruitStall);
 
 		Food mixedFruits = new Food("Mixed Fruits", "水果盘", "upsize $3.50", 3.00,
@@ -2423,7 +2428,56 @@ public class Test {
 		OrderPeriod window = new OrderPeriod(new DateTime(2015, 12, 2, 16, 36, 0),
 				new DateTime(2015, 12, 31, 16, 36, 0), company, canteen1, 0, 0,
 				"This is a testing order window.", null);
+		
+//		OrderWindow window1 = new OrderWindow(new DateTime(2015, 12, 3, 16, 36, 0),
+//				new DateTime(2015, 12, 4, 16, 36, 0), company, canteen1, 0, 0,
+//				"This is another testing order window.", null);
+//		
+//		FoodOrder fo = new FoodOrder("Submitted", arnold, null, window);
+//		FoodOrderItem foi1 = new FoodOrderItem(fo, fishBeehoonfood1, 1, "");
+//		FoodOrderItem foi2 = new FoodOrderItem(fo, fishBeehoonfood2, 1, "");
+//		FoodOrderItem foi3 = new FoodOrderItem(fo, mixedFruits, 1, "");
+//		Set<FoodOrderItem> foodOrderList = new HashSet<FoodOrderItem>();
+//		foodOrderList.add(foi1);
+//		foodOrderList.add(foi2);
+//		foodOrderList.add(foi3);
+//		fo.setFoodOrderList(foodOrderList);
+//		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		try {
+//			fo.setCreateDate(df.parse("2015-12-02 16:40:00"));
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		FoodOrder fo1 = new FoodOrder("Submitted", arnold, null, window1);
+//		FoodOrderItem foi4 = new FoodOrderItem(fo1, bananaJuice, 1, "");
+//		FoodOrderItem foi5 = new FoodOrderItem(fo1, orange, 1, "");
+//		FoodOrderItem foi6 = new FoodOrderItem(fo1, mfood1, 1, "");
+//		Set<FoodOrderItem> foodOrderList1 = new HashSet<FoodOrderItem>();
+//		foodOrderList1.add(foi4);
+//		foodOrderList1.add(foi5);
+//		foodOrderList1.add(foi6);
+//		fo1.setFoodOrderList(foodOrderList1);
+//		try {
+//			fo1.setCreateDate(df.parse("2015-12-03 16:40:00"));
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 		session.save(window); // arnold test data
+//		session.save(window1);
+//		
+//		session.save(foi1);
+//		session.save(foi2);
+//		session.save(foi3);
+//		session.save(fo);
+//		
+//		session.save(foi4);
+//		session.save(foi5);
+//		session.save(foi6);
+//		session.save(fo1);
 
 		session.getTransaction().commit();
 		session.flush();

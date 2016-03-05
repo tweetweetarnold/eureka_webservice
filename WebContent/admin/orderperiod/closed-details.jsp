@@ -52,7 +52,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Order Window Management: Closed-Details</h1>
+					<h1 class="page-header">Order Period Management: Closed-Details</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -61,15 +61,15 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<c:set value="${sessionScope.window}" var="window" />
+					<c:set value="${sessionScope.period}" var="period" />
 
 					<div class="panel-body">
-						<b>Window ID: </b>
-						${window.windowId}
+						<b>Period ID: </b>
+						${period.periodId}
 						<br>
 
 						<b>Canteen: </b>
-						${window.canteen.name}
+						${period.canteen.name}
 						<br>
 						<br>
 
@@ -117,7 +117,7 @@
 													<td rowspan="${fn:length(order.value) + 1}">
 														<p title="${order.key.email}">${order.key.name}&nbsp;(${order.key.deliveryPoint})</p>
 														<a
-															href="/eureka_webservice/admin/orderwindow/add-fooditem.jsp?foodOrderId=${order.value[0].foodOrder.foodOrderId}"
+															href="/eureka_webservice/admin/orderperiod/add-fooditem.jsp?foodOrderId=${order.value[0].foodOrder.foodOrderId}"
 														>Add new line</a>
 													</td>
 
@@ -340,7 +340,7 @@
 
 									<br>
 									<br>
-									<button class="btn btn-primary" type="button" onclick="window.print()">Print This Page</button>
+									<button class="btn btn-primary" type="button" onclick="period.print()">Print This Page</button>
 
 								</div>
 

@@ -55,7 +55,7 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Order Window Management: Add</h1>
+					<h1 class="page-header">Order Period Management: Add</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -64,7 +64,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Add new Order window</div>
+						<div class="panel-heading">Add new Order period</div>
 
 						<div class="panel-body">
 
@@ -72,7 +72,7 @@
 
 
 
-								<form role="form" action="/eureka_webservice/ProcessAdminAddNewOrderWindowServlet" id="submitForm">
+								<form role="form" action="/eureka_webservice/ProcessAdminAddNewOrderPeriodServlet" id="submitForm">
 
 									<div class="col-md-6 col-lg-6">
 
@@ -99,7 +99,7 @@
 										</div>
 
 										<div class="form-group">
-											<label>Start Datetime</label>
+											<label>Start Date/Time</label>
 											<div class='input-group date' id='datetimepicker6'>
 												<input type='text' class="form-control" name="startDatetime" placeholder="Start Date" required />
 												<span class="input-group-addon">
@@ -109,7 +109,7 @@
 										</div>
 
 										<div class="form-group">
-											<label>End Datetime</label>
+											<label>End Date/Time</label>
 											<div class='input-group date' id='datetimepicker7'>
 												<input type='text' class="form-control" name="endDatetime" placeholder="End Date" required />
 												<span class="input-group-addon">
@@ -130,7 +130,7 @@
 
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm">
 											<i class="fa fa-plus fa-lg"></i>
-											Add New Order Window
+											Add New Order Period
 										</button>
 
 										<!-- Modal confirmation -->
@@ -140,7 +140,7 @@
 													<div class="modal-header">
 														<h4 class="modal-title" id="myModalLabel">Confirmation</h4>
 													</div>
-													<div class="modal-body">Are you sure you want to add a new Order Window?</div>
+													<div class="modal-body">Are you sure you want to add a new Order Period?</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 														<button type="submit" class="btn btn-primary" form="submitForm">Confirm</button>
@@ -173,7 +173,7 @@
 										<div class="form-group">
 											<label>Comments to Users (Optional)</label>
 											<textarea rows="3" name="remarks" class="form-control"
-												placeholder="What do you want to let your users know about this Order Window?"
+												placeholder="What do you want to let your users know about this Order Period?"
 											></textarea>
 										</div>
 

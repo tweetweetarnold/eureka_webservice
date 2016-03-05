@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Company;
+import org.json.simple.JSONArray;
 
 import com.google.gson.Gson;
 
 import controller.CompanyController;
+import model.Company;
 
 /**
  * Servlet implementation class GetAllCompaniesServlet
@@ -45,7 +46,9 @@ public class GetAllCompaniesServlet extends HttpServlet {
 
 		Gson gson = new Gson();
 
-		out.println(gson.toJson(list));
+		JSONArray arr = new JSONArray();
+		arr.addAll(list);
+		out.println(gson.toJson(arr));
 
 	}
 

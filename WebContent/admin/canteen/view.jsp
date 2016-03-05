@@ -99,11 +99,32 @@
 					{{data.length}}
 					<br>
 					<br>
-					<a href='/eureka_webservice/admin/canteen/add.jsp' class="btn btn-primary">
-						<i class="fa fa-plus fa-lg"></i>
-						Add Canteen
-					</a>
-					<br>
+
+					<div class="row">
+						<div class="col-md-5">
+							<div class="input-group">
+
+								<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+								<div class="input-group-btn">
+									<button class="btn btn-default">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-7">
+							<a href='/eureka_webservice/admin/canteen/add.jsp' class="btn btn-primary pull-right">
+								<i class="fa fa-plus fa-lg"></i>
+								Add Canteen
+							</a>
+						</div>
+
+					</div>
+					<!-- /row -->
+
+
 					<br>
 
 					<div class="dataTable_wrapper">
@@ -113,7 +134,13 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Canteen</th>
+									<th>
+										<a href="#" ng-click="sortType = 'canteen'; sortReverse = !sortReverse">
+											Canteen
+											<span ng-show="sortType == 'canteen' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'canteen' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>Address</th>
 									<th>Create Date</th>
 									<th></th>
@@ -122,7 +149,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="canteen in data track by $index">
+								<tr ng-repeat="canteen in data | orderBy:sortType:sortReverse | filter:searchText track by $index">
 									<td>{{canteen.canteenId}}</td>
 									<td>{{canteen.name | date:'medium' : '+0800'}}</td>
 									<td>{{canteen.address | date:'medium' : '+0800'}}</td>
@@ -231,6 +258,9 @@
 									$window.sessionStorage
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
+
+									$scope.sortType = 'canteen'; // set the default sort type
+									$scope.sortReverse = false; // set the default sort order
 
 									$scope.loading = $http(
 											{

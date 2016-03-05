@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
@@ -73,7 +73,10 @@ public class GetAllFoodsServlet extends HttpServlet {
 
 		try {
 			List<Food> list = canteenCtrl.getAllFood();
-			out.println(gson.toJson(list));
+			
+			JSONArray arr = new JSONArray();
+			arr.addAll(list);
+			out.println(gson.toJson(arr));
 
 		} catch (Exception e) {
 			e.printStackTrace();

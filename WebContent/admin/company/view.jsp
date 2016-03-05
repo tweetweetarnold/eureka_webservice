@@ -63,18 +63,44 @@
 					{{companyList.length}}
 					<br>
 					<br>
-					<a class="btn btn-primary" ng-href='/eureka_webservice/admin/company/add.jsp' target="_self">
-						<i class="fa fa-plus fa-lg"></i>
-						Add Company
-					</a>
-					<br>
+
+					<div class="row">
+						<div class="col-md-5">
+							<div class="input-group">
+
+								<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+								<div class="input-group-btn">
+									<button class="btn btn-default">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-7">
+							<a class="btn btn-primary pull-right" ng-href='/eureka_webservice/admin/company/add.jsp' target="_self">
+								<i class="fa fa-plus fa-lg"></i>
+								Add Company
+							</a>
+						</div>
+
+					</div>
+					<!-- /row -->
+
 					<br>
 
 					<div class="dataTable_wrapper">
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
-									<th>Company</th>
+									<th>
+										<a target="_self" href="#" ng-click="sortType = 'company'; sortReverse = !sortReverse">
+											Company
+											<span ng-show="sortType == 'company' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'company' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>Code</th>
 									<th>Date Joined</th>
 									<th>Delivery Points</th>
@@ -83,7 +109,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="company in companyList track by $index">
+								<tr ng-repeat="company in companyList  | orderBy:sortType:sortReverse  | filter:searchText track by $index">
 									<td>{{company.name}}</td>
 									<td>{{company.companyCode}}</td>
 									<td>{{company.createDate | date:'medium' : '+0800'}}</td>
@@ -93,11 +119,11 @@
 									<td>
 										<a target="_self"
 											ng-href="/eureka_webservice/LoadAdminViewCompanyMonthlySpending?company={{company.companyCode}}&name={{company.name}}"
-										>Monthly Spending Summary</a>
+										>View Monthly Spending</a>
 										<br>
 										<a target="_self"
 											ng-href="/eureka_webservice/LoadAdminViewCompanyWeeklySpending?company={{company.companyCode}}&name={{company.name}}"
-										>Weekly Spending Summary</a>
+										>View Weekly Spending</a>
 									</td>
 									<td>
 										<a target="_self" ng-href="#">
@@ -111,7 +137,7 @@
 											<i class="fa fa-question-circle"></i>
 										</a>
 									</td>
-									
+
 								</tr>
 							</tbody>
 						</table>
@@ -143,6 +169,9 @@
 	<script>
 		app.controller('ViewCompanyController', [ '$scope', '$http',
 				function($scope, $http) {
+
+					$scope.sortType = 'company'; // set the default sort type
+					$scope.sortReverse = false; // set the default sort order
 
 					$scope.loading = $http({
 						method : 'GET',

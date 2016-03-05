@@ -84,26 +84,57 @@
 
 					<b>Total users:</b>
 					{{data.length}}
+
 					<br>
+
+					<div class="col-lg-4" style="padding: 20px 0px 20px;">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+							<div class="input-group-btn">
+								<button class="btn btn-default">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+
 					<br>
 
 					<div class="dataTable_wrapper">
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
-									<th>Company</th>
+									<th>
+										<a href="#" ng-click="sortType = 'company'; sortReverse = !sortReverse">
+											Company
+											<span ng-show="sortType == 'company' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'company' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>Name</th>
 									<th>Email</th>
-									<th>Date Joined</th>
+									<th>
+										<a href="#" ng-click="sortType = 'dateJoined'; sortReverse = !sortReverse">
+											Date Joined
+											<span ng-show="sortType == 'dateJoined' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'dateJoined' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>O/S</th>
-									<th>Status</th>
+									<th>
+										<a href="#" ng-click="sortType = 'status'; sortReverse = !sortReverse">
+											Status
+											<span ng-show="sortType == 'status' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'status' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th></th>
 									<th></th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="user in data track by $index">
+								<tr ng-repeat="user in data | orderBy:sortType:sortReverse | filter:searchText track by $index">
 									<td>{{user.company.name}}</td>
 									<td>{{user.name}}</td>
 									<td>{{user.email}}</td>
@@ -207,6 +238,9 @@
 									$window.sessionStorage
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
+
+									$scope.sortType = 'company'; // set the default sort type
+									$scope.sortReverse = false; // set the default sort order
 
 									$scope.loading = $http(
 											{
