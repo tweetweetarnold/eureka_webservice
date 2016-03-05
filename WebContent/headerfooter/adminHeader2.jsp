@@ -8,7 +8,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a target="_self" class="navbar-brand" href="/eureka_webservice/LoadOrderPeriodOpenedServlet">LunchTime</a>
+		<a target="_self" class="navbar-brand" href="/eureka_webservice/LoadOrderPeriodActiveServlet">LunchTime</a>
 	</div>
 	<!-- /.navbar-header -->
 
@@ -75,9 +75,9 @@
 				<!-- 				</li> -->
 
 				<li>
-					<a target="_self" href="/eureka_webservice/LoadOrderPeriodOpenedServlet">
-						<i class="fa fa-home fa-fw"></i>
-						Homepage
+					<a target="_self" href="#">
+						<i class="fa fa-bar-chart fa-fw"></i>
+						Analytics
 					</a>
 				</li>
 
@@ -93,11 +93,11 @@
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadOrderPeriodOpenedServlet">View: Active</a>
+							<a target="_self" href="/eureka_webservice/LoadOrderPeriodActiveServlet">View: Active</a>
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewOrderPeriodsClosedServlet">View: Archieved</a>
+							<a target="_self" href="/eureka_webservice/LoadAdminViewOrderPeriodsArchivedServlet">View: Archieved</a>
 
 						</li>
 						<li>
@@ -150,6 +150,8 @@
 				<!-- 						<span class="fa arrow"></span> -->
 				<!-- 					</a> -->
 				<!-- 				</li> -->
+
+
 
 				<li>
 					<a target="_self" href="/eureka_webservice/admin/help.jsp">

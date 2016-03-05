@@ -95,14 +95,16 @@
 										</div>
 
 										<div class="form-group">
-											<label>Code</label>
+											<label>Company Code</label>
 											<input class="form-control" ng-model='company.code' name="code" required>
 											<span style="color: red;" ng-show='form.code.$error.required'>This is required!</span>
 										</div>
 
 										<br>
 
-										<button disabled type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">
+										<button ng-disabled='form.$invalid' type="button" class="btn btn-primary" data-toggle="modal"
+											data-target=".bs-example-modal-sm"
+										>
 											<i class="fa fa-plus fa-lg"></i>
 											Add new Company
 										</button>
@@ -156,8 +158,6 @@
 		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"
 	></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 	<!-- Datetime picker -->
