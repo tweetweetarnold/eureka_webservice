@@ -100,7 +100,37 @@
 											<span style="color: red;" ng-show='form.code.$error.required'>This is required!</span>
 										</div>
 
+
+										<hr>
+
+
+										<div class="form-group">
+											<label>Add Delivery Point</label>
+											<br>
+
+											<input type="text" ng-model='deliveryPoint' class="form-control pull-left" style="width: 33%;"
+												placeholder="Eg. Admin Building"
+											>
+											<input type='submit' class='btn btn-primary' ng-disabled='!(deliveryPoint)' ng-click='addDeliveryPoint()'
+												value='Add Delivery Point'
+											>
+
+											<table class="table">
+												<tr ng-repeat="boo in deliveryPointList track by $index">
+													<td>{{boo}}</td>
+													<td>
+														<button type="button" class="btn btn-link btn-xs" ng-click='removeDeliveryPoint($index)'>
+															<i class="fa fa-trash-o fa-2x"></i>
+														</button>
+													</td>
+												</tr>
+											</table>
+
+										</div>
+
+
 										<br>
+
 
 										<button ng-disabled='form.$invalid' type="button" class="btn btn-primary" data-toggle="modal"
 											data-target=".bs-example-modal-sm"
@@ -108,6 +138,7 @@
 											<i class="fa fa-plus fa-lg"></i>
 											Add new Company
 										</button>
+
 									</form>
 
 								</div>
@@ -177,6 +208,20 @@
 									$scope.error = angular
 											.copy($window.sessionStorage.error);
 									$window.sessionStorage.removeItem('error');
+
+									$scope.deliveryPointList = [];
+
+									$scope.addDeliveryPoint = function() {
+										$scope.deliveryPointList
+												.push($scope.deliveryPoint);
+										$scope.deliveryPoint = "";
+										console.log($scope.deliveryPointList);
+									};
+
+									$scope.removeDeliveryPoint = function(index) {
+										$scope.deliveryPointList.splice(index,
+												1);
+									};
 
 									$scope.submit = function() {
 										console.log($scope.company);
