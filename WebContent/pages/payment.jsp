@@ -98,7 +98,7 @@
 				<c:remove var="error" scope="session" />
 			</c:when>
 
-			<c:when test="${sessionScope.orderWindow == null}">
+			<c:when test="${sessionScope.orderPeriod == null}">
 				<div class="alert alert-warning alert-dismissible fade in" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -107,7 +107,7 @@
 					<span class="sr-only">Warning:</span>
 					<c:out value="${warning}" />
 				</div>
-				<c:remove var="orderWindow" scope="session" />
+				<c:remove var="orderPeriod" scope="session" />
 			</c:when>
 
 			<c:when test="${fn:length(sessionScope.paymentFoodOrderList) eq 0}">
@@ -153,7 +153,7 @@
 							<c:set var="count" value="${count + 1}" />
 							<fmt:formatNumber value="${order.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
 
-							<fmt:formatNumber value="${order.orderWindow.priceModifierList[0].value * -1}" var="discount"
+							<fmt:formatNumber value="${order.orderPeriod.priceModifierList[0].value * -1}" var="discount"
 								minFractionDigits="2"
 							/>
 
@@ -213,7 +213,7 @@
 
 						<div id="collapse${loop.index}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
-								Canteen: ${foodOrder.orderWindow.canteen.name}
+								Canteen: ${foodOrder.orderPeriod.canteen.name}
 								<br>
 								Price:
 								<fmt:formatNumber value="${foodOrder.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
