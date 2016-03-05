@@ -79,23 +79,23 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.orderPeriodList}" var="window">
+								<c:forEach items="${sessionScope.orderPeriodList}" var="period">
 									<tr>
-										<td>${window.windowId}</td>
-										<td>${window.company.name}</td>
-										<td>${window.canteen.name}</td>
-										<td>$${window.discountAbsolute}</td>
+										<td>${period.periodId}</td>
+										<td>${period.company.name}</td>
+										<td>${period.canteen.name}</td>
+										<td>$${period.discountAbsolute}</td>
 										<td>
-											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.createDate}" />
+											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${period.createDate}" />
 										</td>
 										<td>
-											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.startDateFormatted}" />
+											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${period.startDateFormatted}" />
 										</td>
 										<td>
-											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.endDateFormatted}" />
+											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${period.endDateFormatted}" />
 										</td>
 										<td>
-											<a href="/eureka_webservice/LoadAdminViewOrderPeriodsClosedDetailsServlet?windowId=${window.windowId}">Details</a>
+											<a href="/eureka_webservice/LoadAdminViewOrderPeriodsClosedDetailsServlet?periodId=${period.periodId}">Details</a>
 										</td>
 									</tr>
 								</c:forEach>
