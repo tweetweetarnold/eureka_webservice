@@ -63,23 +63,30 @@
 					{{companyList.length}}
 					<br>
 					<br>
-					<a class="btn btn-primary" ng-href='/eureka_webservice/admin/company/add.jsp' target="_self">
-						<i class="fa fa-plus fa-lg"></i>
-						Add Company
-					</a>
 
-					<br>
+					<div class="row">
+						<div class="col-md-5">
+							<div class="input-group">
 
-					<div class="col-lg-4" style="padding: 20px 0px 20px;">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
-							<div class="input-group-btn">
-								<button class="btn btn-default">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
+								<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+								<div class="input-group-btn">
+									<button class="btn btn-default">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
 							</div>
 						</div>
+
+
+						<div class="col-md-7">
+							<a class="btn btn-primary pull-right" ng-href='/eureka_webservice/admin/company/add.jsp' target="_self">
+								<i class="fa fa-plus fa-lg"></i>
+								Add Company
+							</a>
+						</div>
+
 					</div>
+					<!-- /row -->
 
 					<br>
 

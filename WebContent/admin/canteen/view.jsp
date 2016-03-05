@@ -99,23 +99,31 @@
 					{{data.length}}
 					<br>
 					<br>
-					<a href='/eureka_webservice/admin/canteen/add.jsp' class="btn btn-primary">
-						<i class="fa fa-plus fa-lg"></i>
-						Add Canteen
-					</a>
 
-					<br>
+					<div class="row">
+						<div class="col-md-5">
+							<div class="input-group">
 
-					<div class="col-lg-4" style="padding: 20px 0px 20px;">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
-							<div class="input-group-btn">
-								<button class="btn btn-default">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
+								<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+								<div class="input-group-btn">
+									<button class="btn btn-default">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
 							</div>
 						</div>
+
+
+						<div class="col-md-7">
+							<a href='/eureka_webservice/admin/canteen/add.jsp' class="btn btn-primary pull-right">
+								<i class="fa fa-plus fa-lg"></i>
+								Add Canteen
+							</a>
+						</div>
+
 					</div>
+					<!-- /row -->
+
 
 					<br>
 

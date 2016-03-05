@@ -102,27 +102,36 @@
 					{{foodList.length}}
 
 					<br>
-
-					<div class="col-lg-4" style="padding: 20px 0px 20px;">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
-							<div class="input-group-btn">
-								<button class="btn btn-default">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-
 					<br>
 
-					<form action="/eureka_webservice/admin/food/add.jsp">
-						<input type="hidden" name="stallId" ng-value="stall.stallId">
-						<button type="submit" class="btn btn-primary">
-							<i class="fa fa-plus fa-lg"></i>
-							Add Food
-						</button>
-					</form>
+					<div class="row">
+						<div class="col-md-5">
+							<div class="input-group">
+
+								<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+								<div class="input-group-btn">
+									<button class="btn btn-default">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-7">
+							<form action="/eureka_webservice/admin/food/add.jsp">
+								<input type="hidden" name="stallId" ng-value="stall.stallId">
+								<button type="submit" class="btn btn-primary pull-right">
+									<i class="fa fa-plus fa-lg"></i>
+									Add Food
+								</button>
+							</form>
+						</div>
+
+					</div>
+					<!-- /row -->
+
+
 					<br>
 
 					<div class="dataTable_wrapper">
