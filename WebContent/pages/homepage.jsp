@@ -66,7 +66,7 @@
 						<td>
 							<strong>Canteen:</strong>
 						</td>
-						<td>${sessionScope.orderWindow.canteen.name}</td>
+						<td>${sessionScope.orderPeriod.canteen.name}</td>
 					</tr>
 					<tr>
 						<td>
@@ -74,7 +74,7 @@
 						</td>
 						<td>
 							<fmt:formatDate pattern="E, dd-MMM-yyyy HH:mm:ss" type="both"
-								value="${sessionScope.orderWindow.startDateFormatted}"
+								value="${sessionScope.orderPeriod.startDateFormatted}"
 							/>
 						</td>
 					</tr>
@@ -84,7 +84,7 @@
 						</td>
 						<td>
 							<fmt:formatDate pattern="E, dd-MMM-yyyy HH:mm:ss" type="both"
-								value="${sessionScope.orderWindow.endDateFormatted}"
+								value="${sessionScope.orderPeriod.endDateFormatted}"
 							/>
 						</td>
 					</tr>
@@ -92,7 +92,7 @@
 						<td>
 							<strong>Comments from Administrator:</strong>
 						</td>
-						<td>${sessionScope.orderWindow.remarks}</td>
+						<td>${sessionScope.orderPeriod.remarks}</td>
 					</tr>
 				</table>
 			</div>
@@ -159,7 +159,7 @@
 			<div class="col-lg-12">
 				<h2 class="page-header">
 					Stalls
-					<small>${orderWindow.canteen.name}</small>
+					<small>${orderPeriod.canteen.name}</small>
 				</h2>
 			</div>
 

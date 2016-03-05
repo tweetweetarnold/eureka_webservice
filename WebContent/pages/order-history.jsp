@@ -94,14 +94,14 @@
 									Transaction ID: ${foodOrder.transactionId}
 									<br>
 									</c:if>
-									Canteen: ${foodOrder.orderWindow.canteen.name}
+									Canteen: ${foodOrder.orderPeriod.canteen.name}
 									<br>
 									Price:
 									<fmt:formatNumber value="${foodOrder.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
 									$${amt}
 									<br>
 									Discount:
-									<fmt:formatNumber value="${foodOrder.orderWindow.priceModifierList[0].value * -1}" var="discamt"
+									<fmt:formatNumber value="${foodOrder.orderPeriod.priceModifierList[0].value * -1}" var="discamt"
 										minFractionDigits="2"
 									/>
 									$${discamt}
