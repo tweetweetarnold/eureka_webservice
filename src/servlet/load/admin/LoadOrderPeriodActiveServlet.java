@@ -22,14 +22,14 @@ import controller.OrderPeriodController;
 /**
  * Servlet implementation class GetTodayOrdersServlet
  */
-@WebServlet("/LoadOrderPeriodOpenedServlet")
-public class LoadOrderPeriodOpenedServlet extends HttpServlet {
+@WebServlet("/LoadOrderPeriodActiveServlet")
+public class LoadOrderPeriodActiveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadOrderPeriodOpenedServlet() {
+	public LoadOrderPeriodActiveServlet() {
 		super();
 	}
 
@@ -71,12 +71,12 @@ public class LoadOrderPeriodOpenedServlet extends HttpServlet {
 			}
 
 			session.setAttribute("orderPeriodMap", map);
-			response.sendRedirect("/eureka_webservice/admin/orderperiod/opened.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderperiod/active.jsp");
 
 		} catch (Exception e) {
-			System.out.println("Error occurred at LoadOrderPeriodOpenedServlet");
+			System.out.println("Error occurred at LoadOrderPeriodActiveServlet");
 			e.printStackTrace();
-			response.sendRedirect("/eureka_webservice/admin/orderperiod/opened.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderperiod/active.jsp");
 		}
 	}
 }

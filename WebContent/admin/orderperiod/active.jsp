@@ -52,7 +52,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Order Period Management: Opened</h1>
+					<h1 class="page-header">Order Period Management: Active</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -66,7 +66,7 @@
 						<div class="alert alert-warning fade in" role="alert">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Warning:</span>
-							There are no Order Periods opened!
+							There are no active Order Periods!
 						</div>
 					</c:if>
 

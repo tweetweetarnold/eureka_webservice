@@ -14,16 +14,16 @@ import model.OrderPeriod;
 import controller.OrderPeriodController;
 
 /**
- * Servlet implementation class LoadAdminViewOrderPeriodsClosedServlet
+ * Servlet implementation class LoadAdminViewOrderPeriodsArchivedServlet
  */
-@WebServlet("/LoadAdminViewOrderPeriodsClosedServlet")
-public class LoadAdminViewOrderPeriodsClosedServlet extends HttpServlet {
+@WebServlet("/LoadAdminViewOrderPeriodsArchivedServlet")
+public class LoadAdminViewOrderPeriodsArchivedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewOrderPeriodsClosedServlet() {
+	public LoadAdminViewOrderPeriodsArchivedServlet() {
 		super();
 	}
 
@@ -49,7 +49,7 @@ public class LoadAdminViewOrderPeriodsClosedServlet extends HttpServlet {
 
 		session.setAttribute("orderPeriodList", list);
 
-		response.sendRedirect("/eureka_webservice/admin/orderperiod/closed.jsp");
+		response.sendRedirect("/eureka_webservice/admin/orderperiod/archived.jsp");
 
 	}
 }

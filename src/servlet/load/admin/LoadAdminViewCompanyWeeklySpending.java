@@ -67,7 +67,6 @@ public class LoadAdminViewCompanyWeeklySpending extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("Error msg: " + e.getMessage());
 			session.setAttribute("error", "Something went wrong");
-		//	response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 		}
 	}
 

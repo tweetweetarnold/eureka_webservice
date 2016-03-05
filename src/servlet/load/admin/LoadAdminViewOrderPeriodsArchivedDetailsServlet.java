@@ -19,16 +19,16 @@ import controller.FoodOrderController;
 import controller.OrderPeriodController;
 
 /**
- * Servlet implementation class LoadAdminViewOrderPeriodsClosedDetailsServlet
+ * Servlet implementation class LoadAdminViewOrderPeriodsArchivedDetailsServlet
  */
-@WebServlet("/LoadAdminViewOrderPeriodsClosedDetailsServlet")
-public class LoadAdminViewOrderPeriodsClosedDetailsServlet extends HttpServlet {
+@WebServlet("/LoadAdminViewOrderPeriodsArchivedDetailsServlet")
+public class LoadAdminViewOrderPeriodsArchivedDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewOrderPeriodsClosedDetailsServlet() {
+	public LoadAdminViewOrderPeriodsArchivedDetailsServlet() {
 		super();
 	}
 
@@ -70,12 +70,12 @@ public class LoadAdminViewOrderPeriodsClosedDetailsServlet extends HttpServlet {
 			session.setAttribute("noGroup", noGroup);
 			session.setAttribute("groupedByStall", groupedByStall);
 
-			response.sendRedirect("/eureka_webservice/admin/orderperiod/closed-details.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderperiod/archived-details.jsp");
 
 		} catch (Exception e) {
-			System.out.println("Error occurred at LoadAdminViewOrderPeriodsClosedDetailsServlet");
+			System.out.println("Error occurred at LoadAdminViewOrderPeriodsArchivedDetailsServlet");
 			e.printStackTrace();
-			response.sendRedirect("/eureka_webservice/admin/orderperiod/closed-details.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderperiod/archived-details.jsp");
 		}
 	}
 }
