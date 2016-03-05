@@ -1030,25 +1030,32 @@ public class FoodOrderController {
 			String weekLabel = (String) iter.next();
 			if (weekLabel.equals(week)) {
 				ArrayList<FoodOrder> foodOrders = weekToFoodOrders.get(weekLabel);
-				FoodOrder initFo = foodOrders.get(foodOrders.size() - 1);
-				double sum = initFo.getFinalPrice();
+				FoodOrder initFo = foodOrders.get(0);
+				double sum = 0.0;
 				Date init = initFo.getCreateDate();
 				String currentDate = simpleDateFormat.format(init);
-				for (int i=foodOrders.size()-2; i>=0;i--) {
+				for (int i=0; i < foodOrders.size(); i++) {
 					FoodOrder fo = foodOrders.get(i);
 					double value = fo.getFinalPrice();
 					Date date = fo.getCreateDate();
 					
 	
 					String newconvertedDate = simpleDateFormat.format(date);
-					
+					System.out.println(newconvertedDate);
+					System.out.println("CURRENT" + currentDate);
 					if (newconvertedDate.equals(currentDate)) {
+						//System.out.println(sum + " " + value);
 						sum += value;
+						System.out.println("TRUE: Put " + currentDate + " and " + sum);
 						dateToFoodOrders.put(currentDate, sum);
-					} else {
 						currentDate = newconvertedDate;
+						//sum = 0.0;
+					} else if (!newconvertedDate.equals(currentDate)){
 						
-						dateToFoodOrders.put(currentDate, value);
+						System.out.println("FALSE : Put " + newconvertedDate + " and " + value);
+						dateToFoodOrders.put(newconvertedDate, value);
+						currentDate = newconvertedDate;
+						sum = value;
 					}
 					
 					
@@ -1066,11 +1073,12 @@ public class FoodOrderController {
 		while (iter1.hasNext()) {
 			String date = (String) iter1.next();
 			double price = dateToFoodOrders.get(date);
+			System.out.println(date + " " + price);
 			dataset.addValue(price, series1, date);
 		}
 		
 		
-		JFreeChart chart = ChartFactory.createLineChart("Weekly Spending from " + week,"Date", "Amount Spend($)",dataset);
+		JFreeChart chart = ChartFactory.createBarChart("Weekly Spending from " + week,"Date", "Amount Spend($)",dataset);
 		return chart;
 	}
 }
