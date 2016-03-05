@@ -37,6 +37,16 @@ public class CompanyController {
 		companyDAO.saveCompany(c);
 	}
 	
+	public void editCompany(int companyId, String name, String companyCode, Set<String> buildings){
+		Company c = getCompany(companyId);
+		c.setName(name);
+		c.setCompanyCode(companyCode);
+		c.setDeliveryPointSet(buildings);
+		updateCompany(c);
+	}
+	
+	
+	
 	/**
 	 * Retrieve all the Companies from the Database
 	 * @return An ArrayList of Company objects stored in the Database
@@ -82,4 +92,7 @@ public class CompanyController {
 	public void updateCompany(Company c) {
 		companyDAO.updateCompany(c);
 	}
+	
+	
+	
 }
