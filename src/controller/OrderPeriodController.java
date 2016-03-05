@@ -152,7 +152,7 @@ public class OrderPeriodController {
 
 		if (startTime.isBefore(endTime)) {
 			for (OrderPeriod w : allOrderPeriods) {
-				if (w.getStatus().equals(StringValues.ORDERPERIOD_OPENED)) {
+				if (w.getStatus().equals(StringValues.ORDERPERIOD_ACTIVE)) {
 					DateTime wStart = w.getStartDate();
 					DateTime wEnd = w.getEndDate();
 
@@ -188,7 +188,7 @@ public class OrderPeriodController {
 
 	public void createNewOrderPeriod2(DateTime startDate, DateTime endDate, Company company,
 			Canteen canteen, int numberOfWeeks, String remarks, double discountAbsolute)
-					throws Exception {
+			throws Exception {
 		QuartzService quartzService = new QuartzService();
 
 		for (int i = 0; i < numberOfWeeks; i++) {

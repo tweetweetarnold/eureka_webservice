@@ -20,8 +20,8 @@ public final class StringValues {
 	public static final String ORDER_SUBMITTED = "Submitted";
 
 	// For OrderWindow status
-	public static final String ORDERPERIOD_CLOSED = "Closed";
-	public static final String ORDERPERIOD_OPENED = "Opened";
+	public static final String ORDERPERIOD_ARCHIVED = "Archived";
+	public static final String ORDERPERIOD_ACTIVE= "Active";
 	public static final String ORDERPERIOD_PROCESSING = "Processing";
 	public static final String ORDERPERIOD_QUEUED = "Queued";
 	public static final String PAID = "Paid";
