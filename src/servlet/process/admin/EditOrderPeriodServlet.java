@@ -18,19 +18,19 @@ import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
 
-import controller.OrderWindowController;
+import controller.OrderPeriodController;
 
 /**
- * Servlet implementation class EditOrderWindowServlet
+ * Servlet implementation class EditOrderPeriodServlet
  */
-@WebServlet("/EditOrderWindowServlet")
-public class EditOrderWindowServlet extends HttpServlet {
+@WebServlet("/EditOrderPeriodServlet")
+public class EditOrderPeriodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public EditOrderWindowServlet() {
+	public EditOrderPeriodServlet() {
 		super();
 	}
 
@@ -56,14 +56,14 @@ public class EditOrderWindowServlet extends HttpServlet {
 		JSONObject returnJson = new JSONObject();
 		Gson gson = new Gson();
 
-		OrderWindowController orderWindowController = new OrderWindowController();
-		String orderWindowIdString = request.getParameter("orderWindowId");
+		OrderPeriodController orderPeriodController = new OrderPeriodController();
+		String orderPeriodIdString = request.getParameter("orderPeriodId");
 		try {
 
 			String startDatetimeString = request.getParameter("startDatetime");
 			String endDatetimeString = request.getParameter("endDatetime");
 
-			System.out.println(orderWindowIdString);
+			System.out.println(orderPeriodIdString);
 			System.out.println(startDatetimeString);
 			System.out.println(endDatetimeString);
 
@@ -80,11 +80,11 @@ public class EditOrderWindowServlet extends HttpServlet {
 			System.out.println("startDatetime: " + startDatetime);
 			System.out.println("endDatetime: " + endDatetime);
 
-			orderWindowController.editOrderWindow(Integer.parseInt(orderWindowIdString),
+			orderPeriodController.editOrderPeriod(Integer.parseInt(orderPeriodIdString),
 					startDatetime, endDatetime);
 
-			returnJson.put("success", "Order Window updated.");
-			session.setAttribute("success", "Order window updated");
+			returnJson.put("success", "Order Period updated.");
+			session.setAttribute("success", "Order period updated");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,8 +92,8 @@ public class EditOrderWindowServlet extends HttpServlet {
 			session.setAttribute("error", e.getMessage());
 
 		}
-		response.sendRedirect("/eureka_webservice/LoadAdminEditOrderWindowServlet?windowId="
-				+ orderWindowIdString);
+		response.sendRedirect("/eureka_webservice/LoadAdminEditOrderPeriodServlet?periodId="
+				+ orderPeriodIdString);
 
 		out.println(gson.toJson(returnJson));
 

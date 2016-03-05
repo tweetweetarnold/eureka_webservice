@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controller.OrderWindowController;
-import model.OrderWindow;
+import controller.OrderPeriodController;
+import model.OrderPeriod;
 
 /**
- * Servlet implementation class LoadAdminEditOrderWindowServlet
+ * Servlet implementation class LoadAdminEditOrderPeriodServlet
  */
-@WebServlet("/LoadAdminEditOrderWindowServlet")
-public class LoadAdminEditOrderWindowServlet extends HttpServlet {
+@WebServlet("/LoadAdminEditOrderPeriodServlet")
+public class LoadAdminEditOrderPeriodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminEditOrderWindowServlet() {
+	public LoadAdminEditOrderPeriodServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,14 +35,14 @@ public class LoadAdminEditOrderWindowServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		OrderWindowController orderWindowCtrl = new OrderWindowController();
+		OrderPeriodController orderPeriodCtrl = new OrderPeriodController();
 
 		try {
-			String orderWindowIdString = request.getParameter("windowId");
-			int orderWindowId = Integer.parseInt(orderWindowIdString);
-			OrderWindow window = orderWindowCtrl.getOrderWindow(orderWindowId);
+			String orderPeriodIdString = request.getParameter("periodId");
+			int orderPeriodId = Integer.parseInt(orderPeriodIdString);
+			OrderPeriod period = orderPeriodCtrl.getOrderPeriod(orderPeriodId);
 
-			session.setAttribute("window", window);
+			session.setAttribute("period", period);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +50,7 @@ public class LoadAdminEditOrderWindowServlet extends HttpServlet {
 
 		}
 
-		response.sendRedirect("/eureka_webservice/admin/orderwindow/edit.jsp");
+		response.sendRedirect("/eureka_webservice/admin/orderperiod/edit.jsp");
 	}
 
 	/**

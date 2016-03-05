@@ -20,19 +20,19 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import controller.OrderWindowController;
+import controller.OrderPeriodController;
 import model.Food;
 import model.Modifier;
 import model.ModifierSection;
-import model.OrderWindow;
+import model.OrderPeriod;
 import model.PriceModifier;
 import model.Stall;
 
 /**
- * Servlet implementation class GetOrderWindowByIdServlet
+ * Servlet implementation class GetOrderPeriodByIdServlet
  */
-@WebServlet("/GetOrderWindowByIdServlet")
-public class GetOrderWindowByIdServlet extends HttpServlet {
+@WebServlet("/GetOrderPeriodByIdServlet")
+public class GetOrderPeriodByIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
@@ -48,7 +48,7 @@ public class GetOrderWindowByIdServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetOrderWindowByIdServlet() {
+	public GetOrderPeriodByIdServlet() {
 		super();
 	}
 
@@ -78,24 +78,24 @@ public class GetOrderWindowByIdServlet extends HttpServlet {
 								&& c.getName().equals("modifierSection"))
 						|| (c.getDeclaringClass() == Modifier.class && c.getName().equals("food")
 								|| c.getDeclaringClass() == PriceModifier.class
-										&& c.getName().equals("orderWindow"));
+										&& c.getName().equals("orderPeriod"));
 			}
 
 		}).registerTypeAdapter(Date.class, dateSerialize).create();
 
-		OrderWindowController orderWindowCtrl = new OrderWindowController();
-		OrderWindow window = null;
+		OrderPeriodController orderPeriodCtrl = new OrderPeriodController();
+		OrderPeriod period = null;
 
 		try {
-			int orderWindowId = Integer.parseInt(request.getParameter("windowId"));
-			System.out.println("orderWindowId: " + orderWindowId);
+			int orderPeriodId = Integer.parseInt(request.getParameter("periodId"));
+			System.out.println("orderPeriodId: " + orderPeriodId);
 
-			window = orderWindowCtrl.getOrderWindow(orderWindowId);
+			period = orderPeriodCtrl.getOrderPeriod(orderPeriodId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		out.print(gson.toJson(window));
+		out.print(gson.toJson(period));
 	}
 
 	/**

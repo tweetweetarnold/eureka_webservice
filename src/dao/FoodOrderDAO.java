@@ -21,7 +21,7 @@ import model.Company;
 import model.Employee;
 import model.Food;
 import model.FoodOrder;
-import model.OrderWindow;
+import model.OrderPeriod;
 import connection.MyConnection;
 
 /**
@@ -48,16 +48,16 @@ public class FoodOrderDAO {
 	}
 
 	/**
-	 * Retrieve all FoodOrders based on the provided OrderWindow
+	 * Retrieve all FoodOrders based on the provided OrderPeriod
 	 * 
-	 * @param orderWindow The provided OrderWindow for retrieving all FoodOrders
-	 * @return An ArrayList of FoodOrder that is under the provided OrderWindow
+	 * @param orderPeriod The provided OrderPeriod for retrieving all FoodOrders
+	 * @return An ArrayList of FoodOrder that is under the provided OrderPeriod
 	 */
-	public ArrayList<FoodOrder> getAllFoodOrderOfOrderWindow(OrderWindow orderWindow) {
+	public ArrayList<FoodOrder> getAllFoodOrderOfOrderPeriod(OrderPeriod orderPeriod) {
 		ArrayList<FoodOrder> returnList = new ArrayList<FoodOrder>();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
-		dc.add(Restrictions.eq("orderWindow", orderWindow));
+		dc.add(Restrictions.eq("orderPeriod", orderPeriod));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -68,12 +68,12 @@ public class FoodOrderDAO {
 		return returnList;
 	}
 
-	public ArrayList<FoodOrder> getAllFoodOrderOfOrderWindowForUser(Employee employee,
-			OrderWindow orderWindow) {
+	public ArrayList<FoodOrder> getAllFoodOrderOfOrderPeriodForUser(Employee employee,
+			OrderPeriod orderPeriod) {
 		ArrayList<FoodOrder> returnList = new ArrayList<FoodOrder>();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
-		dc.add(Restrictions.eq("orderWindow", orderWindow));
+		dc.add(Restrictions.eq("orderPeriod", orderPeriod));
 		dc.add(Restrictions.eq("employee", employee));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
@@ -183,7 +183,7 @@ public class FoodOrderDAO {
 		List<Object> returnList = new ArrayList<>();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class, "FoodOrder");
-		//dc.add(Restrictions.eq("orderWindow", orderWindow));
+		//dc.add(Restrictions.eq("orderPeriod", orderPeriod));
 		//dc.add(Restrictions.eq("company", company));
 		dc.createCriteria("employee")
 		   .add(Restrictions.eq("company", company));
@@ -220,7 +220,7 @@ public class FoodOrderDAO {
 		List<Object> returnList = new ArrayList<>();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
-		//dc.add(Restrictions.eq("orderWindow", orderWindow));
+		//dc.add(Restrictions.eq("orderPeriod", orderPeriod));
 		dc.add(Restrictions.eq("employee", employee));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		
@@ -252,7 +252,7 @@ public class FoodOrderDAO {
 		List<Object> returnList = new ArrayList<>();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class, "FoodOrder");
-		//dc.add(Restrictions.eq("orderWindow", orderWindow));
+		//dc.add(Restrictions.eq("orderPeriod", orderPeriod));
 		//dc.add(Restrictions.eq("company", company));
 		dc.createCriteria("employee")
 		   .add(Restrictions.eq("company", company));
@@ -284,7 +284,7 @@ public class FoodOrderDAO {
 		List<Object> returnList = new ArrayList<>();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
-		//dc.add(Restrictions.eq("orderWindow", orderWindow));
+		//dc.add(Restrictions.eq("orderPeriod", orderPeriod));
 		dc.add(Restrictions.eq("employee", employee));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		
@@ -316,7 +316,7 @@ public class FoodOrderDAO {
 		List<String> returnList = new ArrayList<>();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class, "FoodOrder");
-		//dc.add(Restrictions.eq("orderWindow", orderWindow));
+		//dc.add(Restrictions.eq("orderPeriod", orderPeriod));
 		//dc.add(Restrictions.eq("company", company));
 		dc.createCriteria("employee")
 		   .add(Restrictions.eq("company", company));
@@ -346,7 +346,7 @@ public class FoodOrderDAO {
 		List<String> returnList = new ArrayList<>();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
-		//dc.add(Restrictions.eq("orderWindow", orderWindow));
+		//dc.add(Restrictions.eq("orderPeriod", orderPeriod));
 		dc.add(Restrictions.eq("employee", employee));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		

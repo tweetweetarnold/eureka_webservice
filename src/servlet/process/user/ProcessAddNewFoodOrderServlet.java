@@ -17,11 +17,11 @@ import javax.servlet.http.HttpSession;
 import model.Employee;
 import model.FoodOrder;
 import model.FoodOrderItem;
-import model.OrderWindow;
+import model.OrderPeriod;
 import model.PriceModifier;
 import value.StringValues;
 import controller.FoodOrderController;
-import controller.OrderWindowController;
+import controller.OrderPeriodController;
 import dao.EmployeeDAO;
 
 /**
@@ -66,9 +66,9 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 
 		try {
 			// Retrieve myFoodOrders and User
-			OrderWindowController owController = new OrderWindowController();
+			OrderPeriodController owController = new OrderPeriodController();
 			FoodOrderController controller = new FoodOrderController();
-			OrderWindow window = (OrderWindow) session.getAttribute("orderWindow");
+			OrderPeriod window = (OrderPeriod) session.getAttribute("orderWindow");
 			Employee employee = (Employee) session.getAttribute("user");
 			System.out.println("Employee retrieved");
 			if (!controller.checkForExistingOrder(employee, window)) {

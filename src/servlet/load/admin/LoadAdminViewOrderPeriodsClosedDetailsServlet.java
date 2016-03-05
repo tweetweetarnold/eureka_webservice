@@ -14,21 +14,21 @@ import javax.servlet.http.HttpSession;
 import model.Employee;
 import model.FoodDisplayObject;
 import model.FoodOrderItem;
-import model.OrderWindow;
+import model.OrderPeriod;
 import controller.FoodOrderController;
-import controller.OrderWindowController;
+import controller.OrderPeriodController;
 
 /**
- * Servlet implementation class LoadAdminViewOrderWindowsClosedDetailsServlet
+ * Servlet implementation class LoadAdminViewOrderPeriodsClosedDetailsServlet
  */
-@WebServlet("/LoadAdminViewOrderWindowsClosedDetailsServlet")
-public class LoadAdminViewOrderWindowsClosedDetailsServlet extends HttpServlet {
+@WebServlet("/LoadAdminViewOrderPeriodsClosedDetailsServlet")
+public class LoadAdminViewOrderPeriodsClosedDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewOrderWindowsClosedDetailsServlet() {
+	public LoadAdminViewOrderPeriodsClosedDetailsServlet() {
 		super();
 	}
 
@@ -48,34 +48,34 @@ public class LoadAdminViewOrderWindowsClosedDetailsServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		FoodOrderController foodOrderController = new FoodOrderController();
-		OrderWindowController orderWindowController = new OrderWindowController();
+		OrderPeriodController orderPeriodController = new OrderPeriodController();
 
-		String windowIdString = request.getParameter("windowId");
+		String periodIdString = request.getParameter("periodId");
 
 		try {
-			Integer windowId = Integer.parseInt(windowIdString);
+			Integer periodId = Integer.parseInt(periodIdString);
 
-			OrderWindow window = orderWindowController.getOrderWindow(windowId);
-			System.out.println("windowID here: " + window.getWindowId());
+			OrderPeriod period = orderPeriodController.getOrderPeriod(periodId);
+			System.out.println("periodID here: " + period.getPeriodId());
 
 			HashMap<Employee, ArrayList<FoodOrderItem>> noGroup = foodOrderController
-					.getAllFoodOrderOfOrderWindow(window);
+					.getAllFoodOrderOfOrderPeriod(period);
 
 			ArrayList<FoodDisplayObject> groupedByStall = foodOrderController
-					.getAllFoodOrderOfOrderWindowGroupedByStall(window);
+					.getAllFoodOrderOfOrderPeriodGroupedByStall(period);
 
 			System.out.println("nogroup size: " + noGroup.size());
 
-			session.setAttribute("window", window);
+			session.setAttribute("period", period);
 			session.setAttribute("noGroup", noGroup);
 			session.setAttribute("groupedByStall", groupedByStall);
 
-			response.sendRedirect("/eureka_webservice/admin/orderwindow/closed-details.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderperiod/closed-details.jsp");
 
 		} catch (Exception e) {
-			System.out.println("Error occurred at LoadAdminViewOrderWindowsClosedDetailsServlet");
+			System.out.println("Error occurred at LoadAdminViewOrderPeriodsClosedDetailsServlet");
 			e.printStackTrace();
-			response.sendRedirect("/eureka_webservice/admin/orderwindow/closed-details.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderperiod/closed-details.jsp");
 		}
 	}
 }

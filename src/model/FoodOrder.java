@@ -37,7 +37,7 @@ public class FoodOrder {
 	private Set<FoodOrderItem> foodOrderList;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderWindowId")
-	private OrderWindow orderWindow;
+	private OrderPeriod orderWindow;
 	private String status;
 	private String transactionId;
 
@@ -57,7 +57,7 @@ public class FoodOrder {
 	 * @param orderWindow The window period for ordering food
 	 */
 	public FoodOrder(String status, Employee employee, Set<FoodOrderItem> foodOrderList,
-			OrderWindow orderWindow) {
+			OrderPeriod orderWindow) {
 		super();
 		this.status = status;
 		this.employee = employee;
@@ -135,7 +135,7 @@ public class FoodOrder {
 	 * 
 	 * @return The window period for ordering food
 	 */
-	public OrderWindow getOrderWindow() {
+	public OrderPeriod getOrderWindow() {
 		return orderWindow;
 	}
 
@@ -212,7 +212,7 @@ public class FoodOrder {
 	 * 
 	 * @param orderWindow The new order window for ordering food
 	 */
-	public void setOrderWindow(OrderWindow orderWindow) {
+	public void setOrderWindow(OrderPeriod orderWindow) {
 		this.orderWindow = orderWindow;
 	}
 

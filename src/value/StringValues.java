@@ -10,7 +10,7 @@ public final class StringValues {
 
 	// For Employee status
 	public static final String EMPLOYEE_DESTROYED = "Destroyed";
-	public static final String EMPLOYEE_OK = "Ok";
+	public static final String EMPLOYEE_ACTIVE = "Active";
 	public static final String EMPLOYEE_PENDING_VERIFICATION = "Pending verification";
 	public static final String EMPLOYEE_SUSPENDED = "Suspended";
 
@@ -20,10 +20,10 @@ public final class StringValues {
 	public static final String ORDER_SUBMITTED = "Submitted";
 
 	// For OrderWindow status
-	public static final String ORDERWINDOW_CLOSED = "Closed";
-	public static final String ORDERWINDOW_OPENED = "Opened";
-	public static final String ORDERWINDOW_PROCESSING = "Processing";
-	public static final String ORDERWINDOW_QUEUED = "Queued";
+	public static final String ORDERPERIOD_CLOSED = "Closed";
+	public static final String ORDERPERIOD_OPENED = "Opened";
+	public static final String ORDERPERIOD_PROCESSING = "Processing";
+	public static final String ORDERPERIOD_QUEUED = "Queued";
 	public static final String PAID = "Paid";
 
 	// For PriceModifier Types

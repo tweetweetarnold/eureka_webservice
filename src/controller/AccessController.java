@@ -315,7 +315,7 @@ public class AccessController {
 		String time = aesAlgo.encrypt(formatter.print(currentTime));
 		String token = time;
 		String eEncrypt = aesAlgo.encrypt(email);
-		String encryptedStatus = aesAlgo.encrypt(StringValues.EMPLOYEE_OK);
+		String encryptedStatus = aesAlgo.encrypt(StringValues.EMPLOYEE_ACTIVE);
 
 		String url = appUrl + "/ProcessVerificationServlet?email=" + eEncrypt + "&status="
 				+ encryptedStatus + "&token=" + token;

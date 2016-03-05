@@ -29,8 +29,8 @@ import value.StringValues;
  * @author SMU Team Eureka
  */
 @Entity
-@Table(name = "orderwindow")
-public class OrderWindow {
+@Table(name = "orderperiod")
+public class OrderPeriod {
 
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "canteenId")
@@ -44,7 +44,7 @@ public class OrderWindow {
 	private DateTime endDate;
 	@Column(name = "endDate")
 	private Date endDateFormatted;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "orderWindow")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "orderPeriod")
 	private List<PriceModifier> priceModifierList;
 	private String remarks, status;
 	@Transient
@@ -53,15 +53,15 @@ public class OrderWindow {
 	private Date startDateFormatted;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int windowId;
+	private int periodId;
 
 	/**
-	 * Creates a default constructor for OrderWindow
+	 * Creates a default constructor for OrderPeriod
 	 */
-	public OrderWindow() {
+	public OrderPeriod() {
 	}
 
-	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
+	public OrderPeriod(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
 			double discount, double discountAbsolute, String remarks,
 			ArrayList<PriceModifier> priceModifierList) {
 		this.startDate = startDate;
@@ -78,7 +78,7 @@ public class OrderWindow {
 		this.priceModifierList = priceModifierList;
 	}
 
-	public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
+	public OrderPeriod(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
 			String remarks, ArrayList<PriceModifier> priceModifierList) {
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -93,14 +93,14 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Creates a new OrderWindow with a starting and ending DateTime, company and the canteen
+	 * Creates a new OrderPeriod with a starting and ending DateTime, company and the canteen
 	 * 
-	 * @param startDate The starting Date and Time of this OrderWindow
-	 * @param endDate The ending Date and Time of this OrderWindow
-	 * @param company The Company indicated in this OrderWindow
-	 * @param canteen The Canteen indicated in this OrderWindow
+	 * @param startDate The starting Date and Time of this OrderPeriod
+	 * @param endDate The ending Date and Time of this OrderPeriod
+	 * @param company The Company indicated in this OrderPeriod
+	 * @param canteen The Canteen indicated in this OrderPeriod
 	 */
-	// public OrderWindow(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
+	// public OrderPeriod(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
 	// double discount, String remarks, ArrayList<PriceModifier> priceModifierList) {
 	// this.startDate = startDate;
 	// this.endDate = endDate;
@@ -116,15 +116,15 @@ public class OrderWindow {
 	// }
 
 	/**
-	 * Creates a new OrderWindow with a starting date and time, duration, the Company and the
+	 * Creates a new OrderPeriod with a starting date and time, duration, the Company and the
 	 * Canteen
 	 * 
-	 * @param startDate The starting date and time of this OrderWindow
-	 * @param duration The duration of this OrderWindow
-	 * @param company The Company in this OrderWindow
-	 * @param canteen The Canteen in this OrderWindow
+	 * @param startDate The starting date and time of this OrderPeriod
+	 * @param duration The duration of this OrderPeriod
+	 * @param company The Company in this OrderPeriod
+	 * @param canteen The Canteen in this OrderPeriod
 	 */
-	// public OrderWindow(DateTime startDate, Duration duration, Company company, Canteen canteen,
+	// public OrderPeriod(DateTime startDate, Duration duration, Company company, Canteen canteen,
 	// double discount, String remarks, ArrayList<PriceModifier> priceModifierList) {
 	// this.startDate = startDate;
 	// this.endDate = startDate.plus(duration);
@@ -139,36 +139,36 @@ public class OrderWindow {
 	// }
 
 	/**
-	 * Retrieves the Canteen in this order window
+	 * Retrieves the Canteen in this order period
 	 * 
-	 * @return The Canteen object in this order window
+	 * @return The Canteen object in this order period
 	 */
 	public Canteen getCanteen() {
 		return canteen;
 	}
 
 	/**
-	 * Retrieves the Company of this OrderWindow
+	 * Retrieves the Company of this OrderPeriod
 	 * 
-	 * @return The Company object in this OrderWindow
+	 * @return The Company object in this OrderPeriod
 	 */
 	public Company getCompany() {
 		return company;
 	}
 
 	/**
-	 * Retrieves the date which this OrderWindow is created
+	 * Retrieves the date which this OrderPeriod is created
 	 * 
-	 * @return The date that this OrderWindow object is created
+	 * @return The date that this OrderPeriod object is created
 	 */
 	public Date getCreateDate() {
 		return createDate;
 	}
 
 	/**
-	 * Retrieves the discount of this order window
+	 * Retrieves the discount of this order period
 	 * 
-	 * @return The current discount in this order window
+	 * @return The current discount in this order period
 	 */
 	public double getDiscount() {
 		return discount;
@@ -179,16 +179,16 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Retrieves the duration of this OrderWindow
+	 * Retrieves the duration of this OrderPeriod
 	 * 
-	 * @return The duration of the OrderWindow
+	 * @return The duration of the OrderPeriod
 	 */
 	public Duration getDuration() {
 		return new Duration(endDate.getMillis() - startDate.getMillis());
 	}
 
 	/**
-	 * Retrieves the ending Date and Time of this OrderWindow
+	 * Retrieves the ending Date and Time of this OrderPeriod
 	 * 
 	 * @return The current ending Date and Time in Joda-Time
 	 */
@@ -197,7 +197,7 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Retrieves the formatted ending DateTime of this order window
+	 * Retrieves the formatted ending DateTime of this order period
 	 * 
 	 * @return The current formatted ending DateTime
 	 */
@@ -214,7 +214,7 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Retrieves the starting Date and Time of this OrderWindow
+	 * Retrieves the starting Date and Time of this OrderPeriod
 	 * 
 	 * @return The starting Date and Time in Joda-Time
 	 */
@@ -223,7 +223,7 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Retrieves the formatted starting DateTime of this order window
+	 * Retrieves the formatted starting DateTime of this order period
 	 * 
 	 * @return The current formatted starting DateTime
 	 */
@@ -232,9 +232,9 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Retrieves the current status of this OrderWindow
+	 * Retrieves the current status of this OrderPeriod
 	 * 
-	 * @return The status of the order window. It can be indicated as "Queued", "Opened" or "Closed"
+	 * @return The status of the order period. It can be indicated as "Queued", "Opened" or "Closed"
 	 */
 	public String getStatus() {
 		return this.status;
@@ -252,26 +252,26 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Retrieves the ID of the OrderWindow
+	 * Retrieves the ID of the OrderPeriod
 	 * 
-	 * @return The OrderWindow ID
+	 * @return The OrderPeriod ID
 	 */
-	public int getWindowId() {
-		return windowId;
+	public int getPeriodId() {
+		return periodId;
 	}
 
 	/**
-	 * Check if current OrderWindow overlaps with another Interval
+	 * Check if current OrderPeriod overlaps with another Interval
 	 * 
 	 * @param other Interval to be compared with
-	 * @return Returns true if this OrderWindow overlaps with the parameter Interval
+	 * @return Returns true if this OrderPeriod overlaps with the parameter Interval
 	 */
 	public boolean overlaps(Interval other) {
 		return new Interval(startDate.getMillis(), endDate.getMillis()).overlaps(other);
 	}
 
 	/**
-	 * Changes the current Canteen in this order window
+	 * Changes the current Canteen in this order period
 	 * 
 	 * @param canteen The new Canteen object
 	 */
@@ -280,25 +280,25 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Changes the current Company in this OrderWindow
+	 * Changes the current Company in this OrderPeriod
 	 * 
-	 * @param company The Company object to be set in this OrderWindow
+	 * @param company The Company object to be set in this OrderPeriod
 	 */
 	public void setCompany(Company company) {
 		this.company = company;
 	}
 
 	/**
-	 * Changes the current date of this OrderWindow being created
+	 * Changes the current date of this OrderPeriod being created
 	 * 
-	 * @param createDate The new date created of this OrderWindow
+	 * @param createDate The new date created of this OrderPeriod
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
 	/**
-	 * Changes the current discount of this order window
+	 * Changes the current discount of this order period
 	 * 
 	 * @param discount The new discount to be updated
 	 */
@@ -311,7 +311,7 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Changes the current ending Date and Time of this OrderWindow
+	 * Changes the current ending Date and Time of this OrderPeriod
 	 * 
 	 * @param endDate The new ending Date and Time in java DateTime
 	 */
@@ -321,7 +321,7 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Changes the current formatted ending DateTime of this order window
+	 * Changes the current formatted ending DateTime of this order period
 	 * 
 	 * @param endDateFormatted The new formatted ending DateTime
 	 */
@@ -338,7 +338,7 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Changes the current starting Date and Time of this OrderWindow
+	 * Changes the current starting Date and Time of this OrderPeriod
 	 * 
 	 * @param startDate The new starting Date and Time in java DateTime
 	 */
@@ -348,7 +348,7 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Changes the current formatted starting DateTime of this order window
+	 * Changes the current formatted starting DateTime of this order period
 	 * 
 	 * @param startDateFormatted The new formatted starting DataTime
 	 */
@@ -361,12 +361,12 @@ public class OrderWindow {
 	}
 
 	/**
-	 * Changes the current OrderWindow ID
+	 * Changes the current OrderPeriod ID
 	 * 
-	 * @param windowId The OrderWindow's new ID
+	 * @param periodId The OrderPeriod's new ID
 	 */
-	public void setWindowId(int windowId) {
-		this.windowId = windowId;
+	public void setWindowId(int periodId) {
+		this.periodId = periodId;
 	}
 
 }

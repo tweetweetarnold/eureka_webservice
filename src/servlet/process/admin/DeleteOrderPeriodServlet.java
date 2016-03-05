@@ -14,19 +14,19 @@ import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
 
-import controller.OrderWindowController;
+import controller.OrderPeriodController;
 
 /**
- * Servlet implementation class DeleteOrderWindowServlet
+ * Servlet implementation class DeleteOrderPeriodServlet
  */
-@WebServlet("/DeleteOrderWindowServlet")
-public class DeleteOrderWindowServlet extends HttpServlet {
+@WebServlet("/DeleteOrderPeriodServlet")
+public class DeleteOrderPeriodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteOrderWindowServlet() {
+	public DeleteOrderPeriodServlet() {
 		super();
 	}
 
@@ -48,7 +48,7 @@ public class DeleteOrderWindowServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		JSONObject returnJson = new JSONObject();
-		OrderWindowController orderWindowCtrl = new OrderWindowController();
+		OrderPeriodController orderPeriodCtrl = new OrderPeriodController();
 
 		Gson gson = new Gson();
 
@@ -57,11 +57,11 @@ public class DeleteOrderWindowServlet extends HttpServlet {
 			JSONObject data = (JSONObject) parser.parse(request.getReader());
 			System.out.println(gson.toJson(data));
 
-			int windowId = ((Long) data.get("windowId")).intValue();
+			int periodId = ((Long) data.get("periodId")).intValue();
 
-			orderWindowCtrl.deleteOrderWindow(windowId);
+			orderPeriodCtrl.deleteOrderPeriod(periodId);
 
-			returnJson.put("success", "Order Window ID: " + windowId + " has been deleted.");
+			returnJson.put("success", "Order Period ID: " + periodId + " has been deleted.");
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -9,7 +9,7 @@ import model.Company;
 import model.Employee;
 import model.Food;
 import model.Modifier;
-import model.OrderWindow;
+import model.OrderPeriod;
 import model.Stall;
 
 import org.hibernate.Session;

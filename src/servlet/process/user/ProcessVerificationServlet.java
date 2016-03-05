@@ -94,7 +94,7 @@ public class ProcessVerificationServlet extends HttpServlet {
 				switch (currentStatus) {
 				case StringValues.EMPLOYEE_DESTROYED:
 					throw new Exception("This account is no longer in use");
-				case StringValues.EMPLOYEE_OK:
+				case StringValues.EMPLOYEE_ACTIVE:
 					throw new Exception("Your account is already verified");
 				case StringValues.EMPLOYEE_SUSPENDED:
 					throw new Exception("Your account is suspended");
@@ -107,7 +107,7 @@ public class ProcessVerificationServlet extends HttpServlet {
 				switch (currentStatus) {
 				case StringValues.EMPLOYEE_DESTROYED:
 					throw new Exception("This account is no longer in use");
-				case StringValues.EMPLOYEE_OK:
+				case StringValues.EMPLOYEE_ACTIVE:
 					throw new Exception("Your account is already verified");
 				case StringValues.EMPLOYEE_SUSPENDED:
 					throw new Exception("Your account is suspended");

@@ -15,7 +15,7 @@ import model.Employee;
 import model.Food;
 import model.Modifier;
 import model.ModifierSection;
-import model.OrderWindow;
+import model.OrderPeriod;
 import model.Stall;
 import services.AESAlgorithm;
 import services.PasswordService;
@@ -2420,7 +2420,7 @@ public class Test {
 		// **************************************** End insert of mock data
 		// ****************************************
 
-		OrderWindow window = new OrderWindow(new DateTime(2015, 12, 2, 16, 36, 0),
+		OrderPeriod window = new OrderPeriod(new DateTime(2015, 12, 2, 16, 36, 0),
 				new DateTime(2015, 12, 31, 16, 36, 0), company, canteen1, 0, 0,
 				"This is a testing order window.", null);
 		session.save(window); // arnold test data

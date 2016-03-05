@@ -6,34 +6,34 @@ import java.util.Date;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
-import dao.OrderWindowDAO;
+import dao.OrderPeriodDAO;
 import model.Canteen;
 import model.Company;
-import model.OrderWindow;
+import model.OrderPeriod;
 import model.PriceModifier;
 import services.QuartzService;
 import value.StringValues;
 
 /**
- * Process the business logic of the order window for the application
+ * Process the business logic of the order period for the application
  * 
  * @author SMU Team Eureka
  * 
  */
-public class OrderWindowController {
-	OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
+public class OrderPeriodController {
+	OrderPeriodDAO orderPeriodDAO = new OrderPeriodDAO();
 
 	/**
-	 * Creates a default constructor for the OrderWindowController
+	 * Creates a default constructor for the OrderPeriodController
 	 */
-	public OrderWindowController() {
+	public OrderPeriodController() {
 	}
 
-	public boolean checkForOrderWindowAvailability(DateTime startTime, DateTime endTime,
+	public boolean checkForOrderPeriodAvailability(DateTime startTime, DateTime endTime,
 			Company company, int weeks) throws Exception {
 
-		ArrayList<OrderWindow> allOrderWindows = orderWindowDAO
-				.getAllOrderWindowsUnderCompany(company);
+		ArrayList<OrderPeriod> allOrderPeriods = orderPeriodDAO
+				.getAllOrderPeriodsUnderCompany(company);
 
 		System.out.println("startDate: " + startTime);
 		System.out.println("endTime: " + endTime);
@@ -57,7 +57,7 @@ public class OrderWindowController {
 				DateTime endTimeTemp = endTimes.get(i);
 
 				if (startTimeTemp.isBefore(endTimeTemp)) {
-					for (OrderWindow w : allOrderWindows) {
+					for (OrderPeriod w : allOrderPeriods) {
 						System.out.println(w.getCanteen().getName());
 						if (w.getStatus().equals(StringValues.ACTIVE)) {
 							DateTime wStart = w.getStartDate();
@@ -98,7 +98,7 @@ public class OrderWindowController {
 
 			if (startTime.isBefore(endTime)) {
 
-				for (OrderWindow w : allOrderWindows) {
+				for (OrderPeriod w : allOrderPeriods) {
 
 					if (w.getStatus().equals(StringValues.ACTIVE)) {
 
@@ -141,18 +141,18 @@ public class OrderWindowController {
 		return true;
 	}
 
-	public ArrayList<OrderWindow> checkOrderWindowAvailability(DateTime startTime, DateTime endTime,
+	public ArrayList<OrderPeriod> checkOrderPeriodAvailability(DateTime startTime, DateTime endTime,
 			Company coy) throws Exception {
 
-		ArrayList<OrderWindow> allOrderWindows = orderWindowDAO.getAllOrderWindowsUnderCompany(coy);
-		ArrayList<OrderWindow> occupiedSlots = new ArrayList<OrderWindow>();
+		ArrayList<OrderPeriod> allOrderPeriods = orderPeriodDAO.getAllOrderPeriodsUnderCompany(coy);
+		ArrayList<OrderPeriod> occupiedSlots = new ArrayList<OrderPeriod>();
 
 		System.out.println("startDate: " + startTime);
 		System.out.println("endTime: " + endTime);
 
 		if (startTime.isBefore(endTime)) {
-			for (OrderWindow w : allOrderWindows) {
-				if (w.getStatus().equals(StringValues.ORDERWINDOW_OPENED)) {
+			for (OrderPeriod w : allOrderPeriods) {
+				if (w.getStatus().equals(StringValues.ORDERPERIOD_OPENED)) {
 					DateTime wStart = w.getStartDate();
 					DateTime wEnd = w.getEndDate();
 
@@ -186,7 +186,7 @@ public class OrderWindowController {
 		return occupiedSlots;
 	}
 
-	public void createNewOrderWindow2(DateTime startDate, DateTime endDate, Company company,
+	public void createNewOrderPeriod2(DateTime startDate, DateTime endDate, Company company,
 			Canteen canteen, int numberOfWeeks, String remarks, double discountAbsolute)
 					throws Exception {
 		QuartzService quartzService = new QuartzService();
@@ -194,147 +194,147 @@ public class OrderWindowController {
 		for (int i = 0; i < numberOfWeeks; i++) {
 			DateTime newStartTime = startDate.plusWeeks(i);
 			Date startDateForQuartz = newStartTime.toDate();
-			OrderWindow window = new OrderWindow(newStartTime, endDate.plusWeeks(i), company,
+			OrderPeriod period = new OrderPeriod(newStartTime, endDate.plusWeeks(i), company,
 					canteen, remarks, null);
 
 			ArrayList<PriceModifier> list = new ArrayList<PriceModifier>();
 			PriceModifier discountAbsoluteModifier = new PriceModifier("Discount",
-					StringValues.PRICEMODIFIER_ABSOLUTE, discountAbsolute, window);
+					StringValues.PRICEMODIFIER_ABSOLUTE, discountAbsolute, period);
 			list.add(discountAbsoluteModifier);
-			System.out.println("pricemodifierlist size window: " + list.size());
-			window.setPriceModifierList(list);
-			orderWindowDAO.saveOrderWindow(window);
-			int orderWindowID = orderWindowDAO.updateOrderWindow(window);
-			System.out.println(orderWindowID);
+			System.out.println("pricemodifierlist size period: " + list.size());
+			period.setPriceModifierList(list);
+			orderPeriodDAO.saveOrderPeriod(period);
+			int orderPeriodID = orderPeriodDAO.updateOrderPeriod(period);
+			System.out.println(orderPeriodID);
 			// quartz stuff
-			quartzService.setupNewJobAndTrigger("" + orderWindowID, startDateForQuartz);
+			quartzService.setupNewJobAndTrigger("" + orderPeriodID, startDateForQuartz);
 		}
 
 	}
 
-	public void deleteOrderWindow(int orderWindowId) throws Exception {
+	public void deleteOrderPeriod(int orderPeriodId) throws Exception {
 
 		FoodOrderController foodOrderCtrl = new FoodOrderController();
-		OrderWindow orderWindowToArchive = getOrderWindow(orderWindowId);
+		OrderPeriod orderPeriodToArchive = getOrderPeriod(orderPeriodId);
 
-		if (foodOrderCtrl.getAllFoodOrderOfOrderWindowGroupedByStall(orderWindowToArchive)
+		if (foodOrderCtrl.getAllFoodOrderOfOrderPeriodGroupedByStall(orderPeriodToArchive)
 				.size() == 0) {
-			orderWindowToArchive.setStatus(StringValues.ARCHIVED);
-			orderWindowDAO.updateOrderWindow(orderWindowToArchive);
+			orderPeriodToArchive.setStatus(StringValues.ARCHIVED);
+			orderPeriodDAO.updateOrderPeriod(orderPeriodToArchive);
 		} else {
-			throw new Exception("A Food Order has been made. Order Window cannot be deleted.");
+			throw new Exception("A Food Order has been made. Order Period cannot be deleted.");
 		}
 	}
 
-	public void editOrderWindow(int orderWindowId, DateTime newStartDate, DateTime newEndDate)
+	public void editOrderPeriod(int orderPeriodId, DateTime newStartDate, DateTime newEndDate)
 			throws Exception {
-		OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
-		OrderWindow orderWindowToEdit = getOrderWindow(orderWindowId);
-		DateTime dateEnd = orderWindowToEdit.getEndDate();
-		DateTime dateStart = orderWindowToEdit.getStartDate();
+		OrderPeriodDAO orderPeriodDAO = new OrderPeriodDAO();
+		OrderPeriod orderPeriodToEdit = getOrderPeriod(orderPeriodId);
+		DateTime dateEnd = orderPeriodToEdit.getEndDate();
+		DateTime dateStart = orderPeriodToEdit.getStartDate();
 		DateTimeZone dateTimeZone = DateTimeZone.forID("Asia/Singapore");
 		DateTime currentTime = DateTime.now(dateTimeZone);
 
-		// to check for clashing Order Window
-		ArrayList<OrderWindow> orderWindowList = checkOrderWindowAvailability(newStartDate,
-				newEndDate, orderWindowToEdit.getCompany());
+		// to check for clashing Order Period
+		ArrayList<OrderPeriod> orderPeriodList = checkOrderPeriodAvailability(newStartDate,
+				newEndDate, orderPeriodToEdit.getCompany());
 
 		if (dateStart.isAfter(currentTime)) {
-			// edit OrderWindow orderWindowToEdit
+			// edit OrderPeriod orderPeriodToEdit
 			if (newStartDate.isBefore(currentTime)) {
 				throw new Exception("Cannot set start date to before current time");
-				// check if new order window clash with other order windows
+				// check if new order period clash with other order periods
 			} else {
 
 				// if list is empty no clash
-				if (orderWindowList.isEmpty()) {
-					orderWindowToEdit.setStartDate(newStartDate);
-					orderWindowToEdit.setEndDate(newEndDate);
-					orderWindowDAO.updateOrderWindow(orderWindowToEdit);
-					// if list has one order window and it is the same order
-					// window go ahead and edit it
-				} else if ((orderWindowList.size() == 1)
-						&& (orderWindowList.get(0).getWindowId() == orderWindowId)) {
-					orderWindowToEdit.setStartDate(newStartDate);
-					orderWindowToEdit.setEndDate(newEndDate);
-					orderWindowDAO.updateOrderWindow(orderWindowToEdit);
+				if (orderPeriodList.isEmpty()) {
+					orderPeriodToEdit.setStartDate(newStartDate);
+					orderPeriodToEdit.setEndDate(newEndDate);
+					orderPeriodDAO.updateOrderPeriod(orderPeriodToEdit);
+					// if list has one order period and it is the same order
+					// period go ahead and edit it
+				} else if ((orderPeriodList.size() == 1)
+						&& (orderPeriodList.get(0).getPeriodId() == orderPeriodId)) {
+					orderPeriodToEdit.setStartDate(newStartDate);
+					orderPeriodToEdit.setEndDate(newEndDate);
+					orderPeriodDAO.updateOrderPeriod(orderPeriodToEdit);
 					// if both conditions not satisfied then it clashes with one
-					// or more windows
+					// or more periods
 				} else {
-					throw new Exception("New order window dates clash with another order window");
+					throw new Exception("New order period dates clash with another order period");
 				}
 			}
 		} else if (dateStart.isBefore(currentTime) && dateEnd.isAfter(currentTime)) {
 			// can only edit endDate
 			// if list is empty no clash
-			if (orderWindowList.isEmpty()) {
-				orderWindowToEdit.setEndDate(newEndDate);
-				orderWindowDAO.updateOrderWindow(orderWindowToEdit);
+			if (orderPeriodList.isEmpty()) {
+				orderPeriodToEdit.setEndDate(newEndDate);
+				orderPeriodDAO.updateOrderPeriod(orderPeriodToEdit);
 
-				// if list has one order window and it is the same order window
+				// if list has one order period and it is the same order period
 				// go ahead and edit it
-			} else if ((orderWindowList.size() == 1)
-					&& (orderWindowList.get(0).getWindowId() == orderWindowId)) {
-				orderWindowToEdit.setEndDate(newEndDate);
-				orderWindowDAO.updateOrderWindow(orderWindowToEdit);
+			} else if ((orderPeriodList.size() == 1)
+					&& (orderPeriodList.get(0).getPeriodId() == orderPeriodId)) {
+				orderPeriodToEdit.setEndDate(newEndDate);
+				orderPeriodDAO.updateOrderPeriod(orderPeriodToEdit);
 
 			}
 			// if both conditions not satisfied then it clashes with one or more
-			// windows
+			// periods
 			else {
-				throw new Exception("Dates clash with an existing Order Window.");
+				throw new Exception("Dates clash with an existing Order Period.");
 			}
 
 		} else {
-			throw new Exception("Order Window Cannot be edited");
+			throw new Exception("Order Period Cannot be edited");
 		}
 
 	}
 
-	public ArrayList<OrderWindow> getAllClosedWindows() {
-		return orderWindowDAO.getAllClosedWindows();
+	public ArrayList<OrderPeriod> getAllClosedPeriods() {
+		return orderPeriodDAO.getAllClosedPeriods();
 	}
 
-	public ArrayList<OrderWindow> getAllNonDeletedOrderWindows() {
-		return orderWindowDAO.getAllNonDeletedOrderWindows();
-	}
-
-	/**
-	 * Get all OrderWindows with status "Opened"
-	 * 
-	 * @return Returns an ArrayList of OrderWindows with status "Opened"
-	 */
-	public ArrayList<OrderWindow> getAllOpenedWindows() {
-		return orderWindowDAO.getAllOpenedWindows();
+	public ArrayList<OrderPeriod> getAllNonDeletedOrderPeriods() {
+		return orderPeriodDAO.getAllNonDeletedOrderPeriods();
 	}
 
 	/**
-	 * Get all OrderWindows with status "Opened" for the given Company
+	 * Get all OrderPeriods with status "Opened"
 	 * 
-	 * @param company The company whose "Opened" OrderWindows are to be retrieved
-	 * @return Returns an ArrayList of OrderWindows with status "Opened" for the given Company
+	 * @return Returns an ArrayList of OrderPeriods with status "Opened"
 	 */
-	public ArrayList<OrderWindow> getAllOpenedWindowsForCompany(Company company) {
-		return orderWindowDAO.getAllOpenedWindowsForCompany(company);
+	public ArrayList<OrderPeriod> getAllOpenedPeriods() {
+		return orderPeriodDAO.getAllOpenedPeriods();
 	}
 
 	/**
-	 * Retrieve all the OrderWindows
+	 * Get all OrderPeriods with status "Opened" for the given Company
 	 * 
-	 * @return An ArrayList of all OrderWindows regardless of status
+	 * @param company The company whose "Opened" OrderPeriods are to be retrieved
+	 * @return Returns an ArrayList of OrderPeriods with status "Opened" for the given Company
 	 */
-	public ArrayList<OrderWindow> getAllOrderWindows() {
-		return orderWindowDAO.getAllOrderWindows();
+	public ArrayList<OrderPeriod> getAllOpenedPeriodsForCompany(Company company) {
+		return orderPeriodDAO.getAllOpenedPeriodsForCompany(company);
 	}
 
 	/**
-	 * Retrieves the OrderWindow based on the provided ID
+	 * Retrieve all the OrderPeriods
 	 * 
-	 * @param orderWindowId The ID of the OrderWindow
-	 * @return The OrderWindow object that has the provided ID
+	 * @return An ArrayList of all OrderPeriods regardless of status
 	 */
-	public OrderWindow getOrderWindow(Integer orderWindowId) {
-		return orderWindowDAO.getOrderWindow(orderWindowId);
+	public ArrayList<OrderPeriod> getAllOrderPeriods() {
+		return orderPeriodDAO.getAllOrderPeriods();
+	}
+
+	/**
+	 * Retrieves the OrderPeriod based on the provided ID
+	 * 
+	 * @param orderPeriodId The ID of the OrderPeriod
+	 * @return The OrderPeriod object that has the provided ID
+	 */
+	public OrderPeriod getOrderPeriod(Integer orderPeriodId) {
+		return orderPeriodDAO.getOrderPeriod(orderPeriodId);
 	}
 
 }

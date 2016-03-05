@@ -15,21 +15,21 @@ import javax.servlet.http.HttpSession;
 import model.Employee;
 import model.FoodDisplayObject;
 import model.FoodOrderItem;
-import model.OrderWindow;
+import model.OrderPeriod;
 import controller.FoodOrderController;
-import controller.OrderWindowController;
+import controller.OrderPeriodController;
 
 /**
  * Servlet implementation class GetTodayOrdersServlet
  */
-@WebServlet("/LoadOrderWindowOpenedServlet")
-public class LoadOrderWindowOpenedServlet extends HttpServlet {
+@WebServlet("/LoadOrderPeriodOpenedServlet")
+public class LoadOrderPeriodOpenedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadOrderWindowOpenedServlet() {
+	public LoadOrderPeriodOpenedServlet() {
 		super();
 	}
 
@@ -49,34 +49,34 @@ public class LoadOrderWindowOpenedServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		FoodOrderController foodOrderCtrl = new FoodOrderController();
-		OrderWindowController orderWindowCtrl = new OrderWindowController();
+		OrderPeriodController orderPeriodCtrl = new OrderPeriodController();
 
 		try {
-			LinkedHashMap<OrderWindow, Object[]> map = new LinkedHashMap<OrderWindow, Object[]>();
-			ArrayList<OrderWindow> openedWindowList = orderWindowCtrl.getAllOpenedWindows();
+			LinkedHashMap<OrderPeriod, Object[]> map = new LinkedHashMap<OrderPeriod, Object[]>();
+			ArrayList<OrderPeriod> openedPeriodList = orderPeriodCtrl.getAllOpenedPeriods();
 
-			for (OrderWindow window : openedWindowList) {
+			for (OrderPeriod period : openedPeriodList) {
 				Object[] arr = new Object[2];
 				HashMap<Employee, ArrayList<FoodOrderItem>> noGroup = foodOrderCtrl
-						.getAllFoodOrderOfOrderWindow(window);
+						.getAllFoodOrderOfOrderPeriod(period);
 
 				ArrayList<FoodDisplayObject> groupedByStall = foodOrderCtrl
-						.getAllFoodOrderOfOrderWindowGroupedByStall(window);
+						.getAllFoodOrderOfOrderPeriodGroupedByStall(period);
 
 				System.out.println("nogroup size: " + noGroup.size());
 
 				arr[0] = noGroup;
 				arr[1] = groupedByStall;
-				map.put(window, arr);
+				map.put(period, arr);
 			}
 
-			session.setAttribute("orderWindowMap", map);
-			response.sendRedirect("/eureka_webservice/admin/orderwindow/opened.jsp");
+			session.setAttribute("orderPeriodMap", map);
+			response.sendRedirect("/eureka_webservice/admin/orderperiod/opened.jsp");
 
 		} catch (Exception e) {
-			System.out.println("Error occurred at LoadOrderWindowOpenedServlet");
+			System.out.println("Error occurred at LoadOrderPeriodOpenedServlet");
 			e.printStackTrace();
-			response.sendRedirect("/eureka_webservice/admin/orderwindow/opened.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderperiod/opened.jsp");
 		}
 	}
 }

@@ -21,19 +21,19 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import controller.OrderWindowController;
+import controller.OrderPeriodController;
 import model.Food;
 import model.Modifier;
 import model.ModifierSection;
-import model.OrderWindow;
+import model.OrderPeriod;
 import model.PriceModifier;
 import model.Stall;
 
 /**
- * Servlet implementation class GetAllOrderWindowsServlet
+ * Servlet implementation class GetAllOrderPeriodsServlet
  */
-@WebServlet("/GetAllOrderWindowsServlet")
-public class GetAllOrderWindowsServlet extends HttpServlet {
+@WebServlet("/GetAllOrderPeriodsServlet")
+public class GetAllOrderPeriodsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
@@ -49,7 +49,7 @@ public class GetAllOrderWindowsServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetAllOrderWindowsServlet() {
+	public GetAllOrderPeriodsServlet() {
 		super();
 	}
 
@@ -79,14 +79,14 @@ public class GetAllOrderWindowsServlet extends HttpServlet {
 								&& c.getName().equals("modifierSection"))
 						|| (c.getDeclaringClass() == Modifier.class && c.getName().equals("food")
 								|| c.getDeclaringClass() == PriceModifier.class
-										&& c.getName().equals("orderWindow"));
+										&& c.getName().equals("orderPeriod"));
 			}
 
 		}).registerTypeAdapter(Date.class, dateSerialize).create();
 
-		OrderWindowController orderWindowController = new OrderWindowController();
+		OrderPeriodController orderPeriodController = new OrderPeriodController();
 
-		ArrayList<OrderWindow> list = orderWindowController.getAllNonDeletedOrderWindows();
+		ArrayList<OrderPeriod> list = orderPeriodController.getAllNonDeletedOrderPeriods();
 
 		out.print(gson.toJson(list));
 	}

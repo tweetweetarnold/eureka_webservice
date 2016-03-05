@@ -11,15 +11,15 @@ import java.util.Map;
 import java.util.Set;
 
 import dao.FoodOrderDAO;
-import dao.OrderWindowDAO;
+import dao.OrderPeriodDAO;
 import model.Canteen;
 import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
-import model.OrderWindow;
+import model.OrderPeriod;
 
 public class AnalyticsController {
-	OrderWindowDAO orderWindowDAO = new OrderWindowDAO();
+	OrderPeriodDAO orderPeriodDAO = new OrderPeriodDAO();
 	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
 
 	public AnalyticsController() {
@@ -30,10 +30,10 @@ public class AnalyticsController {
 		CanteenController canteenCtrl = new CanteenController();
 		Canteen canteen = canteenCtrl.getCanteen(canteenId);
 
-		ArrayList<OrderWindow> orderWindowList = orderWindowDAO.getAllWindowsForCanteen(canteen);
+		ArrayList<OrderPeriod> orderPeriodList = orderPeriodDAO.getAllPeriodsForCanteen(canteen);
 		ArrayList<FoodOrder> allFoodOrderList = new ArrayList<FoodOrder>();
-		for (OrderWindow orderWindow : orderWindowList) {
-			allFoodOrderList.addAll(foodOrderDAO.getAllFoodOrderOfOrderWindow(orderWindow));
+		for (OrderPeriod orderPeriod : orderPeriodList) {
+			allFoodOrderList.addAll(foodOrderDAO.getAllFoodOrderOfOrderPeriod(orderPeriod));
 		}
 
 		LinkedHashMap<Food, Integer> foodCountMap = new LinkedHashMap<Food, Integer>();

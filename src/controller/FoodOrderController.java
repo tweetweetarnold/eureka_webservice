@@ -30,7 +30,7 @@ import model.FoodDisplayObject;
 import model.FoodOrder;
 import model.FoodOrderItem;
 import model.ModifierChosen;
-import model.OrderWindow;
+import model.OrderPeriod;
 import model.Stall;
 import value.StringValues;
 
@@ -72,8 +72,8 @@ public class FoodOrderController {
 		updateFoodOrder(foodOrder);
 	}
 
-	public boolean checkForExistingOrder(Employee employee, OrderWindow orderWindow) {
-		if (foodOrderDAO.getAllFoodOrderOfOrderWindowForUser(employee, orderWindow).isEmpty()) {
+	public boolean checkForExistingOrder(Employee employee, OrderPeriod orderPeriod) {
+		if (foodOrderDAO.getAllFoodOrderOfOrderPeriodForUser(employee, orderPeriod).isEmpty()) {
 			return false;
 		}
 		return true;
@@ -114,17 +114,17 @@ public class FoodOrderController {
 	}
 
 	/**
-	 * Returns all FoodOrderItem objects in the OrderWindow sorted in a HashMap
+	 * Returns all FoodOrderItem objects in the OrderPeriod sorted in a HashMap
 	 * with Employee (key) and ArrayList<FoodOrderItem>
 	 * 
-	 * @param orderWindow
-	 *            OrderWindow of FoodOrderItem(s) to retrieve
+	 * @param orderPeriod
+	 *            OrderPeriod of FoodOrderItem(s) to retrieve
 	 * @return a HashMap with Employee as Key and his corresponding
 	 *         FoodOrderItem(s) ordered
 	 */
-	public HashMap<Employee, ArrayList<FoodOrderItem>> getAllFoodOrderOfOrderWindow(OrderWindow orderWindow) {
+	public HashMap<Employee, ArrayList<FoodOrderItem>> getAllFoodOrderOfOrderPeriod(OrderPeriod orderPeriod) {
 		// get all orders made today
-		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getAllFoodOrderOfOrderWindow(orderWindow);
+		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getAllFoodOrderOfOrderPeriod(orderPeriod);
 		// hashmap for return later
 		HashMap<Employee, ArrayList<FoodOrderItem>> map = new HashMap<Employee, ArrayList<FoodOrderItem>>();
 
@@ -159,13 +159,13 @@ public class FoodOrderController {
 	 * Returns a ArrayList of FoodDisplayObjects to be use in the admin food
 	 * order display (by stalls)
 	 * 
-	 * @param orderWindow
-	 *            OrderWindow of FoodDisplayObject(s) to retrieve
-	 * @return a ArrayList of the FoodDisplayObject(s) within the order window
+	 * @param orderPeriod
+	 *            OrderPeriod of FoodDisplayObject(s) to retrieve
+	 * @return a ArrayList of the FoodDisplayObject(s) within the order period
 	 */
-	public ArrayList<FoodDisplayObject> getAllFoodOrderOfOrderWindowGroupedByStall(OrderWindow orderWindow) {
+	public ArrayList<FoodDisplayObject> getAllFoodOrderOfOrderPeriodGroupedByStall(OrderPeriod orderPeriod) {
 
-		ArrayList<FoodOrder> tempFoodOrderList = foodOrderDAO.getAllFoodOrderOfOrderWindow(orderWindow);
+		ArrayList<FoodOrder> tempFoodOrderList = foodOrderDAO.getAllFoodOrderOfOrderPeriod(orderPeriod);
 
 		// This is what we will eventually return. (FINAL)
 		ArrayList<FoodDisplayObject> foodDisplayList = new ArrayList<FoodDisplayObject>();

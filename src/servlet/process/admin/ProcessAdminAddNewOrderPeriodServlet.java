@@ -19,19 +19,19 @@ import org.joda.time.format.DateTimeFormatter;
 
 import controller.CanteenController;
 import controller.CompanyController;
-import controller.OrderWindowController;
+import controller.OrderPeriodController;
 
 /**
- * Servlet implementation class ProcessAdminAddNewOrderWindowServlet
+ * Servlet implementation class ProcessAdminAddNewOrderPeriodServlet
  */
-@WebServlet("/ProcessAdminAddNewOrderWindowServlet")
-public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
+@WebServlet("/ProcessAdminAddNewOrderPeriodServlet")
+public class ProcessAdminAddNewOrderPeriodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ProcessAdminAddNewOrderWindowServlet() {
+	public ProcessAdminAddNewOrderPeriodServlet() {
 		super();
 	}
 
@@ -50,7 +50,7 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		OrderWindowController orderWindowController = new OrderWindowController();
+		OrderPeriodController orderPeriodController = new OrderPeriodController();
 		CompanyController companyController = new CompanyController();
 		CanteenController canteenController = new CanteenController();
 
@@ -94,18 +94,18 @@ public class ProcessAdminAddNewOrderWindowServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			boolean available = orderWindowController.checkForOrderWindowAvailability(
+			boolean available = orderPeriodController.checkForOrderPeriodAvailability(
 					startDatetime, endDatetime, company, numberOfWeeks);
 
 			if (!available) {
-				throw new Exception("Order Window have already been taken");
+				throw new Exception("Order Period have already been taken");
 			} else {
-				// orderWindowController.createNewOrderWindow(startDatetime, endDatetime, company,
+				// orderPeriodController.createNewOrderPeriod(startDatetime, endDatetime, company,
 				// canteen, numberOfWeeks, remarks, 0.0, discountAbsolute);
-				orderWindowController.createNewOrderWindow2(startDatetime, endDatetime, company,
+				orderPeriodController.createNewOrderPeriod2(startDatetime, endDatetime, company,
 						canteen, numberOfWeeks, remarks, discountAbsolute);
 			}
-			session.setAttribute("success", "New Order Window created successfully.");
+			session.setAttribute("success", "New Order Period created successfully.");
 
 			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
 		} catch (Exception e) {

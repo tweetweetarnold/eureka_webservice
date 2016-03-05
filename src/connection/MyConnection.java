@@ -10,7 +10,7 @@ import model.Employee;
 import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
-import model.OrderWindow;
+import model.OrderPeriod;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;

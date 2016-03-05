@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Canteen;
 import model.Employee;
-import model.OrderWindow;
+import model.OrderPeriod;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import controller.AccessController;
-import controller.OrderWindowController;
+import controller.OrderPeriodController;
 
 /**
  * Servlet implementation class Hello
@@ -58,7 +58,7 @@ public class ProcessLoginServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		AccessController accessController = new AccessController();
-		OrderWindowController orderWindowController = new OrderWindowController();
+		OrderPeriodController orderPeriodController = new OrderPeriodController();
 		JSONObject obj = new JSONObject();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -104,22 +104,22 @@ public class ProcessLoginServlet extends HttpServlet {
 			/*
 			 * (3) VERIFY AVAILABLE OPENED ORDER WINDOW.
 			 */
-			ArrayList<OrderWindow> windowList = orderWindowController
-					.getAllOpenedWindowsForCompany(emp.getCompany());
-			if (windowList == null || windowList.size() == 0) {
-				System.out.println("windowList size: " + windowList.size());
+			ArrayList<OrderPeriod> periodList = orderPeriodController
+					.getAllOpenedPeriodsForCompany(emp.getCompany());
+			if (periodList == null || periodList.size() == 0) {
+				System.out.println("periodList size: " + periodList.size());
 			}
 
 			/*
 			 * ************* End of validation ********************
 			 */
 
-			OrderWindow window = null;
+			OrderPeriod period = null;
 			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
 					+ "|";
 
-			if (!windowList.isEmpty()) {
-				window = windowList.get(0);
+			if (!periodList.isEmpty()) {
+				period = periodList.get(0);
 			} else {
 				session.setAttribute("user", emp);
 				session.setAttribute("tokenID", tokenID);
@@ -131,13 +131,13 @@ public class ProcessLoginServlet extends HttpServlet {
 			// Setting user and token
 			session.setAttribute("user", emp);
 			session.setAttribute("tokenID", tokenID);
-			session.setAttribute("orderWindow", window);
+			session.setAttribute("orderPeriod", period);
 			System.out.println("TokenID is set in session");
 
 			// for login2
-			if (window != null && window.getStatus().equals(StringValues.ACTIVE)) {
+			if (period != null && period.getStatus().equals(StringValues.ACTIVE)) {
 				ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
-				canteenList.add(window.getCanteen());
+				canteenList.add(period.getCanteen());
 				session.setAttribute("canteenList", canteenList);
 				System.out.println("canteenList size: " + canteenList.size());
 			}else{

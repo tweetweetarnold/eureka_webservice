@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.OrderWindow;
-import controller.OrderWindowController;
+import model.OrderPeriod;
+import controller.OrderPeriodController;
 
 /**
- * Servlet implementation class LoadAdminViewOrderWindowsServlet
+ * Servlet implementation class LoadAdminViewOrderPeriodsClosedServlet
  */
-@WebServlet("/LoadAdminViewOrderWindowsServlet")
-public class LoadAdminViewOrderWindowsServlet extends HttpServlet {
+@WebServlet("/LoadAdminViewOrderPeriodsClosedServlet")
+public class LoadAdminViewOrderPeriodsClosedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoadAdminViewOrderWindowsServlet() {
+	public LoadAdminViewOrderPeriodsClosedServlet() {
 		super();
 	}
 
@@ -40,15 +40,16 @@ public class LoadAdminViewOrderWindowsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 
-		OrderWindowController orderWindowController = new OrderWindowController();
+		OrderPeriodController orderPeriodController = new OrderPeriodController();
 
-		ArrayList<OrderWindow> list = orderWindowController.getAllOrderWindows();
+		ArrayList<OrderPeriod> list = orderPeriodController.getAllClosedPeriods();
 
-		session.setAttribute("orderWindowList", list);
+		session.setAttribute("orderPeriodList", list);
 
-		response.sendRedirect("/eureka_webservice/admin/orderwindow/view.jsp");
+		response.sendRedirect("/eureka_webservice/admin/orderperiod/closed.jsp");
+
 	}
-
 }
