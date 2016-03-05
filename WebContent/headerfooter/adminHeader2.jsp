@@ -93,11 +93,11 @@
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadOrderPeriodOpenedServlet">View: Opened</a>
+							<a target="_self" href="/eureka_webservice/LoadOrderPeriodOpenedServlet">View: Active</a>
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewOrderPeriodsClosedServlet">View: Closed</a>
+							<a target="_self" href="/eureka_webservice/LoadAdminViewOrderPeriodsClosedServlet">View: Archieved</a>
 
 						</li>
 						<li>
