@@ -60,8 +60,8 @@ public class AddNewCompanyServlet extends HttpServlet {
 			String name = (String) data.get("name");
 			String code = (String) data.get("code");
 
-			Company c = new Company(name, null, null, code);
-			companyCtrl.addNewCompany(c);
+			
+			companyCtrl.addNewCompany(name, code);
 
 			returnJson.put("success", "Company " + name + " has been added.");
 

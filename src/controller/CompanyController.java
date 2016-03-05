@@ -1,7 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Set;
 
+import model.Canteen;
 import model.Company;
 import dao.CompanyDAO;
 
@@ -30,6 +32,11 @@ public class CompanyController {
 		companyDAO.saveCompany(c);
 	}
 
+	public void addNewCompany(String name, String companyCode) {
+		Company c = new Company(name, companyCode);
+		companyDAO.saveCompany(c);
+	}
+	
 	/**
 	 * Retrieve all the Companies from the Database
 	 * @return An ArrayList of Company objects stored in the Database
