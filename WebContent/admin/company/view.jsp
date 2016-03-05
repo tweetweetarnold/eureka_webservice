@@ -126,15 +126,10 @@
 										>View Weekly Spending</a>
 									</td>
 									<td>
-										<a target="_self" ng-href="#">
+										<a target="_self" ng-href="/eureka_webservice/admin/company/edit.jsp?companyId={{company.companyId}}">
 											<button type="button" class="btn btn-link btn-xs">
 												<i class="fa fa-pencil fa-2x"></i>
 											</button>
-										</a>
-										<a target="_self" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Help"
-											data-content="This feature is not ready yet." data-placement="left"
-										>
-											<i class="fa fa-question-circle"></i>
 										</a>
 									</td>
 
@@ -182,13 +177,6 @@
 					});
 
 				} ]);
-	</script>
-
-
-	<script>
-		$(function() {
-			$('[data-toggle="popover"]').popover();
-		});
 	</script>
 
 

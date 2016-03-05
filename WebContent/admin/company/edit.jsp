@@ -48,7 +48,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="AddCompanyController">
+<body ng-app="myApp" ng-controller="EditCompanyController">
 
 	<div id="wrapper">
 
@@ -58,7 +58,7 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Add new Company</h1>
+					<h1 class="page-header">Edit Company</h1>
 
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
@@ -79,7 +79,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Add new Company</div>
+						<div class="panel-heading">Edit Company</div>
 
 						<div class="panel-body">
 
@@ -95,7 +95,7 @@
 										</div>
 
 										<div class="form-group">
-											<label>Code</label>
+											<label>Company Code</label>
 											<input class="form-control" ng-model='company.code' name="code" required>
 											<span style="color: red;" ng-show='form.code.$error.required'>This is required!</span>
 										</div>
@@ -104,7 +104,7 @@
 
 										<button disabled type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">
 											<i class="fa fa-plus fa-lg"></i>
-											Add new Company
+											Update Company
 										</button>
 									</form>
 
@@ -177,13 +177,13 @@
 												method : 'GET',
 												url : '/eureka_webservice/GetCompanyServlet',
 												params : {
-													canteenId : $location
+													companyId : $location
 															.search().companyId
 												}
 											}).then(
 											function successCallback(response) {
 												console.log(response);
-												$scope.canteen = response.data;
+												$scope.company = response.data;
 												console.log($scope.canteen);
 											});
 
