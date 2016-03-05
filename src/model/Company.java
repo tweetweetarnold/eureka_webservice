@@ -24,8 +24,8 @@ import value.StringValues;
 @Entity
 @Table(name = "company")
 public class Company {
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	private String companyCode, name, status;
+	private String companyCode;
+	private String name, status;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int companyId;

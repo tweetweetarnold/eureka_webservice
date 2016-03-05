@@ -54,7 +54,7 @@ public class Test2 {
 		// ************* WARNING, THIS HIBERNATE CONFIG FILE WILL CLEAR
 		// EVERYTHING IN DATABASE AND POPULATE WITH BELOW
 
-		Company company = new Company("XiaoDingDang Co.", null, null, "XDD123");
+		Company company = new Company("XiaoDingDang Co.", "XDD123");
 		Set<String> buildingList = new HashSet<String>();
 		buildingList.add("SEMBCORP");
 		buildingList.add("PSN");
