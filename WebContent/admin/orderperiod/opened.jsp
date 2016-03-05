@@ -52,7 +52,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Order Window Management: Opened</h1>
+					<h1 class="page-header">Order Period Management: Opened</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -62,18 +62,18 @@
 			<div class="row">
 				<div class="col-lg-12">
 
-					<c:if test="${empty sessionScope.orderWindowMap}">
+					<c:if test="${empty sessionScope.orderPeriodMap}">
 						<div class="alert alert-warning fade in" role="alert">
 							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 							<span class="sr-only">Warning:</span>
-							There are no Order Windows opened!
+							There are no Order Periods opened!
 						</div>
 					</c:if>
 
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-						<c:forEach items="${sessionScope.orderWindowMap}" var="map" varStatus="mapLoop">
-							<c:set value="${map.key}" var="window" />
+						<c:forEach items="${sessionScope.orderPeriodMap}" var="map" varStatus="mapLoop">
+							<c:set value="${map.key}" var="period" />
 
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="heading${mapLoop.index}">
@@ -81,14 +81,14 @@
 										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${mapLoop.index}"
 											aria-expanded="true" aria-controls="collapse${mapLoop.index}"
 										>
-											${window.company.name}:&nbsp;&nbsp;
+											${period.company.name}:&nbsp;&nbsp;
 											<b>
 												<fmt:setLocale value="EN" />
-												<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.startDateFormatted}" />
+												<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${period.startDateFormatted}" />
 											</b>
 											&nbsp;&nbsp;to&nbsp;&nbsp;
 											<b>
-												<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.endDateFormatted}" />
+												<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${period.endDateFormatted}" />
 											</b>
 										</a>
 									</h4>
@@ -97,12 +97,12 @@
 									aria-labelledby="heading${mapLoop.index}"
 								>
 									<div class="panel-body">
-										<b>Window ID: </b>
-										${window.windowId}
+										<b>Period ID: </b>
+										${period.periodId}
 										<br>
 
 										<b>Canteen: </b>
-										${window.canteen.name}
+										${period.canteen.name}
 										<br>
 										<br>
 
@@ -150,7 +150,7 @@
 																	<td rowspan="${fn:length(order.value) + 1}">
 																		<p title="${order.key.email}">${order.key.name}&nbsp;(${order.key.deliveryPoint})</p>
 																		<a
-																			href="/eureka_webservice/admin/orderwindow/add-fooditem.jsp?foodOrderId=${order.value[0].foodOrder.foodOrderId}"
+																			href="/eureka_webservice/admin/orderperiod/add-fooditem.jsp?foodOrderId=${order.value[0].foodOrder.foodOrderId}"
 																		>Add new line</a>
 																	</td>
 
@@ -375,7 +375,7 @@
 
 													<br>
 													<br>
-													<button class="btn btn-primary" type="button" onclick="window.print()">Print This Page</button>
+													<button class="btn btn-primary" type="button" onclick="period.print()">Print This Page</button>
 
 												</div>
 

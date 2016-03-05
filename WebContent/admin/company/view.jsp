@@ -119,11 +119,11 @@
 									<td>
 										<a target="_self"
 											ng-href="/eureka_webservice/LoadAdminViewCompanyMonthlySpending?company={{company.companyCode}}&name={{company.name}}"
-										>Monthly Spending Summary</a>
+										>View Monthly Spending</a>
 										<br>
 										<a target="_self"
 											ng-href="/eureka_webservice/LoadAdminViewCompanyWeeklySpending?company={{company.companyCode}}&name={{company.name}}"
-										>Weekly Spending Summary</a>
+										>View Weekly Spending</a>
 									</td>
 									<td>
 										<a target="_self" ng-href="#">

@@ -50,7 +50,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Order Window Management: Closed</h1>
+					<h1 class="page-header">Order Period Management: Closed</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -59,8 +59,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 
-					<b>Total order windows:</b>
-					${fn:length(sessionScope.orderWindowList)}
+					<b>Total Order Periods:</b>
+					${fn:length(sessionScope.orderPeriodList)}
 					<br>
 					<br>
 
@@ -73,13 +73,13 @@
 									<th>Canteen</th>
 									<th>Discount</th>
 									<th>Date Created</th>
-									<th>Start Date</th>
-									<th>End date</th>
+									<th>Start Date/Time</th>
+									<th>End Date/Time</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.orderWindowList}" var="window">
+								<c:forEach items="${sessionScope.orderPeriodList}" var="window">
 									<tr>
 										<td>${window.windowId}</td>
 										<td>${window.company.name}</td>
@@ -95,7 +95,7 @@
 											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${window.endDateFormatted}" />
 										</td>
 										<td>
-											<a href="/eureka_webservice/LoadAdminViewOrderWindowsClosedDetailsServlet?windowId=${window.windowId}">Details</a>
+											<a href="/eureka_webservice/LoadAdminViewOrderPeriodsClosedDetailsServlet?windowId=${window.windowId}">Details</a>
 										</td>
 									</tr>
 								</c:forEach>

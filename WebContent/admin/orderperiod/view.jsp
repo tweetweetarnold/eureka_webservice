@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 
 <%@include file="/protect/adminProtect.jsp"%>
@@ -11,7 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-
 
 <title>LunchTime - Admin</title>
 
@@ -33,9 +31,6 @@
 	rel="stylesheet" type="text/css"
 >
 
-<!-- Datetime picker css -->
-<link href="/eureka_webservice/resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
-
 <!-- Angular -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
@@ -45,29 +40,19 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="AddFoodOrderItemController">
+<body ng-app="myApp" ng-controller="ViewOrderPeriodController">
 
 	<div id="wrapper">
 
 		<%@include file="/headerfooter/adminHeader2.jsp"%>
 
-		<div id="page-wrapper">
 
+		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Order Window Management: Edit Food Order Item</h1>
-
-					<!-- breadcrumb -->
-					<ol class="breadcrumb">
-						<li>
-							<a target="_self" href="/eureka_webservice/LoadOrderWindowOpenedServlet">Back</a>
-						</li>
-						<li class="active">Edit</li>
-					</ol>
-
+					<h1 class="page-header">Order Period Management: All</h1>
 				</div>
-
-
+				<!-- /.col-lg-12 -->
 
 
 				<!-- Message handling -->
@@ -90,71 +75,109 @@
 					</div>
 				</div>
 				<!-- / message handling -->
-				<!-- /.col-lg-12 -->
 
 
 			</div>
-
 			<!-- /.row -->
+
 			<div class="row">
-				<div class="col-lg-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">Edit Food Order Item</div>
+				<div class="col-lg-12" cg-busy='loading'>
 
-						<div class="panel-body">
+					<b>Total Order Periods:</b>
+					{{data.length}}
+					<br>
+					<br>
+					<a class="btn btn-primary" ng-href='/eureka_webservice/admin/orderperiod/add.jsp' target="_self">
+						<i class="fa fa-plus fa-lg"></i>
+						Add Order Period
+					</a>
+					<br>
+					<br>
 
-							<div class="row">
+					<div class="dataTable_wrapper">
+						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Company</th>
+									<th>Canteen</th>
+									<th>Discount</th>
+									<th>Date Created</th>
+									<th>Start Date/Time</th>
+									<th>End Date/Time</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="period in data track by $index">
+									<td>{{period.periodId}}</td>
+									<td>{{period.company.name}}</td>
+									<td>{{period.canteen.name}}</td>
+									<td>{{period.priceModifierList[0].value | currency}}</td>
+									<td>{{period.createDate | date:'medium' : '+0800'}}</td>
+									<td>{{period.startDateFormatted | date:'medium' : '+0800'}}</td>
+									<td>{{period.endDateFormatted | date:'medium' : '+0800'}}</td>
+									<td>
+										<a ng-href="/eureka_webservice/LoadAdminEditOrderPeriodServlet?periodId={{period.periodId}}">
+											<button type="button" class="btn btn-link btn-xs">
+												<i class="fa fa-pencil fa-2x"></i>
+											</button>
+										</a>
+									</td>
+									<td>
+										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete{{$index}}">
+											<i class="fa fa-trash-o fa-2x"></i>
+										</button>
 
-								<div class="col-lg-6">
+										<!-- Modal delete -->
+										<div class="modal fade" id="modalDelete{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+														<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
+													</div>
+													<!-- / modal header -->
+													<div class="modal-body">
+														<p>
+															<b>WARNING: </b>
+															You are deleting Order Period ID: {{period.periodId}}.
+															<br>
+															<br>
+															Are you sure you want to continue?
+														</p>
+													</div>
+													<!-- / modal body -->
 
-									<div class="form-group">
-										<label for="food">Food: </label>
-										<select class="form-control" ng-model='food' name="food"
-											ng-options='f as f.name  + " (" + (f.price | currency) + ")" for f in data track by f.foodId'
-										>
-										</select>
-									</div>
-
-
-									<div class="form-group" ng-show="food != null && food.modifierList.length > 0">
-										<label for="modifierChosen">Modifier: </label>
-										<select class="form-control" name="modifierChosen" ng-model='modifierChosen'
-											ng-options='m as m.name + " (" + (m.price | currency) + ")" for m in food.modifierList track by m.modifierId'
-										>
-										</select>
-									</div>
-
-									<div class="form-group">
-										<label>Total Price: </label>
-										<p>{{food.price + modifierChosen.price | currency}}</p>
-									</div>
-
-									<br>
-									<button class="btn btn-primary" ng-click="submit()">Add new food item</button>
-
-								</div>
-								<!-- /col-lg-6 -->
-
-
-							</div>
-							<!-- /.row -->
-						</div>
-						<!-- /.panel-body -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">No, keep the period</button>
+														<button type="button" ng-click="deletePeriod(period.periodId)" class="btn btn-danger">Yes, delete
+															the period</button>
+													</div>
+													<!-- / modal footer -->
+												</div>
+												<!-- / modal content -->
+											</div>
+										</div>
+										<!-- / Modal delete -->
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
-					<!-- /.panel -->
+					<!-- /.table-responsive -->
+
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
+
 		</div>
-		<!-- /#page-wrapper -->
-
-
-
 	</div>
 	<!-- /#wrapper -->
-
-
 
 	<script
 		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/jquery/dist/jquery.min.js"
@@ -171,13 +194,12 @@
 	<script>
 		app
 				.controller(
-						'AddFoodOrderItemController',
+						'ViewOrderPeriodController',
 						[
-								'$scope',
 								'$http',
-								'$location',
+								'$scope',
 								'$window',
-								function($scope, $http, $location, $window) {
+								function($http, $scope, $window) {
 
 									$scope.success = angular
 											.copy($window.sessionStorage.success);
@@ -187,63 +209,44 @@
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
 
-									$scope.foodOrderId = $location.search().foodOrderId;
-
-									$http(
+									$scope.loading = $http(
 											{
 												method : 'GET',
-												url : '/eureka_webservice/GetAllFoodsServlet',
-												params : {
-													foodOrderId : $scope.foodOrderId
-												}
+												url : '/eureka_webservice/GetAllOrderPeriodsServlet'
 											}).then(
 											function successCallback(response) {
-												console.log(response.data);
 												$scope.data = response.data;
-											},
-											function errorCallback(response) {
-												alert(response);
+												console.log(response);
 											});
 
-									$scope.totalPrice = $scope.food;
+									$scope.deletePeriod = function(periodId) {
 
-									$scope.submit = function() {
-										console.log({
-											food : $scope.food,
-											modifier : $scope.modifierChosen,
-											foodOrderId : $scope.foodOrderId
-										});
+										console.log(periodId);
 
 										$http(
 												{
 													method : 'POST',
-													url : '/eureka_webservice/AddFoodOrderItemIntoFoodOrderServlet',
+													url : '/eureka_webservice/DeleteOrderPeriodServlet',
 													data : {
-														food : $scope.food,
-														modifier : $scope.modifierChosen,
-														foodOrderId : $scope.foodOrderId
+														periodId : periodId
 													}
 												})
 												.then(
 														function successCallback(
 																response) {
-															console
-																	.log(response);
+
 															if (response.data.success != null) {
-																$scope.success = response.data.success;
+																$window.sessionStorage.success = response.data.success;
 															} else if (response.data.error != null) {
-																$scope.error = response.data.error;
+																$window.sessionStorage.error = response.data.error;
 															} else {
 																alert(response);
 															}
-
+															$window.location.href = '/eureka_webservice/admin/orderperiod/view.jsp';
 														});
-
-									}
-
-								} ]);
+									};
+								} ])
 	</script>
-
 
 </body>
 
