@@ -802,6 +802,28 @@ public class FoodOrderController {
 
 		return yearMonthToFoodOrders;
 	}
+	
+	public TreeMap<String, ArrayList<FoodOrder>> getAllFoodOrdersSetByMonthYear() {
+		List<Object> list = foodOrderDAO.getUniqueMonthYearInFoodOrders();
+		List<FoodOrder> allFoodOrders = foodOrderDAO.getAllFoodOrders();
+		TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders = new TreeMap<>(Collections.reverseOrder());
+		for (Object obj : list) {
+			String monthYear = (String) obj;
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder order : allFoodOrders) {
+				String str = order.getCreateDate().toString();
+				if (str.contains(monthYear)) {
+					sortList.add(order);
+					
+				}
+				
+			}
+			
+			yearMonthToFoodOrders.put(monthYear, sortList);
+		}
+
+		return yearMonthToFoodOrders;
+	}
 
 	public TreeMap<String, Double> getFoodOrderSetTotalPriceByMonthYear(
 			TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders) {
@@ -866,6 +888,33 @@ public class FoodOrderController {
 		return weekToFoodOrder;
 	}
 
+	public TreeMap<String, ArrayList<FoodOrder>> getAllFoodOrdersSetByWeek() {
+	//	String email = employee.getEmail();
+		List<String> week = foodOrderDAO.getUniqueWeekInFoodOrders();
+		List<FoodOrder> allFoodOrders = foodOrderDAO.getAllFoodOrders();
+		ArrayList<ArrayList<Date>> dateList = dateTransformation(week);
+
+		TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrder = new TreeMap<>(Collections.reverseOrder());
+
+		for (int i = 0; i < dateList.size(); i++) {
+			ArrayList<Date> dlist = dateList.get(i);
+			Date start = dlist.get(0);
+			Date end = dlist.get(1);
+
+			System.out.println("====");
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder fo : allFoodOrders) {
+				Date fd = fo.getCreateDate();
+				if ((fd.after(start)) && (fd.before(end))) {
+					sortList.add(fo);
+				}
+			}
+			if (!sortList.isEmpty()) {
+				weekToFoodOrder.put(week.get(i), sortList);
+			}
+		}
+		return weekToFoodOrder;
+	}
 	
 	public TreeMap<String, ArrayList<FoodOrder>> getFoodOrderSetByWeek(Employee employee) {
 		String email = employee.getEmail();
@@ -953,6 +1002,27 @@ public class FoodOrderController {
 		
 		return weekToTotalPrice;
 	}
+	
+	public TreeMap<String, ArrayList<String>> getYearToMonthListForAll() {
+		List<Object> yearList = foodOrderDAO.getUniqueYearInFoodOrders();
+		List<Object> monthList = foodOrderDAO.getUniqueMonthYearInFoodOrders();
+		TreeMap<String, ArrayList<String>> yearToMonthList = new TreeMap<>(Collections.reverseOrder());
+		for(Object obj : yearList) {
+			String year = (String) obj;
+			ArrayList<String> filteredMonthList = new ArrayList<>();
+			for (Object o : monthList) {
+				String month = (String) o;
+				if (month.contains(year)) {
+					filteredMonthList.add(month);
+				}
+			}
+			yearToMonthList.put(year, filteredMonthList);
+			
+		}
+		return yearToMonthList;
+		
+	}
+	
 	
 	public TreeMap<String, ArrayList<String>> getYearToMonthList(Employee employee) {
 		List<Object> yearList = foodOrderDAO.getUniqueYearInFoodOrderForUser(employee);

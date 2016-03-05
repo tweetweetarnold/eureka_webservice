@@ -67,7 +67,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<c:if test="${not empty sessionScope.weekList}">
-					<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the week range to display the weekly Summary</b>
+					<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the week range to display the weekly summary</b>
 					<br>
 					<br>
 					<form class="sign-in-up-form"
