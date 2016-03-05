@@ -102,7 +102,20 @@
 						<i class="fa fa-plus fa-lg"></i>
 						Add Stall
 					</a>
+
 					<br>
+
+					<div class="col-lg-4" style="padding: 20px 0px 20px;">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+							<div class="input-group-btn">
+								<button class="btn btn-default">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+
 					<br>
 
 					<div class="dataTable_wrapper">
@@ -110,7 +123,13 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Stall</th>
+									<th>
+										<a  href="#" ng-click="sortType = 'stall'; sortReverse = !sortReverse">
+											Stall
+											<span ng-show="sortType == 'stall' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'stall' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>Contact No</th>
 									<th>Create Date</th>
 									<th>Image</th>
@@ -120,7 +139,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat='stall in stallList track by stall.stallId'>
+								<tr ng-repeat='stall in stallList | orderBy:sortType:sortReverse | filter:searchText track by stall.stallId'>
 									<td>{{stall.stallId}}</td>
 									<td>{{stall.name}}</td>
 									<td>{{stall.contactNo}}</td>
@@ -244,12 +263,16 @@
 											.search().canteenId;
 									$scope.canteenId = $location.search().canteenId;
 
+									$scope.sortType = 'stall'; // set the default sort type
+									$scope.sortReverse = false; // set the default sort order
+
 									$scope.loading = $http(
 											{
 												method : 'GET',
 												url : '/eureka_webservice/GetAllStallsUnderCanteenServlet',
 												params : {
-													canteenId : $location.search().canteenId
+													canteenId : $location
+															.search().canteenId
 												}
 											})
 											.then(

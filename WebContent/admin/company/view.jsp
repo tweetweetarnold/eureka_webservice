@@ -67,14 +67,33 @@
 						<i class="fa fa-plus fa-lg"></i>
 						Add Company
 					</a>
+
 					<br>
+
+					<div class="col-lg-4" style="padding: 20px 0px 20px;">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+							<div class="input-group-btn">
+								<button class="btn btn-default">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+
 					<br>
 
 					<div class="dataTable_wrapper">
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
-									<th>Company</th>
+									<th>
+										<a target="_self" href="#" ng-click="sortType = 'company'; sortReverse = !sortReverse">
+											Company
+											<span ng-show="sortType == 'company' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'company' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>Code</th>
 									<th>Date Joined</th>
 									<th>Delivery Points</th>
@@ -83,7 +102,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="company in companyList track by $index">
+								<tr ng-repeat="company in companyList  | orderBy:sortType:sortReverse  | filter:searchText track by $index">
 									<td>{{company.name}}</td>
 									<td>{{company.companyCode}}</td>
 									<td>{{company.createDate | date:'medium' : '+0800'}}</td>
@@ -111,7 +130,7 @@
 											<i class="fa fa-question-circle"></i>
 										</a>
 									</td>
-									
+
 								</tr>
 							</tbody>
 						</table>
@@ -143,6 +162,9 @@
 	<script>
 		app.controller('ViewCompanyController', [ '$scope', '$http',
 				function($scope, $http) {
+
+					$scope.sortType = 'company'; // set the default sort type
+					$scope.sortReverse = false; // set the default sort order
 
 					$scope.loading = $http({
 						method : 'GET',

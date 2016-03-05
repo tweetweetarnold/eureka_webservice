@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+
 import model.Canteen;
 import model.Food;
 import model.Modifier;
@@ -69,7 +71,10 @@ public class GetAllCanteensServlet extends HttpServlet {
 		CanteenController canteenCtrl = new CanteenController();
 
 		ArrayList<Canteen> list = canteenCtrl.getAllActiveCanteens();
-		out.print(gson.toJson(list));
+		
+		JSONArray arr = new JSONArray();
+		arr.addAll(list);
+		out.println(gson.toJson(arr));
 	}
 
 	/**

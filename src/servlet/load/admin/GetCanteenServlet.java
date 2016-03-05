@@ -58,10 +58,10 @@ public class GetCanteenServlet extends HttpServlet {
 			public boolean shouldSkipField(FieldAttributes c) {
 				return (c.getDeclaringClass() == Stall.class && c.getName().equals("canteen"))
 						|| (c.getDeclaringClass() == Food.class && c.getName().equals("stall"))
-						|| (c.getDeclaringClass() == ModifierSection.class && c.getName().equals(
-								"food"))
-						|| (c.getDeclaringClass() == Modifier.class && c.getName().equals(
-								"modifierSection"))
+						|| (c.getDeclaringClass() == ModifierSection.class
+								&& c.getName().equals("food"))
+						|| (c.getDeclaringClass() == Modifier.class
+								&& c.getName().equals("modifierSection"))
 						|| (c.getDeclaringClass() == Modifier.class && c.getName().equals("food"));
 			}
 
