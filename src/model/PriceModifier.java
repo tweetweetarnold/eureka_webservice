@@ -15,8 +15,8 @@ public class PriceModifier {
 
 	private String name;
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "orderWindowId")
-	private OrderPeriod orderWindow;
+	@JoinColumn(name = "orderPeriodId")
+	private OrderPeriod orderPeriod;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int priceModifierId;
@@ -26,20 +26,20 @@ public class PriceModifier {
 	public PriceModifier() {
 	}
 
-	public PriceModifier(String name, String type, double value, OrderPeriod orderWindow) {
+	public PriceModifier(String name, String type, double value, OrderPeriod orderPeriod) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.value = value;
-		this.orderWindow = orderWindow;
+		this.orderPeriod = orderPeriod;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public OrderPeriod getOrderWindow() {
-		return orderWindow;
+	public OrderPeriod getOrderPeriod() {
+		return orderPeriod;
 	}
 
 	public String getType() {
@@ -54,8 +54,8 @@ public class PriceModifier {
 		this.name = name;
 	}
 
-	public void setOrderWindow(OrderPeriod orderWindow) {
-		this.orderWindow = orderWindow;
+	public void setOrderPeriod(OrderPeriod orderPeriod) {
+		this.orderPeriod = orderPeriod;
 	}
 
 	public void setType(String type) {
