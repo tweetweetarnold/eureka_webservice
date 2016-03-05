@@ -68,10 +68,10 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 			// Retrieve myFoodOrders and User
 			OrderPeriodController owController = new OrderPeriodController();
 			FoodOrderController controller = new FoodOrderController();
-			OrderPeriod window = (OrderPeriod) session.getAttribute("orderWindow");
+			OrderPeriod period = (OrderPeriod) session.getAttribute("orderPeriod");
 			Employee employee = (Employee) session.getAttribute("user");
 			System.out.println("Employee retrieved");
-			if (!controller.checkForExistingOrder(employee, window)) {
+			if (!controller.checkForExistingOrder(employee, period)) {
 
 				List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session
 						.getAttribute("myFoodOrderItems");
@@ -79,18 +79,18 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 				Set<FoodOrderItem> hashMyFoodOrderItems = new HashSet<>(myFoodOrderItems);
 
 				FoodOrder myFoodOrder = new FoodOrder(StringValues.ORDER_SUBMITTED, employee, null,
-						window);
+						period);
 				for (FoodOrderItem item : hashMyFoodOrderItems) {
 					item.setFoodOrder(myFoodOrder);
 					out.println("size: " + item.getModifierChosenList().size());
 				}
 				myFoodOrder.setFoodOrderList(hashMyFoodOrderItems);
 				System.out.println("New FoodOrder created");
-				List<PriceModifier> priceModifierList =  myFoodOrder.getOrderWindow().getPriceModifierList();
+				List<PriceModifier> priceModifierList =  myFoodOrder.getOrderPeriod().getPriceModifierList();
 				System.out.print("Hopefully this is not 0 :    " + priceModifierList.size()); 
 				double discount = 0.0;
 				try{
-					discount = myFoodOrder.getOrderWindow().getPriceModifierList().get(0).getValue();
+					discount = myFoodOrder.getOrderPeriod().getPriceModifierList().get(0).getValue();
 				}catch(Exception e){
 					e.printStackTrace();
 				}

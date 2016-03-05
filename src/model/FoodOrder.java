@@ -36,8 +36,8 @@ public class FoodOrder {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "foodOrder")
 	private Set<FoodOrderItem> foodOrderList;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "orderWindowId")
-	private OrderPeriod orderWindow;
+	@JoinColumn(name = "orderPeriodId")
+	private OrderPeriod orderPeriod;
 	private String status;
 	private String transactionId;
 
@@ -49,22 +49,22 @@ public class FoodOrder {
 
 	/**
 	 * Creates a new FoodOrder with a status, employee, list of food order items and the order
-	 * window
+	 * period
 	 * 
 	 * @param status The status of the Food order
 	 * @param employee The Employee who created this Food order
 	 * @param foodOrderList The list of food order items in this Food order
-	 * @param orderWindow The window period for ordering food
+	 * @param orderPeriod The period period for ordering food
 	 */
 	public FoodOrder(String status, Employee employee, Set<FoodOrderItem> foodOrderList,
-			OrderPeriod orderWindow) {
+			OrderPeriod orderPeriod) {
 		super();
 		this.status = status;
 		this.employee = employee;
 		this.foodOrderList = foodOrderList;
 		this.createDate = new Date();
 		this.transactionId = null;
-		this.orderWindow = orderWindow;
+		this.orderPeriod = orderPeriod;
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class FoodOrder {
 		double result = getTotalPriceBeforePriceModifiers();
 
 		// order matters for which price modifier to affect the total price first
-		List<PriceModifier> priceModifierList = orderWindow.getPriceModifierList();
+		List<PriceModifier> priceModifierList = orderPeriod.getPriceModifierList();
 		System.out.println("pricemodifierlist size: " + priceModifierList.size());
 
 		if (!priceModifierList.isEmpty()) { // temporary fix. pricemodifierlist no idea why size
@@ -131,12 +131,12 @@ public class FoodOrder {
 	}
 
 	/**
-	 * Retrieves the current order window
+	 * Retrieves the current order period
 	 * 
-	 * @return The window period for ordering food
+	 * @return The period period for ordering food
 	 */
-	public OrderPeriod getOrderWindow() {
-		return orderWindow;
+	public OrderPeriod getOrderPeriod() {
+		return orderPeriod;
 	}
 
 	/**
@@ -208,12 +208,12 @@ public class FoodOrder {
 	}
 
 	/**
-	 * Changes the current order window with a new order window
+	 * Changes the current order period with a new order period
 	 * 
-	 * @param orderWindow The new order window for ordering food
+	 * @param orderPeriod The new order period for ordering food
 	 */
-	public void setOrderWindow(OrderPeriod orderWindow) {
-		this.orderWindow = orderWindow;
+	public void setOrderPeriod(OrderPeriod orderPeriod) {
+		this.orderPeriod = orderPeriod;
 	}
 
 	/**
