@@ -2,12 +2,12 @@
 <%
 	Employee emp = (Employee) session.getAttribute("user");
 	String tokenID = (String) session.getAttribute("tokenID");
-	OrderWindow orderWindow = (OrderWindow) session.getAttribute("orderPeriod");
+	OrderPeriod orderPeriod = (OrderPeriod) session.getAttribute("orderPeriod");
 
 	if (emp == null || tokenID == null) {
 		response.sendRedirect("/eureka_webservice/ProcessLogoutServlet");
 	}
-	if (orderWindow == null) {
+	if (orderPeriod == null) {
 		if (!response.isCommitted()) {
 			response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 		}
