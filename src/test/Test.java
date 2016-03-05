@@ -2425,15 +2425,15 @@ public class Test {
 		// **************************************** End insert of mock data
 		// ****************************************
 
-		OrderPeriod window = new OrderPeriod(new DateTime(2015, 12, 2, 16, 36, 0),
+		OrderPeriod period = new OrderPeriod(new DateTime(2015, 12, 2, 16, 36, 0),
 				new DateTime(2015, 12, 31, 16, 36, 0), company, canteen1, 0, 0,
-				"This is a testing order window.", null);
+				"This is a testing order period.", null);
 		
-//		OrderWindow window1 = new OrderWindow(new DateTime(2015, 12, 3, 16, 36, 0),
+//		OrderPeriod period1 = new OrderPeriod(new DateTime(2015, 12, 3, 16, 36, 0),
 //				new DateTime(2015, 12, 4, 16, 36, 0), company, canteen1, 0, 0,
-//				"This is another testing order window.", null);
+//				"This is another testing order period.", null);
 //		
-//		FoodOrder fo = new FoodOrder("Submitted", arnold, null, window);
+//		FoodOrder fo = new FoodOrder("Submitted", arnold, null, period);
 //		FoodOrderItem foi1 = new FoodOrderItem(fo, fishBeehoonfood1, 1, "");
 //		FoodOrderItem foi2 = new FoodOrderItem(fo, fishBeehoonfood2, 1, "");
 //		FoodOrderItem foi3 = new FoodOrderItem(fo, mixedFruits, 1, "");
@@ -2450,7 +2450,7 @@ public class Test {
 //			e.printStackTrace();
 //		}
 //		
-//		FoodOrder fo1 = new FoodOrder("Submitted", arnold, null, window1);
+//		FoodOrder fo1 = new FoodOrder("Submitted", arnold, null, period1);
 //		FoodOrderItem foi4 = new FoodOrderItem(fo1, bananaJuice, 1, "");
 //		FoodOrderItem foi5 = new FoodOrderItem(fo1, orange, 1, "");
 //		FoodOrderItem foi6 = new FoodOrderItem(fo1, mfood1, 1, "");
@@ -2466,8 +2466,8 @@ public class Test {
 //			e.printStackTrace();
 //		}
 //		
-		session.save(window); // arnold test data
-//		session.save(window1);
+		session.save(period); // arnold test data
+//		session.save(period1);
 //		
 //		session.save(foi1);
 //		session.save(foi2);
