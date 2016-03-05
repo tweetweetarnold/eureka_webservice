@@ -170,4 +170,24 @@ public class EmployeeDAO {
 	public void updateEmployee(Employee e) {
 		MyConnection.update(e);
 	}
+	
+	
+	public ArrayList<Employee> getAllEmployeesFromCompanyWithDeliveryPoint(Company c, String deliveryPoint){
+		ArrayList<Employee> returnList = null;
+		CompanyDAO companyDAO = new CompanyDAO();
+		
+		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
+		dc.add(Restrictions.eq("company", c));
+		dc.add(Restrictions.eq("deliveryPoint", deliveryPoint));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		returnList = new ArrayList<Employee>();
+
+		for (Object o : l) {
+			returnList.add((Employee) o);
+		}
+		return returnList;		
+	}
 }

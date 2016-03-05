@@ -137,6 +137,41 @@ public class EmployeeController {
 		employee.setDeliveryPoint(buildingName);
 		employeeDAO.updateEmployee(employee);
 	}
+	
+	public void notifyAllEmployeesFromCompanyWithDeliveryPoint(Company c, String deliveryPoint){
+		ArrayList<Employee> results = new ArrayList<Employee>();
+		results = employeeDAO.getAllEmployeesFromCompanyWithDeliveryPoint(c, deliveryPoint);
+		
+		
+		ArrayList<String> emailList = new ArrayList<String>();
+		SendEmail emailGen = new SendEmail();
+		emailGen.setMailServerProperties();
+		String url = "http://lunchtime.dal.jelastic.vps-host.net/eureka_webservice/pages/login.jsp";
+		String subject = "Koh Bus LunchTime Ordering App - Please Update Delivery Building";
+		String messageBody = "Dear User,<br><br>"
+				+ "Please note that your chosen delivery building is no longer valid please specify a new building.<br><br>"
+				+ "You can select a new building from the edit profile page after you login. <br><br>"
+				+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
+				+ "Admin<br><br>"
+				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
+		
+		for(Employee e :results){
+			String tempEmail = e.getEmail();
+			emailList.add(tempEmail);
+		}
+		String[] toEmails = new String[emailList.size()];
+		toEmails = emailList.toArray(toEmails);
+		System.out.println(toEmails[0]);
+		String[] ccEmails = { "sumon123may@eastman.com", "wch123ow@eastman.com" };
+		try {
+			emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 
 	/**
 	 * Updates the designated Employee object in the Database
