@@ -9,7 +9,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/eureka_webservice/pages/homepage.jsp" style="font-size: x-large;">
+			<a class="navbar-brand" href="/eureka_webservice/pages/homepage.jsp" style="font-size: x-large;" onclick = "noRedirect=false">
 				<i class="fa fa-cutlery"></i>
 				LunchTime
 			</a>
@@ -18,20 +18,20 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a href="/eureka_webservice/pages/cart.jsp">
+					<a href="/eureka_webservice/pages/cart.jsp" onclick = "noRedirect=false">
 						Cart
 						<i class="fa fa-shopping-cart fa-lg"></i>
 					</a>
 				</li>
 				<li>
-					<a href="/eureka_webservice/LoadUserOrderHistoryServlet">
+					<a href="/eureka_webservice/LoadUserOrderHistoryServlet" onclick = "noRedirect=false">
 						History
 						<i class="fa fa-bars fa-lg"></i>
 					</a>
 				</li>
 
 				<li>
-					<a href="/eureka_webservice/LoadUserPaymentServlet">
+					<a href="/eureka_webservice/LoadUserPaymentServlet" onclick = "noRedirect=false"> 
 						Payment
 						<i class="fa fa-credit-card fa-lg"></i>
 					</a>
@@ -43,13 +43,13 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="/eureka_webservice/pages/profile.jsp">
+							<a href="/eureka_webservice/pages/profile.jsp" onclick = "noRedirect=false">
 								<i class="fa fa-user fa-fw"></i>
 								Profile
 							</a>
 						</li>
 						<li>
-							<a href="/eureka_webservice/pages/contact-us.jsp">
+							<a href="/eureka_webservice/pages/contact-us.jsp" onclick = "noRedirect=false">
 								<i class="fa fa-envelope fa-fw"></i>
 								Contact Us
 							</a>
@@ -85,12 +85,12 @@
 					<h4 class="modal-title text-center" id="myModalLabel">Logout Confirmation</h4>
 				</div>
 				<!-- / modal header -->
-				<div class="modal-body text-center">Are you sure you want to logout?</div>
+				<div class="modal-body text-center" >Are you sure you want to logout?</div>
 				<!-- / modal body -->
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">No, I want to stay!</button>
-					<button type="submit" class="btn btn-success">Yes, get me out of here!</button>
+					<button type="submit" class="btn btn-success" onclick = "noRedirect=false">Yes, get me out of here!</button>
 				</div>
 				<!-- / modal footer -->
 			</div>
