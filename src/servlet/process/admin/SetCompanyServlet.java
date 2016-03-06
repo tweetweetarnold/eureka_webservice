@@ -14,19 +14,19 @@ import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
 
-import controller.CanteenController;
+import controller.CompanyController;
 
 /**
- * Servlet implementation class SetCanteenServlet
+ * Servlet implementation class SetCompanyServlet
  */
-@WebServlet("/SetCanteenServlet")
-public class SetCanteenServlet extends HttpServlet {
+@WebServlet("/SetCompanyServlet")
+public class SetCompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SetCanteenServlet() {
+	public SetCompanyServlet() {
 		super();
 	}
 
@@ -48,7 +48,7 @@ public class SetCanteenServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		Gson gson = new Gson();
-		CanteenController canteenCtrl = new CanteenController();
+		CompanyController companyCtrl = new CompanyController();
 		JSONObject returnJson = new JSONObject();
 
 		try {
@@ -57,13 +57,13 @@ public class SetCanteenServlet extends HttpServlet {
 			JSONObject data = (JSONObject) parser.parse(request.getReader());
 			System.out.println(gson.toJson(data));
 
-			int canteenId = ((Long) data.get("canteenId")).intValue();
+			int companyId = ((Long) data.get("companyId")).intValue();
 			String name = (String) data.get("name");
-			String address = (String) data.get("address");
+			String code = (String) data.get("companyCode");
 
-			canteenCtrl.editCanteen(canteenId, name, address);
+			companyCtrl.editCompany(companyId, name, code, null);
 
-			returnJson.put("success", "Canteen updated.");
+			returnJson.put("success", "Company " + name + " updated.");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,7 +71,6 @@ public class SetCanteenServlet extends HttpServlet {
 		}
 
 		out.println(gson.toJson(returnJson));
-
 	}
 
 }
