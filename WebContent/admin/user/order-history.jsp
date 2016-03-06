@@ -81,11 +81,11 @@
 									aria-labelledby="heading${loop.index }"
 								>
 									<div class="panel-body">
-										<b>Order Window: </b>
-										${orderHistory.orderWindow.windowId}
+										<b>Order Period: </b>
+										${orderHistory.orderPeriod.periodId}
 										<br>
 										<b>Canteen: </b>
-										${orderHistory.orderWindow.canteen.name}
+										${orderHistory.orderPeriod.canteen.name}
 										<br>
 										<br>
 										Price:

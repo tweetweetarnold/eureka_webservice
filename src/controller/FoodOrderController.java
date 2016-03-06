@@ -247,10 +247,10 @@ public class FoodOrderController {
 
 			// this populates (C) (Quantity)
 			for (FoodOrderItem tempItem : uniqueFoodOrderItem) {
-				int tempquantity = 0;
+				int tempquantity = tempItem.getQuantity();
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
-					if (i.equals2(tempItem)) {
-						tempquantity++;
+					if (i.equals2(tempItem)&&i.getFoodOrderItemId()!=tempItem.getFoodOrderItemId()) {
+						tempquantity+=i.getQuantity();
 					}
 				}
 
@@ -613,10 +613,10 @@ public class FoodOrderController {
 			}
 			ArrayList<FoodOrderItem> foodOrderItemsWithQuantity = new ArrayList<FoodOrderItem>();
 			for (FoodOrderItem tempItem : UniquefoodOrderItemList) {
-				int tempquantity = 0;
+				int tempquantity = tempItem.getQuantity();
 				for (FoodOrderItem i : foodOrderItemList) {
-					if (i.equals2(tempItem)) {
-						tempquantity++;
+					if (i.equals2(tempItem)&&i.getFoodOrderItemId()!=tempItem.getFoodOrderItemId()) {
+						tempquantity+=i.getQuantity();
 					}
 				}
 
@@ -656,10 +656,10 @@ public class FoodOrderController {
 		}
 		ArrayList<FoodOrderItem> foodOrderItemsWithQuantity = new ArrayList<FoodOrderItem>();
 		for (FoodOrderItem tempItem : UniquefoodOrderItemList) {
-			int tempquantity = 0;
+			int tempquantity = tempItem.getQuantity();
 			for (FoodOrderItem i : foodOrderItemList) {
-				if (i.equals2(tempItem)) {
-					tempquantity++;
+				if (i.equals2(tempItem)&&i.getFoodOrderItemId()!=tempItem.getFoodOrderItemId()) {
+					tempquantity+=i.getQuantity();
 				}
 			}
 

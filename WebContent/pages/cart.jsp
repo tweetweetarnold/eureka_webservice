@@ -19,15 +19,19 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!-- Bootstrap Core CSS -->
-<link href="/eureka_webservice/resources/startbootstrap-business/css/bootstrap.css" rel="stylesheet">
+<link
+	href="/eureka_webservice/resources/startbootstrap-business/css/bootstrap.css"
+	rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="/eureka_webservice/resources/startbootstrap-business/css/modern-business.css" rel="stylesheet">
+<link
+	href="/eureka_webservice/resources/startbootstrap-business/css/modern-business.css"
+	rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="/eureka_webservice/resources/startbootstrap-business/font-awesome/css/font-awesome.min.css" rel="stylesheet"
-	type="text/css"
->
+<link
+	href="/eureka_webservice/resources/startbootstrap-business/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,13 +53,10 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					Cart
-					<small>what you ordered</small>
+					Cart <small>what you ordered</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li>
-						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
-					</li>
+					<li><a href="/eureka_webservice/pages/homepage.jsp">Home</a></li>
 					<li class="active">Cart</li>
 				</ol>
 			</div>
@@ -66,13 +67,14 @@
 			<div class="col-lg-12">
 				<!-- Success message handling -->
 				<c:if test="${not empty sessionScope.success}">
-					<div class="alert alert-success alert-dismissible fade in" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<div class="alert alert-success alert-dismissible fade in"
+						role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-						<span class="sr-only">Success:</span>
-						${sessionScope.success}
+						<span class="sr-only">Success:</span> ${sessionScope.success}
 					</div>
 					<c:remove var="success" scope="session" />
 				</c:if>
@@ -80,12 +82,14 @@
 
 				<!-- Error message handling -->
 				<c:if test="${not empty sessionScope.error}">
-					<div class="alert alert-danger alert-dismissible fade in" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<div class="alert alert-danger alert-dismissible fade in"
+						role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span>
+						<span class="glyphicon glyphicon-exclamation-sign"
+							aria-hidden="true"></span> <span class="sr-only">Error:</span>
 						${sessionScope.error}
 					</div>
 					<c:remove var="error" scope="session" />
@@ -106,58 +110,81 @@
 								<th>Qty</th>
 								<th>Price</th>
 								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodOrderItem" varStatus="loop">
+							<c:set value= "0" var="count" />
+							<c:forEach items="${sessionScope.myFoodOrderItems}"
+								var="foodOrderItem" varStatus="loop">
+								<c:set var="count" value="${count + 1}"/>
 								<tr>
 									<td>${foodOrderItem.food.name}</td>
-									<td>
-										<c:forEach items="${foodOrderItem.modifierChosenList}" var="modifierChosen" varStatus="innerLoop">
+									<td><c:forEach items="${foodOrderItem.modifierChosenList}"
+											var="modifierChosen" varStatus="innerLoop">
 											${modifierChosen.name}
 											<c:if test="${!innerLoop.last}">, </c:if>
-										</c:forEach>
-									</td>
+										</c:forEach></td>
 									<td>${foodOrderItem.quantity}</td>
+									<td><c:set value="${overallPrice + foodOrderItem.price * foodOrderItem.quantity}"
+											var="overallPrice" /> <fmt:formatNumber
+											value="${foodOrderItem.price * foodOrderItem.quantity}" var="amt"
+											minFractionDigits="2" /> $${amt}</td>
 									<td>
-										<c:set value="${overallPrice + foodOrderItem.price}" var="overallPrice" />
-										<fmt:formatNumber value="${foodOrderItem.price}" var="amt" minFractionDigits="2" />
-										$${amt}
+										<form action="/eureka_webservice/ProcessUpdateFoodItemInCartServlet" method = "post" >
+											<input type="hidden" name= "count" value = "${count}"> 
+											<select name = "quantity">
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10</option>
+											</select>
+											<input type="submit" value= "Update Quantity">
+										</form>
 									</td>
 									<td>
-										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
+										<button type="button" class="btn btn-link btn-xs"
+											data-toggle="modal" data-target="#modalDelete${loop.index}">
 											<i class="fa fa-trash-o fa-2x"></i>
-										</button>
-
-										<!-- Modal delete -->
-										<div class="modal fade" id="modalDelete${loop.index}" tabindex="-1" role="dialog"
-											aria-labelledby="myModalLabel"
-										>
+										</button> <!-- Modal delete -->
+										<div class="modal fade" id="modalDelete${loop.index}"
+											tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 											<div class="modal-dialog" role="document">
-												<form action="/eureka_webservice/ProcessDeleteFoodItemFromOrderItemsServlet">
-													<input type="hidden" name="foodPosition" value="${loop.index}">
+												<form
+													action="/eureka_webservice/ProcessDeleteFoodItemFromOrderItemsServlet">
+													<input type="hidden" name="foodPosition"
+														value="${loop.index}">
 													<div class="modal-content">
 														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
 																<span aria-hidden="true">&times;</span>
 															</button>
 															<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
 														</div>
 														<!-- / modal header -->
-														<div class="modal-body">You are removing a food item from cart. Are you sure you want to continue?</div>
+														<div class="modal-body">You are removing a food item
+															from cart. Are you sure you want to continue?</div>
 														<!-- / modal body -->
 
 														<div class="modal-footer">
-															<button type="button" class="btn btn-default" data-dismiss="modal">No, keep my food</button>
-															<button type="submit" class="btn btn-danger">Yes, remove the food</button>
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">No, keep my food</button>
+															<button type="submit" class="btn btn-danger">Yes,
+																remove the food</button>
 														</div>
 														<!-- / modal footer -->
 													</div>
 													<!-- / modal content -->
 												</form>
 											</div>
-										</div>
-										<!-- / Modal delete -->
+										</div> <!-- / Modal delete -->
 									</td>
 								</tr>
 							</c:forEach>
@@ -184,7 +211,8 @@
 						</td>
 						<td>
 							<h4>
-								<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />
+								<fmt:formatNumber value="${overallPrice}" var="overallPrice2"
+									minFractionDigits="2" />
 								<i>$${overallPrice2}</i>
 							</h4>
 						</td>
@@ -198,10 +226,10 @@
 						</td>
 						<td>
 							<h4>
-								<fmt:formatNumber value="${sessionScope.orderPeriod.priceModifierList[0].value}" var="discount"
-									minFractionDigits="2"
-								/>
-								
+								<fmt:formatNumber
+									value="${sessionScope.orderPeriod.priceModifierList[0].value}"
+									var="discount" minFractionDigits="2" />
+
 								<i>$${discount}</i>
 							</h4>
 						</td>
@@ -215,12 +243,11 @@
 						</td>
 						<td>
 							<h2>
-								<i>
-									<fmt:formatNumber value="${overallPrice + sessionScope.orderPeriod.priceModifierList[0].value}"
-										var="amountPayable" minFractionDigits="2"
-									/>
-									<c:choose>
-										<c:when test="${overallPrice + sessionScope.orderPeriod.priceModifierList[0].value > 0}">
+								<i> <fmt:formatNumber
+										value="${overallPrice + sessionScope.orderPeriod.priceModifierList[0].value}"
+										var="amountPayable" minFractionDigits="2" /> <c:choose>
+										<c:when
+											test="${overallPrice + sessionScope.orderPeriod.priceModifierList[0].value > 0}">
 									$${amountPayable}
 									</c:when>
 										<c:otherwise>
@@ -239,7 +266,8 @@
 		<div class="row">
 			<div class="col-md-4 pull-right">
 				<form action="/eureka_webservice/ProcessAddNewFoodOrderServlet">
-					<button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#modalCheckout">Checkout</button>
+					<button type="button" class="btn btn-success btn-lg btn-block"
+						data-toggle="modal" data-target="#modalCheckout">Checkout</button>
 				</form>
 			</div>
 
@@ -251,28 +279,33 @@
 	<!-- /.container -->
 
 	<!-- Modal checkout -->
-	<div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<form action="/eureka_webservice/ProcessAddNewFoodOrderServlet">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
 					</div>
 					<!-- / modal header -->
 					<div class="modal-body">
-						<p>You are going to submit your order. Are you sure you want to continue?</p>
+						<p>You are going to submit your order. Are you sure you want
+							to continue?</p>
 						<p>
-							<strong>WARNING: YOU CAN ONLY SUBMIT 1 ORDER PER SESSION.</strong>
+							<strong>WARNING: YOU CAN ONLY SUBMIT 1 ORDER PER
+								SESSION.</strong>
 						</p>
 					</div>
 					<!-- / modal body -->
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-danger">Confirm Checkout</button>
+						<button type="submit" class="btn btn-danger">Confirm
+							Checkout</button>
 					</div>
 					<!-- / modal footer -->
 				</div>
@@ -288,10 +321,12 @@
 
 
 	<!-- jQuery -->
-	<script src="/eureka_webservice/resources/startbootstrap-business/js/jquery.js"></script>
+	<script
+		src="/eureka_webservice/resources/startbootstrap-business/js/jquery.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="/eureka_webservice/resources/startbootstrap-business/js/bootstrap.min.js"></script>
+	<script
+		src="/eureka_webservice/resources/startbootstrap-business/js/bootstrap.min.js"></script>
 
 	<!-- Popover Js -->
 	<script>
