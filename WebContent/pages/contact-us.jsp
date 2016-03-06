@@ -39,7 +39,7 @@
 var noRedirect = true;
 function myFunction() {
     if (noRedirect){
-         return "Write something clever here...";
+         return "Please remember to checkout the items in your cart!";
     }else{
     	noRedirect = false;
     }
