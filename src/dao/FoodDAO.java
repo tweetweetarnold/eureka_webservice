@@ -316,5 +316,19 @@ public class FoodDAO {
 		}
 		return returnList;
 	}
+	public List<Food> getAllFoodFromCanteen(Canteen c){
+		DetachedCriteria dc = DetachedCriteria.forClass(Food.class);
+		
+		dc.createCriteria("stall")
+		   .add(Restrictions.eq("canteen", c));
+		
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+		List<Food> returnList = new ArrayList<Food>();
+		for (Object o : l) {
+			returnList.add((Food) o);
+		}
+		return returnList;
+	}
 }

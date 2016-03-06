@@ -18,7 +18,7 @@ input {
 </head>
 <body>
 	<h3>Food</h3>
-	<form action= "/eureka_webservice/LoadAdminSearchFood" method="post">
+	<form action= "/eureka_webservice/LoadUserSearchFood" method="post">
 	<input type="text" id="food" name="food" />
 	<input type="Submit">
 
