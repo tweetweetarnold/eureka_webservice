@@ -35,10 +35,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script>
+var noRedirect = true;
+function myFunction() {
+    if (noRedirect){
+         return "Write something clever here...";
+    }else{
+    	noRedirect = false;
+    }
+}
+</script>
 </head>
 
-<body>
+<body onbeforeunload="return myFunction()">
 
 	<jsp:include page="header.jsp" />
 
@@ -54,7 +63,7 @@
 				</h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
+						<a href="/eureka_webservice/pages/homepage.jsp" onclick = "noRedirect=false">Home</a>
 					</li>
 					<li class="active">Contact Us</li>
 				</ol>
@@ -132,7 +141,7 @@
 							<tr>
 								<td></td>
 								<td>
-									<button class="btn btn-danger btn-lg" type="submit">Send Message!</button>
+									<button class="btn btn-danger btn-lg" type="submit" onclick = "noRedirect=false">Send Message!</button>
 								</td>
 							</tr>
 						</table>

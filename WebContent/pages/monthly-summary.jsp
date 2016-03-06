@@ -39,10 +39,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script>
+var noRedirect = true;
+function myFunction() {
+    if (noRedirect ){
+         return "Write something clever here...";
+    }else{
+    	noRedirect = false;
+    }
+}
+</script>
 </head>
 
-<body>
+<body onbeforeunload="return myFunction()">
 
 	<jsp:include page="header.jsp" />
 	<fmt:setTimeZone value="GMT+8" />
@@ -88,7 +97,7 @@
 							</select>
 						</div>
 						<div class="col-md-2">
-							<button class="btn btn-success btn-block" type="submit">Display</button>
+							<button class="btn btn-success btn-block" type="submit" onclick = "noRedirect=false">Display</button>
 						</div>
 					</form>
 

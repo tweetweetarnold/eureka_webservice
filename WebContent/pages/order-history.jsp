@@ -35,10 +35,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script>
+var noRedirect = true;
+function myFunction() {
+    if (noRedirect ){
+         return "Write something clever here...";
+    }else{
+    	noRedirect = false;
+    }
+}
+</script>
 </head>
 
-<body>
+<body onbeforeunload="return myFunction()">
 
 	<jsp:include page="header.jsp" />
 	<fmt:setTimeZone value="GMT+8" />
@@ -55,14 +64,14 @@
 				</h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
+						<a href="/eureka_webservice/pages/homepage.jsp" onclick = "noRedirect=false">Home</a>
 					</li>
 					<li class="active">Order History</li>
 					<li>
-						<a href="/eureka_webservice/LoadUserSpendingSummaryByMonth">Monthly Spending Summary</a>
+						<a href="/eureka_webservice/LoadUserSpendingSummaryByMonth" onclick = "noRedirect=false">Monthly Spending Summary</a>
 					</li>
 					<li>
-						<a href="/eureka_webservice/LoadUserSpendingSummaryByWeek">Weekly Spending Summary</a>
+						<a href="/eureka_webservice/LoadUserSpendingSummaryByWeek" onclick = "noRedirect=false">Weekly Spending Summary</a>
 					</li>
 					
 				</ol>
@@ -157,32 +166,7 @@
 	</div>
 	<!-- /.container -->
 
-	<!-- Modal -->
-	<div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<form action="/eureka_webservice/ProcessAddNewFoodOrderServlet">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title text-center" id="myModalLabel">Confirmation</h4>
-					</div>
-					<!-- / modal header -->
-					<div class="modal-body">You are going to submit your order. Are you sure you want to continue?</div>
-					<!-- / modal body -->
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-danger">Confirm Checkout</button>
-					</div>
-					<!-- / modal footer -->
-				</div>
-				<!-- / modal content -->
-			</form>
-		</div>
-	</div>
-	<!-- / Modal -->
+	
 
 	<!-- jQuery -->
 	<script src="/eureka_webservice/resources/startbootstrap-business/js/jquery.js"></script>

@@ -39,10 +39,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script>
+var noRedirect = true;
+function myFunction() {
+    if (noRedirect ){
+         return "Write something clever here...";
+    }else{
+    	noRedirect = false;
+    }
+}
+</script>
 </head>
 
-<body>
+<body onbeforeunload="return myFunction()">
 
 	<jsp:include page="header.jsp" />
 
@@ -56,7 +65,7 @@
 					Cart <small>what you ordered</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="/eureka_webservice/pages/homepage.jsp">Home</a></li>
+					<li><a href="/eureka_webservice/pages/homepage.jsp" onclick = "noRedirect=false">Home</a></li>
 					<li class="active">Cart</li>
 				</ol>
 			</div>
@@ -145,7 +154,7 @@
 												<option value="9">9</option>
 												<option value="10">10</option>
 											</select>
-											<input type="submit" value= "Update Quantity">
+											<input type="submit" value= "Update Quantity" onclick = "noRedirect=false">
 										</form>
 									</td>
 									<td>
@@ -176,7 +185,7 @@
 														<div class="modal-footer">
 															<button type="button" class="btn btn-default"
 																data-dismiss="modal">No, keep my food</button>
-															<button type="submit" class="btn btn-danger">Yes,
+															<button type="submit" class="btn btn-danger" onclick = "noRedirect=false">Yes,
 																remove the food</button>
 														</div>
 														<!-- / modal footer -->
@@ -267,7 +276,7 @@
 			<div class="col-md-4 pull-right">
 				<form action="/eureka_webservice/ProcessAddNewFoodOrderServlet">
 					<button type="button" class="btn btn-success btn-lg btn-block"
-						data-toggle="modal" data-target="#modalCheckout">Checkout</button>
+						data-toggle="modal" data-target="#modalCheckout" >Checkout</button>
 				</form>
 			</div>
 
@@ -304,7 +313,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-danger">Confirm
+						<button type="submit" class="btn btn-danger" onclick = "noRedirect=false">Confirm
 							Checkout</button>
 					</div>
 					<!-- / modal footer -->
