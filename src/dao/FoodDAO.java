@@ -305,7 +305,9 @@ public class FoodDAO {
 		   .add(Restrictions.like("name","%"+query+"%"));
 		
 		dc.createCriteria("stall")
-		   .add(Restrictions.eq("canteen", c));
+		   .add(Restrictions.eq("canteen", c))
+		   .add(Restrictions.eq("status", StringValues.ACTIVE));
+			
 		
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
@@ -318,7 +320,7 @@ public class FoodDAO {
 	}
 	public List<Food> getAllFoodFromCanteen(Canteen c){
 		DetachedCriteria dc = DetachedCriteria.forClass(Food.class);
-		
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
 		dc.createCriteria("stall")
 		   .add(Restrictions.eq("canteen", c));
 		

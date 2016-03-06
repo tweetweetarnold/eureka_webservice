@@ -65,6 +65,7 @@ public class EmployeeDAO {
 		Company company = companyDAO.getCompany(companyID);
 		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
 		dc.add(Restrictions.eq("company", company));
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -177,6 +178,7 @@ public class EmployeeDAO {
 		CompanyDAO companyDAO = new CompanyDAO();
 		
 		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
+		dc.add(Restrictions.ne("status", StringValues.ARCHIVED));
 		dc.add(Restrictions.eq("company", c));
 		dc.add(Restrictions.eq("deliveryPoint", deliveryPoint));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
