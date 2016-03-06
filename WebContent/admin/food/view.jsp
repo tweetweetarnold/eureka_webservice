@@ -177,8 +177,8 @@
 											<br>
 										</p>
 										<a target="_self"
-											ng-href='/eureka_webservice/admin/food/addon-add.jsp?stallId={{stallId}}&foodId={{food.foodId}}'
-										>Add Add-On</a>
+											ng-href='/eureka_webservice/admin/food/addon-edit.jsp?stallId={{stallId}}&foodId={{food.foodId}}'
+										>Edit Add-On(s)</a>
 									</td>
 									<td>
 										<a target="_self" ng-href="/eureka_webservice/LoadAdminEditFoodServlet?foodId={{food.foodId}}">

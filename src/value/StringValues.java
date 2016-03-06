@@ -21,7 +21,7 @@ public final class StringValues {
 
 	// For OrderWindow status
 	public static final String ORDERPERIOD_ARCHIVED = "Archived";
-	public static final String ORDERPERIOD_ACTIVE= "Active";
+	public static final String ORDERPERIOD_ACTIVE = "Active";
 	public static final String ORDERPERIOD_PROCESSING = "Processing";
 	public static final String ORDERPERIOD_QUEUED = "Queued";
 	public static final String PAID = "Paid";
@@ -29,6 +29,10 @@ public final class StringValues {
 	// For PriceModifier Types
 	public static final String PRICEMODIFIER_ABSOLUTE = "Absolute";
 	public static final String PRICEMODIFIER_PERCENTAGE = "Percentage";
+
+	// For ModifierSection
+	public static final String MODIFIERSECTION_TYPE_DROPDOWN = "d";
+	public static final String MODIFIERSECTION_TYPE_CHECKBOX = "c";
 
 	// *********************************************************************************
 	// For Session attributes

@@ -73,6 +73,7 @@ public class LoadStallFoodServlet extends HttpServlet {
 		Set<Food> foodList = s.getFoodList();
 		Set<Food> displayFoodList = new HashSet<Food>();
 		Iterator<Food> iter = foodList.iterator();
+
 		while (iter.hasNext()) {
 			Food food = (Food) iter.next();
 			String status = food.getStatus();

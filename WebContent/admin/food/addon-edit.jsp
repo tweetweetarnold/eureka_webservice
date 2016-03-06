@@ -59,7 +59,7 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Add new Add-On(s)</h1>
+					<h1 class="page-header">Edit Add-On(s)</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -68,37 +68,95 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Add new Add-On(s)</div>
+						<div class="panel-heading">Edit Add-On(s)</div>
 
 						<div class="panel-body">
 
 							<div class="row">
 
-								<div class="col-lg-12">
+								<div class="col-lg-8">
 
-									<input type="text" ng-model='modifier.name' placeholder="Add meat">
-									<input type='text' ng-model='modifier.price' placeholder='2.30'>
-									<input type='submit' class='btn btn-primary' ng-disabled='!(modifier.name && modifier.price)'
-										ng-click='addModifier()' value='Add Add-On'
-									>
-									<button class="btn btn-primary" ng-click='done()'>Done</button>
 
-									<br>
-									<br>
-									<table class="table">
-										<tr ng-repeat="boo in modifierList track by $index">
-											<td>{{boo.name}}</td>
-											<td>{{boo.price}}</td>
-											<td>
-												<button type="button" class="btn btn-link btn-xs" ng-click='removeModifier($index)'>
-													<i class="fa fa-trash-o fa-2x"></i>
-												</button>
-											</td>
-										</tr>
+									<h4>Sections</h4>
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th>Section Name</th>
+												<th>Choose Type</th>
+												<th>Add On(s)</th>
+												<th></th>
+											</tr>
+										</thead>
+
+
+										<tbody>
+											<tr ng-repeat='modSection in food.modifierSectionList track by $index'>
+
+												<td>{{modSection.categoryName}}</td>
+												<td>{{modSection.displayType}}</td>
+												<td>
+													<table class="table">
+														<tr ng-repeat='mod in modSection.modifierList track by $index'>
+															<td>{{mod.name}}</td>
+															<td>{{mod.price | currency}}</td>
+															<td>
+																<!-- 																<button type="button" class="btn btn-link btn-xs" ng-click='removeModifier(mod.modifierId)'> -->
+																<!-- 																	<i class="fa fa-trash-o fa-2x"></i> -->
+																<!-- 																</button> -->
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<input type="text" ng-model='modifier.name' placeholder="Add meat">
+															</td>
+															<td>
+																<input type='text' ng-model='modifier.price' placeholder='2.30'>
+															</td>
+															<td>
+																<input type='submit' class='btn btn-primary' ng-disabled='!(modifier.name && modifier.price)'
+																	ng-click='addModifier(modSection.modifierSectionId)' value='Add Add-On'
+																>
+															</td>
+														</tr>
+
+													</table>
+												</td>
+												<td>
+													<!-- 													<a target="_self" href="#">Delete</a> -->
+												</td>
+											</tr>
+
+											<tr>
+
+												<td>
+													<input ng-model='sec.categoryName' type="text">
+												</td>
+												<td>
+													<select ng-model='sec.displayType'>
+														<option value="c">Checkbox</option>
+														<option value="d">Dropdown</option>
+													</select>
+												</td>
+												<td></td>
+												<td>
+													<a class="btn btn-primary" href="#" ng-click='addSection()'>Add</a>
+												</td>
+
+											</tr>
+
+
+										</tbody>
+
 									</table>
 
+
+									<button class="btn btn-primary" ng-click='done()'>Update Add-On(s)</button>
+
+
 								</div>
-								<!-- /.col-lg-12 -->
+								<!-- /.col-lg-8 -->
+
+
 
 							</div>
 							<!-- /.row (nested) -->
@@ -130,8 +188,6 @@
 		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"
 	></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 
@@ -147,19 +203,65 @@
 								'$location',
 								function($scope, $http, $window, $location) {
 
+									var load = function() {
+										$http(
+												{
+													method : 'GET',
+													url : '/eureka_webservice/GetFoodServlet',
+													params : {
+														foodId : $location
+																.search().foodId
+													}
+												})
+												.then(
+														function successCallback(
+																response) {
+															console
+																	.log(response.data);
+															$scope.food = response.data;
+														});
+									}
+									load();
+									$scope.modifier = {};
 									var stallId = $location.search().stallId;
 									$scope.modifierList = [];
 
-									$scope.addModifier = function() {
-										$scope.modifierList
-												.push($scope.modifier);
-										$scope.modifier = {};
-										console.log($scope.modifierList);
-									};
+									$scope.addSection = function() {
+										$http
+												.post(
+														'/eureka_webservice/AddModifierSectionServlet',
+														{
+															categoryName : $scope.sec.categoryName,
+															displayType : $scope.sec.displayType,
+															foodId : $location
+																	.search().foodId
+														})
+												.then(
+														function successCallback(
+																response) {
+															load();
+														});
+									}
 
-									$scope.removeModifier = function(index) {
-										$scope.modifierList.splice(index, 1);
-									};
+									$scope.addModifier = function(modSectionId) {
+
+										$http
+												.post(
+														'/eureka_webservice/AddModifierToSectionServlet',
+														{
+															modifierSectionId : modSectionId,
+															name : $scope.modifier.name,
+															price : $scope.modifier.price,
+															foodId : $location
+																	.search().foodId
+														})
+												.then(
+														function successCallback(
+																response) {
+															load();
+														});
+
+									}
 
 									$scope.done = function() {
 										console.log($scope.modifierList);
