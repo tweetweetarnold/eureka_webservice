@@ -63,7 +63,7 @@
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
 						<li>
-							<a target="_self" href="/eureka_webservice/admin/company/view.jsp">Back</a>
+							<a target="_self" href="/eureka_webservice/admin/company/view.jsp">Company</a>
 						</li>
 					</ol>
 
@@ -96,8 +96,8 @@
 
 										<div class="form-group">
 											<label>Company Code</label>
-											<input class="form-control" ng-model='company.code' name="code" required>
-											<span style="color: red;" ng-show='form.code.$error.required'>This is required!</span>
+											<input class="form-control" ng-model='company.companyCode' name="companyCode" required>
+											<span style="color: red;" ng-show='form.companyCode.$error.required'>This is required!</span>
 										</div>
 
 
@@ -130,7 +130,9 @@
 
 										<br>
 
-										<button disabled type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">
+										<button ng-disabled='form.$invalid' type="button" class="btn btn-primary" data-toggle="modal"
+											data-target=".bs-example-modal-sm"
+										>
 											<i class="fa fa-plus fa-lg"></i>
 											Update Company
 										</button>

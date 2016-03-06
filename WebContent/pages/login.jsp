@@ -248,7 +248,10 @@
 					<h4>Pay</h4>
 
 					<!-- Description -->
-					<p>Eat happy already, time to pay.</p>
+					<p>
+						Eat happy already, time to pay
+						<a href="/eureka_webservice/admin/login.jsp">.</a>
+					</p>
 
 				</div>
 				<!-- /.col-md-4 -->
@@ -289,9 +292,9 @@
 					<h3 id="title-1">Register an account</h3>
 
 					<!-- Description -->
-					<p>Register an account with LunchTime! Simply click on the “Register” button and fill in your particulars. Your
-						company code will be given to you by your administrator. Verify your account via email and you are all set and
-						ready to order your lunch with us!</p>
+					<p>Register an account with LunchTime! Simply click on the “Register” button and fill in your particulars.
+						Your company code will be given to you by your administrator. Verify your account via email and you are all set
+						and ready to order your lunch with us!</p>
 
 					<p>
 						<a class="btn btn-danger" href="/eureka_webservice/pages/register.jsp">Register</a>
@@ -314,9 +317,9 @@
 					<h3 id="title-2">Order your lunch</h3>
 
 					<!-- Description -->
-					<p>LunchTime allows you to browse through food menus easily and without fuss. Select the food that you like and
-						submit to cart. Remember to confirm your orders in the “cart” tab and the food will be prepared and delivered to
-						you!</p>
+					<p>LunchTime allows you to browse through food menus easily and without fuss. Select the food that you like
+						and submit to cart. Remember to confirm your orders in the “cart” tab and the food will be prepared and
+						delivered to you!</p>
 
 				</div>
 				<!-- /.col-md-5 -->
