@@ -1,8 +1,11 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="services.AutoComplete"%>
+<%@page import="model.OrderPeriod"%>
 <%
- 	AutoComplete autoComplete = new AutoComplete();
+	OrderPeriod orderPeriod = (OrderPeriod) session.getAttribute("orderPeriod");
+
+ 	AutoComplete autoComplete = new AutoComplete(orderPeriod.getCanteen());
  
     String query = request.getParameter("q");
      
