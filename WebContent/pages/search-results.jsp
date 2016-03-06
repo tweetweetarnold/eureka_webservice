@@ -131,7 +131,7 @@
 				<!-- Modal -->
 				<div class="modal fade" id="myModal${food.foodId}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					<div class="modal-dialog" role="document">
-						<form action="/eureka_webservice/ProcessAddFoodItemToOrderItemsServlet">
+						<form action="/eureka_webservice/ProcessAddFoodItemToOrderItemsServlet2">
 							<input type="hidden" name="foodId" value="${food.foodId}">
 							<div class="modal-content">
 								<div class="modal-header">
