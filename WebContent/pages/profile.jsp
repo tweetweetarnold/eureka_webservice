@@ -115,7 +115,10 @@
 							<td>
 								<strong>Delivery Point:</strong>
 							</td>
-							<td>${user.deliveryPoint}</td>
+							<td>
+								${user.deliveryPoint}
+								<a href="#" data-toggle="modal" data-target="#modalEditDeliveryPoint">Edit</a>
+							</td>
 						</tr>
 						<tr>
 							<td>
@@ -170,6 +173,8 @@
 
 	</div>
 	<!-- /.container -->
+
+
 
 	<!-- edit password Modal -->
 	<div class="modal fade" id="modalEditPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -230,6 +235,8 @@
 	</div>
 	<!-- / edit password modal -->
 
+
+
 	<!-- edit contact Modal -->
 	<div class="modal fade" id="modalEditContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -264,6 +271,47 @@
 		</div>
 	</div>
 	<!-- / edit contact Modal -->
+
+
+
+	<!-- edit delivery point Modal -->
+	<div class="modal fade" id="modalEditDeliveryPoint" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<form method="post" action="/eureka_webservice/ProcessSetUserDeliveryPointServlet">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title text-center" id="myModalLabel">Edit Delivery Point</h4>
+					</div>
+					<!-- / modal header -->
+					<div class="modal-body text-center">
+						<strong>Edit Delivery point: &nbsp;</strong>
+						<select name="deliveryPoint" required>
+							<c:forEach items="${user.company.deliveryPointSet}" var="point">
+								<option value="${point}">${point}</option>
+							</c:forEach>
+						</select>
+
+					</div>
+					<!-- / modal body -->
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-danger">Update Delivery Point</button>
+					</div>
+					<!-- / modal footer -->
+				</div>
+				<!-- / modal content -->
+			</form>
+		</div>
+	</div>
+	<!-- / edit delivery point Modal -->
+
+
+
+
 
 	<!-- jQuery -->
 	<script src="/eureka_webservice/resources/startbootstrap-business/js/jquery.js"></script>
