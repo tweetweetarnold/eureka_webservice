@@ -5,15 +5,15 @@
 <%
 	OrderPeriod orderPeriod = (OrderPeriod) session.getAttribute("orderPeriod");
 
- 	AutoComplete autoComplete = new AutoComplete(orderPeriod.getCanteen());
- 
-    String query = request.getParameter("q");
-     
-    List<String> countries = autoComplete.getData(query);
- 
-    Iterator<String> iterator = countries.iterator();
-    while(iterator.hasNext()) {
-        String country = (String)iterator.next();
-        out.println(country);
-    }
+	AutoComplete autoComplete = new AutoComplete(orderPeriod.getCanteen());
+
+	String query = request.getParameter("q");
+
+	List<String> countries = autoComplete.getData(query);
+
+	Iterator<String> iterator = countries.iterator();
+	while (iterator.hasNext()) {
+		String country = (String) iterator.next();
+		out.println(country);
+	}
 %>

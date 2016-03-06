@@ -1,6 +1,7 @@
 package servlet.load.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -27,36 +28,37 @@ public class LoadUserSearchFood extends HttpServlet {
 	 */
 	public LoadUserSearchFood() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		HttpSession session = request.getSession();
+
+		FoodDAO foodDAO = new FoodDAO();
+
 		try {
-			HttpSession session = request.getSession();
 			OrderPeriod orderPeriod = (OrderPeriod) session.getAttribute("orderPeriod");
 			String foodName = request.getParameter("food");
 			Canteen c = orderPeriod.getCanteen();
-			FoodDAO foodDAO = new FoodDAO();
+
 			List<Food> list = foodDAO.searchFoodFromCanteen(c, foodName);
-			
-			//redirect Missing
-			
+
+			session.setAttribute("results", list);
+			response.sendRedirect("/eureka_webservice/pages/search-results.jsp");
+
+			System.out.println(list);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
