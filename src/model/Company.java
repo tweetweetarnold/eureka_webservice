@@ -57,6 +57,15 @@ public class Company {
 	}
 
 
+	public Company(String name, String companyCode, Set<String> deliveryPointSet) {
+		super();
+		this.name = name;
+		this.createDate = new Date();
+		this.companyCode = companyCode;
+		this.deliveryPointSet = deliveryPointSet;
+		this.status = StringValues.ACTIVE;
+	}
+	
 
 
 	/**

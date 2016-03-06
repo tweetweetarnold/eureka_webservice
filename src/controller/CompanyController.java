@@ -37,6 +37,11 @@ public class CompanyController {
 		Company c = new Company(name, companyCode);
 		companyDAO.saveCompany(c);
 	}
+	
+	public void addNewCompany(String name, String companyCode, Set<String> buildings) {
+		Company c = new Company(name, companyCode);
+		companyDAO.saveCompany(c);
+	}
 
 	public void editCompany(int companyId, String name, String companyCode, Set<String> buildings) {
 		Company c = null;
