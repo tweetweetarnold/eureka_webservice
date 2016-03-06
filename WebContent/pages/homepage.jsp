@@ -118,8 +118,8 @@ function myFunction() {
 					<c:if test="${stall.status == 'Active'}">
 						<div class="col-md-4 col-sm-6">
 							<a
-								href="/eureka_webservice/LoadStallFoodServlet?stallId=${stall.stallId}">
-								<b style="font-size: large;" onclick = "noRedirect=false">${stall.name}</b> <img
+								href="/eureka_webservice/LoadStallFoodServlet?stallId=${stall.stallId}" onclick = "noRedirect=false">
+								<b style="font-size: large;" >${stall.name}</b> <img
 								class="img-responsive img-portfolio img-hover"
 								onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_231,w_173/v1455951761/default/img-error.jpg'"
 								src="${stall.imageDirectory}"

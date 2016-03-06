@@ -36,9 +36,19 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<script>
+var noRedirect = true;
+function myFunction() {
+    if (noRedirect ){
+         return "Write something clever here...";
+    }else{
+    	noRedirect = false;
+    }
+}
+</script>
 </head>
 
-<body>
+<body onbeforeunload="return myFunction()">
 
 	<jsp:include page="header.jsp" />
 
@@ -54,7 +64,7 @@
 				</h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
+						<a href="/eureka_webservice/pages/homepage.jsp" onclick = "noRedirect=false">Home</a>
 					</li>
 					<li class="active">Profile</li>
 				</ol>
@@ -117,7 +127,7 @@
 							</td>
 							<td>
 								${user.deliveryPoint}
-								<a href="#" data-toggle="modal" data-target="#modalEditDeliveryPoint">Edit</a>
+								<a href="#" data-toggle="modal" data-target="#modalEditDeliveryPoint" >Edit</a>
 							</td>
 						</tr>
 						<tr>
@@ -225,7 +235,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-danger">Update Password</button>
+						<button type="submit" class="btn btn-danger" onclick = "noRedirect=false">Update Password</button>
 					</div>
 					<!-- / modal footer -->
 				</div>
@@ -262,7 +272,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-danger">Update Contact Number</button>
+						<button type="submit" class="btn btn-danger" onclick = "noRedirect=false">Update Contact Number</button>
 					</div>
 					<!-- / modal footer -->
 				</div>
@@ -299,7 +309,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-danger">Update Delivery Point</button>
+						<button type="submit" class="btn btn-danger" onclick = "noRedirect=false">Update Delivery Point</button>
 					</div>
 					<!-- / modal footer -->
 				</div>
