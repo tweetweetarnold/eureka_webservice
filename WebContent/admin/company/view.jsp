@@ -59,6 +59,31 @@
 			<div class="row">
 				<div class="col-lg-12" cg-busy='loading'>
 
+
+
+					<!-- Message handling -->
+					<div class="col-lg-12">
+						<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+							<span class="sr-only">Success: </span>
+							{{success}}
+						</div>
+						<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error: </span>
+							{{error}}
+						</div>
+					</div>
+					<!-- / message handling -->
+
+
+
 					<b>Total companies:</b>
 					{{companyList.length}}
 					<br>
@@ -162,8 +187,17 @@
 
 
 	<script>
-		app.controller('ViewCompanyController', [ '$scope', '$http',
-				function($scope, $http) {
+		app.controller('ViewCompanyController', [
+				'$scope',
+				'$http',
+				'$window',
+				function($scope, $http, $window) {
+
+					$scope.success = angular
+							.copy($window.sessionStorage.success);
+					$scope.error = angular.copy($window.sessionStorage.error);
+					$window.sessionStorage.removeItem('success');
+					$window.sessionStorage.removeItem('error');
 
 					$scope.sortType = 'company'; // set the default sort type
 					$scope.sortReverse = false; // set the default sort order

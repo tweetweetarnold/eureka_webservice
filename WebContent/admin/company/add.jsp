@@ -63,7 +63,7 @@
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
 						<li>
-							<a target="_self" href="/eureka_webservice/admin/company/view.jsp">Back</a>
+							<a target="_self" href="/eureka_webservice/admin/company/view.jsp">Company</a>
 						</li>
 					</ol>
 
@@ -232,7 +232,8 @@
 													url : '/eureka_webservice/AddNewCompanyServlet',
 													data : {
 														name : $scope.company.name,
-														code : $scope.company.code
+														code : $scope.company.code,
+														deliveryPointList : $scope.deliveryPointList
 													}
 												})
 												.then(

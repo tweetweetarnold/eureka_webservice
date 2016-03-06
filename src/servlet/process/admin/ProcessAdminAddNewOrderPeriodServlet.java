@@ -70,8 +70,8 @@ public class ProcessAdminAddNewOrderPeriodServlet extends HttpServlet {
 
 		try {
 			// **Important: to format the time to SG timezone
-			DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm").withZone(
-					DateTimeZone.forID("Asia/Singapore"));
+			DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm")
+					.withZone(DateTimeZone.forID("Asia/Singapore"));
 			DateTime startDatetime = formatter.parseDateTime(startDatetimeString);
 			DateTime endDatetime = formatter.parseDateTime(endDatetimeString);
 
@@ -85,8 +85,8 @@ public class ProcessAdminAddNewOrderPeriodServlet extends HttpServlet {
 
 			try {
 				discountAbsolute = Double.parseDouble(discountAbsoluteString);
-				if(discountAbsolute>0){
-					discountAbsolute*=-1;
+				if (discountAbsolute > 0) {
+					discountAbsolute *= -1;
 					System.out.println("In the try : " + discountAbsolute);
 				}
 
@@ -94,8 +94,8 @@ public class ProcessAdminAddNewOrderPeriodServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			boolean available = orderPeriodController.checkForOrderPeriodAvailability(
-					startDatetime, endDatetime, company, numberOfWeeks);
+			boolean available = orderPeriodController.checkForOrderPeriodAvailability(startDatetime,
+					endDatetime, company, numberOfWeeks);
 
 			if (!available) {
 				throw new Exception("Order Period have already been taken");

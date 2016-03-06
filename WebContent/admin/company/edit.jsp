@@ -116,7 +116,7 @@
 											>
 
 											<table class="table">
-												<tr ng-repeat="boo in deliveryPointList track by $index">
+												<tr ng-repeat="boo in company.deliveryPointSet track by $index">
 													<td>{{boo}}</td>
 													<td>
 														<button type="button" class="btn btn-link btn-xs" ng-click='removeDeliveryPoint($index)'>
@@ -217,19 +217,22 @@
 												console.log($scope.canteen);
 											});
 
-									$scope.deliveryPointList = [];
-
 									$scope.addDeliveryPoint = function() {
-										$scope.deliveryPointList
+										$scope.company.deliveryPointSet
 												.push($scope.deliveryPoint);
 										$scope.deliveryPoint = "";
-										console.log($scope.deliveryPointList);
+										console
+												.log($scope.company.deliveryPointSet);
 									};
 
 									$scope.removeDeliveryPoint = function(index) {
-										$scope.deliveryPointList.splice(index,
-												1);
+										$scope.company.deliveryPointSet.splice(
+												index, 1);
 									};
+
+									$scope.submit2 = function() {
+										console.log($scope.company);
+									}
 
 									$scope.submit = function() {
 

@@ -2,6 +2,8 @@ package servlet.process.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -59,9 +62,16 @@ public class AddNewCompanyServlet extends HttpServlet {
 
 			String name = (String) data.get("name");
 			String code = (String) data.get("code");
+			JSONArray arr = (JSONArray) data.get("deliveryPointList");
 
-			
-			companyCtrl.addNewCompany(name, code);
+			Set<String> list = new HashSet<String>();
+			for (Object o : arr) {
+				list.add((String) o);
+			}
+
+			System.out.println(list);
+
+			companyCtrl.addNewCompany(name, code, list);
 
 			returnJson.put("success", "Company " + name + " has been added.");
 
