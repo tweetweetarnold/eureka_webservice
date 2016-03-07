@@ -21,6 +21,7 @@ import org.hibernate.criterion.Restrictions;
 
 import value.StringValues;
 import connection.MyConnection;
+import controller.ModifierSectionController;
 
 /**
  * Performs the function of Data Access Object for Food model
@@ -30,7 +31,7 @@ import connection.MyConnection;
 public class FoodDAO {
 	CanteenDAO canteenDAO = new CanteenDAO();
 	StallDAO stallDAO = new StallDAO();
-
+	ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 	/**
 	 * Creates a default constructor for FoodDAO
 	 */
@@ -240,6 +241,78 @@ public class FoodDAO {
 
 			addModifierToFood(newModifier, food);
 		}
+	}
+	
+	public void loadModifierSectionData(List<String[]> content) {
+		Iterator<String[]> iter = content.iterator();
+		iter.next();
+		while (iter.hasNext()) {
+			String[] row = (String[]) iter.next();
+			String catergoryName = row[0].trim();
+			String displayType = row[1].trim();
+			String modifierName = row[2].trim();
+			//double priceValue = Double.parseDouble(price);
+
+			String foodName = row[3].trim();
+			String stallName = row[4].trim();
+			String canteenName = row[5].trim();
+
+			Food food = getFoodFromStallAndCanteen(foodName, stallName, canteenName);
+			Modifier existingModifier = getModifierFromFood(modifierName, food);
+			
+			System.out.println(catergoryName + " " + displayType + " " + modifierName + " " + foodName + " " + stallName + " " + canteenName);
+			ModifierSection m = existingModifier.getModifierSection();
+			if (m == null) {
+				System.out.println("ModiSection is null");
+			} else {
+				
+				
+			}
+			if (food.getModifierSectionList() == null) {
+				System.out.println("ModiSectionList is null");
+			} else {
+				System.out.println(food.getModifierSectionList().size());
+				
+			}
+			
+			if (food.getActiveModifierList() != null) {
+				System.out.println(food.getActiveModifierList().size());
+				ModifierSection newOne = new ModifierSection(catergoryName, displayType, new HashSet<Modifier>(), food);
+				existingModifier.setModifierSection(newOne);
+				System.out.println(existingModifier.getModifierSection());
+				newOne.setModifierList(food.getActiveModifierList());
+				System.out.println(newOne.getModifierList().size());
+				food.getModifierSectionList().add(newOne);
+				System.out.println(food.getModifierSectionList().size());
+				modifierSectionDAO.saveModifierSection(newOne);
+				updateFood(food);
+				
+			}
+			
+			
+			
+		//	updateFood(food);
+			
+		
+
+			
+		}
+	}
+	
+	public void addModifierSectionToFood(Food f, Modifier m, ModifierSection newModifierSection) {
+		
+		Set<ModifierSection> modifierSectionList = f.getModifierSectionList();
+		if (modifierSectionList == null) {
+			modifierSectionList = new HashSet<ModifierSection>();
+		}
+		modifierSectionList.add(newModifierSection);
+		
+		
+		System.out.println("SAVING");
+		updateFood(f);
+		modifierSectionDAO.updateModifierSection(newModifierSection);
+		
+		
 	}
 
 	/**

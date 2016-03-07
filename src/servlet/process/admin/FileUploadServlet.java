@@ -103,6 +103,12 @@ public class FileUploadServlet extends HttpServlet {
 								throw new Exception("There are Errors in the Modifier.csv file");
 							}
 							break;
+						case "ModifierSection.csv":
+							errorList = fileUploadController.processModifierSectionUpload(is);
+							if (errorList.size() > 0) {
+								throw new Exception("There are Errors in the ModifierSection.csv file");
+							}
+							break;
 						default:
 							throw new Exception(
 									"Invalid file name. Please upload a correct file name.");

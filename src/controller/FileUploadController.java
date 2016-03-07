@@ -11,12 +11,14 @@ import java.util.List;
 import model.Canteen;
 import model.Food;
 import model.Modifier;
+import model.ModifierSection;
 import model.Stall;
 
 import com.opencsv.CSVReader;
 
 import dao.CanteenDAO;
 import dao.FoodDAO;
+import dao.ModifierSectionDAO;
 import dao.StallDAO;
 
 /**
@@ -31,7 +33,7 @@ public class FileUploadController {
 	ArrayList<String> errorsList = null;
 	FoodDAO foodDAO = new FoodDAO();
 	StallDAO stallDAO = new StallDAO();
-
+	ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 	/**
 	 * Creates a default constructor for FileUploadController
 	 */
@@ -127,6 +129,32 @@ public class FileUploadController {
 		}
 		return errorsList;
 	}
+	
+	public ArrayList<String> processModifierSectionUpload(InputStream is) {
+		System.out.println("PROCESS_MODIFIER_SECTION_FILEUPLOAD");
+
+		BufferedInputStream bis = new BufferedInputStream(is);
+		InputStreamReader isr = new InputStreamReader(bis);
+		BufferedReader br = new BufferedReader(isr);
+
+		try {
+			CSVReader csvreader = new CSVReader(br);
+			content = csvreader.readAll();
+			csvreader.close();
+			errorsList = validateModifierSectionData(content);
+			if (errorsList.size() == 0) {
+				foodDAO.loadModifierSectionData(content);
+			} else {
+				return errorsList;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return errorsList;
+	}
+	
+	
+	
 
 	/**
 	 * Handles the reading of the Stall.csv and load it to the database if there are no errors
@@ -441,6 +469,139 @@ public class FileUploadController {
 		}
 		return errorList;
 	}
+	
+	
+	public ArrayList<String> validateModifierSectionData(List<String[]> content) {
+		ArrayList<String> errorList = new ArrayList<String>();
+		Iterator<String[]> iter = content.iterator();
+		int rowNumber = 1;
+
+		String[] rowHeader = (String[]) iter.next();
+		String categoryNameHeader = rowHeader[0].trim();
+		if (categoryNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber
+					+ " has a missing row header for Category Name in ModifierSection.csv");
+		} else if (!categoryNameHeader.equals("Category Name")) {
+			errorList.add("row " + rowNumber
+					+ " has an invalid row header for Category Name in ModifierSection.csv");
+		}
+
+		String displayTypeHeader = rowHeader[1].trim();
+		if (displayTypeHeader.isEmpty()) {
+			errorList.add("row " + rowNumber
+					+ " has a missing row header for Display Type in ModifierSection.csv");
+		} else if (!displayTypeHeader.equals("Display Type")) {
+			errorList.add("row " + rowNumber
+					+ " has an invalid row header for Display Type in ModifierSection.csv");
+		}
+
+		String modifierNameHeader = rowHeader[2].trim();
+		if (modifierNameHeader.isEmpty()) {
+			errorList.add(
+					"row " + rowNumber + " has a missing row header for Modifier Name in ModifierSection.csv");
+		} else if (!modifierNameHeader.equals("Modifier Name")) {
+			errorList.add(
+					"row " + rowNumber + " has an invalid row header for Modifier Name in ModifierSection.csv");
+		}
+		String foodNameHeader = rowHeader[3].trim();
+		if (foodNameHeader.isEmpty()) {
+			errorList.add(
+					"row " + rowNumber + " has a missing row header for Food Name in ModifierSection.csv");
+		} else if (!foodNameHeader.equals("Food Name")) {
+			errorList.add("row " + rowNumber
+					+ " has an invalid row header for Food Name in ModifierSection.csv");
+		}
+
+		String stallNameHeader = rowHeader[4].trim();
+		if (stallNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber
+					+ " has a missing row header for Stall Name in ModifierSection.csv");
+		} else if (!stallNameHeader.equals("Stall Name")) {
+			errorList.add("row " + rowNumber
+					+ " has an invalid row header for Stall Name in ModifierSection.csv");
+		}
+
+		String canteenNameHeader = rowHeader[5].trim();
+		if (canteenNameHeader.isEmpty()) {
+			errorList.add("row " + rowNumber
+					+ " has a missing row header for Canteen Name in ModifierSection.csv");
+		} else if (!canteenNameHeader.equals("Canteen Name")) {
+			errorList.add("row " + rowNumber
+					+ " has an invalid row header for Canteen Name in ModifierSection.csv");
+		}
+
+		while (iter.hasNext()) {
+			rowNumber++;
+			String[] row = (String[]) iter.next();
+			String categoryName = row[0].trim();
+			if (categoryName.isEmpty()) {
+				errorList.add("row " + rowNumber + " has empty category name in ModifierSection.csv");
+			}
+			
+			String displayType = row[1].trim();
+			if (displayType.isEmpty()) {
+				errorList.add("row " + rowNumber + " has empty display type in ModifierSection.csv");
+			} else if (!displayType.matches("[cd]")) {
+				errorList.add("row " + rowNumber + " has invalid display type in ModifierSection.csv");
+			}
+			 
+
+			String modifierName = row[2].trim();
+			if (modifierName.isEmpty()) {
+				errorList.add("row " + rowNumber + " has empty modifier name in ModifierSection.csv");
+			} 
+
+			String foodName = row[3].trim();
+			if (foodName.isEmpty()) {
+				errorList.add("row " + rowNumber + " has empty food name in Modifier.csv");
+			}
+			String stallName = row[4].trim();
+			if (stallName.isEmpty()) {
+				errorList.add("row " + rowNumber + " has empty stall name in Modifier.csv");
+			}
+
+			String canteenName = row[5].trim();
+			if (canteenName.isEmpty()) {
+				errorList.add("row " + rowNumber + " has empty canteen name in Modifier.csv");
+			} else {
+				Canteen c = canteenDAO.getCanteenByName(canteenName);
+				if (c == null) {
+					errorList.add("row " + rowNumber + ": Canteen does not exist");
+				} else if (!stallName.isEmpty()) {
+					Stall s = canteenDAO.getStallFromCanteen(canteenName, stallName);
+					if (s == null) {
+						errorList.add("row " + rowNumber + ": Stall does not exist");
+					} else if (!foodName.isEmpty()) {
+						Food f = foodDAO.getFoodFromStallAndCanteen(foodName, stallName,
+								canteenName);
+						if (f == null) {
+							errorList.add("row " + rowNumber + ": Food does not exist");
+						} else if (!modifierName.isEmpty()) {
+							Modifier m = foodDAO.getModifierFromFood(modifierName, f);
+							if (m == null) {
+								errorList.add("row " + rowNumber + ": Modifier does not exist");
+
+							} else if (!categoryName.isEmpty()) {
+								ModifierSection modiSection = modifierSectionDAO.getModifierSectionFromFood(categoryName, displayType, f);
+								
+								if (modiSection != null) {
+									//errorList.add("row " + rowNumber + ": Modifier Section already exists ");
+									for (Modifier modifier : modiSection.getModifierList()) {
+										if (modifierName.equals(modifier.getName())) {
+											errorList.add("row " + rowNumber + ": Modifier already exists in Modifier Section");
+										}
+									}
+									
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return errorList;
+	}
+	
 
 	/**
 	 * Validate the contents of Stall.csv for any errors before loading to database
