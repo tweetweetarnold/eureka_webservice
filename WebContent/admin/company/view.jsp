@@ -120,10 +120,10 @@
 							<thead>
 								<tr>
 									<th>
-										<a target="_self" href="#" ng-click="sortType = 'company'; sortReverse = !sortReverse">
+										<a target="_self" href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
 											Company
-											<span ng-show="sortType == 'company' && !sortReverse" class="fa fa-caret-down"></span>
-											<span ng-show="sortType == 'company' && sortReverse" class="fa fa-caret-up"></span>
+											<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
 										</a>
 									</th>
 									<th>Code</th>
@@ -134,7 +134,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="company in companyList  | orderBy:sortType:sortReverse  | filter:searchText track by $index">
+								<tr ng-repeat="company in companyList | orderBy:sortType:sortReverse | filter:searchText track by $index">
 									<td>{{company.name}}</td>
 									<td>{{company.companyCode}}</td>
 									<td>{{company.createDate | date:'medium' : '+0800'}}</td>
@@ -199,7 +199,7 @@
 					$window.sessionStorage.removeItem('success');
 					$window.sessionStorage.removeItem('error');
 
-					$scope.sortType = 'company'; // set the default sort type
+					$scope.sortType = 'name'; // set the default sort type
 					$scope.sortReverse = false; // set the default sort order
 
 					$scope.loading = $http({

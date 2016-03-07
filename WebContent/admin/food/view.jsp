@@ -140,10 +140,10 @@
 								<tr>
 									<th>ID</th>
 									<th>
-										<a href="#" ng-click="sortType = 'food'; sortReverse = !sortReverse">
+										<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
 											Food
-											<span ng-show="sortType == 'food' && !sortReverse" class="fa fa-caret-down"></span>
-											<span ng-show="sortType == 'food' && sortReverse" class="fa fa-caret-up"></span>
+											<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
 										</a>
 									</th>
 									<th>Price</th>
@@ -264,8 +264,6 @@
 		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"
 	></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 
@@ -293,7 +291,7 @@
 									$scope.stallId = $location.search().stallId;
 									$scope.canteenId = $window.sessionStorage.canteenId;
 
-									$scope.sortType = 'food'; // set the default sort type
+									$scope.sortType = 'name'; // set the default sort type
 									$scope.sortReverse = false; // set the default sort order
 
 									$scope.loading = $http(

@@ -114,10 +114,10 @@
 									<th>Name</th>
 									<th>Email</th>
 									<th>
-										<a href="#" ng-click="sortType = 'dateJoined'; sortReverse = !sortReverse">
+										<a href="#" ng-click="sortType = 'createDate'; sortReverse = !sortReverse">
 											Date Joined
-											<span ng-show="sortType == 'dateJoined' && !sortReverse" class="fa fa-caret-down"></span>
-											<span ng-show="sortType == 'dateJoined' && sortReverse" class="fa fa-caret-up"></span>
+											<span ng-show="sortType == 'createDate' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'createDate' && sortReverse" class="fa fa-caret-up"></span>
 										</a>
 									</th>
 									<th>O/S</th>
