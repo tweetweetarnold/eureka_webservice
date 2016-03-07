@@ -56,7 +56,6 @@ public class Company {
 		this.status = StringValues.ACTIVE;
 	}
 
-
 	public Company(String name, String companyCode, Set<String> deliveryPointSet) {
 		super();
 		this.name = name;
@@ -65,8 +64,6 @@ public class Company {
 		this.deliveryPointSet = deliveryPointSet;
 		this.status = StringValues.ACTIVE;
 	}
-	
-
 
 	/**
 	 * Retrieves the current company code of the Company
@@ -95,8 +92,6 @@ public class Company {
 		return createDate;
 	}
 
-
-
 	/**
 	 * Retrieves the current set of Delivery Point for the Company
 	 * 
@@ -119,8 +114,6 @@ public class Company {
 		return status;
 	}
 
-
-
 	/**
 	 * Changes the company code with a new company code
 	 * 
@@ -137,8 +130,6 @@ public class Company {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-
-
 
 	/**
 	 * Changes the set of Delivery Point

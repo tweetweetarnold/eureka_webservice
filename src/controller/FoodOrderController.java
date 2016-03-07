@@ -821,7 +821,7 @@ public class FoodOrderController {
 		Set<String> keyList = yearMonthToFoodOrders.keySet();
 		TreeMap<String, Double> yearMonthToFoodOrdersTotalPrice = new TreeMap<>(
 				Collections.reverseOrder());
-		Iterator iter = keyList.iterator();
+		Iterator<String> iter = keyList.iterator();
 		while (iter.hasNext()) {
 			String yearMonth = (String) iter.next();
 			// System.out.println("**********");
@@ -977,7 +977,7 @@ public class FoodOrderController {
 		TreeMap<String, Double> weekToTotalPrice = new TreeMap<>(Collections.reverseOrder());
 
 		Set<String> keySet = weekToFoodOrder.keySet();
-		Iterator iter = keySet.iterator();
+		Iterator<String> iter = keySet.iterator();
 		while (iter.hasNext()) {
 			String weeklabel = (String) iter.next();
 			System.out.println(weeklabel);
@@ -1134,7 +1134,7 @@ public class FoodOrderController {
 		}
 
 		Set<String> datelabel = dateToFoodOrders.keySet();
-		Iterator iter1 = datelabel.iterator();
+		Iterator<String> iter1 = datelabel.iterator();
 		while (iter1.hasNext()) {
 			String date = (String) iter1.next();
 			double price = dateToFoodOrders.get(date);

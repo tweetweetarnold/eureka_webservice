@@ -3,6 +3,7 @@ package servlet.process.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -12,20 +13,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Canteen;
-import model.Employee;
-import model.OrderPeriod;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import value.StringValues;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import controller.AccessController;
+import controller.AnalyticsController;
 import controller.OrderPeriodController;
+import model.Canteen;
+import model.Employee;
+import model.Food;
+import model.OrderPeriod;
+import value.StringValues;
 
 /**
  * Servlet implementation class Hello
@@ -59,6 +60,7 @@ public class ProcessLoginServlet extends HttpServlet {
 
 		AccessController accessController = new AccessController();
 		OrderPeriodController orderPeriodController = new OrderPeriodController();
+		AnalyticsController analyticsCtrl = new AnalyticsController();
 		JSONObject obj = new JSONObject();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -136,10 +138,17 @@ public class ProcessLoginServlet extends HttpServlet {
 
 			// for login2
 			if (period != null && period.getStatus().equals(StringValues.ACTIVE)) {
+				
 				ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
 				canteenList.add(period.getCanteen());
 				session.setAttribute("canteenList", canteenList);
 				System.out.println("canteenList size: " + canteenList.size());
+				
+				LinkedHashMap<Food, Integer> map = analyticsCtrl.topKfoods(period.getCanteen().getCanteenId());
+				session.setAttribute("mostOrderedList", map);
+				System.out.println("canteenID" + period.getCanteen().getCanteenId());
+				System.out.println("mostorderedlist: " + map);
+				
 			}else{
 				if (!response.isCommitted()) {
 					session.setAttribute("suspended", "true");

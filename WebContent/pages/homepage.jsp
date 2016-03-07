@@ -71,7 +71,7 @@
 
 
 
-		<!-- Arnold's row -->
+		<!-- header's row -->
 		<div class="row">
 			<div class="col-lg-8">
 
@@ -85,10 +85,10 @@
 			</div>
 			<!-- col-lg-8 -->
 		</div>
-		<!-- /row -->
+		<!-- /header row -->
 
 
-
+		<!-- search -->
 		<div class="row">
 			<div class="col-lg-12">
 				<form action="/eureka_webservice/LoadUserSearchFood" method="post">
@@ -98,6 +98,132 @@
 
 			</div>
 		</div>
+		<!-- / search -->
+
+
+		<!-- favourite food -->
+		<div class="row">
+
+			<div class="col-lg-12">
+				<h2 class="page-header">Best food for this canteen</h2>
+			</div>
+
+			<c:forEach items="${sessionScope.mostOrderedList}" var="food" begin="0" end="2">
+				<div class="col-md-4 img-portfolio">
+
+					<a href="portfolio-item.html" data-toggle="modal" data-target="#myModal${food.foodId}">
+						<b class="pull-left">${food.name}</b>
+						<b class="pull-right">
+							<fmt:formatNumber value="${food.price}" var="amt" minFractionDigits="2" />
+							$${amt}
+						</b>
+						<img class="img-responsive img-portfolio img-hover" src="${food.imageDirectory}"
+							onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg'"
+							alt="http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg"
+							style="width: 263px;
+	height: 169px;"
+						>
+					</a>
+
+				</div>
+
+				<!-- Modal -->
+				<div class="modal fade" id="myModal${food.foodId}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<form action="/eureka_webservice/ProcessAddFoodItemToOrderItemsServlet">
+							<input type="hidden" name="foodId" value="${food.foodId}">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title text-center" id="myModalLabel">${food.name}'s&nbsp;Add-On(s)</h4>
+								</div>
+								<!-- / modal header -->
+								<div class="modal-body">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th class="text-center">S/N</th>
+												<th>Add-On</th>
+												<th>Price</th>
+												<th class="text-center">Add</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:choose>
+												<c:when test="${not empty food.modifierSectionList}">
+													<!-- / loop for modifierSection -->
+													<c:forEach varStatus="loop" items="${food.modifierSectionList}" var="modifierSection">
+														<tr>
+															<td>${modifierSection.categoryName}</td>
+														</tr>
+
+
+														<!-- / if checkbox -->
+														<c:if test="${modifierSection.displayType =='c'}">
+															<c:forEach varStatus="loop" items="${modifierSection.modifierList}" var="modifier">
+																<tr>
+																	<td style="text-align: center;">${loop.index+1}</td>
+																	<td style="text-align: left;">${modifier.name}</td>
+																	<td style="text-align: left;">
+																		<fmt:formatNumber value="${modifier.price}" var="modPrice" minFractionDigits="2" />
+																		+ $ ${modPrice}
+																	</td>
+																	<td class="text-center">
+																		<input type="checkbox" value="true" name="${modifier.name}">
+																	</td>
+																</tr>
+															</c:forEach>
+														</c:if>
+
+														<c:if test="${modifierSection.displayType =='d'}">
+															<tr>
+																<td>
+																	<select class="form-control" name="modifierDropdown" required>
+																		<c:forEach varStatus="loop" items="${modifierSection.modifierList}" var="modifier">
+																			<option value="${modifier.name}" name="${modifier.name}">${modifier.name}+$
+																				${modifier.price}</option>
+																		</c:forEach>
+																	</select>
+																</td>
+															</tr>
+														</c:if>
+
+
+
+													</c:forEach>
+												</c:when>
+												<c:otherwise>
+													<tr>
+														<td colspan="4" style="text-align: center;">No add-ons available</td>
+													</tr>
+												</c:otherwise>
+											</c:choose>
+
+										</tbody>
+
+									</table>
+
+								</div>
+								<!-- / modal body -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-danger" onclick="noRedirect=false">Add to cart</button>
+								</div>
+								<!-- / modal footer -->
+							</div>
+							<!-- / modal content -->
+						</form>
+					</div>
+				</div>
+				<!-- / Modal -->
+
+			</c:forEach>
+
+
+		</div>
+		<!-- / favourite food -->
 
 
 
@@ -147,13 +273,6 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="/eureka_webservice/resources/startbootstrap-business/js/bootstrap.min.js"></script>
 
-	<!-- Script to Activate the Carousel -->
-	<script>
-		$('.carousel').carousel({
-			interval : 5000
-		//changes the speed
-		});
-	</script>
 
 
 	<script>
