@@ -62,7 +62,7 @@ function myFunction() {
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					Cart <small>what you ordered</small>
+					Cart <small>What you have ordered</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="/eureka_webservice/pages/homepage.jsp" onclick = "noRedirect=false">Home</a></li>
@@ -117,7 +117,7 @@ function myFunction() {
 								<th>Food</th>
 								<th>Add-On(s)</th>
 								<th>Qty</th>
-								<th>Price</th>
+								<th>Total Price</th>
 								<th></th>
 								<th></th>
 							</tr>

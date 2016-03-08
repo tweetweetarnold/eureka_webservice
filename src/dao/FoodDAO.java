@@ -373,7 +373,7 @@ public class FoodDAO {
 		saveFood(newFood);
 	}
 
-	public List<Food> searchFoodFromCanteen(Canteen c, String query){
+	public List<Food> searchFoodFromCanteen(Canteen c, String query) throws Exception{
 		DetachedCriteria dc = DetachedCriteria.forClass(Food.class)
 		   .add(Restrictions.like("name","%"+query+"%"));
 		
@@ -388,6 +388,9 @@ public class FoodDAO {
 		List<Food> returnList = new ArrayList<Food>();
 		for (Object o : l) {
 			returnList.add((Food) o);
+		}
+		if(returnList.isEmpty()){
+			throw new Exception("No such food found.");
 		}
 		return returnList;
 	}

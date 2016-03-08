@@ -66,11 +66,11 @@ function myFunction() {
 					Monthly Spending Summary <small>your previous orders</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="/eureka_webservice/pages/homepage.jsp">Home</a></li>
-					<li><a href="/eureka_webservice/LoadUserOrderHistoryServlet">Order
+					<li><a href="/eureka_webservice/pages/homepage.jsp" onclick = "noRedirect=false">Home</a></li>
+					<li><a href="/eureka_webservice/LoadUserOrderHistoryServlet" onclick = "noRedirect=false">Order
 							History</a></li>
 					<li class="active">Monthly Spending Summary</li>
-					<li><a href="/eureka_webservice/LoadUserSpendingSummaryByWeek">Weekly
+					<li><a href="/eureka_webservice/LoadUserSpendingSummaryByWeek" onclick = "noRedirect=false">Weekly
 							Spending Summary</a></li>
 				</ol>
 			</div>

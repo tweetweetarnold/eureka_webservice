@@ -77,7 +77,7 @@ public class AnalyticsController {
 		List<Map.Entry<Food, Integer>> entries = new ArrayList<Map.Entry<Food, Integer>>(foodCountMap.entrySet());
 		Collections.sort(entries, new Comparator<Map.Entry<Food, Integer>>() {
 			public int compare(Map.Entry<Food, Integer> a, Map.Entry<Food, Integer> b) {
-				return a.getValue().compareTo(b.getValue());
+				return b.getValue().compareTo(a.getValue());
 			}
 		});
 

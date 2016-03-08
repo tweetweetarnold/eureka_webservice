@@ -61,6 +61,14 @@ public class LoadUserSearchFood extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			if (e != null) {
+				session.setAttribute("error", e);
+				if (!response.isCommitted()) {
+					response.sendRedirect("/eureka_webservice/pages/search-results.jsp");
+				}
+			}
+
+			
 		}
 	}
 

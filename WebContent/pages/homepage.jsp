@@ -105,7 +105,7 @@
 		<div class="row">
 
 			<div class="col-lg-12">
-				<h2 class="page-header">Best food for this canteen</h2>
+				<h2 class="page-header">Top 3 Most Ordered Food from Oasis Canteen</h2>
 			</div>
 
 			<c:forEach items="${sessionScope.mostOrderedList}" var="favFood" begin="0" end="2">
