@@ -56,7 +56,7 @@
 
 				<!-- Message handling -->
 				<div class="col-lg-12">
-					<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null">
+					<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null" ng-cloak>
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -64,7 +64,7 @@
 						<span class="sr-only">Success: </span>
 						{{success}}
 					</div>
-					<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
+					<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null" ng-cloak>
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -111,8 +111,20 @@
 											<span ng-show="sortType == 'company' && sortReverse" class="fa fa-caret-up"></span>
 										</a>
 									</th>
-									<th>Name</th>
-									<th>Email</th>
+									<th>
+										<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+											Name
+											<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">
+											Email
+											<span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>
 										<a href="#" ng-click="sortType = 'createDate'; sortReverse = !sortReverse">
 											Date Joined

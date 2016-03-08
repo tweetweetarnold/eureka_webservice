@@ -8,7 +8,10 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a target="_self" class="navbar-brand" href="/eureka_webservice/LoadOrderPeriodActiveServlet">LunchTime</a>
+		<a target="_self" class="navbar-brand" href="/eureka_webservice/LoadOrderPeriodActiveServlet">
+			<i class="fa fa-cutlery"></i>
+			LunchTime
+		</a>
 	</div>
 	<!-- /.navbar-header -->
 
@@ -116,17 +119,10 @@
 				</li>
 
 				<li>
-					<a target="_self" href="#">
+					<a target="_self" href="/eureka_webservice/LoadAdminViewUsersWithOutstandingPaymentServlet">
 						<i class="fa fa-money fa-fw"></i>
 						Payment
-						<span class="fa arrow"></span>
 					</a>
-					<ul class="nav nav-second-level">
-						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewUsersWithOutstandingPaymentServlet">Outstanding</a>
-						</li>
-					</ul>
-					<!-- /.nav-second-level -->
 				</li>
 
 				<li>

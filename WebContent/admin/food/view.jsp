@@ -77,7 +77,7 @@
 
 					<!-- Message handling -->
 					<div class="col-lg-12">
-						<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null">
+						<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null" ng-cloak>
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -85,7 +85,7 @@
 							<span class="sr-only">Success: </span>
 							{{success}}
 						</div>
-						<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
+						<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null" ng-cloak>
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>

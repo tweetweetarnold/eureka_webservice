@@ -93,7 +93,7 @@
 
 							<!-- Button -->
 							<button class="btn btn-success btn-block" type="submit" ng-show='btn' ng-click='onPress()'>Sign In</button>
-							<button class="btn btn-success btn-block" type="button" disabled ng-hide='btn'>Loading...</button>
+							<button class="btn btn-success btn-block" type="button" disabled ng-hide='btn' ng-cloak>Loading...</button>
 							<br>
 
 							<!-- Error message handling -->
