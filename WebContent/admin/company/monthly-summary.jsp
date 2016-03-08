@@ -124,9 +124,10 @@
 
 
 
+												Month-Year:<fmt:parseDate value="${key}" var="parsedEmpDate" pattern="yyyy-MM" />
+                              						<fmt:formatDate pattern="MMM-yyyy" value="${parsedEmpDate}" />
 
-
-												Year-Month: ${key} <fmt:formatNumber value="${map.value}"
+												<fmt:formatNumber value="${map.value}"
 													var="amt" minFractionDigits="2" /> <i class="pull-right">Amount
 													Spent: $${amt}</i>
 

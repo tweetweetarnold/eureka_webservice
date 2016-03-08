@@ -1083,15 +1083,28 @@ public class FoodOrderController {
 		String[] keySet = yearMonthToTotalPrice.keySet()
 				.toArray(new String[yearMonthToTotalPrice.size()]);
 		Arrays.sort(keySet);
+		
+		
+		
 		// java.util.Iterator<String> iter = keySet.iterator();
 		for (String yearMonth : keySet) {
 			if (yearMonth.contains(year)) {
 				double price = yearMonthToTotalPrice.get(yearMonth);
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+				try {
+					Date d = format.parse(yearMonth);
+					format.applyPattern("MMM-yyyy");
+					yearMonth = format.format(d);
+					System.out.println(yearMonth);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				dataset.addValue(price, series1, yearMonth);
+				
 			}
 		}
 		JFreeChart chart = ChartFactory.createLineChart("Monthly Spending For " + year,
-				"Year-Month", "Amount Spend($)", dataset);
+				"Month-Year", "Amount Spend($)", dataset);
 		CategoryPlot plot = chart.getCategoryPlot();
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		  rangeAxis.setUpperMargin(0.15);
