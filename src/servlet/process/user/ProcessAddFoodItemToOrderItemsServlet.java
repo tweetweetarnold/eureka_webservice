@@ -93,7 +93,7 @@ public class ProcessAddFoodItemToOrderItemsServlet extends HttpServlet {
 			}
 
 			// Create new FoodOrderItem
-			FoodOrderItem foodItem = new FoodOrderItem(null, food, 1, "");
+			FoodOrderItem foodItem = new FoodOrderItem(null, food, quantity, "");
 			System.out.println("new FoodOrderItem created");
 
 			// Add new FoodOrderItem to myFoodOrders
