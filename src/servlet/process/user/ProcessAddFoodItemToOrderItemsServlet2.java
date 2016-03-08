@@ -68,6 +68,20 @@ public class ProcessAddFoodItemToOrderItemsServlet2 extends HttpServlet {
 			String foodId = request.getParameter("foodId");
 			System.out.println("foodId: " + foodId);
 
+			// TODO: CHRIS CHENG HERRE!!!
+			// TODO: CHRIS CHENG HERRE!!!
+			// TODO: CHRIS CHENG HERRE!!!
+			// TODO: CHRIS CHENG HERRE!!!
+			// TODO: CHRIS CHENG HERRE!!!
+			int quantity = Integer.parseInt(request.getParameter("quantity")); // TODO: CHRIS CHENG
+																				// HERRE!!!
+			// TODO: CHRIS CHENG HERRE!!!
+			// TODO: CHRIS CHENG HERRE!!!
+			// TODO: CHRIS CHENG HERRE!!!
+			// TODO: CHRIS CHENG HERRE!!!
+			// TODO: CHRIS CHENG HERRE!!!
+			// TODO: CHRIS CHENG HERRE!!!
+
 			Food food = foodDAO.getFood(Integer.parseInt(foodId));
 			System.out.println("food retrieved: " + food.getName());
 

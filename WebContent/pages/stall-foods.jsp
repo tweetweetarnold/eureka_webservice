@@ -36,14 +36,14 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 <script>
-var noRedirect = true;
-function myFunction() {
-    if (noRedirect ){
-         return "Please remember to checkout the items in your cart!";
-    }else{
-    	noRedirect = false;
-    }
-}
+	var noRedirect = true;
+	function myFunction() {
+		if (noRedirect) {
+			return "Please remember to checkout the items in your cart!";
+		} else {
+			noRedirect = false;
+		}
+	}
 </script>
 </head>
 
@@ -67,7 +67,7 @@ function myFunction() {
 				<!-- breadcrumb -->
 				<ol class="breadcrumb">
 					<li>
-						<a href="/eureka_webservice/pages/homepage.jsp" onclick = "noRedirect=false">Home</a>
+						<a href="/eureka_webservice/pages/homepage.jsp" onclick="noRedirect=false">Home</a>
 					</li>
 					<li class="active">${sessionScope.stallName}</li>
 				</ol>
@@ -121,8 +121,11 @@ function myFunction() {
 							$${amt}
 						</b>
 						<img class="img-responsive img-portfolio img-hover" src="${food.imageDirectory}"
-							onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg'" alt="http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg"
-						style="width:263px;height:169px;">
+							onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg'"
+							alt="http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg"
+							style="width: 263px;
+	height: 169px;"
+						>
 						<!--"http://placehold.it/700x450  -->
 					</a>
 
@@ -206,11 +209,22 @@ function myFunction() {
 
 									</table>
 
+									<div>
+										Quantity:
+										<select name="quantity" class="form-control" style="display: inline;
+	width: 10%;">
+											<c:forEach begin="1" end="10" varStatus="count">
+												<option value="${count.index}">${count.index}</option>
+											</c:forEach>
+
+										</select>
+									</div>
+
 								</div>
 								<!-- / modal body -->
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<button type="submit" class="btn btn-danger" onclick = "noRedirect=false">Add to cart</button>
+									<button type="submit" class="btn btn-danger" onclick="noRedirect=false">Add to cart</button>
 								</div>
 								<!-- / modal footer -->
 							</div>

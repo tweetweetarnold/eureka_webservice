@@ -84,17 +84,11 @@
 				<!-- 				</li> -->
 
 				<li>
-					<a target="_self" href="#">
+					<a target="_self" href="/eureka_webservice/LoadAdminViewOverallMonthlySpending">
 						<i class="fa fa-bar-chart fa-fw"></i>
 						Analytics
 						<span class="fa arrow"></span>
 					</a>
-					<ul class="nav nav-second-level">
-						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewOverallMonthlySpending">View Spending Summary</a>
-
-						</li>
-					</ul>
 				</li>
 
 				<li>

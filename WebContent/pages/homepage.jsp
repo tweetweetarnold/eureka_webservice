@@ -92,8 +92,11 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<form action="/eureka_webservice/LoadUserSearchFood" method="post">
-					<input type="text" id="food" name="food" placeholder="Search" />
-					<input type="Submit" onclick="noRedirect=false">
+					<input class="form-control" type="text" id="food" name="food" placeholder="Search food"
+						style="width: 30%;
+	display: inline;"
+					/>
+					<input class="btn btn-danger" type="Submit" value="Search" onclick="noRedirect=false">
 				</form>
 
 			</div>
@@ -105,11 +108,11 @@
 		<div class="row">
 
 			<div class="col-lg-12">
-				<h2 class="page-header">Top 3 Most Ordered Food from Oasis Canteen</h2>
+				<h2 class="page-header">Top 3 Most Ordered Food from ${sessionScope.orderPeriod.canteen.name}</h2>
 			</div>
 
 			<c:forEach items="${sessionScope.mostOrderedList}" var="favFood" begin="0" end="2">
-			<c:set value="${favFood.key}" var="food"/>
+				<c:set value="${favFood.key}" var="food" />
 				<div class="col-md-4 img-portfolio">
 
 					<a href="portfolio-item.html" data-toggle="modal" data-target="#myModal${food.foodId}">
