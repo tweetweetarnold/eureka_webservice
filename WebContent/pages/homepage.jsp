@@ -209,6 +209,19 @@
 
 									</table>
 
+
+									<div>
+										Quantity:
+										<select name="quantity" class="form-control" style="display: inline;
+	width: 10%;">
+											<c:forEach begin="1" end="10" varStatus="count">
+												<option value="${count.index}">${count.index}</option>
+											</c:forEach>
+
+										</select>
+									</div>
+
+
 								</div>
 								<!-- / modal body -->
 								<div class="modal-footer">

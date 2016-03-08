@@ -102,15 +102,27 @@
 									<th>Company</th>
 									<th>Canteen</th>
 									<th>Discount</th>
-									<th>Date Created</th>
-									<th>Start Date/Time</th>
+									<th>
+										<a href="#" ng-click="sortType = 'createDate'; sortReverse = !sortReverse">
+											Date Created
+											<span ng-show="sortType == 'createDate' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'createDate' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a href="#" ng-click="sortType = 'start'; sortReverse = !sortReverse">
+											Start Date/Time
+											<span ng-show="sortType == 'start' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'start' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>End Date/Time</th>
 									<th></th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="period in data track by $index">
+								<tr ng-repeat="period in data | orderBy:sortType:sortReverse track by $index">
 									<td>{{period.periodId}}</td>
 									<td>{{period.company.name}}</td>
 									<td>{{period.canteen.name}}</td>
@@ -208,6 +220,9 @@
 									$window.sessionStorage
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
+
+									$scope.sortType = 'start'; // set the default sort type
+									$scope.sortReverse = false; // set the default sort order
 
 									$scope.loading = $http(
 											{
