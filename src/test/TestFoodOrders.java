@@ -957,7 +957,7 @@ package test;
 			Food mfood7 = new Food("Stingray + Veg", "魟魚加菜", "more vegs, less fried meat", 3.70,
 					"resources/img/food/img-malaystingray.jpg", null, malayStall);
 			// for mfood1 modifiers
-			Modifier modifier1 = new Modifier("more vegetables", "多菜", "", 0.00, mfood1);
+			Modifier modifier1 = new Modifier("More vegetables", "多菜", "", 0.00, mfood1);
 			Modifier modifier2 = new Modifier("No egg", "不要蛋", "", 0.00, mfood1);
 			Set<Modifier> modifierList1 = new HashSet<Modifier>();
 			modifierList1.add(modifier1);
@@ -965,7 +965,7 @@ package test;
 			mfood1.setModifierList(modifierList1);
 
 			// for mfood2 modifiers
-			Modifier modifierM21 = new Modifier("more vegetables", "多菜", "", 0.00, mfood2);
+			Modifier modifierM21 = new Modifier("More vegetables", "多菜", "", 0.00, mfood2);
 			Modifier modifierM22 = new Modifier("No egg", "不要蛋", "", 0.00, mfood2);
 			Set<Modifier> modifierList2 = new HashSet<Modifier>();
 			modifierList2.add(modifierM21);
@@ -973,28 +973,28 @@ package test;
 			mfood2.setModifierList(modifierList2);
 
 			// for mfood3 modifiers
-			Modifier modifierM31 = new Modifier("more vegetables", "多菜", "", 0.00, mfood3);
+			Modifier modifierM31 = new Modifier("More vegetables", "多菜", "", 0.00, mfood3);
 			Modifier modifierM32 = new Modifier("No egg", "不要蛋", "", 0.00, mfood3);
 			Set<Modifier> modifierList3 = new HashSet<Modifier>();
 			modifierList3.add(modifierM31);
 			modifierList3.add(modifierM32);
 			mfood3.setModifierList(modifierList3);
 
-			Modifier modifierM51 = new Modifier("more vegetables", "多菜", "", 0.00, mfood5);
+			Modifier modifierM51 = new Modifier("More vegetables", "多菜", "", 0.00, mfood5);
 			Modifier modifierM52 = new Modifier("No egg", "不要蛋", "", 0.00, mfood5);
 			Set<Modifier> modifierListm5 = new HashSet<Modifier>();
 			modifierListm5.add(modifierM51);
 			modifierListm5.add(modifierM52);
 			mfood5.setModifierList(modifierListm5);
 
-			Modifier modifierM61 = new Modifier("more vegetables", "多菜", "", 0.00, mfood6);
+			Modifier modifierM61 = new Modifier("More vegetables", "多菜", "", 0.00, mfood6);
 			Modifier modifierM62 = new Modifier("No egg", "不要蛋", "", 0.00, mfood6);
 			Set<Modifier> modifierListm6 = new HashSet<Modifier>();
 			modifierListm6.add(modifierM61);
 			modifierListm6.add(modifierM62);
 			mfood6.setModifierList(modifierListm6);
 
-			Modifier modifierM71 = new Modifier("more vegetables", "多菜", "", 0.00, mfood7);
+			Modifier modifierM71 = new Modifier("More vegetables", "多菜", "", 0.00, mfood7);
 			Modifier modifierM72 = new Modifier("No egg", "不要蛋", "", 0.00, mfood7);
 			Set<Modifier> modifierListm7 = new HashSet<Modifier>();
 			modifierListm7.add(modifierM71);
@@ -1204,8 +1204,8 @@ package test;
 					chineseMixVegStall);
 
 			// for mixVegRice1 modifiers
-			Modifier modifier9 = new Modifier("more vegetables", "多菜", "", 0.00, mixVegRice1);
-			Modifier modifier10 = new Modifier("no fried meat", "不要炸肉", "", 0.00, mixVegRice1);
+			Modifier modifier9 = new Modifier("More vegetables", "多菜", "", 0.00, mixVegRice1);
+			Modifier modifier10 = new Modifier("No fried meat", "不要炸肉", "", 0.00, mixVegRice1);
 			Modifier modifier11 = new Modifier("Upsize to $3.20", "加大", "", 0.20, mixVegRice1);
 			Set<Modifier> modifierList4 = new HashSet<Modifier>();
 			modifierList4.add(modifier9);
@@ -1218,8 +1218,8 @@ package test;
 			modifierListMV2.add(modifierMV2);
 			mixVegRice2.setModifierList(modifierListMV2);
 
-			Modifier modifierNew21 = new Modifier("more vegetables", "多菜", "", 0.00, mixVegRice4);
-			Modifier modifierNew22 = new Modifier("no fried meat", "不要炸肉", "", 0.00, mixVegRice4);
+			Modifier modifierNew21 = new Modifier("More vegetables", "多菜", "", 0.00, mixVegRice4);
+			Modifier modifierNew22 = new Modifier("No fried meat", "不要炸肉", "", 0.00, mixVegRice4);
 			Set<Modifier> modifierListNew20 = new HashSet<Modifier>();
 			modifierListNew20.add(modifierNew21);
 			modifierListNew20.add(modifierNew22);
@@ -1396,14 +1396,14 @@ package test;
 			seafood11.setModifierList(modifierListS11);
 
 			// for seafood4 modifier
-			Modifier modifier20 = new Modifier("more vegetables", "多菜", "", 0.00, seafood4);
+			Modifier modifier20 = new Modifier("More vegetables", "多菜", "", 0.00, seafood4);
 
 			Set<Modifier> modifierList9 = new HashSet<Modifier>();
 			modifierList9.add(modifier20);
 			seafood4.setModifierList(modifierList9);
 
 			// for seafood5 modifier
-			Modifier modifier21 = new Modifier("more vegetables", "多菜", "", 0.00, seafood5);
+			Modifier modifier21 = new Modifier("More vegetables", "多菜", "", 0.00, seafood5);
 
 			Set<Modifier> modifierList10 = new HashSet<Modifier>();
 			modifierList10.add(modifier21);

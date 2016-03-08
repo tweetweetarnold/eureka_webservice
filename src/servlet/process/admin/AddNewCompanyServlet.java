@@ -18,7 +18,6 @@ import org.json.simple.parser.JSONParser;
 import com.google.gson.Gson;
 
 import controller.CompanyController;
-import model.Company;
 
 /**
  * Servlet implementation class AddNewCompanyServlet
