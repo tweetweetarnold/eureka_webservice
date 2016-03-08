@@ -139,7 +139,8 @@
 									<td>{{company.companyCode}}</td>
 									<td>{{company.createDate | date:'medium' : '+0800'}}</td>
 									<td>
-										<p ng-repeat="deliveryPoint in company.deliveryPointSet track by $index">{{deliveryPoint}},</p>
+										<p ng-repeat="deliveryPoint in company.deliveryPointSet track by $index">{{deliveryPoint}}<font ng-show="!$last">,</font>
+										</p>
 									</td>
 									<td>
 										<a target="_self"
