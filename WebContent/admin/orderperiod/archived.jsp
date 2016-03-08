@@ -95,7 +95,7 @@
 											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${period.endDateFormatted}" />
 										</td>
 										<td>
-											<a href="/eureka_webservice/LoadAdminViewOrderPeriodsClosedDetailsServlet?periodId=${period.periodId}">Details</a>
+											<a href="/eureka_webservice/LoadAdminViewOrderPeriodsArchivedDetailsServlet?periodId=${period.periodId}">Details</a>
 										</td>
 									</tr>
 								</c:forEach>

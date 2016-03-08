@@ -104,7 +104,7 @@
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewOrderPeriodsArchivedServlet">View: Archieved</a>
+							<a target="_self" href="/eureka_webservice/LoadAdminViewOrderPeriodsArchivedServlet">View: Archived</a>
 
 						</li>
 						<li>
