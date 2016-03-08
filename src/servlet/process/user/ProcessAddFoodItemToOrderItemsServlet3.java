@@ -23,15 +23,15 @@ import dao.FoodDAO;
  * Servlet implementation class AddFoodItemToSessionServlet
  */
 @WebServlet(description = "This servlet adds a food item to be stored in session", urlPatterns = {
-		"/ProcessAddFoodItemToOrderItemsServlet2" })
-public class ProcessAddFoodItemToOrderItemsServlet2 extends HttpServlet {
+		"/ProcessAddFoodItemToOrderItemsServlet3" })
+public class ProcessAddFoodItemToOrderItemsServlet3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	FoodDAO foodDAO = new FoodDAO();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ProcessAddFoodItemToOrderItemsServlet2() {
+	public ProcessAddFoodItemToOrderItemsServlet3() {
 		super();
 	}
 
@@ -125,7 +125,7 @@ public class ProcessAddFoodItemToOrderItemsServlet2 extends HttpServlet {
 			System.out.println("new FoodOrderItem added to myFoodOrderItems successfully");
 			session.setAttribute("success", food.getName() + " has been added to cart!");
 
-			response.sendRedirect("/eureka_webservice/pages/search-results.jsp");
+			response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();
