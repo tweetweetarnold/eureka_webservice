@@ -93,7 +93,7 @@
 			<div class="col-lg-12">
 				<form action="/eureka_webservice/LoadUserSearchFood" method="post">
 					<input type="text" id="food" name="food" placeholder="Search" />
-					<input type="Submit">
+					<input type="Submit" onclick="noRedirect=false">
 				</form>
 
 			</div>
