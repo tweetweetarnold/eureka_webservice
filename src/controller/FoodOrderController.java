@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +17,15 @@ import java.util.TreeMap;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.ui.TextAnchor;
 import org.joda.time.DateTime;
 
 import dao.EmployeeDAO;
@@ -1083,6 +1092,14 @@ public class FoodOrderController {
 		}
 		JFreeChart chart = ChartFactory.createLineChart("Monthly Spending For " + year,
 				"Year-Month", "Amount Spend($)", dataset);
+		CategoryPlot plot = chart.getCategoryPlot();
+		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+		  rangeAxis.setUpperMargin(0.15);
+		plot.setBackgroundPaint(Color.white);
+		plot.setRangeGridlinePaint(Color.black);
+		LineAndShapeRenderer lsr = (LineAndShapeRenderer) chart.getCategoryPlot().getRenderer() ;
+		lsr.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+		lsr.setBaseItemLabelsVisible(true); 
 		return chart;
 
 	}
@@ -1139,11 +1156,21 @@ public class FoodOrderController {
 			String date = (String) iter1.next();
 			double price = dateToFoodOrders.get(date);
 			System.out.println(date + " " + price);
-			dataset.addValue(price, series1, date);
+			dataset.addValue(convertPriceToTwoDecimal(price), series1, date);
 		}
 
 		JFreeChart chart = ChartFactory.createBarChart("Weekly Spending from " + week, "Date",
 				"Amount Spend($)", dataset);
+		CategoryPlot plot = chart.getCategoryPlot();
+		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+		  rangeAxis.setUpperMargin(0.15);
+		plot.setBackgroundPaint(Color.white);
+		plot.setRangeGridlinePaint(Color.black);
+		BarRenderer bsr = (BarRenderer) chart.getCategoryPlot().getRenderer() ;
+		bsr.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+		bsr.setBaseItemLabelsVisible(true); 
+		bsr.setMaximumBarWidth(.10);
+		
 		return chart;
 	}
 }
