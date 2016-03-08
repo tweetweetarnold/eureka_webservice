@@ -108,7 +108,8 @@
 				<h2 class="page-header">Best food for this canteen</h2>
 			</div>
 
-			<c:forEach items="${sessionScope.mostOrderedList}" var="food" begin="0" end="2">
+			<c:forEach items="${sessionScope.mostOrderedList}" var="favFood" begin="0" end="2">
+			<c:set value="${favFood.key}" var="food"/>
 				<div class="col-md-4 img-portfolio">
 
 					<a href="portfolio-item.html" data-toggle="modal" data-target="#myModal${food.foodId}">
