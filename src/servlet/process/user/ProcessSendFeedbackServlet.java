@@ -53,10 +53,10 @@ public class ProcessSendFeedbackServlet extends HttpServlet {
 					+ message + "<br><br>" + "***************** END OF MESSAGE *****************";
 
 			String[] emails = new String[] { "chris.cheng.2013@sis.smu.edu.sg",
-					"boonhui.koh.2013@sis.smu.edu.sg", "arnold.lee.2013@sis.smu.edu.sg" };
+					"boonhui.koh.2013@sis.smu.edu.sg" };
 
 			emailer.setMailServerProperties();
-			emailer.sendEmail("User Feedback from LunchTime", bodyMessage, emails);
+			emailer.sendEmail("User Feedback from LunchTime", bodyMessage, emails, null);
 
 			session.setAttribute("success", "Thank you for your feedback!");
 

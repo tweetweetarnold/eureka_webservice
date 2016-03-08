@@ -16,7 +16,6 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import services.AESAlgorithm;
-import services.PasswordService;
 import services.SendEmail;
 import value.StringValues;
 import dao.AdminDAO;
@@ -194,10 +193,12 @@ public class AccessController {
 	 * @return An ArrayList of error messages if fails the requirements
 	 */
 	public ArrayList<String> checkPasswordMeetRequirements(String password, String confirmPwd) {
+
 		ArrayList<String> messages = new ArrayList<String>();
 		if (!password.equals(confirmPwd)) {
 			messages.add("Passwords do not match.");
 		}
+
 		// in the case where password is less than 7
 		if (!(password.length() >= 7)) {
 			messages.add("Password must be at least 7 characters long.");
@@ -254,7 +255,7 @@ public class AccessController {
 						+ "This email is to inform you that your account has been deleted.<br> Thank you for using Koh Bus LunchTime Ordering App.<br><br> "
 						+ "Regards,<br>" + "Admin<br><br>"
 						+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
-				toSendEmail);
+				toSendEmail, null);
 
 		return true;
 	}
@@ -295,7 +296,7 @@ public class AccessController {
 						+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
 						+ "Admin<br><br>"
 						+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
-				toSendEmail);
+				toSendEmail, null);
 
 		return true;
 	}
@@ -327,7 +328,7 @@ public class AccessController {
 						+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
 						+ "Admin<br><br>"
 						+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
-				toSendEmail);
+				toSendEmail, null);
 
 		return true;
 
@@ -342,25 +343,6 @@ public class AccessController {
 	 */
 	private String encryptPassword(String email, String password) {
 		return aesAlgo.encrypt(email + password);
-	}
-
-	/**
-	 * Registers a new Administrator to gain access to classified information
-	 * 
-	 * @param username The username of the Administrator
-	 * @param password The password of the Administrator
-	 * @param name The Name of the Administrator
-	 * @param contactNo The contact number of the Administrator
-	 * @return The username of the Administrator which is needed for verification upon logging in
-	 *         upon a successful registration
-	 */
-	public String registerAdmin(String username, String password, String name, long contactNo) {
-		String encryptPassword = PasswordService.encryptPassword(password);
-
-		Admin newAdmin = new Admin(username, encryptPassword, name, contactNo);
-		adminDAO.saveAdmin(newAdmin);
-
-		return newAdmin.getUsername();
 	}
 
 	/**

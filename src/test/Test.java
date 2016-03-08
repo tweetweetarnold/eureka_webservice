@@ -1,8 +1,5 @@
 package test;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,14 +13,11 @@ import model.Canteen;
 import model.Company;
 import model.Employee;
 import model.Food;
-import model.FoodOrder;
-import model.FoodOrderItem;
 import model.Modifier;
 import model.ModifierSection;
 import model.OrderPeriod;
 import model.Stall;
 import services.AESAlgorithm;
-import services.PasswordService;
 
 public class Test {
 
@@ -80,7 +74,7 @@ public class Test {
 		session.save(company2);
 		session.save(arnold);
 
-		Admin admin = new Admin("admin", PasswordService.encryptPassword("1234567"), "admin1",
+		Admin admin = new Admin("admin", "1234567", "admin1",
 				45678925);
 		session.save(admin);
 

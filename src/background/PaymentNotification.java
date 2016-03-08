@@ -54,7 +54,7 @@ public class PaymentNotification implements Job {
 			//temporary carbon copy recipients
 			if(toEmails.length>0){
 				String[] ccEmails = {"chris.cheng.2013@sis.smu.edu.sg", "wch123ow@eastman.com"};
-				emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
+				emailGen.sendEmail(subject, messageBody, toEmails, ccEmails);
 			}
 			
 		} catch (Exception ex) {

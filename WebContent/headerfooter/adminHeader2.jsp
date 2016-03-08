@@ -25,7 +25,13 @@
 			</a>
 			<ul class="dropdown-menu">
 				<li>
-					<a target="_self" href="#">
+					<a target="_self" href="/eureka_webservice/admin/file-upload.jsp">
+						<i class="fa fa-cloud-upload fa-fw"></i>
+						File Upload
+					</a>
+				</li>
+				<li>
+					<a target="_self" href="/eureka_webservice/RunQuartzServlet">
 						<i class="fa fa-play fa-fw"></i>
 						Run Quartz
 					</a>

@@ -56,7 +56,7 @@ public class ChasePayment implements Job {
 			
 			//temporary carbon copy recipients
 			String[] ccEmails = {"sumon123may@eastman.com", "wch123ow@eastman.com"};
-			emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
+			emailGen.sendEmail(subject, messageBody, toEmails, ccEmails);
 
 		} catch (Exception ex) {
 			LoggerFactory.getLogger(getClass()).error(ex.getMessage() + "HELLO");

@@ -106,7 +106,7 @@ public class EmployeeController {
 		System.out.println(toEmails[0]);
 		String[] ccEmails = { "sumon123may@eastman.com", "wch123ow@eastman.com" };
 		try {
-			emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
+			emailGen.sendEmail(subject, messageBody, toEmails, ccEmails);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -164,7 +164,7 @@ public class EmployeeController {
 		System.out.println(toEmails[0]);
 		String[] ccEmails = { "sumon123may@eastman.com", "wch123ow@eastman.com" };
 		try {
-			emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
+			emailGen.sendEmail(subject, messageBody, toEmails, ccEmails);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
