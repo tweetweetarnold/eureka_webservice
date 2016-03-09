@@ -94,8 +94,14 @@ function myFunction() {
 						
 							<select class="form-control" name="id" required>
 								<c:forEach items="${sessionScope.weekList}" var="map">
-
-									<option value="${map}">${map}</option>
+									<c:set var="splitWeek" value="${fn:split(map,'to')}" />
+									
+									<fmt:parseDate value="${splitWeek[0]}" var="parsedEmpDate1" pattern="yyyy-MM-dd" />
+									<fmt:formatDate  value="${parsedEmpDate1}" var="weekChange1" pattern="dd-MMM-yyyy"/>
+									
+									<fmt:parseDate value="${splitWeek[1]}" var="parsedEmpDate2" pattern="yyyy-MM-dd" />
+									<fmt:formatDate  value="${parsedEmpDate2}" var="weekChange2" pattern="dd-MMM-yyyy"/>
+									<option value="${map}">${weekChange1} to ${weekChange2}</option>
 								</c:forEach>
 
 							</select>
@@ -128,7 +134,16 @@ function myFunction() {
 									<a role="button" data-toggle="collapse"
 										data-parent="#accordion" href="#collapse${loop.index}"
 										aria-expanded="true" aria-controls="collapse${loop.index}">
-										 Week: ${key} <fmt:formatNumber
+										 
+										 <c:set var="week" value="${fn:split(key,'to')}" />
+												
+										 <fmt:parseDate value="${week[0]}" var="parsedEmpDate3" pattern="yyyy-MM-dd" />
+										 <fmt:formatDate  value="${parsedEmpDate3}" var="newWeek1" pattern="dd-MMM-yyyy"/>
+												
+										 <fmt:parseDate value="${week[1]}" var="parsedEmpDate4" pattern="yyyy-MM-dd" />
+										 <fmt:formatDate  value="${parsedEmpDate4}" var="newWeek2" pattern="dd-MMM-yyyy"/>
+										 
+										 Week: ${newWeek1} to ${newWeek2} <fmt:formatNumber
 											value="${map.value}" var="amt" minFractionDigits="2" /> <i
 										class="pull-right">Amount Spent: $${amt}</i>
 

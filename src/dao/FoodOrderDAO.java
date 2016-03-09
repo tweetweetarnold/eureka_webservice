@@ -488,7 +488,7 @@ public class FoodOrderDAO {
 		DetachedCriteria dc = DetachedCriteria.forClass(FoodOrder.class);
 		
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-
+		dc.addOrder(org.hibernate.criterion.Order.desc("createDate"));
 		List<Object> l = MyConnection.retrieveAll(dc);
 
 		for (Object o : l) {

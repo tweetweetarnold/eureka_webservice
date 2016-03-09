@@ -1096,9 +1096,9 @@ public class FoodOrderController {
 					format.applyPattern("MMM-yyyy");
 					yearMonth = format.format(d);
 					System.out.println(yearMonth);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				dataset.addValue(price, series1, yearMonth);
 				
 			}
@@ -1124,7 +1124,7 @@ public class FoodOrderController {
 		Set<String> keySet = weekToFoodOrders.keySet();
 		java.util.Iterator<String> iter = keySet.iterator();
 		TreeMap<String, Double> dateToFoodOrders = new TreeMap<>();
-		String pattern = "yyyy-MMM-dd";
+		String pattern = "dd-MMM-yyyy";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
 		while (iter.hasNext()) {
@@ -1172,18 +1172,37 @@ public class FoodOrderController {
 			dataset.addValue(convertPriceToTwoDecimal(price), series1, date);
 		}
 
-		JFreeChart chart = ChartFactory.createBarChart("Weekly Spending from " + week, "Date",
+		JFreeChart chart = ChartFactory.createLineChart("Weekly Spending from " + weekDurationFormatTransformation(week), "Date",
 				"Amount Spend($)", dataset);
 		CategoryPlot plot = chart.getCategoryPlot();
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		  rangeAxis.setUpperMargin(0.15);
 		plot.setBackgroundPaint(Color.white);
 		plot.setRangeGridlinePaint(Color.black);
-		BarRenderer bsr = (BarRenderer) chart.getCategoryPlot().getRenderer() ;
-		bsr.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
-		bsr.setBaseItemLabelsVisible(true); 
-		bsr.setMaximumBarWidth(.10);
+		LineAndShapeRenderer lsr = (LineAndShapeRenderer) chart.getCategoryPlot().getRenderer() ;
+		lsr.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+		lsr.setBaseItemLabelsVisible(true); 
+		
 		
 		return chart;
+	}
+	
+	public String weekDurationFormatTransformation(String week) {
+		String[] array = week.split("to");	
+		String weekstart = array[0];
+		String weekend = array[1];
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date d1 = format.parse(weekstart);
+			Date d2 = format.parse(weekend);
+			format.applyPattern("dd-MMM-yyyy");
+			weekstart = format.format(d1);
+			weekend = format.format(d2);
+			//System.out.println(yearMonth);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return weekstart + " to " + weekend;
 	}
 }
