@@ -31,7 +31,7 @@
 <link href="/eureka_webservice/resources/guri-one/templates/stylesheets/application.css" rel="stylesheet">
 
 <!-- Favicons -->
-<link href="/eureka_webservice/resources/guri-one/templates/images/favicon/favicon.png" rel="shortcut icon">
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
 <link href="/eureka_webservice/resources/guri-one/templates/images/favicon/apple-touch-icon-57-precomposed.png"
 	rel="apple-touch-icon"
 >

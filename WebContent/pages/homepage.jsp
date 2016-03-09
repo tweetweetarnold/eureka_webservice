@@ -13,10 +13,13 @@
 
 <title>LunchTime</title>
 
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
+
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 
 <!-- Bootstrap Core CSS -->
 <link href="/eureka_webservice/resources/startbootstrap-business/css/bootstrap.css" rel="stylesheet">
