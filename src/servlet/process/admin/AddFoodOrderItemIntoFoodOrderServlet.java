@@ -61,6 +61,8 @@ public class AddFoodOrderItemIntoFoodOrderServlet extends HttpServlet {
 		Gson gson = new Gson();
 		JSONObject returnJson = new JSONObject();
 
+		int foodOrderItemId = -1;
+
 		try {
 			JSONParser parser = new JSONParser();
 			JSONObject data = (JSONObject) parser.parse(request.getReader());
@@ -69,6 +71,16 @@ public class AddFoodOrderItemIntoFoodOrderServlet extends HttpServlet {
 			JSONObject f = (JSONObject) data.get("food");
 			JSONObject m = (JSONObject) data.get("modifier");
 			int foodOrderId = Integer.parseInt((String) data.get("foodOrderId"));
+			if (data.get("foodOrderItemId") != null) {
+				foodOrderItemId = Integer.parseInt((String) data.get("foodOrderItemId"));
+			}
+			System.out.println("foodorderitemId: " + foodOrderItemId);
+
+			// to delete the food if there is a foodorderitemid selected
+			if (foodOrderItemId != -1) {
+				foodOrderCtrl.deleteFoodOrderItem(foodOrderItemId);
+				System.out.println("food deleted: " + foodOrderItemId);
+			}
 
 			String jsonString = gson.toJson(m);
 			Modifier m1 = gson.fromJson(jsonString, Modifier.class);

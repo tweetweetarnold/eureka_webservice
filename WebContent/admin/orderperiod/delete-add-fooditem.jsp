@@ -108,30 +108,12 @@
 								<div class="col-lg-6">
 
 									<div class="form-group">
-										<label>Canteen: </label>
-										{{canteen.name}}
-									</div>
-
-									<div class="form-group">
-										<label for="stall">Stall: </label>
-										<select class="form-control" ng-model='stall' name="food" ng-change='getFood()'
-											ng-options='s.name for s in stalls track by s.stallId'
-										>
-										</select>
-									</div>
-
-
-
-									<div class="form-group">
 										<label for="food">Food: </label>
 										<select class="form-control" ng-model='food' name="food"
 											ng-options='f as f.name  + " (" + (f.price | currency) + ")" for f in data track by f.foodId'
-											ng-disabled='stall == null'
 										>
 										</select>
 									</div>
-
-
 
 
 									<div class="form-group" ng-show="food != null && food.modifierList.length > 0">
@@ -142,15 +124,10 @@
 										</select>
 									</div>
 
-
-
 									<div class="form-group">
 										<label>Total Price: </label>
 										<p>{{food.price + modifierChosen.price | currency}}</p>
 									</div>
-
-
-
 
 									<br>
 									<button class="btn btn-primary" ng-click="submit()">Add new food item</button>
@@ -211,46 +188,22 @@
 									$window.sessionStorage.removeItem('error');
 
 									$scope.foodOrderId = $location.search().foodOrderId;
-									$scope.canteenId = $location.search().canteenId;
-									$scope.foodOrderItemId = $location.search().foodOrderItemId;
 
 									$http(
 											{
 												method : 'GET',
-												url : '/eureka_webservice/GetAllStallsUnderCanteenServlet',
+												url : '/eureka_webservice/GetAllFoodsServlet',
 												params : {
-													canteenId : $scope.canteenId
+													foodOrderId : $scope.foodOrderId
 												}
-											})
-											.then(
-													function successCallback(
-															response) {
-														console.log(response);
-														$scope.stalls = response.data.stalls;
-														$scope.canteen = response.data.canteen;
-													});
-
-									$scope.getFood = function() {
-										$http(
-												{
-													method : 'GET',
-													url : '/eureka_webservice/GetAllFoodsUnderStallServlet',
-													params : {
-														stallId : $scope.stall.stallId
-													}
-												})
-												.then(
-														function successCallback(
-																response) {
-															console
-																	.log(response.data);
-															$scope.data = response.data.foods;
-														},
-														function errorCallback(
-																response) {
-															alert(response);
-														});
-									};
+											}).then(
+											function successCallback(response) {
+												console.log(response.data);
+												$scope.data = response.data;
+											},
+											function errorCallback(response) {
+												alert(response);
+											});
 
 									$scope.totalPrice = $scope.food;
 
@@ -268,8 +221,7 @@
 													data : {
 														food : $scope.food,
 														modifier : $scope.modifierChosen,
-														foodOrderId : $scope.foodOrderId,
-														foodOrderItemId: $scope.foodOrderItemId
+														foodOrderId : $scope.foodOrderId
 													}
 												})
 												.then(

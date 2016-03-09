@@ -48,7 +48,7 @@ public class ProcessAdminDeleteFoodOrderItemServlet extends HttpServlet {
 
 			session.setAttribute("success", foodOrderItemId + " has been deleted.");
 
-			response.sendRedirect("/eureka_webservice/LoadOrderWindowOpenedServlet");
+			response.sendRedirect("/eureka_webservice/LoadOrderPeriodActiveServlet");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

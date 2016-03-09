@@ -75,11 +75,17 @@
 		<div class="row">
 			<div class="col-lg-8">
 
+				<h1>${sessionScope.orderPeriod.canteen.name}</h1>
+
 				<h3>
-					Today's canteen is ${sessionScope.orderPeriod.canteen.name}
-					<br>
 					Order your food before
-					<fmt:formatDate pattern="E, dd-MMM-yyyy HH:mm:ss" type="both" value="${sessionScope.orderPeriod.endDateFormatted}" />
+					<b>
+						<ins>
+							<fmt:formatDate pattern="E, dd-MMM-yyyy HH:mm:ss" type="both"
+								value="${sessionScope.orderPeriod.endDateFormatted}"
+							/>
+						</ins>
+					</b>
 				</h3>
 
 			</div>
@@ -87,21 +93,8 @@
 		</div>
 		<!-- /header row -->
 
+		<br>
 
-		<!-- search -->
-		<div class="row">
-			<div class="col-lg-12">
-				<form action="/eureka_webservice/LoadUserSearchFood" method="post">
-					<input class="form-control" type="text" id="food" name="food" placeholder="Search food"
-						style="width: 30%;
-	display: inline;"
-					/>
-					<input class="btn btn-danger" type="Submit" value="Search" onclick="noRedirect=false">
-				</form>
-
-			</div>
-		</div>
-		<!-- / search -->
 
 
 		<!-- favourite food -->
@@ -238,9 +231,27 @@
 
 			</c:forEach>
 
+		</div>
+		<!-- / row favourite food -->
+
+
+
+		<!-- search -->
+		<div class="row ">
+			<div class="col-lg-12">
+				<form action="/eureka_webservice/LoadUserSearchFood" method="post">
+					<input class="form-control" type="text" id="food" name="food" placeholder="Search food"
+						style="width: 30%;
+	display: inline;"
+					/>
+					<input class="btn btn-danger" type="Submit" value="Search" onclick="noRedirect=false">
+				</form>
+			</div>
 
 		</div>
-		<!-- / favourite food -->
+		<!-- /search -->
+
+
 
 
 
@@ -253,6 +264,9 @@
 					<small>${orderPeriod.canteen.name}</small>
 				</h2>
 			</div>
+
+
+
 
 
 			<c:forEach items="${sessionScope.canteenList}" var="canteen">

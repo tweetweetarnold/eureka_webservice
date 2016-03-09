@@ -128,7 +128,7 @@
 											<c:set value="0" var="overallPrice" />
 
 											<!-- 1st tab - group by users -->
-											<div class="tab-pane fade in active" id="nogroup${mapLoop.index }">
+											<div class="tab-pane fade in active" id="nogroup${mapLoop.index}">
 												<div class="dataTable_wrapper">
 													<br>
 													<table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -141,6 +141,7 @@
 																<th>Qty</th>
 																<th>Price($)</th>
 																<th></th>
+																<th></th>
 															</tr>
 														</thead>
 														<tbody>
@@ -150,7 +151,7 @@
 																	<td rowspan="${fn:length(order.value) + 1}">
 																		<p title="${order.key.email}">${order.key.name}&nbsp;(${order.key.deliveryPoint})</p>
 																		<a
-																			href="/eureka_webservice/admin/orderperiod/add-fooditem.jsp?foodOrderId=${order.value[0].foodOrder.foodOrderId}"
+																			href="/eureka_webservice/admin/orderperiod/add-fooditem.jsp?foodOrderId=${order.value[0].foodOrder.foodOrderId}&canteenId=${period.canteen.canteenId}"
 																		>Add new line</a>
 																	</td>
 
@@ -170,6 +171,15 @@
 																				/>
 																				$${combinedPrice}
 																				<c:set value="${overallPrice + combinedPrice}" var="overallPrice" />
+																			</td>
+																			<td>
+																				<a
+																					href="/eureka_webservice/admin/orderperiod/add-fooditem.jsp?foodOrderId=${order.value[0].foodOrder.foodOrderId}&foodOrderItemId=${foodOrderItem.foodOrderItemId}&canteenId=${period.canteen.canteenId}"
+																				>
+																					<button type="button" class="btn btn-link btn-xs">
+																						<i class="fa fa-pencil fa-2x"></i>
+																					</button>
+																				</a>
 																			</td>
 																			<td>
 																				<button type="button" class="btn btn-link btn-xs" data-toggle="modal"
