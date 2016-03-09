@@ -86,7 +86,6 @@
 												<th>Section Name</th>
 												<th>Choose Type</th>
 												<th>Add On(s)</th>
-												<th></th>
 											</tr>
 										</thead>
 
@@ -95,17 +94,16 @@
 											<tr ng-repeat='modSection in food.modifierSectionList track by $index'>
 
 												<td>{{modSection.categoryName}}</td>
-												<td>{{modSection.displayType}}</td>
+												<td>
+													<div ng-show='modSection.displayType == "c"'>Allow multiple selections</div>
+													<div ng-show='modSection.displayType != "c"'>Only 1 selection allowed</div>
+												</td>
 												<td>
 													<table class="table">
 														<tr ng-repeat='mod in modSection.modifierList track by $index'>
 															<td>{{mod.name}}</td>
 															<td>{{mod.price | currency}}</td>
-															<td>
-																<!-- 																<button type="button" class="btn btn-link btn-xs" ng-click='removeModifier(mod.modifierId)'> -->
-																<!-- 																	<i class="fa fa-trash-o fa-2x"></i> -->
-																<!-- 																</button> -->
-															</td>
+															<td></td>
 														</tr>
 														<tr>
 															<td>
@@ -123,9 +121,6 @@
 
 													</table>
 												</td>
-												<td>
-													<!-- 													<a target="_self" href="#">Delete</a> -->
-												</td>
 											</tr>
 
 											<tr>
@@ -135,13 +130,12 @@
 												</td>
 												<td>
 													<select ng-model='sec.displayType'>
-														<option value="c">Checkbox</option>
-														<option value="d">Dropdown</option>
+														<option value="c">Allow multiple selections</option>
+														<option value="d">Only 1 selection allowed</option>
 													</select>
 												</td>
-												<td></td>
 												<td>
-													<a class="btn btn-primary" href="#" ng-click='addSection()'>Add</a>
+													<a class="btn btn-primary" href="#" ng-click='addSection()'>Add new Section</a>
 												</td>
 
 											</tr>
@@ -243,6 +237,8 @@
 																response) {
 															load();
 														});
+										
+										$scope.sec = {};
 									}
 
 									$scope.addModifier = function(modSectionId) {
@@ -262,7 +258,7 @@
 																response) {
 															load();
 														});
-
+										
 									}
 
 									$scope.done = function() {

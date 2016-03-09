@@ -113,10 +113,10 @@
 											<input class="form-control" name="chineseName" value="${sessionScope.chineseName}" required>
 										</div>
 
-										<div class="form-group">
-											<label>Description</label>
-											<input class="form-control" name="description" value="${sessionScope.description}">
-										</div>
+										<!-- 										<div class="form-group"> -->
+										<!-- 											<label>Description</label> -->
+										<%-- 											<input class="form-control" name="description" value="${sessionScope.description}"> --%>
+										<!-- 										</div> -->
 
 										<div class="form-group">
 											<label>Price</label>
