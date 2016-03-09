@@ -48,8 +48,10 @@ public class LoadAdminViewOverallWeeklySpending extends HttpServlet {
 
 			String week = request.getParameter("id");
 			if (week != null) {
+				TreeMap<String, Double> dateToTotalPrice = foodOrderController.dateToTotalPrice(weekToFoodOrders, week);
 				
 				session.setAttribute("resultSet", week);
+				session.setAttribute("dateToTotalPrice", dateToTotalPrice);
 				session.setAttribute("weekToFoodOrders", weekToFoodOrders);
 				session.setAttribute("weekToTotalPrice", weekToTotalPrice);
 

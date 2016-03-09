@@ -68,7 +68,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<c:if test="${not empty sessionScope.yearToMonthList}">
-					<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the Year to display the monthly summary</b>
+					<b>&nbsp;&nbsp;&nbsp;Select the Year to display the monthly summary</b>
 					<br>
 					<br>
 					<form class="sign-in-up-form"
@@ -103,6 +103,23 @@
 					</center>
 					<br>
 					<br>
+					
+					<c:set var="sum" value="0"/>
+					<c:set var="n" value="${sessionScope.yearMonthToTotalPrice.size()}"/>
+					<c:forEach items="${sessionScope.yearMonthToTotalPrice}" var="map" varStatus="loop">
+						<c:set var="key" value="${map.key}" />
+							<c:if test="${fn:contains(key,yearValue)}">
+								<c:set var="sum" value="${sum + map.value}"/>
+							</c:if>
+					</c:forEach>
+					
+					
+					<fmt:formatNumber value="${sum/n}" var="avg" minFractionDigits="2" />
+					<h3><b>&nbsp;Average Monthly Spending: $${avg}</b></h3>
+					<br>
+					
+					
+					
 
 
 					<div class="panel-group" id="accordion" role="tablist"

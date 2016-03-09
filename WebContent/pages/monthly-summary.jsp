@@ -116,9 +116,21 @@
 					<center>
 						<img src="/eureka_webservice/LoadUserMonthlyChart?year=${yearValue}" />
 					</center>
+					
+					
+					<c:set var="sum" value="0"/>
+					<c:set var="n" value="${sessionScope.yearMonthToTotalPrice.size()}"/>
+					<c:forEach items="${sessionScope.yearMonthToTotalPrice}" var="map" varStatus="loop">
+						<c:set var="key" value="${map.key}" />
+							<c:if test="${fn:contains(key,yearValue)}">
+								<c:set var="sum" value="${sum + map.value}"/>
+							</c:if>
+					</c:forEach>
+					
+					
+					<fmt:formatNumber value="${sum/n}" var="avg" minFractionDigits="2" />
+					<h3><b>&nbsp;Average Monthly Spending: $${avg}</b></h3>
 					<br>
-					<br>
-
 
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 						<c:forEach items="${sessionScope.yearMonthToTotalPrice}" var="map" varStatus="loop">

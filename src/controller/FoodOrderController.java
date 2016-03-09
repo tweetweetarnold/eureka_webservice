@@ -1121,48 +1121,9 @@ public class FoodOrderController {
 			String week) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		String series1 = "spending";
-		Set<String> keySet = weekToFoodOrders.keySet();
-		java.util.Iterator<String> iter = keySet.iterator();
-		TreeMap<String, Double> dateToFoodOrders = new TreeMap<>();
-		String pattern = "dd-MMM-yyyy";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-		while (iter.hasNext()) {
-			String weekLabel = (String) iter.next();
-			if (weekLabel.equals(week)) {
-				ArrayList<FoodOrder> foodOrders = weekToFoodOrders.get(weekLabel);
-				FoodOrder initFo = foodOrders.get(0);
-				double sum = 0.0;
-				Date init = initFo.getCreateDate();
-				String currentDate = simpleDateFormat.format(init);
-				for (int i = 0; i < foodOrders.size(); i++) {
-					FoodOrder fo = foodOrders.get(i);
-					double value = fo.getFinalPrice();
-					Date date = fo.getCreateDate();
-
-					String newconvertedDate = simpleDateFormat.format(date);
-					System.out.println(newconvertedDate);
-					System.out.println("CURRENT" + currentDate);
-					if (newconvertedDate.equals(currentDate)) {
-						// System.out.println(sum + " " + value);
-						sum += value;
-						System.out.println("TRUE: Put " + currentDate + " and " + sum);
-						dateToFoodOrders.put(currentDate, sum);
-						currentDate = newconvertedDate;
-						// sum = 0.0;
-					} else if (!newconvertedDate.equals(currentDate)) {
-
-						System.out.println("FALSE : Put " + newconvertedDate + " and " + value);
-						dateToFoodOrders.put(newconvertedDate, value);
-						currentDate = newconvertedDate;
-						sum = value;
-					}
-
-				}
-
-			}
-		}
-
+		TreeMap<String, Double> dateToFoodOrders = dateToTotalPrice(weekToFoodOrders, week);
+		
 		Set<String> datelabel = dateToFoodOrders.keySet();
 		Iterator<String> iter1 = datelabel.iterator();
 		while (iter1.hasNext()) {
@@ -1204,5 +1165,51 @@ public class FoodOrderController {
 		}
 		
 		return weekstart + " to " + weekend;
+	}
+	
+	
+	public TreeMap<String, Double> dateToTotalPrice(TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders,String week) {
+		Set<String> keySet = weekToFoodOrders.keySet();
+		java.util.Iterator<String> iter = keySet.iterator();
+		TreeMap<String, Double> dateToFoodOrders = new TreeMap<>();
+		String pattern = "dd-MMM-yyyy";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		while (iter.hasNext()) {
+			String weekLabel = (String) iter.next();
+			if (weekLabel.equals(week)) {
+				ArrayList<FoodOrder> foodOrders = weekToFoodOrders.get(weekLabel);
+				FoodOrder initFo = foodOrders.get(0);
+				double sum = 0.0;
+				Date init = initFo.getCreateDate();
+				String currentDate = simpleDateFormat.format(init);
+				for (int i = 0; i < foodOrders.size(); i++) {
+					FoodOrder fo = foodOrders.get(i);
+					double value = fo.getFinalPrice();
+					Date date = fo.getCreateDate();
+
+					String newconvertedDate = simpleDateFormat.format(date);
+					System.out.println(newconvertedDate);
+					System.out.println("CURRENT" + currentDate);
+					if (newconvertedDate.equals(currentDate)) {
+						// System.out.println(sum + " " + value);
+						sum += value;
+						System.out.println("TRUE: Put " + currentDate + " and " + sum);
+						dateToFoodOrders.put(currentDate, sum);
+						currentDate = newconvertedDate;
+						// sum = 0.0;
+					} else if (!newconvertedDate.equals(currentDate)) {
+
+						System.out.println("FALSE : Put " + newconvertedDate + " and " + value);
+						dateToFoodOrders.put(newconvertedDate, value);
+						currentDate = newconvertedDate;
+						sum = value;
+					}
+
+				}
+
+			}
+		}
+		return dateToFoodOrders;
 	}
 }

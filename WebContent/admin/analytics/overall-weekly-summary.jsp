@@ -108,6 +108,19 @@
 							src="/eureka_webservice/LoadOverallWeeklyChart?week=${weekValue}" />
 					</center>
 					<br>
+					
+					<c:set var="sum" value="0"/>
+					<c:set var="n" value="${sessionScope.dateToTotalPrice.size()}"/>
+					<c:forEach items="${sessionScope.dateToTotalPrice}" var="map" varStatus="loop">
+						<c:set var="key" value="${map.key}" />
+							
+								<c:set var="sum" value="${sum + map.value}"/>
+						
+					</c:forEach>
+					
+					
+					<fmt:formatNumber value="${sum/n}" var="avg" minFractionDigits="2" />
+					<h3><b>&nbsp;Average Spending for the Week: $${avg}</b></h3>
 					<br>
 
 

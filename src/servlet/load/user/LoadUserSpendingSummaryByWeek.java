@@ -63,7 +63,9 @@ public class LoadUserSpendingSummaryByWeek extends HttpServlet {
 			
 			String week = (String) request.getParameter("id");
 			if (week != null) {
+				TreeMap<String, Double> dateToTotalPrice = foodOrderController.dateToTotalPrice(weekToFoodOrders, week);
 				session.setAttribute("resultSet", week);
+				session.setAttribute("dateToTotalPrice", dateToTotalPrice);
 				session.setAttribute("weekToFoodOrders", weekToFoodOrders);
 				session.setAttribute("weekToTotalPrice", weekToTotalPrice);
 			}
