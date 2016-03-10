@@ -4,15 +4,24 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.detectlanguage.errors.APIError;
+
 import dao.FoodDAO;
 import dao.ModifierSectionDAO;
 import model.Food;
 import model.Modifier;
 import model.ModifierSection;
+import services.ChineseValidation;
 
 public class ModifierSectionController {
+	ChineseValidation chineseValidation = new ChineseValidation();
+	
 	public ModifierSectionController() {
 
+	}
+	
+	private boolean checkChineseWords(String text) throws APIError {
+		return chineseValidation.checkForChineseWords(text);
 	}
 
 	// assuming the person just wants to create an empty container
@@ -38,13 +47,17 @@ public class ModifierSectionController {
 
 	public boolean createAndAddModifier(String modifierName, String chineseName,
 			String modifierDescription, double modifierPrice, String foodID,
-			String modifierSectionID) {
+			String modifierSectionID) throws Exception  {
 
 		boolean modifierSectionExists = false;
 		ModifierSection modifierSectionToEdit = null;
 		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 		FoodDAO foodDAO = new FoodDAO();
 		Food food = foodDAO.getFood(Integer.parseInt(foodID));
+		
+		if (!checkChineseWords(chineseName)) {
+			throw new Exception(chineseName + " is not a valid chinese word.");
+		}
 		Modifier newModifier = new Modifier(modifierName, chineseName, modifierDescription,
 				modifierPrice, food);
 
@@ -71,6 +84,9 @@ public class ModifierSectionController {
 		}
 		if (modifierSectionExists) {
 			Set<Modifier> modifierListToEdit = modifierSectionToEdit.getModifierList();
+			if (checkDuplicates(modifierListToEdit, newModifier)) {
+				throw new Exception("add-ons already exists");
+			}
 			modifierListToEdit.add(newModifier);
 			modifierSectionToEdit.setModifierList(modifierListToEdit);
 			replacementModifierSectionList.add(modifierSectionToEdit);
@@ -83,6 +99,16 @@ public class ModifierSectionController {
 		}
 		return modifierSectionExists;
 
+	}
+	
+	
+	public boolean checkDuplicates(Set<Modifier> modifierList, Modifier m) {
+		for (Modifier modifier : modifierList) {
+			if (modifier.getName().equals(m.getName())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

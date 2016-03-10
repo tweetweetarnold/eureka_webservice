@@ -43,7 +43,7 @@ public class AddModifierToSectionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("application/json");
+		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		JSONObject returnJson = new JSONObject();
@@ -58,13 +58,19 @@ public class AddModifierToSectionServlet extends HttpServlet {
 
 			int modifierSectionId = (int) (long) data.get("modifierSectionId");
 			String name = (String) data.get("name");
+			
 			double price = Double.parseDouble((String) data.get("price"));
+			
 			String foodId = (String) data.get("foodId");
-
-			modifierSectionCtrl.createAndAddModifier(name, "", "", price, foodId,
+			String chineseName = (String) data.get("chineseName");
+			
+			modifierSectionCtrl.createAndAddModifier(name, chineseName, "", price, foodId,
 					Integer.toString(modifierSectionId));
 
-			returnJson.put("success", "Modifier " + name + " has been added.");
+			returnJson.put("success", "Add-ons " + name + " has been added.");
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			returnJson.put("error", "Invalid input for price");
 
 		} catch (Exception e) {
 			e.printStackTrace();

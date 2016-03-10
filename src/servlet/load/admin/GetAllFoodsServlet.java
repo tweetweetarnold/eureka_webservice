@@ -44,7 +44,7 @@ public class GetAllFoodsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("application/json");
+		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		CanteenController canteenCtrl = new CanteenController();

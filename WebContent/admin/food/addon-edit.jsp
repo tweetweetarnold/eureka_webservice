@@ -102,23 +102,30 @@
 													<table class="table">
 														<tr ng-repeat='mod in modSection.modifierList track by $index'>
 															<td>{{mod.name}}</td>
+															<td>{{mod.chineseName}}</td>
 															<td>{{mod.price | currency}}</td>
-															<td></td>
+															
 														</tr>
 														<tr>
 															<td>
 																<input type="text" ng-model='modifier[$index].name' placeholder="Add meat">
 															</td>
+															
+															<td>
+																<input type='text' ng-model='modifier[$index].chineseName' placeholder='加肉'>
+															</td>
 															<td>
 																<input type='text' ng-model='modifier[$index].price' placeholder='2.30'>
 															</td>
-															<td>
-																<input type='submit' class='btn btn-primary' ng-disabled='!(modifier[$index].name && modifier[$index].price)'
+															
+														</tr>
+														<tr>
+														<td>
+																<input type='submit' class='btn btn-primary' ng-disabled='!(modifier[$index].name && modifier[$index].price && modifier[$index].chineseName)'
 																	ng-click='addModifier(modSection.modifierSectionId, $index)' value='Add Add-On'
 																>
 															</td>
 														</tr>
-
 													</table>
 												</td>
 											</tr>
@@ -204,6 +211,9 @@
 												{
 													method : 'GET',
 													url : '/eureka_webservice/GetFoodServlet',
+													headers : {
+														'Content-Type' : 'application/json; charset=UTF-8'
+													},
 													params : {
 														foodId : $location
 																.search().foodId
@@ -250,13 +260,29 @@
 															modifierSectionId : modSectionId,
 															name : $scope.modifier[index].name,
 															price : $scope.modifier[index].price,
+															chineseName : $scope.modifier[index].chineseName,
 															foodId : $location
 																	.search().foodId
 														})
 												.then(
 														function successCallback(
 																response) {
-															load();
+															
+																if (response.data.success != null) {
+																	$window.sessionStorage.success = response.data.success;
+																	$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
+																			+ stallId;
+																} else if (response.data.error != null) {
+																	$window.sessionStorage.error = response.data.error;
+																	$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
+																			+ stallId;
+																} else {
+																	console
+																			.log(response);
+																	alert('fail');
+																}
+
+															
 														});
 										$scope.modifier[index] = {};
 										
@@ -272,6 +298,9 @@
 										$http(
 												{
 													method : 'POST',
+													headers : {
+														'Content-Type' : 'application/json; charset=UTF-8'
+													},
 													url : '/eureka_webservice/ProcessAdminAddModifierToFoodServlet',
 													data : {
 														foodId : $location
