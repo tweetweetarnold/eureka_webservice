@@ -3,6 +3,8 @@ package servlet.process.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.UUID;
 
@@ -26,6 +28,7 @@ import model.Canteen;
 import model.Employee;
 import model.Food;
 import model.OrderPeriod;
+import model.Stall;
 import value.StringValues;
 
 /**
@@ -144,7 +147,14 @@ public class ProcessLoginServlet extends HttpServlet {
 				canteenList.add(period.getCanteen());
 				session.setAttribute("canteenList", canteenList);
 				System.out.println("canteenList size: " + canteenList.size());
-				
+				ArrayList<Stall> stallList = new ArrayList<Stall>(period.getCanteen().getActiveStallList());
+				Collections.sort(stallList, new Comparator<Stall>() {
+					public int compare(Stall arg0, Stall arg1) {
+						// TODO Auto-generated method stub
+						return arg0.getName().compareTo(arg1.getName());
+					}
+				});
+				session.setAttribute("stallList", stallList);
 				LinkedHashMap<Food, Integer> map = analyticsCtrl.topKfoods(period.getCanteen().getCanteenId());
 				session.setAttribute("mostOrderedList", map);
 				System.out.println("canteenID" + period.getCanteen().getCanteenId());

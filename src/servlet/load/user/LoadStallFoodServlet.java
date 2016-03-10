@@ -1,8 +1,13 @@
 package servlet.load.user;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -71,7 +76,7 @@ public class LoadStallFoodServlet extends HttpServlet {
 		System.out.println("size: " + s.getFoodList().size());
 
 		Set<Food> foodList = s.getFoodList();
-		Set<Food> displayFoodList = new HashSet<Food>();
+		List<Food> displayFoodList = new ArrayList<Food>();
 		Iterator<Food> iter = foodList.iterator();
 
 		while (iter.hasNext()) {
@@ -83,7 +88,16 @@ public class LoadStallFoodServlet extends HttpServlet {
 		}
 
 		session2.close();
+		Collections.sort(displayFoodList, new Comparator<Food>() {
+			public int compare(Food arg0, Food arg1) {
+				// TODO Auto-generated method stub
+				return arg0.getName().compareTo(arg1.getName());
+			}
+		});
+		
 
+		
+		
 		HttpSession session = request.getSession();
 		session.setAttribute("stallName", s.getName());
 		session.setAttribute("foodList", displayFoodList);

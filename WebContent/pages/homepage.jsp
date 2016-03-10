@@ -272,8 +272,8 @@
 
 
 
-			<c:forEach items="${sessionScope.canteenList}" var="canteen">
-				<c:forEach items="${canteen.stallList}" var="stall">
+			
+				<c:forEach items="${sessionScope.stallList}" var="stall">
 					<c:if test="${stall.status == 'Active'}">
 						<div class="col-md-4 col-sm-6">
 							<a href="/eureka_webservice/LoadStallFoodServlet?stallId=${stall.stallId}" onclick="noRedirect=false">
@@ -288,7 +288,7 @@
 						</div>
 					</c:if>
 				</c:forEach>
-			</c:forEach>
+			
 
 		</div>
 
