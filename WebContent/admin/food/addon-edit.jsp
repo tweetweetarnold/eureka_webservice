@@ -107,14 +107,14 @@
 														</tr>
 														<tr>
 															<td>
-																<input type="text" ng-model='modifier.name' placeholder="Add meat">
+																<input type="text" ng-model='modifier[$index].name' placeholder="Add meat">
 															</td>
 															<td>
-																<input type='text' ng-model='modifier.price' placeholder='2.30'>
+																<input type='text' ng-model='modifier[$index].price' placeholder='2.30'>
 															</td>
 															<td>
-																<input type='submit' class='btn btn-primary' ng-disabled='!(modifier.name && modifier.price)'
-																	ng-click='addModifier(modSection.modifierSectionId)' value='Add Add-On'
+																<input type='submit' class='btn btn-primary' ng-disabled='!(modifier[$index].name && modifier[$index].price)'
+																	ng-click='addModifier(modSection.modifierSectionId, $index)' value='Add Add-On'
 																>
 															</td>
 														</tr>
@@ -241,15 +241,15 @@
 										$scope.sec = {};
 									}
 
-									$scope.addModifier = function(modSectionId) {
+									$scope.addModifier = function(modSectionId, index) {
 
 										$http
 												.post(
 														'/eureka_webservice/AddModifierToSectionServlet',
 														{
 															modifierSectionId : modSectionId,
-															name : $scope.modifier.name,
-															price : $scope.modifier.price,
+															name : $scope.modifier[index].name,
+															price : $scope.modifier[index].price,
 															foodId : $location
 																	.search().foodId
 														})
@@ -258,6 +258,7 @@
 																response) {
 															load();
 														});
+										$scope.modifier[index] = {};
 										
 									}
 
