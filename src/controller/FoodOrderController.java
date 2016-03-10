@@ -28,6 +28,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.TextAnchor;
 import org.joda.time.DateTime;
 
+import connection.MyConnection;
 import dao.EmployeeDAO;
 import dao.FoodOrderDAO;
 import dao.FoodOrderItemDAO;
@@ -118,6 +119,22 @@ public class FoodOrderController {
 		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToDelete);
 		foodOrderItemDAO.deleteFoodOrderItem(foodOrderItemToDelete);
 
+	}
+	
+	public void deleteFoodOrderItemFromFoodOrderTest(int foodOrderItemId) throws Exception {
+		FoodOrderItem foodOrderItem = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
+		FoodOrder foodOrder = foodOrderItem.getFoodOrder();
+		//archive FoodOrder if it's the last foodOrderItem to be deleted
+		if(foodOrder.getFoodOrderList().size()==1){
+			deleteFoodOrderItem(foodOrderItemId);
+			foodOrder.setEmployee(null);
+			foodOrder.setFoodOrderList(null);
+			foodOrder.setOrderPeriod(null);
+			foodOrder.setTransactionId(null);
+			MyConnection.delete(foodOrder);
+		}else{
+			deleteFoodOrderItem(foodOrderItemId);
+		}
 	}
 
 	/**

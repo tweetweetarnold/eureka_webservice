@@ -44,7 +44,7 @@ public class ProcessAdminDeleteFoodOrderItemServlet extends HttpServlet {
 		FoodOrderController foodOrderController = new FoodOrderController();
 		try {
 
-			foodOrderController.deleteFoodOrderItem(Integer.parseInt(foodOrderItemId));
+			foodOrderController.deleteFoodOrderItemFromFoodOrderTest(Integer.parseInt(foodOrderItemId));
 
 			session.setAttribute("success", foodOrderItemId + " has been deleted.");
 
