@@ -119,6 +119,7 @@
 										</a>
 									</th>
 									<th>End Date/Time</th>
+									<th>Status</th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -133,7 +134,13 @@
 									<td>{{period.startDateFormatted | date:'medium' : '+0800'}}</td>
 									<td>{{period.endDateFormatted | date:'medium' : '+0800'}}</td>
 									<td>
-										<a ng-href="/eureka_webservice/LoadAdminEditOrderPeriodServlet?periodId={{period.periodId}}">
+										<div ng-show='period.endDateFormatted < now'>Expired</div>
+										<div ng-hide='period.endDateFormatted < now'>Active</div>
+									</td>
+									<td>
+										<a ng-href="/eureka_webservice/LoadAdminEditOrderPeriodServlet?periodId={{period.periodId}}"
+											ng-hide='period.endDateFormatted < now'
+										>
 											<button type="button" class="btn btn-link btn-xs">
 												<i class="fa fa-pencil fa-2x"></i>
 											</button>
@@ -222,6 +229,8 @@
 									$window.sessionStorage
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
+
+									$scope.now = new Date();
 
 									$scope.sortType = 'start'; // set the default sort type
 									$scope.sortReverse = false; // set the default sort order

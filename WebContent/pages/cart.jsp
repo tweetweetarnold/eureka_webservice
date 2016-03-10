@@ -132,30 +132,30 @@ function myFunction() {
 											<c:if test="${!innerLoop.last}">, </c:if>
 										</c:forEach>
 									</td>
-									<td>${foodOrderItem.quantity}</td>
+									<td>
+										<form action="/eureka_webservice/ProcessUpdateFoodItemInCartServlet" method="post">
+											<input type="hidden" name="count" value="${count}">
+											<select name="quantity">
+												<c:forEach begin="1" end="10" varStatus="num">
+													<c:choose>
+														<c:when test="${num.index == foodOrderItem.quantity}">
+															<option value="${num.index}" selected>${num.index}</option>
+														</c:when>
+														<c:otherwise>
+															<option value="${num.index}">${num.index}</option>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+											</select>
+											<input type="submit" value="Update" onclick="noRedirect=false" class="btn btn-danger">
+										</form>
+									</td>
 									<td>
 										<c:set value="${overallPrice + foodOrderItem.price * foodOrderItem.quantity}" var="overallPrice" />
 										<fmt:formatNumber value="${foodOrderItem.price * foodOrderItem.quantity}" var="amt" minFractionDigits="2" />
 										$${amt}
 									</td>
-									<td>
-										<form action="/eureka_webservice/ProcessUpdateFoodItemInCartServlet" method="post">
-											<input type="hidden" name="count" value="${count}">
-											<select name="quantity">
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
-												<option value="6">6</option>
-												<option value="7">7</option>
-												<option value="8">8</option>
-												<option value="9">9</option>
-												<option value="10">10</option>
-											</select>
-											<input type="submit" value="Update Quantity" onclick="noRedirect=false" class="btn btn-danger">
-										</form>
-									</td>
+									<td></td>
 									<td>
 										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
 											<i class="fa fa-trash-o fa-2x"></i>
