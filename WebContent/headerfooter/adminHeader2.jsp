@@ -144,10 +144,21 @@
 				</li>
 
 				<li>
-					<a target="_self" href="/eureka_webservice/admin/user/view.jsp">
+					<a target="_self" href="#">
 						<i class="fa fa-user fa-fw"></i>
 						User
+						<span class="fa arrow"></span>
 					</a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a target="_self" href="/eureka_webservice/admin/user/view.jsp">Active</a>
+
+						</li>
+						<li>
+							<a target="_self" href="/eureka_webservice/admin/user/archived.jsp">Archived</a>
+
+						</li>
+					</ul>
 				</li>
 
 				<li>

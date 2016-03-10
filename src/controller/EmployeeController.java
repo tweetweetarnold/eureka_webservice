@@ -25,6 +25,10 @@ public class EmployeeController {
 	 */
 	public EmployeeController() {
 	}
+	
+	public ArrayList<Employee> getAllDestroyedEmployees() {
+		return employeeDAO.getAllDestroyedEmployees();
+	}
 
 	public ArrayList<Employee> getAllNonDestroyedEmployees() {
 		return employeeDAO.getAllNonDestroyedEmployees();
