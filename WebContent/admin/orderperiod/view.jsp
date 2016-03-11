@@ -138,9 +138,7 @@
 										<div ng-hide='period.endDateFormatted < now'>Active</div>
 									</td>
 									<td>
-										<a ng-href="/eureka_webservice/LoadAdminEditOrderPeriodServlet?periodId={{period.periodId}}"
-											ng-hide='period.endDateFormatted < now'
-										>
+										<a ng-href="/eureka_webservice/LoadAdminEditOrderPeriodServlet?periodId={{period.periodId}}">
 											<button type="button" class="btn btn-link btn-xs">
 												<i class="fa fa-pencil fa-2x"></i>
 											</button>

@@ -137,7 +137,7 @@
 
 
 									<div class="form-group" ng-show="food != null && food.modifierList.length > 0">
-										<label for="modifierChosen">Modifier: </label>
+										<label for="modifierChosen">Add-On: </label>
 										<select class="form-control" name="modifierChosen" ng-model='modifierChosen'
 											ng-options='m as m.name + " (" + (m.price | currency) + ")" for m in food.modifierList track by m.modifierId'
 										>

@@ -62,6 +62,14 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">Edit Add-On(s)</h1>
+
+					<!-- breadcrumb -->
+					<ol class="breadcrumb">
+						<li>
+							<a target="_self" ng-href="/eureka_webservice/admin/food/view.jsp?stallId={{stallId}}">Back</a>
+						</li>
+					</ol>
+
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -104,24 +112,25 @@
 															<td>{{mod.name}}</td>
 															<td>{{mod.chineseName}}</td>
 															<td>{{mod.price | currency}}</td>
-															
+
 														</tr>
 														<tr>
 															<td>
 																<input type="text" ng-model='modifier[$index].name' placeholder="Add meat">
 															</td>
-															
+
 															<td>
 																<input type='text' ng-model='modifier[$index].chineseName' placeholder='加肉'>
 															</td>
 															<td>
 																<input type='text' ng-model='modifier[$index].price' placeholder='2.30'>
 															</td>
-															
+
 														</tr>
 														<tr>
-														<td>
-																<input type='submit' class='btn btn-primary' ng-disabled='!(modifier[$index].name && modifier[$index].price && modifier[$index].chineseName)'
+															<td>
+																<input type='submit' class='btn btn-primary'
+																	ng-disabled='!(modifier[$index].name && modifier[$index].price && modifier[$index].chineseName)'
 																	ng-click='addModifier(modSection.modifierSectionId, $index)' value='Add Add-On'
 																>
 															</td>
@@ -230,6 +239,7 @@
 									load();
 									$scope.modifier = {};
 									var stallId = $location.search().stallId;
+									$scope.stallId = stallId;
 									$scope.modifierList = [];
 
 									$scope.addSection = function() {
@@ -247,11 +257,12 @@
 																response) {
 															load();
 														});
-										
+
 										$scope.sec = {};
 									}
 
-									$scope.addModifier = function(modSectionId, index) {
+									$scope.addModifier = function(modSectionId,
+											index) {
 
 										$http
 												.post(
@@ -267,25 +278,24 @@
 												.then(
 														function successCallback(
 																response) {
-															
-																if (response.data.success != null) {
-																	$window.sessionStorage.success = response.data.success;
-																	$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
-																			+ stallId;
-																} else if (response.data.error != null) {
-																	$window.sessionStorage.error = response.data.error;
-																	$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
-																			+ stallId;
-																} else {
-																	console
-																			.log(response);
-																	alert('fail');
-																}
 
-															
+															if (response.data.success != null) {
+																$window.sessionStorage.success = response.data.success;
+																$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
+																		+ stallId;
+															} else if (response.data.error != null) {
+																$window.sessionStorage.error = response.data.error;
+																$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
+																		+ stallId;
+															} else {
+																console
+																		.log(response);
+																alert('fail');
+															}
+
 														});
 										$scope.modifier[index] = {};
-										
+
 									}
 
 									$scope.done = function() {

@@ -34,11 +34,41 @@ public class FileUploadController {
 	FoodDAO foodDAO = new FoodDAO();
 	StallDAO stallDAO = new StallDAO();
 	ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+
 	/**
 	 * Creates a default constructor for FileUploadController
 	 */
 	public FileUploadController() {
 
+	}
+
+	public ArrayList<String> uploadData(InputStream is, String tableName) {
+		System.out.println("FILEUPLOAD_UPLOADDATA");
+
+		BufferedInputStream bis = new BufferedInputStream(is);
+		InputStreamReader isr = new InputStreamReader(bis);
+		BufferedReader br = new BufferedReader(isr);
+
+		try {
+			CSVReader csvreader = new CSVReader(br);
+			content = csvreader.readAll();
+			csvreader.close();
+
+			switch (tableName) {
+			case "Canteen":
+				errorsList = validateCanteenData(content);
+				if (errorsList.size() == 0) {
+					canteenDAO.loadCanteenData(content);
+				} else {
+					return errorsList;
+				}
+				break;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return errorsList;
 	}
 
 	/**
@@ -54,10 +84,12 @@ public class FileUploadController {
 		BufferedInputStream bis = new BufferedInputStream(is);
 		InputStreamReader isr = new InputStreamReader(bis);
 		BufferedReader br = new BufferedReader(isr);
+
 		try {
 			CSVReader csvreader = new CSVReader(br);
 			content = csvreader.readAll();
 			csvreader.close();
+
 			errorsList = validateCanteenData(content);
 			if (errorsList.size() == 0) {
 				canteenDAO.loadCanteenData(content);
@@ -129,7 +161,7 @@ public class FileUploadController {
 		}
 		return errorsList;
 	}
-	
+
 	public ArrayList<String> processModifierSectionUpload(InputStream is) {
 		System.out.println("PROCESS_MODIFIER_SECTION_FILEUPLOAD");
 
@@ -152,9 +184,6 @@ public class FileUploadController {
 		}
 		return errorsList;
 	}
-	
-	
-	
 
 	/**
 	 * Handles the reading of the Stall.csv and load it to the database if there are no errors
@@ -192,13 +221,16 @@ public class FileUploadController {
 	 * @param content The List of contents of Canteen.csv to be validated
 	 * @return An ArrayList of errors found in the Canteen.csv, otherwise returns an empty ArrayList
 	 */
-	public ArrayList<String> validateCanteenData(List<String[]> content) {
+	private ArrayList<String> validateCanteenData(List<String[]> content) {
+
 		ArrayList<String> errorList = new ArrayList<String>();
 		Iterator<String[]> iter = content.iterator();
 		int rowNumber = 1;
+
 		// Validate the row header
 		String[] rowHeader = (String[]) iter.next();
 		String canteenNameHeader = rowHeader[0].trim();
+
 		if (canteenNameHeader.isEmpty()) {
 			errorList.add("row " + rowNumber
 					+ " has a missing row header for Canteen Name in Canteen.csv");
@@ -252,7 +284,7 @@ public class FileUploadController {
 	 * @param content The List of contents of Food.csv to be validated
 	 * @return An ArrayList of errors found in the Food.csv, otherwise returns an empty ArrayList
 	 */
-	public ArrayList<String> validateFoodData(List<String[]> content) {
+	private ArrayList<String> validateFoodData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Iterator<String[]> iter = content.iterator();
 		int rowNumber = 1;
@@ -355,7 +387,7 @@ public class FileUploadController {
 	 * @return An ArrayList of errors found in the Modifier.csv, otherwise returns an empty
 	 *         ArrayList
 	 */
-	public ArrayList<String> validateModifierData(List<String[]> content) {
+	private ArrayList<String> validateModifierData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Iterator<String[]> iter = content.iterator();
 		int rowNumber = 1;
@@ -469,9 +501,8 @@ public class FileUploadController {
 		}
 		return errorList;
 	}
-	
-	
-	public ArrayList<String> validateModifierSectionData(List<String[]> content) {
+
+	private ArrayList<String> validateModifierSectionData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Iterator<String[]> iter = content.iterator();
 		int rowNumber = 1;
@@ -497,16 +528,16 @@ public class FileUploadController {
 
 		String modifierNameHeader = rowHeader[2].trim();
 		if (modifierNameHeader.isEmpty()) {
-			errorList.add(
-					"row " + rowNumber + " has a missing row header for Modifier Name in ModifierSection.csv");
+			errorList.add("row " + rowNumber
+					+ " has a missing row header for Modifier Name in ModifierSection.csv");
 		} else if (!modifierNameHeader.equals("Modifier Name")) {
-			errorList.add(
-					"row " + rowNumber + " has an invalid row header for Modifier Name in ModifierSection.csv");
+			errorList.add("row " + rowNumber
+					+ " has an invalid row header for Modifier Name in ModifierSection.csv");
 		}
 		String foodNameHeader = rowHeader[3].trim();
 		if (foodNameHeader.isEmpty()) {
-			errorList.add(
-					"row " + rowNumber + " has a missing row header for Food Name in ModifierSection.csv");
+			errorList.add("row " + rowNumber
+					+ " has a missing row header for Food Name in ModifierSection.csv");
 		} else if (!foodNameHeader.equals("Food Name")) {
 			errorList.add("row " + rowNumber
 					+ " has an invalid row header for Food Name in ModifierSection.csv");
@@ -535,21 +566,24 @@ public class FileUploadController {
 			String[] row = (String[]) iter.next();
 			String categoryName = row[0].trim();
 			if (categoryName.isEmpty()) {
-				errorList.add("row " + rowNumber + " has empty category name in ModifierSection.csv");
+				errorList.add(
+						"row " + rowNumber + " has empty category name in ModifierSection.csv");
 			}
-			
+
 			String displayType = row[1].trim();
 			if (displayType.isEmpty()) {
-				errorList.add("row " + rowNumber + " has empty display type in ModifierSection.csv");
+				errorList
+						.add("row " + rowNumber + " has empty display type in ModifierSection.csv");
 			} else if (!displayType.matches("[cd]")) {
-				errorList.add("row " + rowNumber + " has invalid display type in ModifierSection.csv");
+				errorList.add(
+						"row " + rowNumber + " has invalid display type in ModifierSection.csv");
 			}
-			 
 
 			String modifierName = row[2].trim();
 			if (modifierName.isEmpty()) {
-				errorList.add("row " + rowNumber + " has empty modifier name in ModifierSection.csv");
-			} 
+				errorList.add(
+						"row " + rowNumber + " has empty modifier name in ModifierSection.csv");
+			}
 
 			String foodName = row[3].trim();
 			if (foodName.isEmpty()) {
@@ -582,16 +616,19 @@ public class FileUploadController {
 								errorList.add("row " + rowNumber + ": Modifier does not exist");
 
 							} else if (!categoryName.isEmpty()) {
-								ModifierSection modiSection = modifierSectionDAO.getModifierSectionFromFood(categoryName, displayType, f);
-								
+								ModifierSection modiSection = modifierSectionDAO
+										.getModifierSectionFromFood(categoryName, displayType, f);
+
 								if (modiSection != null) {
-									//errorList.add("row " + rowNumber + ": Modifier Section already exists ");
+									// errorList.add("row " + rowNumber + ": Modifier Section
+									// already exists ");
 									for (Modifier modifier : modiSection.getModifierList()) {
 										if (modifierName.equals(modifier.getName())) {
-											errorList.add("row " + rowNumber + ": Modifier already exists in Modifier Section");
+											errorList.add("row " + rowNumber
+													+ ": Modifier already exists in Modifier Section");
 										}
 									}
-									
+
 								}
 							}
 						}
@@ -601,7 +638,6 @@ public class FileUploadController {
 		}
 		return errorList;
 	}
-	
 
 	/**
 	 * Validate the contents of Stall.csv for any errors before loading to database
@@ -609,7 +645,7 @@ public class FileUploadController {
 	 * @param content The List of contents of Stall.csv to be validated
 	 * @return An ArrayList of errors found in the Stall.csv, otherwise returns an empty ArrayList
 	 */
-	public ArrayList<String> validateStallData(List<String[]> content) {
+	private ArrayList<String> validateStallData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Canteen canteen = null;
 		Iterator<String[]> iter = content.iterator();
