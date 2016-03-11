@@ -86,16 +86,16 @@
 				<li>
 					<a target="_self" href="#">
 						<i class="fa fa-bar-chart fa-fw"></i>
-						Analytics
+						Spending Summary
 						<span class="fa arrow"></span>
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a target="_self" href="/eureka_webservice/admin/analytics/company-analytics.jsp">Companies Spending</a>
+							<a target="_self" href="/eureka_webservice/admin/analytics/company-analytics.jsp">View: Companies Spending</a>
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewOverallMonthlySpending">Overall Spending</a>
+							<a target="_self" href="/eureka_webservice/LoadAdminViewOverallMonthlySpending">View: Overall Spending</a>
 
 						</li>
 					</ul>

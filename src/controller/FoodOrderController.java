@@ -1110,7 +1110,7 @@ public class FoodOrderController {
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
 				try {
 					Date d = format.parse(yearMonth);
-					format.applyPattern("MMM-yyyy");
+					format.applyPattern("MMM");
 					yearMonth = format.format(d);
 					System.out.println(yearMonth);
 				} catch (Exception e) {
@@ -1121,7 +1121,7 @@ public class FoodOrderController {
 			}
 		}
 		JFreeChart chart = ChartFactory.createLineChart("Monthly Spending For " + year,
-				"Month-Year", "Amount Spend($)", dataset);
+				"Month", "Amount Spend($)", dataset);
 		CategoryPlot plot = chart.getCategoryPlot();
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		  rangeAxis.setUpperMargin(0.15);
