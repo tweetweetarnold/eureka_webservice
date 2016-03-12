@@ -128,7 +128,7 @@
 										<label for="food">Food: </label>
 										<select class="form-control" ng-model='food' name="food"
 											ng-options='f as f.name  + " (" + (f.price | currency) + ")" for f in data track by f.foodId'
-											ng-disabled='stall == null'
+											ng-disabled='data == null'
 										>
 										</select>
 									</div>

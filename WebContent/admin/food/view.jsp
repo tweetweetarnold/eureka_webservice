@@ -45,7 +45,7 @@
 
 </head>
 
-<body ng-app='myApp' ng-controller='ViewFoodController'>
+<body ng-app='myApp' ng-controller='ViewFoodController' ng-cloak>
 
 	<div id="wrapper">
 

@@ -44,7 +44,7 @@
 
 </head>
 
-<body ng-app='myApp' ng-controller='ViewStallController'>
+<body ng-app='myApp' ng-controller='ViewStallController' ng-cloak>
 
 	<div id="wrapper">
 

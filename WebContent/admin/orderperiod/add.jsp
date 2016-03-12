@@ -172,12 +172,12 @@
 											<input name="discountAbsolute" class="form-control" placeholder="Eg. 2.00">
 										</div>
 
-										<div class="form-group">
-											<label>Comments to Users (Optional)</label>
-											<textarea rows="3" name="remarks" class="form-control"
-												placeholder="What do you want to let your users know about this Order Period?"
-											></textarea>
-										</div>
+<!-- 										<div class="form-group"> -->
+<!-- 											<label>Comments to Users (Optional)</label> -->
+<!-- 											<textarea rows="3" name="remarks" class="form-control" -->
+<!-- 												placeholder="What do you want to let your users know about this Order Period?" -->
+<!-- 											></textarea> -->
+<!-- 										</div> -->
 
 									</div>
 									<!-- /.col-md-6 col-lg-6 -->

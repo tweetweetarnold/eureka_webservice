@@ -55,6 +55,9 @@ public class LoadAdminEditFoodServlet extends HttpServlet {
 		session.setAttribute("imageDirectory", food.getImageDirectory());
 		session.setAttribute("weatherConditions", food.getWeatherConditions());
 
+		session.setAttribute("canteenId", food.getStall().getCanteen().getCanteenId());
+		session.setAttribute("stallId", food.getStall().getStallId());
+
 		response.sendRedirect("/eureka_webservice/admin/food/edit.jsp");
 	}
 

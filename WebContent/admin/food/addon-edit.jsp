@@ -162,7 +162,7 @@
 									</table>
 
 
-									<button class="btn btn-primary" ng-click='done()'>Update Add-On(s)</button>
+									<button class="btn btn-primary" ng-click='done()'>Save Add-On(s)</button>
 
 
 								</div>

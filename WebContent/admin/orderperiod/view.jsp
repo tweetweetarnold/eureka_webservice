@@ -42,7 +42,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="ViewOrderPeriodController">
+<body ng-app="myApp" ng-controller="ViewOrderPeriodController" ng-cloak>
 
 	<div id="wrapper">
 

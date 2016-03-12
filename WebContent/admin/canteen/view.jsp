@@ -49,7 +49,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="ViewCanteenController">
+<body ng-app="myApp" ng-controller="ViewCanteenController" ng-cloak>
 
 
 	<div id="wrapper">

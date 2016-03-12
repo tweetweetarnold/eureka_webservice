@@ -43,7 +43,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="ViewCompanyController">
+<body ng-app="myApp" ng-controller="ViewCompanyController" ng-cloak>
 
 	<div id="wrapper">
 

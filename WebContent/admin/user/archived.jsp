@@ -42,7 +42,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="ViewUserController">
+<body ng-app="myApp" ng-controller="ViewUserController" ng-cloak>
 
 	<div id="wrapper">
 

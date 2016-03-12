@@ -387,7 +387,7 @@
 
 													<br>
 													<br>
-													<button class="btn btn-primary" type="button" onclick="period.print()">Print This Page</button>
+													<button class="btn btn-primary" type="button" onclick="window.print()">Print This Page</button>
 
 												</div>
 

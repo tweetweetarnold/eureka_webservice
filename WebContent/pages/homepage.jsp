@@ -241,15 +241,7 @@
 
 		<!-- search -->
 		<div class="row ">
-			<div class="col-lg-12">
-				<form action="/eureka_webservice/LoadUserSearchFood" method="post">
-					<input class="form-control" type="text" id="food" name="food" placeholder="Search food"
-						style="width: 30%;
-	display: inline;"
-					/>
-					<input class="btn btn-danger" type="Submit" value="Search" onclick="noRedirect=false">
-				</form>
-			</div>
+			<div class="col-lg-12"></div>
 
 		</div>
 		<!-- /search -->
@@ -260,19 +252,39 @@
 
 
 		<!-- Portfolio Section -->
-		<div class="row">
-			<div class="col-lg-12">
-				<h2 class="page-header">
+		<div class="row page-header">
+
+			<div class="col-lg-8">
+				<h2>
 					Stalls
 					<small>${orderPeriod.canteen.name}</small>
 				</h2>
 			</div>
 
 
+			<div class='col-lg-4'>
+				<form action="/eureka_webservice/LoadUserSearchFood" method="post" style="margin: 20px 0px 10px;">
+					<input class="form-control" type="text" id="food" name="food" placeholder="Search food"
+						style="width: 70%;
+	display: inline;"
+					/>
+					<input class="btn btn-danger" type="Submit" value="Search" onclick="noRedirect=false">
+				</form>
+			</div>
+
+		</div>
+		<!-- / row -->
 
 
 
-			
+
+
+		<div class='row'>
+
+
+			<div class="col-lg-12">
+
+
 				<c:forEach items="${sessionScope.stallList}" var="stall">
 					<c:if test="${stall.status == 'Active'}">
 						<div class="col-md-4 col-sm-6">
@@ -288,7 +300,10 @@
 						</div>
 					</c:if>
 				</c:forEach>
-			
+
+
+			</div>
+
 
 		</div>
 
