@@ -74,9 +74,15 @@ public class FoodOrderController {
 	}
 
 	public void addFoodOrderItemIntoFoodOrder(FoodOrderItem foodOrderItem, FoodOrder foodOrder) {
+		Employee employee = foodOrder.getEmployee();
+		double amountOwed = employee.getAmountOwed();
+		amountOwed -= foodOrder.getFinalPrice();
 		Set<FoodOrderItem> foodOrderItemList = foodOrder.getFoodOrderList();
 		foodOrderItemList.add(foodOrderItem);
 		foodOrder.setFoodOrderList(foodOrderItemList);
+		amountOwed += foodOrder.getFinalPrice();
+		employee.setAmountOwed(amountOwed);
+		employeeDAO.updateEmployee(employee);
 		updateFoodOrder(foodOrder);
 	}
 
@@ -109,6 +115,7 @@ public class FoodOrderController {
 		// remove ModifierChosen
 		Set<ModifierChosen> modifierList = foodOrderItemToDelete.getModifierChosenList();
 		for (ModifierChosen modifierChosen : modifierList) {
+			modifierChosen.setFood(null);
 			modifierSectionDAO.deleteModifierChosen(modifierChosen);
 		}
 
@@ -118,6 +125,7 @@ public class FoodOrderController {
 		foodOrderItemToDelete.setModifierChosenList(null);
 		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToDelete);
 		foodOrderItemDAO.deleteFoodOrderItem(foodOrderItemToDelete);
+		
 
 	}
 	

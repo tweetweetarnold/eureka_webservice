@@ -152,7 +152,9 @@ public class FoodController {
 
 		double price = 0.0;
 		try {
-			price = Double.parseDouble(parameters[4]);
+		
+			
+			price = Double.parseDouble(parameters[3]);
 		} catch (Exception e) {
 			throw new Exception("Invalid input for price");
 		}
