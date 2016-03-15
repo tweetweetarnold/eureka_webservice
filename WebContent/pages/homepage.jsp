@@ -104,7 +104,7 @@
 		<div class="row">
 
 			<div class="col-lg-12">
-				<h2 class="page-header">Food that you may like from ${sessionScope.orderPeriod.canteen.name}</h2>
+				<h2 class="page-header">Recommended food <small>${sessionScope.orderPeriod.canteen.name}</small></h2>
 			</div>
 
 			<c:forEach items="${sessionScope.mostOrderedList}" var="favFood" begin="0" end="3">
