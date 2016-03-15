@@ -107,7 +107,7 @@ function myFunction() {
 									</c:if>
 									Canteen: ${foodOrder.orderPeriod.canteen.name}
 									<br>
-									Price:
+									Total Price:
 									<fmt:formatNumber value="${foodOrder.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
 									$${amt}
 									<br>

@@ -149,14 +149,19 @@ public class StallDAO {
 	
 	public void setFoodListToStall(Set<Food> oldFoodList, Stall newStall) {
 		FoodDAO foodDAO = new FoodDAO();
-		Set<Food> newList = newStall.getFoodList();
-		
+		Set<Food> newList = newStall.getActiveFoodList();
+		System.out.println("Active list is " + oldFoodList.size());
 		for (Food f: oldFoodList) {
+			f.setStatus(StringValues.ACTIVE);
 			f.setStall(newStall);
 			newList.add(f);
+			
 			foodDAO.updateFood(f);
+			System.out.println(f.getName() + " is updated");
+			System.out.println(f.getStall().getName() + " name of STALL NOW");
 		}
 		//return fList;
+		
 	}
 	
 	/**

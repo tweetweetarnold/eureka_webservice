@@ -227,7 +227,7 @@ function myFunction() {
 							<div class="panel-body">
 								Canteen: ${foodOrder.orderPeriod.canteen.name}
 								<br>
-								Price:
+								Total Price:
 								<fmt:formatNumber value="${foodOrder.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
 								$${amt}
 								<br>

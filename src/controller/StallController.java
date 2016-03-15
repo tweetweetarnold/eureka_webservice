@@ -47,10 +47,10 @@ public class StallController {
 	public void deleteStall(Stall s) {
 		FoodController foodCtrl = new FoodController();
 		stallDAO.deleteStall(s);
-		Set<Food> foodList = s.getFoodList();
-		for (Food f : foodList) {
-			foodCtrl.deleteFood(f);
-		}
+//		Set<Food> foodList = s.getFoodList();
+//		for (Food f : foodList) {
+//			foodCtrl.deleteFood(f);
+//		}
 	}
 
 	public ArrayList<Stall> getAllActiveStallsUnderCanteen(Canteen c) {
@@ -140,8 +140,9 @@ public class StallController {
 			if (image.length == 0) {
 				Stall newStall = new Stall(parameters[1], contactNo, stall.getCanteen(),
 						new HashSet<Food>(), stall.getImageDirectory(), stall.getPublicId());
-				if (!stall.getFoodList().isEmpty()) {
-					updateFoodListToStall(stall.getFoodList(), newStall);
+				System.out.println("The size is: " + stall.getActiveFoodList().size());
+				if (!stall.getActiveFoodList().isEmpty()) {
+					updateFoodListToStall(stall.getActiveFoodList(), newStall);
 				} else {
 					saveStall(newStall);
 				}
@@ -149,12 +150,14 @@ public class StallController {
 				cloudinaryOutput = replaceStallOldImage(stall.getPublicId(), image);
 				Stall newStall = new Stall(parameters[1], contactNo, stall.getCanteen(),
 						new HashSet<Food>(), cloudinaryOutput[0], cloudinaryOutput[1]);
-				if (!stall.getFoodList().isEmpty()) {
-					updateFoodListToStall(stall.getFoodList(), newStall);
+				if (!stall.getActiveFoodList().isEmpty()) {
+					updateFoodListToStall(stall.getActiveFoodList(), newStall);
 				} else {
 					saveStall(newStall);
 				}
 			}
+			
+			
 		} else {
 			if (image.length == 0) {
 				throw new Exception(
@@ -167,7 +170,17 @@ public class StallController {
 			}
 		}
 	}
-
+	
+	public void deleteActiveFoodInOldStall(Stall s) {
+		FoodController foodCtrl = new FoodController();
+		Set<Food> foodList = s.getFoodList();
+		if (!foodList.isEmpty()) {
+			for (Food f : foodList) {
+				foodCtrl.deleteFood(f);
+			}
+		}
+		
+	}
 	public String[] replaceStallOldImage(String oldPublicId, byte[] image) throws IOException {
 		return cloudinaryUpload.replaceStallImage(oldPublicId, image);
 	}
