@@ -240,6 +240,11 @@
 													<b>Overall Price: </b>
 													$
 													<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
+
+													<br>
+													<br>
+													<button class="btn btn-primary" type="button" onclick="window.print()">Print This Page</button>
+
 												</div>
 												<!-- /.table-responsive -->
 											</div>
@@ -308,6 +313,10 @@
 													<b>Overall Price: </b>
 													$
 													<fmt:formatNumber value="${overallPrice}" var="overallPrice2" minFractionDigits="2" />${overallPrice2}
+
+													<br>
+													<br>
+													<button class="btn btn-primary" type="button" onclick="window.print()">Print This Page</button>
 
 
 												</div>

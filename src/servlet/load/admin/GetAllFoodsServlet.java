@@ -2,6 +2,8 @@ package servlet.load.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,6 +18,10 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 import controller.CanteenController;
 import model.Food;
@@ -30,6 +36,16 @@ import model.Stall;
 @WebServlet("/GetAllFoodsServlet")
 public class GetAllFoodsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
+
+		@Override
+		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
+			final long dateString = src.getTime();
+			return new JsonPrimitive(dateString);
+		}
+
+	};
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -69,11 +85,11 @@ public class GetAllFoodsServlet extends HttpServlet {
 										&& c.getName().equals("orderWindow"));
 			}
 
-		}).create();
+		}).registerTypeAdapter(Date.class, dateSerialize).create();
 
 		try {
 			List<Food> list = canteenCtrl.getAllFood();
-			
+
 			JSONArray arr = new JSONArray();
 			arr.addAll(list);
 			out.println(gson.toJson(arr));

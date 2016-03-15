@@ -2,6 +2,8 @@ package servlet.load.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +21,10 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 import controller.CanteenController;
 
@@ -28,6 +34,16 @@ import controller.CanteenController;
 @WebServlet("/GetCanteenServlet")
 public class GetCanteenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
+
+		@Override
+		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
+			final long dateString = src.getTime();
+			return new JsonPrimitive(dateString);
+		}
+
+	};
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -65,7 +81,7 @@ public class GetCanteenServlet extends HttpServlet {
 						|| (c.getDeclaringClass() == Modifier.class && c.getName().equals("food"));
 			}
 
-		}).create();
+		}).registerTypeAdapter(Date.class, dateSerialize).create();
 
 		int canteenId = Integer.parseInt(request.getParameter("canteenId"));
 

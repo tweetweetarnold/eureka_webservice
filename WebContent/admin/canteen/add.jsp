@@ -50,7 +50,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="AddCanteenController">
+<body ng-app="myApp" ng-controller="AddCanteenController" ng-cloak>
 
 	<div id="wrapper">
 

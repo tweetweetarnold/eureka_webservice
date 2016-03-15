@@ -153,8 +153,8 @@
 							<tbody>
 								<tr ng-repeat="canteen in data | orderBy:sortType:sortReverse | filter:searchText track by $index">
 									<td>{{canteen.canteenId}}</td>
-									<td>{{canteen.name | date:'medium' : '+0800'}}</td>
-									<td>{{canteen.address | date:'medium' : '+0800'}}</td>
+									<td>{{canteen.name}}</td>
+									<td>{{canteen.address}}</td>
 									<td>{{canteen.createDate | date:'medium' : '+0800'}}</td>
 									<td>
 										<a ng-href="/eureka_webservice/admin/stall/view.jsp?canteenId={{canteen.canteenId}}">View all stalls</a>
@@ -266,17 +266,14 @@
 											{
 												method : 'GET',
 												url : '/eureka_webservice/GetAllCanteensServlet'
-											})
-											.then(
-													function successCallback(
-															response) {
-														$scope.data = response.data;
-														$scope.display = response.status;
-													},
-													function errorCallback(
-															response) {
-														console.log(response);
-													});
+											}).then(
+											function successCallback(response) {
+												$scope.data = response.data;
+												console.log(response.data);
+											},
+											function errorCallback(response) {
+												console.log(response);
+											});
 
 									$scope.deleteCanteen = function(canteenId,
 											canteenName) {
