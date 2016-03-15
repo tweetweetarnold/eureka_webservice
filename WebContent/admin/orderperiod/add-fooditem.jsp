@@ -155,7 +155,7 @@
 
 
 									<br>
-									<button class="btn btn-primary" ng-click="submit()">Add new food item</button>
+									<button class="btn btn-primary" ng-click="submit()">Update food item</button>
 
 								</div>
 								<!-- /col-lg-6 -->
@@ -271,7 +271,7 @@
 														food : $scope.food,
 														modifier : $scope.modifierChosen,
 														foodOrderId : $scope.foodOrderId,
-														foodOrderItemId: $scope.foodOrderItemId
+														foodOrderItemId : $scope.foodOrderItemId
 													}
 												})
 												.then(

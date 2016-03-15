@@ -116,6 +116,7 @@
 											<input type='submit' class='btn btn-primary' ng-disabled='!(deliveryPoint)' ng-click='addDeliveryPoint()'
 												value='Add Delivery Point'
 											>
+											<span style="color: red;" ng-show='deliveryPointList == 0'>This is required!</span>
 
 											<table class="table">
 												<tr ng-repeat="boo in deliveryPointList track by $index">
@@ -134,7 +135,7 @@
 										<br>
 
 
-										<button ng-disabled='form.$invalid' type="button" class="btn btn-primary" data-toggle="modal"
+										<button ng-disabled='form.$invalid || deliveryPointList.length == 0' type="button" class="btn btn-primary" data-toggle="modal"
 											data-target=".bs-example-modal-sm"
 										>
 											<i class="fa fa-plus fa-lg"></i>

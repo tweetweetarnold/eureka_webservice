@@ -154,7 +154,7 @@
 																		<p title="${order.key.email}">${order.key.name}&nbsp;(${order.key.deliveryPoint})</p>
 																		<a
 																			href="/eureka_webservice/admin/orderperiod/add-fooditem.jsp?foodOrderId=${order.value[0].foodOrder.foodOrderId}&canteenId=${period.canteen.canteenId}"
-																		>Add new line</a>
+																		>Add new food</a>
 																	</td>
 
 																	<c:forEach items="${order.value}" var="foodOrderItem">
