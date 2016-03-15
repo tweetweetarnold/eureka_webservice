@@ -603,7 +603,7 @@ public class Test {
 		Stall stall9 = new Stall("Minced Meat Noodles Stall", 93686070, null, null,
 				"resources/img/stall/img-tj.jpg", null);
 		Food food27 = new Food("Minced Meat Noodles(Mee Kia)", "肉挫面（面仔）", "upsize to $3.20", 2.70,
-				"resources/img/food/img-mincedmeatnoodles.jpg", null, stall9);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037674/Food%20Images%20Raw/minced_meat_noodle_mee_kia.jpg", null, stall9);
 
 		Food nfood9 = new Food("Minced Meat Noodles(Mee Pok)", "肉挫面（面薄）", "upsize to $3.20", 2.70,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627087/Food%20Images%20Raw/minced_meat_noodles.jpg",
@@ -757,7 +757,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/pear.jpg",
 				null, stall11);
 
-		Food food41 = new Food("Pear Juice", "梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456729605/Food%20Images%20Raw/Pear_juice.jpg", null, stall11);
+		Food food41 = new Food("Pear Juice", "梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037645/Food%20Images%20Raw/Pear_juice_2.jpg", null, stall11);
 
 		Food food42 = new Food("Honeydew", "哈蜜瓜", "", 0.70, "resources/img/food/img-honeydew.jpg",
 				null, stall11);
@@ -1251,7 +1251,7 @@ public class Test {
 		Food roastfood1 = new Food("Roast Chicken Rice", "烧鸡饭", "2 meat choices $4", 3.00,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420637/Food%20Images%20Raw/Roast_chicken_Rice.jpg", null, roastMeatStall);
 		Food roastfood2 = new Food("Wanton Mee(Dry)", "云吞面（干）", "", 3.20,
-				"resources/img/food/img-wantonmee.jpg", null, roastMeatStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037657/Food%20Images%20Raw/wanton_mee_dry.jpg", null, roastMeatStall);
 		Food roastfood3 = new Food("CharSiew Rice", "叉烧饭", "2 meat choices $4", 3.00,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627009/Food%20Images%20Raw/charsiew_rice.jpg",
 				null, roastMeatStall);
@@ -1346,7 +1346,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/sweet_and_sour_pork.jpg",
 				null, seafoodTzeCharStall);
 		Food seafood9 = new Food("Pork Rib Soup", "排骨汤", "", 4.80,
-				"resources/img/food/img-porkribsoup.jpg", null, seafoodTzeCharStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fill,h_169,w_263/v1457808872/Food%20Images%20Raw/pork_rib_soup.jpg", null, seafoodTzeCharStall);
 		Food seafood10 = new Food("Black Chicken Soup", "黑鸡汤", "", 5.80,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627087/Food%20Images%20Raw/black_chicken_soup.jpg",
 				null, seafoodTzeCharStall);
@@ -1584,7 +1584,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/pear.jpg",
 				null, fruitStall);
 
-		Food pearJuice = new Food("Pear Juice", "梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456729605/Food%20Images%20Raw/Pear_juice.jpg", null, fruitStall);
+		Food pearJuice = new Food("Pear Juice", "梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037645/Food%20Images%20Raw/Pear_juice_2.jpg", null, fruitStall);
 
 		Food honeydew = new Food("Honeydew", "哈密瓜", "", 0.70, "resources/img/food/img-honeydew.jpg",
 				null, fruitStall);
