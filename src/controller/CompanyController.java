@@ -36,22 +36,66 @@ public class CompanyController {
 		companyDAO.saveCompany(c);
 	}
 
-	public void addNewCompany(String name, String companyCode, Set<String> buildings) {
+	public void addNewCompany(String name, String companyCode, Set<String> buildings) throws Exception {
+		String errorMessages = validateNewCompanyInputs(name, companyCode, buildings);
+		if (!errorMessages.isEmpty()) {
+			throw new Exception(errorMessages);
+		}
+		
+		boolean companyCodeExists = checkCompanyCodeExists(companyCode);
+		boolean companyNameExists = checkCompanyNameExists(name);
+		
+		if (companyCodeExists) {
+			throw new Exception("Company Code already exists");
+		}
+		
+		if (companyNameExists) {
+			throw new Exception("Company Name already exists");
+		}
+
 		Company c = new Company(name, companyCode, buildings);
 		companyDAO.saveCompany(c);
 	}
 
-	public void editCompany(int companyId, String name, String companyCode, Set<String> buildings) {
-		Company c = null;
+	public void editCompany(int companyId, String name, String companyCode, Set<String> buildings) throws Exception {
+		String errorMessages = validateNewCompanyInputs(name, companyCode, buildings);
+		if (!errorMessages.isEmpty()) {
+			throw new Exception(errorMessages);
+		}
+		
+		boolean changesInName = false;
+		boolean changesInCompanyCode = false;
+		Company companyToEdit = null;
 		try {
-			c = getCompany(companyId);
+			companyToEdit = getCompany(companyId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		c.setName(name);
-		c.setCompanyCode(companyCode);
-		c.setDeliveryPointSet(buildings);
-		updateCompany(c);
+		
+		if (!name.equals(companyToEdit.getName()) && !name.isEmpty()) {
+			companyToEdit.setName(name);
+			changesInName = true;
+		}
+		
+		if (!companyCode.equals(companyToEdit.getCompanyCode()) && !name.isEmpty()) {
+			companyToEdit.setCompanyCode(companyCode);
+			changesInCompanyCode = true;
+		}
+		
+		companyToEdit.setDeliveryPointSet(buildings);
+
+		if (changesInName) {
+			if (checkCompanyNameExists(name)) {
+				throw new Exception("Company name already taken");
+			}
+		}
+		
+		if (changesInCompanyCode) {
+			if (checkCompanyCodeExists(companyCode)) {
+				throw new Exception("Company code already taken");
+			}
+		}
+		updateCompany(companyToEdit);
 	}
 
 	/**
@@ -117,6 +161,44 @@ public class CompanyController {
 	 */
 	public void updateCompany(Company c) {
 		companyDAO.updateCompany(c);
+	}
+	
+	public boolean checkCompanyCodeExists(String companyCode) {
+		Company c = getCompanyByCompanyCode(companyCode);
+		if (c != null) {
+			return true;
+		}
+		return false;
+		
+	}
+	
+	public Company getCompanyByName(String companyName) {
+		return companyDAO.getCompanyByName(companyName);
+	}
+	public boolean checkCompanyNameExists(String companyName) {
+		Company c = getCompanyByName(companyName);
+		if (c != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String validateNewCompanyInputs(String companyName, String companyCode, Set<String> buildings) {
+		String errors = "";
+		
+		if (companyName == null || companyName.isEmpty()) {
+			errors += "Company Name is Empty.\n";
+		}
+		
+		if (companyCode == null || companyCode.isEmpty()) {
+			errors += "Company code is Empty.\n";
+			
+		}
+		
+		if (buildings == null || buildings.isEmpty()) {
+			errors += "Delivery Point is Empty.\n";
+		}
+		return errors;
 	}
 
 }

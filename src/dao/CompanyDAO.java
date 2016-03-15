@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Company;
+import model.Employee;
 
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 
 import connection.MyConnection;
 
@@ -77,6 +79,18 @@ public class CompanyDAO {
 		
 
 	}
+	public Company getCompanyByName(String companyName) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Company.class);
+		dc.add(Restrictions.eq("name", companyName));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+		if (l.size() == 0) {
+			return null;
+		}
+		return (Company) l.get(0);
+	}
+	
 
 	/**
 	 * Save company's details in Database

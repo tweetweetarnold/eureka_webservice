@@ -71,15 +71,23 @@
 
 				</div>
 				<!-- /.col-lg-12 -->
-
+				
 
 
 			</div>
-
+			
 
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-12">
+				<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null" ng-cloak>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error: </span>
+							{{error}}
+						</div>
 					<div class="panel panel-default">
 						<div class="panel-heading">Add new Company</div>
 
@@ -88,7 +96,8 @@
 							<div class="row">
 
 								<div class="col-lg-12">
-
+									
+									
 									<form name="form" novalidate>
 										<div class="form-group">
 											<label> Company name </label>
