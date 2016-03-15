@@ -31,6 +31,7 @@ public class GetAvailableUserStatus extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -41,12 +42,11 @@ public class GetAvailableUserStatus extends HttpServlet {
 		Gson gson = new Gson();
 
 		arr.add(StringValues.EMPLOYEE_DESTROYED);
-		arr.add(StringValues.EMPLOYEE_OK);
+		arr.add(StringValues.EMPLOYEE_ACTIVE);
 		arr.add(StringValues.EMPLOYEE_PENDING_VERIFICATION);
 		arr.add(StringValues.EMPLOYEE_SUSPENDED);
 
 		out.println(gson.toJson(arr));
-
 	}
 
 	/**

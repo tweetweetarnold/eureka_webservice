@@ -7,14 +7,18 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 
 import connection.MyConnection;
+import dao.CanteenDAO;
+import dao.FoodDAO;
+import model.Canteen;
 import model.Food;
 
 public class AutoComplete {
 	private ArrayList<Food> foodList;
 	private int sizeOfList;
 	
-	public AutoComplete(){
-		this.foodList = getAllFood(); 
+	public AutoComplete(Canteen c){
+		FoodDAO foodDAO = new FoodDAO();
+		this.foodList = new ArrayList<Food>(foodDAO.getAllFoodFromCanteen(c));
 		this.sizeOfList = foodList.size();
 	}
 	
@@ -38,7 +42,7 @@ public class AutoComplete {
 	
 	//for autoFill
 	public List<String> getData(String query){
-		System.out.println("LOL");
+		
 		List<String> foodNames = new ArrayList<String>();
 		String foodName = null;
 		for(int i=0; i<sizeOfList; i++) {

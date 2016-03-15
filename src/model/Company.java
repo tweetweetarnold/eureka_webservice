@@ -24,13 +24,12 @@ import value.StringValues;
 @Entity
 @Table(name = "company")
 public class Company {
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	private Set<Canteen> canteenList;
-	private String companyCode, name, status;
+	private String companyCode;
+	private String name, status;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int companyId;
-	private Date createDate, cutoffTime;
+	private Date createDate;
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> deliveryPointSet;
 
@@ -49,34 +48,23 @@ public class Company {
 	 * @param canteenList The list of Canteen
 	 * @param companyCode The company code assigned to the Company
 	 */
-	public Company(String name, Date cutoffTime, Set<Canteen> canteenList, String companyCode) {
+	public Company(String name, String companyCode) {
 		super();
 		this.name = name;
 		this.createDate = new Date();
-		this.cutoffTime = cutoffTime;
-		this.canteenList = canteenList;
 		this.companyCode = companyCode;
 		this.status = StringValues.ACTIVE;
 	}
 
-	public Set<Canteen> getActiveCanteenList() {
-		Set<Canteen> returnSet = new HashSet<Canteen>();
-		for(Canteen s:canteenList){
-			if(s.getStatus().equals(StringValues.ACTIVE)){
-				returnSet.add(s);
-			}
-		}
-		return returnSet;
+	public Company(String name, String companyCode, Set<String> deliveryPointSet) {
+		super();
+		this.name = name;
+		this.createDate = new Date();
+		this.companyCode = companyCode;
+		this.deliveryPointSet = deliveryPointSet;
+		this.status = StringValues.ACTIVE;
 	}
 
-	/**
-	 * Retrieves the current list of Canteens
-	 * 
-	 * @return The list of Canteens
-	 */
-	public Set<Canteen> getCanteenList() {
-		return canteenList;
-	}
 	/**
 	 * Retrieves the current company code of the Company
 	 * 
@@ -105,15 +93,6 @@ public class Company {
 	}
 
 	/**
-	 * Retrieves the Company's current cut-off timing for ordering food
-	 * 
-	 * @return The cut-off timing for ordering food
-	 */
-	public Date getCutoffTime() {
-		return cutoffTime;
-	}
-
-	/**
 	 * Retrieves the current set of Delivery Point for the Company
 	 * 
 	 * @return The set of Delivery Point
@@ -136,15 +115,6 @@ public class Company {
 	}
 
 	/**
-	 * Changes the list of Canteens with a new list of Canteens
-	 * 
-	 * @param canteenList The new list of Canteens
-	 */
-	public void setCanteenList(Set<Canteen> canteenList) {
-		this.canteenList = canteenList;
-	}
-
-	/**
 	 * Changes the company code with a new company code
 	 * 
 	 * @param companyCode The new company code
@@ -159,15 +129,6 @@ public class Company {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
-	}
-
-	/**
-	 * Change the Company's cut-off timing with a new cut-off timing
-	 * 
-	 * @param cutoffTime The new cut-off timing
-	 */
-	public void setCutoffTime(Date cutoffTime) {
-		this.cutoffTime = cutoffTime;
 	}
 
 	/**

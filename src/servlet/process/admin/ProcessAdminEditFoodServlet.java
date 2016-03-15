@@ -94,6 +94,7 @@ public class ProcessAdminEditFoodServlet extends HttpServlet {
 						String inputValues = item.getString();
 						parameters[index] = inputValues;
 						System.out.println(item.getFieldName());
+						System.out.println("here: "  + index);
 						System.out.println(inputValues);
 					}
 				}

@@ -41,10 +41,11 @@ public class ProcessAdminAddModifierToFoodServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("application/json");
+		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		Gson gson = new Gson();
@@ -66,8 +67,10 @@ public class ProcessAdminAddModifierToFoodServlet extends HttpServlet {
 				JSONObject obj = (JSONObject) arr.get(i);
 				String name = (String) obj.get("name");
 				double price = Double.parseDouble((String) obj.get("price"));
+				String chineseName = (String) obj.get("chineseName");
+				System.out.println("CHineseName :" + chineseName);
 				// modifier creation
-				modifierSectionController.createAndAddModifier(name, "", "", price, foodId,
+				modifierSectionController.createAndAddModifier(name, chineseName, "", price, foodId,
 						modifierSectionId);
 				System.out.println("name: " + name);
 				System.out.println("price: " + price);

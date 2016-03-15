@@ -13,6 +13,8 @@
 
 <title>LunchTime - Admin</title>
 
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
+
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -47,7 +49,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="ViewCanteenController">
+<body ng-app="myApp" ng-controller="ViewCanteenController" ng-cloak>
 
 
 	<div id="wrapper">
@@ -69,7 +71,7 @@
 
 				<!-- Message handling -->
 				<div class="col-lg-12">
-					<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null">
+					<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null" ng-cloak>
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -77,7 +79,7 @@
 						<span class="sr-only">Success: </span>
 						{{success}}
 					</div>
-					<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
+					<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null" ng-cloak>
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -99,8 +101,32 @@
 					{{data.length}}
 					<br>
 					<br>
-					<a href='/eureka_webservice/admin/canteen/add.jsp' class="btn btn-primary">Add canteen</a>
-					<br>
+
+					<div class="row">
+						<div class="col-md-5">
+							<div class="input-group">
+
+								<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+								<div class="input-group-btn">
+									<button class="btn btn-default">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-7">
+							<a href='/eureka_webservice/admin/canteen/add.jsp' class="btn btn-primary pull-right">
+								<i class="fa fa-plus fa-lg"></i>
+								Add Canteen
+							</a>
+						</div>
+
+					</div>
+					<!-- /row -->
+
+
 					<br>
 
 					<div class="dataTable_wrapper">
@@ -110,7 +136,13 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Canteen</th>
+									<th>
+										<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+											Canteen
+											<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>Address</th>
 									<th>Create Date</th>
 									<th></th>
@@ -119,7 +151,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="canteen in data track by $index">
+								<tr ng-repeat="canteen in data | orderBy:sortType:sortReverse | filter:searchText track by $index">
 									<td>{{canteen.canteenId}}</td>
 									<td>{{canteen.name | date:'medium' : '+0800'}}</td>
 									<td>{{canteen.address | date:'medium' : '+0800'}}</td>
@@ -206,8 +238,6 @@
 		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"
 	></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 
@@ -228,6 +258,9 @@
 									$window.sessionStorage
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
+
+									$scope.sortType = 'name'; // set the default sort type
+									$scope.sortReverse = false; // set the default sort order
 
 									$scope.loading = $http(
 											{

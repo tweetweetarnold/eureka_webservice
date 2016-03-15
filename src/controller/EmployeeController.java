@@ -25,6 +25,10 @@ public class EmployeeController {
 	 */
 	public EmployeeController() {
 	}
+	
+	public ArrayList<Employee> getAllDestroyedEmployees() {
+		return employeeDAO.getAllDestroyedEmployees();
+	}
 
 	public ArrayList<Employee> getAllNonDestroyedEmployees() {
 		return employeeDAO.getAllNonDestroyedEmployees();
@@ -37,8 +41,7 @@ public class EmployeeController {
 	 * @return The specified food delivery point
 	 */
 	public String getDefaultDeliveryPoint(String email) {
-		Employee employee = retrieveEmployeeViaEmail(email);
-		return employee.getDeliveryPoint();
+		return retrieveEmployeeViaEmail(email).getDeliveryPoint();
 	}
 
 	/**
@@ -79,9 +82,8 @@ public class EmployeeController {
 		employeeDAO.saveEmployee(e);
 	}
 
-	public void suspendOverduePaymentFromCompany(Company c){
-		
-		
+	public void suspendOverduePaymentFromCompany(Company c) {
+
 		ArrayList<String> emailList = new ArrayList<String>();
 		SendEmail emailGen = new SendEmail();
 		emailGen.setMailServerProperties();
@@ -89,17 +91,10 @@ public class EmployeeController {
 		String subject = "Koh Bus LunchTime Ordering App - Payment Overdue";
 		String messageBody = "Dear User,<br><br>"
 				+ "Please note that you will not be able to place any new orders until you have cleared your payment!<br><br>"
-				+"<a href="
-				+ url
-				+ ">"
-				+ url
-				+ "</a>"
-				+ "<br><br>"
-				+ "Regards,<br>"
+				+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
 				+ "Admin<br><br>"
 				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
-		
-		
+
 		ArrayList<Object> objects = new ArrayList<Object>(
 				MyConnection.getUsersWithOutstandingPaymentFromCompany(c));
 		for (Object o : objects) {
@@ -108,16 +103,15 @@ public class EmployeeController {
 			String tempEmail = tempEmployee.getEmail();
 			emailList.add(tempEmail);
 			updateEmployee(tempEmployee);
-			
+
 		}
 		String[] toEmails = new String[emailList.size()];
 		toEmails = emailList.toArray(toEmails);
 		System.out.println(toEmails[0]);
-		String[] ccEmails = {"sumon123may@eastman.com", "wch123ow@eastman.com"};
+		String[] ccEmails = { "sumon123may@eastman.com", "wch123ow@eastman.com" };
 		try {
-			emailGen.sendEmailWithCarbonCopy(subject, messageBody, toEmails, ccEmails);
+			emailGen.sendEmail(subject, messageBody, toEmails, ccEmails);
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -148,6 +142,41 @@ public class EmployeeController {
 		employeeDAO.updateEmployee(employee);
 	}
 	
+	public void notifyAllEmployeesFromCompanyWithDeliveryPoint(Company c, String deliveryPoint){
+		ArrayList<Employee> results = new ArrayList<Employee>();
+		results = employeeDAO.getAllEmployeesFromCompanyWithDeliveryPoint(c, deliveryPoint);
+		
+		
+		ArrayList<String> emailList = new ArrayList<String>();
+		SendEmail emailGen = new SendEmail();
+		emailGen.setMailServerProperties();
+		String url = "http://lunchtime.dal.jelastic.vps-host.net/eureka_webservice/pages/login.jsp";
+		String subject = "Koh Bus LunchTime Ordering App - Please Update Delivery Building";
+		String messageBody = "Dear User,<br><br>"
+				+ "Please note that your chosen delivery building is no longer valid please specify a new building.<br><br>"
+				+ "You can select a new building from the edit profile page after you login. <br><br>"
+				+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
+				+ "Admin<br><br>"
+				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
+		
+		for(Employee e :results){
+			String tempEmail = e.getEmail();
+			emailList.add(tempEmail);
+		}
+		String[] toEmails = new String[emailList.size()];
+		toEmails = emailList.toArray(toEmails);
+		System.out.println(toEmails[0]);
+		String[] ccEmails = { "sumon123may@eastman.com", "wch123ow@eastman.com" };
+		try {
+			emailGen.sendEmail(subject, messageBody, toEmails, ccEmails);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+
 	/**
 	 * Updates the designated Employee object in the Database
 	 * 
@@ -156,5 +185,5 @@ public class EmployeeController {
 	public void updateEmployee(Employee e) {
 		employeeDAO.updateEmployee(e);
 	}
-	
+
 }

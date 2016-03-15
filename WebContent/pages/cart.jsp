@@ -13,6 +13,8 @@
 
 <title>LunchTime</title>
 
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
+
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -35,10 +37,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script>
+var noRedirect = true;
+function myFunction() {
+    if (noRedirect ){
+         return ""Please remember to checkout the items in your cart!"";
+    }else{
+    	noRedirect = false;
+    }
+}
+</script>
 </head>
 
-<body>
+<body onbeforeunload="return myFunction()">
 
 	<jsp:include page="header.jsp" />
 
@@ -50,11 +61,11 @@
 			<div class="col-lg-12">
 				<h1 class="page-header">
 					Cart
-					<small>what you ordered</small>
+					<small>What you have ordered</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
+						<a href="/eureka_webservice/pages/homepage.jsp" onclick="noRedirect=false">Home</a>
 					</li>
 					<li class="active">Cart</li>
 				</ol>
@@ -104,12 +115,15 @@
 								<th>Food</th>
 								<th>Add-On(s)</th>
 								<th>Qty</th>
-								<th>Price</th>
+								<th>Total Price</th>
+								<th></th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
+							<c:set value="0" var="count" />
 							<c:forEach items="${sessionScope.myFoodOrderItems}" var="foodOrderItem" varStatus="loop">
+								<c:set var="count" value="${count + 1}" />
 								<tr>
 									<td>${foodOrderItem.food.name}</td>
 									<td>
@@ -118,17 +132,34 @@
 											<c:if test="${!innerLoop.last}">, </c:if>
 										</c:forEach>
 									</td>
-									<td>${foodOrderItem.quantity}</td>
 									<td>
-										<c:set value="${overallPrice + foodOrderItem.price}" var="overallPrice" />
-										<fmt:formatNumber value="${foodOrderItem.price}" var="amt" minFractionDigits="2" />
+										<form action="/eureka_webservice/ProcessUpdateFoodItemInCartServlet" method="post">
+											<input type="hidden" name="count" value="${count}">
+											<select name="quantity">
+												<c:forEach begin="1" end="10" varStatus="num">
+													<c:choose>
+														<c:when test="${num.index == foodOrderItem.quantity}">
+															<option value="${num.index}" selected>${num.index}</option>
+														</c:when>
+														<c:otherwise>
+															<option value="${num.index}">${num.index}</option>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+											</select>
+											<input type="submit" value="Update" onclick="noRedirect=false" class="btn btn-danger">
+										</form>
+									</td>
+									<td>
+										<c:set value="${overallPrice + foodOrderItem.price * foodOrderItem.quantity}" var="overallPrice" />
+										<fmt:formatNumber value="${foodOrderItem.price * foodOrderItem.quantity}" var="amt" minFractionDigits="2" />
 										$${amt}
 									</td>
+									<td></td>
 									<td>
 										<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDelete${loop.index}">
 											<i class="fa fa-trash-o fa-2x"></i>
 										</button>
-
 										<!-- Modal delete -->
 										<div class="modal fade" id="modalDelete${loop.index}" tabindex="-1" role="dialog"
 											aria-labelledby="myModalLabel"
@@ -149,7 +180,7 @@
 
 														<div class="modal-footer">
 															<button type="button" class="btn btn-default" data-dismiss="modal">No, keep my food</button>
-															<button type="submit" class="btn btn-danger">Yes, remove the food</button>
+															<button type="submit" class="btn btn-danger" onclick="noRedirect=false">Yes, remove the food</button>
 														</div>
 														<!-- / modal footer -->
 													</div>
@@ -198,10 +229,10 @@
 						</td>
 						<td>
 							<h4>
-								<fmt:formatNumber value="${sessionScope.orderWindow.priceModifierList[0].value}" var="discount"
+								<fmt:formatNumber value="${sessionScope.orderPeriod.priceModifierList[0].value}" var="discount"
 									minFractionDigits="2"
 								/>
-								
+
 								<i>$${discount}</i>
 							</h4>
 						</td>
@@ -216,11 +247,11 @@
 						<td>
 							<h2>
 								<i>
-									<fmt:formatNumber value="${overallPrice + sessionScope.orderWindow.priceModifierList[0].value}"
+									<fmt:formatNumber value="${overallPrice + sessionScope.orderPeriod.priceModifierList[0].value}"
 										var="amountPayable" minFractionDigits="2"
 									/>
 									<c:choose>
-										<c:when test="${overallPrice + sessionScope.orderWindow.priceModifierList[0].value > 0}">
+										<c:when test="${overallPrice + sessionScope.orderPeriod.priceModifierList[0].value > 0}">
 									$${amountPayable}
 									</c:when>
 										<c:otherwise>
@@ -272,7 +303,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-danger">Confirm Checkout</button>
+						<button type="submit" class="btn btn-danger" onclick="noRedirect=false">Confirm Checkout</button>
 					</div>
 					<!-- / modal footer -->
 				</div>

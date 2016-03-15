@@ -22,7 +22,8 @@ import dao.FoodDAO;
 /**
  * Servlet implementation class AddFoodItemToSessionServlet
  */
-@WebServlet(description = "This servlet adds a food item to be stored in session", urlPatterns = { "/ProcessAddFoodItemToOrderItemsServlet" })
+@WebServlet(description = "This servlet adds a food item to be stored in session", urlPatterns = {
+		"/ProcessAddFoodItemToOrderItemsServlet" })
 public class ProcessAddFoodItemToOrderItemsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	FoodDAO foodDAO = new FoodDAO();
@@ -67,6 +68,8 @@ public class ProcessAddFoodItemToOrderItemsServlet extends HttpServlet {
 			String foodId = request.getParameter("foodId");
 			System.out.println("foodId: " + foodId);
 
+			int quantity = Integer.parseInt(request.getParameter("quantity")); 
+
 			Food food = foodDAO.getFood(Integer.parseInt(foodId));
 			System.out.println("food retrieved: " + food.getName());
 
@@ -80,7 +83,7 @@ public class ProcessAddFoodItemToOrderItemsServlet extends HttpServlet {
 			}
 
 			// Create new FoodOrderItem
-			FoodOrderItem foodItem = new FoodOrderItem(null, food, 1, "");
+			FoodOrderItem foodItem = new FoodOrderItem(null, food, quantity, "");
 			System.out.println("new FoodOrderItem created");
 
 			// Add new FoodOrderItem to myFoodOrders
@@ -90,7 +93,8 @@ public class ProcessAddFoodItemToOrderItemsServlet extends HttpServlet {
 			Set<Modifier> modifierList = food.getModifierList();
 			for (Modifier m : modifierList) {
 				String name = m.getName();
-				System.out.println("Chris Test-----> Expected " + name + " retrieved: " + request.getParameter("modifierDropdown"));
+				System.out.println("Chris Test-----> Expected " + name + " retrieved: "
+						+ request.getParameter("modifierDropdown"));
 				String value = request.getParameter(name);
 				String dropdownValue = request.getParameter("modifierDropdown");
 				if (value != null) {

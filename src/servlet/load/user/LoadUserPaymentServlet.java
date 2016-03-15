@@ -56,7 +56,7 @@ public class LoadUserPaymentServlet extends HttpServlet {
 
 			session.setAttribute("paymentFoodOrderList", foodOrderList);
 			session.setAttribute("warning",
-					"There are currently no order windows opened at this time. You can make view your order history or make payment.");
+					"There are currently no order windows opened at this time. You can view your order history or make payment.");
 
 			response.sendRedirect("/eureka_webservice/pages/payment.jsp");
 

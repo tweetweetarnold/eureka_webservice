@@ -35,7 +35,6 @@ public class EmployeeDAO {
 	public void deleteEmployee(Employee e) {
 		e.setStatus(StringValues.EMPLOYEE_DESTROYED);
 		updateEmployee(e);
-		//MyConnection.delete(e);
 	}
 
 	/**
@@ -58,13 +57,14 @@ public class EmployeeDAO {
 		}
 		return returnList;
 	}
-	
+
 	public ArrayList<Employee> getAllEmployeesFromCompany(int companyID) {
 		ArrayList<Employee> returnList = null;
 		CompanyDAO companyDAO = new CompanyDAO();
 		Company company = companyDAO.getCompany(companyID);
 		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
 		dc.add(Restrictions.eq("company", company));
+		dc.add(Restrictions.eq("status", StringValues.ACTIVE));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 
 		List<Object> l = MyConnection.queryWithCriteria(dc);
@@ -77,9 +77,26 @@ public class EmployeeDAO {
 		return returnList;
 	}
 	
+	public ArrayList<Employee> getAllDestroyedEmployees() {
+		ArrayList<Employee> returnList = null;
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
+		dc.add(Restrictions.eq("status", StringValues.EMPLOYEE_DESTROYED));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		returnList = new ArrayList<Employee>();
+
+		for (Object o : l) {
+			returnList.add((Employee) o);
+		}
+		return returnList;
+	}
+
 	public ArrayList<Employee> getAllNonDestroyedEmployees() {
 		ArrayList<Employee> returnList = null;
-		
+
 		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
 		dc.add(Restrictions.ne("status", StringValues.EMPLOYEE_DESTROYED));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
@@ -93,14 +110,14 @@ public class EmployeeDAO {
 		}
 		return returnList;
 	}
-	
-	
+
 	/**
 	 * Retrieves all users with outstanding payment that are above the specified amount(inclusive)
 	 * 
 	 * @param amount The specified amount
 	 * @param inclusive Whether to include the specified amount
-	 * @return An ArrayList of users with outstanding payment that are greater than (or equals) to the specified amount
+	 * @return An ArrayList of users with outstanding payment that are greater than (or equals) to
+	 *         the specified amount
 	 */
 	public ArrayList<Employee> getAllUsersWithOutstandingPaymentAbove(double amount,
 			boolean inclusive) {
@@ -161,7 +178,7 @@ public class EmployeeDAO {
 	public void saveEmployee(Employee e) {
 		MyConnection.save(e);
 	}
-	
+
 	/**
 	 * Updates the designated Employee object in the Database
 	 * 
@@ -169,5 +186,26 @@ public class EmployeeDAO {
 	 */
 	public void updateEmployee(Employee e) {
 		MyConnection.update(e);
+	}
+
+	public ArrayList<Employee> getAllEmployeesFromCompanyWithDeliveryPoint(Company c,
+			String deliveryPoint) {
+		ArrayList<Employee> returnList = null;
+		CompanyDAO companyDAO = new CompanyDAO();
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
+		dc.add(Restrictions.ne("status", StringValues.ARCHIVED));
+		dc.add(Restrictions.eq("company", c));
+		dc.add(Restrictions.eq("deliveryPoint", deliveryPoint));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+
+		returnList = new ArrayList<Employee>();
+
+		for (Object o : l) {
+			returnList.add((Employee) o);
+		}
+		return returnList;
 	}
 }

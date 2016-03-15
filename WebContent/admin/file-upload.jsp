@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
 <title>LunchTime - Admin</title>
 
 <link
@@ -37,7 +37,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 </head>
 <body>
-<fmt:setTimeZone value="GMT+8" />
+	<fmt:setTimeZone value="GMT+8" />
 
 	<div id="wrapper">
 		<%@include file="/headerfooter/adminHeader2.jsp"%>
@@ -54,14 +54,57 @@
 
 			<div class="row">
 				<div class="col-lg-12">
+
+					<p>File Upload allows you to add new data into the database via a CSV file. You can add data into the following
+						tables:</p>
+					<ol>
+						<li>
+							<a href="/eureka_webservice/admin/downloads/Canteen.csv">Canteen</a>
+						</li>
+						<li>
+							<a href="/eureka_webservice/admin/downloads/Stall.csv">Stall</a>
+						</li>
+						<li>
+							<a href="/eureka_webservice/admin/downloads/Food.csv">Food</a>
+						</li>
+						<li>
+							<a href="/eureka_webservice/admin/downloads/ModifierSection.csv">ModifierSection</a>
+						</li>
+						<li>
+							<a href="/eureka_webservice/admin/downloads/Modifier.csv">Modifier</a>
+						</li>
+					</ol>
+
+					<p>
+						To upload a CSV file, ensure that the
+						<b>
+							<u>file name is the same as the table</u>
+						</b>
+						you want to insert into.
+						<br>
+						Eg. Canteen.csv for Canteen table
+					</p>
+
+					<p>Ensure that your data is well formed and meet the format as given for each table. Click on the table name
+						above to view the sample file.</p>
+
+					<br>
+					<p>Once you are ready, start uploading data below!</p>
+
+					<hr>
+
+
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 
-
-
 						<h3>Select a file to upload</h3>
-						<h5>Upload Canteen.csv or Stall.csv or Food.csv or Modifier.csv</h5>
-						<form action="FileUpload" method="post" enctype="multipart/form-data">
+						<p>
+							<i>Make sure your CSV file meets the criteria and standards stated above.</i>
+						</p>
+						<br>
+
+
+						<form action="/eureka_webservice/FileUpload" method="post" enctype="multipart/form-data">
 							<input type="file" name="file" style="width: 228px;" required />
 							<br>
 							<input type="submit" class="btn btn-primary" value="Upload" />

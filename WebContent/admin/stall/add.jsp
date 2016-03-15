@@ -15,6 +15,8 @@
 
 <title>LunchTime - Admin</title>
 
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
+
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -107,7 +109,10 @@
 										</div>
 
 
-										<button type="submit" class="btn btn-primary">Add new Stall</button>
+										<button type="submit" class="btn btn-primary">
+											<i class="fa fa-plus fa-lg"></i>
+											Add new Stall
+										</button>
 
 									</form>
 								</div>

@@ -4,15 +4,24 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.detectlanguage.errors.APIError;
+
 import dao.FoodDAO;
 import dao.ModifierSectionDAO;
 import model.Food;
 import model.Modifier;
 import model.ModifierSection;
+import services.ChineseValidation;
 
 public class ModifierSectionController {
+	ChineseValidation chineseValidation = new ChineseValidation();
+	
 	public ModifierSectionController() {
 
+	}
+	
+	private boolean checkChineseWords(String text) throws APIError {
+		return chineseValidation.checkForChineseWords(text);
 	}
 
 	// assuming the person just wants to create an empty container
@@ -31,20 +40,24 @@ public class ModifierSectionController {
 		foodModifierSections.add(newModifierSection);
 		food.setModifierSectionList(foodModifierSections);
 		// update the existing food object and save the new ModifierSection
-		foodDAO.updateFood(food);
+
 		modifierSectionDAO.saveModifierSection(newModifierSection);
 		return newModifierSection.getModifierSectionId();
 	}
 
 	public boolean createAndAddModifier(String modifierName, String chineseName,
 			String modifierDescription, double modifierPrice, String foodID,
-			String modifierSectionID) {
+			String modifierSectionID) throws Exception  {
 
 		boolean modifierSectionExists = false;
 		ModifierSection modifierSectionToEdit = null;
-		// ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 		FoodDAO foodDAO = new FoodDAO();
 		Food food = foodDAO.getFood(Integer.parseInt(foodID));
+		
+		if (!checkChineseWords(chineseName)) {
+			throw new Exception(chineseName + " is not a valid chinese word.");
+		}
 		Modifier newModifier = new Modifier(modifierName, chineseName, modifierDescription,
 				modifierPrice, food);
 
@@ -55,13 +68,14 @@ public class ModifierSectionController {
 
 		// insert Modifier into an existing ModifierSection
 		Set<ModifierSection> modifierSectionList = food.getModifierSectionList();
-		Set<ModifierSection> replacementModifierSectionList = food.getModifierSectionList();
+		Set<ModifierSection> replacementModifierSectionList = new HashSet<ModifierSection>();
 		Iterator<ModifierSection> iter = modifierSectionList.iterator();
 		while (iter.hasNext()) {
 			ModifierSection existingModifierSection = (ModifierSection) iter.next();
 			// Check if modifierSection already exists
 			if (existingModifierSection.getModifierSectionId() == Integer
 					.parseInt(modifierSectionID)) {
+				System.out.println("ModifierSection ID = " + modifierSectionID);
 				modifierSectionExists = true;
 				modifierSectionToEdit = existingModifierSection;
 			} else {
@@ -70,17 +84,31 @@ public class ModifierSectionController {
 		}
 		if (modifierSectionExists) {
 			Set<Modifier> modifierListToEdit = modifierSectionToEdit.getModifierList();
+			if (checkDuplicates(modifierListToEdit, newModifier)) {
+				throw new Exception("add-ons already exists");
+			}
 			modifierListToEdit.add(newModifier);
 			modifierSectionToEdit.setModifierList(modifierListToEdit);
 			replacementModifierSectionList.add(modifierSectionToEdit);
 			food.setModifierSectionList(replacementModifierSectionList);
-			foodDAO.updateFood(food);
 			newModifier.setModifierSection(modifierSectionToEdit);
+			modifierSectionDAO.updateModifierSection(modifierSectionToEdit);
+
 			// modifierSectionDAO.saveModifier(newModifier);
 			// modifierSectionDAO.saveModifierSection(modifierSectionToEdit);
 		}
 		return modifierSectionExists;
 
+	}
+	
+	
+	public boolean checkDuplicates(Set<Modifier> modifierList, Modifier m) {
+		for (Modifier modifier : modifierList) {
+			if (modifier.getName().equals(m.getName())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
@@ -44,7 +44,7 @@ public class GetAllFoodsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("application/json");
+		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		CanteenController canteenCtrl = new CanteenController();
@@ -72,9 +72,11 @@ public class GetAllFoodsServlet extends HttpServlet {
 		}).create();
 
 		try {
-
 			List<Food> list = canteenCtrl.getAllFood();
-			out.println(gson.toJson(list));
+			
+			JSONArray arr = new JSONArray();
+			arr.addAll(list);
+			out.println(gson.toJson(arr));
 
 		} catch (Exception e) {
 			e.printStackTrace();

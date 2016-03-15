@@ -13,6 +13,8 @@
 
 <title>LunchTime</title>
 
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
+
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -35,10 +37,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script>
+	var noRedirect = true;
+	function myFunction() {
+		if (noRedirect) {
+			return "Please remember to checkout the items in your cart!";
+		} else {
+			noRedirect = false;
+		}
+	}
+</script>
 </head>
 
-<body>
+<body onbeforeunload="return myFunction()">
 
 	<!-- header -->
 	<jsp:include page="header.jsp" />
@@ -58,7 +69,7 @@
 				<!-- breadcrumb -->
 				<ol class="breadcrumb">
 					<li>
-						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
+						<a href="/eureka_webservice/pages/homepage.jsp" onclick="noRedirect=false">Home</a>
 					</li>
 					<li class="active">${sessionScope.stallName}</li>
 				</ol>
@@ -112,8 +123,12 @@
 							$${amt}
 						</b>
 						<img class="img-responsive img-portfolio img-hover" src="${food.imageDirectory}"
-							onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg'" alt="http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg"
-						style="width:263px;height:169px;">
+							onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/v1457805772/default/Image_Placeholder.png'"
+							alt="http://res.cloudinary.com/dmeln4k8n/image/upload/v1457805772/default/Image_Placeholder.png"
+							style="width: 263px;
+	height: 169px;"
+						>
+						<!-- "this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg'" -->
 						<!--"http://placehold.it/700x450  -->
 					</a>
 
@@ -197,11 +212,22 @@
 
 									</table>
 
+									<div>
+										Quantity:
+										<select name="quantity" class="form-control" style="display: inline;
+	width: 10%;">
+											<c:forEach begin="1" end="10" varStatus="count">
+												<option value="${count.index}">${count.index}</option>
+											</c:forEach>
+
+										</select>
+									</div>
+
 								</div>
 								<!-- / modal body -->
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<button type="submit" class="btn btn-danger">Add to cart</button>
+									<button type="submit" class="btn btn-danger" onclick="noRedirect=false">Add to cart</button>
 								</div>
 								<!-- / modal footer -->
 							</div>

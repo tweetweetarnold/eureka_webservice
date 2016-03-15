@@ -42,6 +42,7 @@ public class GetAllFoodsUnderStallServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -72,16 +73,21 @@ public class GetAllFoodsUnderStallServlet extends HttpServlet {
 
 		}).create();
 
-		String stallIdString = request.getParameter("stallId");
-		int stallId = Integer.parseInt(stallIdString);
-		System.out.println("stallID: " + stallId);
+		try {
+			String stallIdString = request.getParameter("stallId");
+			int stallId = Integer.parseInt(stallIdString);
+			System.out.println("stallID: " + stallId);
 
-		Stall stall = stallCtrl.getStall(stallId);
-		ArrayList<Food> list = foodCtrl.getAllActiveFoodsUnderStall(stall);
+			Stall stall = stallCtrl.getStall(stallId);
+			ArrayList<Food> list = foodCtrl.getAllActiveFoodsUnderStall(stall);
 
-		returnJson.put("canteenId", stall.getCanteen().getCanteenId());
-		returnJson.put("stall", stall);
-		returnJson.put("foods", list);
+			returnJson.put("canteenId", stall.getCanteen().getCanteenId());
+			returnJson.put("stall", stall);
+			returnJson.put("foods", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put("error", e.getMessage());
+		}
 
 		out.print(gson.toJson(returnJson));
 	}

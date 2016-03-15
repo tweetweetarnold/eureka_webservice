@@ -10,7 +10,7 @@ import model.Employee;
 import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
-import model.OrderWindow;
+import model.OrderPeriod;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -175,6 +175,23 @@ public class MyConnection {
 				Criteria.DISTINCT_ROOT_ENTITY);
 		String email = employee.getEmail();
 		criteria.add(Restrictions.eq("employee", employee)).list();
+		list = (List<Object>) criteria.list();
+
+		session.getTransaction().commit();
+		session.close();
+		return list;
+	}
+	
+	public static List<Object> getCompanyFoodOrderList(Company company) {
+		Session session = startSession();
+		List<Object> list = new ArrayList<>();
+		Criteria criteria = session.createCriteria(FoodOrder.class);
+		//String email = employee.getEmail();
+		criteria.createCriteria("employee")
+		   .add(Restrictions.eq("company", company));
+		criteria.setResultTransformer(
+				Criteria.DISTINCT_ROOT_ENTITY);
+	//	criteria.add(Restrictions.eq("company", company)).list();
 		list = (List<Object>) criteria.list();
 
 		session.getTransaction().commit();

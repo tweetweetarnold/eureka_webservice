@@ -46,14 +46,22 @@ public class GetUserByEmailServlet extends HttpServlet {
 		response.setContentType("applcation/json");
 		PrintWriter out = response.getWriter();
 
-		EmployeeController employeeCtrl = new EmployeeController();
-		String email = request.getParameter("email");
-		System.out.println("email: " + email);
-
-		Employee e = employeeCtrl.getEmployeeByEmail(email);
-
 		Gson gson = new Gson();
-		out.print(gson.toJson(e));
+
+		EmployeeController employeeCtrl = new EmployeeController();
+
+		Employee employee = null;
+
+		try {
+			String email = request.getParameter("email");
+			System.out.println("email: " + email);
+
+			employee = employeeCtrl.getEmployeeByEmail(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		out.print(gson.toJson(employee));
 
 	}
 

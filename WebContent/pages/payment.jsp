@@ -13,6 +13,8 @@
 
 <title>LunchTime</title>
 
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
+
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -36,9 +38,19 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<script>
+var noRedirect = true;
+function myFunction() {
+    if (noRedirect ){
+         return "Please remember to checkout the items in your cart!";
+    }else{
+    	noRedirect = false;
+    }
+}
+</script>
 </head>
 
-<body>
+<body onbeforeunload="return myFunction()">
 
 	<jsp:include page="header.jsp" />
 	<fmt:setTimeZone value="GMT+8" />
@@ -55,7 +67,7 @@
 				</h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
+						<a href="/eureka_webservice/pages/homepage.jsp" onclick = "noRedirect=false">Home</a>
 					</li>
 					<li class="active">Payment</li>
 				</ol>
@@ -98,7 +110,7 @@
 				<c:remove var="error" scope="session" />
 			</c:when>
 
-			<c:when test="${sessionScope.orderWindow == null}">
+			<c:when test="${sessionScope.orderPeriod == null}">
 				<div class="alert alert-warning alert-dismissible fade in" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -107,7 +119,7 @@
 					<span class="sr-only">Warning:</span>
 					<c:out value="${warning}" />
 				</div>
-				<c:remove var="orderWindow" scope="session" />
+				<c:remove var="orderPeriod" scope="session" />
 			</c:when>
 
 			<c:when test="${fn:length(sessionScope.paymentFoodOrderList) eq 0}">
@@ -153,7 +165,7 @@
 							<c:set var="count" value="${count + 1}" />
 							<fmt:formatNumber value="${order.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
 
-							<fmt:formatNumber value="${order.orderWindow.priceModifierList[0].value * -1}" var="discount"
+							<fmt:formatNumber value="${order.orderPeriod.priceModifierList[0].value * -1}" var="discount"
 								minFractionDigits="2"
 							/>
 
@@ -169,7 +181,7 @@
 
 						</c:forEach>
 
-						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
+						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" onclick = "noRedirect=false">
 
 					</form>
 					</c:if>
@@ -213,9 +225,9 @@
 
 						<div id="collapse${loop.index}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
-								Canteen: ${foodOrder.orderWindow.canteen.name}
+								Canteen: ${foodOrder.orderPeriod.canteen.name}
 								<br>
-								Price:
+								Total Price:
 								<fmt:formatNumber value="${foodOrder.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
 								$${amt}
 								<br>

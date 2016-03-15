@@ -53,6 +53,7 @@ public class ProcessAdminDeleteStallServlet extends HttpServlet {
 			Stall stall = stallController.getStall(stallId);
 
 			stallController.deleteStall(stall);
+			stallController.deleteActiveFoodInOldStall(stall);
 
 			session.setAttribute("success", stall.getName() + " has been deleted.");
 

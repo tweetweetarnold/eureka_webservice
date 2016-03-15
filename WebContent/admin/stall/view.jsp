@@ -13,6 +13,8 @@
 
 <title>LunchTime - Admin</title>
 
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
+
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -42,7 +44,7 @@
 
 </head>
 
-<body ng-app='myApp' ng-controller='ViewStallController'>
+<body ng-app='myApp' ng-controller='ViewStallController' ng-cloak>
 
 	<div id="wrapper">
 
@@ -73,7 +75,7 @@
 
 					<!-- Message handling -->
 					<div class="col-lg-12">
-						<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null">
+						<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null" ng-cloak>
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -81,7 +83,7 @@
 							<span class="sr-only">Success: </span>
 							{{success}}
 						</div>
-						<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
+						<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null" ng-cloak>
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -98,9 +100,34 @@
 					{{stallList.length}}
 					<br>
 					<br>
-					<a class="btn btn-primary" ng-href='/eureka_webservice/admin/stall/add.jsp?canteenId={{canteenId}}' target="_self">Add
-						Stall</a>
-					<br>
+
+					<div class="row">
+						<div class="col-md-5">
+							<div class="input-group">
+
+								<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+								<div class="input-group-btn">
+									<button class="btn btn-default">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-7">
+							<a class="btn btn-primary pull-right" ng-href='/eureka_webservice/admin/stall/add.jsp?canteenId={{canteenId}}'
+								target="_self"
+							>
+								<i class="fa fa-plus fa-lg"></i>
+								Add Stall
+							</a>
+						</div>
+
+					</div>
+					<!-- /row -->
+
+
 					<br>
 
 					<div class="dataTable_wrapper">
@@ -108,7 +135,13 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Stall</th>
+									<th>
+										<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+											Stall
+											<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>Contact No</th>
 									<th>Create Date</th>
 									<th>Image</th>
@@ -118,14 +151,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat='stall in stallList track by stall.stallId'>
+								<tr ng-repeat='stall in stallList | orderBy:sortType:sortReverse | filter:searchText track by stall.stallId'>
 									<td>{{stall.stallId}}</td>
 									<td>{{stall.name}}</td>
 									<td>{{stall.contactNo}}</td>
 									<td>{{stall.createDate | date:'medium' : '+0800'}}</td>
 									<td>
 										<img ng-src="{{stall.imageDirectory}}"
-											onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_231,w_173/v1455951761/default/img-error.jpg'"
+											onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/b_rgb:f5f5f5,c_lpad,h_231,w_173/v1457805772/default/Image_Placeholder.png'"
 										/>
 									</td>
 									<td>
@@ -153,7 +186,7 @@
 												<form action="/eureka_webservice/ProcessAdminDeleteStallServlet" method="post">
 													<input type="hidden" name="stallId" ng-value="stall.stallId">
 													<input type="hidden" name="canteenId" ng-value="canteenId">
-													
+
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -214,9 +247,6 @@
 		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"
 	></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
-
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 	<script>
@@ -238,15 +268,20 @@
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
 
+									$window.sessionStorage.canteenId = $location
+											.search().canteenId;
 									$scope.canteenId = $location.search().canteenId;
-									var canteenId = $location.search().canteenId;
+
+									$scope.sortType = 'name'; // set the default sort type
+									$scope.sortReverse = false; // set the default sort order
 
 									$scope.loading = $http(
 											{
 												method : 'GET',
 												url : '/eureka_webservice/GetAllStallsUnderCanteenServlet',
 												params : {
-													canteenId : canteenId
+													canteenId : $location
+															.search().canteenId
 												}
 											})
 											.then(

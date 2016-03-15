@@ -15,6 +15,8 @@
 
 <title>LunchTime - Admin</title>
 
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
+
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -115,11 +117,14 @@
 
 										<div class="form-group">
 											<label>Image Directory(*only accepts jpeg or jpg image formats)</label>
-											<input type="file" name="file" style="width: 228px;"/>
+											<input type="file" name="file" style="width: 228px;" />
 										</div>
 										<br>
 
-										<button type="submit" class="btn btn-primary">Add new Food</button>
+										<button type="submit" class="btn btn-primary">
+											<i class="fa fa-plus fa-lg"></i>
+											Add new Food
+										</button>
 
 									</form>
 								</div>

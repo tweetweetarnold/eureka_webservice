@@ -13,6 +13,8 @@
 
 <title>LunchTime - Admin</title>
 
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
+
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -43,7 +45,7 @@
 
 </head>
 
-<body ng-app='myApp' ng-controller='ViewFoodController'>
+<body ng-app='myApp' ng-controller='ViewFoodController' ng-cloak>
 
 	<div id="wrapper">
 
@@ -77,7 +79,7 @@
 
 					<!-- Message handling -->
 					<div class="col-lg-12">
-						<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null">
+						<div class="alert alert-success alert-dismissible fade in" role="alert" ng-show="success != null" ng-cloak>
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -85,7 +87,7 @@
 							<span class="sr-only">Success: </span>
 							{{success}}
 						</div>
-						<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null">
+						<div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="error != null" ng-cloak>
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -100,13 +102,38 @@
 
 					<b>Total foods:</b>
 					{{foodList.length}}
+
 					<br>
 					<br>
 
-					<form action="/eureka_webservice/admin/food/add.jsp">
-						<input type="hidden" name="stallId" ng-value="stall.stallId">
-						<button type="submit" class="btn btn-primary">Add Food</button>
-					</form>
+					<div class="row">
+						<div class="col-md-5">
+							<div class="input-group">
+
+								<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+								<div class="input-group-btn">
+									<button class="btn btn-default">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-7">
+							<form action="/eureka_webservice/admin/food/add.jsp">
+								<input type="hidden" name="stallId" ng-value="stall.stallId">
+								<button type="submit" class="btn btn-primary pull-right">
+									<i class="fa fa-plus fa-lg"></i>
+									Add Food
+								</button>
+							</form>
+						</div>
+
+					</div>
+					<!-- /row -->
+
+
 					<br>
 
 					<div class="dataTable_wrapper">
@@ -114,7 +141,13 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Food</th>
+									<th>
+										<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+											Food
+											<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>Price</th>
 									<th>Create Date</th>
 									<th>Image</th>
@@ -124,7 +157,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat='food in foodList track by food.foodId'>
+								<tr ng-repeat='food in foodList | orderBy:sortType:sortReverse | filter:searchText track by food.foodId'>
 									<td>{{food.foodId}}</td>
 									<td>
 										{{food.name}}
@@ -135,7 +168,7 @@
 									<td>{{food.createDate | date:'medium' : '+0800'}}</td>
 									<td>
 										<img ng-src="{{food.imageDirectory}}"
-											onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg'"
+											onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/v1457805772/default/Image_Placeholder.png'"
 											style="width: 263px;
 	height: 169px;"
 										/>
@@ -146,8 +179,8 @@
 											<br>
 										</p>
 										<a target="_self"
-											ng-href='/eureka_webservice/admin/food/addon-add.jsp?stallId={{stallId}}&foodId={{food.foodId}}'
-										>Add Add-On</a>
+											ng-href='/eureka_webservice/admin/food/addon-edit.jsp?stallId={{stallId}}&foodId={{food.foodId}}'
+										>Edit Add-On(s)</a>
 									</td>
 									<td>
 										<a target="_self" ng-href="/eureka_webservice/LoadAdminEditFoodServlet?foodId={{food.foodId}}">
@@ -233,8 +266,6 @@
 		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"
 	></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 
@@ -257,7 +288,13 @@
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
 
+									$window.sessionStorage.stallId = $location
+											.search().stallId;
 									$scope.stallId = $location.search().stallId;
+									$scope.canteenId = $window.sessionStorage.canteenId;
+
+									$scope.sortType = 'name'; // set the default sort type
+									$scope.sortReverse = false; // set the default sort order
 
 									$scope.loading = $http(
 											{
@@ -275,7 +312,6 @@
 													function successCallback(
 															response) {
 														console.log(response);
-														$scope.canteenId = response.data.canteenId;
 														$scope.stall = response.data.stall;
 														$scope.foodList = response.data.foods;
 													});

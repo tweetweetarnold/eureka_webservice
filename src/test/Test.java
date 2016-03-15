@@ -15,10 +15,9 @@ import model.Employee;
 import model.Food;
 import model.Modifier;
 import model.ModifierSection;
-import model.OrderWindow;
+import model.OrderPeriod;
 import model.Stall;
 import services.AESAlgorithm;
-import services.PasswordService;
 
 public class Test {
 
@@ -55,8 +54,8 @@ public class Test {
 		// ************* WARNING, THIS HIBERNATE CONFIG FILE WILL CLEAR
 		// EVERYTHING IN DATABASE AND POPULATE WITH BELOW
 
-		Company company2 = new Company("Eastman Chemicals", null, null, "ECM901");
-		Company company = new Company("XiaoDingDang Co. (TEST)", null, null, "XDD123");
+		Company company2 = new Company("Eastman Chemicals","ECM901");
+		Company company = new Company("XiaoDingDang Co. (TEST)","XDD123");
 		Set<String> buildingList = new HashSet<String>();
 		buildingList.add("SEMBCORP");
 		buildingList.add("PSN");
@@ -75,7 +74,7 @@ public class Test {
 		session.save(company2);
 		session.save(arnold);
 
-		Admin admin = new Admin("admin", PasswordService.encryptPassword("1234567"), "admin1",
+		Admin admin = new Admin("admin", "1234567", "admin1",
 				45678925);
 		session.save(admin);
 
@@ -344,12 +343,12 @@ public class Test {
 		Stall stall6 = new Stall("Roast Duck & Chicken Rice Stall", 98427347, null, null,
 				"resources/img/stall/img-roastmeatstall.jpg", null);
 		Food food13 = new Food("Roast Chicken Rice", "烧鸡饭", "", 2.50,
-				"resources/img/food/img-roastchickenrice.jpg", null, stall6);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420637/Food%20Images%20Raw/Roast_chicken_Rice.jpg", null, stall6);
 		Food food14 = new Food("CharSiew Rice", "叉烧饭", "", 2.50,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627009/Food%20Images%20Raw/charsiew_rice.jpg",
 				null, stall6);
 		Food food15 = new Food("Roast Meat Rice", "烧肉饭", "", 2.50,
-				"resources/img/food/img-roastmeatrice.jpg", null, stall6);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847815/Food%20Images%20Raw/Roast_meat_rice.jpg", null, stall6);
 		// Food foodC16 = new Food("CharSiew + Roast Meat Rice", "", 3.00,
 		// "resources/img/food/img-charsiewrice.jpg", stall6);
 
@@ -525,7 +524,7 @@ public class Test {
 		Food food25 = new Food("Vegetarian Beehoon", "斋米粉", "add veg $0.50", 2.50,
 				"resources/img/food/img-vegetarianbeehoon.jpg", null, stall8);
 		Food food26 = new Food("Vegetarian Mee", "斋面", "add veg $0.50", 2.50,
-				"resources/img/food/img-vergetarianmee.jpg", null, stall8);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059120/Food%20Images%20Raw/Vegetarian_mee.jpg", null, stall8);
 
 		Food nfood7 = new Food("Vegetarian Kway Tiao", "素粿条", "add veg $0.50", 2.50,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455774076/Food%20Images%20Raw/Vegetarian_Kway_Tiao.jpg",
@@ -604,7 +603,7 @@ public class Test {
 		Stall stall9 = new Stall("Minced Meat Noodles Stall", 93686070, null, null,
 				"resources/img/stall/img-tj.jpg", null);
 		Food food27 = new Food("Minced Meat Noodles(Mee Kia)", "肉挫面（面仔）", "upsize to $3.20", 2.70,
-				"resources/img/food/img-mincedmeatnoodles.jpg", null, stall9);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037674/Food%20Images%20Raw/minced_meat_noodle_mee_kia.jpg", null, stall9);
 
 		Food nfood9 = new Food("Minced Meat Noodles(Mee Pok)", "肉挫面（面薄）", "upsize to $3.20", 2.70,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627087/Food%20Images%20Raw/minced_meat_noodles.jpg",
@@ -671,7 +670,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627077/Food%20Images%20Raw/hokkien_mee.jpg",
 				null, stall10);
 		Food food33 = new Food("Dumpling Noodles", "水饺面", "", 3.00,
-				"resources/img/food/img-dumplingnoodle.jpg", null, stall10);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_lpad,h_169,w_263/v1456745890/Food%20Images%20Raw/dumpling_noodle.jpg", null, stall10);
 
 		// Food nfood11 = new Food("Fishball Noodles(Thick Beehoon)", "", 3.00,
 		// null, stall10);
@@ -740,47 +739,47 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/apple.jpg",
 				null, stall11);
 
-		Food food35 = new Food("Apple Juice", "苹果汁", "", 2.50, null, null, stall11);
+		Food food35 = new Food("Apple Juice", "苹果汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555990/Food%20Images%20Raw/Apple_juice.jpg", null, stall11);
 
 		Food food36 = new Food("Watermelon", "西瓜", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627161/Food%20Images%20Raw/watermelon.jpg",
 				null, stall11);
 
-		Food food37 = new Food("Watermelon Juice", "西瓜汁", "", 2.50, null, null, stall11);
+		Food food37 = new Food("Watermelon Juice", "西瓜汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457084066/Food%20Images%20Raw/Watermelon_juice.jpg", null, stall11);
 
 		Food food38 = new Food("Dragonfruit", "龙珠果", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/dragonfruits.jpg",
 				null, stall11);
 
-		Food food39 = new Food("Dragonfruit Juice", "龙珠果汁", "", 2.50, null, null, stall11);
+		Food food39 = new Food("Dragonfruit Juice", "龙珠果汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420619/Food%20Images%20Raw/Dragonfruit_juice.jpg", null, stall11);
 
 		Food food40 = new Food("Pear", "梨", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/pear.jpg",
 				null, stall11);
 
-		Food food41 = new Food("Pear Juice", "梨汁", "", 2.50, null, null, stall11);
+		Food food41 = new Food("Pear Juice", "梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037645/Food%20Images%20Raw/Pear_juice_2.jpg", null, stall11);
 
 		Food food42 = new Food("Honeydew", "哈蜜瓜", "", 0.70, "resources/img/food/img-honeydew.jpg",
 				null, stall11);
 
-		Food food43 = new Food("Honeydew Juice", "哈蜜瓜汁", "", 2.50, null, null, stall11);
+		Food food43 = new Food("Honeydew Juice", "哈蜜瓜汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420631/Food%20Images%20Raw/Honeydew_juice.jpg", null, stall11);
 
 		Food food44 = new Food("Papaya", "木瓜", "", 0.70, "resources/img/food/img-papaya.jpg", null,
 				stall11);
 
-		Food food45 = new Food("Papaya Juice", "木瓜汁", "", 2.60, null, null, stall11);
+		Food food45 = new Food("Papaya Juice", "木瓜汁", "", 2.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847809/Food%20Images%20Raw/Papaya_juice.jpg", null, stall11);
 
 		Food food46 = new Food("Pineapple", "黄梨", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627163/Food%20Images%20Raw/pineapple.jpg",
 				null, stall11);
 
-		Food food47 = new Food("Pineapple Juice", "黄梨汁", "", 2.50, null, null, stall11);
+		Food food47 = new Food("Pineapple Juice", "黄梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg", null, stall11);
 
 		Food food48 = new Food("Banana", "香蕉", "", 0.70,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627006/Food%20Images%20Raw/banana.jpg",
 				null, stall11);
 
-		Food food49 = new Food("Banana Juice", "香蕉汁", "", 2.60, null, null, stall11);
+		Food food49 = new Food("Banana Juice", "香蕉汁", "", 2.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457155104/Food%20Images%20Raw/Banana_juice.jpg", null, stall11);
 
 		Food food50 = new Food("Agar Agar", "燕菜糕", "", 0.60, "resources/img/food/img-agaragar.jpg",
 				null, stall11);
@@ -789,17 +788,17 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/orange.jpg",
 				null, stall11);
 
-		Food food52 = new Food("Orange Juice", "橙汁", "", 2.50, null, null, stall11);
+		Food food52 = new Food("Orange Juice", "橙汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555997/Food%20Images%20Raw/Orange_juice.jpg", null, stall11);
 
 		Food food53 = new Food("Guava", "番石榴", "", 0.70, "resources/img/food/img-guava.jpg", null,
 				stall11);
 
-		Food food54 = new Food("Guava Juice", "番石榴汁", "", 2.50, null, null, stall11);
+		Food food54 = new Food("Guava Juice", "番石榴汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555994/Food%20Images%20Raw/Guava_Juice.jpg", null, stall11);
 
 		Food food55 = new Food("Sarawak Pineapple", "沙捞越黄梨", "", 1.20,
 				"resources/img/food/img-sarawakpineapple.jpg", null, stall11);
 
-		Food food56 = new Food("Sarawak Pineapple Juice", "沙捞越黄梨汁", "", 3.10, null, null, stall11);
+		Food food56 = new Food("Sarawak Pineapple Juice", "沙捞越黄梨汁", "", 3.10, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg", null, stall11);
 
 		Food food57 = new Food("Mixed Fruits", "水果盘", "upsize $3.50", 3.00,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627095/Food%20Images%20Raw/mixed_fruits.jpg",
@@ -945,7 +944,7 @@ public class Test {
 		Food mfood7 = new Food("Stingray + Veg", "魟魚加菜", "more vegs, less fried meat", 3.70,
 				"resources/img/food/img-malaystingray.jpg", null, malayStall);
 		// for mfood1 modifiers
-		Modifier modifier1 = new Modifier("more vegetables", "多菜", "", 0.00, mfood1);
+		Modifier modifier1 = new Modifier("More vegetables", "多菜", "", 0.00, mfood1);
 		Modifier modifier2 = new Modifier("No egg", "不要蛋", "", 0.00, mfood1);
 		Set<Modifier> modifierList1 = new HashSet<Modifier>();
 		modifierList1.add(modifier1);
@@ -953,7 +952,7 @@ public class Test {
 		mfood1.setModifierList(modifierList1);
 
 		// for mfood2 modifiers
-		Modifier modifierM21 = new Modifier("more vegetables", "多菜", "", 0.00, mfood2);
+		Modifier modifierM21 = new Modifier("More vegetables", "多菜", "", 0.00, mfood2);
 		Modifier modifierM22 = new Modifier("No egg", "不要蛋", "", 0.00, mfood2);
 		Set<Modifier> modifierList2 = new HashSet<Modifier>();
 		modifierList2.add(modifierM21);
@@ -961,28 +960,28 @@ public class Test {
 		mfood2.setModifierList(modifierList2);
 
 		// for mfood3 modifiers
-		Modifier modifierM31 = new Modifier("more vegetables", "多菜", "", 0.00, mfood3);
+		Modifier modifierM31 = new Modifier("More vegetables", "多菜", "", 0.00, mfood3);
 		Modifier modifierM32 = new Modifier("No egg", "不要蛋", "", 0.00, mfood3);
 		Set<Modifier> modifierList3 = new HashSet<Modifier>();
 		modifierList3.add(modifierM31);
 		modifierList3.add(modifierM32);
 		mfood3.setModifierList(modifierList3);
 
-		Modifier modifierM51 = new Modifier("more vegetables", "多菜", "", 0.00, mfood5);
+		Modifier modifierM51 = new Modifier("More vegetables", "多菜", "", 0.00, mfood5);
 		Modifier modifierM52 = new Modifier("No egg", "不要蛋", "", 0.00, mfood5);
 		Set<Modifier> modifierListm5 = new HashSet<Modifier>();
 		modifierListm5.add(modifierM51);
 		modifierListm5.add(modifierM52);
 		mfood5.setModifierList(modifierListm5);
 
-		Modifier modifierM61 = new Modifier("more vegetables", "多菜", "", 0.00, mfood6);
+		Modifier modifierM61 = new Modifier("More vegetables", "多菜", "", 0.00, mfood6);
 		Modifier modifierM62 = new Modifier("No egg", "不要蛋", "", 0.00, mfood6);
 		Set<Modifier> modifierListm6 = new HashSet<Modifier>();
 		modifierListm6.add(modifierM61);
 		modifierListm6.add(modifierM62);
 		mfood6.setModifierList(modifierListm6);
 
-		Modifier modifierM71 = new Modifier("more vegetables", "多菜", "", 0.00, mfood7);
+		Modifier modifierM71 = new Modifier("More vegetables", "多菜", "", 0.00, mfood7);
 		Modifier modifierM72 = new Modifier("No egg", "不要蛋", "", 0.00, mfood7);
 		Set<Modifier> modifierListm7 = new HashSet<Modifier>();
 		modifierListm7.add(modifierM71);
@@ -1192,8 +1191,8 @@ public class Test {
 				chineseMixVegStall);
 
 		// for mixVegRice1 modifiers
-		Modifier modifier9 = new Modifier("more vegetables", "多菜", "", 0.00, mixVegRice1);
-		Modifier modifier10 = new Modifier("no fried meat", "不要炸肉", "", 0.00, mixVegRice1);
+		Modifier modifier9 = new Modifier("More vegetables", "多菜", "", 0.00, mixVegRice1);
+		Modifier modifier10 = new Modifier("No fried meat", "不要炸肉", "", 0.00, mixVegRice1);
 		Modifier modifier11 = new Modifier("Upsize to $3.20", "加大", "", 0.20, mixVegRice1);
 		Set<Modifier> modifierList4 = new HashSet<Modifier>();
 		modifierList4.add(modifier9);
@@ -1206,8 +1205,8 @@ public class Test {
 		modifierListMV2.add(modifierMV2);
 		mixVegRice2.setModifierList(modifierListMV2);
 
-		Modifier modifierNew21 = new Modifier("more vegetables", "多菜", "", 0.00, mixVegRice4);
-		Modifier modifierNew22 = new Modifier("no fried meat", "不要炸肉", "", 0.00, mixVegRice4);
+		Modifier modifierNew21 = new Modifier("More vegetables", "多菜", "", 0.00, mixVegRice4);
+		Modifier modifierNew22 = new Modifier("No fried meat", "不要炸肉", "", 0.00, mixVegRice4);
 		Set<Modifier> modifierListNew20 = new HashSet<Modifier>();
 		modifierListNew20.add(modifierNew21);
 		modifierListNew20.add(modifierNew22);
@@ -1250,14 +1249,14 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638264/Stall%20Images%20Raw/oasis_chicken_rice_stall.jpg",
 				null);
 		Food roastfood1 = new Food("Roast Chicken Rice", "烧鸡饭", "2 meat choices $4", 3.00,
-				"resources/img/food/img-roastchickenrice.jpg", null, roastMeatStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420637/Food%20Images%20Raw/Roast_chicken_Rice.jpg", null, roastMeatStall);
 		Food roastfood2 = new Food("Wanton Mee(Dry)", "云吞面（干）", "", 3.20,
-				"resources/img/food/img-wantonmee.jpg", null, roastMeatStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037657/Food%20Images%20Raw/wanton_mee_dry.jpg", null, roastMeatStall);
 		Food roastfood3 = new Food("CharSiew Rice", "叉烧饭", "2 meat choices $4", 3.00,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627009/Food%20Images%20Raw/charsiew_rice.jpg",
 				null, roastMeatStall);
 		Food roastfood4 = new Food("Roast Meat Rice", "烧肉饭", "2 meat choices $4", 3.00,
-				"resources/img/food/img-roastmeatrice.jpg", null, roastMeatStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847815/Food%20Images%20Raw/Roast_meat_rice.jpg", null, roastMeatStall);
 
 		Food roastfood5 = new Food("Wanton Mee(Soup)", "云吞面（汤）", "", 3.20,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627114/Food%20Images%20Raw/wanton_mee.jpg",
@@ -1347,7 +1346,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/sweet_and_sour_pork.jpg",
 				null, seafoodTzeCharStall);
 		Food seafood9 = new Food("Pork Rib Soup", "排骨汤", "", 4.80,
-				"resources/img/food/img-porkribsoup.jpg", null, seafoodTzeCharStall);
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fill,h_169,w_263/v1457808872/Food%20Images%20Raw/pork_rib_soup.jpg", null, seafoodTzeCharStall);
 		Food seafood10 = new Food("Black Chicken Soup", "黑鸡汤", "", 5.80,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627087/Food%20Images%20Raw/black_chicken_soup.jpg",
 				null, seafoodTzeCharStall);
@@ -1384,14 +1383,14 @@ public class Test {
 		seafood11.setModifierList(modifierListS11);
 
 		// for seafood4 modifier
-		Modifier modifier20 = new Modifier("more vegetables", "多菜", "", 0.00, seafood4);
+		Modifier modifier20 = new Modifier("More vegetables", "多菜", "", 0.00, seafood4);
 
 		Set<Modifier> modifierList9 = new HashSet<Modifier>();
 		modifierList9.add(modifier20);
 		seafood4.setModifierList(modifierList9);
 
 		// for seafood5 modifier
-		Modifier modifier21 = new Modifier("more vegetables", "多菜", "", 0.00, seafood5);
+		Modifier modifier21 = new Modifier("More vegetables", "多菜", "", 0.00, seafood5);
 
 		Set<Modifier> modifierList10 = new HashSet<Modifier>();
 		modifierList10.add(modifier21);
@@ -1565,49 +1564,49 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/apple.jpg",
 				null, fruitStall);
 
-		Food appleJuice = new Food("Apple Juice", "苹果汁", "", 2.50, null, null, fruitStall);
+		Food appleJuice = new Food("Apple Juice", "苹果汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555990/Food%20Images%20Raw/Apple_juice.jpg", null, fruitStall);
 
 		Food watermelon = new Food("Watermelon", "西瓜", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627161/Food%20Images%20Raw/watermelon.jpg",
 				null, fruitStall);
 
-		Food watermelonJuice = new Food("Watermelon Juice", "西瓜汁", "", 2.50, null, null,
+		Food watermelonJuice = new Food("Watermelon Juice", "西瓜汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457084066/Food%20Images%20Raw/Watermelon_juice.jpg", null,
 				fruitStall);
 
 		Food dragonfruit = new Food("Dragonfruit", "龙珠果", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/dragonfruits.jpg",
 				null, fruitStall);
 
-		Food dragonfruitJuice = new Food("Dragonfruit Juice", "龙珠果汁", "", 2.50, null, null,
+		Food dragonfruitJuice = new Food("Dragonfruit Juice", "龙珠果汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420619/Food%20Images%20Raw/Dragonfruit_juice.jpg", null,
 				fruitStall);
 
 		Food pear = new Food("Pear", "梨", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/pear.jpg",
 				null, fruitStall);
 
-		Food pearJuice = new Food("Pear Juice", "梨汁", "", 2.50, null, null, fruitStall);
+		Food pearJuice = new Food("Pear Juice", "梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037645/Food%20Images%20Raw/Pear_juice_2.jpg", null, fruitStall);
 
 		Food honeydew = new Food("Honeydew", "哈密瓜", "", 0.70, "resources/img/food/img-honeydew.jpg",
 				null, fruitStall);
 
-		Food honeydewJuice = new Food("Honeydew Juice", "哈蜜瓜汁", "", 2.50, null, null, fruitStall);
+		Food honeydewJuice = new Food("Honeydew Juice", "哈蜜瓜汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420631/Food%20Images%20Raw/Honeydew_juice.jpg", null, fruitStall);
 
 		Food papaya = new Food("Papaya", "木瓜", "", 0.70, "resources/img/food/img-papaya.jpg", null,
 				fruitStall);
 
-		Food papayaJuice = new Food("Papaya Juice", "木瓜汁", "", 2.60, null, null, fruitStall);
+		Food papayaJuice = new Food("Papaya Juice", "木瓜汁", "", 2.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847809/Food%20Images%20Raw/Papaya_juice.jpg", null, fruitStall);
 
 		Food pineapple = new Food("Pineapple", "黄梨", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627163/Food%20Images%20Raw/pineapple.jpg",
 				null, fruitStall);
 
-		Food pineappleJuice = new Food("Pineapple Juice", "黄梨汁", "", 2.50, null, null, fruitStall);
+		Food pineappleJuice = new Food("Pineapple Juice", "黄梨汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg", null, fruitStall);
 
 		Food banana = new Food("Banana", "香蕉", "", 0.70,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627006/Food%20Images%20Raw/banana.jpg",
 				null, fruitStall);
 
-		Food bananaJuice = new Food("Banana Juice", "香蕉汁", "", 2.60, null, null, fruitStall);
+		Food bananaJuice = new Food("Banana Juice", "香蕉汁", "", 2.60, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457155104/Food%20Images%20Raw/Banana_juice.jpg", null, fruitStall);
 
 		Food agaragar = new Food("Agar Agar", "燕菜糕", "", 0.60,
 				"resources/img/food/img-agaragar.jpg", null, fruitStall);
@@ -1616,17 +1615,17 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/orange.jpg",
 				null, fruitStall);
 
-		Food orangeJuice = new Food("Orange Juice", "橙汁", "", 2.50, null, null, fruitStall);
+		Food orangeJuice = new Food("Orange Juice", "橙汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555997/Food%20Images%20Raw/Orange_juice.jpg", null, fruitStall);
 
 		Food guava = new Food("Guava", "番石榴", "", 0.70, "resources/img/food/img-guava.jpg", null,
 				fruitStall);
 
-		Food guavaJuice = new Food("Guava Juice", "番石榴汁", "", 2.50, null, null, fruitStall);
+		Food guavaJuice = new Food("Guava Juice", "番石榴汁", "", 2.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555994/Food%20Images%20Raw/Guava_Juice.jpg", null, fruitStall);
 
 		Food sarawakPineapple = new Food("Sarawak Pineapple", "沙捞越黄梨", "", 1.20,
 				"resources/img/food/img-sarawakpineapple.jpg", null, fruitStall);
 
-		Food sarawakPineappleJuice = new Food("Sarawak Pineapple Juice", "沙捞越黄梨果汁", "", 3.10, null,
+		Food sarawakPineappleJuice = new Food("Sarawak Pineapple Juice", "沙捞越黄梨果汁", "", 3.10, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg",
 				null, fruitStall);
 
 		Food mixedFruits = new Food("Mixed Fruits", "水果盘", "upsize $3.50", 3.00,
@@ -2420,10 +2419,59 @@ public class Test {
 		// **************************************** End insert of mock data
 		// ****************************************
 
-		OrderWindow window = new OrderWindow(new DateTime(2015, 12, 2, 16, 36, 0),
+		OrderPeriod period = new OrderPeriod(new DateTime(2015, 12, 2, 16, 36, 0),
 				new DateTime(2015, 12, 31, 16, 36, 0), company, canteen1, 0, 0,
-				"This is a testing order window.", null);
-		session.save(window); // arnold test data
+				"This is a testing order period.", null);
+		
+//		OrderPeriod period1 = new OrderPeriod(new DateTime(2015, 12, 3, 16, 36, 0),
+//				new DateTime(2015, 12, 4, 16, 36, 0), company, canteen1, 0, 0,
+//				"This is another testing order period.", null);
+//		
+//		FoodOrder fo = new FoodOrder("Submitted", arnold, null, period);
+//		FoodOrderItem foi1 = new FoodOrderItem(fo, fishBeehoonfood1, 1, "");
+//		FoodOrderItem foi2 = new FoodOrderItem(fo, fishBeehoonfood2, 1, "");
+//		FoodOrderItem foi3 = new FoodOrderItem(fo, mixedFruits, 1, "");
+//		Set<FoodOrderItem> foodOrderList = new HashSet<FoodOrderItem>();
+//		foodOrderList.add(foi1);
+//		foodOrderList.add(foi2);
+//		foodOrderList.add(foi3);
+//		fo.setFoodOrderList(foodOrderList);
+//		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		try {
+//			fo.setCreateDate(df.parse("2015-12-02 16:40:00"));
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		FoodOrder fo1 = new FoodOrder("Submitted", arnold, null, period1);
+//		FoodOrderItem foi4 = new FoodOrderItem(fo1, bananaJuice, 1, "");
+//		FoodOrderItem foi5 = new FoodOrderItem(fo1, orange, 1, "");
+//		FoodOrderItem foi6 = new FoodOrderItem(fo1, mfood1, 1, "");
+//		Set<FoodOrderItem> foodOrderList1 = new HashSet<FoodOrderItem>();
+//		foodOrderList1.add(foi4);
+//		foodOrderList1.add(foi5);
+//		foodOrderList1.add(foi6);
+//		fo1.setFoodOrderList(foodOrderList1);
+//		try {
+//			fo1.setCreateDate(df.parse("2015-12-03 16:40:00"));
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+		session.save(period); // arnold test data
+//		session.save(period1);
+//		
+//		session.save(foi1);
+//		session.save(foi2);
+//		session.save(foi3);
+//		session.save(fo);
+//		
+//		session.save(foi4);
+//		session.save(foi5);
+//		session.save(foi6);
+//		session.save(fo1);
 
 		session.getTransaction().commit();
 		session.flush();

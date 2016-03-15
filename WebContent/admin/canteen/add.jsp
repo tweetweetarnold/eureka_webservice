@@ -15,6 +15,8 @@
 
 <title>LunchTime - Admin</title>
 
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
+
 <link
 	href="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -92,7 +94,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Add new canteen</div>
+						<div class="panel-heading">Add new Canteen</div>
 
 						<div class="panel-body">
 
@@ -100,20 +102,29 @@
 
 								<div class="col-lg-12">
 
-									<div class="form-group">
-										<label>Canteen name</label>
-										<input class="form-control" ng-model='canteen.name' name="name" required>
-									</div>
+									<form name="form">
 
-									<div class="form-group">
-										<label>Address</label>
-										<input class="form-control" ng-model='canteen.address' name="address">
-									</div>
+										<div class="form-group">
+											<label>Canteen name</label>
+											<input class="form-control" ng-model='canteen.name' name="name" required>
+											<span style="color: red;" ng-show='form.name.$error.required'>This is required!</span>
+										</div>
 
-									<br>
+										<div class="form-group">
+											<label>Address</label>
+											<input class="form-control" ng-model='canteen.address' name="address" required>
+											<span style="color: red;" ng-show='form.address.$error.required'>This is required!</span>
+										</div>
 
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add
-										new Canteen</button>
+
+										<button ng-disabled='!(canteen.name && canteen.address)' type="button" class="btn btn-primary"
+											data-toggle="modal" data-target=".bs-example-modal-sm"
+										>
+											<i class="fa fa-plus fa-lg"></i>
+											Add new Canteen
+										</button>
+
+									</form>
 
 								</div>
 								<!-- /.col-lg-12 -->

@@ -8,35 +8,60 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a target="_self" class="navbar-brand" href="/eureka_webservice/LoadOrderWindowOpenedServlet">LunchTime</a>
+		<a target="_self" class="navbar-brand" href="/eureka_webservice/LoadOrderPeriodActiveServlet">
+			<i class="fa fa-cutlery"></i>
+			LunchTime
+		</a>
 	</div>
 	<!-- /.navbar-header -->
 
 	<ul class="nav navbar-top-links navbar-right">
-		<li>
-			<a target="_self" href="/eureka_webservice/ProcessAdminLogoutServlet">
+
+		<li class="dropdown">
+			<a target="_self" class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<i class="fa fa-cog fa-fw"></i>
+				Settings
+				<i class="fa fa-caret-down"></i>
+			</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a target="_self" href="/eureka_webservice/admin/file-upload.jsp">
+						<i class="fa fa-cloud-upload fa-fw"></i>
+						File Upload
+					</a>
+				</li>
+				<li>
+					<a target="_self" href="/eureka_webservice/RunQuartzServlet">
+						<i class="fa fa-play fa-fw"></i>
+						Run Quartz
+					</a>
+				</li>
+			</ul>
+			<!-- /.dropdown-menu -->
+		</li>
+		<!-- /.dropdown -->
+
+
+		<li class="dropdown">
+			<a target="_self" class="dropdown-toggle" data-toggle="dropdown" href="#">
 				<i class="fa fa-sign-out fa-fw"></i>
 				Logout
+				<i class="fa fa-caret-down"></i>
 			</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a target="_self" href="/eureka_webservice/ProcessAdminLogoutServlet">
+						<i class="fa fa-sign-out fa-fw"></i>
+						Logout
+					</a>
+				</li>
+			</ul>
+			<!-- /.dropdown-menu -->
 		</li>
-
-
-		<!-- 		<li class="dropdown"> -->
-		<!-- 			<a target="_self" class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: white;"> -->
-		<!-- 				<i class="fa fa-sign-out fa-fw"></i> -->
-		<!-- 				<i class="fa fa-caret-down"></i> -->
-		<!-- 			</a> -->
-		<!-- 			<ul class="dropdown-menu"> -->
-		<!-- 				<li> -->
-		<!-- 					<a target="_self" href="/eureka_webservice/ProcessAdminLogoutServlet"> -->
-		<!-- 						<i class="fa fa-sign-out fa-fw"></i> -->
-		<!-- 						Logout -->
-		<!-- 					</a> -->
-		<!-- 				</li> -->
-		<!-- 			</ul> -->
-		<!-- 			<!-- /.dropdown-user -->
-		<!-- 		</li> -->
 		<!-- /.dropdown -->
+
+
+
 	</ul>
 	<!-- /.navbar-top-links -->
 
@@ -59,74 +84,87 @@
 				<!-- 				</li> -->
 
 				<li>
-					<a target="_self" href="/eureka_webservice/LoadOrderWindowOpenedServlet">
-						<i class="fa fa-dashboard fa-fw"></i>
-						Homepage
+					<a target="_self" href="#">
+						<i class="fa fa-bar-chart fa-fw"></i>
+						Spending Summary
+						<span class="fa arrow"></span>
 					</a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a target="_self" href="/eureka_webservice/admin/analytics/company-analytics.jsp">View: Companies Spending</a>
+
+						</li>
+						<li>
+							<a target="_self" href="/eureka_webservice/LoadAdminViewOverallMonthlySpending">View: Overall Spending</a>
+
+						</li>
+					</ul>
+					
 				</li>
 
 				<li>
 					<a target="_self" href="#">
 						<i class="fa fa-windows fa-fw"></i>
-						Order Windows
+						Order Periods
 						<span class="fa arrow"></span>
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a target="_self" href="/eureka_webservice/admin/orderwindow/view.jsp">View: All</a>
+							<a target="_self" href="/eureka_webservice/admin/orderperiod/view.jsp">View: All</a>
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadOrderWindowOpenedServlet">View: Opened</a>
+							<a target="_self" href="/eureka_webservice/LoadOrderPeriodActiveServlet">View: Active</a>
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewOrderWindowsClosedServlet">View: Closed</a>
+							<a target="_self" href="/eureka_webservice/LoadAdminViewOrderPeriodsArchivedServlet">View: Archived</a>
 
 						</li>
 						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminAddNewWindowServlet">Add New Window</a>
+							<a target="_self" href="/eureka_webservice/LoadAdminAddNewPeriodServlet">Set Order Period</a>
 						</li>
 
 					</ul>
 					<!-- /.nav-second-level -->
+				</li>
+
+				<li>
+					<a target="_self" href="/eureka_webservice/LoadAdminViewUsersWithOutstandingPaymentServlet">
+						<i class="fa fa-money fa-fw"></i>
+						Payment
+					</a>
+				</li>
+
+				<li>
+					<a target="_self" href="/eureka_webservice/admin/company/view.jsp">
+						<i class="fa fa-building fa-fw"></i>
+						Company
+					</a>
 				</li>
 
 				<li>
 					<a target="_self" href="#">
-						<i class="fa fa-money fa-fw"></i>
-						Payment
-						<span class="fa arrow"></span>
-					</a>
-					<ul class="nav nav-second-level">
-						<li>
-							<a target="_self" href="/eureka_webservice/LoadAdminViewUsersWithOutstandingPaymentServlet">Outstanding</a>
-						</li>
-					</ul>
-					<!-- /.nav-second-level -->
-				</li>
-
-				<li>
-					<a target="_self" href="/eureka_webservice/LoadAdminViewCompaniesServlet">
-						<i class="fa fa-building fa-fw"></i>
-						Company
-						<span class="fa arrow"></span>
-					</a>
-				</li>
-
-				<li>
-					<a target="_self" href="/eureka_webservice/admin/user/view.jsp">
 						<i class="fa fa-user fa-fw"></i>
 						User
 						<span class="fa arrow"></span>
 					</a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a target="_self" href="/eureka_webservice/admin/user/view.jsp">Active</a>
+
+						</li>
+						<li>
+							<a target="_self" href="/eureka_webservice/admin/user/archived.jsp">Archived</a>
+
+						</li>
+					</ul>
 				</li>
 
 				<li>
 					<a target="_self" href="/eureka_webservice/admin/canteen/view.jsp">
 						<i class="fa fa-cutlery fa-fw"></i>
 						Canteen
-						<span class="fa arrow"></span>
 					</a>
 				</li>
 
@@ -137,6 +175,15 @@
 				<!-- 						<span class="fa arrow"></span> -->
 				<!-- 					</a> -->
 				<!-- 				</li> -->
+
+
+
+				<li>
+					<a target="_self" href="/eureka_webservice/admin/help.jsp">
+						<i class="fa fa-info fa-fw"></i>
+						Help & Guides
+					</a>
+				</li>
 
 
 			</ul>

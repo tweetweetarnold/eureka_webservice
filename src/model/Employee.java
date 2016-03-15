@@ -62,7 +62,7 @@ public class Employee {
 		this.amountOwed = 0;
 		this.contactNo = contactNo;
 		this.company = company;
-		this.status = StringValues.EMPLOYEE_OK;
+		this.status = StringValues.EMPLOYEE_ACTIVE;
 		// this.favouriteList = new HashSet<>();
 		this.createDate = new Date();
 		this.favoriteFood = null;

@@ -13,6 +13,8 @@
 
 <title>LunchTime</title>
 
+<link href="/eureka_webservice/resources/img/favicon/lunchtime_favicon.png" rel="shortcut icon">
+
 <!-- library import for JSTL -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -36,9 +38,19 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<script>
+var noRedirect = true;
+function myFunction() {
+    if (noRedirect ){
+         return "Please remember to checkout the items in your cart!";
+    }else{
+    	noRedirect = false;
+    }
+}
+</script>
 </head>
 
-<body>
+<body onbeforeunload="return myFunction()">
 
 	<jsp:include page="header.jsp" />
 
@@ -54,7 +66,7 @@
 				</h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="/eureka_webservice/pages/homepage.jsp">Home</a>
+						<a href="/eureka_webservice/pages/homepage.jsp" onclick = "noRedirect=false">Home</a>
 					</li>
 					<li class="active">Profile</li>
 				</ol>
@@ -115,7 +127,10 @@
 							<td>
 								<strong>Delivery Point:</strong>
 							</td>
-							<td>${user.deliveryPoint}</td>
+							<td>
+								${user.deliveryPoint}
+								<a href="#" data-toggle="modal" data-target="#modalEditDeliveryPoint" >Edit</a>
+							</td>
 						</tr>
 						<tr>
 							<td>
@@ -171,6 +186,8 @@
 	</div>
 	<!-- /.container -->
 
+
+
 	<!-- edit password Modal -->
 	<div class="modal fade" id="modalEditPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -220,7 +237,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-danger">Update Password</button>
+						<button type="submit" class="btn btn-danger" onclick = "noRedirect=false">Update Password</button>
 					</div>
 					<!-- / modal footer -->
 				</div>
@@ -229,6 +246,8 @@
 		</div>
 	</div>
 	<!-- / edit password modal -->
+
+
 
 	<!-- edit contact Modal -->
 	<div class="modal fade" id="modalEditContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -255,7 +274,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-danger">Update Contact Number</button>
+						<button type="submit" class="btn btn-danger" onclick = "noRedirect=false">Update Contact Number</button>
 					</div>
 					<!-- / modal footer -->
 				</div>
@@ -264,6 +283,47 @@
 		</div>
 	</div>
 	<!-- / edit contact Modal -->
+
+
+
+	<!-- edit delivery point Modal -->
+	<div class="modal fade" id="modalEditDeliveryPoint" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<form method="post" action="/eureka_webservice/ProcessSetUserDeliveryPointServlet">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title text-center" id="myModalLabel">Edit Delivery Point</h4>
+					</div>
+					<!-- / modal header -->
+					<div class="modal-body text-center">
+						<strong>Edit Delivery point: &nbsp;</strong>
+						<select name="deliveryPoint" required>
+							<c:forEach items="${user.company.deliveryPointSet}" var="point">
+								<option value="${point}">${point}</option>
+							</c:forEach>
+						</select>
+
+					</div>
+					<!-- / modal body -->
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-danger" onclick = "noRedirect=false">Update Delivery Point</button>
+					</div>
+					<!-- / modal footer -->
+				</div>
+				<!-- / modal content -->
+			</form>
+		</div>
+	</div>
+	<!-- / edit delivery point Modal -->
+
+
+
+
 
 	<!-- jQuery -->
 	<script src="/eureka_webservice/resources/startbootstrap-business/js/jquery.js"></script>

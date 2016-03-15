@@ -2,30 +2,18 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-
-import model.Canteen;
-import model.Food;
-import model.ModifierSection;
-import model.OrderWindow;
-import model.Stall;
-import net.aksingh.owmjapis.AbstractWeather.Weather;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONArray;
-
-import services.ChineseValidation;
-import services.CloudinaryUpload;
 
 import com.detectlanguage.errors.APIError;
 
 import dao.FoodDAO;
+import model.Food;
+import model.ModifierSection;
+import model.Stall;
+import services.ChineseValidation;
+import services.CloudinaryUpload;
 
 /**
  * Process the function of managing the Food objects' information
@@ -37,7 +25,6 @@ public class FoodController {
 	ChineseValidation chineseValidation = new ChineseValidation();
 	CloudinaryUpload cloudinaryUpload = new CloudinaryUpload();
 	FoodDAO foodDAO = new FoodDAO();
-	StallController stallController = new StallController();
 
 	/**
 	 * Creates a default constructor for FoodController
@@ -45,85 +32,79 @@ public class FoodController {
 	public FoodController() {
 	}
 
-	public int addFood(ServletFileUpload upload, HttpServletRequest request) throws Exception {
-		// FoodController foodController = new FoodController();
-		int stallId = 0;
-		int index = 0;
-		String[] parameters = new String[6];
-		String[] output = new String[2];
-		byte[] image = null;
-
-		// Parse the request
-		List<FileItem> items = upload.parseRequest(request);
-		Iterator<FileItem> iter = items.iterator();
-		while (iter.hasNext()) {
-			FileItem item = (FileItem) iter.next();
-			if (!item.isFormField()) {
-
-				String contentType = item.getContentType();
-				if (!contentType.equals("image/jpeg")) {
-					throw new Exception("Invalid image format");
-				}
-
-				image = item.get();
-			} else {
-				if (item.getFieldName().equals("chineseName")) {
-					String inputValues = item.getString("UTF-8");
-					parameters[index] = inputValues;
-				} else {
-					String inputValues = item.getString();
-					parameters[index] = inputValues;
-					System.out.println(item.getFieldName());
-					System.out.println(inputValues);
-				}
-			}
-			index++;
-		}
-
-		double price = Double.parseDouble(parameters[4]);
-		stallId = Integer.parseInt(parameters[0]);
-
-		Stall stall = stallController.getStall(stallId);
-		if (!parameters[2].isEmpty()) {
-			boolean isChinese = checkChineseWords(parameters[2]);
-			if (!isChinese) {
-				throw new Exception(parameters[2] + " is not a valid chinese word.");
-			}
-		}
-		boolean foodExists = checkFoodExists(parameters[1], stall);
-		if (foodExists) {
-			throw new Exception(parameters[1] + " already exists in " + stall.getName());
-		}
-
-		output = imageUpload(image);
-		Food food = new Food(parameters[1], parameters[2], parameters[3], price, output[0],
-				output[1], stall);
-
-		food.setWeatherConditions(parameters[5]);
-
-		System.out.println("foodname: " + food.getName());
-		System.out.println("saving food...");
-		saveFood(food);
-		return stallId;
-
-	}
+	// public int addFood(ServletFileUpload upload, HttpServletRequest request) throws Exception {
+	// int stallId = 0;
+	// int index = 0;
+	// String[] parameters = new String[6];
+	// String[] output = new String[2];
+	// byte[] image = null;
+	//
+	// // Parse the request
+	// List<FileItem> items = upload.parseRequest(request);
+	// Iterator<FileItem> iter = items.iterator();
+	// while (iter.hasNext()) {
+	// FileItem item = (FileItem) iter.next();
+	// if (!item.isFormField()) {
+	//
+	// String contentType = item.getContentType();
+	// if (!contentType.equals("image/jpeg")) {
+	// throw new Exception("Invalid image format");
+	// }
+	//
+	// image = item.get();
+	// } else {
+	// if (item.getFieldName().equals("chineseName")) {
+	// String inputValues = item.getString("UTF-8");
+	// parameters[index] = inputValues;
+	// } else {
+	// String inputValues = item.getString();
+	// parameters[index] = inputValues;
+	// System.out.println(item.getFieldName());
+	// System.out.println(inputValues);
+	// }
+	// }
+	// index++;
+	// }
+	//
+	// double price = Double.parseDouble(parameters[4]);
+	// stallId = Integer.parseInt(parameters[0]);
+	//
+	// Stall stall = stallController.getStall(stallId);
+	// if (!parameters[2].isEmpty()) {
+	// boolean isChinese = checkChineseWords(parameters[2]);
+	// if (!isChinese) {
+	// throw new Exception(parameters[2] + " is not a valid chinese word.");
+	// }
+	// }
+	// boolean foodExists = checkFoodExists(parameters[1], stall);
+	// if (foodExists) {
+	// throw new Exception(parameters[1] + " already exists in " + stall.getName());
+	// }
+	//
+	// output = imageUpload(image);
+	// Food food = new Food(parameters[1], parameters[2], parameters[3], price, output[0],
+	// output[1], stall);
+	//
+	// food.setWeatherConditions(parameters[5]);
+	//
+	// System.out.println("foodname: " + food.getName());
+	// System.out.println("saving food...");
+	// saveFood(food);
+	// return stallId;
+	//
+	// }
 
 	public void addFood2(String name, String chineseName, String description,
 			String weatherConditions, byte[] image, JSONArray modifierList, double price,
 			int stallId) throws Exception {
-		// byte[] image = null;
 		String[] output = new String[2];
 
-		// if (!image2.getContentType().equals("image/jpeg")) {
-		// throw new Exception("Invalid image format");
-		// } else {
-		// image = image2.get();
-		// }
+		StallController stallCtrl = new StallController();
 
 		if (!checkChineseWords(chineseName)) {
 			throw new Exception(chineseName + " is not a valid chinese word.");
 		}
-		Stall s = stallController.getStall(stallId);
+		Stall s = stallCtrl.getStall(stallId);
 
 		if (checkFoodExists(name, s)) {
 			throw new Exception(name + " already exists in " + s.getName());
@@ -138,7 +119,7 @@ public class FoodController {
 
 	}
 
-	public boolean checkChineseWords(String text) throws APIError {
+	private boolean checkChineseWords(String text) throws APIError {
 		return chineseValidation.checkForChineseWords(text);
 	}
 
@@ -162,22 +143,22 @@ public class FoodController {
 		return cloudinaryUpload.deleteImage(publicId);
 	}
 
-	public void editFood(byte[] image, String[] parameters, Food food, int stallId) throws Exception {
+	public void editFood(byte[] image, String[] parameters, Food food, int stallId)
+			throws Exception {
 		String[] cloudinaryOutput = new String[2];
 		/*
-		 * cloudinaryOutput[0] stores the image url 
-		 * cloudinaryOutput[1] stores the image publicId
+		 * cloudinaryOutput[0] stores the image url cloudinaryOutput[1] stores the image publicId
 		 */
 
-		
 		double price = 0.0;
-		try{
-			price = Double.parseDouble(parameters[4]);
+		try {
+		
+			
+			price = Double.parseDouble(parameters[3]);
 		} catch (Exception e) {
 			throw new Exception("Invalid input for price");
 		}
-		
-		
+
 		if (!parameters[2].isEmpty()) {
 			boolean isChinese = checkChineseWords(parameters[2]);
 			if (!isChinese) {
@@ -220,7 +201,7 @@ public class FoodController {
 				updateFood(food);
 			}
 		}
-		
+
 	}
 
 	public ArrayList<Food> getAllActiveFoodsUnderStall(Stall stall) {
@@ -254,18 +235,18 @@ public class FoodController {
 	 * @param weather A String description of a weather status
 	 * @return Food which suits the current weather condition
 	 */
-	public Food getFoodForWeather(ArrayList<Food> foodList, String weather) {
-		ArrayList<Food> choices = new ArrayList<Food>();
-		for (Food f : foodList) {
-			if (f.getWeatherConditions().equals(weather)) {
-				choices.add(f);
-			}
-		}
-		Random rand = new Random();
-		int pick = rand.nextInt(choices.size());
-
-		return choices.get(pick);
-	}
+	// public Food getFoodForWeather(ArrayList<Food> foodList, String weather) {
+	// ArrayList<Food> choices = new ArrayList<Food>();
+	// for (Food f : foodList) {
+	// if (f.getWeatherConditions().equals(weather)) {
+	// choices.add(f);
+	// }
+	// }
+	// Random rand = new Random();
+	// int pick = rand.nextInt(choices.size());
+	//
+	// return choices.get(pick);
+	// }
 
 	/**
 	 * Get food recommendation for a given weather condition and order window
@@ -274,36 +255,36 @@ public class FoodController {
 	 * @param weather The current weather condition
 	 * @return Food which suits the current weather condition
 	 */
-	public Food getFoodForWeather(Weather weather, OrderWindow orderWindow) {
-		int weatherCode = weather.getWeatherCode();
-		Canteen currentCanteen = orderWindow.getCanteen();
-		Set<Stall> stallSet = currentCanteen.getStallList();
-		Iterator<Stall> iter = stallSet.iterator();
-		ArrayList<Food> foodList = new ArrayList<Food>();
-
-		while (iter.hasNext()) {
-			Stall tempStall = (Stall) iter.next();
-			foodList.addAll(tempStall.getFoodList());
-		}
-
-		// Thunderstorms
-		if (weatherCode <= 299 && weatherCode >= 200) {
-			return getFoodForWeather(foodList, "thunderstorm");
-			// Rain
-		} else if (weatherCode <= 599 && weatherCode >= 300) {
-			return getFoodForWeather(foodList, "rain");
-			// clear or cloudy
-		} else if (weatherCode <= 899 && weatherCode >= 800) {
-			return getFoodForWeather(foodList, "clear");
-			// hot
-		} else if (weatherCode == 904) {
-			return getFoodForWeather(foodList, "hot");
-		} else {
-			Random rand = new Random();
-			int pick = rand.nextInt(foodList.size());
-			return foodList.get(pick);
-		}
-	}
+	// public Food getFoodForWeather(Weather weather, OrderWindow orderWindow) {
+	// int weatherCode = weather.getWeatherCode();
+	// Canteen currentCanteen = orderWindow.getCanteen();
+	// Set<Stall> stallSet = currentCanteen.getStallList();
+	// Iterator<Stall> iter = stallSet.iterator();
+	// ArrayList<Food> foodList = new ArrayList<Food>();
+	//
+	// while (iter.hasNext()) {
+	// Stall tempStall = (Stall) iter.next();
+	// foodList.addAll(tempStall.getFoodList());
+	// }
+	//
+	// // Thunderstorms
+	// if (weatherCode <= 299 && weatherCode >= 200) {
+	// return getFoodForWeather(foodList, "thunderstorm");
+	// // Rain
+	// } else if (weatherCode <= 599 && weatherCode >= 300) {
+	// return getFoodForWeather(foodList, "rain");
+	// // clear or cloudy
+	// } else if (weatherCode <= 899 && weatherCode >= 800) {
+	// return getFoodForWeather(foodList, "clear");
+	// // hot
+	// } else if (weatherCode == 904) {
+	// return getFoodForWeather(foodList, "hot");
+	// } else {
+	// Random rand = new Random();
+	// int pick = rand.nextInt(foodList.size());
+	// return foodList.get(pick);
+	// }
+	// }
 
 	/**
 	 * Retrieving the image directory of the Food object based on the specified ID
@@ -318,35 +299,19 @@ public class FoodController {
 	public boolean haveChangesInParameters(Food currentFood, String inputName,
 			String inputChineseName, String inputDescription, double inputPrice,
 			String inputWeatherConditions) {
-		boolean hasChanges = false;
-		String currentName = currentFood.getName();
-		String currentChineseName = currentFood.getChineseName();
-		String currentDesc = currentFood.getDescription();
-		double currentPrice = currentFood.getPrice();
-		String currentWeather = currentFood.getWeatherConditions();
 
-		if (!currentName.equals(inputName)) {
-			hasChanges = true;
+		if (currentFood.getName().equals(inputName)) {
+			if (currentFood.getChineseName().equals(inputChineseName)) {
+				if (currentFood.getDescription().equals(inputDescription)) {
+					if (currentFood.getPrice() == inputPrice) {
+						if (currentFood.getWeatherConditions().equals(inputWeatherConditions)) {
+							return false;
+						}
+					}
+				}
+			}
 		}
-
-		if (!currentChineseName.equals(inputChineseName)) {
-			hasChanges = true;
-		}
-
-		if (!currentDesc.equals(inputDescription)) {
-			hasChanges = true;
-		}
-
-		if (currentPrice != inputPrice) {
-			hasChanges = true;
-		}
-
-		if (!currentWeather.equals(inputWeatherConditions)) {
-			hasChanges = true;
-		}
-
-		return hasChanges;
-
+		return true;
 	}
 
 	public String[] imageUpload(byte[] file) throws IOException {
@@ -355,16 +320,14 @@ public class FoodController {
 	}
 
 	public void processAddingFood(byte[] image, String[] parameters, int stallId) throws Exception {
-		// FoodController foodController = new FoodController();
-		StallController stallController = new StallController();
 		String[] cloudinaryOutput = new String[2];
 		/*
 		 * cloudinaryOutput[0] stores the image url cloudinaryOutput[1] stores the image publicId
 		 */
-
+		StallController stallCtrl = new StallController();
 		double price = Double.parseDouble(parameters[4]);
 
-		Stall stall = stallController.getStall(stallId);
+		Stall stall = stallCtrl.getStall(stallId);
 		if (!parameters[2].isEmpty()) {
 			boolean isChinese = checkChineseWords(parameters[2]);
 			if (!isChinese) {
@@ -376,11 +339,11 @@ public class FoodController {
 			throw new Exception(parameters[1] + " already exists in " + stall.getName());
 		}
 		if (image.length == 0) {
-			Food food = new Food(parameters[1], parameters[2], parameters[3], price,
-					null, null, stall);
-	
+			Food food = new Food(parameters[1], parameters[2], parameters[3], price, null, null,
+					stall);
+
 			food.setWeatherConditions(parameters[5]);
-	
+
 			System.out.println("foodname: " + food.getName());
 			System.out.println("saving food...");
 			saveFood(food);
@@ -388,9 +351,9 @@ public class FoodController {
 			cloudinaryOutput = imageUpload(image);
 			Food food = new Food(parameters[1], parameters[2], parameters[3], price,
 					cloudinaryOutput[0], cloudinaryOutput[1], stall);
-	
+
 			food.setWeatherConditions(parameters[5]);
-	
+
 			System.out.println("foodname: " + food.getName());
 			System.out.println("saving food...");
 			saveFood(food);

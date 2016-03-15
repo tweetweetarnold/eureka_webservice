@@ -3,6 +3,9 @@ package servlet.process.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -12,20 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Canteen;
-import model.Employee;
-import model.OrderWindow;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import value.StringValues;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import controller.AccessController;
-import controller.OrderWindowController;
+import controller.AnalyticsController;
+import controller.OrderPeriodController;
+import model.Canteen;
+import model.Employee;
+import model.Food;
+import model.OrderPeriod;
+import model.Stall;
+import value.StringValues;
 
 /**
  * Servlet implementation class Hello
@@ -53,12 +57,14 @@ public class ProcessLoginServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		HttpSession session = request.getSession();
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 
 		AccessController accessController = new AccessController();
-		OrderWindowController orderWindowController = new OrderWindowController();
+		OrderPeriodController orderPeriodController = new OrderPeriodController();
+		AnalyticsController analyticsCtrl = new AnalyticsController();
 		JSONObject obj = new JSONObject();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -104,22 +110,22 @@ public class ProcessLoginServlet extends HttpServlet {
 			/*
 			 * (3) VERIFY AVAILABLE OPENED ORDER WINDOW.
 			 */
-			ArrayList<OrderWindow> windowList = orderWindowController
-					.getAllOpenedWindowsForCompany(emp.getCompany());
-			if (windowList == null || windowList.size() == 0) {
-				System.out.println("windowList size: " + windowList.size());
+			ArrayList<OrderPeriod> periodList = orderPeriodController
+					.getAllOpenedPeriodsForCompany(emp.getCompany());
+			if (periodList == null || periodList.size() == 0) {
+				System.out.println("periodList size: " + periodList.size());
 			}
 
 			/*
 			 * ************* End of validation ********************
 			 */
 
-			OrderWindow window = null;
+			OrderPeriod period = null;
 			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + emp.getEmail()
 					+ "|";
 
-			if (!windowList.isEmpty()) {
-				window = windowList.get(0);
+			if (!periodList.isEmpty()) {
+				period = periodList.get(0);
 			} else {
 				session.setAttribute("user", emp);
 				session.setAttribute("tokenID", tokenID);
@@ -131,15 +137,29 @@ public class ProcessLoginServlet extends HttpServlet {
 			// Setting user and token
 			session.setAttribute("user", emp);
 			session.setAttribute("tokenID", tokenID);
-			session.setAttribute("orderWindow", window);
+			session.setAttribute("orderPeriod", period);
 			System.out.println("TokenID is set in session");
 
 			// for login2
-			if (window != null && window.getStatus().equals(StringValues.ACTIVE)) {
+			if (period != null && period.getStatus().equals(StringValues.ACTIVE)) {
+				
 				ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
-				canteenList.add(window.getCanteen());
+				canteenList.add(period.getCanteen());
 				session.setAttribute("canteenList", canteenList);
 				System.out.println("canteenList size: " + canteenList.size());
+				ArrayList<Stall> stallList = new ArrayList<Stall>(period.getCanteen().getActiveStallList());
+				Collections.sort(stallList, new Comparator<Stall>() {
+					public int compare(Stall arg0, Stall arg1) {
+						// TODO Auto-generated method stub
+						return arg0.getName().compareTo(arg1.getName());
+					}
+				});
+				session.setAttribute("stallList", stallList);
+				LinkedHashMap<Food, Integer> map = analyticsCtrl.topKfoods(period.getCanteen().getCanteenId());
+				session.setAttribute("mostOrderedList", map);
+				System.out.println("canteenID" + period.getCanteen().getCanteenId());
+				System.out.println("mostorderedlist: " + map);
+				
 			}else{
 				if (!response.isCommitted()) {
 					session.setAttribute("suspended", "true");

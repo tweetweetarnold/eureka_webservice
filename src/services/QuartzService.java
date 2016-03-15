@@ -14,6 +14,8 @@ import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
 import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
+import org.quartz.TriggerKey;
 import org.quartz.impl.StdSchedulerFactory;
 import static org.quartz.TriggerBuilder.newTrigger;
 
@@ -28,23 +30,6 @@ public class QuartzService {
 	public QuartzService() {
 
 	}
-	// for order window notification
-	public void setupNewJobAndTrigger(String orderWindowId, Date startTime) throws SchedulerException{
-	    Scheduler sched = StdSchedulerFactory.getDefaultScheduler();
-	    JobDetail job1 = newJob(SendNotification.class).withIdentity(orderWindowId,"group2").build();
-	    job1.getJobDataMap().put(SendNotification.ORDERWINDOW_ID, orderWindowId);
-	    SimpleTrigger trigger1 = (SimpleTrigger) newTrigger() 
-	    	    .withIdentity(orderWindowId, "group2")
-	    	    .startAt(startTime) // some Date 
-	    	    .forJob(orderWindowId, "group2") // identify job with name, group strings
-	    	    .build();
-	    sched.scheduleJob(job1, trigger1);
-	    sched.start();
-	    System.out.println("Job Scheduled");
-	}
-	
-	//for weekly suspension,payment notificaion on friday and daily chase payment
-	
 	public void doProcess(){
 
         try {
@@ -115,6 +100,47 @@ public class QuartzService {
             se.printStackTrace();
         }
     }
+	
+	//for weekly suspension,payment notificaion on friday and daily chase payment
+	
+	// for order window notification
+	public void setupNewJobAndTrigger(String orderWindowId, Date startTime) throws SchedulerException{
+	    Scheduler sched = StdSchedulerFactory.getDefaultScheduler();
+	    JobDetail job1 = newJob(SendNotification.class).withIdentity(orderWindowId,"group2").build();
+	    job1.getJobDataMap().put(SendNotification.ORDERPERIOD_ID, orderWindowId);
+	    SimpleTrigger trigger1 = (SimpleTrigger) newTrigger() 
+	    	    .withIdentity(orderWindowId, "group2")
+	    	    .startAt(startTime) // some Date 
+	    	    .forJob(orderWindowId, "group2") // identify job with name, group strings
+	    	    .build();
+	    sched.scheduleJob(job1, trigger1);
+	    sched.start();
+	    System.out.println("Job Scheduled");
+	}
+	
+	
+	public void setupNewJobAndTriggerForJobs(String jobType, int day, int hour, int min) throws Exception{
+		Scheduler sched = StdSchedulerFactory.getDefaultScheduler();
+	    Trigger oldTrigger = null;
+	    if(jobType.equals("weeklySuspension")){
+	    	oldTrigger = sched.getTrigger(TriggerKey.triggerKey("trigger1", "group1"));
+	    }else if(jobType.equals("paymentNotification")){
+	    	oldTrigger = sched.getTrigger(TriggerKey.triggerKey("trigger2", "group1"));
+	    }else if(jobType.equals("chasePayment")){
+	    	oldTrigger = sched.getTrigger(TriggerKey.triggerKey("trigger3", "group1"));
+	    }else{
+	    	throw new Exception("Error with Job Name");
+	    }
+	    TriggerBuilder tb = oldTrigger.getTriggerBuilder();
+    	Trigger newTrigger = tb.withSchedule(weeklyOnDayAndHourAndMinute(day, hour, min).inTimeZone(TimeZone.getTimeZone("GMT+8:00")))
+    		    .build();
+	    
+	    
+    	sched.rescheduleJob(oldTrigger.getKey(), newTrigger);
+    	sched.start();
+	}
+	
+	
 	
 
 }

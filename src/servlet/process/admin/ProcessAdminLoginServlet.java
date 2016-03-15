@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Admin;
-import services.PasswordService;
 import controller.AccessController;
+import model.Admin;
 
 /**
  * Servlet implementation class ProcessAdminLoginServlet
@@ -59,8 +58,7 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 			adminInputPwd = (String) request.getParameter("adminPassword");
 
 			// Verify user credentials. if user does not exist, returns null
-			Admin admin = loginController.authenticateAdmin(adminUsername,
-					PasswordService.encryptPassword(adminInputPwd));
+			Admin admin = loginController.authenticateAdmin(adminUsername, adminInputPwd);
 			System.out.println("Admin is authenticated: " + admin.getName());
 
 			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + admin.getUsername()
@@ -72,7 +70,7 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 
 			System.out.println("TokenID is set in session");
 
-			response.sendRedirect("/eureka_webservice/LoadOrderWindowOpenedServlet");
+			response.sendRedirect("/eureka_webservice/LoadOrderPeriodActiveServlet");
 
 		} catch (Exception e) {
 			System.out.println("Exception thrown. Incorrect credentials.");

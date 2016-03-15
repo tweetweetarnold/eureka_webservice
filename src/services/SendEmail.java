@@ -17,43 +17,41 @@ public class SendEmail {
 	private final String password = "{ryusoken}";
 	private final String username = "kohbuslunchtime@gmail.com";
 
-	private MimeMessage createEmailMessage(String subject, String messageBody, String[] toEmails)
-			throws MessagingException {
-		String emailSubject = subject;
-		String emailBody = messageBody;
-
-		mailSession = Session.getInstance(emailProperties, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		});
-		MimeMessage emailMessage = null;
-
-		try {
-			emailMessage = new MimeMessage(mailSession);
-
-			for (int i = 0; i < toEmails.length; i++) {
-				emailMessage.addRecipient(Message.RecipientType.TO,
-						new InternetAddress(toEmails[i]));
-			}
-
-			emailMessage.setSubject(emailSubject);
-			emailMessage.setContent(emailBody, "text/html; charset=utf-8");
-			emailMessage.setFrom(new InternetAddress("no_reply@lunchtime.com",
-					"Koh Bus LunchTime Ordering App"));
-			emailMessage.setReplyTo(InternetAddress.parse("no_reply@lunchtime.com", false));
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return emailMessage;
-	}
+	// private MimeMessage createEmailMessage(String subject, String messageBody, String[]
+	// recipients)
+	// throws MessagingException {
+	//
+	// mailSession = Session.getInstance(emailProperties, new javax.mail.Authenticator() {
+	// protected PasswordAuthentication getPasswordAuthentication() {
+	// return new PasswordAuthentication(username, password);
+	// }
+	// });
+	//
+	// MimeMessage emailMessage = null;
+	//
+	// try {
+	// emailMessage = new MimeMessage(mailSession);
+	//
+	// for (int i = 0; i < recipients.length; i++) {
+	// emailMessage.addRecipient(Message.RecipientType.TO,
+	// new InternetAddress(recipients[i]));
+	// }
+	//
+	// emailMessage.setSubject(subject);
+	// emailMessage.setContent(messageBody, "text/html; charset=utf-8");
+	// emailMessage.setFrom(new InternetAddress("no_reply@lunchtime.com",
+	// "Koh Bus LunchTime Ordering App"));
+	// emailMessage.setReplyTo(InternetAddress.parse("no_reply@lunchtime.com", false));
+	//
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	//
+	// return emailMessage;
+	// }
 
 	private MimeMessage createEmailMessageWithCarbonCopy(String subject, String messageBody,
-			String[] toEmails, String[] ccEmails) throws MessagingException {
-		String emailSubject = subject;
-		String emailBody = messageBody;
+			String[] recipients, String[] ccEmails) throws MessagingException {
 
 		mailSession = Session.getInstance(emailProperties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -65,24 +63,25 @@ public class SendEmail {
 		try {
 			emailMessage = new MimeMessage(mailSession);
 
-			for (int i = 0; i < toEmails.length; i++) {
+			// set recipients
+			for (int i = 0; i < recipients.length; i++) {
 				emailMessage.addRecipient(Message.RecipientType.TO,
-						new InternetAddress(toEmails[i]));
+						new InternetAddress(recipients[i]));
 			}
 
+			// set cc recipients
 			if (ccEmails != null) {
-
 				for (int i = 0; i < ccEmails.length; i++) {
-					emailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress(
-							ccEmails[i]));
+					emailMessage.addRecipient(Message.RecipientType.CC,
+							new InternetAddress(ccEmails[i]));
 				}
 			}
 
-			emailMessage.addRecipient(Message.RecipientType.BCC, new InternetAddress(
-					"chris.cheng.2013@sis.smu.edu.sg"));
+			emailMessage.addRecipient(Message.RecipientType.BCC,
+					new InternetAddress("chris.cheng.2013@sis.smu.edu.sg"));
 
-			emailMessage.setSubject(emailSubject);
-			emailMessage.setContent(emailBody, "text/html; charset=utf-8");
+			emailMessage.setSubject(subject);
+			emailMessage.setContent(messageBody, "text/html; charset=utf-8");
 			emailMessage.setFrom(new InternetAddress("no_reply@lunchtime.com",
 					"Koh Bus LunchTime Ordering App"));
 			emailMessage.setReplyTo(InternetAddress.parse("no_reply@lunchtime.com", false));
@@ -94,21 +93,17 @@ public class SendEmail {
 		return emailMessage;
 	}
 
-	public void sendEmail(String subject, String messageBody, String[] toEmails)
-			throws MessagingException {
+	// public void sendEmail(String subject, String messageBody, String[] recipients)
+	// throws MessagingException {
+	//
+	// Message emailMessage = createEmailMessage(subject, messageBody, recipients);
+	// Transport.send(emailMessage);
+	// }
 
-		Message emailMessage = createEmailMessage(subject, messageBody, toEmails);
-		Transport.send(emailMessage);
-	}
-
-	public void sendEmailWithCarbonCopy(String subject, String messageBody, String[] toEmails,
+	public void sendEmail(String subject, String messageBody, String[] recipients,
 			String[] ccEmails) throws MessagingException {
-		System.out.println(subject);
-		System.out.println(messageBody);
-		System.out.println(toEmails);
-		System.out.println(ccEmails);
-		
-		Message emailMessage = createEmailMessageWithCarbonCopy(subject, messageBody, toEmails,
+
+		Message emailMessage = createEmailMessageWithCarbonCopy(subject, messageBody, recipients,
 				ccEmails);
 		Transport.send(emailMessage);
 	}

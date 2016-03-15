@@ -1,26 +1,46 @@
 package controller;
 
+import java.awt.Color;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeMap;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.ui.TextAnchor;
 import org.joda.time.DateTime;
 
+import connection.MyConnection;
 import dao.EmployeeDAO;
 import dao.FoodOrderDAO;
 import dao.FoodOrderItemDAO;
 import dao.ModifierSectionDAO;
+import model.Company;
 import model.Employee;
 import model.Food;
 import model.FoodDisplayObject;
 import model.FoodOrder;
 import model.FoodOrderItem;
 import model.ModifierChosen;
-import model.OrderWindow;
+import model.OrderPeriod;
 import model.Stall;
 import value.StringValues;
 
@@ -34,6 +54,9 @@ public class FoodOrderController {
 	EmployeeDAO employeeDAO = new EmployeeDAO();
 	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
 	DateTime today = new DateTime();
+	FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
+	ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+	CompanyController companyController = new CompanyController();
 
 	/**
 	 * Creates a default constructor for FoodOrderController
@@ -51,25 +74,27 @@ public class FoodOrderController {
 	}
 
 	public void addFoodOrderItemIntoFoodOrder(FoodOrderItem foodOrderItem, FoodOrder foodOrder) {
+		Employee employee = foodOrder.getEmployee();
+		double amountOwed = employee.getAmountOwed();
+		amountOwed -= foodOrder.getFinalPrice();
 		Set<FoodOrderItem> foodOrderItemList = foodOrder.getFoodOrderList();
 		foodOrderItemList.add(foodOrderItem);
 		foodOrder.setFoodOrderList(foodOrderItemList);
+		amountOwed += foodOrder.getFinalPrice();
+		employee.setAmountOwed(amountOwed);
+		employeeDAO.updateEmployee(employee);
 		updateFoodOrder(foodOrder);
 	}
 
-	public boolean checkForExistingOrder(Employee employee, OrderWindow orderWindow) {
-		FoodOrderDAO foodOrderDao = new FoodOrderDAO();
-		if (foodOrderDao.getAllFoodOrderOfOrderWindowForUser(employee, orderWindow).isEmpty()) {
+	public boolean checkForExistingOrder(Employee employee, OrderPeriod orderPeriod) {
+		if (foodOrderDAO.getAllFoodOrderOfOrderPeriodForUser(employee, orderPeriod).isEmpty()) {
 			return false;
 		}
 		return true;
 	}
 
 	public void deleteFoodOrderItem(int foodOrderItemId) throws Exception {
-		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
-		// FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
-		EmployeeDAO employeeDAO = new EmployeeDAO();
-		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+
 		FoodOrderItem foodOrderItemToDelete = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
 		FoodOrder foodOrderToDelete = foodOrderItemToDelete.getFoodOrder();
 		if (foodOrderToDelete.getStatus() == StringValues.PAID) {
@@ -90,6 +115,7 @@ public class FoodOrderController {
 		// remove ModifierChosen
 		Set<ModifierChosen> modifierList = foodOrderItemToDelete.getModifierChosenList();
 		for (ModifierChosen modifierChosen : modifierList) {
+			modifierChosen.setFood(null);
 			modifierSectionDAO.deleteModifierChosen(modifierChosen);
 		}
 
@@ -99,20 +125,37 @@ public class FoodOrderController {
 		foodOrderItemToDelete.setModifierChosenList(null);
 		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToDelete);
 		foodOrderItemDAO.deleteFoodOrderItem(foodOrderItemToDelete);
+		
 
+	}
+	
+	public void deleteFoodOrderItemFromFoodOrderTest(int foodOrderItemId) throws Exception {
+		FoodOrderItem foodOrderItem = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
+		FoodOrder foodOrder = foodOrderItem.getFoodOrder();
+		//archive FoodOrder if it's the last foodOrderItem to be deleted
+		if(foodOrder.getFoodOrderList().size()==1){
+			deleteFoodOrderItem(foodOrderItemId);
+			foodOrder.setEmployee(null);
+			foodOrder.setFoodOrderList(null);
+			foodOrder.setOrderPeriod(null);
+			foodOrder.setTransactionId(null);
+			MyConnection.delete(foodOrder);
+		}else{
+			deleteFoodOrderItem(foodOrderItemId);
+		}
 	}
 
 	/**
-	 * Returns all FoodOrderItem objects in the OrderWindow sorted in a HashMap with Employee (key)
+	 * Returns all FoodOrderItem objects in the OrderPeriod sorted in a HashMap with Employee (key)
 	 * and ArrayList<FoodOrderItem>
 	 * 
-	 * @param orderWindow OrderWindow of FoodOrderItem(s) to retrieve
+	 * @param orderPeriod OrderPeriod of FoodOrderItem(s) to retrieve
 	 * @return a HashMap with Employee as Key and his corresponding FoodOrderItem(s) ordered
 	 */
-	public HashMap<Employee, ArrayList<FoodOrderItem>> getAllFoodOrderOfOrderWindow(
-			OrderWindow orderWindow) {
+	public HashMap<Employee, ArrayList<FoodOrderItem>> getAllFoodOrderOfOrderPeriod(
+			OrderPeriod orderPeriod) {
 		// get all orders made today
-		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getAllFoodOrderOfOrderWindow(orderWindow);
+		List<FoodOrder> tempFoodOrderList = foodOrderDAO.getAllFoodOrderOfOrderPeriod(orderPeriod);
 		// hashmap for return later
 		HashMap<Employee, ArrayList<FoodOrderItem>> map = new HashMap<Employee, ArrayList<FoodOrderItem>>();
 
@@ -147,14 +190,14 @@ public class FoodOrderController {
 	 * Returns a ArrayList of FoodDisplayObjects to be use in the admin food order display (by
 	 * stalls)
 	 * 
-	 * @param orderWindow OrderWindow of FoodDisplayObject(s) to retrieve
-	 * @return a ArrayList of the FoodDisplayObject(s) within the order window
+	 * @param orderPeriod OrderPeriod of FoodDisplayObject(s) to retrieve
+	 * @return a ArrayList of the FoodDisplayObject(s) within the order period
 	 */
-	public ArrayList<FoodDisplayObject> getAllFoodOrderOfOrderWindowGroupedByStall(
-			OrderWindow orderWindow) {
+	public ArrayList<FoodDisplayObject> getAllFoodOrderOfOrderPeriodGroupedByStall(
+			OrderPeriod orderPeriod) {
 
 		ArrayList<FoodOrder> tempFoodOrderList = foodOrderDAO
-				.getAllFoodOrderOfOrderWindow(orderWindow);
+				.getAllFoodOrderOfOrderPeriod(orderPeriod);
 
 		// This is what we will eventually return. (FINAL)
 		ArrayList<FoodDisplayObject> foodDisplayList = new ArrayList<FoodDisplayObject>();
@@ -238,10 +281,10 @@ public class FoodOrderController {
 
 			// this populates (C) (Quantity)
 			for (FoodOrderItem tempItem : uniqueFoodOrderItem) {
-				int tempquantity = 0;
+				int tempquantity = tempItem.getQuantity();
 				for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
-					if (i.equals2(tempItem)) {
-						tempquantity++;
+					if (i.equals2(tempItem)&&i.getFoodOrderItemId()!=tempItem.getFoodOrderItemId()) {
+						tempquantity+=i.getQuantity();
 					}
 				}
 
@@ -267,9 +310,6 @@ public class FoodOrderController {
 						String tempUsername = i.getFoodOrder().getEmployee().getEmail();
 						usernames.add(tempUsername);
 					}
-					// usernamesForFoodItem.put(f.getFoodOrderItemId(), new
-					// ArrayList<String>(
-					// usernames));
 				}
 
 				for (String s : usernames) {
@@ -350,26 +390,26 @@ public class FoodOrderController {
 		// This is what we will eventually return. (FINAL)
 		ArrayList<FoodDisplayObject> foodDisplayList = new ArrayList<FoodDisplayObject>();
 
-		// (A) LinkedHashMap for all the FoodOrderItems with the store as the
-		// key
+		/*
+		 * (A) LinkedHashMap for all the FoodOrderItems with the store as the key
+		 */
 		HashMap<String, ArrayList<FoodOrderItem>> stallToFoodItemLinkedHash = new HashMap<String, ArrayList<FoodOrderItem>>();
 
-		// retrieving all the FoodOrderItems from a FoodOrder in order to
-		// populate the
-		// (A)stallToFoodItemLinkedHash
+		/*
+		 * retrieving all the FoodOrderItems from a FoodOrder in order to populate the
+		 * (A)stallToFoodItemLinkedHash
+		 */
 		for (int i = 0; i < tempFoodOrderList.size(); i++) {
 			FoodOrder tempFoodOrder = tempFoodOrderList.get(i);
 			ArrayList<FoodOrderItem> tempFoodOrderItem = new ArrayList<FoodOrderItem>(
 					tempFoodOrder.getFoodOrderList());
 
-			// looping through the FoodOrderItems in the tempFoodOrderItemList
-			// and then checking
-			// if the stall of the FoodOrderItem already exists in
-			// (A)stallToFoodItemLinkedHash
-			// if it does then add the foodOrderItem into the existing list with
-			// the stall as the
-			// key in (A)
-			// else create a new Stall Key in (A)
+			/*
+			 * looping through the FoodOrderItems in the tempFoodOrderItemList and then checking if
+			 * the stall of the FoodOrderItem already exists in (A)stallToFoodItemLinkedHash if it
+			 * does then add the foodOrderItem into the existing list with the stall as the key in
+			 * (A) else create a new Stall Key in (A)
+			 */
 			for (FoodOrderItem foodItem : tempFoodOrderItem) {
 				FoodOrderItem foodItemd = foodItem;
 				Food tempFood = foodItemd.getFood();
@@ -396,21 +436,24 @@ public class FoodOrderController {
 		int count = 1;
 		// This will populate the (FINAL) list
 		while (iter.hasNext()) {
-			// this (B)LinkedHashMap will store all the users who ordered the
-			// particular
-			// FoodOrderItem.
+			/*
+			 * this (B)LinkedHashMap will store all the users who ordered the particular
+			 * FoodOrderItem.
+			 */
 			HashMap<Integer, ArrayList<Employee>> usernamesForFoodItem = new HashMap<Integer, ArrayList<Employee>>();
 			String stallName = (String) iter.next();
 			// (AA)This holds all the FoodOrderItems for the stall.
 			ArrayList<FoodOrderItem> tempFoodOrderItemForDisplay = stallToFoodItemLinkedHash
 					.get(stallName);
-			// this (C)LinkedHashMap will store the quantity of the particular
-			// FoodOrderItem.
+			/*
+			 * this (C)LinkedHashMap will store the quantity of the particular FoodOrderItem.
+			 */
 			HashMap<Integer, Integer> quantityForFoodOrderItem = new HashMap<Integer, Integer>();
 			ArrayList<FoodOrderItem> uniqueFoodOrderItem = new ArrayList<FoodOrderItem>();
-			// this loops Through the foodOrderItems in (AA) in order to take
-			// out the unique
-			// FoodOrderItems and stores them in UniqueFoodOrderItem
+			/*
+			 * this loops Through the foodOrderItems in (AA) in order to take out the unique
+			 * FoodOrderItems and stores them in UniqueFoodOrderItem
+			 */
 			for (FoodOrderItem i : tempFoodOrderItemForDisplay) {
 				Iterator<FoodOrderItem> iterator = uniqueFoodOrderItem.iterator();
 				int equalCount = 0;
@@ -440,7 +483,6 @@ public class FoodOrderController {
 			// not too sure if we can use the old uniqueFoodOrderItemList....
 			ArrayList<FoodOrderItem> uniqueFoodOrderItems = new ArrayList<FoodOrderItem>();
 			Iterator<Integer> iterFoodItemID = quantityForFoodOrderItem.keySet().iterator();
-			FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
 			while (iterFoodItemID.hasNext()) {
 				int id = (Integer) iterFoodItemID.next();
 				FoodOrderItem tempFoodOrderItem = foodOrderItemDAO.getFoodOrderItem(id);
@@ -507,8 +549,6 @@ public class FoodOrderController {
 	 */
 	public HashMap<Integer, ArrayList<FoodOrderItem>> getFoodOrderItemsForStall(Date earlierDate,
 			Date laterDate) {
-		// ArrayList<FoodOrder> tempFoodOrderList = new ArrayList<FoodOrder>(
-		// getFoodOrderBetweenCutOff(earlierDate, laterDate));
 		List<FoodOrder> tempFoodOrderList = foodOrderDAO
 				.getFoodOrderByDate(today.minusDays(1).toDate(), today.toDate());
 
@@ -537,6 +577,12 @@ public class FoodOrderController {
 			mapToReturn.put(tempStallID, foodOrderListForStallName);
 		}
 		return mapToReturn;
+	}
+
+	public List<FoodOrder> getCompanyFoodOrderSet(Company company) {
+		List<FoodOrder> returnList = incrementQuantity(
+				foodOrderDAO.getCompanyFoodOrderSet(company));
+		return returnList;
 	}
 
 	/**
@@ -601,10 +647,10 @@ public class FoodOrderController {
 			}
 			ArrayList<FoodOrderItem> foodOrderItemsWithQuantity = new ArrayList<FoodOrderItem>();
 			for (FoodOrderItem tempItem : UniquefoodOrderItemList) {
-				int tempquantity = 0;
+				int tempquantity = tempItem.getQuantity();
 				for (FoodOrderItem i : foodOrderItemList) {
-					if (i.equals2(tempItem)) {
-						tempquantity++;
+					if (i.equals2(tempItem)&&i.getFoodOrderItemId()!=tempItem.getFoodOrderItemId()) {
+						tempquantity+=i.getQuantity();
 					}
 				}
 
@@ -644,10 +690,10 @@ public class FoodOrderController {
 		}
 		ArrayList<FoodOrderItem> foodOrderItemsWithQuantity = new ArrayList<FoodOrderItem>();
 		for (FoodOrderItem tempItem : UniquefoodOrderItemList) {
-			int tempquantity = 0;
+			int tempquantity = tempItem.getQuantity();
 			for (FoodOrderItem i : foodOrderItemList) {
-				if (i.equals2(tempItem)) {
-					tempquantity++;
+				if (i.equals2(tempItem)&&i.getFoodOrderItemId()!=tempItem.getFoodOrderItemId()) {
+					tempquantity+=i.getQuantity();
 				}
 			}
 
@@ -669,9 +715,8 @@ public class FoodOrderController {
 	 * 
 	 */
 	public void replaceWithFavoriteFood(int foodUnavailableID, Date earlierDate, Date laterDate) {
-		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
-		FoodController foodController = new FoodController();
-		Food foodUnavailable = foodController.getFood(foodUnavailableID);
+		FoodController foodCtrl = new FoodController();
+		Food foodUnavailable = foodCtrl.getFood(foodUnavailableID);
 
 		ArrayList<Object> foodOrderItemUnavailableList = new ArrayList<Object>(
 				foodOrderItemDAO.getFoodOrderItems(foodUnavailable, earlierDate, laterDate));
@@ -694,8 +739,6 @@ public class FoodOrderController {
 
 	public void updateFoodOrder(int foodOrderItemId, Food newFood,
 			Set<ModifierChosen> newModifierChosenSet, int quantity) throws Exception {
-		FoodOrderItemDAO foodOrderItemDAO = new FoodOrderItemDAO();
-		EmployeeDAO employeeDAO = new EmployeeDAO();
 		FoodOrderItem foodOrderItemToEdit = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
 		FoodOrder foodOrderToEdit = foodOrderItemToEdit.getFoodOrder();
 		if (foodOrderToEdit.getStatus() == StringValues.PAID) {
@@ -703,8 +746,9 @@ public class FoodOrderController {
 		}
 		Employee employee = foodOrderToEdit.getEmployee();
 
-		// we need to change the amount owed of the employee so we remove the
-		// foodOrder price first
+		/*
+		 * we need to change the amount owed of the employee so we remove the foodOrder price first
+		 */
 		double amountOwed = employee.getAmountOwed() - foodOrderToEdit.getFinalPrice();
 
 		// edit the foodOrderItem here
@@ -722,5 +766,475 @@ public class FoodOrderController {
 		employeeDAO.updateEmployee(employee);
 		foodOrderItemDAO.updateFoodOrderItem(foodOrderItemToEdit);
 		updateFoodOrder(foodOrderToEdit);
+	}
+
+	/*
+	 * Returns a Map with monthYear as the key and the list of FoodOrders that is within the
+	 * monthYear example of monthYear format: 2016-12
+	 */
+	public TreeMap<String, ArrayList<FoodOrder>> getFoodOrderSetByMonthYear(Employee employee) {
+		// Employee employee = employeeDAO.getEmployeeByEmail(email);
+		String email = employee.getEmail();
+		List<Object> list = foodOrderDAO.getUniqueMonthYearInFoodOrderForUser(employee);
+		List<FoodOrder> userFoodOrders = getFoodOrderSet(email);
+		TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders = new TreeMap<>(
+				Collections.reverseOrder());
+		for (Object obj : list) {
+			String monthYear = (String) obj;
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder order : userFoodOrders) {
+				String str = order.getCreateDate().toString();
+				if (str.contains(monthYear)) {
+					sortList.add(order);
+					// System.out.println(str + " added");
+				}
+				// System.out.println("End of 3rd Layer");
+			}
+			// System.out.println("Putting " + monthYear + " into Map");
+			yearMonthToFoodOrders.put(monthYear, sortList);
+		}
+
+		return yearMonthToFoodOrders;
+	}
+
+	/*
+	 * Returns a Map with monthYear as the key and the list of FoodOrders that is within the
+	 * monthYear example of monthYear format: 2016-12
+	 */
+	public TreeMap<String, ArrayList<FoodOrder>> getCompanyFoodOrderSetByMonthYear(
+			String companyCode) {
+		// Employee employee = employeeDAO.getEmployeeByEmail(email);
+		Company company = companyController.getCompanyByCompanyCode(companyCode);
+		List<Object> list = foodOrderDAO.getUniqueMonthYearInFoodOrderForCompany(company);
+		List<FoodOrder> userFoodOrders = getCompanyFoodOrderSet(company);
+		TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders = new TreeMap<>(
+				Collections.reverseOrder());
+		for (Object obj : list) {
+			String monthYear = (String) obj;
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder order : userFoodOrders) {
+				String str = order.getCreateDate().toString();
+				if (str.contains(monthYear)) {
+					sortList.add(order);
+					// System.out.println(str + " added");
+				}
+				// System.out.println("End of 3rd Layer");
+			}
+			// System.out.println("Putting " + monthYear + " into Map");
+			yearMonthToFoodOrders.put(monthYear, sortList);
+		}
+
+		return yearMonthToFoodOrders;
+	}
+
+	public TreeMap<String, ArrayList<FoodOrder>> getAllFoodOrdersSetByMonthYear() {
+		List<Object> list = foodOrderDAO.getUniqueMonthYearInFoodOrders();
+		List<FoodOrder> allFoodOrders = foodOrderDAO.getAllFoodOrders();
+		TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders = new TreeMap<>(
+				Collections.reverseOrder());
+		for (Object obj : list) {
+			String monthYear = (String) obj;
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder order : allFoodOrders) {
+				String str = order.getCreateDate().toString();
+				if (str.contains(monthYear)) {
+					sortList.add(order);
+
+				}
+
+			}
+
+			yearMonthToFoodOrders.put(monthYear, sortList);
+		}
+
+		return yearMonthToFoodOrders;
+	}
+
+	public TreeMap<String, Double> getFoodOrderSetTotalPriceByMonthYear(
+			TreeMap<String, ArrayList<FoodOrder>> yearMonthToFoodOrders) {
+		Set<String> keyList = yearMonthToFoodOrders.keySet();
+		TreeMap<String, Double> yearMonthToFoodOrdersTotalPrice = new TreeMap<>(
+				Collections.reverseOrder());
+		Iterator<String> iter = keyList.iterator();
+		while (iter.hasNext()) {
+			String yearMonth = (String) iter.next();
+			// System.out.println("**********");
+			// System.out.println("MONTH " + yearMonth);
+			// System.out.println("**********");
+			ArrayList<FoodOrder> tList = yearMonthToFoodOrders.get(yearMonth);
+			double sumOfFinalPrices = 0.0;
+			for (FoodOrder fo : tList) {
+				double price = convertPriceToTwoDecimal(fo.getFinalPrice());
+				if (price < 0) {
+					price = 0.0;
+				}
+				sumOfFinalPrices += price;
+				// System.out.println(fo.getCreateDate().toString() + "\t Final
+				// Price:" + price);
+				// System.out.println("=======================");
+
+			}
+			System.out.println("Total price for the month: " + sumOfFinalPrices);
+			System.out.println();
+			yearMonthToFoodOrdersTotalPrice.put(yearMonth, sumOfFinalPrices);
+			//
+		}
+		return yearMonthToFoodOrdersTotalPrice;
+	}
+
+	public double convertPriceToTwoDecimal(double finalPrice) {
+		return Math.round(finalPrice * 100.0) / 100.0;
+	}
+
+	public TreeMap<String, ArrayList<FoodOrder>> getCompanyFoodOrderSetByWeek(String companyCode) {
+		Company company = companyController.getCompanyByCompanyCode(companyCode);
+		List<String> week = foodOrderDAO.getUniqueWeekInFoodOrderForCompany(company);
+		List<FoodOrder> companyFoodOrders = getCompanyFoodOrderSet(company);
+		ArrayList<ArrayList<Date>> dateList = dateTransformation(week);
+
+		TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrder = new TreeMap<>(
+				Collections.reverseOrder());
+
+		for (int i = 0; i < dateList.size(); i++) {
+			ArrayList<Date> dlist = dateList.get(i);
+			Date start = dlist.get(0);
+			Date end = dlist.get(1);
+
+			System.out.println("====");
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder fo : companyFoodOrders) {
+				Date fd = fo.getCreateDate();
+				if ((fd.after(start)) && (fd.before(end))) {
+					sortList.add(fo);
+				}
+			}
+			if (!sortList.isEmpty()) {
+				weekToFoodOrder.put(week.get(i), sortList);
+			}
+		}
+		return weekToFoodOrder;
+	}
+
+	public TreeMap<String, ArrayList<FoodOrder>> getAllFoodOrdersSetByWeek() {
+		// String email = employee.getEmail();
+		List<String> week = foodOrderDAO.getUniqueWeekInFoodOrders();
+		List<FoodOrder> allFoodOrders = foodOrderDAO.getAllFoodOrders();
+		ArrayList<ArrayList<Date>> dateList = dateTransformation(week);
+
+		TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrder = new TreeMap<>(
+				Collections.reverseOrder());
+
+		for (int i = 0; i < dateList.size(); i++) {
+			ArrayList<Date> dlist = dateList.get(i);
+			Date start = dlist.get(0);
+			Date end = dlist.get(1);
+
+			System.out.println("====");
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder fo : allFoodOrders) {
+				Date fd = fo.getCreateDate();
+				if ((fd.after(start)) && (fd.before(end))) {
+					sortList.add(fo);
+				}
+			}
+			if (!sortList.isEmpty()) {
+				weekToFoodOrder.put(week.get(i), sortList);
+			}
+		}
+		return weekToFoodOrder;
+	}
+
+	public TreeMap<String, ArrayList<FoodOrder>> getFoodOrderSetByWeek(Employee employee) {
+		String email = employee.getEmail();
+		List<String> week = foodOrderDAO.getUniqueWeekInFoodOrderForUser(employee);
+		List<FoodOrder> userFoodOrders = getFoodOrderSet(email);
+		ArrayList<ArrayList<Date>> dateList = dateTransformation(week);
+
+		TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrder = new TreeMap<>(
+				Collections.reverseOrder());
+
+		for (int i = 0; i < dateList.size(); i++) {
+			ArrayList<Date> dlist = dateList.get(i);
+			Date start = dlist.get(0);
+			Date end = dlist.get(1);
+
+			System.out.println("====");
+			ArrayList<FoodOrder> sortList = new ArrayList<>();
+			for (FoodOrder fo : userFoodOrders) {
+				Date fd = fo.getCreateDate();
+				if ((fd.after(start)) && (fd.before(end))) {
+					sortList.add(fo);
+				}
+			}
+			if (!sortList.isEmpty()) {
+				weekToFoodOrder.put(week.get(i), sortList);
+			}
+		}
+		return weekToFoodOrder;
+	}
+
+	public ArrayList<ArrayList<Date>> dateTransformation(List<String> week) {
+		ArrayList<ArrayList<Date>> wl = new ArrayList<>();
+		for (Object o : week) {
+			String d = (String) o;
+			String[] arr = d.split("to");
+			ArrayList<Date> dateRange = new ArrayList<>();
+			for (int i = 0; i < arr.length; i++) {
+				// Date.parse(sp);
+				String sp = arr[i];
+				if (i == 1) {
+					sp = arr[i] + " 23:59:59";
+				} else {
+					sp = arr[i] + " 00:00:00";
+				}
+
+				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+				try {
+					Date date = formatter.parse(sp);
+					System.out.println(date);
+					dateRange.add(date);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+
+			}
+			// System.out.println(d);
+			wl.add(dateRange);
+			System.out.println("");
+		}
+		return wl;
+	}
+
+	public TreeMap<String, Double> getFoodOrderSetTotalPriceByWeek(
+			TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrder) {
+		TreeMap<String, Double> weekToTotalPrice = new TreeMap<>(Collections.reverseOrder());
+
+		Set<String> keySet = weekToFoodOrder.keySet();
+		Iterator<String> iter = keySet.iterator();
+		while (iter.hasNext()) {
+			String weeklabel = (String) iter.next();
+			System.out.println(weeklabel);
+			System.out.println("-------");
+			ArrayList<FoodOrder> fList = weekToFoodOrder.get(weeklabel);
+			double sum = 0.0;
+			for (FoodOrder fo : fList) {
+				System.out.println(fo.getCreateDate());
+				System.out.println(fo.getFinalPrice());
+				double price = convertPriceToTwoDecimal(fo.getFinalPrice());
+				if (price < 0) {
+					price = 0.0;
+				}
+				sum += price;
+			}
+			weekToTotalPrice.put(weeklabel, sum);
+		}
+
+		return weekToTotalPrice;
+	}
+
+	public TreeMap<String, ArrayList<String>> getYearToMonthListForAll() {
+		List<Object> yearList = foodOrderDAO.getUniqueYearInFoodOrders();
+		List<Object> monthList = foodOrderDAO.getUniqueMonthYearInFoodOrders();
+		TreeMap<String, ArrayList<String>> yearToMonthList = new TreeMap<>(
+				Collections.reverseOrder());
+		for (Object obj : yearList) {
+			String year = (String) obj;
+			ArrayList<String> filteredMonthList = new ArrayList<>();
+			for (Object o : monthList) {
+				String month = (String) o;
+				if (month.contains(year)) {
+					filteredMonthList.add(month);
+				}
+			}
+			yearToMonthList.put(year, filteredMonthList);
+
+		}
+		return yearToMonthList;
+
+	}
+
+	public TreeMap<String, ArrayList<String>> getYearToMonthList(Employee employee) {
+		List<Object> yearList = foodOrderDAO.getUniqueYearInFoodOrderForUser(employee);
+		List<Object> monthList = foodOrderDAO.getUniqueMonthYearInFoodOrderForUser(employee);
+		TreeMap<String, ArrayList<String>> yearToMonthList = new TreeMap<>(
+				Collections.reverseOrder());
+		for (Object obj : yearList) {
+			String year = (String) obj;
+			ArrayList<String> filteredMonthList = new ArrayList<>();
+			for (Object o : monthList) {
+				String month = (String) o;
+				if (month.contains(year)) {
+					filteredMonthList.add(month);
+				}
+			}
+			yearToMonthList.put(year, filteredMonthList);
+
+		}
+		return yearToMonthList;
+
+	}
+
+	public TreeMap<String, ArrayList<String>> getCompanyYearToMonthList(String companyCode) {
+		Company company = companyController.getCompanyByCompanyCode(companyCode);
+		List<Object> yearList = foodOrderDAO.getUniqueYearInFoodOrderForCompany(company);
+		List<Object> monthList = foodOrderDAO.getUniqueMonthYearInFoodOrderForCompany(company);
+
+		for (Object o : monthList) {
+			System.out.println(o.toString());
+		}
+		TreeMap<String, ArrayList<String>> yearToMonthList = new TreeMap<>(
+				Collections.reverseOrder());
+		for (Object obj : yearList) {
+			String year = (String) obj;
+			ArrayList<String> filteredMonthList = new ArrayList<>();
+			for (Object o : monthList) {
+				String month = (String) o;
+				if (month.contains(year)) {
+					filteredMonthList.add(month);
+				}
+			}
+			yearToMonthList.put(year, filteredMonthList);
+
+		}
+		return yearToMonthList;
+
+	}
+
+	public JFreeChart generateMonthlyChart(TreeMap<String, Double> yearMonthToTotalPrice,
+			String year) {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		String series1 = "spending";
+		String[] keySet = yearMonthToTotalPrice.keySet()
+				.toArray(new String[yearMonthToTotalPrice.size()]);
+		Arrays.sort(keySet);
+		
+		
+		
+		// java.util.Iterator<String> iter = keySet.iterator();
+		for (String yearMonth : keySet) {
+			if (yearMonth.contains(year)) {
+				double price = yearMonthToTotalPrice.get(yearMonth);
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+				try {
+					Date d = format.parse(yearMonth);
+					format.applyPattern("MMM");
+					yearMonth = format.format(d);
+					System.out.println(yearMonth);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				dataset.addValue(price, series1, yearMonth);
+				
+			}
+		}
+		JFreeChart chart = ChartFactory.createLineChart("Monthly Spending For " + year,
+				"Month", "Amount Spend($)", dataset);
+		CategoryPlot plot = chart.getCategoryPlot();
+		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+		  rangeAxis.setUpperMargin(0.15);
+		plot.setBackgroundPaint(Color.white);
+		plot.setRangeGridlinePaint(Color.black);
+		LineAndShapeRenderer lsr = (LineAndShapeRenderer) chart.getCategoryPlot().getRenderer() ;
+		lsr.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+		lsr.setBaseItemLabelsVisible(true); 
+		return chart;
+
+	}
+
+	public JFreeChart generateWeeklyChart(TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders,
+			String week) {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		String series1 = "spending";
+
+		TreeMap<String, Double> dateToFoodOrders = dateToTotalPrice(weekToFoodOrders, week);
+		
+		Set<String> datelabel = dateToFoodOrders.keySet();
+		Iterator<String> iter1 = datelabel.iterator();
+		while (iter1.hasNext()) {
+			String date = (String) iter1.next();
+			double price = dateToFoodOrders.get(date);
+			System.out.println(date + " " + price);
+			dataset.addValue(convertPriceToTwoDecimal(price), series1, date);
+		}
+
+		JFreeChart chart = ChartFactory.createLineChart("Weekly Spending from " + weekDurationFormatTransformation(week), "Date",
+				"Amount Spend($)", dataset);
+		CategoryPlot plot = chart.getCategoryPlot();
+		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+		  rangeAxis.setUpperMargin(0.15);
+		plot.setBackgroundPaint(Color.white);
+		plot.setRangeGridlinePaint(Color.black);
+		LineAndShapeRenderer lsr = (LineAndShapeRenderer) chart.getCategoryPlot().getRenderer() ;
+		lsr.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+		lsr.setBaseItemLabelsVisible(true); 
+		
+		
+		return chart;
+	}
+	
+	public String weekDurationFormatTransformation(String week) {
+		String[] array = week.split("to");	
+		String weekstart = array[0];
+		String weekend = array[1];
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date d1 = format.parse(weekstart);
+			Date d2 = format.parse(weekend);
+			format.applyPattern("dd-MMM-yyyy");
+			weekstart = format.format(d1);
+			weekend = format.format(d2);
+			//System.out.println(yearMonth);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return weekstart + " to " + weekend;
+	}
+	
+	
+	public TreeMap<String, Double> dateToTotalPrice(TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders,String week) {
+		Set<String> keySet = weekToFoodOrders.keySet();
+		java.util.Iterator<String> iter = keySet.iterator();
+		TreeMap<String, Double> dateToFoodOrders = new TreeMap<>();
+		String pattern = "dd-MMM-yyyy";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		while (iter.hasNext()) {
+			String weekLabel = (String) iter.next();
+			if (weekLabel.equals(week)) {
+				ArrayList<FoodOrder> foodOrders = weekToFoodOrders.get(weekLabel);
+				FoodOrder initFo = foodOrders.get(0);
+				double sum = 0.0;
+				Date init = initFo.getCreateDate();
+				String currentDate = simpleDateFormat.format(init);
+				for (int i = 0; i < foodOrders.size(); i++) {
+					FoodOrder fo = foodOrders.get(i);
+					double value = fo.getFinalPrice();
+					Date date = fo.getCreateDate();
+
+					String newconvertedDate = simpleDateFormat.format(date);
+					System.out.println(newconvertedDate);
+					System.out.println("CURRENT" + currentDate);
+					if (newconvertedDate.equals(currentDate)) {
+						// System.out.println(sum + " " + value);
+						sum += value;
+						System.out.println("TRUE: Put " + currentDate + " and " + sum);
+						dateToFoodOrders.put(currentDate, sum);
+						currentDate = newconvertedDate;
+						// sum = 0.0;
+					} else if (!newconvertedDate.equals(currentDate)) {
+
+						System.out.println("FALSE : Put " + newconvertedDate + " and " + value);
+						dateToFoodOrders.put(newconvertedDate, value);
+						currentDate = newconvertedDate;
+						sum = value;
+					}
+
+				}
+
+			}
+		}
+		return dateToFoodOrders;
 	}
 }
