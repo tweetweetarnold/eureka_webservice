@@ -6,15 +6,15 @@
   </welcome-file-list>
   <context-param>
     <param-name>authtoken</param-name>
-    <param-value>4B9J31XgDu8aIN-pSKu9vjjYrIgJoJAXBvzX8OKft46l3vvHp0q_iD7M3lK</param-value>
+    <param-value>enUIvf_6R6e4Y2IbGXNzBJiSPaU99sdJQO22B01p15a1w7M3OVatl0ESizq</param-value>
   </context-param>
   <context-param>
     <param-name>posturl</param-name>
-    <param-value>https://www.paypal.com/cgi-bin/webscr</param-value>
+    <param-value>https://www.sandbox.paypal.com/cgi-bin/webscr</param-value>
   </context-param>
   <context-param>
     <param-name>business</param-name>
-    <param-value>admin@kohbus.sg</param-value>
+    <param-value>kohbuslunch@gmail.com</param-value>
   </context-param>
   <context-param>
     <param-name>returnurl</param-name>
