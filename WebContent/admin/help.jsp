@@ -58,11 +58,11 @@
 			<div class="row">
 				<div class="col-lg-12">
 
-					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="panel-group">
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingOne">
 								<h4 class="panel-title">
-									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+									<a role="button" data-toggle="collapse" data-parent="#collapse" href="#collapseOne" aria-expanded="true"
 										aria-controls="collapseOne"
 									> Introduction </a>
 								</h4>
@@ -77,7 +77,7 @@
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingTwo">
 								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#collapse" href="#collapseTwo"
 										aria-expanded="false" aria-controls="collapseTwo"
 									> Collapsible Group Item #2 </a>
 								</h4>
@@ -94,7 +94,7 @@
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingThree">
 								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#collapse" href="#collapseThree"
 										aria-expanded="false" aria-controls="collapseThree"
 									> Collapsible Group Item #3 </a>
 								</h4>

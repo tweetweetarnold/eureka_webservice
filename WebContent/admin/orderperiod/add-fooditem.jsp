@@ -115,9 +115,9 @@
 									</div>
 
 									<div class="form-group">
-										<label for="stall">Stall: </label>
+										<label for="stall">Stall:* </label>
 										<select class="form-control" ng-model='stall' name="food" ng-change='getFood()'
-											ng-options='s.name for s in stalls track by s.stallId'
+											ng-options='s.name for s in stalls | orderBy:"name" track by s.stallId'
 										>
 										</select>
 									</div>
@@ -125,11 +125,21 @@
 
 
 									<div class="form-group">
-										<label for="food">Food: </label>
+										<label for="food">Food:* </label>
 										<select class="form-control" ng-model='food' name="food"
-											ng-options='f as f.name  + " (" + (f.price | currency) + ")" for f in data track by f.foodId'
+											ng-options='f as f.name  + " (" + (f.price | currency) + ")" for f in data | orderBy:"name" track by f.foodId'
 											ng-disabled='data == null'
 										>
+										</select>
+									</div>
+
+
+
+
+									<div class="form-group">
+										<label for="food">Quantity:* **DOES NOT WORK YET**</label>
+										<select class="form-control" ng-model='quantity' name="quantity" ng-disabled='food == null'>
+											<option ng-repeat='num in numRow' ng-value="num">{{num}}</option>
 										</select>
 									</div>
 
@@ -139,7 +149,7 @@
 									<div class="form-group" ng-show="food != null && food.modifierList.length > 0">
 										<label for="modifierChosen">Add-On: </label>
 										<select class="form-control" name="modifierChosen" ng-model='modifierChosen'
-											ng-options='m as m.name + " (" + (m.price | currency) + ")" for m in food.modifierList track by m.modifierId'
+											ng-options='m as m.name + " (" + (m.price | currency) + ")" for m in food.modifierList | orderBy:"name" track by m.modifierId'
 										>
 										</select>
 									</div>
@@ -148,14 +158,15 @@
 
 									<div class="form-group">
 										<label>Total Price: </label>
-										<p>{{food.price + modifierChosen.price | currency}}</p>
+										<p>{{(food.price + modifierChosen.price)*quantity | currency}}</p>
 									</div>
 
 
 
 
 									<br>
-									<button class="btn btn-primary" ng-disabled='!(stall && food)' ng-click="submit()">Update food item</button>
+									<button class="btn btn-primary" ng-disabled='!(stall && food && quantity)' ng-click="submit()">Update
+										food item</button>
 
 								</div>
 								<!-- /col-lg-6 -->
@@ -214,7 +225,10 @@
 
 									$scope.foodOrderId = $location.search().foodOrderId;
 									$scope.canteenId = $location.search().canteenId;
+									$scope.quantity = $location.search().quantity;
 									$scope.foodOrderItemId = $location.search().foodOrderItemId;
+									$scope.numRow = [ 1, 2, 3, 4, 5, 6, 7, 8,
+											9, 10 ];
 
 									$http(
 											{
@@ -271,6 +285,7 @@
 														food : $scope.food,
 														modifier : $scope.modifierChosen,
 														foodOrderId : $scope.foodOrderId,
+														quantity : $scope.quantity,
 														foodOrderItemId : $scope.foodOrderItemId
 													}
 												})

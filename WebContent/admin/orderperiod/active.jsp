@@ -72,7 +72,7 @@
 						</div>
 					</c:if>
 
-					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="panel-group">
 
 						<c:forEach items="${sessionScope.orderPeriodMap}" var="map" varStatus="mapLoop">
 							<c:set value="${map.key}" var="period" />
@@ -80,7 +80,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="heading${mapLoop.index}">
 									<h4 class="panel-title">
-										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${mapLoop.index}"
+										<a role="button" data-toggle="collapse" data-parent="#collapse" href="#collapse${mapLoop.index}"
 											aria-expanded="true" aria-controls="collapse${mapLoop.index}"
 										>
 											${period.company.name}:&nbsp;&nbsp;
@@ -176,7 +176,7 @@
 																			</td>
 																			<td>
 																				<a
-																					href="/eureka_webservice/admin/orderperiod/add-fooditem.jsp?foodOrderId=${order.value[0].foodOrder.foodOrderId}&foodOrderItemId=${foodOrderItem.foodOrderItemId}&canteenId=${period.canteen.canteenId}"
+																					href="/eureka_webservice/admin/orderperiod/add-fooditem.jsp?foodOrderId=${order.value[0].foodOrder.foodOrderId}&foodOrderItemId=${foodOrderItem.foodOrderItemId}&canteenId=${period.canteen.canteenId}&quantity=${foodOrderItem.quantity}"
 																				>
 																					<button type="button" class="btn btn-link btn-xs">
 																						<i class="fa fa-pencil fa-2x"></i>

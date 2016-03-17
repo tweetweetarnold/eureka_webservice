@@ -70,6 +70,7 @@ public class AddFoodOrderItemIntoFoodOrderServlet extends HttpServlet {
 
 			JSONObject f = (JSONObject) data.get("food");
 			JSONObject m = (JSONObject) data.get("modifier");
+			int q = Integer.parseInt((String) data.get("quantity"));
 			int foodOrderId = Integer.parseInt((String) data.get("foodOrderId"));
 			if (data.get("foodOrderItemId") != null) {
 				foodOrderItemId = Integer.parseInt((String) data.get("foodOrderItemId"));
@@ -87,7 +88,7 @@ public class AddFoodOrderItemIntoFoodOrderServlet extends HttpServlet {
 
 			Food food = foodCtrl.getFood(((Long) f.get("foodId")).intValue());
 			FoodOrder order = foodOrderCtrl.getFoodOrder(foodOrderId);
-			FoodOrderItem item = new FoodOrderItem(order, food, 1, null);
+			FoodOrderItem item = new FoodOrderItem(order, food, q, null);
 
 			System.out.println("modifierchosen: " + m1);
 			if (m1 != null) {
