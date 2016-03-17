@@ -140,7 +140,6 @@
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
-									<th>ID</th>
 									<th>
 										<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
 											Food
@@ -158,7 +157,6 @@
 							</thead>
 							<tbody>
 								<tr ng-repeat='food in foodList | orderBy:sortType:sortReverse | filter:searchText track by food.foodId'>
-									<td>{{food.foodId}}</td>
 									<td>
 										{{food.name}}
 										<br>

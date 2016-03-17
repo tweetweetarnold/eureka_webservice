@@ -155,7 +155,7 @@
 
 
 									<br>
-									<button class="btn btn-primary" ng-click="submit()">Update food item</button>
+									<button class="btn btn-primary" ng-disabled='!(stall && food)' ng-click="submit()">Update food item</button>
 
 								</div>
 								<!-- /col-lg-6 -->

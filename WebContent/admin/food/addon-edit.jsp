@@ -151,7 +151,9 @@
 													</select>
 												</td>
 												<td>
-													<a class="btn btn-primary" href="#" ng-click='addSection()'>Add new Section</a>
+													<a class="btn btn-primary" ng-disabled='!(sec.categoryName && sec.displayType)' href="#"
+														ng-click='addSection()'
+													>Add new Section</a>
 												</td>
 
 											</tr>
@@ -238,8 +240,8 @@
 									}
 									load();
 									$scope.modifier = {};
-									var stallId = $location.search().stallId;
-									$scope.stallId = stallId;
+									$scope.stallId = $location.search().stallId;
+									$scope.foodId = $location.search().foodId;
 									$scope.modifierList = [];
 
 									$scope.addSection = function() {
@@ -256,6 +258,8 @@
 														function successCallback(
 																response) {
 															load();
+															console
+																	.log(response.data);
 														});
 
 										$scope.sec = {};
@@ -278,19 +282,14 @@
 												.then(
 														function successCallback(
 																response) {
-
 															if (response.data.success != null) {
-																$window.sessionStorage.success = response.data.success;
-																$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
-																		+ stallId;
+																load()
 															} else if (response.data.error != null) {
-																$window.sessionStorage.error = response.data.error;
-																$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
-																		+ stallId;
+																// TODO
 															} else {
 																console
 																		.log(response);
-																alert('fail');
+																alert('Please ensure that your inputs are valid.');
 															}
 
 														});
@@ -299,44 +298,11 @@
 									}
 
 									$scope.done = function() {
-										console.log($scope.modifierList);
-
-										console.log({
-											data : $scope.modifierList
-										});
-
-										$http(
-												{
-													method : 'POST',
-													headers : {
-														'Content-Type' : 'application/json; charset=UTF-8'
-													},
-													url : '/eureka_webservice/ProcessAdminAddModifierToFoodServlet',
-													data : {
-														foodId : $location
-																.search().foodId,
-														modifierList : $scope.modifierList
-													}
-												})
-												.then(
-														function successCallback(
-																response) {
-															if (response.data.success != null) {
-																$window.sessionStorage.success = response.data.success;
-																$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
-																		+ stallId;
-															} else if (response.data.error != null) {
-																$window.sessionStorage.error = response.data.error;
-																$window.location.href = '/eureka_webservice/admin/food/view.jsp?stallId='
-																		+ stallId;
-															} else {
-																console
-																		.log(response);
-																alert('fail');
-															}
-
-														});
-
+										$window.sessionStorage.success = "Add-on updated.";
+										$window.location.href = "/eureka_webservice/admin/food/view.jsp?stallId="
+												+ $scope.stallId
+												+ "&foodId="
+												+ $scope.foodId;
 									};
 
 								} ]);
