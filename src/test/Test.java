@@ -890,7 +890,7 @@ public class Test {
 		Canteen canteen1 = new Canteen("Oasis Food Centre", "3 Sakra Rd, Singapore 627878", null);
 
 		Stall kuehStall = new Stall("Oasis Kueh Stall", 90685620, canteen1, null,
-				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455641259/Stall%20Images%20Raw/oasis_kueh_stall.jpg",
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_thumb,h_225,w_350/v1455641259/Stall%20Images%20Raw/oasis_kueh_stall.jpg",
 				null);
 		Food kuehfood1 = new Food("Chee Cheong Fun", "猪肠粉", "", 0.60,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/chee_cheong_fun.jpg",
@@ -924,7 +924,7 @@ public class Test {
 		kuehStall.setFoodList(foodList1);
 
 		Stall malayStall = new Stall("Oasis Muslim Stall", 93848341, canteen1, null,
-				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638292/Stall%20Images%20Raw/oasis_muslim_stall.jpg",
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319109/Stall%20Images%20Raw/oasis_new_muslim_stall.jpg",
 				null);
 		Food mfood1 = new Food("Curry Chicken + Veg", "咖喱鸡加菜", "more vegs, less fried meat", 3.70,
 				"resources/img/food/img-mixedvegricemalay.jpg", null, malayStall);
@@ -1049,7 +1049,7 @@ public class Test {
 		malayStall.setFoodList(foodList2);
 
 		Stall indianStall = new Stall("Indian Stall", 98717752, canteen1, null,
-				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638270/Stall%20Images%20Raw/oasis_indian_stall.jpg",
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319115/Stall%20Images%20Raw/oasis_new_indian_stall.jpg",
 				null);
 		Food infood1 = new Food("White Rice(Chicken)", "白饭（鸡肉）", "Chicken/Fish/Mutton", 4.00,
 				"resources/img/food/img-whiterice.jpg", null, indianStall);
@@ -1174,7 +1174,7 @@ public class Test {
 		indianStall.setFoodList(foodList3);
 
 		Stall chineseMixVegStall = new Stall("Chinese Mix Veg Stall", 93848341, canteen1, null,
-				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638272/Stall%20Images%20Raw/oasis_mixed_rice_stall.jpg",
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319114/Stall%20Images%20Raw/oasis_new_mixed_rice_stall.jpg",
 				null);
 		Food mixVegRice1 = new Food("1 Meat 2 Veg", "1肉2菜",
 				"more meat, less fried meat, or upsize to $3.50", 3.00,
@@ -1246,7 +1246,7 @@ public class Test {
 		chineseMixVegStall.setFoodList(foodList4);
 
 		Stall roastMeatStall = new Stall("Roast Meat Stall", 123, canteen1, null,
-				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638264/Stall%20Images%20Raw/oasis_chicken_rice_stall.jpg",
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319118/Stall%20Images%20Raw/oasis_new_chicken_rice_stall.jpg",
 				null);
 		Food roastfood1 = new Food("Roast Chicken Rice", "烧鸡饭", "2 meat choices $4", 3.00,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420637/Food%20Images%20Raw/Roast_chicken_Rice.jpg", null, roastMeatStall);
@@ -1322,7 +1322,7 @@ public class Test {
 		roastMeatStall.setFoodList(foodList5);
 
 		Stall seafoodTzeCharStall = new Stall("Seafood Tze Char Stall", 92262376, canteen1, null,
-				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638309/Stall%20Images%20Raw/oasis_seafood_stall.jpg",
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319106/Stall%20Images%20Raw/oasis_new_seafood_stall.jpg",
 				null);
 
 		Food seafood1 = new Food("Horfun (Dry)", "河粉（干）", "dry type $4.00", 4.00,
@@ -1461,7 +1461,7 @@ public class Test {
 		seafoodTzeCharStall.setFoodList(foodList6);
 
 		Stall fishBeehoonStall = new Stall("Fish Beehoon Stall", 98367790, canteen1, null,
-				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638253/Stall%20Images%20Raw/oasis_fish_soup_stall.jpg",
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319112/Stall%20Images%20Raw/oasis_new_fish_soup.jpg",
 				null);
 		Food fishBeehoonfood1 = new Food("Fish Soup With Beehoon", "鱼汤与米粉",
 				"add bittergourd: $0.50", 3.50,
@@ -1557,7 +1557,7 @@ public class Test {
 		fishBeehoonStall.setFoodList(foodList7);
 
 		Stall fruitStall = new Stall("Fruit Stall", 91151608, canteen1, null,
-				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fit,h_231,w_360/v1455638266/Stall%20Images%20Raw/oasis_fruit_stall.jpg",
+				"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319120/Stall%20Images%20Raw/oasis_new_fruits_stall.jpg",
 				null);
 
 		Food apple = new Food("Apple", "苹果", "", 0.60,

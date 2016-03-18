@@ -79,7 +79,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<c:if test="${not empty sessionScope.yearToMonthList}">
-					<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the Year to display the monthly Summary</b>
+					<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Display the monthly summary for the year of </b>
 					<br>
 					<br>
 					<form class="sign-in-up-form" action="/eureka_webservice/LoadUserSpendingSummaryByMonth" role="form">

@@ -120,8 +120,8 @@
 							$${amt}
 						</b>
 						<img class="img-responsive img-portfolio img-hover" src="${food.imageDirectory}"
-							onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg'"
-							alt="http://res.cloudinary.com/dmeln4k8n/image/upload/c_pad,h_169,w_263/v1455951761/default/img-error.jpg"
+							onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/v1457805772/default/Image_Placeholder.png'"
+							alt="http://res.cloudinary.com/dmeln4k8n/image/upload/v1457805772/default/Image_Placeholder.png"
 							style="width: 263px;
 	height: 169px;"
 						>

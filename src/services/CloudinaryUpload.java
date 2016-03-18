@@ -83,7 +83,7 @@ public class CloudinaryUpload {
 		String publicId = (String) uploadResult.get("public_id");
 		output[1] = publicId;
 		String url = cloudinary.url()
-				.transformation(new Transformation().width(360).height(231).crop("fit"))
+				.transformation(new Transformation().width(350).height(225).crop("fit"))
 				.generate(publicId);
 		output[0] = url;
 		System.out.println(url);

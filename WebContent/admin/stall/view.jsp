@@ -156,7 +156,7 @@
 									<td>{{stall.createDate | date:'medium' : '+0800'}}</td>
 									<td>
 										<img ng-src="{{stall.imageDirectory}}"
-											onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/b_rgb:f5f5f5,c_lpad,h_231,w_173/v1457805772/default/Image_Placeholder.png'"
+											onerror="this.src='http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,w_350/v1457805772/default/Image_Placeholder.png'"
 										/>
 									</td>
 									<td>
