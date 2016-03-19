@@ -85,12 +85,11 @@ public class AddFoodOrderItemIntoFoodOrderServlet extends HttpServlet {
 				System.out.println("food deleted: " + foodOrderItemId);
 			}
 
-			int modifierId = (int) (long) m.get("modifierId");
-			Modifier m1 = msCtrl.getModifier(modifierId);
-
-			// String jsonString = gson.toJson(m);
-			// System.out.println(jsonString);
-			// Modifier m1 = gson.fromJson(jsonString, Modifier.class);
+			Modifier m1 = null;
+			if (m != null) {
+				int modifierId = (int) (long) m.get("modifierId");
+				m1 = msCtrl.getModifier(modifierId);
+			}
 
 			Food food = foodCtrl.getFood(((Long) f.get("foodId")).intValue());
 			FoodOrder order = foodOrderCtrl.getFoodOrder(foodOrderId);

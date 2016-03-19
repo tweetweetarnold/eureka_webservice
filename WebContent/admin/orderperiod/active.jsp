@@ -185,13 +185,13 @@
 																			</td>
 																			<td>
 																				<button type="button" class="btn btn-link btn-xs" data-toggle="modal"
-																					data-target="#modalDelete${innerLoop}"
+																					data-target="#modalDelete${foodOrderItem.foodOrderItemId}"
 																				>
 																					<i class="fa fa-trash-o fa-2x"></i>
 																				</button>
 
 																				<!-- Modal delete -->
-																				<div class="modal fade" id="modalDelete${innerLoop}" tabindex="-1" role="dialog"
+																				<div class="modal fade" id="modalDelete${foodOrderItem.foodOrderItemId}" tabindex="-1" role="dialog"
 																					aria-labelledby="myModalLabel"
 																				>
 																					<div class="modal-dialog" role="document">
@@ -208,7 +208,7 @@
 																								<div class="modal-body">
 																									<p>
 																										<b>WARNING: </b>
-																										You are deleting food order item.
+																										You are deleting food order item (${foodOrderItem.food.name}).
 																										<br>
 																										<br>
 																										Are you sure you want to continue?

@@ -137,12 +137,11 @@
 
 
 									<div class="form-group">
-										<label for="food">Quantity:* **DOES NOT WORK YET**</label>
+										<label for="food">Quantity:*</label>
 										<select class="form-control" ng-model='quantity' name="quantity" ng-disabled='food == null'>
 											<option ng-repeat='num in numRow' ng-value="num">{{num}}</option>
 										</select>
 									</div>
-
 
 
 
@@ -153,6 +152,26 @@
 										>
 										</select>
 									</div>
+
+
+									<!-- 									<div ng-show='food != null && food.modifierSectionList.length > 0'> -->
+<!-- 										<br> -->
+<!-- 										<h4>Add-On(s)</h4> -->
+<!-- 										<hr> -->
+
+
+<!-- 										<div class="form-group" ng-repeat='mSection in food.modifierSectionList track by mSection.modifierSectionId'> -->
+<!-- 											<label for="modifierChosen">{{mSection.categoryName}}: </label> -->
+<!-- 											<div ng-repeat='modifier in mSection.modifierList | orderBy:"name" track by $index'> -->
+<!-- 												<input type="checkbox" ng-model='modifier' name="modifier" ng-value="modifier"> -->
+<!-- 												{{modifier.name}} -->
+<!-- 												<br> -->
+<!-- 											</div> -->
+
+
+<!-- 										</div> -->
+
+<!-- 									</div> -->
 
 
 
@@ -299,7 +318,9 @@
 															} else if (response.data.error != null) {
 																$scope.error = response.data.error;
 															} else {
-																alert(response);
+																alert("Something went wrong!");
+																console
+																		.log(response);
 															}
 
 														});
