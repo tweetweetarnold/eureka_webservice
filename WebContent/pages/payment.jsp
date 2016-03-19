@@ -167,7 +167,8 @@ function myFunction() {
 						<input type="hidden" name="cmd" value="_cart" />
 						<input type="hidden" name="business" value="${initParam['business']}" />
 						<input type="hidden" name="currency_code" value="SGD">
-
+						<input type="hidden" name="cancel_return" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/pages/payment.jsp"/>
+						<input type="hidden" name="cbt" value="Please click here to complete the transaction">
 						<c:set var="count" value="0" />
 
 						<c:forEach items="${sessionScope.paymentFoodOrderList}" var="order" varStatus="orderLoop">

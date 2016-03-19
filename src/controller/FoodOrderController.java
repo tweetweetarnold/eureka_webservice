@@ -113,7 +113,9 @@ public class FoodOrderController {
 					FoodOrder fo = foodOrders.get(i);
 					double value = fo.getFinalPrice();
 					Date date = fo.getCreateDate();
-
+					if (value < 0) {
+						value = 0.0;
+					}
 					String newconvertedDate = simpleDateFormat.format(date);
 					System.out.println(newconvertedDate);
 					System.out.println("CURRENT" + currentDate);
@@ -275,6 +277,7 @@ public class FoodOrderController {
 			String date = (String) iter1.next();
 			double price = dateToFoodOrders.get(date);
 			System.out.println(date + " " + price);
+			
 			dataset.addValue(convertPriceToTwoDecimal(price), series1, date);
 		}
 

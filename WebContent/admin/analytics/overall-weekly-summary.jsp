@@ -168,7 +168,14 @@
 										 <br>User: ${foodOrder.employee.name} &nbsp;&nbsp;Company: ${foodOrder.employee.company.name}</br>
 												<fmt:formatNumber value="${foodOrder.finalPrice}"
 													var="amtSpent" minFractionDigits="2" />
+												<c:choose>
+												<c:when test="${foodOrder.finalPrice < 0 }">
+												<i class="pull-right">Price: $0.00 </i>
+												</c:when>
+												<c:otherwise>
 												<i class="pull-right">Price: $${amtSpent} </i>
+												</c:otherwise>
+												</c:choose>
 												<br>
 											</c:forEach>
 										</div>
