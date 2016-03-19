@@ -32,68 +32,6 @@ public class FoodController {
 	public FoodController() {
 	}
 
-	// public int addFood(ServletFileUpload upload, HttpServletRequest request) throws Exception {
-	// int stallId = 0;
-	// int index = 0;
-	// String[] parameters = new String[6];
-	// String[] output = new String[2];
-	// byte[] image = null;
-	//
-	// // Parse the request
-	// List<FileItem> items = upload.parseRequest(request);
-	// Iterator<FileItem> iter = items.iterator();
-	// while (iter.hasNext()) {
-	// FileItem item = (FileItem) iter.next();
-	// if (!item.isFormField()) {
-	//
-	// String contentType = item.getContentType();
-	// if (!contentType.equals("image/jpeg")) {
-	// throw new Exception("Invalid image format");
-	// }
-	//
-	// image = item.get();
-	// } else {
-	// if (item.getFieldName().equals("chineseName")) {
-	// String inputValues = item.getString("UTF-8");
-	// parameters[index] = inputValues;
-	// } else {
-	// String inputValues = item.getString();
-	// parameters[index] = inputValues;
-	// System.out.println(item.getFieldName());
-	// System.out.println(inputValues);
-	// }
-	// }
-	// index++;
-	// }
-	//
-	// double price = Double.parseDouble(parameters[4]);
-	// stallId = Integer.parseInt(parameters[0]);
-	//
-	// Stall stall = stallController.getStall(stallId);
-	// if (!parameters[2].isEmpty()) {
-	// boolean isChinese = checkChineseWords(parameters[2]);
-	// if (!isChinese) {
-	// throw new Exception(parameters[2] + " is not a valid chinese word.");
-	// }
-	// }
-	// boolean foodExists = checkFoodExists(parameters[1], stall);
-	// if (foodExists) {
-	// throw new Exception(parameters[1] + " already exists in " + stall.getName());
-	// }
-	//
-	// output = imageUpload(image);
-	// Food food = new Food(parameters[1], parameters[2], parameters[3], price, output[0],
-	// output[1], stall);
-	//
-	// food.setWeatherConditions(parameters[5]);
-	//
-	// System.out.println("foodname: " + food.getName());
-	// System.out.println("saving food...");
-	// saveFood(food);
-	// return stallId;
-	//
-	// }
-
 	public void addFood2(String name, String chineseName, String description,
 			String weatherConditions, byte[] image, JSONArray modifierList, double price,
 			int stallId) throws Exception {
@@ -152,8 +90,7 @@ public class FoodController {
 
 		double price = 0.0;
 		try {
-		
-			
+
 			price = Double.parseDouble(parameters[3]);
 		} catch (Exception e) {
 			throw new Exception("Invalid input for price");

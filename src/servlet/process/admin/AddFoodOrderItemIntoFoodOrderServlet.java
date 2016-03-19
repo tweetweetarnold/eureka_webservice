@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 
 import controller.FoodController;
 import controller.FoodOrderController;
+import controller.ModifierSectionController;
 import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
@@ -57,6 +58,7 @@ public class AddFoodOrderItemIntoFoodOrderServlet extends HttpServlet {
 
 		FoodOrderController foodOrderCtrl = new FoodOrderController();
 		FoodController foodCtrl = new FoodController();
+		ModifierSectionController msCtrl = new ModifierSectionController();
 
 		Gson gson = new Gson();
 		JSONObject returnJson = new JSONObject();
@@ -83,9 +85,12 @@ public class AddFoodOrderItemIntoFoodOrderServlet extends HttpServlet {
 				System.out.println("food deleted: " + foodOrderItemId);
 			}
 
-			String jsonString = gson.toJson(m);
-			System.out.println(jsonString);
-			Modifier m1 = gson.fromJson(jsonString, Modifier.class);
+			int modifierId = (int) (long) m.get("modifierId");
+			Modifier m1 = msCtrl.getModifier(modifierId);
+
+			// String jsonString = gson.toJson(m);
+			// System.out.println(jsonString);
+			// Modifier m1 = gson.fromJson(jsonString, Modifier.class);
 
 			Food food = foodCtrl.getFood(((Long) f.get("foodId")).intValue());
 			FoodOrder order = foodOrderCtrl.getFoodOrder(foodOrderId);

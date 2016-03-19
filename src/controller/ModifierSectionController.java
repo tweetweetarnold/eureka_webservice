@@ -15,11 +15,11 @@ import services.ChineseValidation;
 
 public class ModifierSectionController {
 	ChineseValidation chineseValidation = new ChineseValidation();
-	
+
 	public ModifierSectionController() {
 
 	}
-	
+
 	// assuming the person just wants to create an empty container
 	public int addModifierSection(String foodID, String categoryName, String displayType) {
 		FoodDAO foodDAO = new FoodDAO();
@@ -45,19 +45,16 @@ public class ModifierSectionController {
 		return chineseValidation.checkForChineseWords(text);
 	}
 
-	
-	
-	
 	public boolean createAndAddModifier(String modifierName, String chineseName,
 			String modifierDescription, double modifierPrice, String foodID,
-			String modifierSectionID) throws Exception  {
+			String modifierSectionID) throws Exception {
 
 		boolean modifierSectionExists = false;
 		ModifierSection modifierSectionToEdit = null;
 		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 		FoodDAO foodDAO = new FoodDAO();
 		Food food = foodDAO.getFood(Integer.parseInt(foodID));
-		
+
 		if (!checkChineseWords(chineseName)) {
 			throw new Exception(chineseName + " is not a valid chinese word.");
 		}
@@ -103,13 +100,12 @@ public class ModifierSectionController {
 		return modifierSectionExists;
 
 	}
-	
-	
-	public Modifier getModifier(int id){
+
+	public Modifier getModifier(int id) {
 		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
 		return modifierSectionDAO.getModifier(id);
 	}
-	
+
 	public boolean checkDuplicates(Set<Modifier> modifierList, Modifier m) {
 		for (Modifier modifier : modifierList) {
 			if (modifier.getName().equals(m.getName())) {
@@ -118,6 +114,5 @@ public class ModifierSectionController {
 		}
 		return false;
 	}
-
 
 }
