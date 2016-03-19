@@ -70,7 +70,6 @@
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
-									<th>Id</th>
 									<th>Company</th>
 									<th>Canteen</th>
 									<th>Discount</th>
@@ -83,7 +82,6 @@
 							<tbody>
 								<c:forEach items="${sessionScope.orderPeriodList}" var="period">
 									<tr>
-										<td>${period.periodId}</td>
 										<td>${period.company.name}</td>
 										<td>${period.canteen.name}</td>
 										<td>$${period.discountAbsolute}</td>

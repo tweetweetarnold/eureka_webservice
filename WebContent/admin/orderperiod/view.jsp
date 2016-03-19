@@ -100,7 +100,6 @@
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
-									<th>Id</th>
 									<th>Company</th>
 									<th>Canteen</th>
 									<th>Discount</th>
@@ -126,7 +125,6 @@
 							</thead>
 							<tbody>
 								<tr ng-repeat="period in data | orderBy:sortType:sortReverse track by $index">
-									<td>{{period.periodId}}</td>
 									<td>{{period.company.name}}</td>
 									<td>{{period.canteen.name}}</td>
 									<td>{{period.priceModifierList[0].value | currency}}</td>
