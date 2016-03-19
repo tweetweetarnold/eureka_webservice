@@ -87,6 +87,7 @@ public class QuartzService {
             scheduler.scheduleJob(job3, trigger3);
             
             scheduler.start();
+            System.out.println("Quartz Started");
 //            try {
 //				Thread.sleep(3000);
 //			} catch (InterruptedException e) {

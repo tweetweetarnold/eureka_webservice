@@ -54,10 +54,10 @@ public class Test {
 		// ************* WARNING, THIS HIBERNATE CONFIG FILE WILL CLEAR
 		// EVERYTHING IN DATABASE AND POPULATE WITH BELOW
 
-		Company company2 = new Company("Eastman Chemicals","ECM901");
+		Company company2 = new Company("Eastman Chemical","ECM901");
 		Company company = new Company("XiaoDingDang Co. (TEST)","XDD123");
 		Set<String> buildingList = new HashSet<String>();
-		buildingList.add("SEMBCORP");
+		buildingList.add("FEEDSTOCK");
 		buildingList.add("PSN");
 		buildingList.add("CONTROL");
 		buildingList.add("MAINTENANCE");

@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 
 import services.QuartzService;
 import test.QuartzTest;
@@ -30,9 +33,11 @@ public class RunQuartzServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		QuartzTest quartzTest = new QuartzTest();
-		quartzTest.doProcess();
-		response.sendRedirect("/eureka_webservice/pages/login.jsp");
+		QuartzService quartzService = new QuartzService();
+		quartzService.doProcess();
+		HttpSession session = request.getSession();
+		session.setAttribute("success", "Scheduled notifications now active.");
+		response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
 	}
 
 	/**
@@ -40,9 +45,11 @@ public class RunQuartzServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		QuartzService quartzTest = new QuartzService();
-		quartzTest.doProcess();
-		response.sendRedirect("/eureka_webservice/pages/login.jsp");
+		QuartzService quartzService = new QuartzService();
+		quartzService.doProcess();
+		HttpSession session = request.getSession();
+		session.setAttribute("success", "Scheduled notifications now active.");
+		response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
 	}
 
 }
