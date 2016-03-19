@@ -32,43 +32,14 @@ public class FileUploadController {
 	List<String[]> content = null;
 	ArrayList<String> errorsList = null;
 	FoodDAO foodDAO = new FoodDAO();
-	StallDAO stallDAO = new StallDAO();
 	ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+	StallDAO stallDAO = new StallDAO();
 
 	/**
 	 * Creates a default constructor for FileUploadController
 	 */
 	public FileUploadController() {
 
-	}
-
-	public ArrayList<String> uploadData(InputStream is, String tableName) {
-		System.out.println("FILEUPLOAD_UPLOADDATA");
-
-		BufferedInputStream bis = new BufferedInputStream(is);
-		InputStreamReader isr = new InputStreamReader(bis);
-		BufferedReader br = new BufferedReader(isr);
-
-		try {
-			CSVReader csvreader = new CSVReader(br);
-			content = csvreader.readAll();
-			csvreader.close();
-
-			switch (tableName) {
-			case "Canteen":
-				errorsList = validateCanteenData(content);
-				if (errorsList.size() == 0) {
-					canteenDAO.loadCanteenData(content);
-				} else {
-					return errorsList;
-				}
-				break;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return errorsList;
 	}
 
 	/**
@@ -132,6 +103,29 @@ public class FileUploadController {
 		return errorsList;
 	}
 
+	public ArrayList<String> processModifierSectionUpload(InputStream is) {
+		System.out.println("PROCESS_MODIFIER_SECTION_FILEUPLOAD");
+
+		BufferedInputStream bis = new BufferedInputStream(is);
+		InputStreamReader isr = new InputStreamReader(bis);
+		BufferedReader br = new BufferedReader(isr);
+
+		try {
+			CSVReader csvreader = new CSVReader(br);
+			content = csvreader.readAll();
+			csvreader.close();
+			errorsList = validateModifierSectionData(content);
+			if (errorsList.size() == 0) {
+				foodDAO.loadModifierSectionData(content);
+			} else {
+				return errorsList;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return errorsList;
+	}
+
 	/**
 	 * Handles the reading of the Modifier.csv and load it to the database if there are no errors
 	 * 
@@ -153,29 +147,6 @@ public class FileUploadController {
 			errorsList = validateModifierData(content);
 			if (errorsList.size() == 0) {
 				foodDAO.loadModifierData(content);
-			} else {
-				return errorsList;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return errorsList;
-	}
-
-	public ArrayList<String> processModifierSectionUpload(InputStream is) {
-		System.out.println("PROCESS_MODIFIER_SECTION_FILEUPLOAD");
-
-		BufferedInputStream bis = new BufferedInputStream(is);
-		InputStreamReader isr = new InputStreamReader(bis);
-		BufferedReader br = new BufferedReader(isr);
-
-		try {
-			CSVReader csvreader = new CSVReader(br);
-			content = csvreader.readAll();
-			csvreader.close();
-			errorsList = validateModifierSectionData(content);
-			if (errorsList.size() == 0) {
-				foodDAO.loadModifierSectionData(content);
 			} else {
 				return errorsList;
 			}
@@ -209,6 +180,35 @@ public class FileUploadController {
 			} else {
 				return errorsList;
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return errorsList;
+	}
+
+	public ArrayList<String> uploadData(InputStream is, String tableName) {
+		System.out.println("FILEUPLOAD_UPLOADDATA");
+
+		BufferedInputStream bis = new BufferedInputStream(is);
+		InputStreamReader isr = new InputStreamReader(bis);
+		BufferedReader br = new BufferedReader(isr);
+
+		try {
+			CSVReader csvreader = new CSVReader(br);
+			content = csvreader.readAll();
+			csvreader.close();
+
+			switch (tableName) {
+			case "Canteen":
+				errorsList = validateCanteenData(content);
+				if (errorsList.size() == 0) {
+					canteenDAO.loadCanteenData(content);
+				} else {
+					return errorsList;
+				}
+				break;
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -653,6 +653,8 @@ public class FileUploadController {
 
 		String[] rowHeader = (String[]) iter.next();
 		String stallNameHeader = rowHeader[0].trim();
+		
+		// check headers
 		if (stallNameHeader.isEmpty()) {
 			errorList.add(
 					"row " + rowNumber + " has a missing row header for Stall Name in Stall.csv");
@@ -678,6 +680,8 @@ public class FileUploadController {
 			errorList.add("row " + rowNumber
 					+ " has an invalid row header for Canteen Name in Stall.csv");
 		}
+		
+		// end checking headers
 
 		while (iter.hasNext()) {
 			rowNumber++;

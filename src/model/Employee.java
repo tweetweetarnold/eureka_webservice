@@ -37,16 +37,15 @@ public class Employee {
 	// @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	// private Set<Food> favouriteList;
 	private String status;
-	
+
 	/**
 	 * Creates a new default constructor for Employee
 	 */
 	public Employee() {
 	}
-	
+
 	/**
-	 * Creates a new Employee with a password, name,
-	 * email address, contact number and its company
+	 * Creates a new Employee with a password, name, email address, contact number and its company
 	 * 
 	 * @param password The Employee's password
 	 * @param name The Employee's name
@@ -68,7 +67,7 @@ public class Employee {
 		this.favoriteFood = null;
 
 	}
-	
+
 	/**
 	 * Retrieves the current amount owed by the Employee
 	 * 
@@ -77,7 +76,7 @@ public class Employee {
 	public double getAmountOwed() {
 		return amountOwed;
 	}
-	
+
 	/**
 	 * Retrieves the company of the Employee
 	 * 
@@ -86,7 +85,7 @@ public class Employee {
 	public Company getCompany() {
 		return company;
 	}
-	
+
 	/**
 	 * Retrieves the contact number of the Employee
 	 * 
@@ -95,7 +94,7 @@ public class Employee {
 	public long getContactNo() {
 		return contactNo;
 	}
-	
+
 	/**
 	 * Retrieves the date of the Employee's entity model created
 	 * 
@@ -104,7 +103,7 @@ public class Employee {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	
+
 	/**
 	 * Retrieves the Employee's default delivery point
 	 * 
@@ -113,7 +112,7 @@ public class Employee {
 	public String getDeliveryPoint() {
 		return deliveryPoint;
 	}
-	
+
 	/**
 	 * Retrieves the email address of the Employee
 	 * 
@@ -122,7 +121,7 @@ public class Employee {
 	public String getEmail() {
 		return email;
 	}
-	
+
 	/**
 	 * Returns the favorite food of the Employee
 	 * 
@@ -131,7 +130,7 @@ public class Employee {
 	public Food getFavoriteFood() {
 		return favoriteFood;
 	}
-	
+
 	/**
 	 * Retrieves the name of the Employee
 	 * 
@@ -140,7 +139,7 @@ public class Employee {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Retrieves the password of the Employee
 	 * 
@@ -149,7 +148,7 @@ public class Employee {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	/**
 	 * Retrieves the current status of the Employee
 	 * 
@@ -158,7 +157,7 @@ public class Employee {
 	public String getStatus() {
 		return status;
 	}
-	
+
 	/**
 	 * Changes the amount owed with a new amount
 	 * 
@@ -167,7 +166,7 @@ public class Employee {
 	public void setAmountOwed(double amountOwed) {
 		this.amountOwed = amountOwed;
 	}
-	
+
 	/**
 	 * Changes the company of the Employee
 	 * 
@@ -176,7 +175,7 @@ public class Employee {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-	
+
 	/**
 	 * Changes the contact number of the Employee with a new number
 	 * 
@@ -185,7 +184,7 @@ public class Employee {
 	public void setContactNo(long contactNo) {
 		this.contactNo = contactNo;
 	}
-	
+
 	/**
 	 * Changes the date of the Employee's entity model created
 	 * 
@@ -194,7 +193,7 @@ public class Employee {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	
+
 	/**
 	 * Changes the Employee's default delivery point
 	 * 
@@ -203,7 +202,7 @@ public class Employee {
 	public void setDeliveryPoint(String deliveryPoint) {
 		this.deliveryPoint = deliveryPoint;
 	}
-	
+
 	/**
 	 * Changes the email address of Employee with a new email address
 	 * 
@@ -212,7 +211,7 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	/**
 	 * Changes the favorite food of the Employee
 	 * 
@@ -221,7 +220,7 @@ public class Employee {
 	public void setFavoriteFood(Food favoriteFood) {
 		this.favoriteFood = favoriteFood;
 	}
-	
+
 	/**
 	 * Changes the current name of the Employee
 	 * 
@@ -238,7 +237,7 @@ public class Employee {
 	// public void setFavouriteList(Set<Food> favouriteList) {
 	// this.favouriteList = favouriteList;
 	// }
-	
+
 	/**
 	 * Changes the current password with a new password
 	 * 
@@ -247,7 +246,7 @@ public class Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	/**
 	 * Changes the status of the Employee
 	 * 

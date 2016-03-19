@@ -59,19 +59,19 @@
 						tables:</p>
 					<ol>
 						<li>
-							<a href="/eureka_webservice/admin/downloads/Canteen.csv">Canteen</a>
+							<a href="/eureka_webservice/admin/downloads/canteen.csv">canteen</a>
 						</li>
 						<li>
-							<a href="/eureka_webservice/admin/downloads/Stall.csv">Stall</a>
+							<a href="/eureka_webservice/admin/downloads/stall.csv">stall</a>
 						</li>
 						<li>
-							<a href="/eureka_webservice/admin/downloads/Food.csv">Food</a>
+							<a href="/eureka_webservice/admin/downloads/food.csv">food</a>
 						</li>
 						<li>
-							<a href="/eureka_webservice/admin/downloads/ModifierSection.csv">ModifierSection</a>
+							<a href="/eureka_webservice/admin/downloads/modifiersection.csv">modifiersection</a>
 						</li>
 						<li>
-							<a href="/eureka_webservice/admin/downloads/Modifier.csv">Modifier</a>
+							<a href="/eureka_webservice/admin/downloads/modifier.csv">modifier</a>
 						</li>
 					</ol>
 
@@ -104,7 +104,7 @@
 						<br>
 
 
-						<form action="/eureka_webservice/FileUpload" method="post" enctype="multipart/form-data">
+						<form action="/eureka_webservice/FileUploadServlet" method="post" enctype="multipart/form-data">
 							<input type="file" name="file" style="width: 228px;" required />
 							<br>
 							<input type="submit" class="btn btn-primary" value="Upload" />

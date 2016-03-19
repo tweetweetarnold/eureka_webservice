@@ -20,10 +20,6 @@ public class ModifierSectionController {
 
 	}
 	
-	private boolean checkChineseWords(String text) throws APIError {
-		return chineseValidation.checkForChineseWords(text);
-	}
-
 	// assuming the person just wants to create an empty container
 	public int addModifierSection(String foodID, String categoryName, String displayType) {
 		FoodDAO foodDAO = new FoodDAO();
@@ -45,6 +41,20 @@ public class ModifierSectionController {
 		return newModifierSection.getModifierSectionId();
 	}
 
+	private boolean checkChineseWords(String text) throws APIError {
+		return chineseValidation.checkForChineseWords(text);
+	}
+
+	public boolean checkDuplicates(Set<Modifier> modifierList, Modifier m) {
+		for (Modifier modifier : modifierList) {
+			if (modifier.getName().equals(m.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 	public boolean createAndAddModifier(String modifierName, String chineseName,
 			String modifierDescription, double modifierPrice, String foodID,
 			String modifierSectionID) throws Exception  {
@@ -99,16 +109,6 @@ public class ModifierSectionController {
 		}
 		return modifierSectionExists;
 
-	}
-	
-	
-	public boolean checkDuplicates(Set<Modifier> modifierList, Modifier m) {
-		for (Modifier modifier : modifierList) {
-			if (modifier.getName().equals(m.getName())) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 }

@@ -27,28 +27,29 @@ public class CompanyController {
 	 * 
 	 * @param c The Company object to be added in
 	 */
-	public void addNewCompany(Company c) {
-		companyDAO.saveCompany(c);
-	}
+	// public void addNewCompany(Company c) {
+	// companyDAO.saveCompany(c);
+	// }
 
-	public void addNewCompany(String name, String companyCode) {
-		Company c = new Company(name, companyCode);
-		companyDAO.saveCompany(c);
-	}
+	// public void addNewCompany(String name, String companyCode) {
+	// Company c = new Company(name, companyCode);
+	// companyDAO.saveCompany(c);
+	// }
 
-	public void addNewCompany(String name, String companyCode, Set<String> buildings) throws Exception {
+	public void addNewCompany(String name, String companyCode, Set<String> buildings)
+			throws Exception {
 		String errorMessages = validateNewCompanyInputs(name, companyCode, buildings);
 		if (!errorMessages.isEmpty()) {
 			throw new Exception(errorMessages);
 		}
-		
+
 		boolean companyCodeExists = checkCompanyCodeExists(companyCode);
 		boolean companyNameExists = checkCompanyNameExists(name);
-		
+
 		if (companyCodeExists) {
 			throw new Exception("Company Code already exists");
 		}
-		
+
 		if (companyNameExists) {
 			throw new Exception("Company Name already exists");
 		}
@@ -57,12 +58,44 @@ public class CompanyController {
 		companyDAO.saveCompany(c);
 	}
 
-	public void editCompany(int companyId, String name, String companyCode, Set<String> buildings) throws Exception {
+	public boolean checkCompanyCodeExists(String companyCode) {
+		Company c = getCompanyByCompanyCode(companyCode);
+		if (c != null) {
+			return true;
+		}
+		return false;
+
+	}
+
+	public boolean checkCompanyNameExists(String companyName) {
+		Company c = getCompanyByName(companyName);
+		if (c != null) {
+			return true;
+		}
+		return false;
+	}
+
+	public void deleteDeliveryPoint(String companyId, String deliveryPoint) throws Exception {
+
+		Company c = getCompany(Integer.parseInt(companyId));
+		Set<String> deliverySet = c.getDeliveryPointSet();
+		if (!deliverySet.contains(deliveryPoint)) {
+			throw new Exception("Delivery point does not exist");
+		} else {
+			deliverySet.remove(deliveryPoint);
+		}
+		EmployeeController employeeController = new EmployeeController();
+		employeeController.notifyAllEmployeesFromCompanyWithDeliveryPoint(c, deliveryPoint);
+
+	}
+
+	public void editCompany(int companyId, String name, String companyCode, Set<String> buildings)
+			throws Exception {
 		String errorMessages = validateNewCompanyInputs(name, companyCode, buildings);
 		if (!errorMessages.isEmpty()) {
 			throw new Exception(errorMessages);
 		}
-		
+
 		boolean changesInName = false;
 		boolean changesInCompanyCode = false;
 		Company companyToEdit = null;
@@ -71,17 +104,17 @@ public class CompanyController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		if (!name.equals(companyToEdit.getName()) && !name.isEmpty()) {
 			companyToEdit.setName(name);
 			changesInName = true;
 		}
-		
+
 		if (!companyCode.equals(companyToEdit.getCompanyCode()) && !name.isEmpty()) {
 			companyToEdit.setCompanyCode(companyCode);
 			changesInCompanyCode = true;
 		}
-		
+
 		companyToEdit.setDeliveryPointSet(buildings);
 
 		if (changesInName) {
@@ -89,7 +122,7 @@ public class CompanyController {
 				throw new Exception("Company name already taken");
 			}
 		}
-		
+
 		if (changesInCompanyCode) {
 			if (checkCompanyCodeExists(companyCode)) {
 				throw new Exception("Company code already taken");
@@ -131,6 +164,10 @@ public class CompanyController {
 		return companyDAO.getCompanyByCompanyCode(companyCode.toUpperCase());
 	}
 
+	public Company getCompanyByName(String companyName) {
+		return companyDAO.getCompanyByName(companyName);
+	}
+
 	/**
 	 * Removes the designated Company object from the Database
 	 * 
@@ -138,20 +175,6 @@ public class CompanyController {
 	 */
 	public void removeCompany(Company c) {
 		companyDAO.deleteCompany(c);
-	}
-
-	public void deleteDeliveryPoint(String companyId, String deliveryPoint) throws Exception {
-
-		Company c = getCompany(Integer.parseInt(companyId));
-		Set<String> deliverySet = c.getDeliveryPointSet();
-		if (!deliverySet.contains(deliveryPoint)) {
-			throw new Exception("Delivery point does not exist");
-		} else {
-			deliverySet.remove(deliveryPoint);
-		}
-		EmployeeController employeeController = new EmployeeController();
-		employeeController.notifyAllEmployeesFromCompanyWithDeliveryPoint(c, deliveryPoint);
-
 	}
 
 	/**
@@ -162,39 +185,20 @@ public class CompanyController {
 	public void updateCompany(Company c) {
 		companyDAO.updateCompany(c);
 	}
-	
-	public boolean checkCompanyCodeExists(String companyCode) {
-		Company c = getCompanyByCompanyCode(companyCode);
-		if (c != null) {
-			return true;
-		}
-		return false;
-		
-	}
-	
-	public Company getCompanyByName(String companyName) {
-		return companyDAO.getCompanyByName(companyName);
-	}
-	public boolean checkCompanyNameExists(String companyName) {
-		Company c = getCompanyByName(companyName);
-		if (c != null) {
-			return true;
-		}
-		return false;
-	}
-	
-	public String validateNewCompanyInputs(String companyName, String companyCode, Set<String> buildings) {
+
+	public String validateNewCompanyInputs(String companyName, String companyCode,
+			Set<String> buildings) {
 		String errors = "";
-		
+
 		if (companyName == null || companyName.isEmpty()) {
 			errors += "Company Name is Empty.\n";
 		}
-		
+
 		if (companyCode == null || companyCode.isEmpty()) {
 			errors += "Company code is Empty.\n";
-			
+
 		}
-		
+
 		if (buildings == null || buildings.isEmpty()) {
 			errors += "Delivery Point is Empty.\n";
 		}

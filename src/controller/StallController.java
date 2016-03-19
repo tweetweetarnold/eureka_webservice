@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import dao.StallDAO;
 import model.Canteen;
 import model.Food;
 import model.Stall;
 import services.CloudinaryUpload;
-import dao.StallDAO;
 
 /**
  * Process the functions of managing the Stall's information
@@ -40,17 +40,23 @@ public class StallController {
 		return false;
 	}
 
+	public void deleteActiveFoodInOldStall(Stall s) {
+		FoodController foodCtrl = new FoodController();
+		Set<Food> foodList = s.getFoodList();
+		if (!foodList.isEmpty()) {
+			for (Food f : foodList) {
+				foodCtrl.deleteFood(f);
+			}
+		}
+
+	}
+
 	public boolean deleteImage(String publicId) throws IOException {
 		return cloudinaryUpload.deleteImage(publicId);
 	}
 
 	public void deleteStall(Stall s) {
-		FoodController foodCtrl = new FoodController();
 		stallDAO.deleteStall(s);
-//		Set<Food> foodList = s.getFoodList();
-//		for (Food f : foodList) {
-//			foodCtrl.deleteFood(f);
-//		}
 	}
 
 	public ArrayList<Stall> getAllActiveStallsUnderCanteen(Canteen c) {
@@ -156,8 +162,7 @@ public class StallController {
 					saveStall(newStall);
 				}
 			}
-			
-			
+
 		} else {
 			if (image.length == 0) {
 				throw new Exception(
@@ -170,17 +175,7 @@ public class StallController {
 			}
 		}
 	}
-	
-	public void deleteActiveFoodInOldStall(Stall s) {
-		FoodController foodCtrl = new FoodController();
-		Set<Food> foodList = s.getFoodList();
-		if (!foodList.isEmpty()) {
-			for (Food f : foodList) {
-				foodCtrl.deleteFood(f);
-			}
-		}
-		
-	}
+
 	public String[] replaceStallOldImage(String oldPublicId, byte[] image) throws IOException {
 		return cloudinaryUpload.replaceStallImage(oldPublicId, image);
 	}
