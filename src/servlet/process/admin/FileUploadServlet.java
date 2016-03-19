@@ -23,7 +23,7 @@ import controller.FileUploadController;
 /**
  * Servlet implementation class FileUploadServlet
  */
-@WebServlet("/FileUpload")
+@WebServlet("/FileUploadServlet")
 public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -87,31 +87,31 @@ public class FileUploadServlet extends HttpServlet {
 
 						switch (fileName) {
 
-						case "Canteen.csv":
+						case "canteen.csv":
 							errorList = fileUploadController.processCanteenUpload(is);
 							if (errorList.size() > 0) {
 								throw new Exception("There are Errors in the Canteen.csv file");
 							}
 							break;
-						case "Stall.csv":
+						case "stall.csv":
 							errorList = fileUploadController.processStallUpload(is);
 							if (errorList.size() > 0) {
 								throw new Exception("There are Errors in the Stall.csv file");
 							}
 							break;
-						case "Food.csv":
+						case "food.csv":
 							errorList = fileUploadController.processFoodUpload(is);
 							if (errorList.size() > 0) {
 								throw new Exception("There are Errors in the Food.csv file");
 							}
 							break;
-						case "Modifier.csv":
+						case "modifier.csv":
 							errorList = fileUploadController.processModifierUpload(is);
 							if (errorList.size() > 0) {
 								throw new Exception("There are Errors in the Modifier.csv file");
 							}
 							break;
-						case "ModifierSection.csv":
+						case "modifiersection.csv":
 							errorList = fileUploadController.processModifierSectionUpload(is);
 							if (errorList.size() > 0) {
 								throw new Exception(

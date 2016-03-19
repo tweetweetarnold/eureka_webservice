@@ -20,9 +20,9 @@ import model.FoodOrderItem;
 import model.OrderPeriod;
 
 public class AnalyticsController {
-	OrderPeriodDAO orderPeriodDAO = new OrderPeriodDAO();
-	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
 	FoodDAO foodDAO = new FoodDAO();
+	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
+	OrderPeriodDAO orderPeriodDAO = new OrderPeriodDAO();
 
 	public AnalyticsController() {
 	}
