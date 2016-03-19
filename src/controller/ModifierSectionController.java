@@ -102,6 +102,11 @@ public class ModifierSectionController {
 	}
 	
 	
+	public Modifier getModifier(int id){
+		ModifierSectionDAO modifierSectionDAO = new ModifierSectionDAO();
+		return modifierSectionDAO.getModifier(id);
+	}
+	
 	public boolean checkDuplicates(Set<Modifier> modifierList, Modifier m) {
 		for (Modifier modifier : modifierList) {
 			if (modifier.getName().equals(m.getName())) {

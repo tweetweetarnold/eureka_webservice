@@ -84,6 +84,7 @@ public class AddFoodOrderItemIntoFoodOrderServlet extends HttpServlet {
 			}
 
 			String jsonString = gson.toJson(m);
+			System.out.println(jsonString);
 			Modifier m1 = gson.fromJson(jsonString, Modifier.class);
 
 			Food food = foodCtrl.getFood(((Long) f.get("foodId")).intValue());

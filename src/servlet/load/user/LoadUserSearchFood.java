@@ -2,6 +2,7 @@ package servlet.load.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -48,14 +49,25 @@ public class LoadUserSearchFood extends HttpServlet {
 		FoodDAO foodDAO = new FoodDAO();
 
 		try {
+			session.setAttribute("results", new ArrayList<Food>());
 			OrderPeriod orderPeriod = (OrderPeriod) session.getAttribute("orderPeriod");
 			String foodName = request.getParameter("food");
 			Canteen c = orderPeriod.getCanteen();
-
+			if(foodName.trim().isEmpty()){
+//				session.setAttribute("error", "Please input a search field.");
+				if (!response.isCommitted()) {
+					response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
+				}
+			}
 			List<Food> list = foodDAO.searchFoodFromCanteen(c, foodName);
-
+			if(list.isEmpty()){
+				throw new Exception("No such food found.");
+			}
+			
 			session.setAttribute("results", list);
-			response.sendRedirect("/eureka_webservice/pages/search-results.jsp");
+			if (!response.isCommitted()) {
+				response.sendRedirect("/eureka_webservice/pages/search-results.jsp");
+			}
 
 			System.out.println(list);
 

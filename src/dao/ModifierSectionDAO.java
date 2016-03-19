@@ -38,6 +38,19 @@ public class ModifierSectionDAO {
 		}
 	}
 	
+	public Modifier getModifier(int id){
+		DetachedCriteria dc = DetachedCriteria.forClass(Modifier.class);
+		dc.add(Restrictions.eq("modifierId",id));
+		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		
+		List<Object> l = MyConnection.queryWithCriteria(dc);
+		if (l.size() == 0) {
+			return null;
+		} else {
+			return (Modifier) l.get(0);
+		}
+		
+	}
 	
 	public void deleteModifierChosen(ModifierChosen modifierChosen){
 		MyConnection.delete(modifierChosen);
