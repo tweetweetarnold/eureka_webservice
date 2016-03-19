@@ -107,7 +107,7 @@ public class Test {
 
 		Food nfood1 = new Food("Fish Head Soup and Beehoon", "鱼头米粉汤", "add veg $0.50", 4.20, null,
 				null, stall1);
-		Food nfood2 = new Food("Fish Soup", "鱼汤", "add veg $0.50", 4.20, null, null, stall1);
+		Food nfood2 = new Food("Fish Soup", "鱼汤", "add veg $0.50", 4.20, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1458374052/Food%20Images%20Raw/Fish_soup.jpg", null, stall1);
 		Food nfood3 = new Food("Fried Fish Soup and Beehoon", "炸鱼汤米粉", "add veg $0.50", 3.70,
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627090/Food%20Images%20Raw/Fried_Fish_soup_with_Beehoon.jpg",
 				null, stall1);
@@ -1476,7 +1476,7 @@ public class Test {
 				"http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627090/Food%20Images%20Raw/Fried_Fish_soup_with_Beehoon.jpg",
 				null, fishBeehoonStall);
 
-		Food fishBeehoonfood4 = new Food("Fish Soup", "鱼汤", "add bittergourd: $0.50", 3.50, null,
+		Food fishBeehoonfood4 = new Food("Fish Soup", "鱼汤", "add bittergourd: $0.50", 3.50, "http://res.cloudinary.com/dmeln4k8n/image/upload/v1458374052/Food%20Images%20Raw/Fish_soup.jpg",
 				null, fishBeehoonStall);
 		Food fishBeehoonfood5 = new Food("Fish Soup With Mee Sua", "鱼汤面线", "add bittergourd: $0.50",
 				3.50, null, null, fishBeehoonStall);

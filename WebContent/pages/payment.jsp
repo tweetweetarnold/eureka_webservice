@@ -76,17 +76,17 @@ function myFunction() {
 		</div>
 		<!-- /.row -->
 
-		<c:choose>
+		
 
-			<c:when test="${not empty sessionScope.paymentSuccess}">
+			<c:if test="${not empty sessionScope.paymentSuccess}">
 				<c:remove var="paymentFoodOrderList" scope="session" />
-			</c:when>
+			</c:if>
 
-			<c:when test="${not empty sessionScope.error}">
+			<c:if test="${not empty sessionScope.error}">
 				<c:remove var="paymentFoodOrderList" scope="session" />
-			</c:when>
+			</c:if>
 
-			<c:when test="${not empty sessionScope.paymentSuccess}">
+			<c:if test="${not empty sessionScope.paymentSuccess}">
 				<div class="alert alert-success alert-dismissible fade in" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -96,9 +96,9 @@ function myFunction() {
 					<c:out value="${paymentSuccess}" />
 				</div>
 				<c:remove var="paymentSuccess" scope="session" />
-			</c:when>
+			</c:if>
 
-			<c:when test="${not empty sessionScope.error}">
+			<c:if test="${not empty sessionScope.error}">
 				<div class="alert alert-danger alert-dismissible fade in" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -108,8 +108,8 @@ function myFunction() {
 					<c:out value="${error}" />
 				</div>
 				<c:remove var="error" scope="session" />
-			</c:when>
-
+			</c:if>
+		<c:choose>
 			<c:when test="${sessionScope.orderPeriod == null}">
 				<div class="alert alert-warning alert-dismissible fade in" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -133,9 +133,10 @@ function myFunction() {
 				</div>
 				<c:remove var="paymentFoodOrderList" scope="session" />
 			</c:when>
-
-
 		</c:choose>
+
+
+		
 
 
 
@@ -143,6 +144,14 @@ function myFunction() {
 			<div class="col-md-12">
 				<!-- PayPal form -->
 				<c:if test="${not empty sessionScope.paymentFoodOrderList}">
+				<div class="alert alert-warning alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<span class="sr-only">Warning:</span>
+					<c:out value="Note: If you do not have a PayPal account, you can still make payment using debit or credit card" />
+				</div>
 				<c:set var="sum" value="0" />
 				<c:forEach items="${sessionScope.paymentFoodOrderList}" var="order" varStatus="orderLoop">
 							<c:set var="sum" value="${sum + order.finalPrice}" />
@@ -185,6 +194,7 @@ function myFunction() {
 
 					</form>
 					</c:if>
+					
 				</c:if>
 				<!-- End of PayPal -->
 				<div class="row"></div>

@@ -59,9 +59,19 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-
+					<c:if test="${empty sessionScope.orderHistoryList}">
+					
+					<div class="alert alert-warning alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<span class="sr-only">Warning:</span>
+					<c:out value="There are no order history available" />
+				</div>
+				</c:if>
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
+						
 						<c:forEach items="${sessionScope.orderHistoryList}" var="orderHistory" varStatus="loop">
 
 							<div class="panel panel-default">

@@ -84,7 +84,7 @@
 					Order your food before
 					<b>
 						<ins>
-							<fmt:formatDate pattern="E, dd-MMM-yyyy HH:mm:ss" type="both"
+							<fmt:formatDate pattern="E, dd-MMM-yyyy hh:mm:ss aa" type="both"
 								value="${sessionScope.orderPeriod.endDateFormatted}"
 							/>
 						</ins>
