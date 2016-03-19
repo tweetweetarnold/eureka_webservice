@@ -1233,4 +1233,13 @@ public class FoodOrderController {
 
 		return weekstart + " to " + weekend;
 	}
+	
+	public boolean hasExistingFoodOrders(Employee employee, OrderPeriod orderPeriod){
+		System.out.println("Testing hasExistingFoodOrders: " + foodOrderDAO.getAllFoodOrderOfOrderPeriodForUser(employee,orderPeriod).size());
+		if(foodOrderDAO.getAllFoodOrderOfOrderPeriodForUser(employee,orderPeriod).size()!=0){
+			return true;
+		}
+		return false;
+	}
+	
 }

@@ -106,7 +106,8 @@ public class ProcessAddNewFoodOrderServlet extends HttpServlet {
 
 				controller.addFoodOrder(myFoodOrder);
 				System.out.println("New FoodOrder added to database");
-
+				session.setAttribute("warningPersist",
+						"An existing order has already been placed. You will not be able to checkout food again.");
 				session.removeAttribute("myFoodOrderItems");
 				System.out.println("myFoodOrderItems cleared");
 

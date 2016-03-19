@@ -23,6 +23,7 @@ import com.google.gson.GsonBuilder;
 
 import controller.AccessController;
 import controller.AnalyticsController;
+import controller.FoodOrderController;
 import controller.OrderPeriodController;
 import model.Canteen;
 import model.Employee;
@@ -174,6 +175,11 @@ public class ProcessLoginServlet extends HttpServlet {
 				out.print(gson.toJson(obj));
 			} else {
 				if (!response.isCommitted()) {
+					FoodOrderController foodOrderController = new FoodOrderController();
+					if(foodOrderController.checkForExistingOrder(emp, period)){
+						session.setAttribute("warningPersist",
+								"An existing order has already been placed. You will not be able to checkout food again.");
+					}
 					response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 				}
 			}
