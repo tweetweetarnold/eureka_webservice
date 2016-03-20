@@ -214,7 +214,7 @@
 					<h4>Register</h4>
 
 					<!-- Description -->
-					<p>Register for an account with your company's code!</p>
+					<p>Register an account with your company code!</p>
 
 				</div>
 				<!-- /.col-md-4 -->
@@ -230,7 +230,7 @@
 					<h4>Order</h4>
 
 					<!-- Description -->
-					<p>Browse the canteen and order your food for the day!</p>
+					<p>Select your lunch and submit to cart</p>
 
 				</div>
 				<!-- /.col-md-4 -->
@@ -249,7 +249,7 @@
 
 					<!-- Description -->
 					<p>
-						Eat happy already, time to pay
+						Pay your accumulated lunch orders only at the end of every week!
 						<a href="/eureka_webservice/admin/login.jsp">.</a>
 					</p>
 
