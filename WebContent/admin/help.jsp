@@ -48,7 +48,7 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Help & Guides</h1>
+					<h1 class="page-header">Help & Guide</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -60,58 +60,91 @@
 
 					<div class="panel-group">
 						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingOne">
-								<h4 class="panel-title">
-									<a role="button" data-toggle="collapse" data-parent="#collapse" href="#collapseOne" aria-expanded="true"
-										aria-controls="collapseOne"
-									> Introduction </a>
-								</h4>
-							</div>
-							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-								<div class="panel-body">
+							<div class="panel-heading" role="tab" id="headingOne">Help & Guide</div>
+
+							<div class="panel-body">
+
+								<section style="padding-bottom: 20px;">
+									<h2>Background</h2>
 									<p>This guide serves to inform the user about this application (LunchTime).</p>
 									<p>LunchTime was developed by a team of SMU SIS students as a project.</p>
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingTwo">
-								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#collapse" href="#collapseTwo"
-										aria-expanded="false" aria-controls="collapseTwo"
-									> Collapsible Group Item #2 </a>
-								</h4>
-							</div>
-							<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-								<div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-									richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-									nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-									nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-									sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw
-									denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingThree">
-								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#collapse" href="#collapseThree"
-										aria-expanded="false" aria-controls="collapseThree"
-									> Collapsible Group Item #3 </a>
-								</h4>
-							</div>
-							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-								<div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-									richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-									nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-									nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-									sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw
-									denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
+								</section>
+
+
+								<section>
+									<h2>FAQ</h2>
+									<p>
+										<strong>Q: What is LunchTime?</strong>
+										<br>
+										A: LunchTime provides employees of participating companies with an easy and secure way to order their lunch.
+									</p>
+
+									<p>
+										<strong>Q: What is an Order Period?</strong>
+										<br>
+										A: It is the time period where employees are able to place their lunch order. For example, if the order period
+										is 8.30am – 10.30am, employees are able to place their lunch order via LunchTime anytime from 8.30am -
+										10.30am.
+									</p>
+
+									<p>
+										<strong>Q: How do I add an order period?</strong>
+										<br>
+										A: It is the time period where employees are able to place their lunch order. For example, if the order period
+										is 8.30am – 10.30am, employees are able to place their lunch order via LunchTime anytime from 8.30am -
+										10.30am.
+										<br>
+										Click on ‘Order Period’ on the left navigation panel at the side. Click on ‘Add New Order Period’ Fill in the
+										order period details and click ‘Add New Order Window’ button
+
+									</p>
+
+									<p>
+										<strong>Q: What happens if I entered the wrong start or end date/time?</strong>
+										<br>
+										A: *You are only able to edit the start or end date/time if the order period has not started yet. Navigate to
+										view all order periods Click on the pencil icon to edit the order period Enter the new start and end date/time
+										and click ‘Update’
+									</p>
+
+
+									<p>
+										<strong>Q: How do I delete a user if he/she has left the company?</strong>
+										<br>
+										A: Click on ‘User’ on the left navigation panel at the side Click on the trash icon to delete the user
+									</p>
+
+									<p>
+										<strong>Q: How do I change the status of the employee if he/she has cleared the outstanding payment
+											in cash?</strong>
+										<br>
+										A: Click on ‘User’ on the left navigation panel at the side Click on the pencil icon to edit the O/S and
+										status Click ‘Update’
+									</p>
+
+									<p>
+										<strong>Q: Am I able to add and manage new canteens/stalls/food items?</strong>
+										<br>
+										A: Yes you are able to. Simply navigate to ‘Canteen’ on the left navigation panel at the side. Add, edit and
+										delete canteen will be on this page. To add, edit or delete a stall from any of the canteens, click on the
+										‘View all Stalls’ link for that canteen. To add, edit or delete a food item from any of the stalls in the
+										canteen, click on the ‘View all Food’ link for that stall.
+									</p>
+
+								</section>
+
+
+
+
+
+
+
+
+
+
 							</div>
 						</div>
 					</div>
-
-
-
 
 				</div>
 				<!-- /.col-lg-12 -->

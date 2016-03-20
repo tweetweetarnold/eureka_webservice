@@ -181,7 +181,7 @@
 				<li>
 					<a target="_self" href="/eureka_webservice/admin/help.jsp">
 						<i class="fa fa-info fa-fw"></i>
-						Help & Guides
+						Help & Guide
 					</a>
 				</li>
 

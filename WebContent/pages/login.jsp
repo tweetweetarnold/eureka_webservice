@@ -240,7 +240,7 @@
 					<!-- Icons -->
 					<figure>
 						<img class="img-services img-margin"
-							src="/eureka_webservice/resources/guri-one/templates/images/icons/world-map.png" alt=""
+							src="/eureka_webservice/resources/guri-one/templates/images/icons/paymenticon.png" alt=""
 						>
 					</figure>
 
