@@ -3,6 +3,8 @@ package servlet.process.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -72,6 +75,7 @@ public class AddFoodOrderItemIntoFoodOrderServlet extends HttpServlet {
 
 			JSONObject f = (JSONObject) data.get("food");
 			JSONObject m = (JSONObject) data.get("modifier");
+			JSONObject selected = (JSONObject) data.get("selected");
 			int q = Integer.parseInt((String) data.get("quantity"));
 			int foodOrderId = Integer.parseInt((String) data.get("foodOrderId"));
 			if (data.get("foodOrderItemId") != null) {
@@ -85,21 +89,33 @@ public class AddFoodOrderItemIntoFoodOrderServlet extends HttpServlet {
 				System.out.println("food deleted: " + foodOrderItemId);
 			}
 
-			Modifier m1 = null;
-			if (m != null) {
-				int modifierId = (int) (long) m.get("modifierId");
-				m1 = msCtrl.getModifier(modifierId);
-			}
+			// Modifier m1 = null;
+			// if (m != null) {
+			// int modifierId = (int) (long) m.get("modifierId");
+			// m1 = msCtrl.getModifier(modifierId);
+			// }
 
 			Food food = foodCtrl.getFood(((Long) f.get("foodId")).intValue());
 			FoodOrder order = foodOrderCtrl.getFoodOrder(foodOrderId);
 			FoodOrderItem item = new FoodOrderItem(order, food, q, null);
 
-			System.out.println("modifierchosen: " + m1);
-			if (m1 != null) {
-				ModifierChosen mchosen = new ModifierChosen(m1, item);
+			// System.out.println("modifierchosen: " + m1);
+			// if (m1 != null) {
+			// ModifierChosen mchosen = new ModifierChosen(m1, item);
+			// Set<ModifierChosen> modifierChosenList = new HashSet<ModifierChosen>();
+			// modifierChosenList.add(mchosen);
+			// item.setModifierChosenList(modifierChosenList);
+			// }
+
+			Iterator i = selected.keySet().iterator();
+			if (i.hasNext()) {
 				Set<ModifierChosen> modifierChosenList = new HashSet<ModifierChosen>();
-				modifierChosenList.add(mchosen);
+				while (i.hasNext()) {
+					int num = Integer.parseInt((String) i.next());
+					Modifier modifier = msCtrl.getModifier(num);
+					ModifierChosen mchosen = new ModifierChosen(modifier, item);
+					modifierChosenList.add(mchosen);
+				}
 				item.setModifierChosenList(modifierChosenList);
 			}
 

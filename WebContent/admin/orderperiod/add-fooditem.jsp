@@ -145,33 +145,33 @@
 
 
 
-									<div class="form-group" ng-show="food != null && food.modifierList.length > 0">
-										<label for="modifierChosen">Add-On: </label>
-										<select class="form-control" name="modifierChosen" ng-model='modifierChosen'
-											ng-options='m as m.name + " (" + (m.price | currency) + ")" for m in food.modifierList | orderBy:"name" track by m.modifierId'
-										>
-										</select>
-									</div>
-
-
-									<!-- 									<div ng-show='food != null && food.modifierSectionList.length > 0'> -->
-<!-- 										<br> -->
-<!-- 										<h4>Add-On(s)</h4> -->
-<!-- 										<hr> -->
-
-
-<!-- 										<div class="form-group" ng-repeat='mSection in food.modifierSectionList track by mSection.modifierSectionId'> -->
-<!-- 											<label for="modifierChosen">{{mSection.categoryName}}: </label> -->
-<!-- 											<div ng-repeat='modifier in mSection.modifierList | orderBy:"name" track by $index'> -->
-<!-- 												<input type="checkbox" ng-model='modifier' name="modifier" ng-value="modifier"> -->
-<!-- 												{{modifier.name}} -->
-<!-- 												<br> -->
-<!-- 											</div> -->
-
-
-<!-- 										</div> -->
-
+<!-- 									<div class="form-group" ng-show="food != null && food.modifierList.length > 0"> -->
+<!-- 										<label for="modifierChosen">Add-On: </label> -->
+<!-- 										<select class="form-control" name="modifierChosen" ng-model='modifierChosen' -->
+<!-- 											ng-options='m as m.name + " (" + (m.price | currency) + ")" for m in food.modifierList | orderBy:"name" track by m.modifierId' -->
+<!-- 										> -->
+<!-- 										</select> -->
 <!-- 									</div> -->
+
+
+									<div ng-show='food != null && food.modifierSectionList.length > 0'>
+										<br>
+										<h4>Add-On(s)</h4>
+										<hr>
+
+
+										<div class="form-group" ng-repeat='mSection in food.modifierSectionList track by mSection.modifierSectionId'>
+											<label for="modifierChosen">{{mSection.categoryName}}: </label>
+											<div ng-repeat='modifier in mSection.modifierList | orderBy:"name" track by $index'>
+												<input type="checkbox" ng-model='selected[modifier.modifierId]' name="modifier" ng-true-value="'true'">
+												{{modifier.name}} ({{modifier.price | currency}})
+												<br>
+											</div>
+
+
+										</div>
+
+									</div>
 
 
 
@@ -179,7 +179,6 @@
 										<label>Total Price: </label>
 										<p>{{(food.price + modifierChosen.price)*quantity | currency}}</p>
 									</div>
-
 
 
 
@@ -248,6 +247,7 @@
 									$scope.foodOrderItemId = $location.search().foodOrderItemId;
 									$scope.numRow = [ 1, 2, 3, 4, 5, 6, 7, 8,
 											9, 10 ];
+									$scope.selected = {};
 
 									$http(
 											{
@@ -290,11 +290,15 @@
 									$scope.totalPrice = $scope.food;
 
 									$scope.submit = function() {
-										console.log({
-											food : $scope.food,
-											modifier : $scope.modifierChosen,
-											foodOrderId : $scope.foodOrderId
-										});
+										console
+												.log({
+													food : $scope.food,
+													modifier : $scope.modifierChosen,
+													foodOrderId : $scope.foodOrderId,
+													quantity : $scope.quantity,
+													foodOrderItemId : $scope.foodOrderItemId,
+													selected : $scope.selected
+												});
 
 										$http(
 												{
@@ -305,7 +309,8 @@
 														modifier : $scope.modifierChosen,
 														foodOrderId : $scope.foodOrderId,
 														quantity : $scope.quantity,
-														foodOrderItemId : $scope.foodOrderItemId
+														foodOrderItemId : $scope.foodOrderItemId,
+														selected : $scope.selected
 													}
 												})
 												.then(

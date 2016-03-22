@@ -178,7 +178,7 @@ public class ProcessLoginServlet extends HttpServlet {
 					FoodOrderController foodOrderController = new FoodOrderController();
 					if(foodOrderController.checkForExistingOrder(emp, period)){
 						session.setAttribute("warningPersist",
-								"An existing order has already been placed. You will not be able to checkout food again.");
+								"You have already placed an order. You will not be able to checkout again.");
 					}
 					response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 				}
