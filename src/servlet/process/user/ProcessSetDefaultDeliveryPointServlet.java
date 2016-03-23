@@ -69,11 +69,11 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 
 		userController.updateDefaultDeliveryPoint(email, buildingName);
 
-		
 		String[] emailArray = { email };
-		
+
 		try {
-			accessController.constructVerifyEmail(request.getServerName(), request.getServerPort(), request.getContextPath(), email, emailArray);
+			accessController.constructVerifyEmail(request.getServerName(), request.getServerPort(),
+					request.getContextPath(), email, emailArray);
 
 			session.removeAttribute("email");
 			session.setAttribute("output", email);
@@ -87,14 +87,14 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 
 	}
 
-//	private String constructVerifyEmail(String contextPath, String email, Locale locale,
-//			String token) {
-//		AESAlgorithm aes = new AESAlgorithm();
-//		String eEncrypt = aes.encrypt(email);
-//		String encryptedStatus = aes.encrypt(StringValues.EMPLOYEE_OK);
-//		String url = contextPath + "/eureka_webservice/ProcessVerificationServlet?email="
-//				+ eEncrypt + "&status=" + encryptedStatus + "&token=" + token;
-//		return url;
-//	}
+	// private String constructVerifyEmail(String contextPath, String email, Locale locale,
+	// String token) {
+	// AESEncryption aes = new AESEncryption();
+	// String eEncrypt = aes.encrypt(email);
+	// String encryptedStatus = aes.encrypt(StringValues.EMPLOYEE_OK);
+	// String url = contextPath + "/eureka_webservice/ProcessVerificationServlet?email="
+	// + eEncrypt + "&status=" + encryptedStatus + "&token=" + token;
+	// return url;
+	// }
 
 }

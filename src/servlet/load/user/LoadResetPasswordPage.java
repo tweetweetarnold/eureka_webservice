@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import services.AESAlgorithm;
+import services.AESEncryption;
 
 /**
  * Servlet implementation class ProcessResetPasswordServlet
@@ -45,7 +45,7 @@ public class LoadResetPasswordPage extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		AESAlgorithm aes = new AESAlgorithm();
+		AESEncryption aes = new AESEncryption();
 
 		try {
 			String email = (String) request.getParameter("email");

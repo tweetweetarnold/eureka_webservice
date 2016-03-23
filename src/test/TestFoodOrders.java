@@ -22,7 +22,7 @@ import model.Modifier;
 import model.ModifierSection;
 import model.OrderPeriod;
 import model.Stall;
-import services.AESAlgorithm;
+import services.AESEncryption;
 
 public class TestFoodOrders {
 
@@ -67,7 +67,7 @@ public class TestFoodOrders {
 		buildingList.add("CONTROL");
 		buildingList.add("MAINTENANCE");
 
-		AESAlgorithm aes = new AESAlgorithm();
+		AESEncryption aes = new AESEncryption();
 		company2.setDeliveryPointSet(buildingList);
 		company.setDeliveryPointSet(buildingList);
 		Employee arnold = new Employee(aes.encrypt("chris.cheng.2013@sis.smu.edu.sg" + "1234567"),

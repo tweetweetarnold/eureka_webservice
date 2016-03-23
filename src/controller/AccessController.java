@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 import javax.mail.MessagingException;
 
-import model.Admin;
-import model.Company;
-import model.Employee;
-
 import org.apache.commons.validator.routines.EmailValidator;
 import org.hibernate.exception.ConstraintViolationException;
 import org.joda.time.DateTime;
@@ -15,10 +11,13 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import services.AESAlgorithm;
+import dao.AdminDAO;
+import model.Admin;
+import model.Company;
+import model.Employee;
+import services.AESEncryption;
 import services.SendEmail;
 import value.StringValues;
-import dao.AdminDAO;
 
 /**
  * Process the functions of user access control such as registration and logging in for
@@ -29,7 +28,6 @@ import dao.AdminDAO;
 public class AccessController {
 
 	AdminDAO adminDAO = new AdminDAO();
-	AESAlgorithm aesAlgo = new AESAlgorithm();
 
 	/**
 	 * Creates a default constructor for AccessController
@@ -47,8 +45,7 @@ public class AccessController {
 	public Admin authenticateAdmin(String inputUsername, String inputPassword) {
 		Admin admin = adminDAO.getAdminByUsername(inputUsername);
 		if (admin != null) {
-			String adminPasswordinDB = admin.getPassword();
-			if (inputPassword.equals(adminPasswordinDB)) {
+			if (AESEncryption.encrypt(inputPassword).equals(admin.getPassword())) {
 				return admin;
 			}
 		}
@@ -69,7 +66,7 @@ public class AccessController {
 			if (emp != null) {
 				String password = emp.getPassword();
 				/* checking that the input password is correct as the password stored in DataBase */
-				if (aesAlgo.encrypt(inputEmail + inputPassword).equals(password)) {
+				if (AESEncryption.encrypt(inputEmail + inputPassword).equals(password)) {
 					return emp;
 				}
 			}
@@ -274,7 +271,6 @@ public class AccessController {
 	public boolean constructResetPasswordEmail(String serverName, int serverPort,
 			String contextPath, String email, String[] toSendEmail) throws MessagingException {
 		SendEmail javaEmail = new SendEmail();
-		AESAlgorithm aes = new AESAlgorithm();
 
 		String appUrl = "http://" + serverName + ":" + serverPort + contextPath;
 
@@ -284,9 +280,9 @@ public class AccessController {
 		DateTime currentTime = new DateTime(DateTimeZone.forID("Asia/Singapore"));
 		System.out.println("NOW: " + currentTime);
 
-		String time = aes.encrypt(formatter.print(currentTime));
+		String time = AESEncryption.encrypt(formatter.print(currentTime));
 		String token = time;
-		String eEncrypt = aes.encrypt(email);
+		String eEncrypt = AESEncryption.encrypt(email);
 		String url = appUrl + "/LoadResetPasswordPage?email=" + eEncrypt + "&token=" + token;
 
 		javaEmail.setMailServerProperties();
@@ -313,10 +309,10 @@ public class AccessController {
 		DateTime currentTime = new DateTime(DateTimeZone.forID("Asia/Singapore"));
 		System.out.println("NOW: " + currentTime);
 
-		String time = aesAlgo.encrypt(formatter.print(currentTime));
+		String time = AESEncryption.encrypt(formatter.print(currentTime));
 		String token = time;
-		String eEncrypt = aesAlgo.encrypt(email);
-		String encryptedStatus = aesAlgo.encrypt(StringValues.EMPLOYEE_ACTIVE);
+		String eEncrypt = AESEncryption.encrypt(email);
+		String encryptedStatus = AESEncryption.encrypt(StringValues.EMPLOYEE_ACTIVE);
 
 		String url = appUrl + "/ProcessVerificationServlet?email=" + eEncrypt + "&status="
 				+ encryptedStatus + "&token=" + token;
@@ -342,7 +338,7 @@ public class AccessController {
 	 * @return The encrypted password
 	 */
 	private String encryptPassword(String email, String password) {
-		return aesAlgo.encrypt(email + password);
+		return AESEncryption.encrypt(email + password);
 	}
 
 	/**
@@ -391,8 +387,7 @@ public class AccessController {
 	 * @throws Exception if the new contact number of the Employee could not be updated in the
 	 *             database
 	 */
-	public boolean updateEmployeeContactNumber(Employee e, String newContactNumber)
-			throws Exception {
+	public void updateEmployeeContactNumber(Employee e, String newContactNumber) throws Exception {
 
 		EmployeeController employeeCtrl = new EmployeeController();
 
@@ -400,7 +395,12 @@ public class AccessController {
 		e.setContactNo(newContactNum);
 		employeeCtrl.updateEmployee(e);
 
-		return true;
+	}
+
+	public void updateAdminPassword(Admin a, String password) throws Exception {
+		AdminDAO dao = new AdminDAO();
+		a.setPassword(AESEncryption.encrypt(password));
+		dao.updateAdmin(a);
 	}
 
 	/**
@@ -411,11 +411,10 @@ public class AccessController {
 	 * @return Returns true when the password has been updated
 	 * @throws Exception if the new password of the Employee could not be updated in the database
 	 */
-	public boolean updateEmployeePassword(Employee e, String password) throws Exception {
+	public void updateEmployeePassword(Employee e, String password) throws Exception {
 		EmployeeController employeeCtrl = new EmployeeController();
 		e.setPassword(encryptPassword(e.getEmail(), password));
 		employeeCtrl.updateEmployee(e);
-		return true;
 	}
 
 	/**
@@ -428,7 +427,7 @@ public class AccessController {
 	 * @return Returns true when the password has been updated
 	 * @throws Exception if the new password of the Employee could not be updated in the database
 	 */
-	public boolean updateEmployeePassword(Employee e, String oldPassword, String newPassword,
+	public void updateEmployeePassword(Employee e, String oldPassword, String newPassword,
 			String confirmNewPassword) throws Exception {
 
 		EmployeeController employeeCtrl = new EmployeeController();
@@ -445,7 +444,6 @@ public class AccessController {
 		}
 		e.setPassword(encryptPassword(e.getEmail(), newPassword));
 		employeeCtrl.updateEmployee(e);
-		return true;
 
 	}
 

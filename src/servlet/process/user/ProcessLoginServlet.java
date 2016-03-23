@@ -58,7 +58,7 @@ public class ProcessLoginServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
@@ -143,25 +143,26 @@ public class ProcessLoginServlet extends HttpServlet {
 
 			// for login2
 			if (period != null && period.getStatus().equals(StringValues.ACTIVE)) {
-				
+
 				ArrayList<Canteen> canteenList = new ArrayList<Canteen>();
 				canteenList.add(period.getCanteen());
 				session.setAttribute("canteenList", canteenList);
 				System.out.println("canteenList size: " + canteenList.size());
-				ArrayList<Stall> stallList = new ArrayList<Stall>(period.getCanteen().getActiveStallList());
+				ArrayList<Stall> stallList = new ArrayList<Stall>(
+						period.getCanteen().getActiveStallList());
 				Collections.sort(stallList, new Comparator<Stall>() {
 					public int compare(Stall arg0, Stall arg1) {
-						// TODO Auto-generated method stub
 						return arg0.getName().compareTo(arg1.getName());
 					}
 				});
 				session.setAttribute("stallList", stallList);
-				LinkedHashMap<Food, Integer> map = analyticsCtrl.topKfoods(period.getCanteen().getCanteenId());
+				LinkedHashMap<Food, Integer> map = analyticsCtrl
+						.topKfoods(period.getCanteen().getCanteenId());
 				session.setAttribute("mostOrderedList", map);
 				System.out.println("canteenID" + period.getCanteen().getCanteenId());
 				System.out.println("mostorderedlist: " + map);
-				
-			}else{
+
+			} else {
 				if (!response.isCommitted()) {
 					session.setAttribute("suspended", "true");
 					response.sendRedirect("/eureka_webservice/LoadUserPaymentServlet");
@@ -176,7 +177,7 @@ public class ProcessLoginServlet extends HttpServlet {
 			} else {
 				if (!response.isCommitted()) {
 					FoodOrderController foodOrderController = new FoodOrderController();
-					if(foodOrderController.checkForExistingOrder(emp, period)){
+					if (foodOrderController.checkForExistingOrder(emp, period)) {
 						session.setAttribute("warningPersist",
 								"You have already placed an order. You will not be able to checkout again.");
 					}

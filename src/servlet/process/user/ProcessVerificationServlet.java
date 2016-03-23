@@ -9,16 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Employee;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import services.AESAlgorithm;
-import value.StringValues;
 import dao.EmployeeDAO;
+import model.Employee;
+import services.AESEncryption;
+import value.StringValues;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -57,7 +56,6 @@ public class ProcessVerificationServlet extends HttpServlet {
 		System.out.println("*********** VerificationServlet ***********");
 
 		HttpSession session = request.getSession();
-		AESAlgorithm aes = new AESAlgorithm();
 
 		try {
 
@@ -66,15 +64,15 @@ public class ProcessVerificationServlet extends HttpServlet {
 			String status = (String) request.getParameter("status");
 			String param = (String) request.getParameter("token");
 			String newEmail = email.replaceAll(" ", "+");
-			String eDecrypt = aes.decrypt(newEmail);
-			String verifiedStatus = aes.decrypt(status);
+			String eDecrypt = AESEncryption.decrypt(newEmail);
+			String verifiedStatus = AESEncryption.decrypt(status);
 
 			Employee employee = employeedao.getEmployeeByEmail(eDecrypt);
 
 			if (param.contains(" ")) {
 				param = param.replaceAll(" ", "+");
 			}
-			String token = aes.decrypt(param);
+			String token = AESEncryption.decrypt(param);
 			DateTimeZone.setDefault(DateTimeZone.forID("Asia/Singapore"));
 			System.out.println("Servlet TIME ZONE: " + DateTimeZone.getDefault().toString());
 			DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MMMM-yyyy HH:mm");

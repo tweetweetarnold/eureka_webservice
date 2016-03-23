@@ -100,18 +100,16 @@ public class ProcessAdminAddNewOrderPeriodServlet extends HttpServlet {
 			if (!available) {
 				throw new Exception("Order Period have already been taken");
 			} else {
-				// orderPeriodController.createNewOrderPeriod(startDatetime, endDatetime, company,
-				// canteen, numberOfWeeks, remarks, 0.0, discountAbsolute);
 				orderPeriodController.createNewOrderPeriod2(startDatetime, endDatetime, company,
 						canteen, numberOfWeeks, remarks, discountAbsolute);
 			}
 			session.setAttribute("success", "New Order Period created successfully.");
 
-			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderperiod/active.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("error", e.getMessage());
-			response.sendRedirect("/eureka_webservice/admin/homepage.jsp");
+			response.sendRedirect("/eureka_webservice/admin/orderperiod/active.jsp");
 		}
 
 	}

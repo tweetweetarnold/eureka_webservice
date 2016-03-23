@@ -7,7 +7,6 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 
 import connection.MyConnection;
-import dao.CanteenDAO;
 import dao.FoodDAO;
 import model.Canteen;
 import model.Food;

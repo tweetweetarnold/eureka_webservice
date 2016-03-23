@@ -52,7 +52,7 @@ public class ProcessResetPasswordRedirectServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		response.setContentType("application/json");
 
-		// AESAlgorithm aesAlgo = new AESAlgorithm();
+		// AESEncryption aesAlgo = new AESEncryption();
 		EmployeeController userController = new EmployeeController();
 		AccessController accessController = new AccessController();
 

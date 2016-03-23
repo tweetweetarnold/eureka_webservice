@@ -3,7 +3,6 @@ package servlet.process.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,7 +44,7 @@ public class EditUserServlet extends HttpServlet {
 
 			JsonObject o = json.getAsJsonObject();
 
-			Date date = new Date(o.get("createDate").getAsLong());
+//			Date date = new Date(o.get("createDate").getAsLong());
 			String password = o.get("password").getAsString();
 			String name = o.get("name").getAsString();
 			String email = o.get("email").getAsString();
@@ -61,16 +60,12 @@ public class EditUserServlet extends HttpServlet {
 				Employee e = new Employee(password, name, email, contactNo, company);
 				e.setStatus(status);
 				e.setAmountOwed(amountOwed);
-
 				return e;
-
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-
 			return null;
 		}
-
 	};
 
 	/**

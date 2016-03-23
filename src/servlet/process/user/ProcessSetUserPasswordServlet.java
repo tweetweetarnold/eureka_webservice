@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Employee;
 import controller.AccessController;
+import model.Employee;
 
 /**
  * Servlet implementation class ProcessSetUserPasswordServlet
@@ -50,13 +50,11 @@ public class ProcessSetUserPasswordServlet extends HttpServlet {
 		String confirmNewPassword = request.getParameter("confirmNewPassword");
 
 		try {
-			
-			boolean ans = accessController.updateEmployeePassword(e, oldPassword, newPassword,
+
+			accessController.updateEmployeePassword(e, oldPassword, newPassword,
 					confirmNewPassword);
-			if (ans) {
-				session.setAttribute("success", "Password updated successfully.");
-				response.sendRedirect("/eureka_webservice/pages/profile.jsp");
-			} 
+			session.setAttribute("success", "Password updated successfully.");
+			response.sendRedirect("/eureka_webservice/pages/profile.jsp");
 
 		} catch (Exception e1) {
 			e1.printStackTrace();

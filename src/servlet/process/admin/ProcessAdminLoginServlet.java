@@ -47,7 +47,7 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		AccessController loginController = new AccessController();
+		AccessController accessCtrl = new AccessController();
 
 		String adminUsername = "";
 		String adminInputPwd = "";
@@ -58,7 +58,7 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 			adminInputPwd = (String) request.getParameter("adminPassword");
 
 			// Verify user credentials. if user does not exist, returns null
-			Admin admin = loginController.authenticateAdmin(adminUsername, adminInputPwd);
+			Admin admin = accessCtrl.authenticateAdmin(adminUsername, adminInputPwd);
 			System.out.println("Admin is authenticated: " + admin.getName());
 
 			String tokenID = UUID.randomUUID().toString().toUpperCase() + "|" + admin.getUsername()

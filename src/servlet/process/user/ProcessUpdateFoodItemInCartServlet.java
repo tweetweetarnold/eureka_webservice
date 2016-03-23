@@ -18,38 +18,35 @@ import model.FoodOrderItem;
 @WebServlet("/ProcessUpdateFoodItemInCartServlet")
 public class ProcessUpdateFoodItemInCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProcessUpdateFoodItemInCartServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ProcessUpdateFoodItemInCartServlet() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(); 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String newQuantity = request.getParameter("quantity");
 		String count = request.getParameter("count");
-		List<FoodOrderItem> myFoodOrderItems= (List<FoodOrderItem>) session.getAttribute("myFoodOrderItems");
-		myFoodOrderItems.get(Integer.parseInt(count)-1).setQuantity(Integer.parseInt(newQuantity));
-//		for(FoodOrderItem f : myFoodOrderItems){
-//			if(Integer.parseInt(foodOrderItemId)== f.getFoodOrderItemId()){
-//				System.out.println(foodOrderItemId);
-//				f.setQuantity(Integer.parseInt(newQuantity));
-//			}
-//		}
-		session.setAttribute("success",  "The Cart has been updated!");
+		List<FoodOrderItem> myFoodOrderItems = (List<FoodOrderItem>) session
+				.getAttribute("myFoodOrderItems");
+		myFoodOrderItems.get(Integer.parseInt(count) - 1)
+				.setQuantity(Integer.parseInt(newQuantity));
+		session.setAttribute("success", "The Cart has been updated!");
 
 		response.sendRedirect("/eureka_webservice/pages/cart.jsp");
 	}

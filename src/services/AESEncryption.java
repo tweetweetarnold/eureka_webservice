@@ -8,12 +8,12 @@ import javax.crypto.spec.SecretKeySpec;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-public class AESAlgorithm {
+public class AESEncryption {
 	private static String algo = "AES";
 	private static String secret = "agsjdjegqbentkdh";
-	private byte[] keyValue = secret.getBytes();
+	private static byte[] keyValue = secret.getBytes();
 
-	public String decrypt(String encryptedPassword) {
+	public static String decrypt(String encryptedPassword) {
 		String decryptedPassword = null;
 		try {
 			Key key = generateKey();
@@ -29,7 +29,7 @@ public class AESAlgorithm {
 		return decryptedPassword;
 	}
 
-	public String encrypt(String password) {
+	public static String encrypt(String password) {
 		String encryptedValue = null;
 		try {
 			Key key = generateKey();
@@ -44,7 +44,7 @@ public class AESAlgorithm {
 		return encryptedValue;
 	}
 
-	public Key generateKey() throws Exception {
+	public static Key generateKey() throws Exception {
 		Key key = new SecretKeySpec(keyValue, algo);
 		return key;
 	}

@@ -36,6 +36,12 @@
 						Run Quartz
 					</a>
 				</li>
+				<li>
+					<a target="_self" href="/eureka_webservice/admin/reset-password.jsp">
+						<i class="fa fa-key fa-fw"></i>
+						Reset Password
+					</a>
+				</li>
 			</ul>
 			<!-- /.dropdown-menu -->
 		</li>

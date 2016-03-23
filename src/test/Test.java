@@ -17,7 +17,7 @@ import model.Modifier;
 import model.ModifierSection;
 import model.OrderPeriod;
 import model.Stall;
-import services.AESAlgorithm;
+import services.AESEncryption;
 
 public class Test {
 
@@ -62,7 +62,7 @@ public class Test {
 		buildingList.add("CONTROL");
 		buildingList.add("MAINTENANCE");
 
-		AESAlgorithm aes = new AESAlgorithm();
+		AESEncryption aes = new AESEncryption();
 		company2.setDeliveryPointSet(buildingList);
 		company.setDeliveryPointSet(buildingList);
 		Employee arnold = new Employee(aes.encrypt("chris.cheng.2013@sis.smu.edu.sg" + "1234567"),
@@ -74,7 +74,8 @@ public class Test {
 		session.save(company2);
 		session.save(arnold);
 
-		Admin admin = new Admin("admin", "1234567", "admin1",
+		AESEncryption a = new AESEncryption();
+		Admin admin = new Admin("admin", a.encrypt("1234567"), "admin1",
 				45678925);
 		session.save(admin);
 
