@@ -222,6 +222,13 @@ public class FoodOrderController {
 			MyConnection.delete(foodOrder);
 		} else {
 			deleteFoodOrderItem(foodOrderItemId);
+			foodOrder = getFoodOrder(foodOrder.getFoodOrderId());
+
+			for(FoodOrderItem f : foodOrder.getFoodOrderList()){
+				if(f.equals2(foodOrderItem)){
+					deleteFoodOrderItemFromFoodOrderTest(f.getFoodOrderItemId());
+				}
+			}
 		}
 	}
 
