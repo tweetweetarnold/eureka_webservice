@@ -92,6 +92,7 @@
 											<b>
 												<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${period.endDateFormatted}" />
 											</b>
+											<i class="fa fa-caret-down"></i>
 										</a>
 									</h4>
 								</div>

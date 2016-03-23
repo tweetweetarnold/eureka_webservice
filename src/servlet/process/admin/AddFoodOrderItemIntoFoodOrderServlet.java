@@ -89,23 +89,9 @@ public class AddFoodOrderItemIntoFoodOrderServlet extends HttpServlet {
 				System.out.println("food deleted: " + foodOrderItemId);
 			}
 
-			// Modifier m1 = null;
-			// if (m != null) {
-			// int modifierId = (int) (long) m.get("modifierId");
-			// m1 = msCtrl.getModifier(modifierId);
-			// }
-
 			Food food = foodCtrl.getFood(((Long) f.get("foodId")).intValue());
 			FoodOrder order = foodOrderCtrl.getFoodOrder(foodOrderId);
 			FoodOrderItem item = new FoodOrderItem(order, food, q, null);
-
-			// System.out.println("modifierchosen: " + m1);
-			// if (m1 != null) {
-			// ModifierChosen mchosen = new ModifierChosen(m1, item);
-			// Set<ModifierChosen> modifierChosenList = new HashSet<ModifierChosen>();
-			// modifierChosenList.add(mchosen);
-			// item.setModifierChosenList(modifierChosenList);
-			// }
 
 			Iterator i = selected.keySet().iterator();
 			if (i.hasNext()) {
