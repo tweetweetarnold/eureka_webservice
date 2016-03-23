@@ -99,7 +99,7 @@ public class ProcessVerificationServlet extends HttpServlet {
 				case StringValues.EMPLOYEE_SUSPENDED:
 					throw new Exception("Your account is suspended");
 				case StringValues.EMPLOYEE_PENDING_VERIFICATION:
-					session.setAttribute("error", "Session Timeout for verification");
+					session.setAttribute("error", "Verification email expired.");
 					session.setAttribute("email", eDecrypt);
 					response.sendRedirect("/eureka_webservice/pages/request-verification.jsp");
 				}
