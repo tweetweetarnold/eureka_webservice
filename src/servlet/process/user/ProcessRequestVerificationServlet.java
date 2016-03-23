@@ -46,9 +46,9 @@ public class ProcessRequestVerificationServlet extends HttpServlet {
 			
 			accessController.constructVerifyEmail(request.getServerName(), request.getServerPort(), request.getContextPath(), email, toEmail);
 			session.removeAttribute("email");
-
+			session.setAttribute("output", email);
 			session.setAttribute("success",
-					"An email has been sent to you. Please check your email within 5 minutes and follow the instructions on verifying your account.");
+					"A verification email has been resent to you. Please check your email within 5 minutes and follow the instructions on verifying your account.");
 			response.sendRedirect("/eureka_webservice/pages/login.jsp");
 		} catch (Exception e) {
 			session.setAttribute("error", e.getMessage());

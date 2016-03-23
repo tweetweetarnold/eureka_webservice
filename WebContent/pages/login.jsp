@@ -166,6 +166,11 @@
 									<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
 									<span class="sr-only">Success:</span>
 									<c:out value="${success}" />
+									<br>
+									<c:if test="${not empty sessionScope.output}">
+										Click<a href="/eureka_webservice/ProcessRequestVerificationServlet?email=<c:out value="${output}"/>"> <b>here</b> </a> if you did not receive the email.
+								    	<c:remove var="output" scope="session" />
+								    </c:if>
 								</div>
 								<c:remove var="success" scope="session" />
 							</c:if>

@@ -76,7 +76,7 @@ public class ProcessSetDefaultDeliveryPointServlet extends HttpServlet {
 			accessController.constructVerifyEmail(request.getServerName(), request.getServerPort(), request.getContextPath(), email, emailArray);
 
 			session.removeAttribute("email");
-
+			session.setAttribute("output", email);
 			session.setAttribute("success",
 					"An email has been sent to you. Please check your email within 5 minutes and follow the instructions to verify your account.");
 			response.sendRedirect("/eureka_webservice/pages/login.jsp");
