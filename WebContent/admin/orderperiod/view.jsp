@@ -217,7 +217,6 @@
 
 
 						<!-- pagination -->
-						<dir-pagination-controls template-url="/resources/angular-pagination/dirPagination.tpl.html"></dir-pagination-controls>
 
 
 					</div>

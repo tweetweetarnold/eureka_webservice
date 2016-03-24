@@ -14,7 +14,6 @@ import model.ModifierSection;
 import services.ChineseValidation;
 
 public class ModifierSectionController {
-	ChineseValidation chineseValidation = new ChineseValidation();
 
 	public ModifierSectionController() {
 
@@ -42,7 +41,7 @@ public class ModifierSectionController {
 	}
 
 	private boolean checkChineseWords(String text) throws APIError {
-		return chineseValidation.checkForChineseWords(text);
+		return ChineseValidation.checkForChineseWords(text);
 	}
 
 	public boolean createAndAddModifier(String modifierName, String chineseName,

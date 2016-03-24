@@ -8,7 +8,7 @@ import com.detectlanguage.errors.APIError;
 
 public class ChineseValidation {
 
-	public boolean checkForChineseWords(String text) throws APIError {
+	public static boolean checkForChineseWords(String text) throws APIError {
 
 		Pattern p = Pattern.compile("[a-zA-Z]+");
 		Matcher m = p.matcher(text);

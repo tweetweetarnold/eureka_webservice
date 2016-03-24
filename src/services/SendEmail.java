@@ -17,39 +17,6 @@ public class SendEmail {
 	private final String password = "{ryusoken}";
 	private final String username = "kohbuslunchtime@gmail.com";
 
-	// private MimeMessage createEmailMessage(String subject, String messageBody, String[]
-	// recipients)
-	// throws MessagingException {
-	//
-	// mailSession = Session.getInstance(emailProperties, new javax.mail.Authenticator() {
-	// protected PasswordAuthentication getPasswordAuthentication() {
-	// return new PasswordAuthentication(username, password);
-	// }
-	// });
-	//
-	// MimeMessage emailMessage = null;
-	//
-	// try {
-	// emailMessage = new MimeMessage(mailSession);
-	//
-	// for (int i = 0; i < recipients.length; i++) {
-	// emailMessage.addRecipient(Message.RecipientType.TO,
-	// new InternetAddress(recipients[i]));
-	// }
-	//
-	// emailMessage.setSubject(subject);
-	// emailMessage.setContent(messageBody, "text/html; charset=utf-8");
-	// emailMessage.setFrom(new InternetAddress("no_reply@lunchtime.com",
-	// "Koh Bus LunchTime Ordering App"));
-	// emailMessage.setReplyTo(InternetAddress.parse("no_reply@lunchtime.com", false));
-	//
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	//
-	// return emailMessage;
-	// }
-
 	private MimeMessage createEmailMessageWithCarbonCopy(String subject, String messageBody,
 			String[] recipients, String[] ccEmails) throws MessagingException {
 
@@ -92,13 +59,6 @@ public class SendEmail {
 
 		return emailMessage;
 	}
-
-	// public void sendEmail(String subject, String messageBody, String[] recipients)
-	// throws MessagingException {
-	//
-	// Message emailMessage = createEmailMessage(subject, messageBody, recipients);
-	// Transport.send(emailMessage);
-	// }
 
 	public void sendEmail(String subject, String messageBody, String[] recipients,
 			String[] ccEmails) throws MessagingException {

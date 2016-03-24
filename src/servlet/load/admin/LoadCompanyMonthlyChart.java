@@ -25,20 +25,20 @@ import model.FoodOrder;
 @WebServlet("/LoadCompanyMonthlyChart")
 public class LoadCompanyMonthlyChart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoadCompanyMonthlyChart() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public LoadCompanyMonthlyChart() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.setContentType("image/jpeg");
 		ServletOutputStream os = response.getOutputStream();
 		HttpSession session = request.getSession();
@@ -51,7 +51,8 @@ public class LoadCompanyMonthlyChart extends HttpServlet {
 					.getCompanyFoodOrderSetByMonthYear(companyCode);
 			TreeMap<String, Double> yearMonthToTotalPrice = foodOrderController
 					.getFoodOrderSetTotalPriceByMonthYear(yearMonthToFoodOrders);
-			JFreeChart chart = foodOrderController.generateMonthlyChart(yearMonthToTotalPrice, year);
+			JFreeChart chart = foodOrderController.generateMonthlyChart(yearMonthToTotalPrice,
+					year);
 			int width = 600;
 			int height = 350;
 			ChartUtilities.writeChartAsJPEG(os, chart, width, height);
@@ -67,8 +68,8 @@ public class LoadCompanyMonthlyChart extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

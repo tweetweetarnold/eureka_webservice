@@ -22,7 +22,6 @@ import services.CloudinaryUpload;
  * 
  */
 public class FoodController {
-	ChineseValidation chineseValidation = new ChineseValidation();
 	CloudinaryUpload cloudinaryUpload = new CloudinaryUpload();
 	FoodDAO foodDAO = new FoodDAO();
 
@@ -58,7 +57,7 @@ public class FoodController {
 	}
 
 	private boolean checkChineseWords(String text) throws APIError {
-		return chineseValidation.checkForChineseWords(text);
+		return ChineseValidation.checkForChineseWords(text);
 	}
 
 	public boolean checkFoodExists(String inputFoodName, Stall stall) {

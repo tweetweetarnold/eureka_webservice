@@ -53,7 +53,7 @@ public class MyConnection {
 				}
 				System.out.println("SessionFactory is set: " + sessionFactory);
 			}
-			
+
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
@@ -171,8 +171,8 @@ public class MyConnection {
 	public static List<Object> getFoodOrderList(Employee employee) {
 		Session session = startSession();
 		List<Object> list = new ArrayList<>();
-		Criteria criteria = session.createCriteria(FoodOrder.class).setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY);
+		Criteria criteria = session.createCriteria(FoodOrder.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		String email = employee.getEmail();
 		criteria.add(Restrictions.eq("employee", employee)).list();
 		list = (List<Object>) criteria.list();
@@ -181,17 +181,15 @@ public class MyConnection {
 		session.close();
 		return list;
 	}
-	
+
 	public static List<Object> getCompanyFoodOrderList(Company company) {
 		Session session = startSession();
 		List<Object> list = new ArrayList<>();
 		Criteria criteria = session.createCriteria(FoodOrder.class);
-		//String email = employee.getEmail();
-		criteria.createCriteria("employee")
-		   .add(Restrictions.eq("company", company));
-		criteria.setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY);
-	//	criteria.add(Restrictions.eq("company", company)).list();
+		// String email = employee.getEmail();
+		criteria.createCriteria("employee").add(Restrictions.eq("company", company));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		// criteria.add(Restrictions.eq("company", company)).list();
 		list = (List<Object>) criteria.list();
 
 		session.getTransaction().commit();
@@ -267,8 +265,8 @@ public class MyConnection {
 		System.out.println("MyConnection: getWithCriteria");
 		Session session = startSession();
 
-		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY);
+		Criteria criteria = dc.getExecutableCriteria(session)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Object> l = criteria.list();
 
 		endSession(session);
@@ -279,8 +277,8 @@ public class MyConnection {
 	public static List<Object> retrieveAll(DetachedCriteria dc) {
 		System.out.println("MyConnection: retrieveAll");
 		Session session = startSession();
-		Criteria criteria = dc.getExecutableCriteria(session).setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY);
+		Criteria criteria = dc.getExecutableCriteria(session)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Object> list = (List<Object>) criteria.list();
 		session.getTransaction().commit();
 		session.close();
@@ -328,5 +326,5 @@ public class MyConnection {
 		session.getTransaction().commit();
 		session.close();
 	}
-	
+
 }

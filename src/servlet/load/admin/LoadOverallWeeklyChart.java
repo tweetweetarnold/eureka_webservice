@@ -24,33 +24,33 @@ import model.FoodOrder;
 @WebServlet("/LoadOverallWeeklyChart")
 public class LoadOverallWeeklyChart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoadOverallWeeklyChart() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public LoadOverallWeeklyChart() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.setContentType("image/jpeg");
 		ServletOutputStream os = response.getOutputStream();
 		HttpSession session = request.getSession();
 		try {
-			
 
 			FoodOrderController foodOrderController = new FoodOrderController();
 			String week = request.getParameter("week");
-			TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders = foodOrderController.getAllFoodOrdersSetByWeek();
-			
-			TreeMap<String, Double>  weekToTotalPrice = foodOrderController.getFoodOrderSetTotalPriceByWeek(weekToFoodOrders);
-			
-			
+			TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders = foodOrderController
+					.getAllFoodOrdersSetByWeek();
+
+			TreeMap<String, Double> weekToTotalPrice = foodOrderController
+					.getFoodOrderSetTotalPriceByWeek(weekToFoodOrders);
+
 			JFreeChart chart = foodOrderController.generateWeeklyChart(weekToFoodOrders, week);
 			int width = 600;
 			int height = 350;
@@ -66,8 +66,8 @@ public class LoadOverallWeeklyChart extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
