@@ -46,7 +46,7 @@
 
 	<div id="wrapper">
 
-		<%@include file="/headerfooter/adminHeader2.jsp"%>
+		<%@include file="/admin/adminHeader.jsp"%>
 
 		<div id="page-wrapper">
 			<div class="row">
@@ -54,12 +54,12 @@
 					<h1 class="page-header">Overall Weekly Spending Summary</h1>
 					<!-- breadcrumb -->
 					<ol class="breadcrumb">
-						
+
 						<li>
 							<a href="/eureka_webservice/LoadAdminViewOverallMonthlySpending">Overall Monthly Spending Summary</a>
 						</li>
 						<li class="active">Overall Weekly Spending Summary</li>
-						
+
 					</ol>
 				</div>
 				<!-- /.col-lg-12 -->
@@ -69,136 +69,130 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<c:if test="${not empty sessionScope.weekList}">
-					<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Display the weekly spending summary for the week of </b>
-					<br>
-					<br>
-					<form class="sign-in-up-form"
-						action="/eureka_webservice/LoadAdminViewOverallWeeklySpending"
-						role="form">
-						<div class="col-md-4">
-						
-							<select class="form-control" name="id" required>
-								<c:forEach items="${sessionScope.weekList}" var="map">
-									<c:set var="splitWeek" value="${fn:split(map,'to')}" />
-									
-									<fmt:parseDate value="${splitWeek[0]}" var="parsedEmpDate1" pattern="yyyy-MM-dd" />
-									<fmt:formatDate  value="${parsedEmpDate1}" var="weekChange1" pattern="dd-MMM-yyyy"/>
-									
-									<fmt:parseDate value="${splitWeek[1]}" var="parsedEmpDate2" pattern="yyyy-MM-dd" />
-									<fmt:formatDate  value="${parsedEmpDate2}" var="weekChange2" pattern="dd-MMM-yyyy"/>
-									<option value="${map}">${weekChange1} to ${weekChange2}</option>
-								</c:forEach>
+						<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Display the weekly spending summary for the week of </b>
+						<br>
+						<br>
+						<form class="sign-in-up-form" action="/eureka_webservice/LoadAdminViewOverallWeeklySpending" role="form">
+							<div class="col-md-4">
 
-							</select>
-						</div>
-						<div class="col-md-2">
-							<button class="btn btn-success btn-block" type="submit">Display</button>
-						</div>
-					</form>
+								<select class="form-control" name="id" required>
+									<c:forEach items="${sessionScope.weekList}" var="map">
+										<c:set var="splitWeek" value="${fn:split(map,'to')}" />
+
+										<fmt:parseDate value="${splitWeek[0]}" var="parsedEmpDate1" pattern="yyyy-MM-dd" />
+										<fmt:formatDate value="${parsedEmpDate1}" var="weekChange1" pattern="dd-MMM-yyyy" />
+
+										<fmt:parseDate value="${splitWeek[1]}" var="parsedEmpDate2" pattern="yyyy-MM-dd" />
+										<fmt:formatDate value="${parsedEmpDate2}" var="weekChange2" pattern="dd-MMM-yyyy" />
+										<option value="${map}">${weekChange1}to ${weekChange2}</option>
+									</c:forEach>
+
+								</select>
+							</div>
+							<div class="col-md-2">
+								<button class="btn btn-success btn-block" type="submit">Display</button>
+							</div>
+						</form>
 
 
-					<br>
-					<br>
-					
-				</c:if>
+						<br>
+						<br>
+
+					</c:if>
 					<c:if test="${not empty sessionScope.resultSet}">
-					<c:set var="weekValue" value="${resultSet}" />
-					<center>
-						<img
-							src="/eureka_webservice/LoadOverallWeeklyChart?week=${weekValue}" />
-					</center>
-					<br>
-					
-					<c:set var="sum" value="0"/>
-					<c:set var="n" value="${sessionScope.dateToTotalPrice.size()}"/>
-					<c:forEach items="${sessionScope.dateToTotalPrice}" var="map" varStatus="loop">
-						<c:set var="key" value="${map.key}" />
-							
-								<c:set var="sum" value="${sum + map.value}"/>
-						
-					</c:forEach>
-					
-					
-					<fmt:formatNumber value="${sum/n}" var="avg" minFractionDigits="2" />
-					<h3><b>&nbsp;Average Spending for the Week: $${avg}</b></h3>
-					<br>
+						<c:set var="weekValue" value="${resultSet}" />
+						<center>
+							<img src="/eureka_webservice/LoadOverallWeeklyChart?week=${weekValue}" />
+						</center>
+						<br>
 
-
-					<div class="panel-group" id="accordion" role="tablist"
-						aria-multiselectable="true">
-						<c:forEach items="${sessionScope.weekToTotalPrice}" var="map"
-							varStatus="loop">
+						<c:set var="sum" value="0" />
+						<c:set var="n" value="${sessionScope.dateToTotalPrice.size()}" />
+						<c:forEach items="${sessionScope.dateToTotalPrice}" var="map" varStatus="loop">
 							<c:set var="key" value="${map.key}" />
-							<c:if test="${key == weekValue}">
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="headingOne">
-										<h4 class="panel-title">
-											<a role="button" data-toggle="collapse"
-												data-parent="#accordion" href="#collapse${loop.index}"
-												aria-expanded="true" aria-controls="collapse${loop.index}">
+
+							<c:set var="sum" value="${sum + map.value}" />
+
+						</c:forEach>
 
 
-												<c:set var="week" value="${fn:split(key,'to')}" />
-												
-												<fmt:parseDate value="${week[0]}" var="parsedEmpDate3" pattern="yyyy-MM-dd" />
-												<fmt:formatDate  value="${parsedEmpDate3}" var="newWeek1" pattern="dd-MMM-yyyy"/>
-												
-												<fmt:parseDate value="${week[1]}" var="parsedEmpDate4" pattern="yyyy-MM-dd" />
-												<fmt:formatDate  value="${parsedEmpDate4}" var="newWeek2" pattern="dd-MMM-yyyy"/>
-
-												Week: ${newWeek1} to ${newWeek2} <fmt:formatNumber value="${map.value}"
-													var="amt" minFractionDigits="2" /> <i class="pull-right">Amount
-													Spent: $${amt}</i>
+						<fmt:formatNumber value="${sum/n}" var="avg" minFractionDigits="2" />
+						<h3>
+							<b>&nbsp;Average Spending for the Week: $${avg}</b>
+						</h3>
+						<br>
 
 
-											</a>
-										</h4>
-									</div>
-									<div id="collapse${loop.index}" class="panel-collapse collapse"
-										role="tabpanel" aria-labelledby="headingOne">
-										<div class="panel-body">
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+							<c:forEach items="${sessionScope.weekToTotalPrice}" var="map" varStatus="loop">
+								<c:set var="key" value="${map.key}" />
+								<c:if test="${key == weekValue}">
+									<div class="panel panel-default">
+										<div class="panel-heading" role="tab" id="headingOne">
+											<h4 class="panel-title">
+												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${loop.index}"
+													aria-expanded="true" aria-controls="collapse${loop.index}"
+												>
 
-											<c:set var="foodOrdersMap"
-												value="${sessionScope.weekToFoodOrders}" />
-											<c:set var="list" value="${foodOrdersMap[key]}" />
-											<c:forEach items="${list}" var="foodOrder" varStatus="loop">
+
+													<c:set var="week" value="${fn:split(key,'to')}" />
+
+													<fmt:parseDate value="${week[0]}" var="parsedEmpDate3" pattern="yyyy-MM-dd" />
+													<fmt:formatDate value="${parsedEmpDate3}" var="newWeek1" pattern="dd-MMM-yyyy" />
+
+													<fmt:parseDate value="${week[1]}" var="parsedEmpDate4" pattern="yyyy-MM-dd" />
+													<fmt:formatDate value="${parsedEmpDate4}" var="newWeek2" pattern="dd-MMM-yyyy" />
+
+													Week: ${newWeek1} to ${newWeek2}
+													<fmt:formatNumber value="${map.value}" var="amt" minFractionDigits="2" />
+													<i class="pull-right">Amount Spent: $${amt}</i>
+
+
+												</a>
+											</h4>
+										</div>
+										<div id="collapse${loop.index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+											<div class="panel-body">
+
+												<c:set var="foodOrdersMap" value="${sessionScope.weekToFoodOrders}" />
+												<c:set var="list" value="${foodOrdersMap[key]}" />
+												<c:forEach items="${list}" var="foodOrder" varStatus="loop">
 										
 										 Order ID: ${foodOrder.foodOrderId} &mdash;
 										<fmt:formatDate type="both" value="${foodOrder.createDate}" />
-										 <br>User: ${foodOrder.employee.name} &nbsp;&nbsp;Company: ${foodOrder.employee.company.name}</br>
-												<fmt:formatNumber value="${foodOrder.finalPrice}"
-													var="amtSpent" minFractionDigits="2" />
-												<c:choose>
-												<c:when test="${foodOrder.finalPrice < 0 }">
-												<i class="pull-right">Price: $0.00 </i>
-												</c:when>
-												<c:otherwise>
-												<i class="pull-right">Price: $${amtSpent} </i>
-												</c:otherwise>
-												</c:choose>
-												<br>
-											</c:forEach>
+													<br>User: ${foodOrder.employee.name} &nbsp;&nbsp;Company: ${foodOrder.employee.company.name}</br>
+													<fmt:formatNumber value="${foodOrder.finalPrice}" var="amtSpent" minFractionDigits="2" />
+													<c:choose>
+														<c:when test="${foodOrder.finalPrice < 0 }">
+															<i class="pull-right">Price: $0.00 </i>
+														</c:when>
+														<c:otherwise>
+															<i class="pull-right">Price: $${amtSpent} </i>
+														</c:otherwise>
+													</c:choose>
+													<br>
+												</c:forEach>
+											</div>
 										</div>
 									</div>
-								</div>
 
-							</c:if>
-						</c:forEach>
-					</div>
-					<c:remove var="resultSet" scope="session" />
-				</c:if>
-
+								</c:if>
+							</c:forEach>
+						</div>
+						<c:remove var="resultSet" scope="session" />
+					</c:if>
 
 
-					</div>
-					<!-- /.panel-group -->
 
 				</div>
-				<!-- /.col-lg-12 -->
-			</div>
-			<!-- /.row -->
+				<!-- /.panel-group -->
 
+			</div>
+			<!-- /.col-lg-12 -->
 		</div>
+		<!-- /.row -->
+
+	</div>
 	</div>
 	<!-- /#wrapper -->
 

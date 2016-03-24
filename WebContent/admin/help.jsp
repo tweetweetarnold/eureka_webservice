@@ -41,7 +41,7 @@
 
 	<div id="wrapper">
 
-		<%@include file="/headerfooter/adminHeader2.jsp"%>
+		<%@include file="/admin/adminHeader.jsp"%>
 
 
 		<div id="page-wrapper">

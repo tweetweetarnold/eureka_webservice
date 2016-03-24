@@ -136,7 +136,7 @@
 				</li>
 
 				<li>
-					<a target="_self" href="/eureka_webservice/LoadAdminViewUsersWithOutstandingPaymentServlet">
+					<a target="_self" href="/eureka_webservice/admin/outstanding-payment.jsp">
 						<i class="fa fa-money fa-fw"></i>
 						Payment
 					</a>

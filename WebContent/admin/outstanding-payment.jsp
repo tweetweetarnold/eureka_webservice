@@ -33,20 +33,20 @@
 	rel="stylesheet" type="text/css"
 >
 
-
-<!-- library import for JSTL -->
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+<link href="/eureka_webservice/resources/angularbusy/angular-busy.min.css" rel="stylesheet">
+<script src="/eureka_webservice/resources/angularbusy/angular-busy.min.js"></script>
+<script src='/eureka_webservice/resources/js/myapp.js'></script>
 
 </head>
 
-<body>
-	<fmt:setTimeZone value="GMT+8" />
+<body ng-app="myApp" ng-controller='OutstandingPaymentController'>
 
 	<div id="wrapper">
 
-		<%@include file="/headerfooter/adminHeader2.jsp"%>
+		<%@include file="/admin/adminHeader.jsp"%>
 
 		<div id="page-wrapper">
 			<div class="row">
@@ -58,10 +58,10 @@
 			<!-- /.row -->
 
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-12" cg-busy='loading'>
 
 					<b>Total users:</b>
-					${fn:length(sessionScope.outstandingList)}
+					{{data.length}}
 					<br>
 					<br>
 
@@ -78,20 +78,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.outstandingList}" var="user">
-									<tr>
-										<td>${user.company.name}</td>
-										<td>${user.name}</td>
-										<td>${user.email}</td>
-										<td>
-											<fmt:formatDate type="both" value="${user.createDate}" />
-										</td>
-										<td>
-											$
-											<fmt:formatNumber value="${user.amountOwed}" var="amt" minFractionDigits="2" />${amt}</td>
-										<td>${user.status}</td>
-									</tr>
-								</c:forEach>
+								<tr ng-repeat='user in data track by $index'>
+									<td>{{user.company.name}}</td>
+									<td>{{user.name}}</td>
+									<td>{{user.email}}</td>
+									<td>{{user.createDate | date:'medium' : '+0800'}}</td>
+									<td>{{user.amountOwed | currency}}
+									<td>{{user.status}}</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -117,9 +111,42 @@
 		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"
 	></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
-	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
+
+	<script>
+		app
+				.controller(
+						'OutstandingPaymentController',
+						[
+								'$http',
+								'$scope',
+								'$window',
+								function($http, $scope, $window) {
+
+									$scope.success = angular
+											.copy($window.sessionStorage.success);
+									$scope.error = angular
+											.copy($window.sessionStorage.error);
+									$window.sessionStorage
+											.removeItem('success');
+									$window.sessionStorage.removeItem('error');
+
+									$scope.loading = $http(
+											{
+												method : 'GET',
+												url : '/eureka_webservice/GetUsersWithOutstandingPaymentServlet'
+											}).then(
+											function successCallback(response) {
+												console.log(response.data);
+												$scope.data = response.data;
+											},
+											function errorCallback(response) {
+												console.log(response)
+												alert("Something went wrong!");
+											});
+
+								} ]);
+	</script>
 </body>
 
 </html>
