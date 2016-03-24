@@ -100,9 +100,27 @@
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
-									<th>Company</th>
-									<th>Canteen</th>
-									<th>Discount</th>
+									<th>
+										<a href="#" ng-click="sortType = 'company.name'; sortReverse = !sortReverse">
+											Company
+											<span ng-show="sortType == 'company.name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'company.name' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a href="#" ng-click="sortType = 'canteen.name'; sortReverse = !sortReverse">
+											Canteen
+											<span ng-show="sortType == 'canteen.name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'canteen.name' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a href="#" ng-click="sortType = 'priceModifierList[0].value'; sortReverse = !sortReverse">
+											Discount
+											<span ng-show="sortType == 'priceModifierList[0].value' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'priceModifierList[0].value' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>
 										<a href="#" ng-click="sortType = 'createDate'; sortReverse = !sortReverse">
 											Date Created
@@ -111,14 +129,26 @@
 										</a>
 									</th>
 									<th>
-										<a href="#" ng-click="sortType = 'start'; sortReverse = !sortReverse">
+										<a href="#" ng-click="sortType = 'startDateFormatted'; sortReverse = !sortReverse">
 											Start Date/Time
-											<span ng-show="sortType == 'start' && !sortReverse" class="fa fa-caret-down"></span>
-											<span ng-show="sortType == 'start' && sortReverse" class="fa fa-caret-up"></span>
+											<span ng-show="sortType == 'startDateFormatted' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'startDateFormatted' && sortReverse" class="fa fa-caret-up"></span>
 										</a>
 									</th>
-									<th>End Date/Time</th>
-									<th>Status</th>
+									<th>
+										<a href="#" ng-click="sortType = 'endDateFormatted'; sortReverse = !sortReverse">
+											End Date/Time
+											<span ng-show="sortType == 'endDateFormatted' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'endDateFormatted' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a href="#" ng-click="sortType = 'status'; sortReverse = !sortReverse">
+											Status
+											<span ng-show="sortType == 'status' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'status' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -184,6 +214,12 @@
 								</tr>
 							</tbody>
 						</table>
+
+
+						<!-- pagination -->
+						<dir-pagination-controls template-url="/resources/angular-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+
+
 					</div>
 					<!-- /.table-responsive -->
 

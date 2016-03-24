@@ -63,26 +63,69 @@
 					<b>Total users:</b>
 					{{data.length}}
 					<br>
+
+
+					<!--  Search -->
+					<div class="col-lg-4" style="padding: 20px 0px 20px;">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" ng-model='searchText'>
+							<div class="input-group-btn">
+								<button class="btn btn-default">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					<!--  / Search -->
+
 					<br>
 
 					<div class="dataTable_wrapper">
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
-									<th>Company</th>
-									<th>Name</th>
-									<th>Email</th>
-									<th>Date Joined</th>
-									<th>O/S</th>
-									<th>Status</th>
+									<th>
+										<a href="#" ng-click="sortType = 'company.name'; sortReverse = !sortReverse">
+											Company
+											<span ng-show="sortType == 'company.name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'company.name' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+											Name
+											<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">
+											Email
+											<span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a href="#" ng-click="sortType = 'amountOwed'; sortReverse = !sortReverse">
+											O/S
+											<span ng-show="sortType == 'amountOwed' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'amountOwed' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th>
+										<a href="#" ng-click="sortType = 'status'; sortReverse = !sortReverse">
+											Status
+											<span ng-show="sortType == 'status' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'status' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat='user in data track by $index'>
+								<tr ng-repeat='user in data | orderBy:sortType:sortReverse | filter:searchText track by $index'>
 									<td>{{user.company.name}}</td>
 									<td>{{user.name}}</td>
 									<td>{{user.email}}</td>
-									<td>{{user.createDate | date:'medium' : '+0800'}}</td>
 									<td>{{user.amountOwed | currency}}
 									<td>{{user.status}}</td>
 								</tr>
@@ -90,8 +133,8 @@
 						</table>
 					</div>
 					<!-- /.table-responsive -->
-
 				</div>
+
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
@@ -130,6 +173,9 @@
 									$window.sessionStorage
 											.removeItem('success');
 									$window.sessionStorage.removeItem('error');
+
+									$scope.sortType = 'amountOwed'; // set the default sort type
+									$scope.sortReverse = true; // set the default sort order
 
 									$scope.loading = $http(
 											{

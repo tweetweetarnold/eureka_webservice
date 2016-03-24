@@ -26,16 +26,14 @@ public class LoadAdminViewCompanyMonthlySpending extends HttpServlet {
 	 */
 	public LoadAdminViewCompanyMonthlySpending() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		try {
@@ -47,7 +45,7 @@ public class LoadAdminViewCompanyMonthlySpending extends HttpServlet {
 					.getCompanyYearToMonthList(companyCode);
 			session.setAttribute("name", companyName);
 			session.setAttribute("yearToMonthList", yearToMonthList);
-			//session.setAttribute("company", companyCode);
+			// session.setAttribute("company", companyCode);
 			System.out.println(yearToMonthList.size());
 
 			String year = request.getParameter("id");
@@ -64,25 +62,22 @@ public class LoadAdminViewCompanyMonthlySpending extends HttpServlet {
 
 			}
 
-			// ***Haven't define the jsp page to redirect***
-			 response.sendRedirect("/eureka_webservice/admin/company/monthly-summary.jsp?company=" + companyCode);
+			response.sendRedirect("/eureka_webservice/admin/analytics/monthly-summary.jsp?company="
+					+ companyCode);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error msg: " + e.getMessage());
 			session.setAttribute("error", "Something went wrong");
-		//	response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 		}
 
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

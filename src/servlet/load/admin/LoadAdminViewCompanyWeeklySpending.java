@@ -21,20 +21,20 @@ import model.FoodOrder;
 @WebServlet("/LoadAdminViewCompanyWeeklySpending")
 public class LoadAdminViewCompanyWeeklySpending extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoadAdminViewCompanyWeeklySpending() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public LoadAdminViewCompanyWeeklySpending() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		try {
@@ -44,14 +44,16 @@ public class LoadAdminViewCompanyWeeklySpending extends HttpServlet {
 			FoodOrderController foodOrderController = new FoodOrderController();
 			TreeMap<String, ArrayList<FoodOrder>> weekToFoodOrders = foodOrderController
 					.getCompanyFoodOrderSetByWeek(companyCode);
-			TreeMap<String, Double>  weekToTotalPrice = foodOrderController.getFoodOrderSetTotalPriceByWeek(weekToFoodOrders);
+			TreeMap<String, Double> weekToTotalPrice = foodOrderController
+					.getFoodOrderSetTotalPriceByWeek(weekToFoodOrders);
 			session.setAttribute("name", companyName);
 			Set<String> weekList = weekToTotalPrice.keySet();
 			session.setAttribute("weekList", weekList);
 
 			String week = request.getParameter("id");
 			if (week != null) {
-				TreeMap<String, Double> dateToTotalPrice = foodOrderController.dateToTotalPrice(weekToFoodOrders, week);
+				TreeMap<String, Double> dateToTotalPrice = foodOrderController
+						.dateToTotalPrice(weekToFoodOrders, week);
 				// session.setAttribute("yearToMonthList", yearToMonthList);
 				session.setAttribute("resultSet", week);
 				session.setAttribute("dateToTotalPrice", dateToTotalPrice);
@@ -60,8 +62,8 @@ public class LoadAdminViewCompanyWeeklySpending extends HttpServlet {
 
 			}
 
-			// ***Haven't define the jsp page to redirect***
-			 response.sendRedirect("/eureka_webservice/admin/company/weekly-summary.jsp?company=" + companyCode);
+			response.sendRedirect(
+					"/eureka_webservice/admin/analytics/weekly-summary.jsp?company=" + companyCode);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,8 +75,8 @@ public class LoadAdminViewCompanyWeeklySpending extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

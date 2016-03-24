@@ -143,7 +143,13 @@
 										</a>
 									</th>
 									<th>Address</th>
-									<th>Create Date</th>
+									<th>
+										<a href="#" ng-click="sortType = 'createDate'; sortReverse = !sortReverse">
+											Create Date
+											<span ng-show="sortType == 'createDate' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'createDate' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th></th>
 									<th></th>
 									<th></th>

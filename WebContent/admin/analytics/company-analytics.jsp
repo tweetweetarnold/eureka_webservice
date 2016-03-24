@@ -43,7 +43,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="ViewCompanyController">
+<body ng-app="myApp" ng-controller="ViewCompanyController" ng-cloak>
 
 	<div id="wrapper">
 
@@ -105,13 +105,6 @@
 						</div>
 
 
-						<div class="col-md-7">
-							<a class="btn btn-primary pull-right" ng-href='/eureka_webservice/admin/company/add.jsp' target="_self">
-								<i class="fa fa-plus fa-lg"></i>
-								Add Company
-							</a>
-						</div>
-
 					</div>
 					<!-- /row -->
 
@@ -129,7 +122,6 @@
 										</a>
 									</th>
 									<th></th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -143,13 +135,6 @@
 										<a target="_self"
 											ng-href="/eureka_webservice/LoadAdminViewCompanyWeeklySpending?company={{company.companyCode}}&name={{company.name}}"
 										>View Weekly Spending</a>
-									</td>
-									<td>
-										<a target="_self" ng-href="/eureka_webservice/admin/company/edit.jsp?companyId={{company.companyId}}">
-											<button type="button" class="btn btn-link btn-xs">
-												<i class="fa fa-pencil fa-2x"></i>
-											</button>
-										</a>
 									</td>
 
 								</tr>

@@ -129,9 +129,14 @@
 										</a>
 									</th>
 									<th>Code</th>
-									<th>Date Joined</th>
+									<th>
+										<a target="_self" href="#" ng-click="sortType = 'createDate'; sortReverse = !sortReverse">
+											Date Joined
+											<span ng-show="sortType == 'createDate' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'createDate' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
 									<th>Delivery Points</th>
-									<th></th>
 									<th></th>
 								</tr>
 							</thead>
@@ -141,17 +146,10 @@
 									<td>{{company.companyCode}}</td>
 									<td>{{company.createDate | date:'medium' : '+0800'}}</td>
 									<td>
-										<p ng-repeat="deliveryPoint in company.deliveryPointSet track by $index">{{deliveryPoint}}<font ng-show="!$last">,</font>
+										<p ng-repeat="deliveryPoint in company.deliveryPointSet track by $index">
+											{{deliveryPoint}}
+											<font ng-show="!$last">,</font>
 										</p>
-									</td>
-									<td>
-										<a target="_self"
-											ng-href="/eureka_webservice/LoadAdminViewCompanyMonthlySpending?company={{company.companyCode}}&name={{company.name}}"
-										>View Monthly Spending</a>
-										<br>
-										<a target="_self"
-											ng-href="/eureka_webservice/LoadAdminViewCompanyWeeklySpending?company={{company.companyCode}}&name={{company.name}}"
-										>View Weekly Spending</a>
 									</td>
 									<td>
 										<a target="_self" ng-href="/eureka_webservice/admin/company/edit.jsp?companyId={{company.companyId}}">
