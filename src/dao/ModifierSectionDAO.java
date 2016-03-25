@@ -1,12 +1,5 @@
 package dao;
 
-import model.Food;
-import model.Modifier;
-import model.ModifierChosen;
-import model.ModifierSection;
-import value.StringValues;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.criterion.CriteriaSpecification;
@@ -14,15 +7,19 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import connection.MyConnection;
+import model.Food;
+import model.Modifier;
+import model.ModifierChosen;
+import model.ModifierSection;
 
 public class ModifierSectionDAO {
 
 	public ModifierSectionDAO() {
 
 	}
-	
-	public ModifierSection getModifierSectionFromFood(String categoryName, String displayType, Food food) {
-		//ArrayList<Food> returnList = new ArrayList<Food>();
+
+	public ModifierSection getModifierSectionFromFood(String categoryName, String displayType,
+			Food food) {
 
 		DetachedCriteria dc = DetachedCriteria.forClass(ModifierSection.class);
 		dc.add(Restrictions.eq("categoryName", categoryName));
@@ -37,22 +34,22 @@ public class ModifierSectionDAO {
 			return (ModifierSection) l.get(0);
 		}
 	}
-	
-	public Modifier getModifier(int id){
+
+	public Modifier getModifier(int id) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Modifier.class);
-		dc.add(Restrictions.eq("modifierId",id));
+		dc.add(Restrictions.eq("modifierId", id));
 		dc.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		
+
 		List<Object> l = MyConnection.queryWithCriteria(dc);
 		if (l.size() == 0) {
 			return null;
 		} else {
 			return (Modifier) l.get(0);
 		}
-		
+
 	}
-	
-	public void deleteModifierChosen(ModifierChosen modifierChosen){
+
+	public void deleteModifierChosen(ModifierChosen modifierChosen) {
 		MyConnection.delete(modifierChosen);
 	}
 
@@ -63,7 +60,7 @@ public class ModifierSectionDAO {
 	public void saveModifierSection(ModifierSection modifierSection) {
 		MyConnection.save(modifierSection);
 	}
-	
+
 	public void updateModifierSection(ModifierSection modifierSection) {
 		MyConnection.update(modifierSection);
 	}

@@ -40,15 +40,16 @@ public class ProcessAdminDeleteFoodOrderItemServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String foodOrderItemId = request.getParameter("foodOrderItemId");
-		System.out.println("******Deleting: " + foodOrderItemId);
-		FoodOrderController foodOrderController = new FoodOrderController();
-		try {
 
-			foodOrderController.deleteFoodOrderItemFromFoodOrderTest(Integer.parseInt(foodOrderItemId));
+		System.out.println("******Deleting: " + foodOrderItemId);
+		FoodOrderController foodOrderCtrl = new FoodOrderController();
+
+		try {
+			foodOrderCtrl.deleteFoodOrderItemFromFoodOrderTest(Integer.parseInt(foodOrderItemId));
 
 			session.setAttribute("success", foodOrderItemId + " has been deleted.");
-
 			response.sendRedirect("/eureka_webservice/LoadOrderPeriodActiveServlet");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

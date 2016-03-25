@@ -73,9 +73,11 @@ public class ProcessAdminLoginServlet extends HttpServlet {
 			response.sendRedirect("/eureka_webservice/LoadOrderPeriodActiveServlet");
 
 		} catch (Exception e) {
-			System.out.println("Exception thrown. Incorrect credentials.");
+			System.out.println("Incorrect credentials for Admin.");
+
 			session.setAttribute("username", adminUsername);
 			session.setAttribute("error", "Something went wrong! Please check your credentials.");
+
 			response.sendRedirect("/eureka_webservice/admin/login.jsp");
 		}
 	}

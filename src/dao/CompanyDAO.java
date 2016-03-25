@@ -3,14 +3,12 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Company;
-import model.Employee;
-
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import connection.MyConnection;
+import model.Company;
 
 /**
  * Performs the function of Data Access Object for the Company model

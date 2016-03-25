@@ -3,15 +3,14 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Company;
-import model.Employee;
-import value.StringValues;
-
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import connection.MyConnection;
+import model.Company;
+import model.Employee;
+import value.StringValues;
 
 /**
  * Performs the function of Data Access Object for the Employee model
@@ -76,7 +75,7 @@ public class EmployeeDAO {
 		}
 		return returnList;
 	}
-	
+
 	public ArrayList<Employee> getAllDestroyedEmployees() {
 		ArrayList<Employee> returnList = null;
 
@@ -191,7 +190,6 @@ public class EmployeeDAO {
 	public ArrayList<Employee> getAllEmployeesFromCompanyWithDeliveryPoint(Company c,
 			String deliveryPoint) {
 		ArrayList<Employee> returnList = null;
-		CompanyDAO companyDAO = new CompanyDAO();
 
 		DetachedCriteria dc = DetachedCriteria.forClass(Employee.class);
 		dc.add(Restrictions.ne("status", StringValues.ARCHIVED));

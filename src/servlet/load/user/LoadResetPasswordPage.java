@@ -45,12 +45,11 @@ public class LoadResetPasswordPage extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		AESEncryption aes = new AESEncryption();
 
 		try {
 			String email = (String) request.getParameter("email");
-			String newEmail = email.replaceAll(" ", "+"); // TODO: Clarification from boonhui
-			String eDecrypt = aes.decrypt(newEmail);
+			String newEmail = email.replaceAll(" ", "+");
+			String eDecrypt = AESEncryption.decrypt(newEmail);
 			String token = (String) request.getParameter("token");
 
 			session.setAttribute("token", token);

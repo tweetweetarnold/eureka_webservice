@@ -41,7 +41,6 @@ public class LoadUserMonthlyChart extends HttpServlet {
 	 */
 	public LoadUserMonthlyChart() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -50,7 +49,7 @@ public class LoadUserMonthlyChart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		response.setContentType("image/jpeg");
 		ServletOutputStream os = response.getOutputStream();
 		HttpSession session = request.getSession();
@@ -82,7 +81,6 @@ public class LoadUserMonthlyChart extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

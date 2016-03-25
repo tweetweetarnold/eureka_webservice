@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -17,14 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Food;
-import model.Stall;
-
 import org.hibernate.Session;
 
-import value.StringValues;
 import connection.MyConnection;
 import dao.StallDAO;
+import model.Food;
+import model.Stall;
+import value.StringValues;
 
 /**
  * Servlet implementation class LoadStallFoodServlet
@@ -40,7 +37,6 @@ public class LoadStallFoodServlet extends HttpServlet {
 	 */
 	public LoadStallFoodServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -90,14 +86,10 @@ public class LoadStallFoodServlet extends HttpServlet {
 		session2.close();
 		Collections.sort(displayFoodList, new Comparator<Food>() {
 			public int compare(Food arg0, Food arg1) {
-				// TODO Auto-generated method stub
 				return arg0.getName().compareTo(arg1.getName());
 			}
 		});
-		
 
-		
-		
 		HttpSession session = request.getSession();
 		session.setAttribute("stallName", s.getName());
 		session.setAttribute("foodList", displayFoodList);
