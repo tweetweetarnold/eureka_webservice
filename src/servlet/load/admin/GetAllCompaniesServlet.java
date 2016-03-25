@@ -30,6 +30,7 @@ import model.Modifier;
 import model.ModifierSection;
 import model.PriceModifier;
 import model.Stall;
+import services.MyJSONSerializer;
 
 /**
  * Servlet implementation class GetAllCompaniesServlet
@@ -37,16 +38,6 @@ import model.Stall;
 @WebServlet("/GetAllCompaniesServlet")
 public class GetAllCompaniesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
-
-		@Override
-		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
-			final long dateString = src.getTime();
-			return new JsonPrimitive(dateString);
-		}
-
-	};
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -80,7 +71,7 @@ public class GetAllCompaniesServlet extends HttpServlet {
 				return false;
 			}
 
-		}).registerTypeAdapter(Date.class, dateSerialize).create();
+		}).registerTypeAdapter(Date.class, MyJSONSerializer.dateSerialize).create();
 
 		JSONArray arr = new JSONArray();
 		arr.addAll(list);

@@ -24,7 +24,6 @@ public class LoadAdminEditStallServlet extends HttpServlet {
 	 */
 	public LoadAdminEditStallServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

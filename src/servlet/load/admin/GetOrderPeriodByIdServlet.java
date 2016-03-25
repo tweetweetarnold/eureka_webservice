@@ -27,6 +27,7 @@ import model.ModifierSection;
 import model.OrderPeriod;
 import model.PriceModifier;
 import model.Stall;
+import services.MyJSONSerializer;
 
 /**
  * Servlet implementation class GetOrderPeriodByIdServlet
@@ -35,15 +36,6 @@ import model.Stall;
 public class GetOrderPeriodByIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
-
-		@Override
-		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
-			final long dateString = src.getTime();
-			return new JsonPrimitive(dateString);
-		}
-
-	};
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -81,7 +73,7 @@ public class GetOrderPeriodByIdServlet extends HttpServlet {
 										&& c.getName().equals("orderPeriod"));
 			}
 
-		}).registerTypeAdapter(Date.class, dateSerialize).create();
+		}).registerTypeAdapter(Date.class, MyJSONSerializer.dateSerialize).create();
 
 		OrderPeriodController orderPeriodCtrl = new OrderPeriodController();
 		OrderPeriod period = null;

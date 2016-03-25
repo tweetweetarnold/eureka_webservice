@@ -16,6 +16,7 @@ import model.Food;
 import model.Modifier;
 import model.ModifierSection;
 import model.Stall;
+import services.MyJSONSerializer;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
@@ -34,16 +35,6 @@ import controller.EmployeeController;
 @WebServlet("/GetUserByEmailServlet")
 public class GetUserByEmailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
-
-		@Override
-		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
-			final long dateString = src.getTime();
-			return new JsonPrimitive(dateString);
-		}
-
-	};
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -87,7 +78,7 @@ public class GetUserByEmailServlet extends HttpServlet {
 						|| (c.getDeclaringClass() == Modifier.class && c.getName().equals("food"));
 			}
 
-		}).registerTypeAdapter(Date.class, dateSerialize).create();
+		}).registerTypeAdapter(Date.class, MyJSONSerializer.dateSerialize).create();
 
 		EmployeeController employeeCtrl = new EmployeeController();
 

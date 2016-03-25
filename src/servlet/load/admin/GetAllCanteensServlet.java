@@ -2,7 +2,6 @@ package servlet.load.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,22 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import controller.CanteenController;
 import model.Canteen;
 import model.Food;
 import model.Modifier;
 import model.ModifierSection;
 import model.Stall;
-
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-
-import controller.CanteenController;
+import services.MyJSONSerializer;
 
 /**
  * Servlet implementation class GetAllCanteensServlet
@@ -37,16 +32,6 @@ import controller.CanteenController;
 @WebServlet("/GetAllCanteensServlet")
 public class GetAllCanteensServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	final JsonSerializer<Date> dateSerialize = new JsonSerializer<Date>() {
-
-		@Override
-		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
-			final long dateString = src.getTime();
-			return new JsonPrimitive(dateString);
-		}
-
-	};
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -82,7 +67,7 @@ public class GetAllCanteensServlet extends HttpServlet {
 						|| (c.getDeclaringClass() == Modifier.class && c.getName().equals("food"));
 			}
 
-		}).registerTypeAdapter(Date.class, dateSerialize).create();
+		}).registerTypeAdapter(Date.class, MyJSONSerializer.dateSerialize).create();
 
 		CanteenController canteenCtrl = new CanteenController();
 
