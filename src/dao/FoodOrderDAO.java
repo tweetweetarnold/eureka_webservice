@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
@@ -16,13 +14,11 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.type.Type;
 
-import model.Canteen;
+import connection.MyConnection;
 import model.Company;
 import model.Employee;
-import model.Food;
 import model.FoodOrder;
 import model.OrderPeriod;
-import connection.MyConnection;
 
 /**
  * Performs the function of Data Access Object for the FoodOrder model

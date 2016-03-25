@@ -40,6 +40,7 @@ public class AddModifierToSectionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -58,16 +59,17 @@ public class AddModifierToSectionServlet extends HttpServlet {
 
 			int modifierSectionId = (int) (long) data.get("modifierSectionId");
 			String name = (String) data.get("name");
-			
+
 			double price = Double.parseDouble((String) data.get("price"));
-			
+
 			String foodId = (String) data.get("foodId");
 			String chineseName = (String) data.get("chineseName");
-			
+
 			modifierSectionCtrl.createAndAddModifier(name, chineseName, "", price, foodId,
 					Integer.toString(modifierSectionId));
 
 			returnJson.put("success", "Add-ons " + name + " has been added.");
+
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			returnJson.put("error", "Invalid input for price");
