@@ -49,7 +49,7 @@ function myFunction() {
 </script>
 </head>
 
-<body onbeforeunload="return myFunction()">
+<body >
 
 	<jsp:include page="header.jsp" />
 

@@ -123,7 +123,7 @@ public class ProcessAddFoodItemToOrderItemsServlet3 extends HttpServlet {
 
 			// Redirect back to homepage
 			System.out.println("new FoodOrderItem added to myFoodOrderItems successfully");
-			session.setAttribute("success", food.getName() + " has been added to cart!");
+			session.setAttribute("success", food.getName() + " has been added to cart! Please remember to checkout when you are done!");
 
 			response.sendRedirect("/eureka_webservice/pages/homepage.jsp");
 

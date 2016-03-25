@@ -49,7 +49,7 @@
 </script>
 </head>
 
-<body onbeforeunload="return myFunction()">
+<body >
 
 	<jsp:include page="header.jsp" />
 	<fmt:setTimeZone value="GMT+8" />
