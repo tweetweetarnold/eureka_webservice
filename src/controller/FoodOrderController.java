@@ -209,7 +209,7 @@ public class FoodOrderController {
 
 	}
 
-	public void deleteFoodOrderItemFromFoodOrderTest(int foodOrderItemId) throws Exception {
+	public void deleteFoodOrderItemFromFoodOrder(int foodOrderItemId) throws Exception {
 		FoodOrderItem foodOrderItem = foodOrderItemDAO.getFoodOrderItem(foodOrderItemId);
 		FoodOrder foodOrder = foodOrderItem.getFoodOrder();
 		// archive FoodOrder if it's the last foodOrderItem to be deleted
@@ -226,7 +226,7 @@ public class FoodOrderController {
 
 			for(FoodOrderItem f : foodOrder.getFoodOrderList()){
 				if(f.equals2(foodOrderItem)){
-					deleteFoodOrderItemFromFoodOrderTest(f.getFoodOrderItemId());
+					deleteFoodOrderItemFromFoodOrder(f.getFoodOrderItemId());
 				}
 			}
 		}
