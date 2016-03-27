@@ -25,7 +25,7 @@ public class EmployeeController {
 	 */
 	public EmployeeController() {
 	}
-	
+
 	public ArrayList<Employee> getAllDestroyedEmployees() {
 		return employeeDAO.getAllDestroyedEmployees();
 	}
@@ -54,14 +54,14 @@ public class EmployeeController {
 		return employeeDAO.getEmployeeByEmail(email);
 	}
 
-	public void notifyAllEmployeesFromCompanyWithDeliveryPoint(Company c, String deliveryPoint){
-		ArrayList<Employee> results = new ArrayList<Employee>();
-		results = employeeDAO.getAllEmployeesFromCompanyWithDeliveryPoint(c, deliveryPoint);
-		
-		
+	public void notifyAllEmployeesFromCompanyWithDeliveryPoint(Company c, String deliveryPoint) {
+		ArrayList<Employee> results = employeeDAO.getAllEmployeesFromCompanyWithDeliveryPoint(c,
+				deliveryPoint);
+
 		ArrayList<String> emailList = new ArrayList<String>();
+
 		SendEmail emailGen = new SendEmail();
-		emailGen.setMailServerProperties();
+
 		String url = "http://lunchtime.dal.jelastic.vps-host.net/eureka_webservice/pages/login.jsp";
 		String subject = "Koh Bus LunchTime Ordering App - Please Update Delivery Building";
 		String messageBody = "Dear User,<br><br>"
@@ -70,21 +70,20 @@ public class EmployeeController {
 				+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
 				+ "Admin<br><br>"
 				+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
-		
-		for(Employee e :results){
+
+		for (Employee e : results) {
 			String tempEmail = e.getEmail();
 			emailList.add(tempEmail);
 		}
 		String[] toEmails = new String[emailList.size()];
 		toEmails = emailList.toArray(toEmails);
 		System.out.println(toEmails[0]);
-		String[] ccEmails = { "sumon123may@eastman.com", "wch123ow@eastman.com" };
 		try {
-			emailGen.sendEmail(subject, messageBody, toEmails, ccEmails);
+			emailGen.sendEmail(subject, messageBody, toEmails, null, null);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
@@ -116,10 +115,10 @@ public class EmployeeController {
 	}
 
 	public void suspendOverduePaymentFromCompany(Company c) {
-
 		ArrayList<String> emailList = new ArrayList<String>();
+
 		SendEmail emailGen = new SendEmail();
-		emailGen.setMailServerProperties();
+
 		String url = "http://lunchtime.dal.jelastic.vps-host.net/eureka_webservice/pages/login.jsp";
 		String subject = "Koh Bus LunchTime Ordering App - Payment Overdue";
 		String messageBody = "Dear User,<br><br>"
@@ -141,9 +140,9 @@ public class EmployeeController {
 		String[] toEmails = new String[emailList.size()];
 		toEmails = emailList.toArray(toEmails);
 		System.out.println(toEmails[0]);
-		String[] ccEmails = { "sumon123may@eastman.com", "wch123ow@eastman.com" };
+
 		try {
-			emailGen.sendEmail(subject, messageBody, toEmails, ccEmails);
+			emailGen.sendEmail(subject, messageBody, toEmails, null, null);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -162,7 +161,7 @@ public class EmployeeController {
 		}
 
 	}
-	
+
 	/**
 	 * Updates the Employee's specified food delivery point
 	 * 
@@ -174,8 +173,6 @@ public class EmployeeController {
 		employee.setDeliveryPoint(buildingName);
 		employeeDAO.updateEmployee(employee);
 	}
-	
-	
 
 	/**
 	 * Updates the designated Employee object in the Database

@@ -2,17 +2,15 @@ package background;
 
 import java.util.ArrayList;
 
-import model.Company;
-import model.Employee;
-
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.slf4j.LoggerFactory;
 
-import services.SendEmail;
 import connection.MyConnection;
 import controller.CompanyController;
+import model.Company;
+import model.Employee;
+import services.SendEmail;
 
 public class PaymentNotification implements Job {
 
@@ -22,18 +20,12 @@ public class PaymentNotification implements Job {
 			String url = "PLEASE ENTER";
 			System.out.println("Sending Payment Notification");
 			SendEmail emailGen = new SendEmail();
-			emailGen.setMailServerProperties();
+			// emailGen.setMailServerProperties();
+
 			String subject = "Koh Bus LunchTime Ordering App - Payment Due";
 			String messageBody = "Dear User,<br><br>"
-					+ "Please note that your weekly payment is due!<br><br>"
-					+"<a href="
-					+ url
-					+ ">"
-					+ url
-					+ "</a>"
-					+ "<br><br>"
-					+ "Regards,<br>"
-					+ "Admin<br><br>"
+					+ "Please note that your weekly payment is due!<br><br>" + "<a href=" + url
+					+ ">" + url + "</a>" + "<br><br>" + "Regards,<br>" + "Admin<br><br>"
 					+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
 
 			// EmployeeController employeeController = new EmployeeController();
@@ -50,15 +42,14 @@ public class PaymentNotification implements Job {
 			}
 			String[] toEmails = new String[emailList.size()];
 			toEmails = emailList.toArray(toEmails);
-			System.out.println("-------------------------------EMAILLIST LENGTH: "+ toEmails.length);
-			//temporary carbon copy recipients
-			if(toEmails.length>0){
-				String[] ccEmails = {"chris.cheng.2013@sis.smu.edu.sg", "wch123ow@eastman.com"};
-				emailGen.sendEmail(subject, messageBody, toEmails, ccEmails);
+			System.out
+					.println("-------------------------------EMAILLIST LENGTH: " + toEmails.length);
+			if (toEmails.length > 0) {
+				emailGen.sendEmail(subject, messageBody, toEmails, null, null);
 			}
-			
+
 		} catch (Exception ex) {
-			LoggerFactory.getLogger(getClass()).error(ex.getMessage() + "HELLO");
+			ex.printStackTrace();
 		}
 	}
 }

@@ -245,14 +245,15 @@ public class AccessController {
 
 	public boolean constructDeleteUserNotificationEmail(String email) throws MessagingException {
 		String[] toSendEmail = { email };
+
 		SendEmail javaEmail = new SendEmail();
-		javaEmail.setMailServerProperties();
+
 		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Account Deleted",
 				"Dear User,<br><br>"
 						+ "This email is to inform you that your account has been deleted.<br> Thank you for using Koh Bus LunchTime Ordering App.<br><br> "
 						+ "Regards,<br>" + "Admin<br><br>"
 						+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
-				toSendEmail, null);
+				toSendEmail, null, null);
 
 		return true;
 	}
@@ -285,14 +286,13 @@ public class AccessController {
 		String eEncrypt = AESEncryption.encrypt(email);
 		String url = appUrl + "/LoadResetPasswordPage?email=" + eEncrypt + "&token=" + token;
 
-		javaEmail.setMailServerProperties();
 		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Password Reset",
 				"Dear User,<br><br>"
 						+ "To reset your password for LunchTime Ordering App, please on click the following link <b>within 5 minutes</b>:<br> "
 						+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
 						+ "Admin<br><br>"
 						+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
-				toSendEmail, null);
+				toSendEmail, null, null);
 
 		return true;
 	}
@@ -317,14 +317,13 @@ public class AccessController {
 		String url = appUrl + "/ProcessVerificationServlet?email=" + eEncrypt + "&status="
 				+ encryptedStatus + "&token=" + token;
 
-		javaEmail.setMailServerProperties();
 		javaEmail.sendEmail("Koh Bus LunchTime Ordering App - Verify Your Email",
 				"Dear User,<br><br>"
 						+ "Welcome to LunchTime Ordering App, please click the following link <b>within 5 minutes</b> to verify your email address:<br><br> "
 						+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
 						+ "Admin<br><br>"
 						+ "This is a system-generated email; please DO NOT REPLY to this email.<br>",
-				toSendEmail, null);
+				toSendEmail, null, null);
 
 		return true;
 

@@ -31,7 +31,7 @@ public class SendNotification implements Job {
 			System.out.println("Sending Payment Notification");
 
 			SendEmail emailGen = new SendEmail();
-			emailGen.setMailServerProperties();
+			// emailGen.setMailServerProperties();
 
 			String subject = "Koh Bus LunchTime Ordering App - Order Period Available!";
 			String messageBody = "Dear User,<br><br>"
@@ -62,7 +62,7 @@ public class SendNotification implements Job {
 			// temporary carbon copy recipients
 			if (toEmails.length > 0) {
 				String[] ccEmails = { "chris.cheng.2013@sis.smu.edu.sg" };
-				emailGen.sendEmail(subject, messageBody, toEmails, ccEmails);
+				emailGen.sendEmail(subject, messageBody, toEmails, ccEmails, null);
 			}
 
 		} catch (Exception ex) {

@@ -17,8 +17,16 @@ public class SendEmail {
 	private final String password = "{ryusoken}";
 	private final String username = "kohbuslunchtime@gmail.com";
 
+	public SendEmail() {
+		emailProperties = new Properties();
+		emailProperties.put("mail.smtp.auth", "true");
+		emailProperties.put("mail.smtp.starttls.enable", "true");
+		emailProperties.put("mail.smtp.host", "smtp.gmail.com");
+		emailProperties.put("mail.smtp.port", "587");
+	}
+
 	private MimeMessage createEmailMessageWithCarbonCopy(String subject, String messageBody,
-			String[] recipients, String[] ccEmails) throws MessagingException {
+			String[] recipients, String[] ccEmails, String[] bccEmails) throws MessagingException {
 
 		mailSession = Session.getInstance(emailProperties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -31,9 +39,11 @@ public class SendEmail {
 			emailMessage = new MimeMessage(mailSession);
 
 			// set recipients
-			for (int i = 0; i < recipients.length; i++) {
-				emailMessage.addRecipient(Message.RecipientType.TO,
-						new InternetAddress(recipients[i]));
+			if (recipients != null) {
+				for (int i = 0; i < recipients.length; i++) {
+					emailMessage.addRecipient(Message.RecipientType.TO,
+							new InternetAddress(recipients[i]));
+				}
 			}
 
 			// set cc recipients
@@ -44,8 +54,13 @@ public class SendEmail {
 				}
 			}
 
-			emailMessage.addRecipient(Message.RecipientType.BCC,
-					new InternetAddress("chris.cheng.2013@sis.smu.edu.sg"));
+			// set bcc recipients
+			if (bccEmails != null) {
+				for (int i = 0; i < bccEmails.length; i++) {
+					emailMessage.addRecipient(Message.RecipientType.BCC,
+							new InternetAddress(bccEmails[i]));
+				}
+			}
 
 			emailMessage.setSubject(subject);
 			emailMessage.setContent(messageBody, "text/html; charset=utf-8");
@@ -61,18 +76,11 @@ public class SendEmail {
 	}
 
 	public void sendEmail(String subject, String messageBody, String[] recipients,
-			String[] ccEmails) throws MessagingException {
+			String[] ccEmails, String[] bccEmails) throws MessagingException {
 
 		Message emailMessage = createEmailMessageWithCarbonCopy(subject, messageBody, recipients,
-				ccEmails);
+				ccEmails, bccEmails);
 		Transport.send(emailMessage);
 	}
 
-	public void setMailServerProperties() {
-		emailProperties = new Properties();
-		emailProperties.put("mail.smtp.auth", "true");
-		emailProperties.put("mail.smtp.starttls.enable", "true");
-		emailProperties.put("mail.smtp.host", "smtp.gmail.com");
-		emailProperties.put("mail.smtp.port", "587");
-	}
 }

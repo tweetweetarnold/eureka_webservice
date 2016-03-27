@@ -27,15 +27,6 @@ public class CompanyController {
 	 * 
 	 * @param c The Company object to be added in
 	 */
-	// public void addNewCompany(Company c) {
-	// companyDAO.saveCompany(c);
-	// }
-
-	// public void addNewCompany(String name, String companyCode) {
-	// Company c = new Company(name, companyCode);
-	// companyDAO.saveCompany(c);
-	// }
-
 	public void addNewCompany(String name, String companyCode, Set<String> buildings)
 			throws Exception {
 		String errorMessages = validateNewCompanyInputs(name, companyCode, buildings);

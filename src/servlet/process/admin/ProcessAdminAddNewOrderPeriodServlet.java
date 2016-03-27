@@ -100,7 +100,7 @@ public class ProcessAdminAddNewOrderPeriodServlet extends HttpServlet {
 			if (!available) {
 				throw new Exception("Order Period have already been taken");
 			} else {
-				orderPeriodController.createNewOrderPeriod2(startDatetime, endDatetime, company,
+				orderPeriodController.createNewOrderPeriod(startDatetime, endDatetime, company,
 						canteen, numberOfWeeks, remarks, discountAbsolute);
 			}
 			session.setAttribute("success", "New Order Period created successfully.");

@@ -21,25 +21,19 @@ public class ChasePayment implements Job {
 		try {
 			String url = "PLEASE ENTER";
 			SendEmail emailGen = new SendEmail();
-			emailGen.setMailServerProperties();
+			// emailGen.setMailServerProperties();
+
 			String subject = "Koh Bus LunchTime Ordering App - Payment Overdue";
 			String messageBody = "Dear User,<br><br>"
 					+ "Please note that you will not be able to place any new orders until you have cleared your payment!<br><br>"
-					+"<a href="
-					+ url
-					+ ">"
-					+ url
-					+ "</a>"
-					+ "<br><br>"
-					+ "Regards,<br>"
+					+ "<a href=" + url + ">" + url + "</a>" + "<br><br>" + "Regards,<br>"
 					+ "Admin<br><br>"
 					+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
-					
 
 			// EmployeeController employeeController = new EmployeeController();
 			CompanyController companyController = new CompanyController();
 			Company c = companyController.getCompany(2);
-			
+
 			ArrayList<Object> objects = new ArrayList<Object>(
 					MyConnection.getUsersToChasePayment(c));
 			ArrayList<String> emailList = new ArrayList<String>();
@@ -48,15 +42,13 @@ public class ChasePayment implements Job {
 				Employee tempEmployee = (Employee) o;
 				String tempEmail = tempEmployee.getEmail();
 				emailList.add(tempEmail);
-				
+
 			}
 
 			String[] toEmails = new String[emailList.size()];
 			toEmails = emailList.toArray(toEmails);
-			
-			//temporary carbon copy recipients
-			String[] ccEmails = {"sumon123may@eastman.com", "wch123ow@eastman.com"};
-			emailGen.sendEmail(subject, messageBody, toEmails, ccEmails);
+
+			emailGen.sendEmail(subject, messageBody, toEmails, null, null);
 
 		} catch (Exception ex) {
 			LoggerFactory.getLogger(getClass()).error(ex.getMessage() + "HELLO");

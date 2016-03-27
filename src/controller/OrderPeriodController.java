@@ -67,7 +67,6 @@ public class OrderPeriodController {
 								return false;
 							}
 							if ((startTimeTemp.isAfter(wStart))) {
-								System.out.println("***Alog 1*****");
 								System.out.println((startTimeTemp.isBefore(endTimeTemp)));
 								if (startTimeTemp.isBefore(wEnd)) {
 									if (endTimeTemp.isBefore(wEnd)) {
@@ -186,26 +185,34 @@ public class OrderPeriodController {
 		return occupiedSlots;
 	}
 
-	public void createNewOrderPeriod2(DateTime startDate, DateTime endDate, Company company,
+	public void createNewOrderPeriod(DateTime startDate, DateTime endDate, Company company,
 			Canteen canteen, int numberOfWeeks, String remarks, double discountAbsolute)
 			throws Exception {
+
 		QuartzService quartzService = new QuartzService();
 
 		for (int i = 0; i < numberOfWeeks; i++) {
+			// To get the startTime and endTime for the particular week
 			DateTime newStartTime = startDate.plusWeeks(i);
+			DateTime newEndTime = endDate.plusWeeks(i);
 			Date startDateForQuartz = newStartTime.toDate();
-			OrderPeriod period = new OrderPeriod(newStartTime, endDate.plusWeeks(i), company,
-					canteen, remarks, null);
 
+			OrderPeriod period = new OrderPeriod(newStartTime, newEndTime, company, canteen,
+					remarks, null);
+
+			// To add the discount amount to this order period
 			ArrayList<PriceModifier> list = new ArrayList<PriceModifier>();
 			PriceModifier discountAbsoluteModifier = new PriceModifier("Discount",
 					StringValues.PRICEMODIFIER_ABSOLUTE, discountAbsolute, period);
+
 			list.add(discountAbsoluteModifier);
-			System.out.println("pricemodifierlist size period: " + list.size());
+
 			period.setPriceModifierList(list);
+
 			orderPeriodDAO.saveOrderPeriod(period);
 			int orderPeriodID = orderPeriodDAO.updateOrderPeriod(period);
-			System.out.println(orderPeriodID);
+			System.out.println("Order Period " + orderPeriodID + " has been created.");
+
 			// quartz stuff
 			quartzService.setupNewJobAndTrigger("" + orderPeriodID, startDateForQuartz);
 		}
