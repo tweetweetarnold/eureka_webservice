@@ -6,7 +6,6 @@ import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.slf4j.LoggerFactory;
 
 import controller.OrderPeriodController;
 import dao.EmployeeDAO;
@@ -26,12 +25,10 @@ public class SendNotification implements Job {
 		ArrayList<String> emailList = new ArrayList<String>();
 
 		try {
-
 			String url = "http://lunchtime.dal.jelastic.vps-host.net/eureka_webservice/pages/login.jsp";
 			System.out.println("Sending Payment Notification");
 
 			SendEmail emailGen = new SendEmail();
-			// emailGen.setMailServerProperties();
 
 			String subject = "Koh Bus LunchTime Ordering App - Order Period Available!";
 			String messageBody = "Dear User,<br><br>"
@@ -45,9 +42,11 @@ public class SendNotification implements Job {
 
 			OrderPeriod orderPeriod = orderPeriodController
 					.getOrderPeriod(Integer.parseInt(orderPeriodId));
+
 			ArrayList<Employee> employeeList = employeeDAO
 					.getAllEmployeesFromCompany(orderPeriod.getCompany().getCompanyId());
 
+			// Add employees to email list
 			for (Employee e : employeeList) {
 				if (!e.getStatus().equals(StringValues.EMPLOYEE_SUSPENDED)
 						|| !e.getStatus().equals(StringValues.EMPLOYEE_DESTROYED)) {
@@ -56,17 +55,15 @@ public class SendNotification implements Job {
 			}
 			String[] toEmails = new String[emailList.size()];
 			toEmails = emailList.toArray(toEmails);
-			System.out
-					.println("-------------------------------EMAILLIST LENGTH: " + toEmails.length);
 
-			// temporary carbon copy recipients
+			System.out.println("Number of recipients: " + toEmails.length);
+
 			if (toEmails.length > 0) {
-				String[] ccEmails = { "chris.cheng.2013@sis.smu.edu.sg" };
-				emailGen.sendEmail(subject, messageBody, toEmails, ccEmails, null);
+				emailGen.sendEmail(subject, messageBody, null, null, toEmails);
 			}
 
 		} catch (Exception ex) {
-			LoggerFactory.getLogger(getClass()).error(ex.getMessage() + "HELLO");
+			ex.printStackTrace();
 		}
 
 	}

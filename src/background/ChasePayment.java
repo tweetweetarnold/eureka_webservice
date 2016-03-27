@@ -2,26 +2,24 @@ package background;
 
 import java.util.ArrayList;
 
-import model.Company;
-import model.Employee;
-
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.slf4j.LoggerFactory;
 
-import services.SendEmail;
 import connection.MyConnection;
 import controller.CompanyController;
+import model.Company;
+import model.Employee;
+import services.SendEmail;
 
 public class ChasePayment implements Job {
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
+
 		try {
-			String url = "PLEASE ENTER";
+			String url = "PLEASE ENTER"; // TODO: this url needs to be updated
 			SendEmail emailGen = new SendEmail();
-			// emailGen.setMailServerProperties();
 
 			String subject = "Koh Bus LunchTime Ordering App - Payment Overdue";
 			String messageBody = "Dear User,<br><br>"
@@ -30,7 +28,6 @@ public class ChasePayment implements Job {
 					+ "Admin<br><br>"
 					+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
 
-			// EmployeeController employeeController = new EmployeeController();
 			CompanyController companyController = new CompanyController();
 			Company c = companyController.getCompany(2);
 
@@ -38,20 +35,20 @@ public class ChasePayment implements Job {
 					MyConnection.getUsersToChasePayment(c));
 			ArrayList<String> emailList = new ArrayList<String>();
 
+			// Add employees with outstanding payment (haven pay past due date)
 			for (Object o : objects) {
 				Employee tempEmployee = (Employee) o;
 				String tempEmail = tempEmployee.getEmail();
 				emailList.add(tempEmail);
-
 			}
 
 			String[] toEmails = new String[emailList.size()];
 			toEmails = emailList.toArray(toEmails);
 
-			emailGen.sendEmail(subject, messageBody, toEmails, null, null);
+			emailGen.sendEmail(subject, messageBody, null, null, toEmails);
 
 		} catch (Exception ex) {
-			LoggerFactory.getLogger(getClass()).error(ex.getMessage() + "HELLO");
+			ex.printStackTrace();
 		}
 	}
 }
