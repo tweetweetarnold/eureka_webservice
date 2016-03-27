@@ -29,7 +29,8 @@ public class LoadAdminViewCompanyMonthlySpending extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -54,16 +55,21 @@ public class LoadAdminViewCompanyMonthlySpending extends HttpServlet {
 						.getCompanyFoodOrderSetByMonthYear(companyCode);
 				TreeMap<String, Double> yearMonthToTotalPrice = foodOrderController
 						.getFoodOrderSetTotalPriceByMonthYear(yearMonthToFoodOrders);
+				if (yearMonthToTotalPrice.size() <= 1) {
+					session.setAttribute("warn", "Please wait for more orders to be placed!");
+				} else {
+					// session.setAttribute("yearToMonthList", yearToMonthList);
+					session.setAttribute("result", year);
+					session.setAttribute("yearMonthToFoodOrders", yearMonthToFoodOrders);
+					session.setAttribute("yearMonthToTotalPrice", yearMonthToTotalPrice);
+					session.removeAttribute("warn");
+				}
 
-				// session.setAttribute("yearToMonthList", yearToMonthList);
-				session.setAttribute("result", year);
-				session.setAttribute("yearMonthToFoodOrders", yearMonthToFoodOrders);
-				session.setAttribute("yearMonthToTotalPrice", yearMonthToTotalPrice);
-
+			} else {
+				session.setAttribute("warn", "There are no orders placed yet!");
 			}
 
-			response.sendRedirect("/eureka_webservice/admin/analytics/monthly-summary.jsp?company="
-					+ companyCode);
+			response.sendRedirect("/eureka_webservice/admin/analytics/monthly-summary.jsp?company=" + companyCode);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,7 +80,8 @@ public class LoadAdminViewCompanyMonthlySpending extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

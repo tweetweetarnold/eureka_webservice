@@ -47,6 +47,8 @@
 	<div id="wrapper">
 
 		<%@include file="/admin/adminHeader.jsp"%>
+		
+		
 
 		<div id="page-wrapper">
 			<div class="row">
@@ -65,7 +67,13 @@
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
-
+			<c:if test="${not empty sessionScope.warn}">
+				<div class="alert alert-warning fade in" role="alert">
+					<span class="glyphicon glyphicon-exclamation-sign"
+						aria-hidden="true"></span> <span class="sr-only">Warning:</span>
+					<c:out value="${warn}" />
+				</div>
+			</c:if>
 			<div class="row">
 				<div class="col-lg-12">
 					<c:if test="${not empty sessionScope.weekList}">
