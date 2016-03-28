@@ -104,6 +104,11 @@
 										</div>
 
 										<div class="form-group">
+											<label>Description</label>
+											<input class="form-control" name="description">
+										</div>
+
+										<div class="form-group">
 											<label>Price</label>
 											<input class="form-control" name="price" required>
 										</div>
@@ -170,6 +175,8 @@
 		src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js"
 	></script>
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/raphael/raphael-min.js"></script>
+	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/bower_components/morrisjs/morris.min.js"></script> -->
+	<!-- <script src="resources/css/startbootstrap-sb-admin-2-1.0.7/js/morris-data.js"></script> -->
 	<script src="/eureka_webservice/resources/css/startbootstrap-sb-admin-2-1.0.7/dist/js/sb-admin-2.js"></script>
 
 	<!-- Datetime picker -->
