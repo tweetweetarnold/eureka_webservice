@@ -103,6 +103,8 @@
 											<input class="form-control" name="chineseName" required>
 										</div>
 
+										<input type="hidden" name="description" value="">
+
 										<div class="form-group">
 											<label>Price</label>
 											<input class="form-control" name="price" required>
