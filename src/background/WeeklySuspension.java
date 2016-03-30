@@ -21,18 +21,18 @@ public class WeeklySuspension implements Job {
 		try {
 			EmployeeController employeeController = new EmployeeController();
 			CompanyController companyController = new CompanyController();
+			ArrayList<Company> companyList = companyController.getAllCompany();
+			for(Company c : companyList){
+				// retrieve users with outstanding balance
+				ArrayList<Object> objects = new ArrayList<Object>(
+						MyConnection.getUsersWithOutstandingPaymentFromCompany(c));
 
-			Company c = companyController.getCompany(2);
-
-			// retrieve users with outstanding balance
-			ArrayList<Object> objects = new ArrayList<Object>(
-					MyConnection.getUsersWithOutstandingPaymentFromCompany(c));
-
-			// Update employee status to suspended if there is outstanding balance
-			for (Object o : objects) {
-				Employee tempEmployee = (Employee) o;
-				tempEmployee.setStatus(StringValues.EMPLOYEE_SUSPENDED);
-				employeeController.updateEmployee(tempEmployee);
+				// Update employee status to suspended if there is outstanding balance
+				for (Object o : objects) {
+					Employee tempEmployee = (Employee) o;
+					tempEmployee.setStatus(StringValues.EMPLOYEE_SUSPENDED);
+					employeeController.updateEmployee(tempEmployee);
+				}
 			}
 
 		} catch (Exception ex) {

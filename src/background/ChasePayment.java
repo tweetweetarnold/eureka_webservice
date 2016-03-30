@@ -29,23 +29,27 @@ public class ChasePayment implements Job {
 					+ "This is a system-generated email; please DO NOT REPLY to this email.<br>";
 
 			CompanyController companyController = new CompanyController();
-			Company c = companyController.getCompany(2);
-
-			ArrayList<Object> objects = new ArrayList<Object>(
-					MyConnection.getUsersToChasePayment(c));
-			ArrayList<String> emailList = new ArrayList<String>();
-
-			// Add employees with outstanding payment (haven pay past due date)
-			for (Object o : objects) {
-				Employee tempEmployee = (Employee) o;
-				String tempEmail = tempEmployee.getEmail();
-				emailList.add(tempEmail);
+			
+			ArrayList<Company> companyList = companyController.getAllCompany();
+			for(Company c : companyList){
+			
+	
+				ArrayList<Object> objects = new ArrayList<Object>(
+						MyConnection.getUsersToChasePayment(c));
+				ArrayList<String> emailList = new ArrayList<String>();
+	
+				// Add employees with outstanding payment (haven pay past due date)
+				for (Object o : objects) {
+					Employee tempEmployee = (Employee) o;
+					String tempEmail = tempEmployee.getEmail();
+					emailList.add(tempEmail);
+				}
+	
+				String[] toEmails = new String[emailList.size()];
+				toEmails = emailList.toArray(toEmails);
+	
+				emailGen.sendEmail(subject, messageBody, null, null, toEmails);
 			}
-
-			String[] toEmails = new String[emailList.size()];
-			toEmails = emailList.toArray(toEmails);
-
-			emailGen.sendEmail(subject, messageBody, null, null, toEmails);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
