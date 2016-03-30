@@ -60,10 +60,13 @@
 				<a class="tooltip-side-nav" href="#section-1" title="" data-original-title="Services" data-placement="left"></a>
 			</li>
 			<li>
-				<a class="tooltip-side-nav" href="#section-2" title="" data-original-title="Features" data-placement="left"></a>
+				<a class="tooltip-side-nav" href="#section-2" title="" data-original-title="Guide" data-placement="left"></a>
 			</li>
 			<li>
 				<a class="tooltip-side-nav" href="#section-3" title="" data-original-title="Subscribe" data-placement="left"></a>
+			</li>
+			<li>
+				<a class="tooltip-side-nav" href="#section-4" title="" data-original-title="Features" data-placement="left"></a>
 			</li>
 			<li>
 				<a class="tooltip-side-nav" href="#to-top" title="" data-original-title="Back" data-placement="left"></a>
@@ -168,9 +171,11 @@
 									<c:out value="${success}" />
 									<br>
 									<c:if test="${not empty sessionScope.output}">
-										Click<a href="/eureka_webservice/ProcessRequestVerificationServlet?email=<c:out value="${output}"/>"> <b>here</b> </a> if you did not receive the email.
+										Click<a href="/eureka_webservice/ProcessRequestVerificationServlet?email=<c:out value="${output}"/>">
+											<b>here</b>
+										</a> if you did not receive the email.
 								    	<c:remove var="output" scope="session" />
-								    </c:if>
+									</c:if>
 								</div>
 								<c:remove var="success" scope="session" />
 							</c:if>
@@ -272,9 +277,24 @@
 
 
 
+	<section id="section-2" style="padding-bottom: 50px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12" style="text-align: center;">
+					Check out the guide video below!
+					<br>
+					<br>
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/siFq8swDz-0" frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
 
 	<!-- Features -->
-	<section class="features-section" id="section-2">
+	<section class="features-section" id="section-3" style="padding-top: 0px;">
 
 		<div class="container">
 
@@ -384,7 +404,7 @@
 
 
 	<!-- Subscribe -->
-	<section class="subscribe-section" id="section-3">
+	<section class="subscribe-section" id="section-4">
 
 		<div class="container">
 
