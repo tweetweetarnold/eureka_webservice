@@ -172,10 +172,24 @@
 										/>
 									</td>
 									<td>
-										<p ng-repeat='modifier in food.modifierList track by modifier.modifierId'>
-											{{modifier.name}}&nbsp;{{modifier.chineseName}} - ({{modifier.price | currency}})
-											<br>
-										</p>
+										<!-- 										<p ng-repeat='modifier in food.modifierList track by modifier.modifierId'> -->
+										<!-- 											{{modifier.name}}&nbsp;{{modifier.chineseName}} - ({{modifier.price | currency}}) -->
+										<!-- 											<br> -->
+										<!-- 										</p> -->
+										<div ng-repeat='modSection in food.modifierSectionList track by modSection.modifierSectionId'>
+											<strong>
+												<u>{{modSection.categoryName}}:</u>
+											</strong>
+
+											<div ng-repeat='mod in modSection.modifierList track by mod.modifierId'>
+												{{mod.name}}&nbsp;{{mod.chineseName}} - ({{mod.price | currency}})
+												<br>
+											</div>
+
+										</div>
+
+
+
 										<a target="_self"
 											ng-href='/eureka_webservice/admin/food/addon-edit.jsp?stallId={{stallId}}&foodId={{food.foodId}}'
 										>Edit Add-On(s)</a>
