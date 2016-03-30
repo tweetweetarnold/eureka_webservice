@@ -70,6 +70,8 @@
 									<p>LunchTime was developed by a team of SMU SIS students as a project.</p>
 								</section>
 
+								<iframe width="560" height="315" src="https://www.youtube.com/embed/MYCZmFgIbg0" frameborder="0" allowfullscreen></iframe>
+
 
 								<section>
 									<h2>FAQ</h2>
@@ -85,17 +87,34 @@
 										A: It is the time period where employees are able to place their lunch order. For example, if the order period
 										is 8.30am – 10.30am, employees are able to place their lunch order via LunchTime anytime from 8.30am -
 										10.30am.
+										<br>
+										<br>
+										<img src="/eureka_webservice/resources/img/help/orderperiod1.png" alt=""
+											style="max-width: 100%;
+	max-height: 400px;"
+										>
+										<br>
+										<br>
 									</p>
 
 									<p>
-										<strong>Q: How do I add an order period?</strong>
+										<strong>Q: How do I set an order period?</strong>
 										<br>
 										A: It is the time period where employees are able to place their lunch order. For example, if the order period
 										is 8.30am – 10.30am, employees are able to place their lunch order via LunchTime anytime from 8.30am -
 										10.30am.
 										<br>
-										Click on ‘Order Period’ on the left navigation panel at the side. Click on ‘Add New Order Period’ Fill in the
-										order period details and click ‘Add New Order Window’ button
+										Click on ‘Order Period’ on the left navigation panel at the side. Click on ‘Set New Order Period’ Fill in the
+										order period details and click ‘Set New Order Period’ button
+
+										<br>
+										<br>
+										<img src="/eureka_webservice/resources/img/help/setorderperiod.png" alt=""
+											style="max-width: 100%;
+	max-height: 400px;"
+										>
+										<br>
+										<br>
 
 									</p>
 
@@ -105,6 +124,14 @@
 										A: *You are only able to edit the start or end date/time if the order period has not started yet. Navigate to
 										view all order periods Click on the pencil icon to edit the order period Enter the new start and end date/time
 										and click ‘Update’
+										<br>
+										<br>
+										<img src="/eureka_webservice/resources/img/help/editorderperiod.png" alt=""
+											style="max-width: 100%;
+	max-height: 400px;"
+										>
+										<br>
+										<br>
 									</p>
 
 
@@ -112,6 +139,14 @@
 										<strong>Q: How do I delete a user if he/she has left the company?</strong>
 										<br>
 										A: Click on ‘User’ on the left navigation panel at the side Click on the trash icon to delete the user
+										<br>
+										<br>
+										<img src="/eureka_webservice/resources/img/help/deleteuser.png" alt=""
+											style="max-width: 100%;
+	max-height: 400px;"
+										>
+										<br>
+										<br>
 									</p>
 
 									<p>
@@ -120,6 +155,14 @@
 										<br>
 										A: Click on ‘User’ on the left navigation panel at the side Click on the pencil icon to edit the O/S and
 										status Click ‘Update’
+										<br>
+										<br>
+										<img src="/eureka_webservice/resources/img/help/editoutstandingpayment.png" alt=""
+											style="max-width: 100%;
+	max-height: 400px;"
+										>
+										<br>
+										<br>
 									</p>
 
 									<p>
@@ -129,6 +172,14 @@
 										delete canteen will be on this page. To add, edit or delete a stall from any of the canteens, click on the
 										‘View all Stalls’ link for that canteen. To add, edit or delete a food item from any of the stalls in the
 										canteen, click on the ‘View all Food’ link for that stall.
+										<br>
+										<br>
+										<img src="/eureka_webservice/resources/img/help/canteen.png" alt=""
+											style="max-width: 100%;
+	max-height: 400px;"
+										>
+										<br>
+										<br>
 									</p>
 
 								</section>
@@ -177,3 +228,4 @@
 </body>
 
 </html>
+
