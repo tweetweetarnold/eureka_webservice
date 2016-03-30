@@ -1,6 +1,89 @@
 Category Name,Display Type,Modifier Name,Food Name,Stall Name,Canteen Name
-Add-ons,c,Change to drumstick,Chicken Rice,New REX(Halal),Boon Lay Hawker Centre
-Add-ons,c,Upsize to $3.50,Malay Mixed Rice(Chicken),New Malay food Stall,Boon Lay Hawker Centre
-Add-ons,c,Upsize to $3.50,Malay Mixed Rice(Fish),New Malay food Stall,Boon Lay Hawker Centre
-Add-ons,c,Upsize to $3.50,Malay Mixed Rice(Mutton),New Malay food Stall,Boon Lay Hawker Centre
-Add-ons,c,Upsize to $3.20,Minced Meat Noodles,New Minced Meat Noodles Stall(Closed On Tuesday),Boon Lay Hawker Centre
+Add-ons,c,No egg,Curry Chicken + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Curry Chicken + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,No egg,Asam Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Asam Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,No egg,Curry Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Curry Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,No egg,Fried Chicken + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Fried Chicken + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Fried Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,No egg,Fried Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Stingray + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,No egg,Stingray + Veg,Oasis Muslim Stall,Oasis Food Centre
+Add-ons,c,More vegetables,White Rice(Chicken),Indian Stall,Oasis Food Centre
+Add-ons,c,More vegetables,White Rice(Fish),Indian Stall,Oasis Food Centre
+Add-ons,c,More vegetables,White Rice(Mutton),Indian Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Vegetable White Rice,Indian Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Chicken Briyani,Indian Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Fish Briyani,Indian Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Mutton Briyani,Indian Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Vegetarian Briyani,Indian Stall,Oasis Food Centre
+Add-ons,c,Upsize to $3.20,1 Meat 2 Veg,Chinese Mix Veg Stall,Oasis Food Centre
+Add-ons,c,No fried meat,1 Meat 2 Veg,Chinese Mix Veg Stall,Oasis Food Centre
+Add-ons,c,More vegetables,1 Meat 2 Veg,Chinese Mix Veg Stall,Oasis Food Centre
+Add-ons,c,Upsize to $3.20,All Veg,Chinese Mix Veg Stall,Oasis Food Centre
+Add-ons,c,No fried meat,Porridge(1 Meat + 2 Veg),Chinese Mix Veg Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Porridge(1 Meat + 2 Veg),Chinese Mix Veg Stall,Oasis Food Centre
+Add-ons,c,Add roast meat,Roast Chicken Rice,Roast Meat Stall,Oasis Food Centre
+Add-ons,c,Add charsiew,Roast Chicken Rice,Roast Meat Stall,Oasis Food Centre
+Add-ons,c,Add roast chicken,CharSiew Rice,Roast Meat Stall,Oasis Food Centre
+Add-ons,c,Add roast meat,CharSiew Rice,Roast Meat Stall,Oasis Food Centre
+Add-ons,c,Add charsiew,Roast Meat Rice,Roast Meat Stall,Oasis Food Centre
+Add-ons,c,Add roast chicken,Roast Meat Rice,Roast Meat Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Hokkien Noodle,Seafood Tze Char Stall,Oasis Food Centre
+Add-ons,c,More vegetables,Mee Goreng,Seafood Tze Char Stall,Oasis Food Centre
+Type of soup,d,Winter Melon,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Type of soup,d,Lotus Root,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Type of soup,d,Bitter Gourd,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Type of soup,d,White Carrot,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Type of soup,d,Old Cucumber,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Type of soup,d,Szechuan Vegetable,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Type of soup,d,Water Crest,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Add-ons,c,Herbal,Black Chicken Soup,Seafood Tze Char Stall,Oasis Food Centre
+Add-ons,c,Herbal,White Chicken Soup,Seafood Tze Char Stall,Oasis Food Centre
+Add-ons,c,Winter Melon + Corn,White Chicken Soup,Seafood Tze Char Stall,Oasis Food Centre
+Add-ons,c,Add bittergourd,Fish Soup With Beehoon,Fish Beehoon Stall,Oasis Food Centre
+Add-ons,c,Add bittergourd,Fish Soup With Rice,Fish Beehoon Stall,Oasis Food Centre
+Add-ons,c,Add bittergourd,Fried Fish Soup With Beehoon,Fish Beehoon Stall,Oasis Food Centre
+Add-ons,c,Add bittergourd,Fish Soup,Fish Beehoon Stall,Oasis Food Centre
+Add-ons,c,Add bittergourd,Fish Soup With Mee Sua,Fish Beehoon Stall,Oasis Food Centre
+Add-ons,c,Mixed fruits upsize,Mixed Fruits,Fruit Stall,Oasis Food Centre
+Add-ons,c,Add Veg,Chilli Chicken + Veg,Malay Food Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add Veg,Curry Fish + Veg,Malay Food Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add Veg,Fried Chicken + Veg,Malay Food Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add Veg,Fried Fish + Veg,Malay Food Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add Veg,1 Meat + 2 Veg,Mixed Rice Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add Veg,All Veg,Mixed Rice Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Upsize to $3.20,Minced Meat Noodles(Mee Kia),Minced Meat Noodles Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add Veg,Fish Slice Beehoon,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add Veg,Fish Soup and Rice,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add charsiew,Roast Chicken Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add roast meat,Roast Chicken Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add roast meat,CharSiew Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add roast chicken,CharSiew Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add charsiew,Roast Meat Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Add-ons,c,Add roast chicken,Roast Meat Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Type of soup,d,Chicken,Fried Rice,REX(Halal),Taman Jurong Market and Food Centre
+Type of soup,d,Beef,Fried Rice,REX(Halal),Taman Jurong Market and Food Centre
+Type of soup,d,Seafood,Fried Rice,REX(Halal),Taman Jurong Market and Food Centre
+Add ons,c,Add Veg,Vegetarian Rice,Vegetarian Stall,Taman Jurong Market and Food Centre
+Add ons,c,Add Veg,Vegetarian Beehoon,Vegetarian Stall,Taman Jurong Market and Food Centre
+Add ons,c,Add Veg,Vegetarian Mee,Vegetarian Stall,Taman Jurong Market and Food Centre
+Type of Noodles,d,Thin Beehoon,Lor Mee,Noodle Stall,Taman Jurong Market and Food Centre
+Type of Noodles,d,Yellow Noodles,Lor Mee,Noodle Stall,Taman Jurong Market and Food Centre
+Type of Noodles,d,Thick Beehoon,Lor Mee,Noodle Stall,Taman Jurong Market and Food Centre
+Type of Noodles,d,Thick Beehoon,Fishball Noodles,Noodle Stall,Taman Jurong Market and Food Centre
+Type of Noodles,d,Thin Beehoon,Fishball Noodles,Noodle Stall,Taman Jurong Market and Food Centre
+Type of Noodles,d,Yellow Noodles,Fishball Noodles,Noodle Stall,Taman Jurong Market and Food Centre
+Add ons,c,Add powder,Guava,Fruits Stall,Taman Jurong Market and Food Centre
+Add ons,c,Mixed fruits upsize,Mixed Fruits,Fruits Stall,Taman Jurong Market and Food Centre
+Add ons,c,Add Veg,Fish Head Soup and Beehoon,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add ons,c,Add Veg,Fish Soup,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add ons,c,Add Veg,Fried Fish Soup and Beehoon,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add ons,c,Add Veg,Fish Soup and Beehoon,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add ons,c,Add Veg,Vegetarian Kway Tiao,Vegetarian Stall,Taman Jurong Market and Food Centre
+Add ons,c,Add Veg,Vegetarian Beehoon Kway Tiao,Vegetarian Stall,Taman Jurong Market and Food Centre
+Add ons,c,Upsize to $3.20,Minced Meat Noodles(Mee Pok),Minced Meat Noodles Stall,Taman Jurong Market and Food Centre
+Add ons,c,Upsize to $3.20,Minced Meat Noodles(Mee Tai Mak),Minced Meat Noodles Stall,Taman Jurong Market and Food Centre
+Add ons,c,Add powder,Guava,Fruit Stall,Oasis Food Centre

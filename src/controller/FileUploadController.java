@@ -332,6 +332,15 @@ public class FileUploadController {
 			errorList.add(
 					"row " + rowNumber + " has an invalid row header for Canteen Name in Food.csv");
 		}
+		
+		String imageNameHeader = rowHeader[5].trim();
+		if (imageNameHeader.isEmpty()) {
+			errorList.add(
+					"row " + rowNumber + " has a missing row header for Image Directory in Food.csv");
+		} else if (!imageNameHeader.equals("Image Directory")) {
+			errorList.add(
+					"row " + rowNumber + " has an invalid row header for Image Directory in Food.csv");
+		}
 
 		while (iter.hasNext()) {
 			rowNumber++;
@@ -679,6 +688,15 @@ public class FileUploadController {
 		} else if (!canteenNameHeader.equals("Canteen Name")) {
 			errorList.add("row " + rowNumber
 					+ " has an invalid row header for Canteen Name in Stall.csv");
+		}
+		
+		String imageNameHeader = rowHeader[3].trim();
+		if (imageNameHeader.isEmpty()) {
+			errorList.add(
+					"row " + rowNumber + " has a missing row header for Image Directory in Stall.csv");
+		} else if (!imageNameHeader.equals("Image Directory")) {
+			errorList.add("row " + rowNumber
+					+ " has an invalid row header for Image Directory in Stall.csv");
 		}
 		
 		// end checking headers

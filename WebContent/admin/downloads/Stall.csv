@@ -1,11 +1,19 @@
-Stall Name,Contact Number,Canteen Name
-New Sliced Fish Bee Hoon Stall,91379160,Boon Lay Hawker Centre
-New Malay food Stall,81145966,Boon Lay Hawker Centre
-New Mixed Rice Stall,93482772,Boon Lay Hawker Centre
-New Wanton Mee Stall,99999999,Boon Lay Hawker Centre
-New Indian Food Stall,93841009,Boon Lay Hawker Centre
-New Roast Duck & Chicken Rice Stall,98427347,Boon Lay Hawker Centre
-New REX(Halal),62684806,Boon Lay Hawker Centre
-New Vegetarian Stall,91182963,Boon Lay Hawker Centre
-New Minced Meat Noodles Stall(Closed On Tuesday),93686070,Boon Lay Hawker Centre
-New Noodle Stall,96946576,Boon Lay Hawker Centre
+Stall Name,Contact Number,Canteen Name,Image Directory
+Oasis Kueh Stall,90685620,Oasis Food Centre,"http://res.cloudinary.com/dmeln4k8n/image/upload/c_thumb,h_225,w_350/v1455641259/Stall%20Images%20Raw/oasis_kueh_stall.jpg"
+Oasis Muslim Stall,93848341,Oasis Food Centre,"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319109/Stall%20Images%20Raw/oasis_new_muslim_stall.jpg"
+Indian Stall,98717752,Oasis Food Centre,"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319115/Stall%20Images%20Raw/oasis_new_indian_stall.jpg"
+Chinese Mix Veg Stall,93848341,Oasis Food Centre,"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319114/Stall%20Images%20Raw/oasis_new_mixed_rice_stall.jpg"
+Roast Meat Stall,98765432,Oasis Food Centre,"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319118/Stall%20Images%20Raw/oasis_new_chicken_rice_stall.jpg"
+Seafood Tze Char Stall,92262376,Oasis Food Centre,"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319106/Stall%20Images%20Raw/oasis_new_seafood_stall.jpg"
+Fish Beehoon Stall,98367790,Oasis Food Centre,"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319112/Stall%20Images%20Raw/oasis_new_fish_soup.jpg"
+Fruit Stall,91151608,Oasis Food Centre,"http://res.cloudinary.com/dmeln4k8n/image/upload/c_scale,h_225,w_350/v1458319120/Stall%20Images%20Raw/oasis_new_fruits_stall.jpg"
+Malay Food Stall,81145966,Taman Jurong Market and Food Centre,resources/img/stall/img-tjmalaystall.jpg
+Mixed Rice Stall,93482772,Taman Jurong Market and Food Centre,resources/img/stall/img-tjmixedrice.jpg
+Minced Meat Noodles Stall,93686070,Taman Jurong Market and Food Centre,resources/img/stall/img-tj.jpg
+Sliced Fish Beehoon Stall,91379160,Taman Jurong Market and Food Centre,resources/img/stall/img-tjslicefishbeehoon.jpg
+Indian Food Stall,93841009,Taman Jurong Market and Food Centre,resources/img/stall/img-indianstall.jpg
+Roast Duck & Chicken Rice Stall,98427347,Taman Jurong Market and Food Centre,resources/img/stall/img-roastmeatstall.jpg
+REX(Halal),62684806,Taman Jurong Market and Food Centre,resources/img/stall/img-tj.jpg
+Vegetarian Stall,91182963,Taman Jurong Market and Food Centre,resources/img/stall/img-tj.jpg
+Noodle Stall,96946576,Taman Jurong Market and Food Centre,resources/img/stall/img-tj.jpg
+Fruits Stall,91151608,Taman Jurong Market and Food Centre,resources/img/stall/img-tj.jpg

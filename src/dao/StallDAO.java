@@ -130,8 +130,9 @@ public class StallDAO {
 			long contactNumber = Long.parseLong(contactNum);
 			String canteenName = row[2].trim();
 			canteen = canteenDAO.getCanteenByName(canteenName);
+			String imageDirectory = row[3].trim();
 
-			Stall newStall = new Stall(stallName, contactNumber, canteen, null, null, null);
+			Stall newStall = new Stall(stallName, contactNumber, canteen, null, imageDirectory, null);
 			// stallList.add(newStall);
 			canteenDAO.addStallToCanteen(canteen, newStall);
 			saveStall(newStall);
