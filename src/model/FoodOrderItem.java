@@ -181,7 +181,12 @@ public class FoodOrderItem {
 	public String getRemarks() {
 		return remarks;
 	}
-
+	
+	/**
+	 * Retrieves the total price of the FoodOrderItems taking into account the quantity
+	 * 
+	 * @return Total price of the FoodOrderItems
+	 */
 	public double getTotalPrice() {
 		return getPrice() * getQuantity();
 	}

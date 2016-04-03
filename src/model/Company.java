@@ -145,7 +145,11 @@ public class Company {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	/**
+	 * Changes the status of the company to the new Status
+	 * 
+	 * @param status The new Status
+	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}

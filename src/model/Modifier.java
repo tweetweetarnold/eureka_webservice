@@ -218,7 +218,12 @@ public class Modifier {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
+
+	/**
+	 * Changes the current Status of the Modifier
+	 * 
+	 * @param status The new status of the Modifier
+	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}

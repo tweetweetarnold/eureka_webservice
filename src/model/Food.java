@@ -93,7 +93,11 @@ public class Food {
 		}
 		return false;
 	}
-
+	/**
+	 * Gets all the active Modifiers corresponding to the food Object
+	 * 
+	 * @return Returns all active Modifiers 
+	 */
 	public Set<Modifier> getActiveModifierList() {
 		Set<Modifier> returnSet = new HashSet<Modifier>();
 		for (Modifier s : modifierList) {
@@ -103,7 +107,12 @@ public class Food {
 		}
 		return returnSet;
 	}
-
+	
+	/**
+	 * Gets the chinese name for the food
+	 * 
+	 * @return Returns food name in chinese
+	 */
 	public String getChineseName() {
 		return chineseName;
 	}
@@ -184,7 +193,7 @@ public class Food {
 		DecimalFormat df = new DecimalFormat("0.00");
 		return df.format(getPrice());
 	}
-
+	
 	public String getPublicId() {
 		return publicId;
 	}
@@ -210,7 +219,11 @@ public class Food {
 	public String getWeatherConditions() {
 		return weatherConditions;
 	}
-
+	/**
+	 * Set the Chinese name of the Food
+	 * 
+	 * @param chineseName The chinese name of the food in UTF-8 chinese characters 
+	 */
 	public void setChineseName(String chineseName) {
 		this.chineseName = chineseName;
 	}

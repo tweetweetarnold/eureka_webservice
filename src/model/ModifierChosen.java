@@ -67,7 +67,11 @@ public class ModifierChosen {
 			return false;
 		}
 	}
-
+	/**
+	 * Retrieves the chinese name of the modifier chosen
+	 * 
+	 * @return The chinese name of the modifier 
+	 */
 	public String getChineseName() {
 		return chineseName;
 	}
@@ -125,7 +129,11 @@ public class ModifierChosen {
 	public double getPrice() {
 		return price;
 	}
-
+	/**
+	 * Changes the chinese name of the modifier chosen
+	 * 
+	 * @param chineseName The chinese name of the modifier 
+	 */
 	public void setChineseName(String chineseName) {
 		this.chineseName = chineseName;
 	}

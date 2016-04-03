@@ -84,7 +84,12 @@ public class FoodOrder {
 	public Employee getEmployee() {
 		return employee;
 	}
-
+	
+	/**
+	 * Retrieves the final price of the FoodOrder after deducting discounts if any
+	 * 
+	 * @return the final price of the food order
+	 */
 	public double getFinalPrice() {
 		double result = getTotalPriceBeforePriceModifiers();
 
