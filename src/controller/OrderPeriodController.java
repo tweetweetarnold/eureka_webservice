@@ -29,6 +29,17 @@ public class OrderPeriodController {
 	public OrderPeriodController() {
 	}
 
+	/**
+	 * Checks if there is any OrderPeriods between the specified start time and end time for this
+	 * Company.
+	 * 
+	 * @param startTime The starting DateTime of the checking period
+	 * @param endTime The ending DateTime of the checking period
+	 * @param company The Company for which this check is under
+	 * @param weeks The number of weeks to check this range of period
+	 * @return Returns true if there are no OrderPeriods between the specified startTime and endTime
+	 *         for this Company. Otherwise, returns false;
+	 */
 	public boolean checkForOrderPeriodAvailability(DateTime startTime, DateTime endTime,
 			Company company, int weeks) throws Exception {
 
@@ -219,6 +230,11 @@ public class OrderPeriodController {
 
 	}
 
+	/**
+	 * Delete the OrderPeriod with the given Id
+	 * 
+	 * @param orderPeriodId The Id of the OrderPeriod to be deleted
+	 */
 	public void deleteOrderPeriod(int orderPeriodId) throws Exception {
 
 		FoodOrderController foodOrderCtrl = new FoodOrderController();
@@ -298,10 +314,20 @@ public class OrderPeriodController {
 
 	}
 
+	/**
+	 * Retrieves all OrderPeriods which are before now
+	 * 
+	 * @return A list of OrderPeriods which are before now
+	 */
 	public ArrayList<OrderPeriod> getAllClosedPeriods() {
 		return orderPeriodDAO.getAllClosedPeriods();
 	}
 
+	/**
+	 * Retrieves all OrderPeriods that are not deleted
+	 * 
+	 * @return A list of OrderPeriods that are not deleted
+	 */
 	public ArrayList<OrderPeriod> getAllNonDeletedOrderPeriods() {
 		return orderPeriodDAO.getAllNonDeletedOrderPeriods();
 	}
