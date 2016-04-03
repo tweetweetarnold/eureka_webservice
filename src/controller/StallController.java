@@ -59,12 +59,18 @@ public class StallController {
 		stallDAO.deleteStall(s);
 	}
 
-	public ArrayList<Stall> getAllActiveStallsUnderCanteen(Canteen c) {
-		return stallDAO.getAllActiveStallsUnderCanteen(c);
+	/**
+	 * Retrieves the list of active Stalls under this Canteen
+	 * 
+	 * @param canteen The Canteen whose Stalls are to be retrieved
+	 * @return A list of active Stalls under this Canteen
+	 */
+	public ArrayList<Stall> getAllActiveStallsUnderCanteen(Canteen canteen) {
+		return stallDAO.getAllActiveStallsUnderCanteen(canteen);
 	}
 
 	/**
-	 * Retrieves all the Stalls from the Canteen
+	 * Retrieves all the Stalls from the Canteen including those deleted
 	 * 
 	 * @param canteen The designated Canteen to retrieve the Stalls
 	 * @return An ArrayList of Stall objects in the designated Canteen
@@ -83,16 +89,28 @@ public class StallController {
 		return stallDAO.getStall(stallId);
 	}
 
-	private boolean haveChangesInParameters(Stall oldStall, String inputName, long inputContactNo) {
-
-		if (oldStall.getName().equals(inputName)) {
-			if (oldStall.getContactNo() == inputContactNo) {
-				return false;
-			}
+	/**
+	 * Check if the specified Stall's name and contact number is different from the specified name
+	 * and conatactNo
+	 * 
+	 * @param stall The Stall whose name and contactNo is to be checked
+	 * @param name The name to be used to check against the specified Stall
+	 * @param contactNo The contact number to be used to check against the specified Stall
+	 * @return The Stall object that has the provided ID
+	 */
+	private boolean haveChangesInParameters(Stall stall, String name, long contactNo) {
+		if (stall.getName().equals(name) && stall.getContactNo() == contactNo) {
+			return false;
 		}
 		return true;
 	}
 
+	/**
+	 * Uploads an image to Cloudinary to be used for a Stall later
+	 * 
+	 * @param image The image to be uploaded for this Stall in byte[] format
+	 * @return A String array
+	 */
 	public String[] imageUploadForStall(byte[] image) throws IOException {
 		return cloudinaryUpload.stallImageUpload(image);
 	}
@@ -101,9 +119,6 @@ public class StallController {
 			throws Exception {
 
 		String[] cloudinaryOutput = new String[2];
-		/*
-		 * cloudinaryOutput[0] stores the image url cloudinaryOutput[1] stores the image publicId
-		 */
 
 		long contactNo = validatesContactNumber(parameters[2]);
 
@@ -135,9 +150,6 @@ public class StallController {
 	public void processEditingStall(byte[] image, String[] parameters, Stall stall)
 			throws Exception {
 		String[] cloudinaryOutput = new String[2];
-		/*
-		 * cloudinaryOutput[0] stores the image url cloudinaryOutput[1] stores the image publicId
-		 */
 		long contactNo = validatesContactNumber(parameters[2]);
 
 		boolean hasChanges = haveChangesInParameters(stall, parameters[1], contactNo);
@@ -180,10 +192,21 @@ public class StallController {
 		return cloudinaryUpload.replaceStallImage(oldPublicId, image);
 	}
 
+	/**
+	 * Adds a new Stall object to the Database
+	 * 
+	 * @param s The Stall object to be added in
+	 */
 	public void saveStall(Stall s) {
 		stallDAO.saveStall(s);
 	}
 
+	/**
+	 * Sets a list of Food to the specified Stall
+	 * 
+	 * @param foodList The list of Food to be updated to the specified Stall
+	 * @param newStall The Stall in which the list of Food is to be updated to
+	 */
 	public void updateFoodListToStall(Set<Food> foodList, Stall newStall) {
 		stallDAO.setFoodListToStall(foodList, newStall);
 	}
@@ -197,6 +220,11 @@ public class StallController {
 		stallDAO.updateStall(s);
 	}
 
+	/**
+	 * Validates if the specified String is a valid contact number
+	 * 
+	 * @param contactNo The contact number to be verified
+	 */
 	private long validatesContactNumber(String contactNo) throws Exception {
 		if (contactNo.matches("[689][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
 			return Long.parseLong(contactNo);
