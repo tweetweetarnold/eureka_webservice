@@ -41,5 +41,8 @@ public final class StringValues {
 	public static final String SESSION_ORDERS_WINDOW_OPENED_NOGROUP = "orderWindowOpenedNogroup";
 	public static final String SESSION_ORDERS_WINDOW_OPENED_STALLS = "orderWindowOpenedStalls";
 	public static final String SESSION_USERMGMT_VIEW = "userMgmtView";
-
+	// *********************************************************************************
+	// For URLS
+	public static final String DEFAULT_URL = "http://lunchtime.dal.jelastic.vps-host.net/eureka_webservice/pages/login.jsp";
+	
 }

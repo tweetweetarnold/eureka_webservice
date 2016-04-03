@@ -25,7 +25,7 @@ public class SendNotification implements Job {
 		ArrayList<String> emailList = new ArrayList<String>();
 
 		try {
-			String url = "http://lunchtime.dal.jelastic.vps-host.net/eureka_webservice/pages/login.jsp";
+			String url = StringValues.DEFAULT_URL;
 			System.out.println("Sending Payment Notification");
 
 			SendEmail emailGen = new SendEmail();

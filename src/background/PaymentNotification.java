@@ -11,6 +11,7 @@ import controller.CompanyController;
 import model.Company;
 import model.Employee;
 import services.SendEmail;
+import value.StringValues;
 
 public class PaymentNotification implements Job {
 
@@ -18,7 +19,7 @@ public class PaymentNotification implements Job {
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 
 		try {
-			String url = "PLEASE ENTER"; // TODO: Url needs to be updated
+			String url = StringValues.DEFAULT_URL; // TODO: Url needs to be updated
 			System.out.println("Sending Payment Notification");
 
 			SendEmail emailGen = new SendEmail();

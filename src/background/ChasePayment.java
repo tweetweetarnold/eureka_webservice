@@ -11,6 +11,7 @@ import controller.CompanyController;
 import model.Company;
 import model.Employee;
 import services.SendEmail;
+import value.StringValues;
 
 public class ChasePayment implements Job {
 
@@ -18,7 +19,7 @@ public class ChasePayment implements Job {
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 
 		try {
-			String url = "PLEASE ENTER"; // TODO: this url needs to be updated
+			String url = StringValues.DEFAULT_URL; // TODO: this url needs to be updated
 			SendEmail emailGen = new SendEmail();
 
 			String subject = "Koh Bus LunchTime Ordering App - Payment Overdue";
