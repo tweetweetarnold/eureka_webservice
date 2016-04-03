@@ -45,6 +45,7 @@ public class Modifier {
 	 * Creates a new Modifier object with a name, description, price and the Food
 	 * 
 	 * @param name The name of the Modifier
+	 * @param chineseName The chinese name of the Modifier
 	 * @param description The description of the Modifier
 	 * @param price The price of the Modifier
 	 * @param food The Food that contains this Modifier
@@ -59,8 +60,19 @@ public class Modifier {
 		this.createDate = new Date();
 		this.status = StringValues.ACTIVE;
 	}
-	
-	public Modifier(String name, String chineseName, String description, double price, Food food, ModifierSection modifierSection) {
+
+	/**
+	 * Creates a new Modifier object
+	 * 
+	 * @param name The name of the Modifier
+	 * @param chineseName The chinese name of the Modifier
+	 * @param description The description of the Modifier
+	 * @param price The price of the Modifier
+	 * @param food The Food that contains this Modifier
+	 * @param modifierSection The ModifierSection associated with this Modifier
+	 */
+	public Modifier(String name, String chineseName, String description, double price, Food food,
+			ModifierSection modifierSection) {
 		super();
 		this.name = name;
 		this.chineseName = chineseName;
@@ -70,7 +82,7 @@ public class Modifier {
 		this.createDate = new Date();
 		this.modifierSection = modifierSection;
 	}
-	// Check if otherModifier equal current modifier
+
 	/**
 	 * Checks if this Modifier is the same as the other Modifier
 	 * 
@@ -90,6 +102,11 @@ public class Modifier {
 
 	}
 
+	/**
+	 * Retrieves the chinese name of this Modifier
+	 * 
+	 * @return The chinese name of this Modifier
+	 */
 	public String getChineseName() {
 		return chineseName;
 	}
@@ -151,10 +168,16 @@ public class Modifier {
 	public double getPrice() {
 		return price;
 	}
-	
+
+	/**
+	 * Retrieves the status of this Modifier
+	 * 
+	 * @return The status of this Modifier
+	 */
 	public String getStatus() {
 		return status;
 	}
+
 	public void setChineseName(String chineseName) {
 		this.chineseName = chineseName;
 	}
@@ -195,7 +218,11 @@ public class Modifier {
 		this.modifierId = modifierId;
 	}
 
-
+	/**
+	 * Sets the ModifierSection for this Modifier
+	 * 
+	 * @param modifierSection The ModifierSection to be set for this Modifier
+	 */
 	public void setModifierSection(ModifierSection modifierSection) {
 		this.modifierSection = modifierSection;
 	}
@@ -208,7 +235,6 @@ public class Modifier {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 
 	/**
 	 * Changes the current price of the Modifier
@@ -227,6 +253,5 @@ public class Modifier {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 
 }

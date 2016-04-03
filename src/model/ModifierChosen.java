@@ -53,7 +53,6 @@ public class ModifierChosen {
 		this.foodOrderItem = item;
 	}
 
-	// Check if otherModifier equal current modifier
 	/**
 	 * Checks if this ModifierChosen is the same as the other ModifierChosen
 	 * 
@@ -67,10 +66,11 @@ public class ModifierChosen {
 			return false;
 		}
 	}
+
 	/**
 	 * Retrieves the chinese name of the modifier chosen
 	 * 
-	 * @return The chinese name of the modifier 
+	 * @return The chinese name of the modifier
 	 */
 	public String getChineseName() {
 		return chineseName;
@@ -120,7 +120,7 @@ public class ModifierChosen {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Retrieves the price of the ModifierChosen
 	 * 
@@ -129,10 +129,11 @@ public class ModifierChosen {
 	public double getPrice() {
 		return price;
 	}
+
 	/**
 	 * Changes the chinese name of the modifier chosen
 	 * 
-	 * @param chineseName The chinese name of the modifier 
+	 * @param chineseName The chinese name of the modifier
 	 */
 	public void setChineseName(String chineseName) {
 		this.chineseName = chineseName;
@@ -182,7 +183,7 @@ public class ModifierChosen {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Changes the current price of the ModifierChosen
 	 * 

@@ -93,10 +93,11 @@ public class Food {
 		}
 		return false;
 	}
+
 	/**
 	 * Gets all the active Modifiers corresponding to the food Object
 	 * 
-	 * @return Returns all active Modifiers 
+	 * @return Returns all active Modifiers
 	 */
 	public Set<Modifier> getActiveModifierList() {
 		Set<Modifier> returnSet = new HashSet<Modifier>();
@@ -107,7 +108,7 @@ public class Food {
 		}
 		return returnSet;
 	}
-	
+
 	/**
 	 * Gets the chinese name for the food
 	 * 
@@ -193,7 +194,12 @@ public class Food {
 		DecimalFormat df = new DecimalFormat("0.00");
 		return df.format(getPrice());
 	}
-	
+
+	/**
+	 * Retrieves the Food's Cloudinary public Id
+	 * 
+	 * @return The Food's Cloudinary public Id
+	 */
 	public String getPublicId() {
 		return publicId;
 	}
@@ -207,6 +213,11 @@ public class Food {
 		return stall;
 	}
 
+	/**
+	 * Retrieves the Food's status
+	 * 
+	 * @return The status of this Food
+	 */
 	public String getStatus() {
 		return status;
 	}
@@ -219,10 +230,11 @@ public class Food {
 	public String getWeatherConditions() {
 		return weatherConditions;
 	}
+
 	/**
 	 * Set the Chinese name of the Food
 	 * 
-	 * @param chineseName The chinese name of the food in UTF-8 chinese characters 
+	 * @param chineseName The chinese name of the food in UTF-8 chinese characters
 	 */
 	public void setChineseName(String chineseName) {
 		this.chineseName = chineseName;
@@ -295,6 +307,11 @@ public class Food {
 		this.price = price;
 	}
 
+	/**
+	 * Set the Food's Cloudinary public Id
+	 * 
+	 * @param publicId The Food's Cloudinary public Id
+	 */
 	public void setPublicId(String publicId) {
 		this.publicId = publicId;
 
@@ -309,6 +326,11 @@ public class Food {
 		this.stall = stall;
 	}
 
+	/**
+	 * Sets the status for this Food
+	 * 
+	 * @param status The status to be set for this Food
+	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}

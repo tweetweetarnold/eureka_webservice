@@ -101,7 +101,6 @@ public class FoodDisplayObject {
 		return totalPrice;
 	}
 
-	// FoodOrderItem to arrayList of Users who ordered it
 	/**
 	 * Retrieves a HashMap of FoodOrderItems and the list of Employees whom ordered the
 	 * FoodOrderItems

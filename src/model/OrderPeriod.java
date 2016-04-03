@@ -61,23 +61,16 @@ public class OrderPeriod {
 	public OrderPeriod() {
 	}
 
-	public OrderPeriod(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-			double discount, double discountAbsolute, String remarks,
-			ArrayList<PriceModifier> priceModifierList) {
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.startDateFormatted = startDate.toDate();
-		this.endDateFormatted = endDate.toDate();
-		this.company = company;
-		this.canteen = canteen;
-		this.discount = discount;
-		this.createDate = new Date();
-		this.discountAbsolute = discountAbsolute;
-		this.remarks = remarks;
-		this.status = StringValues.ACTIVE;
-		this.priceModifierList = priceModifierList;
-	}
-
+	/**
+	 * Creates a new OrderPeriod
+	 * 
+	 * @param startDate The starting DateTime for this OrderPeriod
+	 * @param endDate The ending DateTime for this OrderPeriod
+	 * @param company The Company associated with this OrderPeriod
+	 * @param canteen The Canteen associated with this OrderPeriod
+	 * @param remarks The remarks written for this OrderPeriod
+	 * @param priceModifierList The list of PriceModifiers associated with this OrderPeriod
+	 */
 	public OrderPeriod(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
 			String remarks, ArrayList<PriceModifier> priceModifierList) {
 		this.startDate = startDate;
@@ -91,52 +84,6 @@ public class OrderPeriod {
 		this.status = StringValues.ACTIVE;
 		this.priceModifierList = priceModifierList;
 	}
-
-	/**
-	 * Creates a new OrderPeriod with a starting and ending DateTime, company and the canteen
-	 * 
-	 * @param startDate The starting Date and Time of this OrderPeriod
-	 * @param endDate The ending Date and Time of this OrderPeriod
-	 * @param company The Company indicated in this OrderPeriod
-	 * @param canteen The Canteen indicated in this OrderPeriod
-	 */
-	// public OrderPeriod(DateTime startDate, DateTime endDate, Company company, Canteen canteen,
-	// double discount, String remarks, ArrayList<PriceModifier> priceModifierList) {
-	// this.startDate = startDate;
-	// this.endDate = endDate;
-	// this.startDateFormatted = startDate.toDate();
-	// this.endDateFormatted = endDate.toDate();
-	// this.company = company;
-	// this.canteen = canteen;
-	// this.discount = discount;
-	// this.createDate = new Date();
-	// this.remarks = remarks;
-	// this.status = StringValues.ACTIVE;
-	// this.priceModifierList = priceModifierList;
-	// }
-
-	/**
-	 * Creates a new OrderPeriod with a starting date and time, duration, the Company and the
-	 * Canteen
-	 * 
-	 * @param startDate The starting date and time of this OrderPeriod
-	 * @param duration The duration of this OrderPeriod
-	 * @param company The Company in this OrderPeriod
-	 * @param canteen The Canteen in this OrderPeriod
-	 */
-	// public OrderPeriod(DateTime startDate, Duration duration, Company company, Canteen canteen,
-	// double discount, String remarks, ArrayList<PriceModifier> priceModifierList) {
-	// this.startDate = startDate;
-	// this.endDate = startDate.plus(duration);
-	// this.startDateFormatted = startDate.toDate();
-	// this.endDateFormatted = endDate.toDate();
-	// this.canteen = canteen;
-	// this.company = company;
-	// this.discount = discount;
-	// this.createDate = new Date();
-	// this.status = StringValues.ACTIVE;
-	// this.priceModifierList = priceModifierList;
-	// }
 
 	/**
 	 * Retrieves the Canteen in this order period
@@ -163,19 +110,6 @@ public class OrderPeriod {
 	 */
 	public Date getCreateDate() {
 		return createDate;
-	}
-
-	/**
-	 * Retrieves the discount of this order period
-	 * 
-	 * @return The current discount in this order period
-	 */
-	public double getDiscount() {
-		return discount;
-	}
-
-	public double getDiscountAbsolute() {
-		return discountAbsolute;
 	}
 
 	/**
@@ -238,17 +172,6 @@ public class OrderPeriod {
 	 */
 	public String getStatus() {
 		return this.status;
-		// Interval i = new Interval(startDate.getMillis(), endDate.getMillis());
-		// String status = "Error";
-		//
-		// if (i.containsNow()) {
-		// status = StringValues.ORDERWINDOW_OPENED;
-		// } else if (i.isBeforeNow()) {
-		// status = StringValues.ORDERWINDOW_QUEUED;
-		// } else if (i.isAfterNow()) {
-		// status = StringValues.ORDERWINDOW_CLOSED;
-		// }
-		// return status;
 	}
 
 	/**
@@ -295,19 +218,6 @@ public class OrderPeriod {
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
-	}
-
-	/**
-	 * Changes the current discount of this order period
-	 * 
-	 * @param discount The new discount to be updated
-	 */
-	public void setDiscount(double discount) {
-		this.discount = discount;
-	}
-
-	public void setDiscountAbsolute(double discountAbsolute) {
-		this.discountAbsolute = discountAbsolute;
 	}
 
 	/**

@@ -153,7 +153,6 @@ public class FoodOrder {
 		return status;
 	}
 
-	// retrieve the total price for the particular food order
 	/**
 	 * Retrieves the total price for the food order
 	 * 

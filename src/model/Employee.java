@@ -28,14 +28,11 @@ public class Employee {
 	private Date createDate;
 	private String deliveryPoint;
 	@Id
-	// @Column(unique = true)
 	private String email;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "foodId")
 	private Food favoriteFood;
 	private String password, name;
-	// @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	// private Set<Food> favouriteList;
 	private String status;
 
 	/**
@@ -62,7 +59,6 @@ public class Employee {
 		this.contactNo = contactNo;
 		this.company = company;
 		this.status = StringValues.EMPLOYEE_ACTIVE;
-		// this.favouriteList = new HashSet<>();
 		this.createDate = new Date();
 		this.favoriteFood = null;
 
@@ -229,14 +225,6 @@ public class Employee {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	// public Set<Food> getFavouriteList() {
-	// return favouriteList;
-	// }
-	//
-	// public void setFavouriteList(Set<Food> favouriteList) {
-	// this.favouriteList = favouriteList;
-	// }
 
 	/**
 	 * Changes the current password with a new password

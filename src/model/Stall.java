@@ -69,10 +69,15 @@ public class Stall {
 		this.publicId = publicId;
 	}
 
+	/**
+	 * Retrieves the list of Foods under this stall
+	 * 
+	 * @return The list of Foods under this stall
+	 */
 	public Set<Food> getActiveFoodList() {
 		Set<Food> returnSet = new HashSet<Food>();
-		for(Food s:foodList){
-			if(s.getStatus().equals(StringValues.ACTIVE)){
+		for (Food s : foodList) {
+			if (s.getStatus().equals(StringValues.ACTIVE)) {
 				returnSet.add(s);
 			}
 		}
@@ -114,7 +119,7 @@ public class Stall {
 	public Set<Food> getFoodList() {
 		return foodList;
 	}
-	
+
 	/**
 	 * Retrieves the directory that stores the Food images
 	 * 
@@ -207,7 +212,7 @@ public class Stall {
 	public void setPublicId(String publicId) {
 		this.publicId = publicId;
 	}
-	
+
 	/**
 	 * Changes the ID of the Stall
 	 * 
@@ -216,9 +221,9 @@ public class Stall {
 	public void setStallId(int stallId) {
 		this.stallId = stallId;
 	}
-	
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 }
