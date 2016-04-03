@@ -30,8 +30,19 @@ public class FoodController {
 	 */
 	public FoodController() {
 	}
-
-	public void addFood2(String name, String chineseName, String description,
+	/**
+	 * Adds a new food into the database
+	 * @param name the name of the food to add
+	 * @param chineseName the chinese name of the food to add UTF-8 chinese characters
+	 * @param description 
+	 * @param weatherConditions 
+	 * @param image the byte image of the food to add 
+	 * @param modifierList the modifiers belonging to the food to add
+	 * @param price the base price of the food
+	 * @param stallId the stall id that the food belongs to
+	 * @throws Exception if the chinese name is not valid or if the food name already exists in the stall
+	 */
+	public void addFood(String name, String chineseName, String description,
 			String weatherConditions, byte[] image, JSONArray modifierList, double price,
 			int stallId) throws Exception {
 		String[] output = new String[2];
@@ -55,11 +66,22 @@ public class FoodController {
 		saveFood(f);
 
 	}
-
+	/**
+	 * checks if the chinese text entered is valid chinese characters. 
+	 * @param text the Chinese text to verify 
+	 * @return true if the text is valid. false if the text is invalid
+	 * @throws APIError
+	 */
 	private boolean checkChineseWords(String text) throws APIError {
 		return ChineseValidation.checkForChineseWords(text);
 	}
-
+	
+	/**
+	 * Check if the food name already exists inside the stall
+	 * @param inputFoodName the name of the food to check
+	 * @param stall the stall to check
+	 * @return true if a food with the same food name already exists. false if the food name is unique
+	 */
 	public boolean checkFoodExists(String inputFoodName, Stall stall) {
 		ArrayList<Food> foodList = getAllActiveFoodsUnderStall(stall);
 		if (foodList != null) {
@@ -71,15 +93,32 @@ public class FoodController {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * archieves food 
+	 * @param food the food to archieve
+	 */
 	public void deleteFood(Food food) {
 		foodDAO.deleteFood(food);
 	}
-
+	
+	/**
+	 * deletes a food's image from the image database
+	 * @param publicId the publicid of the food image to delete from cloudinary
+	 * @return true if the food image has been deleted
+	 * @throws IOException
+	 */
 	public boolean deleteImage(String publicId) throws IOException {
 		return cloudinaryUpload.deleteImage(publicId);
 	}
-
+	/**
+	 * Edits a existing food 
+	 * @param image the image in bytes to replace the existing image
+	 * @param parameters the new parameters to replace the old ones in existing food 
+	 * @param food the food to edit
+	 * @param stallId the stallID of the food
+	 * @throws Exception
+	 */
 	public void editFood(byte[] image, String[] parameters, Food food, int stallId)
 			throws Exception {
 		String[] cloudinaryOutput = new String[2];
@@ -139,7 +178,12 @@ public class FoodController {
 		}
 
 	}
-
+	
+	/**
+	 * Retrieve all food with the status of "active" from a stall
+	 * @param stall the stall to retrieve from
+	 * @return list of all food with status of "active"
+	 */
 	public ArrayList<Food> getAllActiveFoodsUnderStall(Stall stall) {
 		return foodDAO.getAllActiveFoodsUnderStall(stall);
 	}
@@ -163,64 +207,6 @@ public class FoodController {
 	public Food getFood(int id) {
 		return foodDAO.getFood(id);
 	}
-
-	/**
-	 * Get food recommendations for a given weather condition and order window
-	 * 
-	 * @param foodList A ArrayList of Food Objects to choose a recommendation from
-	 * @param weather A String description of a weather status
-	 * @return Food which suits the current weather condition
-	 */
-	// public Food getFoodForWeather(ArrayList<Food> foodList, String weather) {
-	// ArrayList<Food> choices = new ArrayList<Food>();
-	// for (Food f : foodList) {
-	// if (f.getWeatherConditions().equals(weather)) {
-	// choices.add(f);
-	// }
-	// }
-	// Random rand = new Random();
-	// int pick = rand.nextInt(choices.size());
-	//
-	// return choices.get(pick);
-	// }
-
-	/**
-	 * Get food recommendation for a given weather condition and order window
-	 * 
-	 * @param orderWindow The current orderWindow
-	 * @param weather The current weather condition
-	 * @return Food which suits the current weather condition
-	 */
-	// public Food getFoodForWeather(Weather weather, OrderWindow orderWindow) {
-	// int weatherCode = weather.getWeatherCode();
-	// Canteen currentCanteen = orderWindow.getCanteen();
-	// Set<Stall> stallSet = currentCanteen.getStallList();
-	// Iterator<Stall> iter = stallSet.iterator();
-	// ArrayList<Food> foodList = new ArrayList<Food>();
-	//
-	// while (iter.hasNext()) {
-	// Stall tempStall = (Stall) iter.next();
-	// foodList.addAll(tempStall.getFoodList());
-	// }
-	//
-	// // Thunderstorms
-	// if (weatherCode <= 299 && weatherCode >= 200) {
-	// return getFoodForWeather(foodList, "thunderstorm");
-	// // Rain
-	// } else if (weatherCode <= 599 && weatherCode >= 300) {
-	// return getFoodForWeather(foodList, "rain");
-	// // clear or cloudy
-	// } else if (weatherCode <= 899 && weatherCode >= 800) {
-	// return getFoodForWeather(foodList, "clear");
-	// // hot
-	// } else if (weatherCode == 904) {
-	// return getFoodForWeather(foodList, "hot");
-	// } else {
-	// Random rand = new Random();
-	// int pick = rand.nextInt(foodList.size());
-	// return foodList.get(pick);
-	// }
-	// }
 
 	/**
 	 * Retrieving the image directory of the Food object based on the specified ID
@@ -249,12 +235,24 @@ public class FoodController {
 		}
 		return true;
 	}
-
+	
+	/**
+	 * uploads a file to cloudinary
+	 * @param file the byte[] to upload 
+	 * @return 
+	 * @throws IOException
+	 */
 	public String[] imageUpload(byte[] file) throws IOException {
 		return cloudinaryUpload.imageUpload(file);
 
 	}
-
+	/**
+	 * Adds new food to a stall
+	 * @param image the image of the food to add
+	 * @param parameters the attributes of the new food object
+	 * @param stallId the stall to add the food to
+	 * @throws Exception
+	 */
 	public void processAddingFood(byte[] image, String[] parameters, int stallId) throws Exception {
 		String[] cloudinaryOutput = new String[2];
 		/*
@@ -296,7 +294,13 @@ public class FoodController {
 		}
 
 	}
-
+	/**
+	 * this replaces the exiting food image with a new food image
+	 * @param oldPublicId the old public id of the food
+	 * @param file the new image in byte[] format to upload 
+	 * @return 
+	 * @throws IOException
+	 */
 	public String[] replaceImage(String oldPublicId, byte[] file) throws IOException {
 		return cloudinaryUpload.replaceImage(oldPublicId, file);
 
@@ -319,7 +323,12 @@ public class FoodController {
 	public void updateFood(Food f) {
 		foodDAO.updateFood(f);
 	}
-
+	
+	/**
+	 * Updates the modifier sections of a Food object
+	 * @param newFood the food to update
+	 * @param modifierSectionList the modifierSections to put into the food
+	 */
 	public void updateModifierListToFood(Food newFood, Set<ModifierSection> modifierSectionList) {
 		foodDAO.updateModifierListToFood(newFood, modifierSectionList);
 	}

@@ -18,16 +18,30 @@ import model.Food;
 import model.FoodOrder;
 import model.FoodOrderItem;
 import model.OrderPeriod;
-
+/**
+ * Process the functions of analytics such as generating reports for weekly and monthly expenditure for
+ * Administrator and normal user
+ * 
+ * @author SMU Team Eureka
+ */
 public class AnalyticsController {
 	FoodDAO foodDAO = new FoodDAO();
 	FoodOrderDAO foodOrderDAO = new FoodOrderDAO();
 	OrderPeriodDAO orderPeriodDAO = new OrderPeriodDAO();
-
+	/**
+	 * Creates a default constructor for AnalyticsController
+	 */
 	public AnalyticsController() {
 	}
 
-	// return a sorted linkedhashmap of all food from the canteen
+	
+	
+	/**
+	 * Obtains a list of food organised by their popularity for the top K food
+	 * 
+	 * @param canteenId CanteenID to retrieve food from
+	 * @return LinkedHashMap<Food, Integer> of Food Items and their corresponding quantity
+	 */
 	public LinkedHashMap<Food, Integer> topKfoods(int canteenId) {
 		CanteenController canteenCtrl = new CanteenController();
 		Canteen canteen = canteenCtrl.getCanteen(canteenId);

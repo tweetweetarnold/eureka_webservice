@@ -25,11 +25,18 @@ public class EmployeeController {
 	 */
 	public EmployeeController() {
 	}
-
+	
+	/**
+	 * retrieves all employees from the database with status of "destroyed" 
+	 * @return ArrayList of Employees
+	 */
 	public ArrayList<Employee> getAllDestroyedEmployees() {
 		return employeeDAO.getAllDestroyedEmployees();
 	}
-
+	/**
+	 * retrieves all employees from the database with status of "active" 
+	 * @return ArrayList of Employees
+	 */
 	public ArrayList<Employee> getAllNonDestroyedEmployees() {
 		return employeeDAO.getAllNonDestroyedEmployees();
 	}
@@ -53,7 +60,13 @@ public class EmployeeController {
 	public Employee getEmployeeByEmail(String email) {
 		return employeeDAO.getEmployeeByEmail(email);
 	}
-
+	
+	
+	/**
+	 * This sends an email to all employees with the delivery point to notify them to update their delivery point in the event that their old delivery point is deleted
+	 * @param c the company to notify
+	 * @param deliveryPoint the delivery point deleted
+	 */
 	public void notifyAllEmployeesFromCompanyWithDeliveryPoint(Company c, String deliveryPoint) {
 		ArrayList<Employee> results = employeeDAO.getAllEmployeesFromCompanyWithDeliveryPoint(c,
 				deliveryPoint);
@@ -113,7 +126,11 @@ public class EmployeeController {
 	public void saveEmployee(Employee e) {
 		employeeDAO.saveEmployee(e);
 	}
-
+	
+	/**
+	 * this suspends all employees from a company with outstanding payment and sends them a notification email
+	 * @param c the Company to check and suspend employees from
+	 */
 	public void suspendOverduePaymentFromCompany(Company c) {
 		ArrayList<String> emailList = new ArrayList<String>();
 
@@ -148,12 +165,20 @@ public class EmployeeController {
 		}
 	}
 
+	/**
+	 * suspend a user based on the user's email
+	 * @param email the email address of the user to suspend
+	 */
 	public void suspendUser(String email) {
 		Employee employeeToSuspend = getEmployeeByEmail(email);
 		employeeToSuspend.setStatus(StringValues.EMPLOYEE_SUSPENDED);
 		updateEmployee(employeeToSuspend);
 	}
-
+	/**
+	 * Used to update a user's amount owed 
+	 * @param arrayList Employees to update the amount owed
+	 * @param amount the amount to update to
+	 */
 	public void updateAmountOwed(ArrayList<Employee> arrayList, double amount) {
 		for (Employee employee : arrayList) {
 			employee.setAmountOwed(amount);

@@ -102,7 +102,13 @@ public class FileUploadController {
 		}
 		return errorsList;
 	}
-
+	/**
+	 * Handles the reading of the ModifierSection.csv and load it to the database if there are no errors
+	 * 
+	 * @param is The contents of the ModifierSction.csv to be read and loaded to database
+	 * @return An ArrayList of error(s) if ModifierSction.csv contains errors, otherwise returns an empty
+	 *         ArrayList
+	 */
 	public ArrayList<String> processModifierSectionUpload(InputStream is) {
 		System.out.println("PROCESS_MODIFIER_SECTION_FILEUPLOAD");
 
@@ -510,7 +516,13 @@ public class FileUploadController {
 		}
 		return errorList;
 	}
-
+	/**
+	 * Validate the contents of ModifierSection.csv for any errors before loading to database
+	 * 
+	 * @param content The List of contents of ModifierSection.csv to be validated
+	 * @return An ArrayList of errors found in the ModifierSection.csv, otherwise returns an empty
+	 *         ArrayList
+	 */
 	private ArrayList<String> validateModifierSectionData(List<String[]> content) {
 		ArrayList<String> errorList = new ArrayList<String>();
 		Iterator<String[]> iter = content.iterator();

@@ -25,6 +25,13 @@ public class CanteenController {
 	public CanteenController() {
 	}
 
+	/**
+	 * Creates a new Canteen. Throws Exception if the a canteen of same name already exists.
+	 * 
+	 * @param name the name of the new Canteen
+	 * @param address the address of the new Canteen
+	 * 
+	 */
 	public void addCanteen(String name, String address) throws Exception {
 		String errorMessages = validateNewCanteenInputs(name, address);
 		if (!errorMessages.isEmpty()) {
@@ -39,6 +46,14 @@ public class CanteenController {
 		}
 	}
 
+	/**
+	 * Verifies if a canteen of the same name already exists inside the database
+	 * 
+	 * @param name The name of the new canteen
+	 * @param address The address of the new canteen
+	 * 
+	 * @return returns true if the canteen already exists and false if it does not exist
+	 */
 	public boolean checkCanteenExists(String name, String address) {
 		Canteen c = canteenDAO.getCanteenByName(name);
 		if (c != null) {
@@ -47,6 +62,12 @@ public class CanteenController {
 		return false;
 	}
 
+	/**
+	 * Archieves a existing canteen
+	 * 
+	 * @param canteenId the canteen id of the canteen to be deleted
+	 * 
+	 */
 	public void deleteCanteen(int canteenId) throws Exception {
 
 		StallController stallCtrl = new StallController();
@@ -59,7 +80,15 @@ public class CanteenController {
 		canteenDAO.deleteCanteen(canteenToDelete);
 
 	}
+	
 
+	/**
+	 * Edits the attributes of an existing canteen.
+	 * 
+	 * @param canteenId the canteen id of the canteen to be edited 
+	 * @param name the new name of the canteen 
+	 * @param address the new address of the canteen
+	 */
 	public void editCanteen(int canteenId, String name, String address) throws Exception {
 		boolean changesExist = false;
 
@@ -85,6 +114,11 @@ public class CanteenController {
 
 	}
 
+	/**
+	 * retrieves a list of all canteens in the database
+	 * 
+	 * @return list of all canteens
+	 */
 	public ArrayList<Canteen> getAllActiveCanteens() {
 		return canteenDAO.getAllActiveCanteens();
 	}
@@ -126,6 +160,7 @@ public class CanteenController {
 	public Canteen getCanteen(int canteenId) {
 		return canteenDAO.getCanteen(canteenId);
 	}
+	
 
 	private String validateNewCanteenInputs(String name, String address) {
 		String errors = "";

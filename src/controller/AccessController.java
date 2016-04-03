@@ -90,7 +90,15 @@ public class AccessController {
 		}
 		return messages;
 	}
-
+	/**
+	 * Checks if the old password is valid, checks if the rest of the conditions are fulfilled.
+	 * 
+	 * @param e the Employee which requested the change of password
+	 * @param oldPassword the input from the user representing the old password
+	 * @param newPassword the input from the user representing the new password
+	 * @param confirmNewPassword the input from the user representing the new password confirmation 
+	 * @return An ArrayList of error messages if the Terms and Conditions are not acknowledged
+	 */
 	public ArrayList<String> checkChangePasswordRequirements(Employee e, String oldPassword,
 			String newPassword, String confirmNewPassword) {
 		ArrayList<String> messages = new ArrayList<String>();
@@ -110,7 +118,12 @@ public class AccessController {
 		}
 		return messages;
 	}
-
+	/**
+	 * Checks if the company code entered by the user exists in the database
+	 * 
+	 * @param companyCode the input from the user representing the company code
+	 * @return An ArrayList of error messages if the Terms and Conditions are not acknowledged
+	 */
 	public ArrayList<String> checkCompanyCode(String companyCode) {
 		CompanyController companyCtrl = new CompanyController();
 		ArrayList<String> messages = new ArrayList<String>();
@@ -296,7 +309,18 @@ public class AccessController {
 
 		return true;
 	}
-
+	
+	/**
+	 * Constructs an email message for verifying a new user's account
+	 * 
+	 * @param serverName The name of the Server
+	 * @param serverPort The Port number of the server
+	 * @param contextPath The root path or URL of the application
+	 * @param email The designated of the Employee's email address
+	 * @param toSendEmail The designated recipients of this email message
+	 * @return Returns true when the email message has constructed and successfully sent
+	 * @throws MessagingException if the email message could not be constructed or sent
+	 */
 	public boolean constructVerifyEmail(String serverName, int serverPort, String contextPath,
 			String email, String[] toSendEmail) throws MessagingException {
 		SendEmail javaEmail = new SendEmail();
@@ -395,7 +419,16 @@ public class AccessController {
 		employeeCtrl.updateEmployee(e);
 
 	}
-
+	
+	
+	
+	/**
+	 * Updates the current password of the Admin in the database
+	 * 
+	 * @param a The designated admin to be updated
+	 * @param password The new password provided by the Employee
+	 * @throws Exception if the new password of the Employee could not be updated in the database
+	 */
 	public void updateAdminPassword(Admin a, String password) throws Exception {
 		AdminDAO dao = new AdminDAO();
 		a.setPassword(AESEncryption.encrypt(password));

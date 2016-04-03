@@ -48,16 +48,29 @@ public class CompanyController {
 		Company c = new Company(name, companyCode, buildings);
 		companyDAO.saveCompany(c);
 	}
+	
+	
+	
 
+	/**
+	 * Verifies if a company with the company code entered exists inside the database
+	 * @param companyCode the companyCode to verify
+	 * @return true if the company exists and false if it does not exist
+	 */
 	public boolean checkCompanyCodeExists(String companyCode) {
 		Company c = getCompanyByCompanyCode(companyCode);
 		if (c != null) {
 			return true;
 		}
 		return false;
-
 	}
 
+
+	/**
+	 * Verifies if a company with the company name entered exists inside the database
+	 * @param companyName the companyName to verify
+	 * @return true if the company exists and false if it does not exist
+	 */
 	public boolean checkCompanyNameExists(String companyName) {
 		Company c = getCompanyByName(companyName);
 		if (c != null) {
@@ -65,7 +78,12 @@ public class CompanyController {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * deletes a delivery point from a company. Throws exception if delivery point does not exist
+	 * @param companyId the id of the company to edit
+	 * @param deliveryPoint the deliveryPoint to delete
+	 */
 	public void deleteDeliveryPoint(String companyId, String deliveryPoint) throws Exception {
 
 		Company c = getCompany(Integer.parseInt(companyId));
@@ -80,6 +98,13 @@ public class CompanyController {
 
 	}
 
+	/**
+	 * Edits the attributes of a Company
+	 * @param companyId the id of the company to edit
+	 * @param name the new name of the company
+	 * @param companyCode the new companyCode of the company
+	 * @param buildings the new set of buildings belonging to the company
+	 */
 	public void editCompany(int companyId, String name, String companyCode, Set<String> buildings)
 			throws Exception {
 		String errorMessages = validateNewCompanyInputs(name, companyCode, buildings);
@@ -154,7 +179,13 @@ public class CompanyController {
 	public Company getCompanyByCompanyCode(String companyCode) {
 		return companyDAO.getCompanyByCompanyCode(companyCode.toUpperCase());
 	}
-
+	
+	
+	/**
+	 * retrieves a company from the database based on a companyName
+	 * @param companyName the name of the company to retrieve
+	 * @return company with name matching the request
+	 */
 	public Company getCompanyByName(String companyName) {
 		return companyDAO.getCompanyByName(companyName);
 	}
@@ -176,7 +207,13 @@ public class CompanyController {
 	public void updateCompany(Company c) {
 		companyDAO.updateCompany(c);
 	}
-
+	/**
+	 * Validates the new inputs when attempting to edit a company's attributes
+	 * @param companyName the new company name of the company
+	 * @param companyCode the new company code of the company
+	 * @param buildings the new buildings of the company
+	 * @return String of errors 
+	 */
 	public String validateNewCompanyInputs(String companyName, String companyCode,
 			Set<String> buildings) {
 		String errors = "";
