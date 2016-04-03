@@ -150,7 +150,14 @@ public class OrderPeriodController {
 		}
 		return true;
 	}
-
+	/**
+	 * Returns a list of orderPeriods which clash with a specified startTime and endTime
+	 * @param startTime the starting time of the new period 
+	 * @param endTime the ending time of the new period
+	 * @param coy the company to check the periods
+	 * @return list of orderPeriods which clash with a specified startTime and endTime
+	 * @throws Exception
+	 */
 	public ArrayList<OrderPeriod> checkOrderPeriodAvailability(DateTime startTime, DateTime endTime,
 			Company coy) throws Exception {
 
@@ -195,7 +202,17 @@ public class OrderPeriodController {
 
 		return occupiedSlots;
 	}
-
+	/**
+	 * Creates a new order period 
+	 * @param startDate the startdate of the new order period
+	 * @param endDate the enddate of the new order period
+	 * @param company the company to create the order period for
+	 * @param canteen the canteen that the orderperiod serves
+	 * @param numberOfWeeks the number of weeks to repeat for
+	 * @param remarks 
+	 * @param discountAbsolute the amount of discount to apply to this order period
+	 * @throws Exception if there are any clashes with this order period throw exception
+	 */
 	public void createNewOrderPeriod(DateTime startDate, DateTime endDate, Company company,
 			Canteen canteen, int numberOfWeeks, String remarks, double discountAbsolute)
 			throws Exception {
@@ -248,7 +265,13 @@ public class OrderPeriodController {
 			throw new Exception("A Food Order has been made. Order Period cannot be deleted.");
 		}
 	}
-
+	/**
+	 * Edits an existing order period
+	 * @param orderPeriodId the id of the order period to edit
+	 * @param newStartDate the new startdate of the orderperiod
+	 * @param newEndDate the new enddate of the orderperiod
+	 * @throws Exception
+	 */
 	public void editOrderPeriod(int orderPeriodId, DateTime newStartDate, DateTime newEndDate)
 			throws Exception {
 		OrderPeriodDAO orderPeriodDAO = new OrderPeriodDAO();
