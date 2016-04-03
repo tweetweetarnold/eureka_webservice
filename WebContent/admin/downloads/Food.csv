@@ -1,34 +1,151 @@
-Food Name,Price,Description,Stall Name,Canteen Name
-Fish Slice Bee Hoon,3.7,,New Sliced Fish Bee Hoon Stall,Boon Lay Hawker Centre
-Fish Soup and Rice,4.7,,New Sliced Fish Bee Hoon Stall,Boon Lay Hawker Centre
-Malay Mixed Rice(Chicken),3,upsize to $3.50,New Malay food Stall,Boon Lay Hawker Centre
-Malay Mixed Rice(Fish),3,upsize to $3.50,New Malay food Stall,Boon Lay Hawker Centre
-Malay Mixed Rice(Mutton),3,upsize to $3.50,New Malay food Stall,Boon Lay Hawker Centre
-Mixed Rice,3,,New Mixed Rice Stall,Boon Lay Hawker Centre
-Porridge,3,,New Mixed Rice Stall,Boon Lay Hawker Centre
-Wanton Mee,3,,New Wanton Mee Stall,Boon Lay Hawker Centre
-Indian Mixed Rice(Chicken),3.5,,New Indian Food Stall,Boon Lay Hawker Centre
-Indian Mixed Rice(Fish),3.5,,New Indian Food Stall,Boon Lay Hawker Centre
-Mutton Briyani,4,,New Indian Food Stall,Boon Lay Hawker Centre
-Ayam Penyat,4,,New Indian Food Stall,Boon Lay Hawker Centre
-Roast Chicken Rice,2.5,,New Roast Duck & Chicken Rice Stall,Boon Lay Hawker Centre
-CharSiew Rice,2.5,,New Roast Duck & Chicken Rice Stall,Boon Lay Hawker Centre
-Roast Meat Rice,2.5,,New Roast Duck & Chicken Rice Stall,Boon Lay Hawker Centre
-Chicken Rice,3,,New REX(Halal),Boon Lay Hawker Centre
-Chicken Fried Rice,3,,New REX(Halal),Boon Lay Hawker Centre
-Seafood Fried Rice,3.5,,New REX(Halal),Boon Lay Hawker Centre
-Beef Fried Rice,4,,New REX(Halal),Boon Lay Hawker Centre
-Seafood Horfun(wet),3.5,,New REX(Halal),Boon Lay Hawker Centre
-Seafood Horfun(dry),4,,New REX(Halal),Boon Lay Hawker Centre
-Chicken Porridge,3,,New REX(Halal),Boon Lay Hawker Centre
-Fish Porridge,3,,New REX(Halal),Boon Lay Hawker Centre
-Vegetarian Rice,2.5,,New Vegetarian Stall,Boon Lay Hawker Centre
-Vegetarian Beehoon,2.5,,New Vegetarian Stall,Boon Lay Hawker Centre
-Vegetarian Mee,2.5,,New Vegetarian Stall,Boon Lay Hawker Centre
-Minced Meat Noodles,2.7,upsize to $3.20,New Minced Meat Noodles Stall(Closed On Tuesday),Boon Lay Hawker Centre
-Lor Mee,3,,New Noodle Stall,Boon Lay Hawker Centre
-Prawn Mee,3,,New Noodle Stall,Boon Lay Hawker Centre
-Fishball Noodles,3,,New Noodle Stall,Boon Lay Hawker Centre
-Laksa,3,,New Noodle Stall,Boon Lay Hawker Centre
-Hokkien Mee,3,,New Noodle Stall,Boon Lay Hawker Centre
-Dumpling Noodles,3,,New Noodle Stall,Boon Lay Hawker Centre
+Food Name,Price,Description,Stall Name,Canteen Name,Image Directory
+Chee Cheong Fun,0.6,,Oasis Kueh Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/chee_cheong_fun.jpg
+Yam cake,1.2,,Oasis Kueh Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627138/Food%20Images%20Raw/yam_cake.jpg
+Dumpling,0.9,,Oasis Kueh Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627030/Food%20Images%20Raw/dumpling.jpg
+Pau,0.8,,Oasis Kueh Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627080/Food%20Images%20Raw/bao.jpg
+Lor Mai Kai,1.5,,Oasis Kueh Stall,Oasis Food Centre,resources/img/food/img-lormaikai.jpg
+Fan Choy,1.8,,Oasis Kueh Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627080/Food%20Images%20Raw/lor_mai_kai.jpg
+Curry Chicken + Veg,3.7,"more vegs, less fried meat",Oasis Muslim Stall,Oasis Food Centre,resources/img/food/img-mixedvegricemalay.jpg
+Asam Fish + Veg,3.7,"more vegs, less fried meat",Oasis Muslim Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627015/Food%20Images%20Raw/asam_fish_plus_veg.jpg
+Curry Fish + Veg,3.7,"more vegs, less fried meat",Oasis Muslim Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627012/Food%20Images%20Raw/curry_fish_plus_veg.jpg
+Fried Chicken + Veg,3.7,"more vegs, less fried meat",Oasis Muslim Stall,Oasis Food Centre,resources/img/food/img-malayfriedchicken.jpg
+Fried Fish + Veg,3.7,"more vegs, less fried meat",Oasis Muslim Stall,Oasis Food Centre,resources/img/food/img-malayfriedfish.jpg
+Stingray + Veg,3.7,"more vegs, less fried meat",Oasis Muslim Stall,Oasis Food Centre,resources/img/food/img-malaystingray.jpg
+White Rice(Chicken),4,Chicken/Fish/Mutton,Indian Stall,Oasis Food Centre,resources/img/food/img-whiterice.jpg
+White Rice(Fish),4,Chicken/Fish/Mutton,Indian Stall,Oasis Food Centre,resources/img/food/img-whiterice.jpg
+White Rice(Mutton),4,Chicken/Fish/Mutton,Indian Stall,Oasis Food Centre,resources/img/food/img-whiterice.jpg
+Vegetable White Rice,3,,Indian Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/vegetable_white_rice.jpg
+Chicken Briyani,5,Chicken,Indian Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627030/Food%20Images%20Raw/chicken_briyani.jpg
+Fish Briyani,5,Fish,Indian Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627097/Food%20Images%20Raw/Fish_Briyani.jpg
+Mutton Briyani,5,Mutton,Indian Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627086/Food%20Images%20Raw/mutton_briyani.jpg
+Vegetarian Briyani,5,Vegetarian,Indian Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455808150/Food%20Images%20Raw/Vegetarian_Briyani.jpg
+1 Meat 2 Veg,3,"more meat, less fried meat, or upsize to $3.50",Chinese Mix Veg Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627151/Food%20Images%20Raw/1meat_plus_2veg.jpg
+All Veg,3,,Chinese Mix Veg Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455808739/Food%20Images%20Raw/all_veg.jpg
+Porridge(1 Meat + 2 Veg),3.7,,Chinese Mix Veg Stall,Oasis Food Centre,resources/img/food/img-whiterice.jpg
+Porridge(All Veg),3.2,,Chinese Mix Veg Stall,Oasis Food Centre,resources/img/food/img-whiterice.jpg
+Roast Chicken Rice,3,2 meat choices $4,Roast Meat Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420637/Food%20Images%20Raw/Roast_chicken_Rice.jpg
+Wanton Mee(Dry),3.2,,Roast Meat Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037657/Food%20Images%20Raw/wanton_mee_dry.jpg
+CharSiew Rice,3,2 meat choices $4,Roast Meat Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627009/Food%20Images%20Raw/charsiew_rice.jpg
+Roast Meat Rice,3,2 meat choices $4,Roast Meat Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847815/Food%20Images%20Raw/Roast_meat_rice.jpg
+Wanton Mee(Soup),3.2,,Roast Meat Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627114/Food%20Images%20Raw/wanton_mee.jpg
+Horfun (Dry),4,dry type $4.00,Seafood Tze Char Stall,Oasis Food Centre,resources/img/food/img-horfun.jpg
+Fried Rice,4,,Seafood Tze Char Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627008/Food%20Images%20Raw/chicken_fried_rice.jpg
+Horfun (Wet),3.7,,Seafood Tze Char Stall,Oasis Food Centre,resources/img/food/img-whiterice.jpg
+Hokkien Noodle,4.2,,Seafood Tze Char Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627077/Food%20Images%20Raw/hokkien_mee.jpg
+Mee Goreng,4.2,,Seafood Tze Char Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627087/Food%20Images%20Raw/mee_goreng.jpg.png
+Ginger & Onion Fish,4.5,,Seafood Tze Char Stall,Oasis Food Centre,resources/img/food/img-gingeronionfishrice.jpg
+Dried Chilli Chicken,4.5,,Seafood Tze Char Stall,Oasis Food Centre,resources/img/food/img-driedchillichicken.jpg
+Sweet & Sour Pork,4.5,,Seafood Tze Char Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/sweet_and_sour_pork.jpg
+Pork Rib Soup,4.8,,Seafood Tze Char Stall,Oasis Food Centre,"http://res.cloudinary.com/dmeln4k8n/image/upload/c_fill,h_169,w_263/v1457808872/Food%20Images%20Raw/pork_rib_soup.jpg"
+Black Chicken Soup,5.8,,Seafood Tze Char Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627087/Food%20Images%20Raw/black_chicken_soup.jpg
+White Chicken Soup,5.5,,Seafood Tze Char Stall,Oasis Food Centre,resources/img/food/img-whitechickensoup.jpg
+Fish Soup With Beehoon,3.5,add bittergourd: $0.50,Fish Beehoon Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627030/Food%20Images%20Raw/fishsoup_with_beehoon.jpg
+Fish Soup With Rice,4,add bittergourd: $0.50,Fish Beehoon Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627042/Food%20Images%20Raw/fishsoup_with_rice.jpg
+Fried Fish Soup With Beehoon,5,add bittergourd: $0.50,Fish Beehoon Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627090/Food%20Images%20Raw/Fried_Fish_soup_with_Beehoon.jpg
+Fish Soup,3.5,add bittergourd: $0.50,Fish Beehoon Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1458374052/Food%20Images%20Raw/Fish_soup.jpg
+Fish Soup With Mee Sua,3.5,add bittergourd: $0.50,Fish Beehoon Stall,Oasis Food Centre,resources/img/food/img-gingeronionfishrice.jpg
+Apple,0.6,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/apple.jpg
+Watermelon,0.6,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627161/Food%20Images%20Raw/watermelon.jpg
+Dragonfruit,0.6,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/dragonfruits.jpg
+Pear,0.6,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/pear.jpg
+Honeydew,0.7,,Fruit Stall,Oasis Food Centre,resources/img/food/img-honeydew.jpg
+Papaya,0.7,,Fruit Stall,Oasis Food Centre,resources/img/food/img-papaya.jpg
+Pineapple,0.6,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627163/Food%20Images%20Raw/pineapple.jpg
+Banana,0.7,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627006/Food%20Images%20Raw/banana.jpg
+Agar Agar,0.6,,Fruit Stall,Oasis Food Centre,resources/img/food/img-agaragar.jpg
+Orange,0.6,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/orange.jpg
+Guava,0.7,,Fruit Stall,Oasis Food Centre,resources/img/food/img-guava.jpg
+Sarawak Pineapple,1.2,,Fruit Stall,Oasis Food Centre,resources/img/food/img-sarawakpineapple.jpg
+Mixed Fruits,3,upsize $3.50,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627095/Food%20Images%20Raw/mixed_fruits.jpg
+Apple Juice,2.5,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555990/Food%20Images%20Raw/Apple_juice.jpg
+Watermelon Juice,2.5,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1457084066/Food%20Images%20Raw/Watermelon_juice.jpg
+Dragonfruit Juice,2.5,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420619/Food%20Images%20Raw/Dragonfruit_juice.jpg
+Pear Juice,2.5,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037645/Food%20Images%20Raw/Pear_juice_2.jpg
+Honeydew Juice,2.5,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420631/Food%20Images%20Raw/Honeydew_juice.jpg
+Papaya Juice,2.6,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847809/Food%20Images%20Raw/Papaya_juice.jpg
+Pineapple Juice,2.5,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg
+Banana Juice,2.6,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1457155104/Food%20Images%20Raw/Banana_juice.jpg
+Orange Juice,2.5,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555997/Food%20Images%20Raw/Orange_juice.jpg
+Guava Juice,2.5,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555994/Food%20Images%20Raw/Guava_Juice.jpg
+Sarawak Pineapple Juice,3.1,,Fruit Stall,Oasis Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg
+Chilli Chicken + Veg,3,upsize to $3.50,Malay Food Stall,Taman Jurong Market and Food Centre,resources/img/food/img-malaychillichicken.jpg
+Fried Chicken + Veg,3,upsize to $3.50,Malay Food Stall,Taman Jurong Market and Food Centre,resources/img/food/img-malayfriedchicken.jpg
+Curry Fish + Veg,3,upsize to $3.50,Malay Food Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627012/Food%20Images%20Raw/curry_fish_plus_veg.jpg
+Fried Fish + Veg,3,upsize to $3.50,Malay Food Stall,Taman Jurong Market and Food Centre,resources/img/food/img-malayfriedfish.jpg
+1 Meat + 2 Veg,3,,Mixed Rice Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627151/Food%20Images%20Raw/1meat_plus_2veg.jpg
+All Veg,3,,Mixed Rice Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455808739/Food%20Images%20Raw/all_veg.jpg
+Minced Meat Noodles(Mee Kia),2.7,upsize to $3.20,Minced Meat Noodles Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037674/Food%20Images%20Raw/minced_meat_noodle_mee_kia.jpg
+Fish Slice Beehoon,3.7,add veg $0.50,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre,resources/img/food/img-fishslicebeehoon.jpg
+Fish Soup and Rice,4.7,add veg $0.50,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627042/Food%20Images%20Raw/fishsoup_with_rice.jpg
+Curry Chicken Briyani,3.5,,Indian Food Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455637596/Food%20Images%20Raw/Curry_Chicken_Briyani.jpg
+Fish Briyani,3.5,,Indian Food Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627097/Food%20Images%20Raw/Fish_Briyani.jpg
+Vegetarian Briyani,4,,Indian Food Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455808150/Food%20Images%20Raw/Vegetarian_Briyani.jpg
+Fried Chicken Briyani,4,,Indian Food Stall,Taman Jurong Market and Food Centre,resources/img/food/img-friedchickenbiryani.jpg
+Roast Chicken Rice,2.5,,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420637/Food%20Images%20Raw/Roast_chicken_Rice.jpg
+CharSiew Rice,2.5,,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627009/Food%20Images%20Raw/charsiew_rice.jpg
+Roast Meat Rice,2.5,,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847815/Food%20Images%20Raw/Roast_meat_rice.jpg
+Chicken Rice(Chicken Wing),3,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-friedchickenbiryani.jpg
+Fried Rice,3,,REX(Halal),Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627008/Food%20Images%20Raw/chicken_fried_rice.jpg
+Seafood Horfun(Wet),3.5,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-seafoodhorfun.jpg
+Seafood Horfun(Dry),4,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-horfun.jpg
+Chicken Porridge,3,,REX(Halal),Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627120/Food%20Images%20Raw/porridge.jpg
+Fish Porridge,3,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-fishporridge.jpg
+Vegetarian Rice,2.5,add veg $0.50,Vegetarian Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627166/Food%20Images%20Raw/Vegetarian_Rice.jpg
+Vegetarian Beehoon,2.5,add veg $0.50,Vegetarian Stall,Taman Jurong Market and Food Centre,resources/img/food/img-vegetarianbeehoon.jpg
+Vegetarian Mee,2.5,add veg $0.50,Vegetarian Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059120/Food%20Images%20Raw/Vegetarian_mee.jpg
+Lor Mee,3,,Noodle Stall,Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Prawn Mee,3,,Noodle Stall,Taman Jurong Market and Food Centre,resources/img/food/img-prawnnoodle.jpg
+Fishball Noodles,3,,Noodle Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627057/Food%20Images%20Raw/fishball_noodles.jpg
+Laksa,3,,Noodle Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627064/Food%20Images%20Raw/laksa.jpg
+Hokkien Mee,3,,Noodle Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627077/Food%20Images%20Raw/hokkien_mee.jpg
+Dumpling Noodles,3,,Noodle Stall,Taman Jurong Market and Food Centre,"http://res.cloudinary.com/dmeln4k8n/image/upload/c_lpad,h_169,w_263/v1456745890/Food%20Images%20Raw/dumpling_noodle.jpg"
+Apple,0.6,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/apple.jpg
+Apple Juice,2.5,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555990/Food%20Images%20Raw/Apple_juice.jpg
+Watermelon,0.6,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627161/Food%20Images%20Raw/watermelon.jpg
+Watermelon Juice,2.5,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1457084066/Food%20Images%20Raw/Watermelon_juice.jpg
+Dragonfruit,0.6,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627027/Food%20Images%20Raw/dragonfruits.jpg
+Dragonfruit Juice,2.5,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420619/Food%20Images%20Raw/Dragonfruit_juice.jpg
+Pear,0.6,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627145/Food%20Images%20Raw/pear.jpg
+Pear Juice,2.5,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1458037645/Food%20Images%20Raw/Pear_juice_2.jpg
+Honeydew,0.7,,Fruits Stall,Taman Jurong Market and Food Centre,resources/img/food/img-honeydew.jpg
+Honeydew Juice,2.5,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456420631/Food%20Images%20Raw/Honeydew_juice.jpg
+Papaya,0.7,,Fruits Stall,Taman Jurong Market and Food Centre,resources/img/food/img-papaya.jpg
+Papaya Juice,2.6,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456847809/Food%20Images%20Raw/Papaya_juice.jpg
+Pineapple,0.6,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627163/Food%20Images%20Raw/pineapple.jpg
+Pineapple Juice,2.5,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg
+Banana,0.7,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627006/Food%20Images%20Raw/banana.jpg
+Banana Juice,2.6,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1457155104/Food%20Images%20Raw/Banana_juice.jpg
+Agar Agar,0.6,,Fruits Stall,Taman Jurong Market and Food Centre,resources/img/food/img-agaragar.jpg
+Orange,0.6,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627100/Food%20Images%20Raw/orange.jpg
+Orange Juice,2.5,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555997/Food%20Images%20Raw/Orange_juice.jpg
+Guava,0.7,,Fruits Stall,Taman Jurong Market and Food Centre,resources/img/food/img-guava.jpg
+Guava Juice,2.5,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1456555994/Food%20Images%20Raw/Guava_Juice.jpg
+Sarawak Pineapple,1.2,,Fruits Stall,Taman Jurong Market and Food Centre,resources/img/food/img-sarawakpineapple.jpg
+Sarawak Pineapple Juice,3.1,,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1457059123/Food%20Images%20Raw/Pineapple_juice.jpg
+Mixed Fruits,3,upsize $3.50,Fruits Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627095/Food%20Images%20Raw/mixed_fruits.jpg
+Chicken Horfun(Wet),3.5,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-chickenhorfunwet.jpg
+Chicken Horfun(Dry),4,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-chickenhorfundry.jpg
+Fish Head Soup and Beehoon,4.2,add veg $0.50,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Fish Soup,4.2,add veg $0.50,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1458374052/Food%20Images%20Raw/Fish_soup.jpg
+Fried Fish Soup and Beehoon,3.7,add veg $0.50,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627090/Food%20Images%20Raw/Fried_Fish_soup_with_Beehoon.jpg
+Fish Soup and Beehoon,3.7,add veg $0.50,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627030/Food%20Images%20Raw/fishsoup_with_beehoon.jpg
+Mutton Briyani,4,,Indian Food Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627086/Food%20Images%20Raw/mutton_briyani.jpg
+Vegetarian Kway Tiao,2.5,add veg $0.50,Vegetarian Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455774076/Food%20Images%20Raw/Vegetarian_Kway_Tiao.jpg
+Vegetarian Beehoon Kway Tiao,2.5,add veg $0.50,Vegetarian Stall,Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Minced Meat Noodles(Mee Pok),2.7,upsize to $3.20,Minced Meat Noodles Stall,Taman Jurong Market and Food Centre,http://res.cloudinary.com/dmeln4k8n/image/upload/v1455627087/Food%20Images%20Raw/minced_meat_noodles.jpg
+Minced Meat Noodles(Mee Tai Mak),2.7,upsize to $3.20,Minced Meat Noodles Stall,Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Chicken Horfun(Gravy),3.5,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Chicken Beehoon(Gravy),3.5,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Chicken Horfun(Fried),4,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Chicken Beehoon(Fried),4,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Seafood Horfun(Gravy),3.5,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Seafood Beehoon(Gravy),3.5,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Seafood Horfun(Fried),4,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Seafood Beehoon(Fried),4,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Beef Horfun(Gravy),4,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Beef Beehoon(Gravy),4,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Beef Horfun(Fried),4,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Beef Beehoon(Fried),4,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Chicken Rice(Chicken Breast),3,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Chicken Rice(Chicken Thigh),3,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg
+Chicken Rice(Drumstick),3.5,,REX(Halal),Taman Jurong Market and Food Centre,resources/img/food/img-lormee.jpg

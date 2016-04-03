@@ -1,6 +1,89 @@
 Modifier Name,Description,Price,Food Name,Stall Name,Canteen Name
-Upsize to $3.50,,0.5,Malay Mixed Rice(Chicken),New Malay food Stall,Boon Lay Hawker Centre
-Upsize to $3.50,,0.5,Malay Mixed Rice(Fish),New Malay food Stall,Boon Lay Hawker Centre
-Upsize to $3.50,,0.5,Malay Mixed Rice(Mutton),New Malay food Stall,Boon Lay Hawker Centre
-Change to drumstick,,0.5,Chicken Rice,New REX(Halal),Boon Lay Hawker Centre
-Upsize to $3.20,,0.5,Minced Meat Noodles,New Minced Meat Noodles Stall(Closed On Tuesday),Boon Lay Hawker Centre
+No egg,,0,Curry Chicken + Veg,Oasis Muslim Stall,Oasis Food Centre
+More vegetables,,0,Curry Chicken + Veg,Oasis Muslim Stall,Oasis Food Centre
+No egg,,0,Asam Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+More vegetables,,0,Asam Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+No egg,,0,Curry Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+More vegetables,,0,Curry Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+No egg,,0,Fried Chicken + Veg,Oasis Muslim Stall,Oasis Food Centre
+More vegetables,,0,Fried Chicken + Veg,Oasis Muslim Stall,Oasis Food Centre
+More vegetables,,0,Fried Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+No egg,,0,Fried Fish + Veg,Oasis Muslim Stall,Oasis Food Centre
+More vegetables,,0,Stingray + Veg,Oasis Muslim Stall,Oasis Food Centre
+No egg,,0,Stingray + Veg,Oasis Muslim Stall,Oasis Food Centre
+More vegetables,,0.5,White Rice(Chicken),Indian Stall,Oasis Food Centre
+More vegetables,,0.5,White Rice(Fish),Indian Stall,Oasis Food Centre
+More vegetables,,0.5,White Rice(Mutton),Indian Stall,Oasis Food Centre
+More vegetables,,0.5,Vegetable White Rice,Indian Stall,Oasis Food Centre
+More vegetables,,0.5,Chicken Briyani,Indian Stall,Oasis Food Centre
+More vegetables,,0.5,Fish Briyani,Indian Stall,Oasis Food Centre
+More vegetables,,0.5,Mutton Briyani,Indian Stall,Oasis Food Centre
+More vegetables,,0.5,Vegetarian Briyani,Indian Stall,Oasis Food Centre
+Upsize to $3.20,,0.2,1 Meat 2 Veg,Chinese Mix Veg Stall,Oasis Food Centre
+No fried meat,,0,1 Meat 2 Veg,Chinese Mix Veg Stall,Oasis Food Centre
+More vegetables,,0,1 Meat 2 Veg,Chinese Mix Veg Stall,Oasis Food Centre
+Upsize to $3.20,,0.2,All Veg,Chinese Mix Veg Stall,Oasis Food Centre
+No fried meat,,0,Porridge(1 Meat + 2 Veg),Chinese Mix Veg Stall,Oasis Food Centre
+More vegetables,,0,Porridge(1 Meat + 2 Veg),Chinese Mix Veg Stall,Oasis Food Centre
+Add roast meat,,1,Roast Chicken Rice,Roast Meat Stall,Oasis Food Centre
+Add charsiew,,1,Roast Chicken Rice,Roast Meat Stall,Oasis Food Centre
+Add roast chicken,,1,CharSiew Rice,Roast Meat Stall,Oasis Food Centre
+Add roast meat,,1,CharSiew Rice,Roast Meat Stall,Oasis Food Centre
+Add charsiew,,1,Roast Meat Rice,Roast Meat Stall,Oasis Food Centre
+Add roast chicken,,1,Roast Meat Rice,Roast Meat Stall,Oasis Food Centre
+More vegetables,,0,Hokkien Noodle,Seafood Tze Char Stall,Oasis Food Centre
+More vegetables,,0,Mee Goreng,Seafood Tze Char Stall,Oasis Food Centre
+Winter Melon,,0,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Lotus Root,,0,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Bitter Gourd,,0,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+White Carrot,,0,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Old Cucumber,,0,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Szechuan Vegetable,,0,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Water Crest,,0,Pork Rib Soup,Seafood Tze Char Stall,Oasis Food Centre
+Herbal,,0,Black Chicken Soup,Seafood Tze Char Stall,Oasis Food Centre
+Herbal,,0,White Chicken Soup,Seafood Tze Char Stall,Oasis Food Centre
+Winter Melon + Corn,,0,White Chicken Soup,Seafood Tze Char Stall,Oasis Food Centre
+Add bittergourd,,0.5,Fish Soup With Beehoon,Fish Beehoon Stall,Oasis Food Centre
+Add bittergourd,,0.5,Fish Soup With Rice,Fish Beehoon Stall,Oasis Food Centre
+Add bittergourd,,0.5,Fried Fish Soup With Beehoon,Fish Beehoon Stall,Oasis Food Centre
+Add bittergourd,,0.5,Fish Soup,Fish Beehoon Stall,Oasis Food Centre
+Add bittergourd,,0.5,Fish Soup With Mee Sua,Fish Beehoon Stall,Oasis Food Centre
+Mixed fruits upsize,,0.5,Mixed Fruits,Fruit Stall,Oasis Food Centre
+Add Veg,,0.5,Chilli Chicken + Veg,Malay Food Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Curry Fish + Veg,Malay Food Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Fried Chicken + Veg,Malay Food Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Fried Fish + Veg,Malay Food Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,1 Meat + 2 Veg,Mixed Rice Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,All Veg,Mixed Rice Stall,Taman Jurong Market and Food Centre
+Upsize to $3.20,,0.5,Minced Meat Noodles(Mee Kia),Minced Meat Noodles Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Fish Slice Beehoon,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Fish Soup and Rice,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add charsiew,,1,Roast Chicken Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Add roast meat,,1,Roast Chicken Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Add roast meat,,1,CharSiew Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Add roast chicken,,1,CharSiew Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Add charsiew,,1,Roast Meat Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Add roast chicken,,1,Roast Meat Rice,Roast Duck & Chicken Rice Stall,Taman Jurong Market and Food Centre
+Chicken,,0,Fried Rice,REX(Halal),Taman Jurong Market and Food Centre
+Beef,,1,Fried Rice,REX(Halal),Taman Jurong Market and Food Centre
+Seafood,,0.5,Fried Rice,REX(Halal),Taman Jurong Market and Food Centre
+Add Veg,,0.5,Vegetarian Rice,Vegetarian Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Vegetarian Beehoon,Vegetarian Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Vegetarian Mee,Vegetarian Stall,Taman Jurong Market and Food Centre
+Thin Beehoon,,0,Lor Mee,Noodle Stall,Taman Jurong Market and Food Centre
+Yellow Noodles,,0,Lor Mee,Noodle Stall,Taman Jurong Market and Food Centre
+Thick Beehoon,,0,Lor Mee,Noodle Stall,Taman Jurong Market and Food Centre
+Thick Beehoon,,0,Fishball Noodles,Noodle Stall,Taman Jurong Market and Food Centre
+Thin Beehoon,,0,Fishball Noodles,Noodle Stall,Taman Jurong Market and Food Centre
+Yellow Noodles,,0,Fishball Noodles,Noodle Stall,Taman Jurong Market and Food Centre
+Add powder,,0,Guava,Fruits Stall,Taman Jurong Market and Food Centre
+Mixed fruits upsize,,0.5,Mixed Fruits,Fruits Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Fish Head Soup and Beehoon,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Fish Soup,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Fried Fish Soup and Beehoon,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Fish Soup and Beehoon,Sliced Fish Beehoon Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Vegetarian Kway Tiao,Vegetarian Stall,Taman Jurong Market and Food Centre
+Add Veg,,0.5,Vegetarian Beehoon Kway Tiao,Vegetarian Stall,Taman Jurong Market and Food Centre
+Upsize to $3.20,,0.5,Minced Meat Noodles(Mee Pok),Minced Meat Noodles Stall,Taman Jurong Market and Food Centre
+Upsize to $3.20,,0.5,Minced Meat Noodles(Mee Tai Mak),Minced Meat Noodles Stall,Taman Jurong Market and Food Centre
+Add powder,,0,Guava,Fruit Stall,Oasis Food Centre

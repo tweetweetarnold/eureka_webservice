@@ -184,11 +184,12 @@ public class FoodDAO {
 
 			String stallName = row[3].trim();
 			String canteenName = row[4].trim();
+			String imageDirectory = row[5].trim();
 
 			System.out.println(stallName);
 			Stall stall = canteenDAO.getStallFromCanteen(canteenName, stallName);
 			System.out.println(stall);
-			Food newFood = new Food(foodName, null, description, priceValue, null, null, stall);
+			Food newFood = new Food(foodName, null, description, priceValue, imageDirectory, null, stall);
 
 			// adds Food to the Stall's foodList
 			stallDAO.addFoodToStall(stall, newFood);
