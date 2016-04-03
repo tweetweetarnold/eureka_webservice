@@ -41,18 +41,9 @@ public class Company {
 	 * code
 	 * 
 	 * @param name The name of the Company
-	 * @param cutoffTime The cut-off timing for ordering food
-	 * @param canteenList The list of Canteen
 	 * @param companyCode The company code assigned to the Company
+	 * @param deliveryPointSet The list of delivery points for this Company
 	 */
-	public Company(String name, String companyCode) {
-		super();
-		this.name = name;
-		this.createDate = new Date();
-		this.companyCode = companyCode;
-		this.status = StringValues.ACTIVE;
-	}
-
 	public Company(String name, String companyCode, Set<String> deliveryPointSet) {
 		super();
 		this.name = name;
@@ -107,6 +98,11 @@ public class Company {
 		return name;
 	}
 
+	/**
+	 * Retrieves the status of the Company
+	 * 
+	 * @return The status of the Company
+	 */
 	public String getStatus() {
 		return status;
 	}
@@ -118,14 +114,6 @@ public class Company {
 	 */
 	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
-	}
-
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
 	}
 
 	/**
@@ -145,6 +133,7 @@ public class Company {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	/**
 	 * Changes the status of the company to the new Status
 	 * 
