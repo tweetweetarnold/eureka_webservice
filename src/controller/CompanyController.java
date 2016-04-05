@@ -21,11 +21,14 @@ public class CompanyController {
 	public CompanyController() {
 
 	}
-
+	
 	/**
 	 * Adds a new Company object into the Database
 	 * 
-	 * @param c The Company object to be added in
+	 * @param name The name of the Company
+	 * @param companyCode The company code assigned to the Company
+	 * @param buildings The list of buildings in the Company
+	 * @throws Exception If the company name, company code,list of buildings are empty or already exists
 	 */
 	public void addNewCompany(String name, String companyCode, Set<String> buildings)
 			throws Exception {

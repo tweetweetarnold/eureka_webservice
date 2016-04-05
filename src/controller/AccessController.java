@@ -406,7 +406,6 @@ public class AccessController {
 	 * 
 	 * @param e The designated Employee to be updated
 	 * @param newContactNumber The new contact number provided by the Employee
-	 * @return Returns true when the contact number has been updated
 	 * @throws Exception if the new contact number of the Employee could not be updated in the
 	 *             database
 	 */
@@ -440,7 +439,6 @@ public class AccessController {
 	 * 
 	 * @param e The designated Employee to be updated
 	 * @param password The new password provided by the Employee
-	 * @return Returns true when the password has been updated
 	 * @throws Exception if the new password of the Employee could not be updated in the database
 	 */
 	public void updateEmployeePassword(Employee e, String password) throws Exception {
@@ -456,7 +454,6 @@ public class AccessController {
 	 * @param oldPassword The Employee's current password
 	 * @param newPassword The Employee's new password
 	 * @param confirmNewPassword The Employee's new password for confirmation
-	 * @return Returns true when the password has been updated
 	 * @throws Exception if the new password of the Employee could not be updated in the database
 	 */
 	public void updateEmployeePassword(Employee e, String oldPassword, String newPassword,
