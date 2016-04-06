@@ -84,7 +84,10 @@
 									<tr>
 										<td>${period.company.name}</td>
 										<td>${period.canteen.name}</td>
-										<td>$${period.discountAbsolute}</td>
+										<td>
+											<fmt:formatNumber value="${period.priceModifierList[0].value}" var="discount" minFractionDigits="2" />
+											$${discount}
+										</td>
 										<td>
 											<fmt:formatDate type="both" pattern="E, dd-MMM-yyyy HH:mm:ss" value="${period.createDate}" />
 										</td>

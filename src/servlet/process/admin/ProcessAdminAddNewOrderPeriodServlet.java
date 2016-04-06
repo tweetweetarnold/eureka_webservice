@@ -105,11 +105,11 @@ public class ProcessAdminAddNewOrderPeriodServlet extends HttpServlet {
 			}
 			session.setAttribute("success", "New Order Period created successfully.");
 
-			response.sendRedirect("/eureka_webservice/admin/orderperiod/active.jsp");
+			response.sendRedirect("/eureka_webservice/LoadOrderPeriodActiveServlet");
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("error", e.getMessage());
-			response.sendRedirect("/eureka_webservice/admin/orderperiod/active.jsp");
+			response.sendRedirect("/eureka_webservice/LoadOrderPeriodActiveServlet");
 		}
 
 	}
