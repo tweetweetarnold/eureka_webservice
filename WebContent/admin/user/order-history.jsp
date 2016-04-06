@@ -99,6 +99,12 @@
 										<b>Canteen: </b>
 										${orderHistory.orderPeriod.canteen.name}
 										<br>
+										<c:if test="${orderHistory.status ne 'Submitted'}">
+											<c:if test="${not empty orderHistory.transactionId}">
+												Transaction ID: ${orderHistory.transactionId}
+											<br>
+											</c:if>
+										</c:if>
 										<br>
 										Price:
 										<fmt:formatNumber value="${orderHistory.totalPriceBeforePriceModifiers}" var="amt" minFractionDigits="2" />
