@@ -346,7 +346,8 @@ public class FoodDAO {
 
 	public List<Food> searchFoodFromCanteen(Canteen c, String query) throws Exception {
 		DetachedCriteria dc = DetachedCriteria.forClass(Food.class)
-				.add(Restrictions.like("name", "%" + query + "%"));
+				.add(Restrictions.like("name", "%" + query + "%"))
+		.add(Restrictions.eq("status", StringValues.ACTIVE));
 
 		dc.createCriteria("stall").add(Restrictions.eq("canteen", c))
 				.add(Restrictions.eq("status", StringValues.ACTIVE));
