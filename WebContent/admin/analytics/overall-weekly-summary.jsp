@@ -84,7 +84,7 @@
 
 										<fmt:parseDate value="${splitWeek[1]}" var="parsedEmpDate2" pattern="yyyy-MM-dd" />
 										<fmt:formatDate value="${parsedEmpDate2}" var="weekChange2" pattern="dd-MMM-yyyy" />
-										<option value="${map}">${weekChange1}to ${weekChange2}</option>
+										<option value="${map}">${weekChange1} to ${weekChange2}</option>
 									</c:forEach>
 
 								</select>

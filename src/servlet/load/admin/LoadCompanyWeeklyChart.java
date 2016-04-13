@@ -52,7 +52,7 @@ public class LoadCompanyWeeklyChart extends HttpServlet {
 			
 			
 			JFreeChart chart = foodOrderController.generateWeeklyChart(weekToFoodOrders, week);
-			int width = 600;
+			int width = 700;
 			int height = 350;
 			ChartUtilities.writeChartAsJPEG(os, chart, width, height);
 		} catch (Exception e) {

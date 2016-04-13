@@ -56,17 +56,17 @@ public class LoadAdminViewCompanyMonthlySpending extends HttpServlet {
 				TreeMap<String, Double> yearMonthToTotalPrice = foodOrderController
 						.getFoodOrderSetTotalPriceByMonthYear(yearMonthToFoodOrders);
 				if (yearMonthToTotalPrice.size() <= 1) {
-					session.setAttribute("warn", "Please wait for more orders to be placed!");
+					session.setAttribute("warning", "Please wait for more orders to be placed!");
 				} else {
 					// session.setAttribute("yearToMonthList", yearToMonthList);
 					session.setAttribute("result", year);
 					session.setAttribute("yearMonthToFoodOrders", yearMonthToFoodOrders);
 					session.setAttribute("yearMonthToTotalPrice", yearMonthToTotalPrice);
-					session.removeAttribute("warn");
+					session.removeAttribute("warning");
 				}
 
 			} else {
-				session.setAttribute("warn", "There are no orders placed yet!");
+				session.setAttribute("warning", "There are no orders placed yet!");
 			}
 
 			response.sendRedirect("/eureka_webservice/admin/analytics/monthly-summary.jsp?company=" + companyCode);

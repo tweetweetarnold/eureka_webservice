@@ -51,7 +51,7 @@ public class LoadOverallMonthlyChart extends HttpServlet {
 			TreeMap<String, Double> yearMonthToTotalPrice = foodOrderController
 					.getFoodOrderSetTotalPriceByMonthYear(yearMonthToFoodOrders);
 			JFreeChart chart = foodOrderController.generateMonthlyChart(yearMonthToTotalPrice, year);
-			int width = 600;
+			int width = 700;
 			int height = 350;
 			ChartUtilities.writeChartAsJPEG(os, chart, width, height);
 		} catch (Exception e) {

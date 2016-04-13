@@ -101,7 +101,7 @@
 										<br>
 										<c:if test="${orderHistory.status ne 'Submitted'}">
 											<c:if test="${not empty orderHistory.transactionId}">
-												Transaction ID: ${orderHistory.transactionId}
+												<b>Transaction ID: </b> ${orderHistory.transactionId}
 											<br>
 											</c:if>
 										</c:if>

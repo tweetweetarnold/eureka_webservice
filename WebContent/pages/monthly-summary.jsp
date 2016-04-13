@@ -172,7 +172,14 @@
 										 Order ID: ${foodOrder.foodOrderId} &mdash;
 										<fmt:formatDate type="both" value="${foodOrder.createDate}" />
 												<fmt:formatNumber value="${foodOrder.finalPrice}" var="amtSpent" minFractionDigits="2" />
-												<i class="pull-right">Price: $${amtSpent} </i>
+												<c:choose>
+										<c:when test="${foodOrder.finalPrice < 0 }">
+										<i class="pull-right">Price: $0.00 </i>
+										</c:when>
+										<c:otherwise>
+										<i class="pull-right">Price: $${amtSpent} </i>
+										</c:otherwise>
+										</c:choose>
 												<br>
 											</c:forEach>
 										</div>

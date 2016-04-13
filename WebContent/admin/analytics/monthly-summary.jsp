@@ -64,11 +64,11 @@
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
-			<c:if test="${not empty sessionScope.warn}">
+			<c:if test="${not empty sessionScope.warning}">
 				<div class="alert alert-warning fade in" role="alert">
 					<span class="glyphicon glyphicon-exclamation-sign"
 						aria-hidden="true"></span> <span class="sr-only">Warning:</span>
-					<c:out value="${warn}" />
+					<c:out value="${warning}" />
 				</div>
 			</c:if>
 			<div class="row">
@@ -174,7 +174,14 @@
 										 <br>User: ${foodOrder.employee.name}</br>
 												<fmt:formatNumber value="${foodOrder.finalPrice}"
 													var="amtSpent" minFractionDigits="2" />
+												<c:choose>
+												<c:when test="${foodOrder.finalPrice < 0 }">
+												<i class="pull-right">Price: $0.00 </i>
+												</c:when>
+												<c:otherwise>
 												<i class="pull-right">Price: $${amtSpent} </i>
+												</c:otherwise>
+												</c:choose>
 												<br>
 											</c:forEach>
 										</div>
