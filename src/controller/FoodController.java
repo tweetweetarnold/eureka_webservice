@@ -30,6 +30,7 @@ public class FoodController {
 	 */
 	public FoodController() {
 	}
+
 	/**
 	 * Adds a new food into the database
 	 * @param name the name of the food to add
@@ -66,6 +67,7 @@ public class FoodController {
 		saveFood(f);
 
 	}
+
 	/**
 	 * checks if the chinese text entered is valid chinese characters. 
 	 * @param text the Chinese text to verify 
@@ -75,7 +77,7 @@ public class FoodController {
 	private boolean checkChineseWords(String text) throws APIError {
 		return ChineseValidation.checkForChineseWords(text);
 	}
-	
+
 	/**
 	 * Check if the food name already exists inside the stall
 	 * @param inputFoodName the name of the food to check
@@ -93,7 +95,7 @@ public class FoodController {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * archieves food 
 	 * @param food the food to archieve
@@ -101,7 +103,7 @@ public class FoodController {
 	public void deleteFood(Food food) {
 		foodDAO.deleteFood(food);
 	}
-	
+
 	/**
 	 * deletes a food's image from the image database
 	 * @param publicId the publicid of the food image to delete from cloudinary
@@ -111,6 +113,7 @@ public class FoodController {
 	public boolean deleteImage(String publicId) throws IOException {
 		return cloudinaryUpload.deleteImage(publicId);
 	}
+
 	/**
 	 * Edits a existing food 
 	 * @param image the image in bytes to replace the existing image
@@ -178,7 +181,7 @@ public class FoodController {
 		}
 
 	}
-	
+
 	/**
 	 * Retrieve all food with the status of "active" from a stall
 	 * @param stall the stall to retrieve from
@@ -226,16 +229,14 @@ public class FoodController {
 			if (currentFood.getChineseName().equals(inputChineseName)) {
 				if (currentFood.getDescription().equals(inputDescription)) {
 					if (currentFood.getPrice() == inputPrice) {
-						if (currentFood.getWeatherConditions().equals(inputWeatherConditions)) {
-							return false;
-						}
+						return false;
 					}
 				}
 			}
 		}
 		return true;
 	}
-	
+
 	/**
 	 * uploads a file to cloudinary
 	 * @param file the byte[] to upload 
@@ -246,6 +247,7 @@ public class FoodController {
 		return cloudinaryUpload.imageUpload(file);
 
 	}
+
 	/**
 	 * Adds new food to a stall
 	 * @param image the image of the food to add
@@ -294,6 +296,7 @@ public class FoodController {
 		}
 
 	}
+
 	/**
 	 * this replaces the exiting food image with a new food image
 	 * @param oldPublicId the old public id of the food
@@ -323,7 +326,7 @@ public class FoodController {
 	public void updateFood(Food f) {
 		foodDAO.updateFood(f);
 	}
-	
+
 	/**
 	 * Updates the modifier sections of a Food object
 	 * @param newFood the food to update
